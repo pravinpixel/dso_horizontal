@@ -244,7 +244,7 @@
                 </td>
             </tr>
             @endfor
-        </table> 
+        </table>  
     </div> 
     <div id="advance-search-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
