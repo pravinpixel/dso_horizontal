@@ -1,7 +1,7 @@
 <div class="navbar-custom topnav-navbar  bg-primary-2">
     <div class="container-fluid d-flex justify-content-betweens align-items-center">
         <!-- LOGO -->
-        <a href="#" class="topnav-logo border-end">
+        <a href="{{ route('dashboard') }}" class="topnav-logo border-end">
             <span class="topnav-logo-lg">
                 <img src="https://www.dso.org.sg/Media/Default/Theme/dso_logo.png" alt="" width="80px"> 
             </span>

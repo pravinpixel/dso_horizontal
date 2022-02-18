@@ -33,7 +33,7 @@ Route::get('/print-barcode', function () {
     return view('crm.print-barcode.index');  
 })->name('print-barcode');
 
-Route::get('/reconsolidation', function () {   
+Route::get('/reconciliation', function () {   
     return view('crm.reconsolidation.index');  
 })->name('reconsolidation');
 

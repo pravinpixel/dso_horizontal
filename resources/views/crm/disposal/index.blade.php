@@ -10,11 +10,9 @@
         </div>
     </div>
    
-    <div class="table-fillters row m-0">
-        <div class="col-12 mb-2 d-flex">
+    <div class="table-fillters row m-0 p-2">
+        <div class="col-12 mb-2 text-end">
             <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
-            <button class="rounded-pill btn btn-sm btn-success-light ms-auto"><i class="bi bi-arrow-counterclockwise"></i></button>
-            <button class="rounded-pill btn btn-sm btn-danger-light ms-1"><i class="bi bi-x"></i></i> </button>
         </div>
         <div class="col">
             <label for="" class="form-label">Material/Product description</label>
@@ -63,6 +61,12 @@
             <label for="" class="form-label">Housing type</label>
             <input type="text" class="form-control custom" placeholder="Type here...">
         </div>
+        <div class="col d-flex align-items-center justify-content-center">
+            <div class="btn-group">
+                <button class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
+                <button class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+        </div> 
     </div>
     <div class="table-responsive">
         <table class="table table-bordered bg-white">

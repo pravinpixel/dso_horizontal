@@ -61,7 +61,7 @@
             <div class="card shadow-hover animate__animated animate__fadeIn">
                 <a href="#" class="card-body btn">
                     <i class="text-warning fa fa-repeat fa-2x mb-2 "></i>
-                    <h5 class="m-0 ">Reconsolidation</h5>
+                    <h5 class="m-0 ">Reconciliation</h5>
                 </a>
             </div>
         </div> 
