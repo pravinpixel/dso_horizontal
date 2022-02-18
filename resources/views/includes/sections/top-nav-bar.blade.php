@@ -20,19 +20,19 @@
                         <a href="{{ route('disposal') }}" class="nav-link {{ Route::is('disposal') ? "active" : "" }}"><i class="bi bi-trash2 me-1"></i><span>disposal</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"><i class="bi bi-box2 me-1"></i>Extend Expiry</a>
+                        <a href="{{ route('extend-expiry') }}" class="nav-link {{ Route::is('extend-expiry') ? 'active' : '' }}"><i class="bi bi-arrow-up-right-square me-1"></i>Extend Expiry</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"><i class="bi bi-file-earmark-bar-graph me-1"></i>Report  </a>
+                        <a href="{{ route('reports') }}" class="nav-link {{ Route::is('reports') ? 'active' : '' }}"><i class="bi bi-file-earmark-bar-graph me-1"></i>Report  </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"><i class="bi bi-search me-1"></i>List Search</a>
+                        <a href="{{ route('list-search') }}" class="nav-link {{ Route::is('list-search') ? 'active' : '' }}"><i class="bi bi-search me-1"></i>List Search</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"><i class="bi bi-upc-scan me-1"></i>Print Barcode </a>
+                        <a href="{{ route('print-barcode') }}" class="nav-link {{ Route::is('print-barcode') ? 'active' : '' }}"><i class="bi bi-upc-scan me-1"></i>Print Barcode </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"><i class="bi bi-arrow-repeat me-1"></i>Reconsolidation</a>
+                        <a href="{{ route('reconsolidation') }}" class="nav-link {{ Route::is('reconsolidation') ? "active" : "" }}"><i class="bi bi-arrow-repeat me-1"></i>Reconsolidation</a>
                     </li>
                     
                     {{-- <li class="nav-item dropdown">

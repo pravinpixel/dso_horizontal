@@ -5,7 +5,7 @@
         <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
             <div class="input-group align-items-center" title="Scan Barcode">
                 <i class="bi bi-upc-scan font-20 mx-2"></i>
-                <input type="text" class="form-control border-0 bg-light ms-1 rounded-pill" placeholder="scan here">
+                <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div>
         <div class="col-2 ms-auto text-end">
@@ -107,7 +107,7 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </a> 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-target="#ViewMP"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
                                         <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
                                         <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
                                     </div>
@@ -135,10 +135,10 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a> 
                                                 <div class="dropdown-menu"> 
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View Material/Product batch details</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
+                                                    <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
@@ -165,7 +165,7 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View Material/Product batch details</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -195,7 +195,7 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View Material/Product batch details</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -225,7 +225,7 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View Material/Product batch details</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -376,5 +376,202 @@
                 </div>
             </div> 
         </div>
-    </div>
+    </div> 
+    <div id="View_Material_Product_details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog w-100 modal-right h-100">
+            <div class="modal-content h-100 rounded-0 ">
+                <div class="modal-header bg-primary text-white border-0 rounded-0">
+                    <h4>View Material/Product details</h4>
+                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                </div>
+                <div class="modal-body  modal-scroll-2">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Material/Product description</div>
+                                Acetone IND 
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Brand</div>
+                                XOX
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">CAS#</div>
+                                1234
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Stat body</div>
+                                SCDF
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"> Alert threshold amt (green)</div>
+                                40
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Alert threshold amt (Amber)</div>
+                                20
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"> Alert threshold amt (green)</div>
+                                24weeks
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Alert before expiry (Amber)</div>
+                                12weeks
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Access</div>
+                                Default (everyone can see)
+                            </div>
+                        </li>
+                    </ol> 
+                </div> 
+            </div> 
+        </div>
+    </div> 
+    <div id="View_Batch_Material_Product_details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog w-100 modal-right h-100">
+            <div class="modal-content h-100 rounded-0">
+                <div class="modal-header bg-primary text-white border-0 rounded-0">
+                    <h4>View Material/Product batch details</h4>
+                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                </div>
+                <div class="modal-body modal-scroll-2">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Material/Product description</div>
+                                Acetone IND 
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Brand</div>
+                                XOX
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">CAS#</div>
+                                1234
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Stat body</div>
+                                SCDF
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"> Alert threshold amt (green)</div>
+                                40
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Alert threshold amt (Amber)</div>
+                                20
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"> Alert threshold amt (green)</div>
+                                24weeks
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Alert before expiry (Amber)</div>
+                                12weeks
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">FM1202</div>
+                                Acetone IND grade form.doc
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">COC/COA</div>
+                                <a href="#">Acetone COC.pdf</a> | <a href="#">Acetone COA.pdf</a> 
+                            </div>
+                        </li>
+                    </ol> 
+                </div> 
+            </div> 
+        </div>
+    </div> 
+    <div id="Transfers" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal-dialog custom-modal-dialog modal-top">
+            <div class="modal-content rounded-0 border-bottom shadow">
+                <div class="modal-header rounded-0 bg-primary text-white  ">
+                    <h4 class="modal-title" id="topModalLabel">Transfer Material/Product batch</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body  ">
+                    <table class="table bg-white table-bordered custom-center m-0">
+                        <thead class="bg-light text-primary-2 table-bordered"> 
+                            <tr>
+                                <th width="200px">Transfer Qty</th>
+                                <th>Storage rm</th>
+                                <th>Housing type</th>
+                                <th>Owner 1</th>
+                                <th>Owner 2</th>
+                                <th> <i class="text-danger bi bi-trash3-fill"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="200px" class="text-center"><input type="number" name="" id="" value="5" class="form-control form-control-sm"></td>
+                                <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value="">CW</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value="">FC1</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value="">Keith</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value="">HuiBeng</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div> 
+                <div class="modal-footer text-end  border-top">
+                    <button class="btn btn-primary rounded-pill">Click to confirm transfer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
 @endsection

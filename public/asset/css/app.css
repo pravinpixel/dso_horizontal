@@ -28,7 +28,7 @@
     --bs-secondary: #919ca7;
     --bs-success: #42d29d;
     --bs-info: #44badc;
-    --bs-warning: #f9bc0d;
+    --bs-warning: #FDCA3F;
     --bs-danger: #fa6767;
     --bs-light: #eef2f7;
     --bs-dark: #474d56;
@@ -47,7 +47,7 @@
     --bs-font-sans-serif: "Nunito", sans-serif;
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --bs-body-font-family: Nunito, sans-serif;
+    --bs-body-font-family: 'Open Sans', Helvetica, sans-serif;
     --bs-body-font-size: 0.9rem;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
@@ -69,6 +69,7 @@
     }
 }
 
+ 
 body {
     margin: 0;
     font-family: var(--bs-body-font-family);
@@ -5321,6 +5322,7 @@ fieldset:disabled .btn {
     background-color: #f3f5f8 !important;
     font-weight: lighter !important;
     text-transform: capitalize !important;
+    border-radius: 6px 6px 0 0;
 }
 
 .navbar-light .navbar-toggler {
@@ -6715,6 +6717,10 @@ fieldset:disabled .btn {
 @media (min-width:576px) {
     .modal-dialog {
         max-width: 500px;
+        margin: 1.75rem auto
+    }
+    .custom-modal-dialog {
+        max-width: 100% !important;
         margin: 1.75rem auto
     }
     .modal-dialog-scrollable {
@@ -9248,7 +9254,7 @@ fieldset:disabled .btn {
 
 .text-warning {
     --bs-text-opacity: 1;
-    color: rgba(var(--bs-warning-rgb), var(--bs-text-opacity))!important
+    color:  #FDCA3F !important
 }
 
 .text-danger {
@@ -14093,9 +14099,9 @@ body[data-layout=full][data-leftbar-theme=light].hide-menu .wrapper .leftside-me
     padding: calc(31px * .5) 20px calc(31px * .5) 57px!important;
     text-align: left!important;
     position: relative;
-    background-color: #fafbfd;
-    border: 1px solid #f1f3fa;
-    border-width: 0 1px;
+    background-color: #102952;
+    /* border: 1px solid #f1f3fa; */
+    /* border-width: 0 1px; */
     min-height: 70px
 }
 

@@ -5,7 +5,7 @@
         <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
             <div class="input-group align-items-center" title="Scan Barcode">
                 <i class="bi bi-upc-scan font-20 mx-2"></i>
-                <input type="text" class="form-control border-0 bg-light ms-1 rounded-pill" placeholder="scan here">
+                <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div> 
     </div> 
@@ -143,7 +143,7 @@
                     <tr>
                         <td class="child-td">10/09/2021 at 08:00 </td>
                         <td class="child-td">Tan Ng Hui Beng</td>
-                        <td class="child-td">10</td>
+                        <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                         <td class="child-td">40</td>
                         <td class="child-td">
                             <i class="btn btn-sm btn-danger-light rounded-pill bi bi-trash3-fill"></i>
@@ -278,8 +278,8 @@
                         <tr>
                             <td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
-                            <td class="child-td">1</td>
-                            <td class="child-td">AME</td>
+                            <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
+                            <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
@@ -290,6 +290,28 @@
             <div class="text-end ">
                 <button class="btn btn-primary ">Click to Confirm deduction</button>
             </div>
+            <table class="table bg-white table-bordered custom-center mt-3">
+                <thead> 
+                    <tr>
+                        <th class="table-th">Date/time stamp</th>
+                        <th class="table-th">Last accessed</th>
+                        <th class="table-th">Auto-generate unique barcode label</th>
+                        <th class="table-th">Outlife expiry from last date/time</th>
+                        <th class="table-th">Outlife expiry from current date/time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for ($key=0; $key<2; $key++)
+                        <tr>
+                            <td class="child-td">11/09/2021 08:00</td>
+                            <td class="child-td">HuiBeng</td>
+                            <td class="child-td">Roll2/1</td> 
+                            <td class="child-td">29 days 17hrs</td>
+                            <td class="child-td">11/09/2021 08:00</td>
+                        </tr>
+                    @endfor
+                </tbody>
+            </table>
         </div> 
     </div> 
 @endsection 
