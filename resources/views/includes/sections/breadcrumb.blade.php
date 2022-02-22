@@ -15,6 +15,8 @@
                             {{ Route::is('reports') ? "Reports" : "" }}
                             {{ Route::is('list-search') ? "List Search" : "" }}
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
+                            {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
+                            {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired Material/Product" : "" }}
                             {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
                         </li>
                     </ol>
@@ -29,8 +31,9 @@
                     {{ Route::is('reports') ? "Reports" : "" }}
                     {{ Route::is('list-search') ? "List Search" : "" }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
+                    {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
+                    {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired Material/Product" : "" }}
                     {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
-
                 </h4>
             </div>
         </div>

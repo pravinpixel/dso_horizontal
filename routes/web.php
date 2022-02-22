@@ -49,6 +49,15 @@ Route::get('/extend-expiry', function () {
     return view('crm.extend-expiry.index');  
 })->name('extend-expiry');
 
+Route::get('/threshold-qty', function () {   
+    return view('crm.notification.threshold-qty');  
+})->name('threshold-qty');
+
+Route::get('/near-expiry-expired', function () {   
+    return view('crm.notification.near-expiry-expired');  
+})->name('near-expiry-expired');
+
+
 Route::get('/ui-demo', function () {   
     return view('welcome');  
 })->name('ui-demo');

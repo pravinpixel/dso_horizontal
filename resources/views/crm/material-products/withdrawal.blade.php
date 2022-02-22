@@ -157,7 +157,7 @@
                     <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of material/product</label>
                 </div>
                 <div class="col-6 ms-auto text-end">
-                    <button class="btn btn-primary h-100">Click to Confirm deduction</button>
+                    <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
                 </div>
             </div>
         </div>
@@ -288,7 +288,7 @@
                 </tbody>
             </table>
             <div class="text-end ">
-                <button class="btn btn-primary ">Click to Confirm deduction</button>
+                <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
             </div>
             <table class="table bg-white table-bordered custom-center mt-3">
                 <thead> 

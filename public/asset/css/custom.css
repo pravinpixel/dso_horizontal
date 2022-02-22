@@ -18,8 +18,8 @@
 } 
 
 .child-td {
-    max-width: 100px ;
-    width: 100px ;
+    /* max-width: 100px ; */
+    width: 100px !important;
     padding: .5rem .95rem !important;
     text-align: center !important;
     vertical-align: middle !important;
@@ -29,7 +29,7 @@
 }
 .child-td-lg {
     width: 150px !important;
-    max-width: 150px !important;
+    /* max-width: 150px !important; */
     padding: .5rem .95rem !important;
     text-align: center !important;
     vertical-align: middle !important;
@@ -213,3 +213,53 @@
     max-height: 95vh;
     overflow: auto;
 }
+.swal-modal {
+    border-radius: 25px !important;
+}
+.swal-footer {
+    text-align: center !important;
+    background-color: rgb(245, 248, 250);
+    margin-top: 32px;
+    border-top: 1px solid #E9EEF1;
+    overflow: hidden;
+}
+.swal-button.btn-danger:hover {
+    background-color: red !important;
+}
+/* .navbar-nav.custom .nav-item {
+    display: flex;
+    min-width: 150px ;
+}
+.navbar-nav.custom .nav-item .nav-link  {
+    width: 100%;
+}
+.topnav{
+    overflow: auto;
+}
+.topnav:hover  .topnav::-webkit-scrollbar {
+    height: 0px !important;
+}
+ 
+.topnav::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    
+}
+
+.topnav:hover::-webkit-scrollbar-thumb {
+    visibility: visible !important;
+}
+ 
+.topnav::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+ 
+.topnav::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+    visibility: hidden;
+}
+ 
+.topnav::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} */

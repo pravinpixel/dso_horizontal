@@ -276,7 +276,10 @@
             $(this).parent()[this.checked ? "addClass" : "removeClass"]("bg-primary-light text-primary"); 
         });
         $(document).on("change", "#GHS-Pictogram-checked-input[type='checkbox']", function () {
-            $('#GHS-Pictogram-modal').modal('show');
+            var checkBox = document.getElementById("GHS-Pictogram-checked-input");
+            if (checkBox.checked == true){
+                $('#GHS-Pictogram-modal').modal('show');
+            }
         });
     </script>
 @endsection
