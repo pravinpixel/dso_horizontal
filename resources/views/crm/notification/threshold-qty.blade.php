@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="table-responsives">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
                      <th class="table-th child-td-lg"> Item Description</th>

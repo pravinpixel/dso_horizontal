@@ -13,13 +13,13 @@
     {{-- @include('includes.sections.filter') --}}
     
     <div class="table-responsive">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
                      <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt size (L)</th>
+                    <th class="table-th child-td">Pkt size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">Storage rm</th>

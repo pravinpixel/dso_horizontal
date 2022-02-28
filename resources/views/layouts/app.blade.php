@@ -51,11 +51,15 @@
                                 <small class="mb-1">In-house Product Logsheet ID#</small>
                                 <input type="text" class="form-control" placeholder="Type here">
                             </div>
-                            <div class="col-6 d-flex align-items-center">
-                                <input type="checkbox" id="EUCMaterial" class="form-check-input me-1">
-                                <label for="EUCMaterial" class="form-lable">EUC Material</label>
-
-                            </div>
+                           
+                            <div class="col-6 text-start mb-2 px-1">
+                                <label for="" class="form-label">EUC Material</label>
+                                <select name="" id="" class="form-select">
+                                    <option value="">-- select --</option>
+                                    <option value="1">Yes</option>
+                                    <option value="4">No</option>
+                                </select>
+                            </div> 
                             <div class="col-6 text-start mb-2 px-1">
                                 <small class="mb-1">CAS#</small>
                                 <input type="text" class="form-control" placeholder="Type here">
@@ -79,7 +83,7 @@
                                     <option value="1">SCDF</option>
                                     <option value="2">NEA</option>
                                     <option value="3">HSA</option>
-                                    <option value="4">NA(CWC),</option>
+                                    <option value="4">NA(CWC)</option>
                                     <option value="4">SPF</option>
                                     <option value="4">Not Applicable</option>
                                 </select>
@@ -116,7 +120,7 @@
                                 <input type="date" class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
-                                <label for="" class="form-label">IQC status (P/F)</label>
+                                <label for="" class="form-label">IQC status </label>
                                 <select name="" id="" class="form-select">
                                     <option value="">-- select --</option>
                                     <option value="1">Pass</option>
@@ -157,7 +161,11 @@
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
                                 <small class="mb-1">Date of shipment</small>
-                                <input type="text" class="form-control" placeholder="Type here">
+                                <input type="date" class="form-control" placeholder="Type here">
+                            </div>
+                            <div class="col-6 text-start mb-2 px-1">
+                                <small class="mb-1">Date of manufacture</small>
+                                <input type="date" class="form-control" placeholder="Type here">
                             </div>
                         </div>
                     </div>

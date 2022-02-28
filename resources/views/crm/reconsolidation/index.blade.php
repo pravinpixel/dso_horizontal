@@ -69,14 +69,14 @@
         </div> 
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
                     <th class="table-th text-center">S.No</th>
                      <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td child-td-lg">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt size (L)</th>
+                    <th class="table-th child-td">Pkt size</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">Storage location </th>
                     <th class="table-th child-td">Housing type</th>

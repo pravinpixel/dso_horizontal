@@ -16,14 +16,14 @@
                     <i class="bi bi-table"></i>  
                 </a>
                 <div class="dropdown-menu" aria-labelledby="topnav-ecommerce">
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Products</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Products Details</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Orders</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Order Details</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Customers</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Shopping Cart</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Checkout</span>
-                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Sellers</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</span>
+                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</span>
                 </div>
             </div>
             <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
@@ -31,13 +31,13 @@
     </div>
     @include('includes.sections.filter')
     <div class="table-responsive">
-        <table class="table table-centered table-bordered bg-white">
+        <table class="table table-centered table-bordered table-hover bg-white">
             <thead>
                 <tr>
                      <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt size (L)</th>
+                    <th class="table-th child-td">Pkt size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">Storage rm</th>
@@ -288,12 +288,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body  ">
-                    <table class="table table-centered bg-white table-bordered custom-center m-0">
-                        <thead class="bg-light text-primary-2 table-bordered"> 
+                    <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
+                        <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                             <tr>
                                 <th width="200px">Transfer Qty</th>
-                                <th>Storage rm</th>
-                                <th>Housing type</th>
+                                <th>Storage room (able to add in new rooms in the future)</th>
+                                <th>Housing type (able to add in new housing type in the future)</th>
                                 <th>Owner 1</th>
                                 <th>Owner 2</th>
                                 <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -346,8 +346,8 @@
                     <div class="row m-0">
                         <div class="col-lg-12">
                             <h5 class="h5 text-primary text-center"> Bulk vol tracking logsheet (Drum)</h5>
-                            <table class="table table-centered bg-white table-bordered custom-center mb-3">
-                                <thead class="bg-light text-primary-2 table-bordered"> 
+                            <table class="table table-centered bg-white table-bordered table-hover custom-center mb-3">
+                                <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                     <tr>
                                         <th>Time stamp</th>
                                         <th>Current accessed</th>
@@ -367,8 +367,8 @@
                         </div>
                         <div class="col-lg-12">
                             <h5 class="h5 text-primary text-center">Repacked mat/product tracking logsheet (Repack)</h5>
-                            <table class="table table-centered bg-white table-bordered custom-center m-0">
-                                <thead class="bg-light text-primary-2 table-bordered"> 
+                            <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
+                                <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                     <tr>
                                         <th width="200px">Transfer Qty</th>
                                         <th>Storage rm</th>
@@ -424,8 +424,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body  ">
-                    <table class="table table-centered  bg-white table-bordered custom-center m-0">
-                        <thead class="bg-light text-primary-2 table-bordered"> 
+                    <table class="table table-centered  bg-white table-bordered table-hover custom-center m-0">
+                        <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                             <tr>
                                 <th width="200px">(Mother) Draw status</th>
                                 <th>Date/time stamp</th>

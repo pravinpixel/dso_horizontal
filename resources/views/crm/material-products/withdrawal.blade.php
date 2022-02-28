@@ -25,15 +25,15 @@
     </ul>
     
     <div class="tab-content p-3 bg-white border-bottom mb-3 border-start  border-end ">
-        <div class="tab-pane show active" id="Direct_Deduct"> 
+        <div class="tab-pane " id="Deduct_track_bulk_vol"> 
             <div class="mb-3 table-responsive">
-                <table class="table table-bordered bg-white">
+                <table class="table table-bordered table-hover bg-white">
                     <thead>
                         <tr>
                              <th class="table-th child-td-lg"> Item Description</th>
                             <th class="table-th child-td">Brand</th>
                             <th class="table-th child-td">Batch/Serial#</th>
-                            <th class="table-th child-td">Pkt size (L)</th>
+                            <th class="table-th child-td">Pkt size</th>
                             <th class="table-th child-td">Qty</th>
                             <th class="table-th child-td-lg">Owner1/2</th>
                             <th class="table-th child-td">Storage rm</th>
@@ -126,10 +126,10 @@
                     @endfor
                 </table> 
             </div>
-            <table class="table bg-white table-bordered custom-center">
+            <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg-primary text-white">
-                        <th class="table-th text-white" colspan="5"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                        <th class="table-th text-white" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Time stamp</th>
@@ -137,6 +137,7 @@
                         <th class="table-th">Used Amt (kg)</th>
                         <th class="table-th">Remain Amt (kg)</th>
                         <th class="table-th">Remarks</th>
+                        <th class="table-th">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -145,6 +146,7 @@
                         <td class="child-td">Tan Ng Hui Beng</td>
                         <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                         <td class="child-td">40</td>
+                        <td class="child-td"><input type="text" name="" id="" class="form-control w-50 text-center mx-auto p-0"  ></td>
                         <td class="child-td">
                             <i class="btn btn-sm btn-danger-light rounded-pill bi bi-trash3-fill"></i>
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
@@ -161,15 +163,15 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane" id="Deduct_track_bulk_vol">
+        <div class="tab-pane show active" id="Direct_Deduct">
             <div class="table-responsive">
-                <table class="table table-bordered bg-white">
+                <table class="table table-bordered table-hover bg-white">
                     <thead>
                         <tr>
                              <th class="table-th child-td-lg"> Item Description</th>
                             <th class="table-th child-td">Brand</th>
                             <th class="table-th child-td">Batch/Serial#</th>
-                            <th class="table-th child-td">Pkt size (L)</th>
+                            <th class="table-th child-td">Pkt size</th>
                             <th class="table-th child-td">Qty</th>
                             <th class="table-th child-td-lg">Owner1/2</th>
                             <th class="table-th child-td">Storage rm</th>
@@ -260,10 +262,10 @@
                     @endfor
                 </table> 
             </div> 
-            <table class="table bg-white table-bordered custom-center">
+            <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
-                    <tr class="bg-primary text-white">
-                        <th class="table-th text-white" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
+                    <tr class="bg text-white">
+                        <th class="bg-secondary text-white" style="padding: 5px !important;" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Material/Product description</th>
@@ -290,7 +292,7 @@
             <div class="text-end ">
                 <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
             </div>
-            <table class="table bg-white table-bordered custom-center mt-3">
+            <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
                         <th class="table-th">Date/time stamp</th>

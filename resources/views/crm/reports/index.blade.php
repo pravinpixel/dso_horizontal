@@ -25,12 +25,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered bg-white m-0">
+                        <table class="table table-bordered table-hover bg-white m-0">
                             <thead>
                                 <tr>
                                     <th colspan="2" class="table-th child-td-lg">Mat/Pdt decription</th>
                                     <th class="table-th child-td">Brand</th>
-                                    <th class="table-th child-td">Pkt size (L)</th>
+                                    <th class="table-th child-td">Pkt size</th>
                                     <th class="table-th child-td-lg">Owner1/2</th>
                                     <th class="table-th child-td">Storage area</th> 
                                 </tr> 
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table bg-white table-bordered custom-center m-0">
+                    <table class="table bg-white table-bordered table-hover custom-center m-0">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th class="table-th text-white" colspan="5"><span class="text-center">Withdrawal Cart</span></th>

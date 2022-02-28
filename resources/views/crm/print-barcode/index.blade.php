@@ -71,7 +71,7 @@
         </div> 
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered bg-white">
+        <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
                      <th class="table-th child-td-lg"> Item Description</th>
