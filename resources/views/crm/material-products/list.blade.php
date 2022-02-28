@@ -64,9 +64,7 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td"></td>
-                            <td class="child-td">
-                                 
-                            </td>
+                            <td class="child-td"></td>
                         </tr>
                         <tr class="collapse show" id="row_{{ $key+1 }}">
                             <td colspan="12" class="p-0">

@@ -29,7 +29,7 @@
                     <th class="table-th child-td">Actions</th>
                 </tr> 
             </thead>
-            @for ($key=0; $key<10; $key++)
+            @for ($key=0; $key<6; $key++)
             <tr class="table-tr">
                 <td colspan="12" class="p-0 border-bottom">
                     <table class="table m-0">
@@ -63,8 +63,32 @@
                                         <tr>
                                             <td class="child-td-lg"></td>
                                             <td class="child-td"></td>
-                                            <td class="child-td">Batch1/-</td>
-                                            <td class="child-td"></td>
+                                            
+                                            
+                                            @if ($key2 == 0)
+                                            <td class="child-td">Batch/1</td>
+                                            @endif
+                                            @if ($key2 == 1)
+                                            <td class="child-td">Batch/2</td>
+                                            @endif 
+                                            @if ($key2 == 2)
+                                            <td class="child-td">Batch/3</td>
+                                            @endif
+                                            @if ($key2 == 3)
+                                            <td class="child-td">Batch/4</td>
+                                            @endif  
+                                            @if ($key2 == 0)
+                                            <td class="child-td">1L</td>
+                                            @endif
+                                            @if ($key2 == 1)
+                                            <td class="child-td">1L</td>
+                                            @endif 
+                                            @if ($key2 == 2)
+                                            <td class="child-td">0.5L</td>
+                                            @endif
+                                            @if ($key2 == 3)
+                                            <td class="child-td">5L</td>
+                                            @endif  
                                             <td class="child-td">10</td>
                                             <td class="child-td-lg">Keith/HuiBeng</td>
                                             <td class="child-td">CW</td>
@@ -81,7 +105,7 @@
                                                 @endif
                                                 @if ($key2 == 3)
                                                     <small class="d-flex">31/10/2021  <i class="ms-1 text-success dot-sm bi bi-circle-fill"></i></small>
-                                                @endif
+                                                @endif  
                                             </td>
                                             <td class="child-td">
                                                 @if ($key2 == 0)
