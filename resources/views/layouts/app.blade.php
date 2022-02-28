@@ -24,18 +24,6 @@
     <main class="container-fluid" style="min-height: 80vh">
         @yield('content')
     </main>
-    <footer class="bg-primary-2">
-        <div class="container-fluid">
-            <div class="row m-0 ">
-                <div class="p-1 col text-start">
-                    <small class="text-warning">People . Passion. Innovation.</small>
-                </div>
-                <div class="p-1 col text-end">
-                    <small class="text-warning">DSO- EG1 Inventory Management System.</small>
-                </div>
-            </div>
-        </div>
-    </footer>
     
     <div id="advance-search-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
