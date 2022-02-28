@@ -315,8 +315,11 @@
                         <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                             <tr>
                                 <th width="200px">Transfer Qty</th>
-                                <th>Storage room (able to add in new rooms in the future)</th>
-                                <th>Housing type (able to add in new housing type in the future)</th>
+                                {{-- <th>Storage room (able to add in new rooms in the future)</th>
+                                <th>Housing type (able to add in new housing type in the future)</th> --}}
+                                <th>Storage room </th>
+                                <th>Housing type </th>
+                                <th>Housing </th>
                                 <th>Owner 1</th>
                                 <th>Owner 2</th>
                                 <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -346,7 +349,14 @@
                                         <option value=""> Racks</option>
                                         <option value=""> Dry Cabinet</option>
                                         <option value=""> Freezer</option>
-
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value=""> -</option>
+                                        @for ($key=0;$key<20;$key++)
+                                            <option value="">{{ $key+1 }}</option>
+                                        @endfor
                                     </select>
                                 </td>
                                 <td>

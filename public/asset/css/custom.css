@@ -1,5 +1,5 @@
 * {
-    text-transform: capitalize !important;
+    text-transform: capitalize ;
 }
 .table-toggle-icon.collapsed::before {
     transform: rotate(0deg);
@@ -8,6 +8,10 @@
 .table-toggle-icon::before {
     transform: rotate(90deg);
     transition: .5s all;
+
+}
+option {
+    text-transform: none !important ;
 
 }
 

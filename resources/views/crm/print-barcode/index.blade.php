@@ -7,10 +7,7 @@
                 <i class="bi bi-upc-scan font-20 mx-2"></i>
                 <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
-        </div>
-        <div class="col-2 ms-auto text-end">
-            <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button>
-        </div>
+        </div> 
     </div> 
     @include('includes.sections.filter')
     <div class="">

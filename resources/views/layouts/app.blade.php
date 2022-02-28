@@ -29,8 +29,11 @@
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0">
                 <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>Advanced Search Filter</h4>
-                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                    <h4>Advanced Search Filter</h4>  
+                    <div class="ms-auto">
+                        <a data-bs-toggle="modal" data-bs-target="#saved-search-modal"  class="btn btn-outline-light me-2 rounded-pill">My saved searches</a>
+                        <button class="rounded-pill btn btn-light btn-sm shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                    </div>
                 </div>
                 <div class="modal-body modal-scroll">
                     <div class="text-center">

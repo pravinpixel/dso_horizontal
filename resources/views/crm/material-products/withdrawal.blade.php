@@ -323,6 +323,10 @@
             <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
+                        <th class="table-th" colspan="5">Material/In-house product Outlife Information</th>
+                    </tr>
+                    <tr>
+                        
                         <th class="table-th">Date/time stamp</th>
                         <th class="table-th">Last accessed</th>
                         <th class="table-th">Auto-generate unique barcode label</th>
@@ -342,6 +346,9 @@
                     @endfor
                 </tbody>
             </table>
+            <div class="text-end ">
+                <button class="btn btn-primary rounded-pill">Print outlife expiry</button>
+            </div>
         </div> 
     </div> 
 @endsection 
