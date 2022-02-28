@@ -10,20 +10,21 @@
         </div>
         <div class="col-6 d-flex justify-content-end ms-auto text-end">
             <button class="btn btn-success rounded-pill mx-1">Import to Excel</button>
+            <button class="btn btn-info rounded-pill mx-1">Export</button>
             
             <div class="dropdown">
-                <a class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none" href="#" id="topnav-ecommerce" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-table"></i>  
-                </a>
-                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce">
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</span>
-                    <span class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
                 </div>
             </div>
             <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
@@ -326,17 +327,31 @@
                                 <td width="200px" class="text-center"><input type="number" name="" id="" value="5" class="text-center form-control form-control-sm"></td>
                                 <td>
                                     <select name="" id="" class="form-select form-select-sm">
-                                        <option value="">CW</option>
+                                        <option value="">AR</option> 
+                                        <option value="">CW</option> 
+                                        <option value="">MA</option> 
+                                        <option value="">SP</option> 
+                                        <option value="">MR</option> 
+                                        <option value="">Polymer</option> 
+                                        <option value="">ChemShed1</option> 
+                                        <option value="">ChemShed2</option> 
                                     </select>
                                 </td>
                                 <td>
                                     <select name="" id="" class="form-select form-select-sm">
-                                        <option value="">FC1</option>
+                                        <option value=""> Flammable Cabinet</option>
+                                        <option value=""> Acid Cabinet</option>
+                                        <option value=""> Base Cabinet</option>
+                                        <option value=""> Metal Cabinet</option>
+                                        <option value=""> Racks</option>
+                                        <option value=""> Dry Cabinet</option>
+                                        <option value=""> Freezer</option>
+
                                     </select>
                                 </td>
                                 <td>
                                     <select name="" id="" class="form-select form-select-sm">
-                                        <option value="">Keith</option>
+                                        <option value="">Beng HJibn</option>
                                     </select>
                                 </td>
                                 <td>

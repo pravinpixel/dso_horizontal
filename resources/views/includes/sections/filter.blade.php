@@ -1,6 +1,6 @@
 <div class="table-fillters row m-0 p-2">
     <div class="col-12 mb-2 text-end">
-        <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> My saved search</button>
+        <button  data-bs-toggle="modal" data-bs-target="#saved-search-modal"  class="rounded-pill btn btn-sm shadow-sm border"><i class="bi bi-bookmarks-fill me-1"></i> My saved search</button>
         <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
     </div>
     <div class="col">
@@ -47,7 +47,7 @@
         </select>
     </div> 
     <div class="col">
-        <label for="" class="form-label">Housing type</label>
+        <label for="" class="form-label">Date in</label>
         <input type="text" class="form-control custom" placeholder="Type here...">
     </div>
     <div class="col d-flex align-items-center justify-content-center">

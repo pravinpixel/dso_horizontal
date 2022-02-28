@@ -3,7 +3,7 @@
 @section('content')
     <div >
         <div class="row m-0 p-0 " style="min-height: 100vh">
-            <div class="col-md-6 text-white  align-items-center d-flex  p-4  card-cover" style="background:url('{{ asset('public/asset/images/login_bg.png') }}'); background-position: -386px center !important;">
+            <div class="col-md-6 text-white  align-items-center d-flex  p-4  card-cover" style="background:linear-gradient(#00000070, #00000063) ,url('{{ asset('public/asset/images/login_bg.png') }}');  ">
                 {{-- <h3 class="display-4"><b>EG1 INVENTORY MANAGEMENT PORTAL</b></h3> --}}
                 <h3 class="display-4"><b>EG1 Inventory Management System</b></h3>
             </div>

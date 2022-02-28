@@ -45,15 +45,7 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td"></td>
-                            <td class="child-td">
-                                <div class="dropdown">
-                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </a> 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Extensionmodal"><i class="bi bi-arrow-up-right-square me-1"></i>Extension</a>
-                                    </div>
-                                </div>
+                            <td class="child-td"> 
                             </td>
                         </tr>
                         <tr class="collapse" id="row_{{ $key+1 }}">
