@@ -3,13 +3,12 @@
 @section('content')
     <div >
         <div class="row m-0 p-0 " style="min-height: 100vh">
-            <div class="col-md-6 text-white  align-items-end d-flex  p-4  card-cover" style="background:url('{{ asset('public/asset/images/banner_bg_login.jpg') }}'); background-position: -386px center !important;">
+            <div class="col-md-6 text-white  align-items-center d-flex  p-4  card-cover" style="background:url('{{ asset('public/asset/images/login_bg.png') }}'); background-position: -386px center !important;">
                 {{-- <h3 class="display-4"><b>EG1 INVENTORY MANAGEMENT PORTAL</b></h3> --}}
-                <h3 class="display-6 text-warning"><b>Celebrating 50 years of Defence Science & Technology</b></h3>
+                <h3 class="display-4"><b>EG1 Inventory Management System</b></h3>
             </div>
             <div class="col-md-6 py-md-5 py-3 px-lg-5">
-                <div class="p-3   text-center">
-                    <h3 class="h4 text-primary-2">EG1 Inventory Management System</h3>
+                <div class="p-3   text-center"> 
                     <img src="{{ asset('public/asset/images/logo/logo.png') }}" alt="q">
                     <h4 class="account-titlse">Login to your account</h4> 
                     <form action="{{ route('dashboard') }}">
