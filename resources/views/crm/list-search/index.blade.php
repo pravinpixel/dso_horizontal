@@ -9,8 +9,8 @@
             </div> 
         </div> 
     </div>
+    @include('includes.sections.filter')    
     
-    {{-- @include('includes.sections.filter') --}}
     
     <div class="table-responsive">
         <table class="table table-bordered table-hover bg-white">

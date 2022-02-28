@@ -40,7 +40,7 @@
                             <th class="table-th child-td">Housing type</th>
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
-                            <th class="table-th child-td">Used for TD/Expt</th> 
+                            <th class="table-th child-td">Used for TD/Expt</th>
                         </tr> 
                     </thead>
                     @for ($key=0; $key<1; $key++)
@@ -48,9 +48,7 @@
                         <td colspan="12" class="p-0 border-bottom">
                             <table class="table m-0">
                                 <tr>
-                                    <td class="child-td-lg"><i class="bi bi-caret-right-fill table-toggle-icon" data-bs-toggle="collapse" href="#row_{{ $key+1 }}" role="button" aria-expanded="false" aria-controls="row_{{ $key+1 }}"></i> 
-                                        Powder Z
-                                    </td>
+                                    <td class="child-td-lg"><i class="bi bi-caret-right-fill table-toggle-icon" data-bs-toggle="collapse" href="#roww_{{ $key+1 }}" role="button" aria-expanded="false" aria-controls="roww_{{ $key+1 }}"></i> Acetone IND</td>
                                     <td class="child-td">XOX</td>
                                     <td class="child-td"></td>
                                     <td class="child-td">1</td>
@@ -62,13 +60,13 @@
                                     <td class="child-td"></td>
                                     <td class="child-td"></td> 
                                 </tr>
-                                <tr class="collapse show" id="row_{{ $key+1 }}">
+                                <tr class="collapse show" id="roww_{{ $key+1 }}">
                                     <td colspan="12" class="p-0">
                                         <table class="table bg-white m-0">
                                             <tr>
                                                 <td class="child-td-lg"></td>
                                                 <td class="child-td"></td>
-                                                <td class="child-td"></td>
+                                                <td class="child-td">Batch1/-</td>
                                                 <td class="child-td"></td>
                                                 <td class="child-td">10</td>
                                                 <td class="child-td-lg">Keith/HuiBeng</td>
@@ -79,11 +77,11 @@
                                                 <td class="child-td">-</td> 
                                             </tr>
                                             <tr>
-                                                <td class="child-td-lg">- Batch 1</td>
+                                                <td class="child-td-lg"></td>
                                                 <td class="child-td"></td>
+                                                <td class="child-td">Batch1/-</td>
                                                 <td class="child-td"></td>
-                                                <td class="child-td"></td>
-                                                <td class="child-td">1</td>
+                                                <td class="child-td">10</td>
                                                 <td class="child-td-lg">Keith/HuiBeng</td>
                                                 <td class="child-td">CW</td>
                                                 <td class="child-td">FC1</td>
@@ -92,11 +90,11 @@
                                                 <td class="child-td">yes</td> 
                                             </tr>
                                             <tr>
-                                                <td class="child-td-lg">- Batch 2</td>
+                                                <td class="child-td-lg"></td>
                                                 <td class="child-td"></td>
+                                                <td class="child-td">Batch1/-</td>
                                                 <td class="child-td"></td>
-                                                <td class="child-td"></td>
-                                                <td class="child-td">1</td>
+                                                <td class="child-td">10</td>
                                                 <td class="child-td-lg">Keith/HuiBeng</td>
                                                 <td class="child-td">CW</td>
                                                 <td class="child-td">FC1</td>
@@ -105,11 +103,11 @@
                                                 <td class="child-td">yes</td> 
                                             </tr>
                                             <tr>
-                                                <td class="child-td-lg">- Batch 3</td>
+                                                <td class="child-td-lg"></td>
                                                 <td class="child-td"></td>
+                                                <td class="child-td">Batch1/-</td>
                                                 <td class="child-td"></td>
-                                                <td class="child-td"></td>
-                                                <td class="child-td">1</td>
+                                                <td class="child-td">10</td>
                                                 <td class="child-td">Keith/HuiBeng</td>
                                                 <td class="child-td">CW</td>
                                                 <td class="child-td">FC1</td>
@@ -129,7 +127,7 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg-primary text-white">
-                        <th class="table-th text-white" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                        <th class="bg-secondary text-white" style="padding: 5px !important" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Time stamp</th>

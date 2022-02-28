@@ -27,7 +27,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="{{ route('disposal') }}" class="nav-link {{ Route::is('disposal') ? "active" : "" }}"><i class="bi bi-trash2 me-1"></i><span>disposal</span></a>
+                        <a href="{{ route('disposal') }}" class="nav-link {{ Route::is('disposal') ? "active" : "" }}"><i class="bi bi-trash2 me-1"></i><span>Early Disposal</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="{{ route('extend-expiry') }}" class="nav-link {{ Route::is('extend-expiry') ? 'active' : '' }}"><i class="bi bi-arrow-up-right-square me-1"></i>Extend Expiry</a>

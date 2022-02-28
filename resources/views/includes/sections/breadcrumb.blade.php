@@ -5,11 +5,15 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">DSO</a></li>
+                      
+                        @if (Route::is(['list-material-products','withdrawal-material-products']))
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-house Product</a></li>
+                        @endif
                         <li class="breadcrumb-item active">
                             {{ Route::is('dashboard') ? "Dashboard" : "" }}
-                            {{ Route::is('list-material-products') ? "List Material / In-house product" : "" }}
+                            {{ Route::is('list-material-products') ? "Search or Add" : "" }}
                             {{ Route::is('withdrawal-material-products') ? "Withdraw Material/Product " : "" }}
-                            {{ Route::is('disposal') ? "Disposal" : "" }}
+                            {{ Route::is('disposal') ? "Early Disposal" : "" }}
                             {{ Route::is('print-barcode') ? "Print Barcode" : "" }}
                             {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}
                             {{ Route::is('reports') ? "Reports" : "" }}
@@ -23,9 +27,9 @@
                 </div>
                 <h4 class="page-title">
                     {{ Route::is('dashboard') ? "Dashboard" : "" }}
-                    {{ Route::is('list-material-products') ? "List Material / In-house product" : "" }}
+                    {{ Route::is('list-material-products') ? "Search or Add" : "" }}
                     {{ Route::is('withdrawal-material-products') ? "Withdraw Material/Product " : "" }}
-                    {{ Route::is('disposal') ? "Disposal" : "" }}
+                    {{ Route::is('disposal') ? "Early Disposal" : "" }}
                     {{ Route::is('print-barcode') ? "Print Barcode / Label" : "" }}
                     {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}
                     {{ Route::is('reports') ? "Reports" : "" }}

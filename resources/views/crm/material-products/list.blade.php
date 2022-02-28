@@ -48,7 +48,7 @@
                     <th class="table-th child-td">Actions</th>
                 </tr> 
             </thead>
-            @for ($key=0; $key<10; $key++)
+            @for ($key=0; $key<3; $key++)
             <tr class="table-tr">
                 <td colspan="12" class="p-0 border-bottom">
                     <table class="table table-centered m-0">
@@ -56,7 +56,7 @@
                             <td class="child-td-lg"><i class="bi bi-caret-right-fill collapsed table-toggle-icon" data-bs-toggle="collapse" href="#row_{{ $key+1 }}" role="button" aria-expanded="false" aria-controls="row_{{ $key+1 }}"></i> Acetone IND</td>
                             <td class="child-td">XOX</td>
                             <td class="child-td"></td>
-                            <td class="child-td">1</td>
+                            <td class="child-td">1L</td>
                             <td class="child-td">20 <i class="text-success dot-sm bi bi-circle-fill"></i></td>
                             <td class="child-td-lg"></td>
                             <td class="child-td"></td>
@@ -68,15 +68,39 @@
                                  
                             </td>
                         </tr>
-                        <tr class="collapse" id="row_{{ $key+1 }}">
+                        <tr class="collapse show" id="row_{{ $key+1 }}">
                             <td colspan="12" class="p-0">
                                 <table class="table table-centered bg-white m-0">
                                     @for ($key2=0; $key2<4; $key2++)
                                         <tr>
                                             <td class="child-td-lg"></td>
                                             <td class="child-td"></td>
-                                            <td class="child-td">Batch1/-</td>
-                                            <td class="child-td"></td>
+                                            
+                                            
+                                            @if ($key2 == 0)
+                                            <td class="child-td">Batch/1</td>
+                                            @endif
+                                            @if ($key2 == 1)
+                                            <td class="child-td">Batch/2</td>
+                                            @endif 
+                                            @if ($key2 == 2)
+                                            <td class="child-td">Batch/3</td>
+                                            @endif
+                                            @if ($key2 == 3)
+                                            <td class="child-td">Batch/4</td>
+                                            @endif  
+                                            @if ($key2 == 0)
+                                            <td class="child-td">1L</td>
+                                            @endif
+                                            @if ($key2 == 1)
+                                            <td class="child-td">1L</td>
+                                            @endif 
+                                            @if ($key2 == 2)
+                                            <td class="child-td">0.5L</td>
+                                            @endif
+                                            @if ($key2 == 3)
+                                            <td class="child-td">5L</td>
+                                            @endif  
                                             <td class="child-td">10</td>
                                             <td class="child-td-lg">Keith/HuiBeng</td>
                                             <td class="child-td">CW</td>

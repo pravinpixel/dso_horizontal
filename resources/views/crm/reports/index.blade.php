@@ -9,7 +9,7 @@
             </div> 
         </div> 
         <div class="col-2 ms-auto text-end">
-            <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button>
+            {{-- <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button> --}}
         </div>
     </div> 
     <div class="row">
