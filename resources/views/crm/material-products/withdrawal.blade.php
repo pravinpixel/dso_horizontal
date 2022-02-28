@@ -26,8 +26,7 @@
     
     <div class="tab-content p-3 bg-white border-bottom mb-3 border-start  border-end ">
         <div class="tab-pane " id="Deduct_track_bulk_vol"> 
-            <div class="mb-3 table-responsive">
-           
+            <div class="mb-3 ">           
                 <table class="table table-centered table-bordered table-hover bg-white">
                     <thead>
                         <tr>
@@ -178,7 +177,7 @@
             </div>
         </div>
         <div class="tab-pane show active" id="Direct_Deduct">
-            <div class="table-responsive">
+            <div class="">
                 <table class="table table-centered table-bordered table-hover bg-white">
                     <thead>
                         <tr>

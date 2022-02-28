@@ -11,7 +11,7 @@
     </div>
    
     @include('includes.sections.filter')
-    <div class="table-responsive">
+    <div class="">
         <table class="table table-centered table-bordered table-hover bg-white">
             <thead>
                 <tr>
