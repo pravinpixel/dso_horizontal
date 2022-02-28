@@ -9,6 +9,9 @@
                         @if (Route::is(['list-material-products','withdrawal-material-products']))
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-house Product</a></li>
                         @endif
+                        @if (Route::is(['threshold-qty','near-expiry-expired']))
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Notification</a></li>
+                        @endif
                         <li class="breadcrumb-item active">
                             {{ Route::is('dashboard') ? "Dashboard" : "" }}
                             {{ Route::is('list-material-products') ? "Search or Add" : "" }}
@@ -20,7 +23,7 @@
                             {{ Route::is('list-search') ? "List Search" : "" }}
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                            {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired Material/Product" : "" }}
+                            {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
                             {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
                         </li>
                     </ol>
@@ -36,7 +39,7 @@
                     {{ Route::is('list-search') ? "List Search" : "" }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                    {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired Material/Product" : "" }}
+                    {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
                     {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
                 </h4>
             </div>

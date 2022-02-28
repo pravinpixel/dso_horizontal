@@ -1,6 +1,4 @@
-* {
-    text-transform: capitalize ;
-}
+
 .table-toggle-icon.collapsed::before {
     transform: rotate(0deg);
     transition: .5s all;
@@ -159,7 +157,7 @@ option {
     min-width: 250px !important;
 }
 .dropdown-menu a {
-    line-height: 35px !important;
+    line-height: 25px !important;
 }
 .dropdown-item.active {
     color: #12326a;

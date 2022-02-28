@@ -293,7 +293,7 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg text-white">
-                        <th class="bg-secondary text-white" style="padding: 5px !important;" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
+                        <th class="bg-warning text-white" style="padding: 5px !important;" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Material/Product description</th>
@@ -305,15 +305,33 @@
                 </thead>
                 <tbody>
                     @for ($key=0; $key<2; $key++)
-                        <tr>
-                            <td class="child-td">Prepreg C3K</td>
+						@if ($key == 1)
+						{
+                        <tr class="bg-secondary text-white">
+						   <td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
                             <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                             <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
-                        </tr>
+							 </tr>
+						}
+						else
+						{
+						<tr>
+						<td class="child-td">Prepreg C3K</td>
+                            <td class="child-td">Roll2/1</td>
+                            <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
+                            <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
+                            <td class="child-td">
+                                <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                            </td>
+							 </tr>
+						}
+						@endif
+                         
+                       
                     @endfor
                 </tbody>
             </table>

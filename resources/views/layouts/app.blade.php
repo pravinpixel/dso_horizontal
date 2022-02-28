@@ -127,7 +127,7 @@
                                 <input type="date" class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
-                                <label for="" class="form-label">Extended QC statu (P/F)</label>
+                                <label for="" class="form-label">Extended QC status (P/F)</label>
                                 <select name="" id="" class="form-select">
                                     <option value="">-- select --</option>
                                     <option value="1">Pass</option>

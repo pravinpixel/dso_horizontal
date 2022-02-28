@@ -10,8 +10,9 @@
         </div>
         <div class="col-6 d-flex justify-content-end ms-auto text-end">
             <button class="btn btn-success rounded-pill mx-1">Import to Excel</button>
-            <button class="btn btn-info rounded-pill mx-1">Export</button>
-            
+            <button class="btn btn-info rounded-pill mx-1">Export</button>          
+            <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
+			  
             <div class="dropdown">
                 <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-table"></i>  
@@ -27,7 +28,6 @@
                     <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
                 </div>
             </div>
-            <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
         </div>
     </div>
     @include('includes.sections.filter')
@@ -100,7 +100,20 @@
                                             @if ($key2 == 3)
                                             <td class="child-td">5L</td>
                                             @endif  
-                                            <td class="child-td">10</td>
+                                            <td class="child-td">
+                                                @if ($key2 == 0)
+                                                30
+                                                @endif
+                                                @if ($key2 == 1)
+                                                9
+                                                @endif 
+                                                @if ($key2 == 2)
+                                                2
+                                                @endif
+                                                @if ($key2 == 3)
+                                                10
+                                                @endif  
+                                            </td>
                                             <td class="child-td-lg">Keith/HuiBeng</td>
                                             <td class="child-td">CW</td>
                                             <td class="child-td">FC1</td>

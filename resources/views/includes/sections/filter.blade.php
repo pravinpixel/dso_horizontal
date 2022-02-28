@@ -48,7 +48,7 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Date in</label>
-        <input type="text" class="form-control custom" placeholder="Type here...">
+        <input type="date" class="form-control custom" placeholder="Type here...">
     </div>
     <div class="col d-flex align-items-center justify-content-center">
         <div class="btn-group">
