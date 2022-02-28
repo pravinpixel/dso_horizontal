@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h4 class="h4">Generate Material/Product withdrawal rate</h4>
+                        <h4 class="h4">Generate withdrawal rate</h4>
                         <div>
                             <button class="btn btn-outline-primary rounded-pill"><i class="bi bi-arrow-repeat me-1"></i>Generate History</button>
                         </div>

@@ -3,7 +3,7 @@
         <!-- LOGO -->
         <a href="{{ route('dashboard') }}" class="topnav-logo border-end">
             <span class="topnav-logo-lg">
-                <img src="https://www.dso.org.sg/Media/Default/Theme/dso_logo.png" alt="" width="80px"> 
+                <img src="{{ asset('public/asset/images/logo/logo-small.png') }}" alt="" width="80px"> 
             </span>
             <span class="topnav-logo-sm">
                 <b class="text-white h4"><span class="text-primary">DSO</span> EG1</b>

@@ -166,14 +166,14 @@
                                                         <i class="bi bi-three-dots"></i>
                                                     </a> 
                                                     <div class="dropdown-menu"> 
-                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View Material/Product batch details</a>
-                                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
-                                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
+                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
+                                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackTransfers"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackOutlife"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
                                                         <a class="dropdown-item text-secondary" onclick="printModal()" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
-                                                        <a class="dropdown-item text-danger" onclick="deleteModal()" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete material/product batch</a> 
+                                                        <a class="dropdown-item text-danger" onclick="deleteModal()" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                     </div>
                                                 </div>
                                             </td>
@@ -192,7 +192,7 @@
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0 ">
                 <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>View Material/Product details</h4>
+                    <h4>View details</h4>
                     <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body  modal-scroll-2">
@@ -260,7 +260,7 @@
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0">
                 <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>View Material/Product batch details</h4>
+                    <h4>View batch details</h4>
                     <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body modal-scroll-2">
@@ -334,7 +334,7 @@
         <div class="modal-dialog custom-modal-dialog modal-top">
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Transfer Material/Product batch</h4>
+                    <h4 class="modal-title" id="topModalLabel">Transfer batch</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body  ">
@@ -389,7 +389,7 @@
         <div class="modal-dialog custom-modal-dialog modal-top">
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Repack/Transfer Material/Product batch</h4>
+                    <h4 class="modal-title" id="topModalLabel">Repack/Transfer batch</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
@@ -470,14 +470,14 @@
         <div class="modal-dialog custom-modal-dialog modal-top">
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
+                    <h4 class="modal-title" id="topModalLabel">Repack/Outlife batch</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body  ">
                     <table class="table table-centered  bg-white table-bordered custom-center m-0">
                         <thead class="bg-light text-primary-2 table-bordered"> 
                             <tr>
-                                <th width="200px">(Mother) Material/Product Draw status</th>
+                                <th width="200px">(Mother) Draw status</th>
                                 <th>Date/time stamp</th>
                                 <th>Last accessed</th>
                                 <th>Auto-generate unique barcode label</th>
@@ -525,7 +525,7 @@
                 <div class="card-footer ">
                     <div class="row align-items-center">
                         <div class="shadow-sm border col-4">
-                            <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of material/product batch</label>
+                            <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                         </div>
                         <div class="col-6 ms-auto text-end">
                             <button class="btn btn-primary rounded-pill h-100">Save and Submit</button>

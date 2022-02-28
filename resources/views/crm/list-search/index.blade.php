@@ -136,14 +136,14 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a> 
                                                 <div class="dropdown-menu"> 
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
-                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete material/product batch</a> 
+                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                 </div>
                                             </div>
                                         </td>
@@ -166,14 +166,14 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
-                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete material/product batch</a> 
+                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                 </div>
                                             </div>
                                         </td>
@@ -196,14 +196,14 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
-                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete material/product batch</a> 
+                                                    <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                 </div>
                                             </div>
                                         </td>
@@ -226,9 +226,9 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a>
                                                 <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View Material/Product batch details</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate material/product batch</a>
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit material/product batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
