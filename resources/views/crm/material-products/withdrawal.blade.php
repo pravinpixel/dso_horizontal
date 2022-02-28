@@ -30,7 +30,7 @@
                 <table class="table table-bordered bg-white">
                     <thead>
                         <tr>
-                            <th class="table-th child-td-lg">Mat/Pdt decription</th>
+                             <th class="table-th child-td-lg"> Item Description</th>
                             <th class="table-th child-td">Brand</th>
                             <th class="table-th child-td">Batch/Serial#</th>
                             <th class="table-th child-td">Pkt size (L)</th>
@@ -166,7 +166,7 @@
                 <table class="table table-bordered bg-white">
                     <thead>
                         <tr>
-                            <th class="table-th child-td-lg">Mat/Pdt decription</th>
+                             <th class="table-th child-td-lg"> Item Description</th>
                             <th class="table-th child-td">Brand</th>
                             <th class="table-th child-td">Batch/Serial#</th>
                             <th class="table-th child-td">Pkt size (L)</th>

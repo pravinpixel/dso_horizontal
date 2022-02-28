@@ -13,8 +13,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
                             <a href="{{ route('withdrawal-material-products') }}" class="dropdown-item {{ Route::is(['withdrawal-material-products']) ? "active" : "" }}"><i class="bi bi-aspect-ratio me-1"></i><span>Withdrawal</span></a>
-                            <a href="{{ route('list-material-products') }}" class="dropdown-item {{ Route::is(['list-material-products']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>List</span></a>
-                            <a href="{{ route('list-search') }}" class="dropdown-item {{ Route::is('list-search') ? 'active' : '' }}"><i class="bi bi-search me-1"></i>List Search</a>
+                            <a href="{{ route('list-material-products') }}" class="dropdown-item {{ Route::is(['list-material-products']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Search or Add</span></a>
+                            {{-- <a href="{{ route('list-search') }}" class="dropdown-item {{ Route::is('list-search') ? 'active' : '' }}"><i class="bi bi-search me-1"></i>List Search</a> --}}
                         </div>
                     </li> 
                     <li class="nav-item dropdown">

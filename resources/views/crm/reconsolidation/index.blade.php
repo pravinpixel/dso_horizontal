@@ -73,7 +73,7 @@
             <thead>
                 <tr>
                     <th class="table-th text-center">S.No</th>
-                    <th class="table-th child-td-lg">Mat/Pdt decription</th>
+                     <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td child-td-lg">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
                     <th class="table-th child-td">Pkt size (L)</th>
