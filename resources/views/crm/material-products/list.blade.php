@@ -8,8 +8,25 @@
                 <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div>
-        <div class="col-2 ms-auto text-end">
-            <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button>
+        <div class="col-6 d-flex justify-content-end ms-auto text-end">
+            <button class="btn btn-success rounded-pill mx-1">Import to Excel</button>
+            
+            <div class="dropdown">
+                <a class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none" href="#" id="topnav-ecommerce" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-table"></i>  
+                </a>
+                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce">
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Products</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Products Details</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Orders</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Order Details</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Customers</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Shopping Cart</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Checkout</span>
+                    <span class="dropdown-item"><input type="checkbox" name="" id=""> Sellers</span>
+                </div>
+            </div>
+            <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
         </div>
     </div>
     @include('includes.sections.filter')
