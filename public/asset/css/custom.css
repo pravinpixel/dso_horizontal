@@ -19,20 +19,26 @@
 
 .child-td {
     /* max-width: 100px ; */
+    min-width: 100px !important;
+    max-width: 100px !important;
     width: 100px !important;
-    padding: .5rem .95rem !important;
+    padding: 5px 0 !important;
     text-align: center !important;
     vertical-align: middle !important;
+    font-size: 12px !important;
 }
 .dot-sm {
     font-size: 10px !important;
 }
 .child-td-lg {
-    width: 150px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+    width: 100px !important;
     /* max-width: 150px !important; */
-    padding: .5rem .95rem !important;
+    padding: 5px 0 !important;
     text-align: center !important;
     vertical-align: middle !important;
+    font-size: 12px !important;
 }
 
 .table-th {
@@ -41,7 +47,7 @@
     font-size: 12px !important;
     padding: 5px !important;
     letter-spacing: .5px;
-    font-weight: bold !important;
+    font-weight: normal !important;
 }
 .bg-primary-2 {
     background-color: #12326A !important;
