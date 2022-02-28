@@ -163,6 +163,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top text-center">
+                    <label for="xxxx"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save search</label>
                     <button class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
                 </div>
             </div> 
