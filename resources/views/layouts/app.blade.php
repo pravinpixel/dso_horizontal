@@ -92,14 +92,23 @@
                                     <option value="4">Freezer</option>
                                 </select>
                             </div> 
+							 <div class="col-6 text-start mb-2 px-1">
+                                <label for="" class="form-label">Housing No</label>
+                                <select name="" id="" class="form-select form-select-sm">
+                                        <option value=""> -</option>
+                                        @for ($key=0;$key<20;$key++)
+                                            <option value="">{{ $key+1 }}</option>
+                                        @endfor
+                                    </select>
+                            </div> 
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Unit Packing size</label>
                                 <select name="" id="" class="form-select">
                                     <option value="">-- select --</option>
                                     <option value="1">kg</option>
                                     <option value="2">L</option>
-                                    <option value="3">m</option>
-                                    <option value="4">m2</option>
+                                    <option value="3">m</option>									
+                                    <option value="4">m&#xB2;</option>
                                     <option value="4">piece</option>
                                     <option value="4">roll</option>
                                     <option value="4">drum</option>
@@ -127,7 +136,7 @@
                                 <input type="date" class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
-                                <label for="" class="form-label">Extended QC status (P/F)</label>
+                                <label for="" class="form-label">Extended QC status</label>
                                 <select name="" id="" class="form-select">
                                     <option value="">-- select --</option>
                                     <option value="1">Pass</option>
@@ -172,7 +181,7 @@
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0">
                 <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>Search History</h4>
+                    <h4>My Saved Searches</h4>
                     <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
                 <div class="modal-body modal-scroll">
@@ -180,14 +189,14 @@
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Storage Rm	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Material/In-House Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Storage Rm	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Material/In-House Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 

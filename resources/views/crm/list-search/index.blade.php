@@ -8,6 +8,23 @@
                 <input type="text" class="form-control  form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div> 
+		  <div class="col-6 d-flex justify-content-end ms-auto text-end">
+            <div class="dropdown">
+                <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-caret-down-square-fill"></i>  
+                </button>
+                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
+                </div>
+            </div>
+        </div>
     </div>
     @include('includes.sections.filter')    
     
@@ -22,7 +39,7 @@
                     <th class="table-th child-td">Pkt size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage rm</th>
+                    <th class="table-th child-td">Storage Room</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">DOE</th>
                     <th class="table-th child-td">QC status</th>
@@ -80,7 +97,7 @@
                                                     <i class="bi bi-three-dots"></i>
                                                 </a> 
                                                 <div class="dropdown-menu"> 
-                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View batch details</a>
+                                                    <a class="dropdown-item text-secondary" href="#"><i class="bi bi-eye"></i> View  details</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                     <a class="dropdown-item text-secondary" href="#"><i class="bi bi-arrows-move me-1"></i>Transfer</a>

@@ -8,9 +8,28 @@
                 <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div> 
-        <div class="col-2 ms-auto text-end">
+        <div class="col-6 d-flex justify-content-end ms-auto text-end">
+		  <button class="btn btn-success rounded-pill mx-1">Import from Excel</button>
+            <button class="btn btn-info rounded-pill mx-1">Export</button>  
             {{-- <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button> --}}
-        </div>
+			
+			<div class="dropdown">
+                <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-caret-down-square-fill"></i>  
+                </button>
+                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
+                </div>
+            </div>
+        </div>	
+		 
     </div> 
     @include('includes.sections.filter')
     <table class="table table-centered table-bordered table-hover border shadow bg-white">
@@ -22,7 +41,7 @@
                 <th class="table-th child-td">Pkt size</th>
                 <th class="table-th child-td">Qty</th>
                 <th class="table-th child-td-lg">Owner1/2</th>
-                <th class="table-th child-td">Storage rm</th>
+                <th class="table-th child-td">Storage Room</th>
                 <th class="table-th child-td">Housing type</th>
                 <th class="table-th child-td">DOE</th>
                 <th class="table-th child-td">QC status</th>
@@ -145,7 +164,7 @@
         @endfor
     </table>  
 
-    <h3 class="h5 border shadow text-primary bg-light text-center py-2">Material/In-House Product Utilisation Cart</h3>
+    <h3 class="h5 border shadow text-primary bg-light text-center py-2">Utilisation Cart</h3>
     <table class="table table-centered table-bordered table-hover bg-white border shadow">
         <thead>
             <tr>
@@ -174,7 +193,7 @@
         </tbody>
     </table>
     <div class="text-center">
-        <button class="btn btn-primary rounded-pill"><b>Export as CSV</b></button>
+        <button class="btn btn-primary rounded-pill"><b>Export</b></button>
     </div>
     <br>
 @endsection 

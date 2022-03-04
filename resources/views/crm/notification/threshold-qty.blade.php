@@ -8,7 +8,7 @@
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage rm</th>
+                    <th class="table-th child-td">Storage Room</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
                     <th class="table-th child-td">Balance </th>

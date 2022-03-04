@@ -8,6 +8,23 @@
                 <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
             </div> 
         </div> 
+		  <div class="col-6 d-flex justify-content-end ms-auto text-end">
+            <div class="dropdown">
+                <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-caret-down-square-fill"></i>  
+                </button>
+                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
+                </div>
+            </div>
+        </div>
     </div> 
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -36,7 +53,7 @@
                             <th class="table-th child-td">Pkt size</th>
                             <th class="table-th child-td">Qty</th>
                             <th class="table-th child-td-lg">Owner1/2</th>
-                            <th class="table-th child-td">Storage rm</th>
+                            <th class="table-th child-td">Storage Room</th>
                             <th class="table-th child-td">Housing type</th>
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
@@ -142,7 +159,7 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg-primary text-white">
-                        <th class="bg-secondary text-white" style="padding: 5px !important" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                        <th class="bg-warning text-white" style="padding: 5px !important" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Time stamp</th>
@@ -187,7 +204,7 @@
                             <th class="table-th child-td">Pkt size</th>
                             <th class="table-th child-td">Qty</th>
                             <th class="table-th child-td-lg">Owner1/2</th>
-                            <th class="table-th child-td">Storage rm</th>
+                            <th class="table-th child-td">Storage Room</th>
                             <th class="table-th child-td">Housing type</th>
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
@@ -293,11 +310,12 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg text-white">
-                        <th class="bg-warning text-white" style="padding: 5px !important;" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
+                        <th class="bg-warning text-white" style="padding: 5px !important;" colspan="6"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Material/In-House Product description</th>
                         <th class="table-th">Batch#/ Serial#</th>
+						 <th class="table-th child-td">Pkt size</th>
                         <th class="table-th">Withdraw Qty</th>
                         <th class="table-th">Remarks</th>
                         <th class="table-th"> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -310,6 +328,7 @@
                         <tr class="bg-secondary text-white">
 						   <td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
+							 <td class="child-td">0.5L</td>
                             <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                             <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
@@ -323,6 +342,7 @@
 						<tr>
 						<td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
+							<td class="child-td">0.5L</td>
                             <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                             <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
@@ -342,7 +362,7 @@
             <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
-                        <th class="table-th" colspan="5">Material/In-House product Outlife Information</th>
+                        <th  class="bg-warning text-white" style="padding: 5px !important;" colspan="5">Material/In-House product Outlife Information</th>
                     </tr>
                     <tr>
                         

@@ -9,8 +9,7 @@
             </div> 
         </div>
         <div class="col-6 d-flex justify-content-end ms-auto text-end">
-            <button class="btn btn-success rounded-pill mx-1">Import from Excel</button>
-            <button class="btn btn-info rounded-pill mx-1">Export</button>          
+                  
             <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
 			  
             <div class="dropdown">
@@ -41,7 +40,7 @@
                     <th class="table-th child-td">Pkt size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage rm</th>
+                    <th class="table-th child-td">Storage Room</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">DOE</th>
                     <th class="table-th child-td">QC status</th>
@@ -65,7 +64,18 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td"></td>
-                            <td class="child-td"></td>
+                           <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a> 
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-target="#ViewMP"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                        <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                                        <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                    </div>
+                                </div>
+                            </td> 
                         </tr>
                         <tr class="collapse show" id="row_{{ $key+1 }}">
                             <td colspan="12" class="p-0">
@@ -332,7 +342,7 @@
                                 <th>Housing type (able to add in new housing type in the future)</th> --}}
                                 <th>Storage room </th>
                                 <th>Housing type </th>
-                                <th>Housing </th>
+                                <th>Housing No.</th>
                                 <th>Owner 1</th>
                                 <th>Owner 2</th>
                                 <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -431,8 +441,9 @@
                                 <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                     <tr>
                                         <th width="200px">Transfer Qty</th>
-                                        <th>Storage rm</th>
+                                        <th>Storage Room</th>
                                         <th>Housing type</th>
+										 <th>Housing No</th>
                                         <th>Owner 1</th>
                                         <th>Owner 2</th>
                                         <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -449,8 +460,15 @@
                                         <td style="padding: 0">
                                             <select name="" id="" class="form-select form-select-sm">
                                                 <option value="">FC1</option>
-                                            </select>
-                                        </td style="padding: 0">
+                                            </select></td>
+                                       <td>
+                                    <select name="" id="" class="form-select form-select-sm">
+                                        <option value=""> -</option>
+                                        @for ($key=0;$key<20;$key++)
+                                            <option value="">{{ $key+1 }}</option>
+                                        @endfor
+                                    </select>
+                                </td>
                                         <td style="padding: 0">
                                             <select name="" id="" class="form-select form-select-sm">
                                                 <option value="">Keith</option>
