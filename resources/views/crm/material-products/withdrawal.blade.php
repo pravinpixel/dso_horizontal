@@ -306,7 +306,7 @@
                 <tbody>
                     @for ($key=0; $key<2; $key++)
 						@if ($key == 1)
-						{
+						 
                         <tr class="bg-secondary text-white">
 						   <td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
@@ -316,9 +316,10 @@
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
 							 </tr>
-						}
-						else
-						{
+					 
+						@endif
+						
+						@if ($key ==0)
 						<tr>
 						<td class="child-td">Prepreg C3K</td>
                             <td class="child-td">Roll2/1</td>
@@ -328,7 +329,7 @@
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
 							 </tr>
-						}
+					 
 						@endif
                          
                        
