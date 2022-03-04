@@ -9,13 +9,13 @@
             </div> 
         </div>
         <div class="col-6 d-flex justify-content-end ms-auto text-end">
-            <button class="btn btn-success rounded-pill mx-1">Import to Excel</button>
+            <button class="btn btn-success rounded-pill mx-1">Import from Excel</button>
             <button class="btn btn-info rounded-pill mx-1">Export</button>          
             <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
 			  
             <div class="dropdown">
                 <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-table"></i>  
+                    <i class="bi bi-caret-down-square-fill"></i>  
                 </button>
                 <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
                     <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
@@ -185,7 +185,7 @@
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Material/Product description</div>
+                                <div class="fw-bold">Material/In-House Product description</div>
                                 Acetone IND 
                             </div>
                         </li>
@@ -253,7 +253,7 @@
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Material/Product description</div>
+                                <div class="fw-bold">Material/In-House Product description</div>
                                 Acetone IND 
                             </div>
                         </li>

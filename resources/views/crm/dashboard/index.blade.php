@@ -5,7 +5,7 @@
             <div class="card shadow-hover animate__animated animate__fadeIn">
                 <a href="{{ route('withdrawal-material-products') }}" class="card-body btn">
                     <i class="text-warning fa fa-briefcase fa-2x mb-2"></i>
-                    <h5 class="m-0 ">Withdraw Material/ Product</h5>
+                    <h5 class="m-0 ">Withdraw Material/ In-House Product</h5>
                 </a>
             </div>
         </div> 
@@ -13,7 +13,7 @@
             <div class="card shadow-hover animate__animated animate__fadeIn">
                 <a href="{{ route("list-material-products") }}" class="card-body btn">
                     <i class="text-warning fa fa-list fa-2x mb-2"></i>
-                    <h5 class="m-0 ">List Material/Product</h5>
+                    <h5 class="m-0 ">List Material / In-House Product</h5>
                 </a>
             </div>
         </div> 

@@ -39,7 +39,7 @@
                     <div class="text-center">
                         <div class="row m-0">
                             <div class="col-6 text-start mb-2 px-1">
-                                <small class="mb-1">In-house Product Logsheet ID#</small>
+                                <small class="mb-1">In-House Product Logsheet ID#</small>
                                 <input type="text" class="form-control" placeholder="Type here">
                             </div>
                            
@@ -147,7 +147,7 @@
                                 <input type="text" class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
-                                <small class="mb-1">Material/Product type</small>
+                                <small class="mb-1">Material/In-House Product type</small>
                                 <input type="text" class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
@@ -182,14 +182,14 @@
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Storage Rm	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Material/Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">Material/In-House Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Storage Rm	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Material/Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">Material/In-House Product Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                         </ul>

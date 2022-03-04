@@ -4,7 +4,7 @@
         <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
     </div>
     <div class="col">
-        <label for="" class="form-label">Material/Product description</label>
+        <label for="" class="form-label">Material/In-House Product description</label>
         <input type="text" class="form-control custom" placeholder="Type here...">
     </div> 
     <div class="col">

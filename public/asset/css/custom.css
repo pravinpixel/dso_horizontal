@@ -85,11 +85,15 @@ option {
     border: none !important;
 }
 .table-fillters .col .form-label {
-    color:  var(--bs-primary);
+       color: var(--bs-primary);
     background-color: rgba(54, 136, 252, .18);
     display: block !important;
     margin: 0;
-    line-height: 20px;
+    line-height: 23px;
+    min-height: 45px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
 .table-fillters .col:hover, .col:active, .col:focus .form-label{
     background-color: var(--bs-primary);

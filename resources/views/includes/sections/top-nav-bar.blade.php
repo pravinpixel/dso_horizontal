@@ -9,7 +9,7 @@
                     </li>  
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none {{ Route::is(['withdrawal-material-products','list-material-products']) ? "active" : "" }}" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="bi bi-briefcase me-1"></i> Material / In-house product <div class="arrow-down"></div>
+                            <i class="bi bi-briefcase me-1"></i> Material / In-House product <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
                             <a href="{{ route('withdrawal-material-products') }}" class="dropdown-item {{ Route::is(['withdrawal-material-products']) ? "active" : "" }}"><i class="bi bi-aspect-ratio me-1"></i><span>Withdrawal</span></a>

@@ -296,7 +296,7 @@
                         <th class="bg-warning text-white" style="padding: 5px !important;" colspan="5"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
-                        <th class="table-th">Material/Product description</th>
+                        <th class="table-th">Material/In-House Product description</th>
                         <th class="table-th">Batch#/ Serial#</th>
                         <th class="table-th">Withdraw Qty</th>
                         <th class="table-th">Remarks</th>
@@ -342,7 +342,7 @@
             <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
-                        <th class="table-th" colspan="5">Material/In-house product Outlife Information</th>
+                        <th class="table-th" colspan="5">Material/In-House product Outlife Information</th>
                     </tr>
                     <tr>
                         

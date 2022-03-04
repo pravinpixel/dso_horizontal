@@ -145,7 +145,7 @@
         @endfor
     </table>  
 
-    <h3 class="h5 border shadow text-primary bg-light text-center py-2">Material/Product Utilisation Cart</h3>
+    <h3 class="h5 border shadow text-primary bg-light text-center py-2">Material/In-House Product Utilisation Cart</h3>
     <table class="table table-centered table-bordered table-hover bg-white border shadow">
         <thead>
             <tr>
