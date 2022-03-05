@@ -157,12 +157,67 @@
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
                         <h4 class="modal-title mb-1" id="topModalLabel">Disposal</h4>
-                        <p class="m-0">Please fill in the information below. The field labels marked with * are required input fields.</p>
+                        <p class="m-0">Please fill in the information below</p>
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body ">
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi consequuntur iste at ea, officia cum pariatur excepturi quaerat mollitia voluptas quas assumenda dolore deserunt dolorem optio ducimus, dolorum esse tempore.
+                   
+                    <div class="row container py-3 col-lg-9 mx-auto">
+                        <div class="col-md-4">
+                            <label for="">Material Description*</label>
+                            <input type="text" name="" id="" class="form-control" placeholder="Acetone ">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">CAS Number *</label>
+                            <div class="input-group">
+                                <input type="text" name="" id="" class="form-control" placeholder=" 67-64-1">
+                                <label for="cas-number_attach" class="btn btn-light border"><i class="bi bi-paperclip"></i></label>
+                                <input type="file" name="" id="cas-number_attach" class="d-none">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Brand *</label>
+                            <input type="text" name="" id="" class="form-control" placeholder="Sigma Aldrich">
+                        </div>
+                        <div class="col-sm-3 mb-2 mb-sm-0  py-3">
+                            <h1 class="h5">Please indicate selection below for disposal. </h1>
+                            <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <label for="Pass_label" class="nav-link active show form-radio-success" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-pass" role="tab" aria-controls="v-pills-pass" aria-selected="true">
+                                    <input type="radio" name="group" class="form-check-input border-success" checked id="Pass_label"> <span class="text-success"> Yes</span>
+                                </label>
+                                <label for="Fail_label" class="nav-link form-radio-danger " id="v-pills-fail-tab" data-bs-toggle="pill" href="#v-pills-fail" role="tab" aria-controls="v-pills-fail" aria-selected="false">
+                                    <input type="radio" name="group"  class="form-check-input border-danger" id="Fail_label"> <span class="text-danger">No</span>
+                                </label> 
+                            </div>
+                        </div>                    
+                        <div class="col-sm-9">
+                            <div class="tab-content  p-3" id="v-pills-tabContent">
+                                <div class="tab-pane fade active show" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
+                                    <div class="d-flex">
+                                        <label for="">Qty:</label>
+                                        <input type="number" class="form-control col-2" name="" id="">
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-fail" role="tabpanel" aria-labelledby="v-pills-fail-tab">
+                                    <p class="text-muted">
+                                        Please fill in the information below for <b class="text-dark">expiry extension</b>. The field labels marked with * are required input fields.
+                                    </p>
+                                    <div class="row m-0">
+                                        <div class="col-12 text-start mb-2 px-1">
+                                            <label for="2_years" ><input id="2_years" type="checkbox" class="me-2 form-check-input" placeholder="Type here">2 years ( Liquids, others)</label>
+                                        </div>
+                                        <div class="col-12 text-start mb-2 px-1">
+                                            <label for="5_years" ><input id="5_years" type="checkbox" class="me-2 form-check-input" placeholder="Type here"> 5 years ( Dry, inert, OEM declares non-expiry materials)</label>
+                                        </div> 
+                                        <div class="col-12 text-center mb-2 px-1">
+                                            <button class="btn btn-outline-danger rounded-pill">Please proceed for disposal</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
                 </div>  
             </div>
         </div>
