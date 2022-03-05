@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="s">
+        @include('includes.sections.filter')
         <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>

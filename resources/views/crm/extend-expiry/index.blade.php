@@ -179,7 +179,7 @@
                         <div class="col-sm-9">
                             <div class="tab-content  p-3" id="v-pills-tabContent">
                                 <div class="tab-pane fade active show" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
-                                    <p class="text-muted">
+                                    <p class="text-muted" style="text-transform: none !important">
                                         Please fill in the information below for <b class="text-dark">expiry extension</b>. The field labels marked with * are required input fields.
                                     </p>
                                     <div class="row m-0">

@@ -6066,7 +6066,9 @@ fieldset:disabled .btn {
 
 .list-group-numbered>li::before {
     content: counters(section, ".") ". ";
-    counter-increment: section
+    counter-increment: section;
+    margin-right: 5px;
+    font-weight: bold;
 }
 
 .list-group-item-action {

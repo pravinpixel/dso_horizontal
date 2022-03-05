@@ -191,9 +191,49 @@
                     <h4>View details</h4>
                     <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
-                <div class="modal-body  modal-scroll-2">
+                <div class="modal-body modal-scroll-2 p-0">
                     <ol class="list-group list-group-numbered">
-                        <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Material description </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">In-house Product description</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">In-house Product Logsheet ID# (hyperlink to logsheet)* - for product only ; phase 2</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">EUC material* (checked if EUC material)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">CAS#</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">FM1202 (checked if FM1202 is available)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Upload SDS/Mill Cert Document*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Brand* </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Supplier* (for products, can input names instead) </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Unit Packing size (select units) * </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Quantity * </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Batch # * (key in NIL if not applicable)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Lot# *  (key in NIL if not applicable)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Serial# *  (key in NIL if not applicable)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">COC/COA/Mill Cert (attach COC/COA/Mill Cert document)* - up to 3 only.</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Statutory body (able to add in new bodies in the future)* for material not product</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Storage room (able to add in new rooms in the future)*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Housing type (able to add in new housing type in the future)*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 1 * </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 2 (SE/PL/FM)*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Date in *</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Date of expiry (Date)* </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">IQC status (P/F)* </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"IQC result (Visual check for non-IQC items. Attach QC document for IQC items)* </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">For product only, can attach COC/COA under IQC."</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">PO Number*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended expiry</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended QC status (P/F)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended QC result (Visual check if no QC conducted/Attach QC document if QC conducted)</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Disposed (Y/N but used for TD&EXPT project) </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Upload disposal certificate</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Project name </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Remarks </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"Alert Threshold Qty for new material/product description (red amber green indicator to reflect quantity health status)  (All owner 1/2 to receive notification) "</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"Alert before expiry (in terms of weeks) for new material/product description (red amber green indicator to warn owners on near expiry items) (All owner 1/2 to receive notification) "</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Dept*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Material/Product type </li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Cost per unit</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Access (default everyone can see, indicate who only can see) drop down list with lab groups then further breakdown into names*</li>
+
+                        {{-- <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">Material/In-House Product description</div>
                                 Acetone IND 
@@ -246,7 +286,7 @@
                                 <div class="fw-bold">Access</div>
                                 Default (everyone can see)
                             </div>
-                        </li>
+                        </li> --}}
                     </ol> 
                 </div> 
             </div> 
@@ -409,7 +449,7 @@
         <div class="modal-dialog custom-modal-dialog modal-top">
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Repack/Transfer batch</h4>
+                    <h4 class="modal-title" id="topModalLabel">Repack/Transfer Material/Product batch</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
@@ -440,12 +480,14 @@
                             <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
                                 <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                     <tr>
-                                        <th width="200px">Transfer Qty</th>
+                                        <th width="200px">Repack Size(L)</th>
+										 <th>Qty</th>
                                         <th>Storage Room</th>
                                         <th>Housing type</th>
 										 <th>Housing No</th>
                                         <th>Owner 1</th>
                                         <th>Owner 2</th>
+										<th>Generate Unique Barcode</th>
                                         <th> <i class="text-danger bi bi-trash3-fill"></i></th>
                                     </tr>
                                 </thead>
@@ -457,6 +499,7 @@
                                                 <option value="">CW</option>
                                             </select>
                                         </td>
+										  <td style="padding: 0">15</td>
                                         <td style="padding: 0">
                                             <select name="" id="" class="form-select form-select-sm">
                                                 <option value="">FC1</option>
@@ -479,6 +522,7 @@
                                                 <option value="">HuiBeng</option>
                                             </select>
                                         </td>
+										  <td style="padding: 0">Batch2/1</td>
                                         <td style="padding: 0">
                                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                                         </td>
@@ -489,7 +533,8 @@
                     </div>
                 </div> 
                 <div class="modal-footer text-end  border-top">
-                    <button class="btn btn-primary rounded-pill">Click to confirm transfer</button>
+                    <button class="btn btn-primary rounded-pill">Click to confirm and proceed to print label page
+</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -498,14 +543,15 @@
         <div class="modal-dialog custom-modal-dialog modal-top">
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Repack/Outlife batch</h4>
+                    <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                </div>
+                </div>				  
                 <div class="modal-body  ">
+				 <h5 class="h5 text-primary text-center">Mat/Pdt outlife logsheet</h5>
                     <table class="table table-centered  bg-white table-bordered table-hover custom-center m-0">
                         <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                             <tr>
-                                <th width="200px">(Mother) Draw status</th>
+                                <th width="200px">(Mother)Material/Product Draw status</th>
                                 <th>Date/time stamp</th>
                                 <th>Last accessed</th>
                                 <th>Auto-generate unique barcode label</th>

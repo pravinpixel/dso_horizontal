@@ -1,6 +1,5 @@
 @extends('layouts.app')
-@section('content')
-        
+@section('content') 
     <div class="d-flex align-items-center mb-3">
         <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
             <div class="input-group align-items-center" title="Scan Barcode">
@@ -26,6 +25,7 @@
             </div>
         </div>
     </div> 
+    @include('includes.sections.filter')
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="#Direct_Deduct" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
