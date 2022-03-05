@@ -15,7 +15,8 @@
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-bell noti-icon"></i>
-                    <span class="noti-icon-badge"></span>
+                    <span class="badge rounded-pill bg-danger">8</span>
+                    
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop"> 
                     <!-- item-->

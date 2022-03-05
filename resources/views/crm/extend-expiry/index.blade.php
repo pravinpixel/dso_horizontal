@@ -157,8 +157,9 @@
             <div class="modal-content rounded-0 border-bottom shadow">
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
-                        <h4 class="modal-title mb-1" id="topModalLabel">Repack/Outlife batch</h4>
-                        <p class="m-0">Please fill in the information below. The field labels marked with * are required input fields.</p>
+                        <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry </h4>
+                        <p class="m-0">Please fill in the information below. The field labels marked with * are required input fields. 
+                        </p>
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
@@ -195,7 +196,7 @@
                                             <input type="text" class="form-control" placeholder="Type here">
                                         </div>
                                         <div class="col-12 text-center mb-2 px-1">
-                                            <button class="btn btn-success rounded-pill">Submit & Save disabled</button>
+                                            <button class="btn btn-success rounded-pill">Submit</button>
                                         </div>
                                     </div>
                                 </div>

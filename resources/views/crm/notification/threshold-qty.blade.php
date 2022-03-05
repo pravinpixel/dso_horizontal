@@ -4,15 +4,15 @@
         <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
-                     <th class="table-th child-td-lg"> Item Description</th>
+                    <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">Storage Room</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
-                    <th class="table-th child-td">Balance </th>
-                    <th class="table-th child-td-lg">RecommendedAction</th>
+                    <th class="table-th child-td">Qty</th>
+                    <th class="table-th child-td-lg">Recommended Action</th>
                     <th class="table-th child-td">Read Status</th>
                 </tr> 
             </thead>
@@ -30,7 +30,7 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td">/-</td>
-                        </tr>
+                        </tr> 
                         <tr class="collapse show" id="row1">
                             <td colspan="12" class="p-0">
                                 <table class="table bg-white m-0">
@@ -45,7 +45,10 @@
                                             <td class="child-td"></td>
                                             <td class="child-td">8</td>
                                             <td class="child-td-lg">To replenish</td>
-                                            <td class="child-td">-</td>
+                                            <td class="child-td">
+                                                <input type="checkbox" id="switch0_{{ $i+1 }}" data-switch="none"/>
+                                                <label for="switch0_{{ $i+1 }}" data-on-label="" data-off-label=""></label>
+                                            </td>
                                         </tr> 
                                     @endfor
                                 </table>

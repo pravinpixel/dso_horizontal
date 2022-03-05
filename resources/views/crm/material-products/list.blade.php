@@ -17,14 +17,14 @@
                     <i class="bi bi-caret-down-square-fill"></i>  
                 </button>
                 <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Products Details</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Orders</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Order Details</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Customers</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Shopping Cart</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Checkout</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id=""> Sellers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Orders</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Order Details</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Customers</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Shopping Cart</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Checkout</label>
+                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Sellers</label>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </a> 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-target="#ViewMP"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
                                         <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
                                         <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
                                     </div>
