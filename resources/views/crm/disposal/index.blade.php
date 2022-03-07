@@ -176,12 +176,15 @@
                                 <input type="file" name="" id="cas-number_attach" class="d-none">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <label for="">Brand *</label>
                             <input type="text" name="" id="" class="form-control" placeholder="Sigma Aldrich">
                         </div>
-                        <div class="col-sm-3 mb-2 mb-sm-0  py-3">
+                        <div class="col-12 mt-4 text-center">
                             <h1 class="h5">Please indicate selection below for disposal. </h1>
+                        </div>
+                        <div class="col-sm-3  mb-sm-0  border-end  py-3">
+                            
                             <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <label for="Pass_label" class="nav-link active show form-radio-success" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-pass" role="tab" aria-controls="v-pills-pass" aria-selected="true">
                                     <input type="radio" name="group" class="form-check-input border-success" checked id="Pass_label"> <span class="text-success"> Yes</span>
@@ -193,10 +196,10 @@
                         </div>                    
                         <div class="col-sm-9">
                             <div class="tab-content  p-3" id="v-pills-tabContent">
-                                <div class="tab-pane fade active show" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
-                                    <div class="d-flex">
-                                        <label for="">Qty:</label>
-                                        <input type="number" class="form-control col-2" name="" id="">
+                                <div class="tab-pane fade active show align-items-center pt-4" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
+                                    <div class="d-flex align-items-center h-100">
+                                        <label for="" class="me-2">Quantity : </label>
+                                        <input type="number" class="form-control text-center" name="" id="" style="width: 200px">
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-fail" role="tabpanel" aria-labelledby="v-pills-fail-tab">
@@ -210,11 +213,16 @@
                                         <div class="col-12 text-start mb-2 px-1">
                                             <label for="5_years" ><input id="5_years" type="checkbox" class="me-2 form-check-input" placeholder="Type here"> 5 years ( Dry, inert, OEM declares non-expiry materials)</label>
                                         </div> 
-                                        <div class="col-12 text-center mb-2 px-1">
-                                            <button class="btn btn-outline-danger rounded-pill">Please proceed for disposal</button>
-                                        </div>
+                                        
                                     </div>
                                 </div> 
+                            </div>
+                        </div>
+                        <div class="col-12  my-2 mt-4 px-1">
+                            Accordance to EG1 Chemical UIMS 2021
+
+                            <div class="text-center">
+                                <button class="btn btn-success rounded-pill">Submit and archive</button>
                             </div>
                         </div>
                     </div>

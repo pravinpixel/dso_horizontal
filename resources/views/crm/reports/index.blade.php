@@ -9,8 +9,8 @@
             </div> 
         </div> 
         <div class="col-2 ms-auto text-end">
-            {{-- <button class="btn btn-primary rounded-pill"><i class="fa fa-plus me-1"></i> Add</button> --}}
-        </div>
+            <button class="btn btn-info rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export as CSV</button>
+        </div> 
     </div> 
     @include('includes.sections.filter')
     <ul class="nav nav-tabs">
