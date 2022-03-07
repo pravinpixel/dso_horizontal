@@ -214,24 +214,24 @@
     </div>
     
     <script>
-        var xValues = [100,200,300,400,500,600,700,800,900,1000];
+        var xValues = ['product 1','product 2','product 3','product 4','product 5','product 6'];
 
         new Chart("myChart", {
             type: "line",
             data: {
                 labels: xValues,
                 datasets: [{ 
-                    data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+                    data: [3860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
                     label:"Jan",
                     borderColor: "#163269",
                     fill: false
                 }, { 
-                data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+                data: [7600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
                     label:"Feb",
                     borderColor: "#FDCA3F",
                     fill: false
                 }, { 
-                data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+                data: [5300,700,2000,5000,6000,4000,2000,1000,200,100],
                     label:"Mar",
                     borderColor: "#4389F6",
                     fill: false
