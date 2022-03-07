@@ -8038,7 +8038,7 @@ fieldset:disabled .btn {
     display: none!important
 }
 
-.shadow, .shadow-hover {
+.shadow   {
     -webkit-box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15)!important;
     box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15)!important
 }

@@ -6,4 +6,6 @@
  
 <script src="{{ asset('public/asset/js/app.js') }}"></script>
 
+
+
 @yield('scripts') 

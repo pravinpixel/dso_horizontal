@@ -275,3 +275,19 @@ option {
 .topnav::-webkit-scrollbar-thumb:hover {
     background: #555;
 } */
+.shadow-hover:hover 
+{
+   -webkit-box-shadow: 0 0 35px 0 #00000026!important;
+    box-shadow: 0 0 35px 0 #00000026!important;
+}
+.border-hover {
+    border: 1px solid transparent;
+}
+.border-hover:hover  {
+    border: 1px solid var(--bs-primary);
+}
+.bg-primary-gradient {
+    background-image: linear-gradient(to right bottom, #163269, #22468a, #2e5bad, #3972d1, #4389f6);
+    color: white;
+    cursor: pointer;
+}
