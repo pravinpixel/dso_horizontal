@@ -81,9 +81,9 @@
                     <label for="" class="col-3">Choose Department</label>
                     <select name="" id="" class="form-select">
                         <option value="">-- select --</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="">Department A</option>
+                        <option value="">Department B</option>
+                        <option value="">Department C</option>
                     </select>
                 </div>
                 <div class="col-4 ms-auto">
