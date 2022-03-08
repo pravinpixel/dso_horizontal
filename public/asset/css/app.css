@@ -5321,7 +5321,7 @@ fieldset:disabled .btn {
     /* border-bottom: 3px solid #12326a; */
     background-color: #f3f5f8 !important;
     font-weight: lighter !important;
-    text-transform: capitalize !important;
+   /* text-transform: capitalize !important;*/
     border-radius: 6px 6px 0 0;
 }
 
