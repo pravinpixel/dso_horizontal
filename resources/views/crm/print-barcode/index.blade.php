@@ -38,6 +38,7 @@
                     <th class="table-th child-td">DOE</th>
                     <th class="table-th child-td">Used for TD/Expt</th> 
                     <th class="table-th child-td">Project Name</th>
+					 <th class="table-th child-td">Actions</th>
                     <th class="table-th child-td">Qty to print</th>
                 </tr> 
             </thead>
@@ -50,6 +51,16 @@
                 <td class="child-td">12/06/2020</td>
                 <td class="child-td">yes</td>
                 <td class="child-td">-</td> 
+				 <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a> 
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>                                        
+                                    </div>
+                                </div>
+                            </td> 
                 <td class="child-td" style="padding: 0 !important"><input type="number" class="text-center form-control form-control-sm m-0 " name="" id="" value="10"></td> 
             </tr>
             @endfor

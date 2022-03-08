@@ -136,7 +136,7 @@
                                                         <i class="bi bi-three-dots"></i>
                                                     </a> 
                                                     <div class="dropdown-menu"> 
-                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>Dispose</a>
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -157,7 +157,7 @@
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
                         <h4 class="modal-title mb-1" id="topModalLabel">Disposal</h4>
-                        <p class="m-0">Please fill in the information below</p>
+                        
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>

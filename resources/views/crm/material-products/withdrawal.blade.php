@@ -58,6 +58,7 @@
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
                             <th class="table-th child-td">Used for TD/Expt</th> 
+							 <th class="table-th child-td">Actions</th>
                         </tr> 
                     </thead>
                     @for ($key=0; $key<3; $key++)
@@ -76,7 +77,18 @@
                                     <td class="child-td"></td>
                                     <td class="child-td"></td>
                                     <td class="child-td"></td>
-                                     
+                                      <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a> 
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                        <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                                        <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                    </div>
+                                </div>
+                            </td> 
                                 </tr>
                                 <tr class="collapse show" id="row_{{ $key+1 }}">
                                     <td colspan="12" class="p-0">
@@ -159,11 +171,13 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg-primary text-white">
-                        <th class="bg-warning text-white" style="padding: 5px !important" colspan="6"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                        <th class="bg-dark text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
                     </tr>
                     <tr>
+					 <th class="table-th child-td-lg"> Item Description</th>                    
+                    <th class="table-th child-td">Batch/Serial#</th>
                         <th class="table-th">Time stamp</th>
-                        <th class="table-th">Last accessed</th>
+                    
                         <th class="table-th">Used Amt (kg)</th>
                         <th class="table-th">Remain Amt (kg)</th>
                         <th class="table-th">Remarks</th>
@@ -172,15 +186,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="child-td">10/09/2021 at 08:00 </td>
+					 <td class="child-td"> Acetone IND</td>
+                            <td class="child-td">XOX</td>
+                        
                         <td class="child-td">Tan Ng Hui Beng</td>
                         <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
                         <td class="child-td">40</td>
                         <td class="child-td"><input type="text" name="" id="" class="form-control w-50 text-center mx-auto p-0"  ></td>
                         <td class="child-td">
-                            <i class="btn btn-sm btn-danger-light rounded-pill bi bi-trash3-fill"></i>
+                           
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
+						
                     </tr>
                 </tbody>
             </table>
@@ -209,6 +226,7 @@
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
                             <th class="table-th child-td">Used for TD/Expt</th> 
+							  <th class="table-th child-td">Actions</th>
                         </tr> 
                     </thead>
                     @for ($key=0; $key<3; $key++)
@@ -227,7 +245,18 @@
                                     <td class="child-td"></td>
                                     <td class="child-td"></td>
                                     <td class="child-td"></td>
-                                     
+                                      <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a> 
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                        <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                                        <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                    </div>
+                                </div>
+                            </td> 
                                 </tr>
                                 <tr class="collapse show" id="row_{{ $key+1 }}">
                                     <td colspan="12" class="p-0">
@@ -310,10 +339,11 @@
             <table class="table bg-white table-bordered table-hover custom-center">
                 <thead>
                     <tr class="bg text-white">
-                        <th class="bg-warning text-white" style="padding: 5px !important;" colspan="6"><span class="text-center">Withdrawal Cart</span></th>
+                        <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
                         <th class="table-th">Material/In-house Product description</th>
+						 <th class="table-th">Brand</th>
                         <th class="table-th">Batch#/ Serial#</th>
 						 <th class="table-th child-td">Pkt size</th>
                         <th class="table-th">Withdraw Qty</th>
@@ -327,10 +357,11 @@
 						 
                         <tr class="bg-secondary text-white">
 						   <td class="child-td">Prepreg C3K</td>
+						    <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							 <td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
-                            <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
+                            <td class="child-td"><input type="number" disabled name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
+                            <td class="child-td"><input type="text"  name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
@@ -341,10 +372,11 @@
 						@if ($key ==0)
 						<tr>
 						<td class="child-td">Prepreg C3K</td>
+						  <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							<td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
-                            <td class="child-td"><input type="text" name="" class="form-control p-0 m-0  id="" value="AME"></td>
+                            <td class="child-td"><input type="number" disabled name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
+                            <td class="child-td"><input type="text"  name="" class="form-control p-0 m-0  id="" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
@@ -362,12 +394,12 @@
             <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
-                        <th  class="bg-warning text-white" style="padding: 5px !important;" colspan="5">Material/In-house Product Outlife Information</th>
+                        <th  class="bg-dark  text-white" style="padding: 5px !important;" colspan="7">Material/In-house Product Outlife Information</th>
                     </tr>
                     <tr>
-                        
-                        <th class="table-th">Date/time stamp</th>
-                        <th class="table-th">Last accessed</th>
+                          <th class="table-th">Item description</th>
+						   <th class="table-th">Batch#/ Serial#</th>
+                        <th class="table-th">Date/time stamp</th>                       
                         <th class="table-th">Auto-generate unique barcode label</th>
                         <th class="table-th">Outlife expiry from last date/time</th>
                         <th class="table-th">Outlife expiry from current date/time</th>
@@ -376,7 +408,8 @@
                 <tbody>
                     @for ($key=0; $key<2; $key++)
                         <tr>
-                            <td class="child-td">11/09/2021 08:00</td>
+							<td class="child-td">Prepreg C3K</td>						 
+                            <td class="child-td">Roll2/1</td>                           
                             <td class="child-td">HuiBeng</td>
                             <td class="child-td">Roll2/1</td> 
                             <td class="child-td">29 days 17hrs</td>

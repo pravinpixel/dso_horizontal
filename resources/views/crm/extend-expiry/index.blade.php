@@ -158,8 +158,7 @@
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
                         <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry </h4>
-                        <p class="m-0">Please fill in the information below. The field labels marked with * are required input fields. 
-                        </p>
+                        
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>

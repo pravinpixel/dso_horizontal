@@ -214,7 +214,7 @@
     </div>
     
     <script>
-        var xValues = ['product 1','product 2','product 3','product 4','product 5','product 6'];
+        var xValues = ['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
         new Chart("myChart", {
             type: "line",
@@ -222,17 +222,17 @@
                 labels: xValues,
                 datasets: [{ 
                     data: [3860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-                    label:"Jan",
+                    label:"Product 1",
                     borderColor: "#163269",
                     fill: false
                 }, { 
                 data: [7600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
-                    label:"Feb",
+                    label:"Product 2",
                     borderColor: "#FDCA3F",
                     fill: false
                 }, { 
                 data: [5300,700,2000,5000,6000,4000,2000,1000,200,100],
-                    label:"Mar",
+                    label:"Product 3",
                     borderColor: "#4389F6",
                     fill: false
                 }]

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="s">
+	 
         @include('includes.sections.filter')
         <table class="table table-bordered table-hover bg-white">
             <thead>
@@ -13,10 +14,12 @@
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
                     <th class="table-th child-td">Qty</th>
-                    <th class="table-th child-td-lg">Recommended Action</th>
+                   
                     <th class="table-th child-td">Read Status</th>
+					 <th class="table-th child-td">Actions</th>
                 </tr> 
             </thead>
+			
             <tr class="table-tr">
                 <td colspan="12" class="p-0 border-bottom">
                     <table class="table m-0">
@@ -31,6 +34,16 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td">/-</td>
+								 <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a> 
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>                                        
+                                    </div>
+                                </div>
+                            </td> 
                         </tr> 
                         <tr class="collapse show" id="row1">
                             <td colspan="12" class="p-0">

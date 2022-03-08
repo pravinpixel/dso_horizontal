@@ -461,6 +461,7 @@
                             <table class="table table-centered bg-white table-bordered table-hover custom-center mb-3">
                                 <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                     <tr>
+                               
                                         <th>Time stamp</th>
                                         <th>Current accessed</th>
                                         <th>Input Used amt (L)</th>
