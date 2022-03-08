@@ -7,7 +7,7 @@
                         <li class="breadcrumb-item"><a href="javascript: void(0);">DSO</a></li>
                       
                         @if (Route::is(['list-material-products','withdrawal-material-products']))
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-House Product</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-house Product</a></li>
                         @endif
                         @if (Route::is(['threshold-qty','near-expiry-expired']))
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Notification</a></li>
@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">
                             {{ Route::is('dashboard') ? "Dashboard" : "" }}
                             {{ Route::is('list-material-products') ? "Search or Add" : "" }}
-                            {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-House Product" : "" }}
+                            {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : "" }}
                             {{ Route::is('disposal') ? "Early Disposal" : "" }}
                             {{ Route::is('print-barcode') ? "Print Barcode" : "" }}
                             {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}
@@ -31,7 +31,7 @@
                 <h4 class="page-title">
                     {{ Route::is('dashboard') ? "Dashboard" : "" }}
                     {{ Route::is('list-material-products') ? "Search or Add" : "" }}
-                    {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-House Product " : "" }}
+                    {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : "" }}
                     {{ Route::is('disposal') ? "Early Disposal" : "" }}
                     {{ Route::is('print-barcode') ? "Print Barcode / Label" : "" }}
                     {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}

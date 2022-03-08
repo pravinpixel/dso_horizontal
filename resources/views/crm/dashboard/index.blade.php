@@ -112,7 +112,7 @@
                     <div class="d-flex align-items-center">
                         <div class="text-warning fa fa-industry fa-2x me-3"></div>
                        <div>
-                            <p class="mb-1">In-House</p>
+                            <p class="mb-1">In-house</p>
                             <strong>2540</strong>
                        </div>
                     </div>

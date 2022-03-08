@@ -237,7 +237,7 @@
 
                         {{-- <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Material/In-House Product description</div>
+                                <div class="fw-bold">Material/In-house Product description</div>
                                 Acetone IND 
                             </div>
                         </li>
@@ -305,7 +305,7 @@
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Material/In-House Product description</div>
+                                <div class="fw-bold">Material/In-house Product description</div>
                                 Acetone IND 
                             </div>
                         </li>
