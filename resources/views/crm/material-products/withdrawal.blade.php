@@ -362,7 +362,7 @@
             <table class="table bg-white table-bordered table-hover custom-center mt-3">
                 <thead> 
                     <tr>
-                        <th  class="bg-warning text-white" style="padding: 5px !important;" colspan="5">Material/In-house product Outlife Information</th>
+                        <th  class="bg-warning text-white" style="padding: 5px !important;" colspan="5">Material/In-house Product Outlife Information</th>
                     </tr>
                     <tr>
                         
