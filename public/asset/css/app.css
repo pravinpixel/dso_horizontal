@@ -5303,7 +5303,7 @@ fieldset:disabled .btn {
 
 .navbar-light .navbar-nav .nav-link {
     color: white;
-    text-transform: capitalize !important;  
+   /* text-transform: capitalize !important;  */
 }
 
 .navbar-light .navbar-nav .nav-link:focus,
