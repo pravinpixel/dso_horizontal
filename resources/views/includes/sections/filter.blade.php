@@ -1,6 +1,7 @@
 <div class="table-fillters row m-0 p-2">
     <div class="col-12 mb-2 text-end d-flex justify-content-end">
-          <div class="dropdown">
+       
+            <div class="dropdown">
                 <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-caret-down-square-fill"></i>  
                 </button>
@@ -15,6 +16,7 @@
                     <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Sellers</label>
                 </div>
             </div>
+         
         <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
     </div>
     <div class="col">

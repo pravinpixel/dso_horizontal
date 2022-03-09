@@ -11,24 +11,8 @@
         <div class="col-6 d-flex justify-content-end ms-auto text-end">
             <button class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
                   
-            <button class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</button>
-            
-			  
-            <div class="dropdown">
-                <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-caret-down-square-fill"></i>  
-                </button>
-                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products Details</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Orders</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Order Details</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Customers</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Shopping Cart</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Checkout</label>
-                    <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Sellers</label>
-                </div>
-            </div>
+            <a href="{{ route('mandatory-form-one') }}" class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</a>
+             
         </div>
     </div>
     @include('includes.sections.filter')

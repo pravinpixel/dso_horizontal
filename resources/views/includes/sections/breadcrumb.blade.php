@@ -6,11 +6,14 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">DSO</a></li>
                       
-                        @if (Route::is(['list-material-products','withdrawal-material-products']))
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-house Product</a></li>
+                        @if (Route::is(['list-material-products','withdrawal-material-products','mandatory-form-one','mandatory-form-two','non-mandatory-form']))
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Material/In-house Product</a></li>
                         @endif
                         @if (Route::is(['threshold-qty','near-expiry-expired']))
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Notification</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Notification</a></li>
+                        @endif
+                        @if (Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']))
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Search or Add</a></li>
                         @endif
                         <li class="breadcrumb-item active">
                             {{ Route::is('dashboard') ? "Dashboard" : "" }}
@@ -25,6 +28,7 @@
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
                             {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
                             {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
+                            {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add " : "" }}
                         </li>
                     </ol>
                 </div>
@@ -41,6 +45,7 @@
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
                     {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
                     {{ Route::is('ui-demo') ? "UI DEMOS" : "" }}
+                    {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add Material / In-house Products " : "" }}
                 </h4>
             </div>
         </div>

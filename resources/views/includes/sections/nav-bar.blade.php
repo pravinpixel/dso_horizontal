@@ -13,27 +13,11 @@
 
         <ul class="list-unstyled topbar-menu  float-end ms-auto mb-0">  
             <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="modal" data-bs-target="#notification-modal">
                     <i class="bi bi-bell noti-icon"></i>
-                    <span class="badge rounded-pill bg-danger">8</span>
+                    <span class="badge rounded-pill bg-danger">5</span>
                     
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop"> 
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                            <span class="float-end">
-                                <a href="javascript: void(0);" class="text-dark">
-                                    <small>Clear All</small>
-                                </a>
-                            </span>Notification
-                        </h5>
-                    </div> 
-                    <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                        View All
-                    </a> 
-                </div>
+                </a> 
             </li>
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none"   href="{{ route('ui-demo') }}"  >

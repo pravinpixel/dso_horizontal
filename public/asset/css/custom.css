@@ -291,3 +291,19 @@ option {
     color: white;
     cursor: pointer;
 }
+.input-group {
+    align-items: center !important;
+}
+.y-center  {
+    align-items: center !important;
+}
+
+.x-center  {
+    justify-content: center !important;
+}
+
+.wizzard-form  label {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #12326A !important;
+}
