@@ -49,15 +49,15 @@
             <label for="" class="col-4">Unit Packing size <sup class="text-danger">*</sup></label>
             <div class="col-8">
                 <select name="" id="" class="form-select form-select-sm">
-                    <option value="">-- select --</option> 
-                    <option value=""> kg</option>
-                    <option value=""> L</option>
-                    <option value=""> m</option>
-                    <option value=""> m2</option>
-                    <option value=""> piece</option>
-                    <option value=""> roll</option>
-                    <option value=""> drum</option>
-                    <option value=""> lnyard</option>
+                    <option value="">-- select --</option>
+                                    <option value="1">kg</option>
+                                    <option value="2">L</option>
+                                    <option value="3">m</option>									
+                                    <option value="4">m&#xB2;</option>
+                                    <option value="4">piece</option>
+                                    <option value="4">roll</option>
+                                    <option value="4">drum</option>
+                                    <option value="4">lnyard</option>
                 </select>
             </div>
         </div>

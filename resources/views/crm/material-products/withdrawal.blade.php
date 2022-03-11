@@ -342,13 +342,13 @@
                         <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
-                        <th class="table-th">Material/In-house Product description</th>
-						 <th class="table-th">Brand</th>
-                        <th class="table-th">Batch#/ Serial#</th>
+                        <th class="table-th child-td">Material/In-house Product description</th>
+						 <th class="table-th child-td">Brand</th>
+                        <th class="table-th child-td">Batch#/ Serial#</th>
 						 <th class="table-th child-td">Pkt size</th>
-                        <th class="table-th">Withdraw Qty</th>
-                        <th class="table-th">Remarks</th>
-                        <th class="table-th"> <i class="text-danger bi bi-trash3-fill"></i></th>
+                        <th class="table-th child-td">Withdraw Qty</th>
+                        <th class="table-th child-td">Remarks</th>
+                        <th class="table-th child-td"> <i class="text-danger bi bi-trash3-fill"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -397,12 +397,12 @@
                         <th  class="bg-dark  text-white" style="padding: 5px !important;" colspan="7">Material/In-house Product Outlife Information</th>
                     </tr>
                     <tr>
-                          <th class="table-th">Item description</th>
-						   <th class="table-th">Batch#/ Serial#</th>
-                        <th class="table-th">Date/time stamp</th>                       
-                        <th class="table-th">Auto-generate unique barcode label</th>
-                        <th class="table-th">Outlife expiry from last date/time</th>
-                        <th class="table-th">Outlife expiry from current date/time</th>
+                          <th class="table-th child-td">Item description</th>
+						   <th class="table-th child-td">Batch#/ Serial#</th>
+                        <th class="table-th child-td">Date/time stamp</th>                       
+                        <th class="table-th child-td">Auto-generate unique barcode label</th>
+                        <th class="table-th child-td">Outlife expiry from last date/time</th>
+                        <th class="table-th child-td">Outlife expiry from current date/time</th>
                     </tr>
                 </thead>
                 <tbody>
