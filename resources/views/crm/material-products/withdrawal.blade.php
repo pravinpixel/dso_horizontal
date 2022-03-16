@@ -25,7 +25,7 @@
             </div>
         </div>
     </div> 
-    @include('includes.sections.filter')
+   
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a href="#Direct_Deduct" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
@@ -84,8 +84,8 @@
                                     </a> 
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                        <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
-                                        <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                      
+                                     
                                     </div>
                                 </div>
                             </td> 
@@ -252,8 +252,8 @@
                                     </a> 
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                        <a class="dropdown-item" href="#"><i class="bi bi-pencil-square me-1"></i> Edit </a>
-                                        <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                      
+                                     
                                     </div>
                                 </div>
                             </td> 

@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top text-center">
-                    <label for="xxxx"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save search</label>
+                    <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save search</label>
                     <button class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
                 </div>
             </div> 
@@ -229,7 +229,22 @@
                 </div> 
             </div> 
         </div>
-    </div>
+    </div> 
+    <div class="modal fade" id="save-search-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="mySmallModalLabel">Save Search Name</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control mb-3" placeholder="Type here..">
+                    <input type="submit" class="form-control btn-primary btn" value="Save">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     {{-- ========= SCRIPTS  ==========--}}
         @include('includes.scripts')
     {{-- ========= SCRIPTS  ==========--}}
