@@ -40,7 +40,8 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </a> 
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>                                        
+                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View batch details
+                                        </a>                                        
                                     </div>
                                 </div>
                             </td> 
