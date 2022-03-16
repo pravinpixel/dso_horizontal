@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-md-3 mb-2 text-start">
                     <label  for="Material_Description" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100">
-                        <input type="checkbox" class="form-check-input checked-input me-2" name="" id="Material_Description">Material/In-house Product Description
+                        <input type="checkbox" class="form-check-input checked-input me-2" name="" id="Material_Description">Item description
                     </label>
                 </div>
                 <div class="col-md-3 mb-2 text-start">

@@ -342,7 +342,7 @@
                         <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Withdrawal Cart</span></th>
                     </tr>
                     <tr>
-                        <th class="table-th child-td">Material/In-house Product description</th>
+                        <th class="table-th child-td">Item description</th>
 						 <th class="table-th child-td">Brand</th>
                         <th class="table-th child-td">Batch#/ Serial#</th>
 						 <th class="table-th child-td">Pkt size</th>
@@ -360,8 +360,8 @@
 						    <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							 <td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number" disabled name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
-                            <td class="child-td"><input type="text"  name="" class="form-control p-0 m-0  id="" value="AME"></td>
+                            <td class="child-td"><input type="number"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
+                            <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
@@ -375,8 +375,8 @@
 						  <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							<td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number" disabled name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
-                            <td class="child-td"><input type="text"  name="" class="form-control p-0 m-0  id="" value="AME"></td>
+                            <td class="child-td"><input type="number"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
+                            <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
