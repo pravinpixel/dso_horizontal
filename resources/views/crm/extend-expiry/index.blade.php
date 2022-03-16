@@ -120,6 +120,7 @@
                                                         <i class="bi bi-three-dots"></i>
                                                     </a> 
                                                     <div class="dropdown-menu"> 
+                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
                                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Extensionmodal" href="#" data-target="#ViewMP"><i class="bi bi-arrow-up-right-square me-1"></i>Extension</a>
                                                     </div>
                                                 </div>

@@ -49,6 +49,10 @@ Route::get('/reconciliation', function () {
     return view('crm.reconsolidation.index');  
 })->name('reconsolidation');
 
+Route::get('/view-reconciliation', function () {   
+    return view('crm.reconsolidation.view');  
+})->name('view-reconsolidation');
+
 Route::get('/list-search', function () {   
     return view('crm.list-search.index');  
 })->name('list-search');

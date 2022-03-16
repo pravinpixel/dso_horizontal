@@ -38,7 +38,7 @@
                         <a href="{{ route('print-barcode') }}" class="nav-link {{ Route::is('print-barcode') ? 'active' : '' }}"><i class="bi bi-upc-scan me-1"></i>Print Barcode </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="{{ route('reconsolidation') }}" class="nav-link {{ Route::is('reconsolidation') ? "active" : "" }}"><i class="bi bi-arrow-repeat me-1"></i>Reconciliation</a>
+                        <a href="{{ route('reconsolidation') }}" class="nav-link {{ Route::is(['reconsolidation','view-reconsolidation']) ? "active" : "" }}"><i class="bi bi-arrow-repeat me-1"></i>Reconciliation</a>
                     </li> 
                     {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

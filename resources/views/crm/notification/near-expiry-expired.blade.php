@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <td class="table-th child-td">S.No</td>
-                        <td class="table-th child-td">Material / Product  Description</td>
+                        <td class="table-th child-td">Item  Description</td>
                         <td class="table-th child-td">Brand</td>
                         <td class="table-th child-td">#Batch/Serial/Lot No</td>
                         <td class="table-th child-td">Qty</td>
@@ -42,7 +42,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                         <a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a> 
+										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch details
+                                          </a> 
                                     </div>
                                 </div>
                             </td>
@@ -54,14 +55,14 @@
     </div>
     <div class="card">
         <div class="bg-secondary  text-white card-header text-center">
-            <h5>Expired Material/In-jouse Product</h5>
+            <h5>Expired Material/In-house Product</h5>
         </div>
         <div class="card-body">            
             <table class="table table-bordered table-hover bg-white">
                 <thead>
                     <tr>
                         <th class="table-th child-td">S.No</th>
-                        <th class="table-th child-td">Material / Product  Description</th>
+                        <th class="table-th child-td">Item  Description</th>
                         <th class="table-th child-td">Brand</th>
                         <th class="table-th child-td">#Batch/Serial/Lot No</th>
                         <th class="table-th child-td">Qty</th>
@@ -92,7 +93,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                         <a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a> 
+										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch details
+                                          </a> 
                                     </div>
                                 </div>
                             </td>
@@ -102,10 +104,9 @@
             </table> 
         </div>    
     </div>
-<div class="card">
+    <div class="card">
         <div class="bg-secondary  text-white card-header text-center">
-            <h5>Failed IQC Material/In-House Product
-</h5>
+            <h5>Failed IQC Material/In-House Product</h5>
         </div>
         <div class="card-body">            
             <table class="table table-bordered table-hover bg-white">
@@ -143,7 +144,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                         <a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a> 
+										  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch details
+                                          </a> 
                                     </div>
                                 </div>
                             </td>

@@ -21,7 +21,7 @@
                             {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : "" }}
                             {{ Route::is('disposal') ? "Early Disposal" : "" }}
                             {{ Route::is('print-barcode') ? "Print Barcode" : "" }}
-                            {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}
+                            {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
                             {{ Route::is('reports') ? "Reports" : "" }}
                             {{ Route::is('list-search') ? "List Search" : "" }}
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
@@ -38,7 +38,7 @@
                     {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : "" }}
                     {{ Route::is('disposal') ? "Early Disposal" : "" }}
                     {{ Route::is('print-barcode') ? "Print Barcode / Label" : "" }}
-                    {{ Route::is('reconsolidation') ? "Reconciliation" : "" }}
+                    {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
                     {{ Route::is('reports') ? "Reports" : "" }}
                     {{ Route::is('list-search') ? "List Search" : "" }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}

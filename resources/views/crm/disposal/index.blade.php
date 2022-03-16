@@ -119,6 +119,7 @@
                                                         <i class="bi bi-three-dots"></i>
                                                     </a> 
                                                     <div class="dropdown-menu"> 
+                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
                                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                                     </div>
                                                 </div>
@@ -135,18 +136,43 @@
         </table>  
     </div>
     <div id="disposalModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog custom-modal-dialog modal-top">
-            <div class="modal-content rounded-0 border-bottom shadow">
+        <div class="modal-dialog modal-lg">
+            {{-- <div class="modal-dialog custom-modal-dialog modal-top"> --}}
+            <div class="modal-content h-auto rounded-0 border-bottom shadow">
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
                         <h4 class="modal-title mb-1" id="topModalLabel">Disposal</h4>
-                        
+                        <span>Please fill in the information below</span>
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <div class="modal-body ">
-                   
-                    <div class="row container py-3 col-lg-9 mx-auto">
+                <div class="modal-body p-4">
+                   <div class="row  ">
+                       <div class="col-md-6">
+                            <label for="Pass_label" class="form-radio-success">
+                                <input type="radio" name="group" class="form-check-input border-success " checked id="Pass_label"> <span class="text-success"> Yes</span>
+                            </label>
+                            <div class="d-flex align-items-center">
+                                <label for="" class="me-2">Qty : </label>
+                                <input type="number" class="form-control text-center my-2" name="" id="" style="width: 100px">
+                            </div>
+                            <br>
+                            <label for="Fail_label" class="form-radio-danger  my-2" >
+                                <input type="radio" name="group"  class="form-check-input border-danger" id="Fail_label"> 
+                                <span class="text-danger">No (can be use for TD/Expt project)</span>
+                            </label>
+                            <div><strong>To be dispoed after :</strong></div>
+                            <input type="date" name="" id="" class="form-control">
+                       </div>
+                       <div class="col-md-6">
+                        <span><strong>Approval Email:</strong></span>
+                        <input type="file" name="" id="" class="form-control"> 
+                       </div>
+                       <div class="col-12 text-center mt-3">
+                            <button class="btn btn-success rounded-pill">Submit and archive</button>
+                       </div>
+                   </div>
+                    {{-- <div class="row container py-3 col-lg-9 mx-auto">
                         <div class="col-md-4">
                             <label for="">Material Description*</label>
                             <input type="text" name="" id="" class="form-control" placeholder="Acetone ">
@@ -208,7 +234,7 @@
                                 <button class="btn btn-success rounded-pill">Submit and archive</button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>  
             </div>
         </div>

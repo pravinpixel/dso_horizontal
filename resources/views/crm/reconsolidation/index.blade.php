@@ -1,46 +1,74 @@
 @extends('layouts.app')
 @section('content')
-        
-    <div class="d-flex align-items-center mb-3">
-        <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
-            <div class="input-group align-items-center" title="Scan Barcode">
-                <i class="bi bi-upc-scan font-20 mx-2"></i>
-                <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-            </div> 
-        </div> 
+    <div class="row m-0">
+        <div class="col-md-8">
+            <div class="row m-0 align-items-center">
+                <div class="col-3 text-end"><strong>Select File</strong></div>
+                <div class="col-9">
+                    <input type="file" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-start">
+            <button class="btn btn-secondary">Reconcile</button>
+            <a href="{{ route('view-reconsolidation') }}" class="btn btn-primary">View Reconciliation</a>
+        </div>
     </div>
-   
-    @include('includes.sections.filter')
-    <div class="">
-        <table class="table table-bordered table-hover bg-white">
+    <div>
+        <h3 class="h4">Past Reconciliations</h3>
+        <table class="table custom table-bordered table-striped border">
             <thead>
                 <tr>
-                    <th class="table-th text-center">S.No</th>
-                     <th class="table-th child-td-lg"> Item Description</th>
-                    <th class="table-th child-td child-td-lg">Brand</th>
-                    <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt size</th>
-                    <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage location </th>
-                    <th class="table-th child-td">Housing type</th>
-                    <th class="table-th child-td">DOE</th>
-                    <th class="table-th child-td text-danger">Count</th>
-                </tr> 
+                    <th width="200px" class="text-center table-th">File upload Date & Time </th>
+                    <th class="text-center table-th">Uploaded Filename </th>
+                    <th class="text-center table-th">Reconciliation Date & Time</th>
+                    <th width="100px" class="text-center table-th">Status</th>
+                </tr>
             </thead>
-            @for ($key=0; $key<2; $key++)
-            <tr>
-                <td class="child-td">{{ $key+1 }}</td>
-                <td class="child-td-lg">Acetone IND</td>
-                <td class="child-td child-td-lg">Sigma Aldrich</td>
-                <td class="child-td">XYZ/-/4567</td>
-                <td class="child-td">{{ $key+1 }}</td>
-                <td class="child-td child-td-lg">Junxiang/Joon Fatt</td>
-                <td class="child-td">MR</td>
-                <td class="child-td">FC2</td>
-                <td class="child-td">09/0{{ $key+1 }}/21</td>
-                <td class="child-td text-danger">1>2>3</td>
-            </tr>
-            @endfor
-        </table> 
-    </div> 
+            <tbody>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+                <tr>
+                    <td class="text-center py-1">01/01/2021 10.30am</td>
+                    <td class="text-center py-1">File 001</td>
+                    <td class="text-center py-1">01/01/2021 11.30am</td>
+                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 @endsection
