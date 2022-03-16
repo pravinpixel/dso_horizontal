@@ -69,7 +69,16 @@
                                 <td class="child-td"></td>
                                 <td class="child-td"></td>
                                 <td class="child-td"></td>
-                                <td class="child-td"></td>
+                                <td class="child-td">
+                                    <div class="dropdown">
+                                        <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </a> 
+                                        <div class="dropdown-menu"> 
+                                            <a class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</a> 
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="collapse show" id="row_{{ $key+1 }}">
                                 <td colspan="13" class="p-0">
@@ -200,7 +209,10 @@
                         </td>
 					</tr> 
                 </tbody>
-            </table> 
+            </table>
+            <div class="text-end ">
+                <button class="btn btn-primary rounded-pill">Generate</button>
+            </div>
         </div>
         <div class="tab-pane p-3" id="search">
             <table class="table table-centered table-bordered table-hover bg-white">
@@ -236,7 +248,16 @@
                                 <td class="child-td"></td>
                                 <td class="child-td"></td>
                                 <td class="child-td"></td>
-                                <td class="child-td"></td>
+                                <td class="child-td">
+                                    <div class="dropdown">
+                                        <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </a> 
+                                        <div class="dropdown-menu"> 
+                                            <a class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</a> 
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="collapse show" id="row_{{ $key+1 }}">
                                 <td colspan="13" class="p-0">
@@ -331,6 +352,46 @@
                 </tr>
                 @endfor
             </table>  
+            <table class="table bg-white table-bordered table-hover custom-center">
+                <thead>
+                    <tr class="bg text-white">
+                        <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Export Cart</span></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th child-td">Item description</th>
+						 <th class="table-th child-td">Brand</th>
+                        <th class="table-th child-td">Batch#/ Serial#</th>
+						 <th class="table-th child-td">Pkt size</th>
+                        <th class="table-th child-td"> Qty</th>
+                        <th class="table-th child-td"> <i class="text-danger bi bi-trash3-fill"></i></th>
+                    </tr>
+                </thead>
+                <tbody> 											
+					<tr>
+                        <td class="child-td">Prepreg C3K</td>
+                        <td class="child-td">Brand 1</td>
+                        <td class="child-td">Roll2/1</td>
+                        <td class="child-td">0.5L</td>
+                        <td class="child-td text-center"><input type="number" name="" class="form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td">
+                            <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                        </td>
+					</tr>  										 
+                    <tr class="bg-secondary text-white">
+                        <td class="child-td">Prepreg C3K</td>
+                        <td class="child-td">Brand 1</td>
+                        <td class="child-td">Roll2/1</td>
+                            <td class="child-td">0.5L</td>
+                        <td class="child-td text-center"><input type="number" name="" class="form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td">
+                            <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                        </td>
+					</tr> 
+                </tbody>
+            </table> 
+            <div class="text-end ">
+                <button class="btn btn-primary rounded-pill">Export</button>
+            </div>
         </div> 
         <div class="tab-pane p-2" id="Generatemp">
             <div class="table-responsive">
