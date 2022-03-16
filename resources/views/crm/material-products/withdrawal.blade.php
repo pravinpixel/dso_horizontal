@@ -380,11 +380,8 @@
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
-							 </tr>
-					 
-						@endif
-                         
-                       
+						</tr> 
+						@endif 
                     @endfor
                 </tbody>
             </table>
