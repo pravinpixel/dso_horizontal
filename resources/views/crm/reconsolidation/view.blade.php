@@ -29,11 +29,8 @@
                 @endfor
             </tbody>
         </table>
-    </div>
-
-
+    </div>  
     <!-- Standard modal -->
- 
     <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

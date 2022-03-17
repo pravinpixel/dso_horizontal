@@ -29,7 +29,7 @@
         <li class="nav-item">
             <a href="#Generatemp" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Generate material/product history</span>
+                <span class="d-none d-md-block">Material/Product History</span>
             </a>
         </li> 
     </ul>
@@ -393,137 +393,33 @@
                 <button class="btn btn-primary rounded-pill">Export</button>
             </div>
         </div> 
-        <div class="tab-pane p-2" id="Generatemp">
-            <div class="table-responsive">
-                <table class="table table-centered table-bordered table-hover bg-white">
-                    <thead>
-                        <tr>
-                            <th class="table-th child-td-lg"> Item Description</th>
-                            <th class="table-th child-td">Brand</th>
-                            <th class="table-th child-td">Batch/Serial#</th>
-                            <th class="table-th child-td">Pkt size</th>
-                            <th class="table-th child-td">Qty</th>
-                            <th class="table-th child-td-lg">Owner1/2</th>
-                            <th class="table-th child-td">Storage rm</th>
-                            <th class="table-th child-td">Housing type</th>
-                            <th class="table-th child-td">DOE</th>
-                            <th class="table-th child-td">QC status</th>
-                            <th class="table-th child-td">Disposal</th>
-                            <th class="table-th child-td">Used for TD/Expt</th>
-                            <th class="table-th child-td">Actions</th>
-                        </tr> 
-                    </thead>
-                    @for ($key=0; $key<3; $key++)
-                    <tr class="table-tr">
-                        <td colspan="13" class="p-0 border-bottom">
-                            <table class="table table-centered m-0">
-                                <tr>
-                                    <td class="child-td-lg"><i class="bi bi-caret-right-fill collapsed table-toggle-icon" data-bs-toggle="collapse" href="#row_{{ $key+1 }}" role="button" aria-expanded="false" aria-controls="row_{{ $key+1 }}"></i> Acetone IND</td>
-                                    <td class="child-td">XOX</td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td">1L</td>
-                                    <td class="child-td">20 <i class="text-success dot-sm bi bi-circle-fill"></i></td>
-                                    <td class="child-td-lg"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                    <td class="child-td"></td>
-                                </tr>
-                                <tr class="collapse show" id="row_{{ $key+1 }}">
-                                    <td colspan="13" class="p-0">
-                                        <table class="table table-centered bg-white m-0">
-                                            @for ($key2=0; $key2<4; $key2++)
-                                                <tr>
-                                                    <td class="child-td-lg"></td>
-                                                    <td class="child-td"></td>
-                                                    
-                                                    @if ($key2 == 0)
-                                                        <td class="child-td">Batch/1</td>
-                                                    @endif
-                                                    @if ($key2 == 1)
-                                                        <td class="child-td">Batch/2</td>
-                                                    @endif 
-                                                    @if ($key2 == 2)
-                                                    <td class="child-td">Batch/3</td>
-                                                    @endif
-                                                    @if ($key2 == 3)
-                                                    <td class="child-td">Batch/4</td>
-                                                    @endif  
-    
-    
-                                                    @if ($key2 == 0)
-                                                    <td class="child-td">1L</td>
-                                                    @endif
-                                                    @if ($key2 == 1)
-                                                    <td class="child-td">1L</td>
-                                                    @endif 
-                                                    @if ($key2 == 2)
-                                                    <td class="child-td">0.5L</td>
-                                                    @endif
-                                                    @if ($key2 == 3)
-                                                    <td class="child-td">5L</td>
-                                                    @endif  
-                                                    
-                                                    <td class="child-td">10</td>
-                                                    <td class="child-td-lg">Keith/HuiBeng</td>
-                                                    <td class="child-td">CW</td>
-                                                    <td class="child-td">FC1</td>
-                                                    <td class="child-td">
-                                                        @if ($key2 == 0)
-                                                            <small class="d-flex">31/10/2021  <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></small>
-                                                        @endif
-                                                        @if ($key2 == 1)
-                                                            <small class="d-flex">31/10/2021  <i class="ms-1 text-success dot-sm bi bi-circle-fill"></i></small>
-                                                        @endif 
-                                                        @if ($key2 == 2)
-                                                            <small class="d-flex">31/10/2021  <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></small>
-                                                        @endif
-                                                        @if ($key2 == 3)
-                                                            <small class="d-flex">31/10/2021  <i class="ms-1 text-success dot-sm bi bi-circle-fill"></i></small>
-                                                        @endif  
-                                                    </td>
-                                                    <td class="child-td">
-                                                        @if ($key2 == 0)
-                                                            <small class="badge badge-success-lighten rounded-pill">PASS</small>
-                                                        @endif
-                                                        @if ($key2 == 1)
-                                                            <small class="badge badge-danger-lighten rounded-pill">FALL</small>
-                                                        @endif 
-                                                        @if ($key2 == 2)
-                                                            <small class="badge badge-success-lighten rounded-pill">PASS</small>
-                                                        @endif
-                                                        @if ($key2 == 3)
-                                                            <small class="badge badge-danger-lighten rounded-pill">FALL</small>
-                                                        @endif 
-                                                    </td>
-                                                    <td class="child-td">N</td>
-                                                    <td class="child-td">-</td>
-                                                  
-                                                    <td class="child-td">
-                                                        <div class="dropdown">
-                                                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="bi bi-three-dots"></i>
-                                                            </a> 
-                                                            <div class="dropdown-menu"> 
-                                                                <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> Gernerate</a>
-                                                                 
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr> 
-                                            @endfor
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
+        <div class="tab-pane p-3" id="Generatemp">
+            <table class="table m-0 table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="table-th text-center">S.No</th>
+                        <th class="table-th text-center">Transaction date </th>
+                        <th class="table-th text-center">Transaction time </th>
+                        <th class="table-th text-center">Transaction By </th>
+                        <th class="table-th text-center">Module </th>
+                        <th class="table-th text-center">Action Taken </th>
+                        <th class="table-th text-center">Comments</th>
                     </tr>
+                </thead>
+                <tbody>
+                    @for ($i=0; $i<8; $i++)
+                        <tr>
+                            <td class="text-center py-1">{{ $i+1 }}</td>
+                            <td class="text-center py-1">1{{ $i+1 }}-03-2022 </td>
+                            <td class="text-center py-1">0{{ $i+1 }}:1{{ $i+1 }} AM </td>
+                            <td class="text-center py-1">Transaction By </td>
+                            <td class="text-center py-1">Module </td>
+                            <td class="text-center py-1">Action Taken </td>
+                            <td class="text-center py-1">Comments</td>
+                        </tr>
                     @endfor
-                </table> 
-            </div>
+                </tbody>
+            </table>
         </div> 
     </div> 
 @endsection
