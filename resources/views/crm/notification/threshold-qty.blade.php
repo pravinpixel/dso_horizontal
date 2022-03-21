@@ -1,20 +1,20 @@
 @extends('layouts.app')
 @section('content')
-    <div class="s">
+    <div>
 	 
-        @include('includes.sections.filter')
         <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
                     <th class="table-th child-td-lg"> Item Description</th>
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
+                    <th class="table-th child-td">Pkt Size</th>
+                    <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">Storage Room</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
-                    <th class="table-th child-td">Qty</th>
-                   
+                    <th class="table-th child-td">DOE</th>
                     <th class="table-th child-td">Read Status</th>
 					 <th class="table-th child-td">Actions</th>
                 </tr> 
@@ -27,6 +27,7 @@
                             <td class="child-td-lg"><i class="bi bi-caret-right-fill collapsed table-toggle-icon" data-bs-toggle="collapse" href="#row1" role="button" aria-expanded="false" aria-controls="row1"></i> Acetone IND</td>
                             <td class="child-td">XOX</td>
                             <td class="child-td">- Batch1/001</td>
+                            <td class="child-td"> 5</td>
                             <td class="child-td-lg"></td>
                             <td class="child-td"></td>
                             <td class="child-td"></td>
@@ -34,7 +35,7 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td">/-</td>
-								 <td class="child-td">
+							<td class="child-td">
                                 <div class="dropdown">
                                     <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-three-dots-vertical"></i>
@@ -54,11 +55,13 @@
                                             <td class="child-td-lg"></td>
                                             <td class="child-td"></td>
                                             <td class="child-td">Batch1/-</td>
+                                            <td class="child-td">{{ $i+1 }}</td>
+                                            <td class="child-td">8</td>
                                             <td class="child-td-lg">Keith/HuiBeng</td>
                                             <td class="child-td">CW</td>
                                             <td class="child-td">FC1</td>
                                             <td class="child-td"></td>
-                                            <td class="child-td">8</td>
+                                            <td class="child-td">10/02/2020</td>                                           
                                             <td class="child-td-lg">To replenish</td>
                                             <td class="child-td">
                                                 <input type="checkbox" id="switch0_{{ $i+1 }}" data-switch="none"/>

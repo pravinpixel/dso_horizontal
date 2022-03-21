@@ -11,10 +11,10 @@
     {{--  ===== STYLES ======= --}}
         @include('includes.styles')
     {{--  ===== STYLES ======= --}}
-
+    
 </head>
 <body>
-
+    @include('includes.alerts')
     <div class="sticky-top">
         @include('includes.sections.nav-bar')
         @include('includes.sections.top-nav-bar')
@@ -328,6 +328,6 @@
 
     {{-- ========= SCRIPTS  ==========--}}
         @include('includes.scripts')
-    {{-- ========= SCRIPTS  ==========--}}
+    {{-- ========= SCRIPTS  ==========--}} 
 </body>
 </html>

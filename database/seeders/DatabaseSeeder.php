@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \DB::table('users')->insert([
+            'user_login_id' => '12345',
+        ]);
     }
 }

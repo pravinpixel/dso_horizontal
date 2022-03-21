@@ -238,43 +238,7 @@ option {
 .swal-button.btn-danger:hover {
     background-color: red !important;
 }
-/* .navbar-nav.custom .nav-item {
-    display: flex;
-    min-width: 150px ;
-}
-.navbar-nav.custom .nav-item .nav-link  {
-    width: 100%;
-}
-.topnav{
-    overflow: auto;
-}
-.topnav:hover  .topnav::-webkit-scrollbar {
-    height: 0px !important;
-}
- 
-.topnav::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    
-}
 
-.topnav:hover::-webkit-scrollbar-thumb {
-    visibility: visible !important;
-}
- 
-.topnav::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
- 
-.topnav::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-    visibility: hidden;
-}
- 
-.topnav::-webkit-scrollbar-thumb:hover {
-    background: #555;
-} */
 .shadow-hover:hover 
 {
    -webkit-box-shadow: 0 0 35px 0 #00000026!important;

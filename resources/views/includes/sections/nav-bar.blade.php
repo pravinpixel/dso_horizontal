@@ -20,7 +20,7 @@
                 </a> 
             </li>
             <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle arrow-none"   href="{{ route('ui-demo') }}"  >
+                <a class="nav-link dropdown-toggle arrow-none"   href="{{ route('master-settings') }}"  >
                     <i class="bi bi-gear noti-icon"></i>
                 </a> 
             </li> 
@@ -48,7 +48,7 @@
                     </a> 
 
                     <!-- item-->
-                    <a href="{{ route('login') }}" class="dropdown-item notify-item">
+                    <a onclick="return document.getElementById('logout_form').submit()" class="dropdown-item notify-item">
                         <i class="bi bi-box-arrow-right me-1"></i>
                         <span>Logout</span>
                     </a>
@@ -65,4 +65,6 @@
         </a> 
     </div>
 </div>
+
  
+<form action="{{ route('logout') }}" method="POST" id="logout_form">@csrf</form>
