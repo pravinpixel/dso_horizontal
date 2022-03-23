@@ -1,16 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <div class="s">
-    @include('includes.sections.filter')
-    <div class="card">
-        <div class="bg-secondary  text-white card-header text-center">
-            <h5>Near Expiry Material/In-house Product</h5>
-        </div>
-        <div class="card-body">
-            <table class="table table-bordered table-hover bg-white">
+   
+    <div class="card"> 
+        <div class="card-body p-0">
+            <table class="table table-bordered table-hover bg-white border m-0">
                 <thead>
                     <tr>
-                        <td class="table-th child-td">S.No</td>
+                        <td colspan="9" class="bg-secondary  text-white card-header text-center">
+                            <h5 class="m-0">Near Expiry Material/In-house Product</h5>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="table-th child-td">Item  Description</td>
                         <td class="table-th child-td">Brand</td>
                         <td class="table-th child-td">#Batch/Serial/Lot No</td>
@@ -25,7 +26,6 @@
                 <tbody>
                     @for ($i=0;$i<6;$i++)
                         <tr>
-                            <td class="child-td">{{ $i+1 }}</td>
                             <td class="child-td">IPA </td>
                             <td class="child-td">Sigma Aldrich</td>
                             <td class="child-td">ABC/-/1234</td>
@@ -53,15 +53,16 @@
             </table> 
         </div>
     </div>
-    <div class="card">
-        <div class="bg-secondary  text-white card-header text-center">
-            <h5>Expired Material/In-house Product</h5>
-        </div>
-        <div class="card-body">            
-            <table class="table table-bordered table-hover bg-white">
+    <div class="card"> 
+        <div class="card-body p-0">            
+            <table class="table border table-bordered table-hover bg-white m-0">
                 <thead>
                     <tr>
-                        <th class="table-th child-td">S.No</th>
+                        <td colspan="9" class="bg-secondary  text-white card-header text-center">
+                            <h5 class="m-0">Expired Material/In-house Product</h5>
+                        </td>
+                    </tr>
+                    <tr>
                         <th class="table-th child-td">Item  Description</th>
                         <th class="table-th child-td">Brand</th>
                         <th class="table-th child-td">#Batch/Serial/Lot No</th>
@@ -76,7 +77,6 @@
                 <tbody>
                     @for ($i=0;$i<6;$i++)
                         <tr>
-                            <td class="child-td">{{ $i+1 }}</td>
                             <td class="child-td">IPA </td>
                             <td class="child-td">Sigma Aldrich</td>
                             <td class="child-td">ABC/-/1234</td>
@@ -104,15 +104,16 @@
             </table> 
         </div>    
     </div>
-    <div class="card">
-        <div class="bg-secondary  text-white card-header text-center">
-            <h5>Failed IQC Material/In-House Product</h5>
-        </div>
-        <div class="card-body">            
-            <table class="table table-bordered table-hover bg-white">
+    <div class="card"> 
+        <div class="card-body p-0">            
+            <table class="table border table-bordered table-hover bg-white m-0">
                 <thead>
                     <tr>
-                        <th class="table-th child-td">S.No</th>
+                        <td colspan="9" class="bg-secondary  text-white card-header text-center">
+                            <h5 class="m-0">Failed IQC Material/In-House Product</h5>
+                        </td>
+                    </tr>
+                    <tr>
                         <th class="table-th child-td">Material / Product  Description</th>
                         <th class="table-th child-td">Brand</th>
                         <th class="table-th child-td">#Batch/Serial/Lot No</th>
@@ -127,7 +128,6 @@
                 <tbody>
                     @for ($i=0;$i<6;$i++)
                         <tr>
-                            <td class="child-td">{{ $i+1 }}</td>
                             <td class="child-td">IPA </td>
                             <td class="child-td">Sigma Aldrich</td>
                             <td class="child-td">ABC/-/1234</td>

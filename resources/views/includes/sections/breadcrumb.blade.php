@@ -26,7 +26,7 @@
                             {{ Route::is('list-search') ? "List Search" : "" }}
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                            {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
+                            {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
                             {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
                             {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add " : "" }}
                         </li>
@@ -43,7 +43,7 @@
                     {{ Route::is('list-search') ? "List Search" : "" }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                    {{ Route::is('near-expiry-expired') ? "Near Expiry/Expired " : "" }}
+                    {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
                     {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
                     {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add Material / In-house Products " : "" }}
                 </h4>
