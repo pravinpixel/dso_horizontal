@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\PackingSizeData;
-use App\Models\Masters\StorageRooom;
-
-
+use App\Models\Masters\StorageRoom;
+use App\Models\Masters\Departments;
+use App\Models\Masters\HouseTypes;
 use Illuminate\Http\Response;
 use App\Interfaces\MasterRepositoryInterface;
 class MasterController extends Controller
@@ -32,7 +31,10 @@ class MasterController extends Controller
         $result['master_category']  =   MasterCategories::latest()->get();
         $result['statutory']        =   StatutoryBody::latest()->get();
         $result['pack_size']        =   PackingSizeData::latest()->get();
-        $result['storage_room']     =   StorageRooom::latest()->get();
+        $result['storage_room']     =   StorageRoom::latest()->get();
+        $result['departments']      =   Departments::latest()->get();
+        $result['house_types']      =   HouseTypes::latest()->get();
+
         return  $result;
     }
     public function store_master(Request $request)

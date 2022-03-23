@@ -92,125 +92,48 @@
         </div>
         <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0">
-                <div class="card-header bg-light text-primary">
-                    <strong class="h5">Departments</strong> 
-                    <a href="" class="float-end"><i class="fa fa-plus"></i></a>
+                <div class="card-header bg-light p-2">
+                    <strong class="h5 text-primary">Departments</strong> 
+                    <div class="btn-group w-100 mt-1">
+                        <input  type="text" name="department" ng-model="department" class="form-control" placeholder="Type here" ng-required required>
+                        <button  ng-click="StoreDepartmentsData(department ,'departments')" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                    </div>
                 </div>
                 <div class="card-body scroll-body p-1">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1">
-                            EGP1
+                        <li class="list-group-item py-1" ng-repeat="row in DepartmentsData">
+                            @{{ row.name }}
                             <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item py-1">
-                            EGP4
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item py-1">
-                            EGP7
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item py-1">
-                            FSML
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item py-1">
-                            STML
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
+                                <span ng-click="EditMasterData(row.id ,'departments')"><i class="bi bi-pencil-square text-secondary"></i></span>
+                                <span ng-click="DeleteMasterData(row.id ,'departments')"><i class="bi bi-trash text-danger"></i></span>
                             </a>
                         </li> 
                     </ul>
                 </div>
-            </div>
+            </div> 
         </div>
+ 
         <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0">
-                <div class="card-header bg-light text-primary">
-                    <strong class="h5">Departments</strong> 
-                    <a href="" class="float-end"><i class="fa fa-plus"></i></a>
+                <div class="card-header bg-light p-2">
+                    <strong class="h5 text-primary">House Typea</strong> 
+                    <div class="btn-group w-100 mt-1">
+                        <input  type="text" name="house_type" ng-model="house_type" class="form-control" placeholder="Type here" ng-required required>
+                        <button  ng-click="StoreHouseTypeData(house_type ,'house_types')" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                    </div>
                 </div>
                 <div class="card-body scroll-body p-1">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item py-1"> 
-                            Flammable
+                        <li class="list-group-item py-1" ng-repeat="row in houseTypesData">
+                            @{{ row.name }}
                             <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
+                                <span ng-click="EditMasterData(row.id ,'house_types')"><i class="bi bi-pencil-square text-secondary"></i></span>
+                                <span ng-click="DeleteMasterData(row.id ,'house_types')"><i class="bi bi-trash text-danger"></i></span>
                             </a>
                         </li> 
-                        <li class="list-group-item py-1"> 
-                            Cabinet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Acid Cabinet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Base Cabinet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Metal Cabinet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Racks
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Dry Cabinet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Freezer
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li> 
-                        <li class="list-group-item py-1"> 
-                            Pallet
-                            <a class="float-end" href="">
-                                <i class="bi bi-pencil-square me-1 text-secondary"></i>
-                                <i class="bi bi-trash text-danger"></i>
-                            </a>
-                        </li>  
                     </ul>
                 </div>
-            </div>
+            </div> 
         </div> 
     </div>
 @endsection 

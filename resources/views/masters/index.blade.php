@@ -43,7 +43,8 @@
                     $scope.statutoryData    = response.data.statutory;
                     $scope.pack_sizeData    = response.data.pack_size;
                     $scope.storageRoomData  = response.data.storage_room;
-
+                    $scope.DepartmentsData  = response.data.departments;
+                    $scope.houseTypesData   = response.data.house_types;
                 });
             }
             $scope.GetMaster();
@@ -124,6 +125,46 @@
                     $scope.data = response.data;
                     $scope.GetMaster();
                     $scope.storeage_room = ''
+                }, function(response) {
+                    $scope.data = response.data || 'Request failed';
+                });
+            }
+            $scope.StoreDepartmentsData = function (input_name, modal_type) {
+                if(input_name == '' || input_name == null ) {
+                    Message('danger', 'Field is required'); 
+                    return false;
+                }
+                $http({
+                    method: 'POST', 
+                    url: '{{ route('master.store.category') }}', 
+                    data: {
+                        name: input_name, 
+                        type: modal_type
+                    }
+                }).then(function(response) {
+                    $scope.data = response.data;
+                    $scope.GetMaster();
+                    $scope.department = ''
+                }, function(response) {
+                    $scope.data = response.data || 'Request failed';
+                });
+            }
+            $scope.StoreHouseTypeData = function (input_name, modal_type) {
+                if(input_name == '' || input_name == null ) {
+                    Message('danger', 'Field is required'); 
+                    return false;
+                }
+                $http({
+                    method: 'POST', 
+                    url: '{{ route('master.store.category') }}', 
+                    data: {
+                        name: input_name, 
+                        type: modal_type
+                    }
+                }).then(function(response) {
+                    $scope.data = response.data;
+                    $scope.GetMaster();
+                    $scope.house_type = ''
                 }, function(response) {
                     $scope.data = response.data || 'Request failed';
                 });
@@ -210,8 +251,6 @@
                 }); 
             }
         });
-
-        
     </script>
 @endsection 
 
