@@ -13,8 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('users')->insert([
-            'user_login_id' => '12345',
+        $this->call([
+            UserSeeder::class,
+            DepartmentSeeder::class,
+            HouseTypeSeeder::class,
+            MasterCategorySeeder::class,
+            PackSizeSeeder::class,
+            StatutorySeeder::class,
+            StorageRoomSeeder::class,
         ]);
     }
 }
