@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\PackingSizeData;
+use App\Models\Masters\StorageRooom;
 
 
 class MasterRepository implements MasterRepositoryInterface {
@@ -30,6 +31,11 @@ class MasterRepository implements MasterRepositoryInterface {
                 'name' => $value
             ]);
         }
+        elseif($type == 'storage_room') {
+            return  StorageRooom::create([
+                'name' => $value
+            ]);
+        }
     }
 
     public function editMaster($id, $type)
@@ -37,10 +43,15 @@ class MasterRepository implements MasterRepositoryInterface {
          
         if($type == 'category_section') {
             return  MasterCategories::findOrFail($id);
-        } elseif($type == 'statutory_section') {
+        } 
+        elseif($type == 'statutory_section') {
             return  StatutoryBody::findOrFail($id);
-        }elseif($type == 'packing_size_section') {
+        }
+        elseif($type == 'packing_size_section') {
             return  PackingSizeData::findOrFail($id);
+        }
+        elseif($type == 'storage_room') {
+            return  StorageRooom::findOrFail($id);
         }
     }
 
@@ -62,6 +73,11 @@ class MasterRepository implements MasterRepositoryInterface {
                 'name' => $value->name
             ]);
         }
+        elseif($type == 'storage_room') {
+            return  StorageRooom::find($value->id)->update([
+                'name' => $value->name
+            ]);
+        }
     }
 
     public function deleteMaster($id, $type)
@@ -78,6 +94,9 @@ class MasterRepository implements MasterRepositoryInterface {
         }elseif($type == 'packing_size_section') {
             
             return  PackingSizeData::find($id)->delete();
+        }
+        elseif($type == 'storage_room') {
+            return  StorageRooom::find($id)->delete();
         }
     }
 }

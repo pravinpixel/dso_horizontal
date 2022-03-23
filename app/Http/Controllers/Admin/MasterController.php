@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\PackingSizeData;
+use App\Models\Masters\StorageRooom;
+
 
 use Illuminate\Http\Response;
 use App\Interfaces\MasterRepositoryInterface;
@@ -27,9 +29,10 @@ class MasterController extends Controller
     }
 
     public function get_masters()    {
-        $result['master_category']  = MasterCategories::latest()->get();
-        $result['statutory']        = StatutoryBody::latest()->get();
-        $result['pack_size']        = PackingSizeData::latest()->get();
+        $result['master_category']  =   MasterCategories::latest()->get();
+        $result['statutory']        =   StatutoryBody::latest()->get();
+        $result['pack_size']        =   PackingSizeData::latest()->get();
+        $result['storage_room']     =   StorageRooom::latest()->get();
         return  $result;
     }
     public function store_master(Request $request)
@@ -39,6 +42,7 @@ class MasterController extends Controller
         if($store) {
             return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
         }
+        return response(['status' => false,  'message' => trans('response.failed')], Response::HTTP_OK);
     }
     public function update_master(Request $request)
     {
@@ -47,6 +51,7 @@ class MasterController extends Controller
         if($update) {
             return response(['status' => true,  'message' => trans('response.update')], Response::HTTP_OK);
         }
+        return response(['status' => false,  'message' => trans('response.failed')], Response::HTTP_OK);
     }
     public function delete_master(Request $request, $id)
     {
@@ -54,13 +59,15 @@ class MasterController extends Controller
         if($delete) {
             return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
         }
+        return response(['status' => false,  'message' => trans('response.failed')], Response::HTTP_OK);
     }
     public function edit_master(Request $request, $id)    {
      
-        $edit  =   $this->MasterRepository->editMaster($request->name, $request->type);
-
+        $edit  =   $this->MasterRepository->editMaster($request->name, $request->type); 
+        
         if($edit) {
             return $edit;
         }
+        return response(['status' => false,  'message' => trans('response.failed')], Response::HTTP_OK);
     }
 } 
