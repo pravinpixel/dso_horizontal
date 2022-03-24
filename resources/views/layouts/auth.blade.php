@@ -10,6 +10,9 @@
     {{--  ===== STYLES ======= --}}
 </head>
 <body class="bg-white"> 
+
+    @include('flash::message')
+    
     @yield('content')
     {{-- ========= SCRIPTS  ==========--}}
         @include('includes.scripts')

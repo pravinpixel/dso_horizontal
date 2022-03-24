@@ -32,19 +32,19 @@ class UserSeeder extends Seeder
         Sentinel::getRoleRepository()->createModel()->create( [
             'name'       => 'User',
             'slug'       => 'user',
-            'permissions'=> ['dashboard' => true],
+            'permissions'=> config('permission'),
         ] );
 
         $manager = Sentinel::getRoleRepository()->createModel()->create([
             'name'       => 'Manager',
             'slug'       => 'manager',
-            'permissions'=> ["manager.dashboard" => true],
+            'permissions'=> config('permission'),
         ]);
 
         $employee = Sentinel::getRoleRepository()->createModel()->create([
             'name'       => 'Employee',
             'slug'       => 'employee',
-            'permissions'=> ["employee.dashboard" => true],
+            'permissions'=> config('permission'),
         ]);
 
         $employee->users()->attach(Sentinel::registerAndActivate(['email' => '324','password'   => config('auth.password'),'first_name' => 'Anthony',]));

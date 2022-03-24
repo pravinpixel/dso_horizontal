@@ -4,18 +4,15 @@
     
     <div class="card">
         <div class="card-header text-end ">
-            <a class="btn btn-primary"  href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>
+            <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
         </div> 
         <div class="card-body"> 
             <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
-                        <th class="table-th">No</th>
+                        <th class="table-th" width="10%">No</th>
                         <th class="table-th">Name</th>
-                        <th class="table-th">Login ID</th>
-                        <th class="table-th">Last Login</th>
-                        <th class="table-th">Roles</th>
-                        <th class="table-th">Status</th>
+                        <th class="table-th">Created At</th>
                         <th class="table-th" width="100px">Action</th>
                     </tr>
                 </thead>
@@ -32,18 +29,15 @@
         var table = $('#data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('user.index') }}",
+            ajax: "{{ route('role.index') }}",
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'first_name', name: 'first_name'},
-                {data: 'email', name: 'email'},               
-                {data: 'last_login', name: 'last_login'},
-                {data: 'role', name: 'role', defaultContent: '',},
-                {data: 'status', name: 'status'},
+                {data: 'name', name: 'name'},
+                {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
       
     });
-</script>  
+</script>
 @endsection

@@ -1,7 +1,9 @@
 <?php
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Admin\MasterController;
-    use App\Http\Controllers\UserController;
+    use App\Http\Controllers\Admin\UserController;
+    use App\Http\Controllers\Admin\RoleController;
+    use App\Http\Controllers\Admin\PermissionController; 
 
 Route::middleware(['auth_users'])->group(function () {
     Route::get('/item-description', [MasterController::class, 'index'])->name('master-settings');
@@ -14,10 +16,30 @@ Route::middleware(['auth_users'])->group(function () {
 
 
     // User Routes 
-
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::post('/user', [UserController::class, 'store'])->name('user.store');
     Route::get('/user-create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user-delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+    Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user-update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user-update/{id}', function () {   
+        return redirect()->back();
+    })->name('user.update');
 
+
+    // Role Routes 
+    Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+    Route::post('/role', [RoleController::class, 'store'])->name('role.store');
+    Route::get('/role-create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/role-delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+    Route::get('/role-edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::put('/role-update/{id}', [RoleController::class, 'update'])->name('role.update');
+    Route::get('/role-update/{id}', function () {   
+        return redirect()->back();
+    })->name('role.update');
+
+
+    Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
+    Route::post('/permission', [PermissionController::class, 'store'])->name('permission.store');
 
 });

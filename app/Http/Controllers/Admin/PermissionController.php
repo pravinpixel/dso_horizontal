@@ -9,6 +9,11 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 class PermissionController extends Controller
 {
      
+    public function index(Request $request)
+    {
+        $roles  = Sentinel::getRoleRepository()->get();
+        return view('masters.permission.index',compact('roles'))->render();
+    }
 
     public function store(Request $request)
     {
@@ -27,7 +32,7 @@ class PermissionController extends Controller
         if($request->user_delete_withdrawal == 'true') {
             $user->addPermission('user.delete.withdrawal');
         }
-        $user->save(); 
+        $user->save();
         return redirect()->back();
     }
 }

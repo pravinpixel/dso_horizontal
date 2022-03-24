@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="row" ng-app="MasterApp" ng-controller="MasterController">
-        <div class="col-sm-2 mb-2 mb-sm-0">
-            <h3 class="h4 text-center">Menus</h3>
+        <div class="col-sm-3 mb-2 mb-sm-0">
+            <h3 class="h4 mb-3">Menus List</h3>
             <ul class="list-group">
-                <a class="list-group-item list-group-item-action {{ Route::is(['master.item-description','master-settings']) ? "active" : '' }}" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i> Item Description</a>
-                <a class="list-group-item list-group-item-action  {{ Route::is(['user.index','user.create','user.edit']) ? "active" : '' }}" href="{{ route('user.index') }}"><i class="bi bi-chevron-right me-1"></i>Users</a>
-                <a class="list-group-item list-group-item-action  {{ Route::is(['role-access']) ? "active" : '' }}" href=""><i class="bi bi-chevron-right me-1"></i>Roles</a>
-                <a class="list-group-item list-group-item-action" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Admin Settings</a>
+                <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['master.item-description','master-settings']) ? "active" : '' }}" href="{{ route('master.item-description') }}"><i class="bi bi-diagram-2-fill fa-2x me-2"></i> Item Description</a>
+                <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['user.index','user.create','user.edit']) ? "active" : '' }}" href="{{ route('user.index') }}"><i class="bi bi-person-plus-fill fa-2x me-2"></i>Users</a>
+                <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['role.index','role.create','role.edit']) ? "active" : '' }}" href="{{ route('role.index') }}"><i class="bi bi-person-rolodex fa-2x me-2"></i>Roles</a>
             </ul>
         </div> 
-        <div class="col-sm-10 p-0"> 
+        <div class="col-sm-9 p-0"> 
             @yield('masters') 
         </div> 
         <div class="modal fade" id="edit_modal">
@@ -248,9 +248,52 @@
                             $scope.data = response.data || 'Request failed';
                         });
                     }
-                }); 
+                });
             }
         });
     </script>
 @endsection 
 
+@section('scripts')
+    <script>
+        function toggle(source) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+        function view_alls(source) {
+            var checkboxes = document.getElementsByClassName('view');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+        function add_alls(source) {
+            var checkboxes = document.getElementsByClassName('add');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+        function edit_alls(source) {
+            var checkboxes = document.getElementsByClassName('edit');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+        function delete_alls(source) {
+            var checkboxes = document.getElementsByClassName('delete');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+@endsection 

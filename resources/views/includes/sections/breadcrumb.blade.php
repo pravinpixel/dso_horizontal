@@ -27,9 +27,23 @@
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
                             {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
-                            {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
                             {{ Route::is(['user-access']) ? "User Access" : "" }}
                             {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add " : "" }}
+
+                            {{ Route::is([
+                                'master-settings',
+                                'get_masters',
+                                'master.item-description',
+                                'master.edit.category',
+                                'user.index',
+                                'user.create',
+                                'user.edit',
+                                'role.index',
+                                'role.create',
+                                'role.edit',
+                                'permission.index'
+                            ]) ? "Master Settings" : "" }}
+
                         </li>
                     </ol>
                 </div>
@@ -44,10 +58,22 @@
                     {{ Route::is('list-search') ? "List Search" : "" }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                    {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
-                    {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
+                    {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }} 
                     {{ Route::is(['user-access']) ? "User Access" : "" }}
                     {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add Material / In-house Products " : "" }}
+                    {{ Route::is([
+                        'master-settings',
+                        'get_masters',
+                        'master.item-description',
+                        'master.edit.category',
+                        'user.index',
+                        'user.create',
+                        'user.edit',
+                        'role.index',
+                        'role.create',
+                        'role.edit',
+                        'permission.index'
+                    ]) ? "Master Settings" : "" }}
                 </h4>
             </div>
         </div>

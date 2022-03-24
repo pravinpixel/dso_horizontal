@@ -55,7 +55,7 @@
             'body'       => $message['message']
         ])
     @else 
-        <div class="alert alert-{{ $message['level'] }} alert-dismissible bg-success text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
+        <div class="alert alert-{{ $message['level'] }} alert-dismissible bg-{{ $message['level'] == 'danger' ? "danger" : 'success'}} text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <strong>{!! $message['message'] !!}</strong>
         </div>

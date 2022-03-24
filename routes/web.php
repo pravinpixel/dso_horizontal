@@ -1,6 +1,5 @@
 <?php
 include('auth.php');
-include('permission.php');
 include('master.php');
 use Illuminate\Support\Facades\Route;
 

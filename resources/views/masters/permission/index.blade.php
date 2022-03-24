@@ -1,20 +1,19 @@
 @extends('masters.index')
 
 @section('masters')
-    <form action="{{ route('store.permission') }}" method="post" class="card">
-        @csrf
-        
+    <form action="{{ route('permission.store') }}" method="post" class="card">
+        @csrf 
         <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover">
             <thead class="bg-primary-2 text-white">
                 <tr>
                     <th colspan="5">
                         <div class="m-0 row col-6 mx-auto">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Choose User :</label>
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Choose Role :</label>
                             <div class="col-sm-8 p-0">
-                                <select name="user_id" class="form-select form-select-sm text-white" style="background: none">
-                                    <option value="">-- Select User  --</option>
-                                    @foreach ($user as $row)
-                                        <option class="text-dark" value="{{ $row->id }}">{{ $row->first_name }}</option>
+                                <select name="role_id" class="form-select form-select-sm text-white" style="background: none">
+                                    <option value="">-- Select Role  --</option>
+                                    @foreach ($roles as $row)
+                                        <option class="text-dark" value="{{ $row->id }}">{{ $row->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -100,7 +99,7 @@
             <tfoot class="bg-primary-2 text-white">
                 <tr>
                     <th colspan="5">
-                        <button type="submit" class="btn btn-sm btn-primary rounded-pill"><i class="fa fa-save me-true"></i>Save & Submit</button>
+                        <button type="submit" class="btn btn-sm btn-primary rounded-pill fw-bold"><i class="fa fa-save me-2"></i>Save & Submit</button>
                     </th>
                 </tr>
             </tfoot>
