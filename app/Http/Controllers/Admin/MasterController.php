@@ -14,7 +14,7 @@ use Illuminate\Http\Response;
 use App\Interfaces\MasterRepositoryInterface;
 class MasterController extends Controller
 {
-    private MasterRepositoryInterface $MasterRepository;
+    private   $MasterRepository;
 
     public function __construct(MasterRepositoryInterface $MasterRepository) 
     {
