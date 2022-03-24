@@ -14,7 +14,7 @@
     
 </head>
 <body>
-    @include('includes.alerts')
+    @include('flash::message')
     <div class="sticky-top">
         @include('includes.sections.nav-bar')
         @include('includes.sections.top-nav-bar')

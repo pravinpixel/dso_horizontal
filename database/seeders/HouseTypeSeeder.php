@@ -16,10 +16,17 @@ class HouseTypeSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-            ['name' => "abcd",],
+            ['name' => "Flammable"],
+            ['name' => "Cabinet"],
+            ['name' => "Acid Cabinet"],
+            ['name' => "Base Cabinet"],
+            ['name' => "Metal Cabinet"],
+            ['name' => "Racks"],
+            ['name' => "Dry Cabinet"],
+            ['name' => "Freezer"],
+            ['name' => "Pallet"],
         ];
+                
         HouseTypes::insert($data);
     }
 }

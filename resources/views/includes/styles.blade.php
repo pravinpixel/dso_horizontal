@@ -12,6 +12,12 @@
 
 {{-- Fonts  --}}
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+
+
+{{-- Datatables --}}
+<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+
  
 <script>
     function Message(type, res) {
@@ -22,8 +28,7 @@
             </div>
         `);
         setTimeout(() => {
-            $("#alert").fadeOut();
+            $(".alert").fadeOut();
         }, 2000);
     }
-    
-</script> 
+</script>

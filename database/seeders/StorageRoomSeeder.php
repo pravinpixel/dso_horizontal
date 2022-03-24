@@ -16,11 +16,15 @@ class StorageRoomSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-        ];
-      
+            ['name' => "AR"],
+            ['name' => "CW"],
+            ['name' => "MA"],
+            ['name' => "SP"],
+            ['name' => "MR"],
+            ['name' => "Polymer"],
+            ['name' => "ChemShed1"],
+            ['name' => "ChemShed2"],
+        ]; 
         StorageRoom::insert($data);  
     }
 }

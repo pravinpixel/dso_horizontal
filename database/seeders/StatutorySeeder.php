@@ -16,10 +16,14 @@ class StatutorySeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-            ['name' => "abcd",],
+            ['name' => "SCDF"],
+            ['name' => "NEA"],
+            ['name' => "HSA"],
+            ['name' => "NA(CWC)"],
+            ['name' => "SPF"],
+            ['name' => "Not Applicable"],
         ];
+       
   
         StatutoryBody::insert($data); 
     }

@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
     <div class="row" ng-app="MasterApp" ng-controller="MasterController">
-        <div class="col-sm-3 mb-2 mb-sm-0">
+        <div class="col-sm-2 mb-2 mb-sm-0">
+            <h3 class="h4 text-center">Menus</h3>
             <ul class="list-group">
-                <a class="list-group-item {{ Route::is(['master.item-description','master-settings']) ? "active" : '' }}" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i> Item Description</a>
-                <a class="list-group-item" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Filter Options</a>
-                <a class="list-group-item" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Apple Technology Company</a>
-                <a class="list-group-item" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Intercom Support System</a>
-                <a class="list-group-item" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Paypal Payment Gateway</a>
+                <a class="list-group-item list-group-item-action {{ Route::is(['master.item-description','master-settings']) ? "active" : '' }}" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i> Item Description</a>
+                <a class="list-group-item list-group-item-action  {{ Route::is(['user.index','user.create','user.edit']) ? "active" : '' }}" href="{{ route('user.index') }}"><i class="bi bi-chevron-right me-1"></i>Users</a>
+                <a class="list-group-item list-group-item-action  {{ Route::is(['role-access']) ? "active" : '' }}" href=""><i class="bi bi-chevron-right me-1"></i>Roles</a>
+                <a class="list-group-item list-group-item-action" href="{{ route('master.item-description') }}"><i class="bi bi-chevron-right me-1"></i>Admin Settings</a>
             </ul>
         </div> 
-        <div class="col-sm-9 p-0"> 
+        <div class="col-sm-10 p-0"> 
             @yield('masters') 
         </div> 
         <div class="modal fade" id="edit_modal">

@@ -28,6 +28,7 @@
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
                             {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
                             {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
+                            {{ Route::is(['user-access']) ? "User Access" : "" }}
                             {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add " : "" }}
                         </li>
                     </ol>
@@ -45,6 +46,7 @@
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
                     {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
                     {{ Route::is(['master-settings','master.item-description']) ? "Master Settings" : "" }}
+                    {{ Route::is(['user-access']) ? "User Access" : "" }}
                     {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add Material / In-house Products " : "" }}
                 </h4>
             </div>

@@ -177,7 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*

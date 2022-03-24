@@ -2119,7 +2119,7 @@ progress {
     --bs-table-striped-color: #fff;
     --bs-table-active-bg: #9da9bb;
     --bs-table-active-color: #fff;
-    --bs-table-hover-bg: #ccdbf1;
+    --bs-table-hover-bg: #c5d8f5;
     --bs-table-hover-color: #474d56;
     color: #474d56;
     border-color: #c9d8ed
@@ -21640,4 +21640,7 @@ div.dataTables_scrollBody>table>:not(:first-child) {
 }
 .show-edit-modal .modal-content {
     margin-top:25px !important
+}
+table.tr-sm >:not(caption)>*>*{
+    padding: 8px !important;
 }

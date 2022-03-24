@@ -50,14 +50,14 @@
             <div class="col-8">
                 <select name="" id="" class="form-select form-select-sm">
                     <option value="">-- select --</option>
-                                    <option value="1">kg</option>
-                                    <option value="2">L</option>
-                                    <option value="3">m</option>									
-                                    <option value="4">m&#xB2;</option>
-                                    <option value="4">piece</option>
-                                    <option value="4">roll</option>
-                                    <option value="4">drum</option>
-                                    <option value="4">lnyard</option>
+                    <option value="1">kg</option>
+                    <option value="2">L</option>
+                    <option value="3">m</option>									
+                    <option value="4">m&#xB2;</option>
+                    <option value="4">piece</option>
+                    <option value="4">roll</option>
+                    <option value="4">drum</option>
+                    <option value="4">lnyard</option>
                 </select>
             </div>
         </div>

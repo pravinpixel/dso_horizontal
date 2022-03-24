@@ -16,10 +16,16 @@ class PackSizeSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-        ];
+            ['name' => "kg"],
+            ['name' => "L"],
+            ['name' => "m"],
+            ['name' => "m²"],
+            ['name' => "piece"],
+            ['name' => "roll"],
+            ['name' => "drum"],
+            ['name' => "lnyard"],
+        ]; 
+        
         PackingSizeData::insert($data);
     }
 }

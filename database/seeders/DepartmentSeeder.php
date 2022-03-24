@@ -16,11 +16,12 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd"],
-            ['name' => "abcd"],
-            ['name' => "abcd"],
-        ];
-        
+            ['name' => "EGP1"],
+            ['name' => "EGP4"],
+            ['name' => "EGP7"],
+            ['name' => "FSML"],
+            ['name' => "STML"],
+        ]; 
         Departments::insert($data); 
     }
 }

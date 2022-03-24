@@ -16,9 +16,8 @@ class MasterCategorySeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "abcd",],
-            ['name' => "abcd",],
-            ['name' => "abcd",],
+            ['name' => "Material"],
+            ['name' => "In-house Products"],
         ];
          
         MasterCategories::insert($data);
