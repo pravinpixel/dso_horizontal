@@ -68,9 +68,9 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/material-products-mandatory-form-two', [MaterialProductsController::class, 'form_two_index'])->name('mandatory-form-two');
     Route::post('/material-products-mandatory-form-two', [MaterialProductsController::class, 'form_two_store'])->name('mandatory-form-two');
 
-   
-    Route::get('/add-material-products-non-mandatory-form', function () {   
-        return view('crm.material-products.wizard.non-mandatory');  
-    })->name('non-mandatory-form');
+    // Add MaterialProducts Non Mandatory Fom
+    Route::get('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_index'])->name('non-mandatory-form');
+    Route::post('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_store'])->name('non-mandatory-form');
+ 
 });
  

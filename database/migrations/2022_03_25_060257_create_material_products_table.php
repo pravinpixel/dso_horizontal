@@ -41,6 +41,22 @@ class CreateMaterialProductsTable extends Migration
             $table->string('coc_coa_mill_cert_document')->nullable();
             $table->string('iqc_result')->nullable();
 
+
+            $table->string('cas')->nullable();
+            $table->string('fm_1202')->nullable();
+            $table->string('project_name')->nullable();
+            $table->string('project_type')->nullable();
+            $table->string('extended_expiry')->nullable();
+            $table->string('extended_qc_status')->nullable();
+            $table->string('extended_qc_result')->nullable();
+            $table->string('upload_disposal_certificate')->nullable();
+            $table->string('alert_threshold_qty_for_new')->nullable();
+            $table->string('alert_before_expiry')->nullable();
+            $table->string('date_of_manufacture')->nullable();
+            $table->string('date_of_shipment')->nullable();
+            $table->string('cost_per_unit')->nullable();
+            $table->string('remarks')->nullable();  
+            
             $table->softDeletes();
             $table->timestamps();
         });

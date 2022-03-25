@@ -37,5 +37,20 @@ class MaterialProducts extends Model
         'sds_mill_cert_document',
         'coc_coa_mill_cert_document',
         'iqc_result',
+
+        'cas',
+        'fm_1202',
+        'project_name',
+        'project_type',
+        'extended_expiry',
+        'extended_qc_status',
+        'extended_qc_result',
+        'upload_disposal_certificate',
+        'alert_threshold_qty_for_new',
+        'alert_before_expiry',
+        'date_of_manufacture',
+        'date_of_shipment',
+        'cost_per_unit',
+        'remarks',
     ];
 } 

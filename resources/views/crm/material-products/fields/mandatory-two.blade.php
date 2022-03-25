@@ -78,7 +78,7 @@
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
                 {!! Form::hidden('coc_coa_mill_cert_document_URL' , $material_product->coc_coa_mill_cert_document ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...',]) !!}
-                {!! Form::file('coc_coa_mill_cert_document', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...','required']) !!}
+                {!! Form::file('coc_coa_mill_cert_document', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...']) !!}
                 <span class="btn btn-light btn-sm border-start"><input type="checkbox" name="" id="" class="form-check-input"></span>
             </div>
         </div>
@@ -97,8 +97,8 @@
         <label for="" class="col-4">IQC result<sup class="text-danger">*</sup></label>
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
-                {!! Form::hidden('iqc_result_URL' , $material_product->iqc_result_URL ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...',]) !!}
-                {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...','required']) !!}
+                {!! Form::hidden('iqc_result_URL' , $material_product->iqc_result ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...',]) !!}
+                {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...']) !!}
                 <span class="btn btn-light btn-sm border-start"><input type="checkbox" name="" id="" class="form-check-input"></span>
             </div>
         </div>
