@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class MaterialProducts extends Model
+{
+    use HasFactory;
+    use SoftDeletes;
+
+    protected $fillable = [
+        'category_selection',
+        'item_description',
+        'in_house_product_logsheet_id',
+        'brand',
+        'supplier',
+        'unit_packing_size',
+        'quantity',
+        'batch',
+        'serial',
+        'po_number',
+        'statutory_body',
+        'euc_material',
+
+        'storage_room',
+        'house_type',
+        'owner_one',
+        'owner_two',
+        'department',
+        'access',
+        'date_in',
+        'date_of_expiry',
+        'iqc_status',
+        'sds_mill_cert_document',
+        'coc_coa_mill_cert_document',
+        'iqc_result',
+    ];
+} 

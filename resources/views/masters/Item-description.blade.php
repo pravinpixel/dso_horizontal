@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body scroll-body p-1">
                     <ul class="list-group list-group-flush"> 
-                        <li class="list-group-item list-group-item-action py-1" ng-repeat="row in masterData">
+                        <li class="list-group-item list-group-item-action py-1" ng-repeat="row in masterData track by row.id">
                             @{{ row.name }}
                             <div class="float-end">
                                 <span ng-click="EditMasterData(row.id ,'category_section')"><i class="bi bi-pencil-square text-secondary me-1"></i></span>

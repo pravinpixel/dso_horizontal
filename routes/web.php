@@ -2,6 +2,7 @@
 include('auth.php');
 include('master.php');
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MaterialProductsController;
 
 
 /*
@@ -15,21 +16,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/dashboard', function () {   
         return view('crm.dashboard.index');  
     })->name('dashboard');
+    
     Route::get('/list-material-products', function () {   
         return view('crm.material-products.list');  
     })->name('list-material-products');
     
-    Route::get('/add-material-products-mandatory-form-one', function () {   
-        return view('crm.material-products.wizard.mandatory-one');  
-    })->name('mandatory-form-one');
-    
-    Route::get('/add-material-products-mandatory-form-two', function () {   
-        return view('crm.material-products.wizard.mandatory-two');  
-    })->name('mandatory-form-two');
-    
-    Route::get('/add-material-products-non-mandatory-form', function () {   
-        return view('crm.material-products.wizard.non-mandatory');  
-    })->name('non-mandatory-form');
     
     Route::get('/withdrawal-material-products', function () {   
         return view('crm.material-products.withdrawal');  
@@ -67,5 +58,19 @@ Route::middleware(['auth_users'])->group(function () {
         return view('crm.notification.near-expiry-expired');  
     })->name('near-expiry-expired');
      
+
+
+    // Add MaterialProduct  Form ONE
+    Route::get('/material-products-mandatory-form-one', [MaterialProductsController::class, 'form_one_index'])->name('mandatory-form-one');
+    Route::post('/material-products-mandatory-form-one', [MaterialProductsController::class, 'form_one_store'])->name('mandatory-form-one');
+
+    // Add MaterialProduct  Form TWO
+    Route::get('/material-products-mandatory-form-two', [MaterialProductsController::class, 'form_two_index'])->name('mandatory-form-two');
+    Route::post('/material-products-mandatory-form-two', [MaterialProductsController::class, 'form_two_store'])->name('mandatory-form-two');
+
+   
+    Route::get('/add-material-products-non-mandatory-form', function () {   
+        return view('crm.material-products.wizard.non-mandatory');  
+    })->name('non-mandatory-form');
 });
  
