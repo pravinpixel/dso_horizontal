@@ -20,13 +20,8 @@
                 </li>
             </ul>
         </div>
-        <div class="card-body">
-            <form action="{{ route('mandatory-form-one') }}" id="wizzard-form" method="GET" class="row m-0 wizzard-form">
-                @csrf
-                @yield('wizzard-form-content')
-            </form>
-        </div>
-        <div class="card-footer border-top bg-light"> 
+        @yield('wizzard-form-content')
+        {{-- <div class="card-footer border-top bg-light"> 
 
             @if (!Route::is('mandatory-form-one'))
                 <a  href="
@@ -62,6 +57,6 @@
                 </a>
             @endif 
             
-        </div>
+        </div> --}}
     </div>
 @endsection
