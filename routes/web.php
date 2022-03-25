@@ -59,6 +59,9 @@ Route::middleware(['auth_users'])->group(function () {
     })->name('near-expiry-expired');
      
 
+    // Change Product Category
+    
+    Route::post('/change-product-category', [MaterialProductsController::class, 'change_product_category'])->name('change-product-category');
 
     // Add MaterialProduct  Form ONE
     Route::get('/material-products-mandatory-form-one', [MaterialProductsController::class, 'form_one_index'])->name('mandatory-form-one');

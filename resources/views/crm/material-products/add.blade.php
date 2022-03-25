@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card border" style="overflow: hidden">
+    <div class="card border" style="overflow: hidden" ng-app="MaterialProductApp" ng-controller="MaterialProductController">
+        
         <div class="card-header border-bottom p-0">
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
@@ -20,43 +21,38 @@
                 </li>
             </ul>
         </div>
+
         @yield('wizzard-form-content')
-        {{-- <div class="card-footer border-top bg-light"> 
 
-            @if (!Route::is('mandatory-form-one'))
-                <a  href="
-                            @if (Route::is('mandatory-form-two'))
-                                {{ route('mandatory-form-one') }}
-                            @endif
-                            @if (Route::is('non-mandatory-form'))
-                                {{ route('mandatory-form-two') }}
-                            @endif
-                        " 
-                    class="btn btn-light rounded-pill shadow-sm border">
-                    <b><i class="bi bi-arrow-left-circle me-1"></i> Prev</b>
-                </a>
-            @endif 
-
-            @if (Route::is(['mandatory-form-one','mandatory-form-two']))
-                <a  href="
-                            @if (Route::is('mandatory-form-one'))
-                                {{ route('mandatory-form-two') }}
-                            @endif
-                            @if (Route::is('mandatory-form-two'))
-                                {{ route('non-mandatory-form') }}
-                            @endif
-                        " 
-                    class="btn btn-primary float-end rounded-pill" type="submit">
-                    <b>Next <i class="bi bi-arrow-right-circle ms-1"></i></b>
-                </a> 
-            @endif
-
-            @if (!Route::is(['mandatory-form-one','mandatory-form-two']))
-                <a  href="#" class="btn bg-primary-2 btn-primary float-end rounded-pill" onclick="event.preventDefault();document.getElementById('wizzard-form').submit();">
-                    <b><i class="bi bi-check-circle mse-1"></i> Submit & Save</b>
-                </a>
-            @endif 
-            
-        </div> --}}
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('MaterialProductApp', []);
+
+        app.controller('MaterialProductController', function($scope, $http) {
+            $scope.change_product_type =  function  () {
+
+                if($scope.category_product_type == '') return false ;
+                
+                $http({
+                    method: 'POST', 
+                    url: "{{ route('change-product-category') }}", 
+                    data: {
+                        type: $scope.category_product_type
+                    }
+                }).then(function(response) {
+
+                    Message('success', response.data.message);
+
+                    if(response.data.status == true) {
+                        location.reload();
+                    }
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });
+            }
+        });
+    </script>
 @endsection
+
+ 

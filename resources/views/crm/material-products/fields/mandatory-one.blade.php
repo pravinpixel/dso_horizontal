@@ -2,7 +2,11 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Category selection</label>
         <div class="col-8">
-            {!! Form::select('category_selection', $category_selection_db , $material_product->category_selection ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+            <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select">
+                <option value=""> {{ category_type() }}</option>
+                <option value="material">Material</option>
+                <option value="in_house">In-house Products</option>
+            </select>
         </div>
     </div> 
 </div> 
@@ -10,7 +14,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Item Description</label>
         <div class="col-8">
-            {!! Form::number('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::number('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' , in_house_type() ]) !!}
         </div>
     </div>
 </div>
@@ -18,7 +22,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">In-house Product Logsheet ID</label>
         <div class="col-8">
-            {!! Form::number('in_house_product_logsheet_id', $material_product->in_house_product_logsheet_id?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::number('in_house_product_logsheet_id', $material_product->in_house_product_logsheet_id?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
         </div>
     </div>
 </div>
@@ -74,7 +78,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">PO Number  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('po_number', $material_product->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('po_number', $material_product->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
         </div>
     </div>
 </div>
@@ -90,7 +94,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">EUC material  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('euc_material', $category_selection_db , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+            {!! Form::select('euc_material', $euc_material_db , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
         </div>
     </div>
 </div>

@@ -13,30 +13,38 @@ use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
 use Laracasts\Flash\Flash;
 use Storage;
+use Illuminate\Http\Response;
 
 class MaterialProductsController extends Controller
 {
+    public function change_product_category(Request $request)
+    {
+        $request->session()->put('category_type', $request->type);
+         
+        return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
+    }
     public function form_one_index(Request $request)
     {
-
-        $id                     =   $request->session()->get('material_product_id');
-        $material_product       =   MaterialProducts::find($id);
+        
+        $material_product       =   MaterialProducts::find(entry_id());
         $category_selection_db  =   MasterCategories::pluck('name','id');
         $statutory_body_db      =   StatutoryBody::pluck('name','id');
         $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
+        $euc_material_db        =   ['Yes', 'No'];
 
         return view('crm.material-products.wizard.mandatory-one', compact([
             'category_selection_db',
             'statutory_body_db',
             'unit_packing_size_db',
-            'material_product'
+            'material_product',
+            'euc_material_db'
         ]));
     }
     public function form_one_store(MaterialProductsRequest $request)
     {   
-          
+         
         $material_product = MaterialProducts::updateOrCreate([
-            'category_selection'            =>   $request->category_selection,
+            'category_selection'            =>   $request->session()->get('category_type'),
             'item_description'              =>   $request->item_description,
             'in_house_product_logsheet_id'  =>   $request->in_house_product_logsheet_id,
             'brand'                         =>   $request->brand,
@@ -58,27 +66,26 @@ class MaterialProductsController extends Controller
     }
     public function form_two_index(Request $request)
     {
-        $id    =  $request->session()->get('material_product_id');
-        $material_product  =  MaterialProducts::find($id);
-
+         
+        $material_product   =   MaterialProducts::find(entry_id()); 
         $storage_room_db    =   StorageRoom::pluck('name','id');
         $house_type_db      =   HouseTypes::pluck('name','id');
         $departments_db     =   Departments::pluck('name','id');
- 
+        $iqc_status         =   ["Pass", "Fail"];
 
         return view('crm.material-products.wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
             'departments_db',
-            'material_product'
+            'material_product',
+            'iqc_status'
         ]));
     }
     public function form_two_store(Request $request)
     {
-          
-        $id    =  $request->session()->get('material_product_id');
-        $data  =  MaterialProducts::find($id);
-        
+           
+        $data  =  MaterialProducts::find(entry_id()); 
+
         try {
 
             //  File Upload Process
@@ -125,9 +132,8 @@ class MaterialProductsController extends Controller
     }
 
     public function non_mandatory_form_index(Request $request)
-    {
-        $id                     =   $request->session()->get('material_product_id');
-        $material_product       =   MaterialProducts::find($id);
+    { 
+        $material_product       =   MaterialProducts::find(entry_id());
         $extended_qc_status     =   ['Pass','Fail'];
 
         return view('crm.material-products.wizard.non-mandatory', compact('extended_qc_status','material_product'));  
@@ -135,8 +141,8 @@ class MaterialProductsController extends Controller
 
     public function non_mandatory_form_store(Request $request)
     {
-        $id         =   $request->session()->get('material_product_id');
-        $data       =   MaterialProducts::find($id); 
+         
+        $data       =   MaterialProducts::find(entry_id()); 
  
         try {
 

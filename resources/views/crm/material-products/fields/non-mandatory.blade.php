@@ -38,7 +38,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Extended expiry</label>
         <div class="col-8">
-            {!! Form::text('extended_expiry', $material_product->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::text('extended_expiry', $material_product->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required', in_house_type()]) !!}
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Extended QC status</label>
         <div class="col-8">
-           {!! Form::select('extended_qc_status', $extended_qc_status , $material_product->extended_qc_status ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+           {!! Form::select('extended_qc_status', $extended_qc_status , $material_product->extended_qc_status ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required',in_house_type()])  !!}
         </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
         <label for="" class="col-4">Extended QC result</label>
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
-                {!! Form::hidden('extended_qc_result_URL' , $material_product->extended_qc_result ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...',]) !!}
+                {!! Form::hidden('extended_qc_result_URL' , $material_product->extended_qc_result ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...', in_house_type()]) !!}
                 {!! Form::file('extended_qc_result', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...']) !!}
                 <span class="btn btn-light btn-sm border-start"><input type="checkbox" name="" id="" class="form-check-input"></span>
             </div>
@@ -67,7 +67,7 @@
         <label for="" class="col-4">Upload disposal certificate</label>
         <div class="col-8">
             {!! Form::hidden('upload_disposal_certificate_URL' , $material_product->upload_disposal_certificate ?? null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...',]) !!}
-            {!! Form::file('upload_disposal_certificate', ['class' => 'form-control form-control-sm ', 'placeholder' => 'Type here...']) !!}
+            {!! Form::file('upload_disposal_certificate', ['class' => 'form-control form-control-sm ', 'placeholder' => 'Type here...', in_house_type()]) !!}
         </div>
     </div>
 </div>

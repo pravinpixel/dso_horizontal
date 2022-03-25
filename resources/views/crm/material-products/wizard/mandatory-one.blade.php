@@ -1,6 +1,6 @@
 @extends('crm.material-products.add')
 @section('wizzard-form-content')
-{!! Form::open(['route' => 'mandatory-form-one', 'id' => 'wizzard_form_one', 'class' => 'row', 'method'=> 'post']) !!}
+{!! Form::open(['route' => 'mandatory-form-one', 'id' => 'wizzard_form_one', 'class' => 'row wizzard-form', 'method'=> 'post']) !!}
     <div class="card-body row">
         @include('crm.material-products.fields.mandatory-one')
     </div>

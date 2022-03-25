@@ -88,7 +88,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">IQC status <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('iqc_status', $house_type_db , $material_product->iqc_status ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+            {!! Form::select('iqc_status', $iqc_status , $material_product->iqc_status ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
         </div>
     </div>
 </div>

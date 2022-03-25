@@ -55,7 +55,7 @@ class CreateMaterialProductsTable extends Migration
             $table->string('date_of_manufacture')->nullable();
             $table->string('date_of_shipment')->nullable();
             $table->string('cost_per_unit')->nullable();
-            $table->string('remarks')->nullable();  
+            $table->string('remarks')->nullable();
             
             $table->softDeletes();
             $table->timestamps();
