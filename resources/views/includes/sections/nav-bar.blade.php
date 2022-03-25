@@ -31,8 +31,8 @@
                         <img src="{{ asset('public/asset/images/user.jpg') }}" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
-                        <span class="account-user-name">Dominic Keller</span>
-                        <span class="account-position">Founder</span>
+                        <span class="account-user-name">{{ Sentinel::getUser()->first_name }}</span>
+                        <span class="account-position">{{ Sentinel::getUser()->roles[0]->name }}</span>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
