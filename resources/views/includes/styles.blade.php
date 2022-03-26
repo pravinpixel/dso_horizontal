@@ -16,8 +16,6 @@
 
 {{-- Datatables --}}
 <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-
-
  
 <script>
     function Message(type, res) {
@@ -30,5 +28,5 @@
         setTimeout(() => {
             $(".alert").fadeOut();
         }, 2000);
-    }
+    } 
 </script>

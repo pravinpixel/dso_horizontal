@@ -214,7 +214,8 @@
                 });
 
             }
-            $scope.DeleteMasterData = function (id, modal_type) {
+            $scope.DeleteMasterData = function (id, modal_type) { 
+                
                 swal({
                     text: "Are you sure want to Delete?",
                     icon: "warning",
@@ -238,7 +239,7 @@
                     if(isConfirm) {
                         $http({
                             method: 'POST', 
-                            url: '{{ url("") }}'+'/delete-setting/'+id, 
+                            url: '{{ route("master.delete.category") }}'+'/'+id,
                             data: {
                                 id: id, 
                                 type: modal_type

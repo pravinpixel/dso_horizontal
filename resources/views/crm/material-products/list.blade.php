@@ -63,9 +63,9 @@
                                             <i class="bi bi-three-dots-vertical"></i>
                                         </a> 
                                         <div class="dropdown-menu" >
-                                            <a class="dropdown-item" ng-click="view_material_product(row)"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                            <a class="dropdown-item" ng-click="edit_material_product(row.id)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
-                                            <a class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
+                                            <a ng-click="view_material_product(row)" class="dropdown-item"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                            <a ng-click="edit_material_product(row.id)" class="dropdown-item"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                                            <a ng-click="delete_material_product(row.id)"  class="dropdown-item text-danger" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
                                         </div>
                                     </div>
                                 </td> 
@@ -457,8 +457,7 @@
             $scope.get_material_products();
 
             $scope.view_material_product = function (row) {
-                $('#View_Material_Product_Details').modal('show');
-                console.log(row)
+                $('#View_Material_Product_Details').modal('show'); 
                 $scope.view_material_product_data  = [
                     {name: 'Item description' , item : row.item_description},
                     {name: 'In-house Product Logsheet ID#' , item : row.in_house_product_logsheet_id},
@@ -473,13 +472,48 @@
                     {name: 'Alert Threshold Qty for new material/product description' , item : row.alert_threshold_qty_for_new},
                     {name: 'Alert before expiry (in terms of weeks) for new material/product description' , item : row.alert_before_expiry},
                     {name: 'Access' , item : row.access},
-                ]
-                console.log($scope.view_material_product_data)
+                ] 
             }
 
             $scope.edit_material_product = function (id) {
-                var Edit_URL =  "{{ route('material-product.edit-form-one') }}"+'/'+ id
-                window.location.replace(Edit_URL);
+                var route =  "{{ route('material-product.edit-form-one') }}"+'/'+ id
+                window.location.replace(route);
+            }
+
+            $scope.delete_material_product = function (id) {
+               var route = "{{ route('delete-material-products') }}"+"/"+id
+                swal({
+                    text: "Are you sure want to Delete?",
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            text: "Cancel",
+                            value: null,
+                            visible: true,
+                            className: "btn-light rounded-pill btn",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "Yes! Delete",
+                            value: true,
+                            visible: true,
+                            className: "btn btn-danger rounded-pill",
+                            closeModal: true
+                        }
+                    }, 
+                }).then((isConfirm) => {
+                    if(isConfirm) {
+                        $http({
+                            method: 'POST', 
+                            url: route, 
+                        }).then(function(response) {
+                            $scope.data = response.data; 
+                            Message('success', response.data.message); 
+                        }, function(response) {
+                            $scope.data = response.data || 'Request failed';
+                        });
+                    } 
+                });
             }
         });
     </script>
