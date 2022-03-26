@@ -59,8 +59,10 @@ Route::middleware(['auth_users'])->group(function () {
     })->name('near-expiry-expired');
      
 
+    //  Get Material OR Products  List
+    Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
+
     // Change Product Category
-    
     Route::post('/change-product-category', [MaterialProductsController::class, 'change_product_category'])->name('change-product-category');
 
     // Add MaterialProduct  Form ONE
@@ -74,6 +76,19 @@ Route::middleware(['auth_users'])->group(function () {
     // Add MaterialProducts Non Mandatory Fom
     Route::get('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_index'])->name('non-mandatory-form');
     Route::post('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_store'])->name('non-mandatory-form');
- 
+    
+    //  ==================================
+
+    // Edit MaterialProduct  Form ONE
+    Route::get('/edit/material-product/form-one/{id?}', [MaterialProductsController::class, 'edit_form_one'])->name('material-product.edit-form-one');
+    Route::post('/edit/material-product/form-one/{id?}', [MaterialProductsController::class, 'update_edit_form_one'])->name('edit-mandatory-form-one');
+
+    // Edit MaterialProduct  Form TWO
+    Route::get('/edit/material-product/form-two/{id?}', [MaterialProductsController::class, 'edit_form_two'])->name('material-product.edit-form-two');
+    Route::post('/edit/material-product/form-two/{id?}', [MaterialProductsController::class, 'update_edit_form_two'])->name('edit-mandatory-form-two');
+
+    // EDit MaterialProducts Non Mandatory Fom
+    Route::get('/edit/material-product/form-three/{id?}', [MaterialProductsController::class, 'edit_form_three'])->name('material-product.edit-form-three');
+    Route::post('/edit/material-product/form-three/{id?}', [MaterialProductsController::class, 'update_edit_form_three'])->name('edit-mandatory-form-three');
 });
  

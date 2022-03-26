@@ -24,7 +24,7 @@ class MaterialProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_selection'            =>   'required',
+            // 'category_selection'            =>   'required',
             'item_description'              =>   'required',
             'in_house_product_logsheet_id'  =>   'required',
             'brand'                         =>   'required',

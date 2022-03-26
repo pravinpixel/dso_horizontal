@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="card border" style="overflow: hidden" ng-app="MaterialProductApp" ng-controller="MaterialProductController">
-        
         <div class="card-header border-bottom p-0">
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
@@ -20,10 +19,8 @@
                     </a>
                 </li>
             </ul>
-        </div>
-
-        @yield('wizzard-form-content')
-
+        </div> 
+        @yield('wizzard-form-content') 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script>

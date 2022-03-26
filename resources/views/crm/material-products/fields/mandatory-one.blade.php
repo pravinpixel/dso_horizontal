@@ -2,11 +2,17 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Category selection</label>
         <div class="col-8">
-            <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select">
-                <option value=""> {{ category_type() }}</option>
-                <option value="material">Material</option>
-                <option value="in_house">In-house Products</option>
-            </select>
+            @if ($edit_mode == false)
+                <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select">
+                    <option value=""> {{ category_type() ==  'material' ? 'Material' : 'In-house Products'}}</option>
+                    <option value="material">Material</option>
+                    <option value="in_house">In-house Products</option>
+                </select>
+                @else
+                <select disabled class="form-select">
+                    <option value="material">Material</option>
+                </select>
+            @endif 
         </div>
     </div> 
 </div> 
@@ -14,7 +20,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Item Description</label>
         <div class="col-8">
-            {!! Form::number('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' , in_house_type() ]) !!}
+            {!! Form::text('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' , in_house_type() ]) !!}
         </div>
     </div>
 </div>
