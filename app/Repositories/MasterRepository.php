@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\MasterRepositoryInterface ;
+use App\Interfaces\MasterRepositoryInterface;
 use App\Models\Order;
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
