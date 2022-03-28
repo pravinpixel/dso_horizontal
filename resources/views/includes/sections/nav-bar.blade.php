@@ -9,7 +9,7 @@
                 <b class="text-white h4"><span class="text-primary">DSO</span> EG1</b>
             </span>
         </a> 
-        <div class="h3 text-white m-0 ps-4">EG1 Inventory Management System</div>
+        <div class="h3 text-white m-0 ps-4">EG1 Inventory Management System  <span id="loader"></span> </div>
 
         <ul class="list-unstyled topbar-menu  float-end ms-auto mb-0">  
             <li class="dropdown notification-list">

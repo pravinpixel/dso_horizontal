@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content') 
-    <div >
+    <div ng-app="SearchAddApp" ng-controller="SearchAddController">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-                </div> 
+                    <input type="number" ng-model="barcode_number" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                </div>
             </div>
             <div class="col-6 d-flex justify-content-end ms-auto text-end">
                 <button class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
@@ -14,9 +14,76 @@
             </div>
         </div>
 
-        @include('includes.sections.filter')
+        <div class="table-fillters row m-0 p-2">
+            <div class="col-12 mb-2 text-end d-flex justify-content-end">
+                    <div class="dropdown">
+                        <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-caret-down-square-fill"></i>  
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products Details</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Orders</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Order Details</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Customers</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Shopping Cart</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Checkout</label>
+                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Sellers</label>
+                        </div>
+                    </div>
+                 
+                <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
+            </div>
+            <div class="col">
+                <label for="" class="form-label">Item description</label>
+                <input type="text" ng-model="item_description" name="item_description" class="form-control custom" placeholder="Type here...">
+            </div> 
+            <div class="col">
+                <label for="" class="form-label">Brand</label>
+                <input type="text" ng-model="brand" name="brand" class="form-control custom" placeholder="Type here...">
+            </div> 
+            <div class="col">
+                <label for=""  class="form-label">Owner 1/2</label>
+                <select name="owner" ng-model="owner" class="form-select custom">
+                    <option value="">-- select --</option>
+                    <option value="1">Vetri maran</option>
+                    <option value="2">Alan walker</option>
+                    <option value="3">Alex</option>
+                    <option value="4">Hema</option>
+                </select>
+            </div> 
+            <div class="col">
+                <label for="" class="form-label">Dept</label>
+                <select name="dept" ng-model="dept" id="" class="form-select custom">
+                    <option value="">-- select --</option>
+                    @foreach ($departments_db as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                    @endforeach 
+                </select>
+            </div> 
+            <div class="col">
+                <label for="" class="form-label">Storage area</label>
+                <select name="storage_area" ng-model="storage_area" class="form-select custom">
+                    <option value="">-- select --</option>
+                    @foreach ($storage_room_db as $row)
+                        <option value="{{ $row->name }}">{{ $row->name }}</option>
+                    @endforeach 
+                </select>
+            </div> 
+            <div class="col">
+            
+                <label for="" class="form-label">Date in</label>
+                <input type="date" ng-model="date_in" name="date_in" class="form-control custom" placeholder="Type here...">
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <div class="btn-group">
+                    <button ng-click="bulk_search()" class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
+                    <button ng-click="reset_bulk_search()" class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button>
+                </div>
+            </div> 
+        </div>
         
-        <div ng-app="SearchAddApp" ng-controller="SearchAddController">
+        <div>
             <table class="table table-centered table-bordered table-hover bg-white">
                 <thead>
                     <tr>
@@ -45,7 +112,7 @@
                             <tr>
                                 <td class="child-td-lg">
                                     <i class="bi bi-caret-right-fill float-start   table-toggle-icon" data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
-                                    @{{ row.item_description }}
+                                    @{{ row.item_description }} 
                                 </td>
                                 <td class="child-td">@{{ row.brand }}</td>
                                 <td class="child-td"></td>
@@ -180,12 +247,14 @@
                             <h4>View Material / Product details</h4>
                             <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                         </div>
-                        <div class="modal-body modal-scroll-2"> 
-                            <ol class="list-group ">
-                                <li class="list-group-item list-group-item-action" ng-repeat="(index, row) in view_material_product_data">
-                                    <b>@{{ row.name }}</b>
-                                    <div class="mt-1">@{{ row.item }}</div>
-                                </li> 
+                        <div class="modal-body modal-scroll-2 p-0"> 
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_material_product_data">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">@{{ row.name }}</div>
+                                        @{{ row.item }}
+                                    </div>
+                                </li>
                             </ol> 
                         </div> 
                     </div> 
@@ -440,6 +509,7 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script>
         var app = angular.module('SearchAddApp', []);
@@ -456,9 +526,60 @@
             }
             $scope.get_material_products();
 
+            $scope.search_barcode_number = function () {
+                $http({
+                    method: 'post', 
+                    url: "{{ route('get-material-products') }}",
+                    data : {
+                        filters: $scope.barcode_number
+                    }
+                }).then(function(response) {
+                    $scope.material_products = response.data.data;
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });
+            }
+
+            $scope.bulk_search = function () {
+                if($scope.item_description == undefined && $scope.brand == undefined && $scope.owner == undefined && $scope.dept == undefined && $scope.storage_area == undefined && $scope.date_in == undefined) {
+                    return false
+                }
+               let date_in = moment($scope.date_in).format('YYYY-MM-DD');
+                
+                $http({
+                    method: 'post', 
+                    url: "{{ route('get-material-products') }}",
+                    data : {
+                        bulk_search: {
+                            item_description : $scope.item_description == undefined ? '' : $scope.item_description,
+                            brand : $scope.brand == undefined ? '' : $scope.brand,
+                            owner : $scope.owner == undefined ? '' : $scope.owner,
+                            dept : $scope.dept == undefined ? '' : $scope.dept,
+                            storage_area : $scope.storage_area == undefined ? '' : $scope.storage_area,
+                            date_in : $scope.date_in == undefined ? '' : date_in,
+                        }
+                    }
+                }).then(function(response) {
+                    $scope.material_products = response.data.data;
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });
+            }
+
+            $scope.reset_bulk_search = function () {
+                $scope.get_material_products();
+                $scope.item_description = ''
+                $scope.brand = ''
+                $scope.owner = ''
+                $scope.dept = ''
+                $scope.storage_area = ''
+                $scope.date_in = ''
+            }
+
             $scope.view_material_product = function (row) {
                 $('#View_Material_Product_Details').modal('show'); 
                 $scope.view_material_product_data  = [
+                    {name: "Category Selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
                     {name: 'Item description' , item : row.item_description},
                     {name: 'In-house Product Logsheet ID#' , item : row.in_house_product_logsheet_id},
                     {name: 'EUC material' , item : row.euc_material},
@@ -472,14 +593,12 @@
                     {name: 'Alert Threshold Qty for new material/product description' , item : row.alert_threshold_qty_for_new},
                     {name: 'Alert before expiry (in terms of weeks) for new material/product description' , item : row.alert_before_expiry},
                     {name: 'Access' , item : row.access},
-                ] 
+                ]
             }
-
             $scope.edit_material_product = function (id) {
                 var route =  "{{ route('material-product.edit-form-one') }}"+'/'+ id
                 window.location.replace(route);
             }
-
             $scope.delete_material_product = function (id) {
                var route = "{{ route('delete-material-products') }}"+"/"+id
                 swal({
@@ -508,6 +627,7 @@
                             url: route, 
                         }).then(function(response) {
                             $scope.data = response.data; 
+                            $scope.get_material_products();
                             Message('success', response.data.message); 
                         }, function(response) {
                             $scope.data = response.data || 'Request failed';

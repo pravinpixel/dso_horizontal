@@ -271,3 +271,17 @@ option {
     font-weight: 600;
     color: #12326A !important;
 }
+
+.rotate ,
+.rotate::before {
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(359deg);
+}
+}

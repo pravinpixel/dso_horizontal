@@ -11,8 +11,13 @@ class MaterialProducts extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $casts = [
+        'date_in' => 'date:d-m-Y'
+    ];
+
     protected $fillable = [
         'category_selection',
+        'barcode_number',
         'item_description',
         'in_house_product_logsheet_id',
         'brand',

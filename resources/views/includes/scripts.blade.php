@@ -3,12 +3,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('public/asset/js/app.js') }}"></script>
- 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-
+ 
 <script type="text/javascript">
     $(document).on('click' ,'#confirmDelete',function (event) {
         var form =  $(this).closest("form");
@@ -39,5 +38,18 @@
             }
         });
     });
+</script>
+
+<script>
+    $('#loader').append('<i id="preLoader" class="bi bi-arrow-repeat text-white rotate"></i>');
+    $(window).on('load', function(){
+        setTimeout(removeLoader, 500); //wait for page load PLUS two seconds.
+    });
+    function removeLoader(){
+        $( "#preLoader" ).fadeOut(500, function() {
+            // fadeOut complete. Remove the loading div
+            $( "#preLoader" ).remove(); //makes page more lightweight 
+        });  
+    }
 </script>
 @yield('scripts') 

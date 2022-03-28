@@ -21,7 +21,7 @@
             </ul>
         </div> 
         @yield('wizzard-form-content') 
-    </div> 
+    </div>
 @endsection
 
  

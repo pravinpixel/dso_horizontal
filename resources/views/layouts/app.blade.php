@@ -14,7 +14,6 @@
     
 </head>
 <body>
-    
     @include('flash::message')
 
     <div class="sticky-top">

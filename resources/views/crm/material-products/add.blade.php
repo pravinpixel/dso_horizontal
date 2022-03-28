@@ -5,7 +5,7 @@
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
                     <a href="{{ route('mandatory-form-one') }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-one') ? "active" : '' }}">
-                        <span class="h5">Mandatory Fields Page 1</span>
+                        <span class="h5">Mandatory Fields Page 1</span> 
                     </a>
                 </li>
                 <li class="nav-item">

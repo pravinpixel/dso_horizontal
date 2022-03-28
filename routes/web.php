@@ -16,11 +16,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/dashboard', function () {   
         return view('crm.dashboard.index');  
     })->name('dashboard');
-    
-    Route::get('/list-material-products', function () {   
-        return view('crm.material-products.list');  
-    })->name('list-material-products');
-    
+     
     
     Route::get('/withdrawal-material-products', function () {   
         return view('crm.material-products.withdrawal');  
@@ -59,8 +55,15 @@ Route::middleware(['auth_users'])->group(function () {
     })->name('near-expiry-expired');
      
 
+    //  Listing Page
+     
+    Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
+
+
     //  Get Material OR Products  List
     Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
+    Route::post('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
+
     Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
 
     // Change Product Category

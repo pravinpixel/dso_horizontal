@@ -25,17 +25,44 @@ class MaterialProductsController extends Controller
     {
         $this->MartialProductRepository = $MartialProductRepository;
     }
+
     public function index(Request $request)
     {
+        if($request->filters) {
+            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->get();
+            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        }
+        if($request->bulk_search) {
+
+            $bulk_search = (object) $request->bulk_search;
+            
+            $material_product = MaterialProducts::orWhere('item_description' , $bulk_search->item_description)
+                                                ->orWhere('brand', $bulk_search->brand)
+                                                ->orWhere('department', $bulk_search->dept)
+                                                ->orWhere('storage_room', $bulk_search->storage_area)
+                                                ->orWhere('date_in', $bulk_search->date_in)
+                                                ->get();
+
+            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        }
         $material_product       =   MaterialProducts::latest()->get();
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
+
+    public function list_index()
+    {
+        $storage_room_db    =   StorageRoom::all();
+        $departments_db     =   Departments::all();
+        return view('crm.material-products.list', compact('storage_room_db','departments_db'));  
+    }
+
     public function change_product_category(Request $request)
     {
         $request->session()->put('category_type', $request->type);
          
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
+
     public function form_one_index(Request $request)
     {
         $material_product       =   MaterialProducts::find(entry_id());
@@ -55,9 +82,10 @@ class MaterialProductsController extends Controller
         ]));
     }
     public function form_one_store(MaterialProductsRequest $request)
-    {   
+    {    
         $material_product = MaterialProducts::updateOrCreate([
             'category_selection'            =>   $request->session()->get('category_type'),
+            'barcode_number'                =>   random_int(100000, 999999),
             'item_description'              =>   $request->item_description,
             'in_house_product_logsheet_id'  =>   $request->in_house_product_logsheet_id,
             'brand'                         =>   $request->brand,
@@ -115,7 +143,7 @@ class MaterialProductsController extends Controller
     // Edit Function
     public function edit_form_one(Request $request, $id=null)
     {
-        $material_product       =   MaterialProducts::find($id);
+        $material_product       =   MaterialProducts::findOrFail($id);
         $category_selection_db  =   MasterCategories::pluck('name','id');
         $statutory_body_db      =   StatutoryBody::pluck('name','id');
         $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
@@ -139,7 +167,7 @@ class MaterialProductsController extends Controller
     }
     public function edit_form_two(Request $request, $id=null)
     {
-        $material_product =  MaterialProducts::find($id);
+        $material_product =  MaterialProducts::findOrFail($id);
         $storage_room_db  =  StorageRoom::pluck('name','id');
         $house_type_db    =  HouseTypes::pluck('name','id');
         $departments_db   =  Departments::pluck('name','id');
@@ -163,7 +191,7 @@ class MaterialProductsController extends Controller
     }
     public function edit_form_three(Request $request, $id=null)
     {
-        $material_product       =   MaterialProducts::find($id);
+        $material_product       =   MaterialProducts::findOrFail($id);
         $extended_qc_status     =   ['Pass','Fail'];
         return view('crm.material-products.edit-wizard.non-mandatory', compact('extended_qc_status','material_product'));  
     }

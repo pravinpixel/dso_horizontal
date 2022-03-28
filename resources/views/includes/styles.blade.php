@@ -17,16 +17,3 @@
 {{-- Datatables --}}
 <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
  
-<script>
-    function Message(type, res) {
-        $('body').append(`
-            <div id="alert" class="alert alert-primary alert-dismissible bg-${type} text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>${res}</strong>
-            </div>
-        `);
-        setTimeout(() => {
-            $(".alert").fadeOut();
-        }, 2000);
-    } 
-</script>

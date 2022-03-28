@@ -42,7 +42,18 @@ function deleteModal() {
         }, 
     });
 }
-
-
-
-// $(function(){"use strict";$("#basicwizard").bootstrapWizard(),$("#progressbarwizard").bootstrapWizard({onTabShow:function(t,r,a){var o=(a+1)/r.find("li").length*100;$("#progressbarwizard").find(".bar").css({width:o+"%"})}}),$("#btnwizard").bootstrapWizard({nextSelector:".button-next",previousSelector:".button-previous",firstSelector:".button-first",lastSelector:".button-last"}),$("#rootwizard").bootstrapWizard({onNext:function(t,r,a){var o=$($(t).data("targetForm"));if(o&&(o.addClass("was-validated"),!1===o[0].checkValidity()))return event.preventDefault(),event.stopPropagation(),!1}})});
+ 
+function Message(type, res) {
+    $('body').append(`
+        <div id="alert" class="alert alert-primary alert-dismissible bg-${type} text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>${res}</strong>
+        </div>
+    `);
+    setTimeout(() => {
+        $(".alert").fadeOut();
+    }, 2000);
+}
+setTimeout(() => {
+    $(".alert").fadeOut();
+}, 2000);
