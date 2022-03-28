@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content') 
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
+        
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
@@ -9,11 +10,11 @@
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-end ms-auto text-end">
-                <button class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
+                <button data-bs-toggle="modal" data-bs-target="#ImportFromExcel" class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
                 <a href="{{ route('mandatory-form-one') }}" class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</a>
             </div>
         </div>
-
+ 
         <div class="table-fillters row m-0 p-2">
             <div class="col-12 mb-2 text-end d-flex justify-content-end">
                     <div class="dropdown">
@@ -21,17 +22,19 @@
                             <i class="bi bi-caret-down-square-fill"></i>  
                         </button>
                         <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Products Details</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Orders</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Order Details</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Customers</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Shopping Cart</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Checkout</label>
-                            <label class="dropdown-item"><input type="checkbox" class="form-check-input me-1" name="" id="">Sellers</label>
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_brand" class="form-check-input me-1">Brand</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_batch" class="form-check-input me-1">Batch/Serial#</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Pkt size </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Qty</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Owner1/2 </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Storage Room </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Housing type  </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">DOE </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">QC status  </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_" class="form-check-input me-1">Used for TD/Expt </label> 
                         </div>
-                    </div>
-                 
+                    </div> 
                 <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
             </div>
             <div class="col">
@@ -87,35 +90,68 @@
             <table class="table table-centered table-bordered table-hover bg-white">
                 <thead>
                     <tr>
-                         <th class="table-th child-td-lg"> Item Description</th>
-                        <th class="table-th child-td">Brand</th>
-                        <th class="table-th child-td">Batch/Serial#</th>
-                        <th class="table-th child-td">Pkt size</th>
-                        <th class="table-th child-td">Qty</th>
-                        <th class="table-th child-td-lg">Owner1/2</th>
-                        <th class="table-th child-td">Storage Room</th>
-                        <th class="table-th child-td">Housing type</th>
-                        <th class="table-th child-td">DOE</th>
-                        <th class="table-th child-td">QC status</th>
-                        <th class="table-th child-td">Used for TD/Expt</th>
-                        <th class="table-th child-td">Actions</th>
+                        <th ng-show="on_item_description" class="position-relative table-th child-td-lg">Item Description 
+                            <i ng-click="sort_by('id', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('id', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th ng-show="on_brand" class="position-relative table-th child-td">Brand 
+                            <i ng-click="sort_by('brand', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('brand', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th ng-show="on_batch" class="position-relative table-th child-td">Batch/Serial# 
+                            <i ng-click="sort_by('batch', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('batch', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">Pkt size 
+                            <i ng-click="sort_by('unit_packing_size', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('unit_packing_size', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">Qty 
+                            <i ng-click="sort_by('quantity', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('quantity', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td-lg">Owner1/2 
+                            <i ng-click="sort_by('owner_one', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('owner_one', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">Storage Room 
+                            <i ng-click="sort_by('storage_room', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('storage_room', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">Housing type 
+                            <i ng-click="sort_by('house_type', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('house_type', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">DOE 
+                            <i ng-click="sort_by('date_of_expiry', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('date_of_expiry', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">QC status 
+                            <i ng-click="sort_by('iqc_status', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('iqc_status', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="position-relative table-th child-td">Used for TD/Expt 
+                            <i ng-click="sort_by('item_description', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                            <i ng-click="sort_by('item_description', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                        </th>
+                        <th class="table-th child-td">Actions </th>
                     </tr> 
                 </thead> 
                 <tr>
-                    <td colspan="12" class="text-center" ng-show="material_products.length == 0">
+                    <td colspan="12" class="text-center" ng-show="material_products.data.length == 0">
                         No data found
                     </td>
                 </tr>
-                <tr class="table-tr" ng-show="material_products.length != 0" ng-repeat="(index,row) in material_products track by row.id">
+                <tr class="table-tr" ng-show="material_products.length != 0" ng-repeat="(index,row) in material_products.data track by row.id">
                     <td colspan="12" class="p-0 border-bottom">
                         <table class="table table-centered m-0">
                             <tr>
-                                <td class="child-td-lg">
-                                    <i class="bi bi-caret-right-fill float-start   table-toggle-icon" data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
-                                    @{{ row.item_description }} 
+                                <td class="child-td-lg" ng-show="on_item_description">
+                                    <i class="bi bi-caret-right-fill float-start table-toggle-icon collapsed" data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
+                                    @{{ row.item_description }} |   @{{ row.id }} 
                                 </td>
-                                <td class="child-td">@{{ row.brand }}</td>
-                                <td class="child-td"></td>
+                                <td class="child-td" ng-show="on_brand">@{{ row.brand }}</td>
+                                <td class="child-td" ng-show="on_batch"></td>
                                 <td class="child-td">@{{ row.unit_packing_size }}L</td>
                                 <td class="child-td">@{{ row.quantity }} <i class="text-success dot-sm bi bi-circle-fill"></i></td>
                                 <td class="child-td-lg"></td>
@@ -137,24 +173,24 @@
                                     </div>
                                 </td> 
                             </tr>
-                            <tr class="collapse show" id="row_@{{ index+1 }}">
+                            <tr class="collapse" id="row_@{{ index+1 }}">
                                 <td colspan="12" class="p-0">
                                     <table class="table table-centered bg-white m-0">
                                         @for ($key2=0; $key2<4; $key2++)
                                             <tr>
-                                                <td class="child-td-lg"></td>
-                                                <td class="child-td"></td>   
+                                                <td class="child-td-lg" ng-show="on_item_description"></td>
+                                                <td class="child-td" ng-show="on_brand"></td>   
                                                 @if ($key2 == 0)
-                                                <td class="child-td">Batch/1</td>
+                                                <td class="child-td" ng-show="on_batch">Batch/1</td>
                                                 @endif
                                                 @if ($key2 == 1)
-                                                <td class="child-td">Batch/2</td>
+                                                <td class="child-td" ng-show="on_batch">Batch/2</td>
                                                 @endif 
                                                 @if ($key2 == 2)
-                                                <td class="child-td">Batch/3</td>
+                                                <td class="child-td" ng-show="on_batch">Batch/3</td>
                                                 @endif
                                                 @if ($key2 == 3)
-                                                <td class="child-td">Batch/4</td>
+                                                <td class="child-td" ng-show="on_batch">Batch/4</td>
                                                 @endif  
                                                 @if ($key2 == 0)
                                                 <td class="child-td">1L</td>
@@ -240,6 +276,13 @@
                     </td>
                 </tr> 
             </table>
+ 
+            
+            <div class="pb-3">
+                <page-pagination></page-pagination>
+            </div>
+            
+
             <div id="View_Material_Product_Details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog w-100 modal-right h-100">
                     <div class="modal-content h-100 rounded-0">
@@ -505,27 +548,105 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
+        <div id="ImportFromExcel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
+            <div class="modal-dialog modal-sm">
+                <form action="{{ route('import_data') }}" method="POST" enctype="multipart/form-data" class="modal-content rounded-0 border-bottom shadow">
+                    @csrf
+                    <div class="modal-header rounded-0 bg-primary text-white ">
+                        <h4 class="modal-title" id="topModalLabel">Import Data From Excel</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="file" name="select_file" class="form-control"> 
+                    </div>
+                    <div class="modal-footer border-top">
+                        <button type="submit" class="btn btn-primary rounded-pill w-100"><i class="bi bi-box-arrow-in-down-left me-1"></i>Import</button>
+                    </div>
+                </form><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div> 
     </div>
 @endsection
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
     <script>
-        var app = angular.module('SearchAddApp', []);
+
+        var app = angular.module('SearchAddApp', []); 
+     
+
         app.controller('SearchAddController', function($scope, $http) {
-            $scope.get_material_products =  function  () {
+
+
+            $scope.on_item_description = true;
+            $scope.on_brand = true;
+            $scope.on_batch = true;
+ 
+            $scope.getPage = function (link) { 
+                if($scope.material_products.current_page == link.label) {
+                    return false
+                }
+               
+                $http({
+                    method: 'get', 
+                    url: link.url,  
+                }).then(function(response) {
+                    $scope.material_products = response.data.data; 
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });  
+            } 
+            $scope.next_Prev_page = function (params) {
+                $http({
+                    method: 'get', 
+                    url: params,  
+                }).then(function(response) {
+                    $scope.material_products = response.data.data; 
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });  
+            } 
+            $scope.get_material_products =  function () {
                 $http({
                     method: 'get', 
                     url: "{{ route('get-material-products') }}",  
                 }).then(function(response) {
-                    $scope.material_products = response.data.data;              
+                    $scope.material_products = response.data.data;
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
                 }, function(response) {
                     Message('danger', response.data.message);
                 });
             }
             $scope.get_material_products();
 
+
+            $scope.sort_by = function (name, type) {
+              
+                $http({
+                    method: 'post', 
+                    url: "{{ route('get-material-products') }}",
+                    data : {
+                        sort_by: {
+                            col_name :  name ,
+                            order_type :  type ,
+                        }
+                    }
+                }).then(function(response) {
+                    $scope.material_products = response.data.data;
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
+                }, function(response) {
+                    Message('danger', response.data.message);
+                });
+            }
+ 
             $scope.search_barcode_number = function () {
                 $http({
                     method: 'post', 
@@ -535,11 +656,12 @@
                     }
                 }).then(function(response) {
                     $scope.material_products = response.data.data;
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
                 }, function(response) {
                     Message('danger', response.data.message);
                 });
-            }
-
+            } 
             $scope.bulk_search = function () {
                 if($scope.item_description == undefined && $scope.brand == undefined && $scope.owner == undefined && $scope.dept == undefined && $scope.storage_area == undefined && $scope.date_in == undefined) {
                     return false
@@ -561,11 +683,12 @@
                     }
                 }).then(function(response) {
                     $scope.material_products = response.data.data;
+                    $scope.material_products.links.shift();
+                    $scope.material_products.links.pop();
                 }, function(response) {
                     Message('danger', response.data.message);
                 });
-            }
-
+            } 
             $scope.reset_bulk_search = function () {
                 $scope.get_material_products();
                 $scope.item_description = ''
@@ -574,8 +697,7 @@
                 $scope.dept = ''
                 $scope.storage_area = ''
                 $scope.date_in = ''
-            }
-
+            } 
             $scope.view_material_product = function (row) {
                 $('#View_Material_Product_Details').modal('show'); 
                 $scope.view_material_product_data  = [
@@ -636,5 +758,28 @@
                 });
             }
         });
-    </script>
+
+        app.directive('pagePagination', function(){  
+            return{
+                restrict: 'E',
+                template: `
+                <ul class="pagination btn-group pagination-rounded" ng-show="material_products.data != ''"> 
+                    <li class="page-item" ng-show="material_products.prev_page_url != null">
+                        <a class="page-link"  href="javascript: void(0);" ng-click="next_Prev_page(material_products.prev_page_url)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" ng-class="{active : link.active == true}" ng-repeat="(index, link) in material_products.links">
+                        <a class="page-link" href="javascript: void(0);" ng-click="getPage(link)" > @{{ link.label}}  </a>
+                    </li>  
+                    <li class="page-item" ng-show="material_products.next_page_url != null">
+                        <a class="page-link" href="javascript: void(0);" ng-click="next_Prev_page(material_products.next_page_url)"  aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+                `
+            };
+        });
+    </script> 
 @endsection

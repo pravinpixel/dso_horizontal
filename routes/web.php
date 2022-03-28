@@ -58,6 +58,8 @@ Route::middleware(['auth_users'])->group(function () {
     //  Listing Page
      
     Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
+    Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
+
 
 
     //  Get Material OR Products  List

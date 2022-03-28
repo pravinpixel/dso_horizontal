@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://www.dso.org.sg/media/default/theme/favicon.png" rel="shortcut icon" type="image/png" />
     <title>DSO</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     {{--  ===== STYLES ======= --}}
         @include('includes.styles')
     {{--  ===== STYLES ======= --}}
-    
+  
 </head>
 <body>
     @include('flash::message')

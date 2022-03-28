@@ -1,11 +1,11 @@
 
 .table-toggle-icon.collapsed::before {
     transform: rotate(0deg);
-    transition: .5s all;
+    transition: .1s all !important;
 }
 .table-toggle-icon::before {
     transform: rotate(90deg);
-    transition: .5s all;
+    transition: .1s all !important;
 
 }
 option {

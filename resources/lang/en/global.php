@@ -10,6 +10,7 @@ return [
     'deactivate_subheading_master'      => 'This item is mapped with other several action, Do you want to still inactivate the item \':name\'',
     'inserted'                          => 'Inserted successfully',
     'updated'                           => 'Updated successfully',
+    'imported'                          =>  'Imported successfully',
     'deleted'                           => 'Deleted Successfully',
     'something'                         => 'Something Went wrong contact administrator',
     "status_updated"                    => "Status updated Successfully",

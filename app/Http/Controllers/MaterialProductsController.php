@@ -14,6 +14,10 @@ use App\Models\MaterialProducts;
 use Laracasts\Flash\Flash;
 use Storage;
 use Illuminate\Http\Response;
+use App\Exports\BulkExport;
+use App\Imports\BulkImport;
+use Maatwebsite\Excel\Facades\Excel;
+// use Excel;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 
@@ -29,9 +33,10 @@ class MaterialProductsController extends Controller
     public function index(Request $request)
     {
         if($request->filters) {
-            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->get();
+            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->paginate(8);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
+
         if($request->bulk_search) {
 
             $bulk_search = (object) $request->bulk_search;
@@ -41,14 +46,35 @@ class MaterialProductsController extends Controller
                                                 ->orWhere('department', $bulk_search->dept)
                                                 ->orWhere('storage_room', $bulk_search->storage_area)
                                                 ->orWhere('date_in', $bulk_search->date_in)
-                                                ->get();
+                                                ->paginate(8);
 
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
-        $material_product       =   MaterialProducts::latest()->get();
+
+
+        if($request->sort_by) {
+            $sort_by = (object) $request->sort_by;
+
+            $material_product       =  MaterialProducts::orderBy($sort_by->col_name, $sort_by->order_type)->paginate(8);
+            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        }
+
+        $material_product       =   MaterialProducts::paginate(8);
+
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
 
+    public function import_excel(Request $request)
+    {
+        $request->validate([
+            'select_file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+        
+        Excel::import(new BulkImport, $request->file('select_file'));
+
+        Flash::success(__('global.imported')); 
+        return back();
+    }
     public function list_index()
     {
         $storage_room_db    =   StorageRoom::all();

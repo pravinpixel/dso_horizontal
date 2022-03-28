@@ -4100,7 +4100,9 @@ fieldset:disabled .btn {
         transition: none
     }
 }
-
+.cur_ponit {
+    cursor: pointer !important
+}
 .fade:not(.show) {
     opacity: 0
 }
@@ -4112,8 +4114,8 @@ fieldset:disabled .btn {
 .collapsing {
     height: 0;
     overflow: hidden;
-    -webkit-transition: height .35s ease;
-    transition: height .35s ease
+    -webkit-transition: .1s  all !important;
+    transition: .1s  all !important
 }
 
 @media (prefers-reduced-motion:reduce) {
