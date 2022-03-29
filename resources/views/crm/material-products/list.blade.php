@@ -14,7 +14,7 @@
                 <a href="{{ route('mandatory-form-one') }}" class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</a>
             </div>
         </div> 
-
+ 
         {{-- = ==== Filletrs ====--}}
             <div class="table-fillters row m-0 p-2">
                 <div class="col-12 mb-2 text-end d-flex justify-content-end">
@@ -270,6 +270,8 @@
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
     <input type="hidden" id="edit-material-products" value="{{ route('material-product.edit-form-one') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
+    <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

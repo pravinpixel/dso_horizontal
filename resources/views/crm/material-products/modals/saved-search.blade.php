@@ -8,20 +8,7 @@
             <div class="modal-body modal-scroll">
                 <div class="text-s">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Item description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Item description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                        <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                        <li class="list-group-item list-group-item-action btn" ng-repeat="row in view_my_saved_search"> @{{ row.search_title }} - <small class="float-end text-secondary">@{{ row.created_at }}</small></li> 
                     </ul>
                 </div>
             </div> 

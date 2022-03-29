@@ -11,13 +11,14 @@ use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\HouseTypes;
 use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
+use App\Models\SaveMySearch;
 use Laracasts\Flash\Flash;
 use Storage;
 use Illuminate\Http\Response;
 use App\Exports\BulkExport;
 use App\Imports\BulkImport;
 use Maatwebsite\Excel\Facades\Excel;
-// use Excel;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 
@@ -51,6 +52,50 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
+        if($request->save_advanced_search) {
+            $row = (object) $request->save_advanced_search['advanced_search'];
+            
+            SaveMySearch::create([
+                'user_id'             =>  Sentinel::getUser()->id,
+                'search_title'        =>  $request->save_advanced_search['title'],
+                'batch'               =>  $row->af_batch,
+                'cas'                 =>  $row->af_cas,
+                'date_of_expiry'      =>  $row->af_date_of_expiry,
+                'date_of_manufacture' =>  $row->af_date_of_manufacture,
+                'date_of_shipment'    =>  $row->af_date_of_shipment,
+                'disposed'            =>  $row->af_disposed,
+                'euc_material'        =>  $row->af_euc_material,
+                'extended_expiry'     =>  $row->af_extended_expiry,
+                'extended_qc_status'  =>  $row->af_extended_qc_status,
+                'housing_number'      =>  $row->af_housing_number,
+                'housing_type'        =>  $row->af_housing_type,
+                'iqc_status'          =>  $row->af_iqc_status,
+                'logsheet_id'         =>  $row->af_logsheet_id,
+                'po_number'           =>  $row->af_po_number ,
+                'product_type'        =>  $row->af_product_type,
+                'project_name'        =>  $row->af_project_name,
+                'serial'              =>  $row->af_serial,
+                'statutory_board'     =>  $row->af_statutory_board,
+                'supplier'            =>  $row->af_supplier,
+                'unit_pkt_size'       =>  $row->af_unit_pkt_size ,
+            ]);
+
+            return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
+        }
+
+        if($request->advanced_search) {
+ 
+            $row = (object) $request->advanced_search;
+            
+            $material_product = MaterialProducts::orWhere('item_description' , $row->af_logsheet_id)
+                                                ->orWhere('brand', $row->af_euc_material)
+                                                ->orWhere('department', $row->af_cas)
+                                                ->orWhere('storage_room', $row->af_supplier)
+                                                ->orWhere('date_in', $row->af_batch)
+                                                ->paginate(5);
+
+            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        }
 
         if($request->sort_by) {
             $sort_by = (object) $request->sort_by;
@@ -62,6 +107,12 @@ class MaterialProductsController extends Controller
         $material_product       =   MaterialProducts::paginate(5);
 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+    }
+
+    public function my_search_history()
+    {
+        $data = SaveMySearch::where('user_id', Sentinel::getUser()->id)->get();
+        return response(['status' => true, 'data' => $data], Response::HTTP_OK);
     }
 
     public function import_excel(Request $request)

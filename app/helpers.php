@@ -16,4 +16,4 @@ if(! function_exists('entry_id')) {
     function entry_id() {
         return session()->get('material_product_id');
     }
-} 
+}

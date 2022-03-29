@@ -230,21 +230,7 @@
                 </div> 
             </div> 
         </div>
-    </div> 
-    <div class="modal fade" id="save-search-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="mySmallModalLabel">Save Search Name</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="form-control mb-3" placeholder="Type here..">
-                    <input type="submit" class="form-control btn-primary btn" value="Save">
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
+    </div>  
     <div id="View_Batch_Material_Product_details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0 ">

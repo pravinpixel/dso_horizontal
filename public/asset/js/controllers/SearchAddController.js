@@ -15,17 +15,17 @@ app.controller('SearchAddController', function($scope, $http) {
 
    
     // === Route Lists ===
-    var material_products           =   $('#get-material-products').val();
-    var edit_material_products      =   $('#edit-material-products').val();
-    var delete_material_products    =   $('#delete-material-products').val();
-
+    var material_products_url         =  $('#get-material-products').val();
+    var edit_material_products_url    =  $('#edit-material-products').val();
+    var delete_material_products_url  =  $('#delete-material-products').val();
+    var get_save_search_url           =  $('#get-save-search').val();
 
 
     // ==== Get Data form DB ====
     $scope.get_material_products =  function () {
         $http({
             method: 'get', 
-            url: material_products,  
+            url: material_products_url,  
         }).then(function(response) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
@@ -38,13 +38,12 @@ app.controller('SearchAddController', function($scope, $http) {
 
     // ====== Edit Data DB ====
     $scope.edit_material_product = function (id) {
-        var route =  edit_material_products +'/'+ id
-        window.location.replace(route);
+        window.location.replace(edit_material_products_url +'/'+ id);
     }
 
     // ====== Delete Data DB ====
     $scope.delete_material_product = function (id) {
-       var route = delete_material_products +"/"+id
+      
         swal({
             text: "Are you sure want to Delete?",
             icon: "warning",
@@ -68,7 +67,7 @@ app.controller('SearchAddController', function($scope, $http) {
             if(isConfirm) {
                 $http({
                     method: 'POST', 
-                    url: route, 
+                    url: delete_material_products_url +"/"+id, 
                 }).then(function(response) {
                     $scope.data = response.data; 
                     $scope.get_material_products();
@@ -111,7 +110,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.sort_by = function (name, type) {
         $http({
             method: 'post', 
-            url: material_products,
+            url: material_products_url,
             data : {
                 sort_by: {
                     col_name :  name ,
@@ -129,7 +128,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.search_barcode_number = function () {
         $http({
             method: 'post', 
-            url: material_products,
+            url: material_products_url,
             data : {
                 filters: $scope.barcode_number
             }
@@ -145,19 +144,17 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.item_description == undefined && $scope.brand == undefined && $scope.owner == undefined && $scope.dept == undefined && $scope.storage_area == undefined && $scope.date_in == undefined) {
             return false
         }
-        let date_in = moment($scope.date_in).format('YYYY-MM-DD');
-        
         $http({
             method: 'post', 
-            url: material_products,
+            url: material_products_url,
             data : {
                 bulk_search: {
-                    item_description : $scope.item_description == undefined ? '' : $scope.item_description,
-                    brand : $scope.brand == undefined ? '' : $scope.brand,
-                    owner : $scope.owner == undefined ? '' : $scope.owner,
-                    dept : $scope.dept == undefined ? '' : $scope.dept,
-                    storage_area : $scope.storage_area == undefined ? '' : $scope.storage_area,
-                    date_in : $scope.date_in == undefined ? '' : date_in,
+                    item_description  :  $scope.item_description    == undefined ? null : $scope.item_description,
+                    brand             :  $scope.brand               == undefined ? null : $scope.brand,
+                    owner             :  $scope.owner               == undefined ? null : $scope.owner,
+                    dept              :  $scope.dept                == undefined ? null : $scope.dept,
+                    storage_area      :  $scope.storage_area        == undefined ? null : $scope.storage_area,
+                    date_in           :  $scope.date_in             == undefined ? null : moment($scope.date_in).format('YYYY-MM-DD'),
                 }
             }
         }).then(function(response) {
@@ -170,12 +167,12 @@ app.controller('SearchAddController', function($scope, $http) {
     }
     $scope.reset_bulk_search = function () {
         $scope.get_material_products();
-        $scope.item_description = ''
-        $scope.brand = ''
-        $scope.owner = ''
-        $scope.dept = ''
-        $scope.storage_area = ''
-        $scope.date_in = ''
+        $scope.item_description     = ''
+        $scope.brand                = ''
+        $scope.owner                = ''
+        $scope.dept                 = ''
+        $scope.storage_area         = ''
+        $scope.date_in              = ''
     } 
     $scope.view_material_product = function (row) {
         $('#View_Material_Product_Details').modal('show'); 
@@ -201,7 +198,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.search_advanced_mode = () => {
         $http({
             method: 'post', 
-            url: material_products,
+            url: material_products_url,
             data : {
                 advanced_search: {
                     af_logsheet_id         : $scope.af_logsheet_id          ==  undefined   ?   null   :   $scope.af_logsheet_id, 
@@ -227,11 +224,68 @@ app.controller('SearchAddController', function($scope, $http) {
                 }
             }
         }).then(function(response) {
+         
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $('#advance-search-ng-modal').modal('hide');
+
         }, function(response) {
             Message('danger', response.data.message);
+        });
+    }
+
+    $scope.save_search_title    = () => {
+       
+        var inputs =   {
+            title : $scope.search_title,
+            advanced_search: {
+                af_logsheet_id         : $scope.af_logsheet_id          ==  undefined   ?   null   :   $scope.af_logsheet_id, 
+                af_euc_material        : $scope.af_euc_material         ==  undefined   ?   null   :   $scope.af_euc_material, 
+                af_cas                 : $scope.af_cas                  ==  undefined   ?   null   :   $scope.af_cas, 
+                af_supplier            : $scope.af_supplier             ==  undefined   ?   null   :   $scope.af_supplier, 
+                af_batch               : $scope.af_batch                ==  undefined   ?   null   :   $scope.af_batch, 
+                af_serial              : $scope.af_serial               ==  undefined   ?   null   :   $scope.af_serial, 
+                af_statutory_board     : $scope.af_statutory_board      ==  undefined   ?   null   :   $scope.af_statutory_board, 
+                af_housing_type        : $scope.af_housing_type         ==  undefined   ?   null   :   $scope.af_housing_type, 
+                af_housing_number      : $scope.af_housing_number       ==  undefined   ?   null   :   $scope.af_housing_number, 
+                af_unit_pkt_size       : $scope.af_unit_pkt_size        ==  undefined   ?   null   :   $scope.af_unit_pkt_size, 
+                af_date_of_expiry      : $scope.af_date_of_expiry       ==  undefined   ?   null   :   moment($scope.af_date_of_expiry).format('YYYY-MM-DD'), 
+                af_iqc_status          : $scope.af_iqc_status           ==  undefined   ?   null   :   $scope.af_iqc_status, 
+                af_po_number           : $scope.af_po_number            ==  undefined   ?   null   :   $scope.af_po_number, 
+                af_extended_expiry     : $scope.af_extended_expiry      ==  undefined   ?   null   :   moment($scope.af_extended_expiry).format('YYYY-MM-DD'), 
+                af_extended_qc_status  : $scope.af_extended_qc_status   ==  undefined   ?   null   :   $scope.af_extended_qc_status, 
+                af_disposed            : $scope.af_disposed             ==  undefined   ?   null   :   $scope.af_disposed, 
+                af_project_name        : $scope.af_project_name         ==  undefined   ?   null   :   $scope.af_project_name, 
+                af_product_type        : $scope.af_product_type         ==  undefined   ?   null   :   $scope.af_product_type, 
+                af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined   ?   null   :   moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
+                af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined   ?   null   :   moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
+            }
+        }
+ 
+        $http({
+            method: 'post', 
+            url: material_products_url,
+            data : {save_advanced_search : inputs}
+
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            Message('success', response.data.message);
+            $scope.search_title = ''
+            $('#save-search-name').modal('hide');
+        }, function(response) {
+            Message('danger', response.data.message);
+        });
+    }
+
+    $scope.view_my_saved_search =   () => {
+        $("#saved-search-ng-modal").modal('show')
+        $http({
+            method: 'get', 
+            url: get_save_search_url,  
+        }).then(function(response) {
+            $scope.view_my_saved_search = response.data.data;
+            console.log($scope.view_my_saved_search)
         });
     }
 });

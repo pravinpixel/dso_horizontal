@@ -4,7 +4,7 @@
             <div class="modal-header bg-primary text-white border-0 rounded-0">
                 <h4>Advanced Search Filter</h4>  
                 <div class="ms-auto">
-                    <a data-bs-toggle="modal" data-bs-target="#saved-search-modal"  class="btn btn-outline-light me-2 rounded-pill">My saved searches</a>
+                    <a ng-click="view_my_saved_search()" class="btn btn-outline-light me-2 rounded-pill">My saved searches</a>
                     <button class="rounded-pill btn btn-light btn-sm shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
             </div>
@@ -135,5 +135,22 @@
                 <button ng-click="search_advanced_mode()" class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
             </div>
         </div> 
+    </div>
+</div>
+ 
+<div class="modal fade" id="save-search-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white border-0 rounded-0">
+                <h4>Search Title</h4>  
+                <div class="ms-auto">
+                    <button class="rounded-pill btn btn-light btn-sm shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <input type="text" ng-model="search_title" class="form-control mb-3" placeholder="Type here..">
+                <input type="submit" ng-click="save_search_title()" class="form-control btn-primary btn" value="Save">
+            </div>
+        </div>
     </div>
 </div>
