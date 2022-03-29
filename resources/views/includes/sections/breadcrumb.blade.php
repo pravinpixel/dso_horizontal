@@ -29,6 +29,7 @@
                             {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
                             {{ Route::is(['user-access']) ? "User Access" : "" }}
                             {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add " : "" }}
+                            {{ Route::is(['material-product.edit-form-one','material-product.edit-form-two','material-product.edit-form-three']) ? "Edit Material / In-house Products " : "" }}
 
                             {{ Route::is([
                                 'master-settings',
@@ -61,6 +62,7 @@
                     {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }} 
                     {{ Route::is(['user-access']) ? "User Access" : "" }}
                     {{ Route::is(['mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "Add Material / In-house Products " : "" }}
+                    {{ Route::is(['material-product.edit-form-one','material-product.edit-form-two','material-product.edit-form-three']) ? "Edit Material / In-house Products " : "" }}
                     {{ Route::is([
                         'master-settings',
                         'get_masters',

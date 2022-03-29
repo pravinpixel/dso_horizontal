@@ -22,6 +22,8 @@
         </div> 
         @yield('wizzard-form-content') 
     </div>
+    
+    <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
 @endsection
 
  

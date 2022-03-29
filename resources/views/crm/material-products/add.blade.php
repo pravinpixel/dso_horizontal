@@ -22,6 +22,9 @@
         </div> 
         @yield('wizzard-form-content') 
     </div>
+
+    <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script>
         var app = angular.module('MaterialProductApp', []);

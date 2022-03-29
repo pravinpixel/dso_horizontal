@@ -33,7 +33,7 @@ class MaterialProductsController extends Controller
     public function index(Request $request)
     {
         if($request->filters) {
-            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->paginate(8);
+            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->paginate(5);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
@@ -46,7 +46,7 @@ class MaterialProductsController extends Controller
                                                 ->orWhere('department', $bulk_search->dept)
                                                 ->orWhere('storage_room', $bulk_search->storage_area)
                                                 ->orWhere('date_in', $bulk_search->date_in)
-                                                ->paginate(8);
+                                                ->paginate(5);
 
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
@@ -55,11 +55,11 @@ class MaterialProductsController extends Controller
         if($request->sort_by) {
             $sort_by = (object) $request->sort_by;
 
-            $material_product       =  MaterialProducts::orderBy($sort_by->col_name, $sort_by->order_type)->paginate(8);
+            $material_product       =  MaterialProducts::orderBy($sort_by->col_name, $sort_by->order_type)->paginate(5);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::paginate(8);
+        $material_product       =   MaterialProducts::paginate(5);
 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
