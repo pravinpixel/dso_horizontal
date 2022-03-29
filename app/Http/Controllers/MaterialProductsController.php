@@ -77,9 +77,12 @@ class MaterialProductsController extends Controller
     }
     public function list_index()
     {
-        $storage_room_db    =   StorageRoom::all();
-        $departments_db     =   Departments::all();
-        return view('crm.material-products.list', compact('storage_room_db','departments_db'));  
+        $storage_room_db        =   StorageRoom::all();
+        $departments_db         =   Departments::all();
+        $statutory_body_db      =   StatutoryBody::all();
+        $house_type_db          =   HouseTypes::all();
+        $unit_packing_size_db   =   PackingSizeData::all();
+        return view('crm.material-products.list', compact('storage_room_db','departments_db','statutory_body_db','house_type_db','unit_packing_size_db'));  
     }
 
     public function change_product_category(Request $request)

@@ -36,7 +36,7 @@
                                 <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label> 
                             </div>
                         </div> 
-                    <button  data-bs-toggle="modal" data-bs-target="#advance-search-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
+                    <button  data-bs-toggle="modal" data-bs-target="#advance-search-ng-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
                 </div>
                 <div class="col">
                     <label for="" class="form-label">Item description</label>

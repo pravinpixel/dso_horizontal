@@ -43,25 +43,18 @@
                             <label for="" class="form-label">Statutory board</label>
                             <select name="af_statutory_board" id="" class="form-select" ng-model="af_statutory_board">
                                 <option value="">-- select --</option>
-                                <option value="1">SCDF</option>
-                                <option value="2">NEA</option>
-                                <option value="3">HSA</option>
-                                <option value="4">NA(CWC)</option>
-                                <option value="4">SPF</option>
-                                <option value="4">Not Applicable</option>
+                                @foreach ($statutory_body_db as $row)
+                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                @endforeach
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
                             <label for="" class="form-label">Housing type</label>
                             <select name="af_housing_type" id="" class="form-select" ng-model="af_housing_type">
                                 <option value="">-- select --</option>
-                                <option value="1">Flammable Cabinet</option>
-                                <option value="2">Acid Cabinet</option>
-                                <option value="3">Base Cabinet</option>
-                                <option value="4">Metal Cabinet</option>
-                                <option value="4">Racks</option>
-                                <option value="4">Dry Cabinet</option>
-                                <option value="4">Freezer</option>
+                                @foreach ($house_type_db as $row)
+                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                @endforeach
                             </select>
                         </div> 
                          <div class="col-6 text-start mb-2 px-1">
@@ -69,7 +62,7 @@
                             <select name="af_housing_number" id="" class="form-select form-select-sm" ng-model="af_housing_number">
                                 <option value=""> -</option>
                                 @for ($key=0;$key<20;$key++)
-                                    <option value="">{{ $key+1 }}</option>
+                                    <option value="{{ $key+1 }}">{{ $key+1 }}</option>
                                 @endfor
                             </select>
                         </div> 
@@ -77,14 +70,9 @@
                             <label for="" class="form-label">Unit Packing size</label>
                             <select name="af_unit_pkt_size" id="" class="form-select" ng-model="af_unit_pkt_size">
                                 <option value="">-- select --</option>
-                                <option value="1">kg</option>
-                                <option value="2">L</option>
-                                <option value="3">m</option>									
-                                <option value="4">m&#xB2;</option>
-                                <option value="4">piece</option>
-                                <option value="4">roll</option>
-                                <option value="4">drum</option>
-                                <option value="4">lnyard</option>
+                                @foreach ($unit_packing_size_db as $row)
+                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                @endforeach	 
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
@@ -143,8 +131,8 @@
                 </div>
             </div>
             <div class="modal-footer border-top text-center">
-                <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save search</label>
-                <button class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
+                <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save this search</label>
+                <button ng-click="search_advanced_mode()" class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
             </div>
         </div> 
     </div>

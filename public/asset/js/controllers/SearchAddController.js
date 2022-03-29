@@ -145,7 +145,7 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.item_description == undefined && $scope.brand == undefined && $scope.owner == undefined && $scope.dept == undefined && $scope.storage_area == undefined && $scope.date_in == undefined) {
             return false
         }
-       let date_in = moment($scope.date_in).format('YYYY-MM-DD');
+        let date_in = moment($scope.date_in).format('YYYY-MM-DD');
         
         $http({
             method: 'post', 
@@ -198,6 +198,40 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     // Advanced Search Fitters
- 
-
+    $scope.search_advanced_mode = () => {
+        $http({
+            method: 'post', 
+            url: material_products,
+            data : {
+                advanced_search: {
+                    af_logsheet_id         : $scope.af_logsheet_id          ==  undefined   ?   null   :   $scope.af_logsheet_id, 
+                    af_euc_material        : $scope.af_euc_material         ==  undefined   ?   null   :   $scope.af_euc_material, 
+                    af_cas                 : $scope.af_cas                  ==  undefined   ?   null   :   $scope.af_cas, 
+                    af_supplier            : $scope.af_supplier             ==  undefined   ?   null   :   $scope.af_supplier, 
+                    af_batch               : $scope.af_batch                ==  undefined   ?   null   :   $scope.af_batch, 
+                    af_serial              : $scope.af_serial               ==  undefined   ?   null   :   $scope.af_serial, 
+                    af_statutory_board     : $scope.af_statutory_board      ==  undefined   ?   null   :   $scope.af_statutory_board, 
+                    af_housing_type        : $scope.af_housing_type         ==  undefined   ?   null   :   $scope.af_housing_type, 
+                    af_housing_number      : $scope.af_housing_number       ==  undefined   ?   null   :   $scope.af_housing_number, 
+                    af_unit_pkt_size       : $scope.af_unit_pkt_size        ==  undefined   ?   null   :   $scope.af_unit_pkt_size, 
+                    af_date_of_expiry      : $scope.af_date_of_expiry       ==  undefined   ?   null   :   moment($scope.af_date_of_expiry).format('YYYY-MM-DD'), 
+                    af_iqc_status          : $scope.af_iqc_status           ==  undefined   ?   null   :   $scope.af_iqc_status, 
+                    af_po_number           : $scope.af_po_number            ==  undefined   ?   null   :   $scope.af_po_number, 
+                    af_extended_expiry     : $scope.af_extended_expiry      ==  undefined   ?   null   :   moment($scope.af_extended_expiry).format('YYYY-MM-DD'), 
+                    af_extended_qc_status  : $scope.af_extended_qc_status   ==  undefined   ?   null   :   $scope.af_extended_qc_status, 
+                    af_disposed            : $scope.af_disposed             ==  undefined   ?   null   :   $scope.af_disposed, 
+                    af_project_name        : $scope.af_project_name         ==  undefined   ?   null   :   $scope.af_project_name, 
+                    af_product_type        : $scope.af_product_type         ==  undefined   ?   null   :   $scope.af_product_type, 
+                    af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined   ?   null   :   moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
+                    af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined   ?   null   :   moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
+                }
+            }
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            $scope.material_products.links.shift();
+            $scope.material_products.links.pop();
+        }, function(response) {
+            Message('danger', response.data.message);
+        });
+    }
 });
