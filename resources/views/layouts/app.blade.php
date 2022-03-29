@@ -209,7 +209,7 @@
                 </div> 
             </div> 
         </div>
-    </div> 
+    </div>
     <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0">
