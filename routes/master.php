@@ -4,6 +4,8 @@
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\Admin\RoleController;
     use App\Http\Controllers\Admin\PermissionController; 
+    use App\Http\Controllers\Admin\HelpMenuController; 
+
 
 Route::middleware(['auth_users'])->group(function () {
     Route::get('/item-description', [MasterController::class, 'index'])->name('master-settings');
@@ -41,5 +43,11 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
     Route::post('/permission', [PermissionController::class, 'store'])->name('permission.store');
-
+ 
+    Route::get('/help', [HelpMenuController::class, 'index'])->name('help.menu.index');
+    Route::get('/help/create', [HelpMenuController::class, 'create'])->name('help.menu.create');
+    Route::post('/help', [HelpMenuController::class, 'store'])->name('help.menu.store');
+    Route::get('/edit/{id}', [HelpMenuController::class, 'edit'])->name('help.menu.edit');
+    Route::post('/edit/{id}', [HelpMenuController::class, 'update'])->name('help.menu.update');
+    Route::post('/delete/{id}', [HelpMenuController::class, 'delete'])->name('help.menu.delete');
 });

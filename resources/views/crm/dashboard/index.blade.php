@@ -97,8 +97,8 @@
             </div>
         </div>
         <div class="card-body">
-            <h2 class="h3 px-1">Overall Snapshots</h2>
-            <div class="row m-0 mb-4">
+            <h2 class="h3 px-1 mb-3">Overall Snapshots</h2>
+            <div class="row m-0">
                 <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
                         <div class="text-warning bi bi-tools fa-2x me-3"></div>
@@ -145,24 +145,31 @@
                     </div>
                 </div>  
             </div> 
+        </div> 
+    </div>
+
+    
+    <div class="row m-0 ">
+        <div class="col-12 text-end mb-3">
+            <button class="btn btn-primary fa fa-eye" id="toggle_show"></button>
         </div>
-        <div class="card-footer py-4">
-            <div class="row m-0">
-                <div class="col-md-6">
-                    <h3 class="h4 text-center mb-3">Material/in-house product utilisation</h3>
+        <div class="toggle_container col-md" id="hide_conatiner">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h3 class="h4 text-center my-1">Material/in-house product utilisation</h3>
+                    <button class="btn btn-danger rounded-pill btn-sm fa fa-times" onclick="jQuery('#hide_conatiner').remove();"></button>
+                </div>
+                <div class="card-body"> 
                     <canvas id="myChart" class="w-100"></canvas>
                 </div>
-                <div class="col-md-6">
-                    <h3 class="h4 text-center mb-4">Health count of specific materials</h3>
-                    {{-- <div class="d-flex align-items-center mb-3 col-lg-9 mx-auto">
-                        <label for="" class="col-3 me-2">Choose Material</label>
-                        <select name="" id="" class="form-select">
-                            <option value="">-- select --</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                    </div> --}}
+            </div>
+        </div>
+        <div class="toggle_container col-md">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="h4 text-center my-1">Health count of specific materials</h3>
+                </div>
+                <div class="card-body"> 
                     <div class="border">
                         <table class="table m-0">
                             <thead>
@@ -211,8 +218,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     
+@endsection
+
+
+@section('scripts')
     <script>
         var xValues = ['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -240,6 +251,13 @@
             // options: {
             //     legend: {display: false}
             // }
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#toggle_show").click(function(){
+                $(".toggle_container").toggle();
+            });
         });
     </script>
 @endsection

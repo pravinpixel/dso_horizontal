@@ -1,16 +1,14 @@
 @extends('layouts.app')
-@section('content')
-
+@section('content') 
     <div class="row" ng-app="MasterApp" ng-controller="MasterController">
         <div class="col-sm-3 mb-2 mb-sm-0"> 
             <ul class="list-group">
-                <a class="list-group-item align-items-center d-flex">
-                    <i class="bi bi-list fa-2x me-2"></i>
-                    <strong class="h4">Menus List</strong>
-                </a>
+                <a class="list-group-item align-items-center d-flex"><i class="bi bi-list fa-2x me-2"></i><strong class="h4">Menus List</strong></a>
                 <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['master.item-description','master-settings']) ? "active" : '' }}" href="{{ route('master.item-description') }}"><i class="bi bi-diagram-2-fill fa-2x me-2"></i> Item Description</a>
                 <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['user.index','user.create','user.edit']) ? "active" : '' }}" href="{{ route('user.index') }}"><i class="bi bi-person-plus-fill fa-2x me-2"></i>Users</a>
                 <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['role.index','role.create','role.edit']) ? "active" : '' }}" href="{{ route('role.index') }}"><i class="bi bi-person-rolodex fa-2x me-2"></i>Roles</a>
+                <a class="list-group-item list-group-item-action align-items-center d-flex {{ Route::is(['help.menu.index','help.menu.create','help.menu.edit']) ? "active" : '' }}" href="{{ route('help.menu.index') }}"><i class="bi bi-question-circle-fill fa-2x me-2"></i>Help Menu</a>
+
             </ul>
         </div> 
         <div class="col-sm-9 p-0"> 

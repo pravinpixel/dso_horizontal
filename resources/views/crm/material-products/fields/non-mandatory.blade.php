@@ -119,3 +119,4 @@
         </div>
     </div>
 </div>
+<div id="hidden_input"></div>

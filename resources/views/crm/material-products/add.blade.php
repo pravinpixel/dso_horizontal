@@ -19,7 +19,7 @@
                     </a>
                 </li>
             </ul>
-        </div> 
+        </div>
         @yield('wizzard-form-content') 
     </div>
 
@@ -52,6 +52,12 @@
                 });
             }
         });
+    </script>
+    <script>
+        function confirmPrint(e) {
+            e.preventDefault(); 
+            $('#hidden_input').html(`<input type="hiddena" name="" value="Draft">`);
+        }
     </script>
 @endsection
 

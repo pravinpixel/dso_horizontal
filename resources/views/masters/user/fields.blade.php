@@ -22,5 +22,3 @@
         {!! Form::select('role_id',$roleDb , $userRole, ['class' =>'form-control', 'placeholder' => '-- Select Role --'])  !!}
     </div>
 </div>
-
- 

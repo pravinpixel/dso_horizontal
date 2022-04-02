@@ -63,7 +63,8 @@ class MasterController extends Controller
         }
         return response(['status' => false,  'message' => trans('response.failed')], Response::HTTP_OK);
     }
-    public function edit_master(Request $request, $id)    {
+    public function edit_master(Request $request, $id) 
+    {
      
         $edit  =   $this->MasterRepository->editMaster($request->name, $request->type); 
         

@@ -18,26 +18,34 @@
         {{-- = ==== Filletrs ====--}}
             <div class="table-fillters row m-0 p-2">
                 <div class="col-12 mb-2 text-end d-flex justify-content-end">
-                        <div class="dropdown">
-                            <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-caret-down-square-fill"></i>  
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_brand" class="form-check-input me-1">Brand</label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_batch" class="form-check-input me-1">Batch/Serial#</label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_size" class="form-check-input me-1">Pkt size </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_quantity" class="form-check-input me-1">Qty</label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_owner_one" class="form-check-input me-1">Owner1/2 </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_storage_room" class="form-check-input me-1">Storage Room </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_house_type" class="form-check-input me-1">Housing type  </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_date_of_expiry" class="form-check-input me-1">DOE </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_iqc_status" class="form-check-input me-1">QC status  </label> 
-                                <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label> 
-                            </div>
-                        </div> 
+                    <div class="dropdown">
+                        <button class="btn btn-light mx-1 border rounded-pill dropdown-toggle arrow-none"   id="topnav-ecommerce" role="button"     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-caret-down-square-fill"></i>  
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_brand" class="form-check-input me-1">Brand</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_batch" class="form-check-input me-1">Batch/Serial#</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_size" class="form-check-input me-1">Pkt size </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_quantity" class="form-check-input me-1">Qty</label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_owner_one" class="form-check-input me-1">Owner1/2 </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_storage_room" class="form-check-input me-1">Storage Room </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_house_type" class="form-check-input me-1">Housing type  </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_date_of_expiry" class="form-check-input me-1">DOE </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_iqc_status" class="form-check-input me-1">QC status  </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label> 
+                        </div>
+                    </div> 
                     <button  data-bs-toggle="modal" data-bs-target="#advance-search-ng-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
                 </div>
+                <div class="col">
+                    <label for="" class="form-label">Category selection</label>
+                    <select  class="form-select custom">
+                        <option value="">-- select --</option>
+                        <option value="3">Category 1</option>
+                        <option value="4">Category 2</option>
+                    </select>
+                </div> 
                 <div class="col">
                     <label for="" class="form-label">Item description</label>
                     <input type="text" ng-model="item_description" name="item_description" class="form-control custom" placeholder="Type here...">
@@ -48,7 +56,7 @@
                 </div> 
                 <div class="col">
                     <label for=""  class="form-label">Owner 1/2</label>
-                    <select name="owner" ng-model="owner" class="form-select custom">
+                    <select name="owner" class="form-select custom">
                         <option value="">-- select --</option>
                         <option value="1">Vetri maran</option>
                         <option value="2">Alan walker</option>
@@ -271,9 +279,7 @@
     <input type="hidden" id="edit-material-products" value="{{ route('material-product.edit-form-one') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
-
-
-
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 

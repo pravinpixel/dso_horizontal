@@ -20,7 +20,7 @@
                             {{ Route::is('list-material-products') ? "Search or Add" : "" }}
                             {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : "" }}
                             {{ Route::is('disposal') ? "Early Disposal" : "" }}
-                            {{ Route::is('print-barcode') ? "Print Barcode" : "" }}
+                            {{ Route::is('print-barcode') ? "Print Label" : "" }}
                             {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
                             {{ Route::is('reports') ? "Reports" : "" }}
                             {{ Route::is('list-search') ? "List Search" : "" }}
@@ -42,9 +42,11 @@
                                 'role.index',
                                 'role.create',
                                 'role.edit',
-                                'permission.index'
+                                'permission.index',
+                                'help.menu.index','help.menu.create','help.menu.edit'
                             ]) ? "Master Settings" : "" }}
 
+                            {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
                         </li>
                     </ol>
                 </div>
@@ -53,7 +55,7 @@
                     {{ Route::is('list-material-products') ? "Search or Add" : "" }}
                     {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : "" }}
                     {{ Route::is('disposal') ? "Early Disposal" : "" }}
-                    {{ Route::is('print-barcode') ? "Print Barcode / Label" : "" }}
+                    {{ Route::is('print-barcode') ? "Print Label  " : "" }}
                     {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
                     {{ Route::is('reports') ? "Reports" : "" }}
                     {{ Route::is('list-search') ? "List Search" : "" }}
@@ -74,8 +76,11 @@
                         'role.index',
                         'role.create',
                         'role.edit',
-                        'permission.index'
+                        'permission.index',
+                        'help.menu.index','help.menu.create','help.menu.edit'
                     ]) ? "Master Settings" : "" }}
+                    {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
+                    
                 </h4>
             </div>
         </div>

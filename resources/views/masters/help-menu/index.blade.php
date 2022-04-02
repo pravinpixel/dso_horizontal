@@ -4,7 +4,7 @@
     
     <div class="card">
         <div class="card-header text-end ">
-            <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+            <a class="btn btn-primary"  href="{{ route('help.menu.create') }}"><i class="fa fa-plus"></i> Add help</a>
         </div> 
         <div class="card-body"> 
             <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover" id="data-table">
@@ -19,20 +19,19 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
+    </div>  
 @endsection 
 
 @section('scripts')
     <script type="text/javascript">
         $(function () {
-        
             var table = $('#data-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('role.index') }}",
+                ajax: "{{ route('help.menu.index') }}",
                 columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'DT_RowIndex', name: 'id',},
+                    {data: 'title', name: 'title'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

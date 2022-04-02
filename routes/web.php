@@ -3,7 +3,9 @@ include('auth.php');
 include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
+use App\Http\Controllers\Admin\HelpMenuController;
 
+use App\Models\Masters\HelpMenu;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +19,13 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/dashboard', function () {   
         return view('crm.dashboard.index');  
     })->name('dashboard');
-     
-    
+      
     Route::get('/withdrawal-material-products', function () {   
         return view('crm.material-products.withdrawal');  
     })->name('withdrawal-material-products');
+
+    Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
+    Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
     
     Route::get('/disposal', function () {   
         return view('crm.disposal.index');  
