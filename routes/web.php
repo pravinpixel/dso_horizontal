@@ -13,6 +13,7 @@ use App\Http\Controllers\MaterialProductsController;
 */
 
 Route::middleware(['auth_users'])->group(function () {
+    
     Route::get('/dashboard', function () {   
         return view('crm.dashboard.index');  
     })->name('dashboard');

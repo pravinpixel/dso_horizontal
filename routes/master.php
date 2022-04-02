@@ -12,7 +12,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/create-settings', [MasterController::class, 'store_master'])->name('master.store.category');
     Route::post('/update-settings', [MasterController::class, 'update_master'])->name('master.update.category');
     Route::post('/delete-setting/{id?}', [MasterController::class, 'delete_master'])->name('master.delete.category');
-    Route::post('/edit-setting/{id}', [MasterController::class, 'edit_master'])->name('master.edit.category');
+    Route::post('/edit-setting/{id?}', [MasterController::class, 'edit_master'])->name('master.edit.category');
 
 
     // User Routes 

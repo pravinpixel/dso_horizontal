@@ -24,6 +24,12 @@
 
     @include('includes.sections.breadcrumb')
 
+    {{-- @if (\Sentinel::hasAnyAccess(['user.view.withdrawal', 'user.add.withdrawal']))
+        True
+        @else
+        False
+    @endif --}}
+
     <main class="container-fluid" style="min-height: 80vh">
         @yield('content')
     </main>

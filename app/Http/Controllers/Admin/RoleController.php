@@ -79,62 +79,62 @@ class RoleController extends Controller
         
 
         $this->validate($request, $rules, $customMessages);
- 
+        
         $permissions = [
              
             // Withdrawal 
-            'user.view.withdrawal'    =>  $request -> user_view_withdrawal   == 'true' ?? 'false',
-            'user.add.withdrawal'     =>  $request -> user_add_withdrawal    == 'true' ?? 'false',
-            'user.edit.withdrawal'    =>  $request -> user_edit_withdrawal   == 'true' ?? 'false',
-            'user.delete.withdrawal'  =>  $request -> user_delete_withdrawal == 'true' ?? 'false',
+            'user.view.withdrawal'    =>  $request -> user_view_withdrawal   == 'true' ? true : false,
+            'user.add.withdrawal'     =>  $request -> user_add_withdrawal    == 'true' ? true : false,
+            'user.edit.withdrawal'    =>  $request -> user_edit_withdrawal   == 'true' ? true : false,
+            'user.delete.withdrawal'  =>  $request -> user_delete_withdrawal == 'true' ? true : false,
 
             // Search or Add 
-            'user.view.search_or_add'    =>  $request -> user_view_search_or_add   == 'true' ?? 'false',
-            'user.add.search_or_add'     =>  $request -> user_add_search_or_add   == 'true' ?? 'false',
-            'user.edit.search_or_add'    =>  $request -> user_edit_search_or_add   == 'true' ?? 'false',
-            'user.delete.search_or_add'  =>  $request -> user_delete_search_or_add   == 'true' ?? 'false',
+            'user.view.search_or_add'    =>  $request -> user_view_search_or_add   == 'true' ? true : false,
+            'user.add.search_or_add'     =>  $request -> user_add_search_or_add   == 'true' ? true : false,
+            'user.edit.search_or_add'    =>  $request -> user_edit_search_or_add   == 'true' ? true : false,
+            'user.delete.search_or_add'  =>  $request -> user_delete_search_or_add   == 'true' ? true : false,
 
             // Threshold Qty 
-            'user.view.threshold_qty'    =>  $request -> user_view_threshold_qty   == 'true' ?? 'false',
-            'user.add.threshold_qty'     =>  $request -> user_add_threshold_qty   == 'true' ?? 'false',
-            'user.edit.threshold_qty'    =>  $request -> user_edit_threshold_qty   == 'true' ?? 'false',
-            'user.delete.threshold_qty'  =>  $request -> user_delete_threshold_qty   == 'true' ?? 'false',
+            'user.view.threshold_qty'    =>  $request -> user_view_threshold_qty   == 'true' ? true : false,
+            'user.add.threshold_qty'     =>  $request -> user_add_threshold_qty   == 'true' ? true : false,
+            'user.edit.threshold_qty'    =>  $request -> user_edit_threshold_qty   == 'true' ? true : false,
+            'user.delete.threshold_qty'  =>  $request -> user_delete_threshold_qty   == 'true' ? true : false,
 
             // Near Expiry/Expired
-            'user.view.near_expiry_and_expired'   =>  $request -> user_view_near_expiry_and_expired   == 'true' ?? 'false',
-            'user.add.near_expiry_and_expired'    =>  $request -> user_add_near_expiry_and_expired   == 'true' ?? 'false',
-            'user.edit.near_expiry_and_expired'   =>  $request -> user_edit_near_expiry_and_expired   == 'true' ?? 'false',
-            'user.delete.near_expiry_and_expired' =>  $request -> user_delete_near_expiry_and_expired   == 'true' ?? 'false',
+            'user.view.near_expiry_and_expired'   =>  $request -> user_view_near_expiry_and_expired   == 'true' ? true : false,
+            'user.add.near_expiry_and_expired'    =>  $request -> user_add_near_expiry_and_expired   == 'true' ? true : false,
+            'user.edit.near_expiry_and_expired'   =>  $request -> user_edit_near_expiry_and_expired   == 'true' ? true : false,
+            'user.delete.near_expiry_and_expired' =>  $request -> user_delete_near_expiry_and_expired   == 'true' ? true : false,
 
             // Early Disposal
-            'user.view.early_disposal'    =>  $request -> user_view_early_disposal   == 'true' ?? 'false',
-            'user.add.early_disposal'     =>  $request -> user_add_early_disposal   == 'true' ?? 'false',
-            'user.edit.early_disposal'    =>  $request -> user_edit_early_disposal   == 'true' ?? 'false',
-            'user.delete.early_disposal'  =>  $request -> user_delete_early_disposal   == 'true' ?? 'false',
+            'user.view.early_disposal'    =>  $request -> user_view_early_disposal   == 'true' ? true : false,
+            'user.add.early_disposal'     =>  $request -> user_add_early_disposal   == 'true' ? true : false,
+            'user.edit.early_disposal'    =>  $request -> user_edit_early_disposal   == 'true' ? true : false,
+            'user.delete.early_disposal'  =>  $request -> user_delete_early_disposal   == 'true' ? true : false,
 
             // Extend Expiry
-            'user.view.extend_expiry'    =>  $request -> user_view_extend_expiry   == 'true' ?? 'false',
-            'user.add.extend_expiry'     =>  $request -> user_add_extend_expiry   == 'true' ?? 'false',
-            'user.edit.extend_expiry'    =>  $request -> user_edit_extend_expiry   == 'true' ?? 'false',
-            'user.delete.extend_expiry'  =>  $request -> user_delete_extend_expiry   == 'true' ?? 'false',
+            'user.view.extend_expiry'    =>  $request -> user_view_extend_expiry   == 'true' ? true : false,
+            'user.add.extend_expiry'     =>  $request -> user_add_extend_expiry   == 'true' ? true : false,
+            'user.edit.extend_expiry'    =>  $request -> user_edit_extend_expiry   == 'true' ? true : false,
+            'user.delete.extend_expiry'  =>  $request -> user_delete_extend_expiry   == 'true' ? true : false,
 
             // Report
-            'user.view.report'    =>  $request -> user_view_report   == 'true' ?? 'false',
-            'user.add.report'     =>  $request -> user_add_report   == 'true' ?? 'false',
-            'user.edit.report'    =>  $request -> user_edit_report   == 'true' ?? 'false',
-            'user.delete.report'  =>  $request -> user_delete_report   == 'true' ?? 'false',
+            'user.view.report'    =>  $request -> user_view_report   == 'true' ? true : false,
+            'user.add.report'     =>  $request -> user_add_report   == 'true' ? true : false,
+            'user.edit.report'    =>  $request -> user_edit_report   == 'true' ? true : false,
+            'user.delete.report'  =>  $request -> user_delete_report   == 'true' ? true : false,
 
             // Print Barcode
-            'user.view.print_barcode'    =>  $request -> user_view_print_barcode   == 'true' ?? 'false',
-            'user.add.print_barcode'     =>  $request -> user_add_print_barcode   == 'true' ?? 'false',
-            'user.edit.print_barcode'    =>  $request -> user_edit_print_barcode   == 'true' ?? 'false',
-            'user.delete.print_barcode'  =>  $request -> user_delete_print_barcode   == 'true' ?? 'false',
+            'user.view.print_barcode'    =>  $request -> user_view_print_barcode   == 'true' ? true : false,
+            'user.add.print_barcode'     =>  $request -> user_add_print_barcode   == 'true' ? true : false,
+            'user.edit.print_barcode'    =>  $request -> user_edit_print_barcode   == 'true' ? true : false,
+            'user.delete.print_barcode'  =>  $request -> user_delete_print_barcode   == 'true' ? true : false,
 
             // Reconciliation
-            'user.view.reconciliation'    =>  $request -> user_view_reconciliation   == 'true' ?? 'false',
-            'user.add.reconciliation'     =>  $request -> user_add_reconciliation   == 'true' ?? 'false',
-            'user.edit.reconciliation'    =>  $request -> user_edit_reconciliation   == 'true' ?? 'false',
-            'user.delete.reconciliation'  =>  $request -> user_delete_reconciliation   == 'true' ?? 'false',
+            'user.view.reconciliation'    =>  $request -> user_view_reconciliation   == 'true' ? true : false,
+            'user.add.reconciliation'     =>  $request -> user_add_reconciliation   == 'true' ? true : false,
+            'user.edit.reconciliation'    =>  $request -> user_edit_reconciliation   == 'true' ? true : false,
+            'user.delete.reconciliation'  =>  $request -> user_delete_reconciliation   == 'true' ? true : false,
         ];
 
         Sentinel::getRoleRepository()->createModel()->create([
@@ -187,61 +187,62 @@ class RoleController extends Controller
             return redirect()->back();
         }
  
+
         $permissions = [
              
             // Withdrawal 
-            'user.view.withdrawal'    =>  $request -> user_view_withdrawal   == 'true' ? 'true' : 'false',
-            'user.add.withdrawal'     =>  $request -> user_add_withdrawal    == 'true' ? 'true' : 'false',
-            'user.edit.withdrawal'    =>  $request -> user_edit_withdrawal   == 'true' ? 'true' : 'false',
-            'user.delete.withdrawal'  =>  $request -> user_delete_withdrawal == 'true' ? 'true' : 'false',
+            'user.view.withdrawal'    =>  $request -> user_view_withdrawal   == 'true' ? true : false,
+            'user.add.withdrawal'     =>  $request -> user_add_withdrawal    == 'true' ? true : false,
+            'user.edit.withdrawal'    =>  $request -> user_edit_withdrawal   == 'true' ? true : false,
+            'user.delete.withdrawal'  =>  $request -> user_delete_withdrawal == 'true' ? true : false,
 
             // Search or Add 
-            'user.view.search_or_add'    =>  $request -> user_view_search_or_add   == 'true' ? 'true' : 'false',
-            'user.add.search_or_add'     =>  $request -> user_add_search_or_add   == 'true' ? 'true' : 'false',
-            'user.edit.search_or_add'    =>  $request -> user_edit_search_or_add   == 'true' ? 'true' : 'false',
-            'user.delete.search_or_add'  =>  $request -> user_delete_search_or_add   == 'true' ? 'true' : 'false',
+            'user.view.search_or_add'    =>  $request -> user_view_search_or_add   == 'true' ? true : false,
+            'user.add.search_or_add'     =>  $request -> user_add_search_or_add   == 'true' ? true : false,
+            'user.edit.search_or_add'    =>  $request -> user_edit_search_or_add   == 'true' ? true : false,
+            'user.delete.search_or_add'  =>  $request -> user_delete_search_or_add   == 'true' ? true : false,
 
             // Threshold Qty 
-            'user.view.threshold_qty'    =>  $request -> user_view_threshold_qty   == 'true' ? 'true' : 'false',
-            'user.add.threshold_qty'     =>  $request -> user_add_threshold_qty   == 'true' ? 'true' : 'false',
-            'user.edit.threshold_qty'    =>  $request -> user_edit_threshold_qty   == 'true' ? 'true' : 'false',
-            'user.delete.threshold_qty'  =>  $request -> user_delete_threshold_qty   == 'true' ? 'true' : 'false',
+            'user.view.threshold_qty'    =>  $request -> user_view_threshold_qty   == 'true' ? true : false,
+            'user.add.threshold_qty'     =>  $request -> user_add_threshold_qty   == 'true' ? true : false,
+            'user.edit.threshold_qty'    =>  $request -> user_edit_threshold_qty   == 'true' ? true : false,
+            'user.delete.threshold_qty'  =>  $request -> user_delete_threshold_qty   == 'true' ? true : false,
 
             // Near Expiry/Expired
-            'user.view.near_expiry_and_expired'   =>  $request -> user_view_near_expiry_and_expired   == 'true' ? 'true' : 'false',
-            'user.add.near_expiry_and_expired'    =>  $request -> user_add_near_expiry_and_expired   == 'true' ? 'true' : 'false',
-            'user.edit.near_expiry_and_expired'   =>  $request -> user_edit_near_expiry_and_expired   == 'true' ? 'true' : 'false',
-            'user.delete.near_expiry_and_expired' =>  $request -> user_delete_near_expiry_and_expired   == 'true' ? 'true' : 'false',
+            'user.view.near_expiry_and_expired'   =>  $request -> user_view_near_expiry_and_expired   == 'true' ? true : false,
+            'user.add.near_expiry_and_expired'    =>  $request -> user_add_near_expiry_and_expired   == 'true' ? true : false,
+            'user.edit.near_expiry_and_expired'   =>  $request -> user_edit_near_expiry_and_expired   == 'true' ? true : false,
+            'user.delete.near_expiry_and_expired' =>  $request -> user_delete_near_expiry_and_expired   == 'true' ? true : false,
 
             // Early Disposal
-            'user.view.early_disposal'    =>  $request -> user_view_early_disposal   == 'true' ? 'true' : 'false',
-            'user.add.early_disposal'     =>  $request -> user_add_early_disposal   == 'true' ? 'true' : 'false',
-            'user.edit.early_disposal'    =>  $request -> user_edit_early_disposal   == 'true' ? 'true' : 'false',
-            'user.delete.early_disposal'  =>  $request -> user_delete_early_disposal   == 'true' ? 'true' : 'false',
+            'user.view.early_disposal'    =>  $request -> user_view_early_disposal   == 'true' ? true : false,
+            'user.add.early_disposal'     =>  $request -> user_add_early_disposal   == 'true' ? true : false,
+            'user.edit.early_disposal'    =>  $request -> user_edit_early_disposal   == 'true' ? true : false,
+            'user.delete.early_disposal'  =>  $request -> user_delete_early_disposal   == 'true' ? true : false,
 
             // Extend Expiry
-            'user.view.extend_expiry'    =>  $request -> user_view_extend_expiry   == 'true' ? 'true' : 'false',
-            'user.add.extend_expiry'     =>  $request -> user_add_extend_expiry   == 'true' ? 'true' : 'false',
-            'user.edit.extend_expiry'    =>  $request -> user_edit_extend_expiry   == 'true' ? 'true' : 'false',
-            'user.delete.extend_expiry'  =>  $request -> user_delete_extend_expiry   == 'true' ? 'true' : 'false',
+            'user.view.extend_expiry'    =>  $request -> user_view_extend_expiry   == 'true' ? true : false,
+            'user.add.extend_expiry'     =>  $request -> user_add_extend_expiry   == 'true' ? true : false,
+            'user.edit.extend_expiry'    =>  $request -> user_edit_extend_expiry   == 'true' ? true : false,
+            'user.delete.extend_expiry'  =>  $request -> user_delete_extend_expiry   == 'true' ? true : false,
 
             // Report
-            'user.view.report'    =>  $request -> user_view_report   == 'true' ? 'true' : 'false',
-            'user.add.report'     =>  $request -> user_add_report   == 'true' ? 'true' : 'false',
-            'user.edit.report'    =>  $request -> user_edit_report   == 'true' ? 'true' : 'false',
-            'user.delete.report'  =>  $request -> user_delete_report   == 'true' ? 'true' : 'false',
+            'user.view.report'    =>  $request -> user_view_report   == 'true' ? true : false,
+            'user.add.report'     =>  $request -> user_add_report   == 'true' ? true : false,
+            'user.edit.report'    =>  $request -> user_edit_report   == 'true' ? true : false,
+            'user.delete.report'  =>  $request -> user_delete_report   == 'true' ? true : false,
 
             // Print Barcode
-            'user.view.print_barcode'    =>  $request -> user_view_print_barcode   == 'true' ? 'true' : 'false',
-            'user.add.print_barcode'     =>  $request -> user_add_print_barcode   == 'true' ? 'true' : 'false',
-            'user.edit.print_barcode'    =>  $request -> user_edit_print_barcode   == 'true' ? 'true' : 'false',
-            'user.delete.print_barcode'  =>  $request -> user_delete_print_barcode   == 'true' ? 'true' : 'false',
+            'user.view.print_barcode'    =>  $request -> user_view_print_barcode   == 'true' ? true : false,
+            'user.add.print_barcode'     =>  $request -> user_add_print_barcode   == 'true' ? true : false,
+            'user.edit.print_barcode'    =>  $request -> user_edit_print_barcode   == 'true' ? true : false,
+            'user.delete.print_barcode'  =>  $request -> user_delete_print_barcode   == 'true' ? true : false,
 
             // Reconciliation
-            'user.view.reconciliation'    =>  $request -> user_view_reconciliation   == 'true' ? 'true' : 'false',
-            'user.add.reconciliation'     =>  $request -> user_add_reconciliation   == 'true' ? 'true' : 'false',
-            'user.edit.reconciliation'    =>  $request -> user_edit_reconciliation   == 'true' ? 'true' : 'false',
-            'user.delete.reconciliation'  =>  $request -> user_delete_reconciliation   == 'true' ? 'true' : 'false',
+            'user.view.reconciliation'    =>  $request -> user_view_reconciliation   == 'true' ? true : false,
+            'user.add.reconciliation'     =>  $request -> user_add_reconciliation   == 'true' ? true : false,
+            'user.edit.reconciliation'    =>  $request -> user_edit_reconciliation   == 'true' ? true : false,
+            'user.delete.reconciliation'  =>  $request -> user_delete_reconciliation   == 'true' ? true : false,
         ];
 
         Sentinel::findRoleById($id)->update(['permissions'  =>  null]);

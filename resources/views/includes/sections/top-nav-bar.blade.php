@@ -1,7 +1,6 @@
 <div class="topnav shadow bg-primary">
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu ">
-
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav custom">                    
                     <li class="nav-item dropdown">
@@ -40,6 +39,7 @@
                     <li class="nav-item dropdown">
                         <a href="{{ route('reconsolidation') }}" class="nav-link {{ Route::is(['reconsolidation','view-reconsolidation']) ? "active" : "" }}"><i class="bi bi-arrow-repeat me-1"></i>Reconciliation</a>
                     </li> 
+                    
                     {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="uil-dashboard me-1"></i>Dashboards <div class="arrow-down"></div>

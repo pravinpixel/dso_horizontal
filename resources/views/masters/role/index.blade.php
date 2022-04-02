@@ -23,21 +23,20 @@
 @endsection 
 
 @section('scripts')
-<script type="text/javascript">
-    $(function () {
-      
-        var table = $('#data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('role.index') }}",
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
+    <script type="text/javascript">
+        $(function () {
+        
+            var table = $('#data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('role.index') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
         });
-      
-    });
-</script>
+    </script>
 @endsection

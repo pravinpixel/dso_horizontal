@@ -8,48 +8,4 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
  
-<script type="text/javascript">
-    $(document).on('click' ,'#confirmDelete',function (event) {
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            text: "Are you sure want to Delete?",
-            icon: "warning",
-            buttons: {
-                cancel: {
-                    text: "Cancel",
-                    value: null,
-                    visible: true,
-                    className: "btn-light rounded-pill btn",
-                    closeModal: true,
-                },
-                confirm: {
-                    text: "Yes! Delete",
-                    value: true,
-                    visible: true,
-                    className: "btn btn-danger rounded-pill",
-                    closeModal: true
-                }
-            },
-        }).then((isConfirm) => {
-            if (isConfirm) {
-                form.submit();
-            }
-        });
-    });
-</script>
-
-<script>
-    $('#loader').append('<i id="preLoader" class="bi bi-arrow-repeat text-white rotate"></i>');
-    $(window).on('load', function(){
-        setTimeout(removeLoader, 500); //wait for page load PLUS two seconds.
-    });
-    function removeLoader(){
-        $( "#preLoader" ).fadeOut(500, function() {
-            // fadeOut complete. Remove the loading div
-            $( "#preLoader" ).remove(); //makes page more lightweight 
-        });  
-    }
-</script>
 @yield('scripts') 
