@@ -58,6 +58,10 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/near-expiry-expired', function () {   
         return view('crm.notification.near-expiry-expired');  
     })->name('near-expiry-expired');
+
+    Route::get('disposed-items', function () {
+        return view('crm.notification.disposed-items');  
+    })->name('disposed-items');
      
 
     //  Listing Page

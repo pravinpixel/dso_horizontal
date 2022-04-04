@@ -1,5 +1,12 @@
 @extends('layouts.app')
 @section('content') 
+<style>
+    .dropdown-menu {
+        transform: translate(-53px, 40px) !important;
+        max-height: 400px !important;
+        overflow: auto
+    }
+</style>
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
         
         <div class="d-flex align-items-center mb-3">
@@ -23,7 +30,7 @@
                             <i class="bi bi-caret-down-square-fill"></i>  
                         </button>
                         <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
-                            <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
+                            {{-- <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_brand" class="form-check-input me-1">Brand</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_batch" class="form-check-input me-1">Batch/Serial#</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_size" class="form-check-input me-1">Pkt size </label> 
@@ -33,7 +40,29 @@
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_house_type" class="form-check-input me-1">Housing type  </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_date_of_expiry" class="form-check-input me-1">DOE </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_iqc_status" class="form-check-input me-1">QC status  </label> 
-                            <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label>  --}}
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Category selection</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner ½</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Storage room</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing type </label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing #</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner 1/2</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Statutory board </label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">EUC Material </label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Require usage tracking</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Require outlife tracking</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Department</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date in </label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date of expiry</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">QC status</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Used for TD/Expt</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">CAS #</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Project name</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Material/In-house product type</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date of manufacture </label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date of shipment</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Cost per unit </label>
+
                         </div>
                     </div> 
                     <button  data-bs-toggle="modal" data-bs-target="#advance-search-ng-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>

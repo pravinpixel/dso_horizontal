@@ -56,7 +56,31 @@
     <script>
         function confirmPrint(e) {
             e.preventDefault(); 
-            $('#hidden_input').html(`<input type="hiddena" name="" value="Draft">`);
+            // $('#hidden_input').html(`<input type="hiddena" name="" value="Draft">`);
+            swal({
+                text: "Do You Want To Print?",
+                icon: "info",
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        value: null,
+                        visible: true,
+                        className: "btn-light rounded-pill btn",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Proceed to print",
+                        value: true,
+                        visible: true,
+                        className: "btn btn-primary rounded-pill",
+                        closeModal: true
+                    }
+                },
+            }).then((isConfirm) => {
+                if (isConfirm) {
+                    form.submit();
+                }
+            });
         }
     </script>
 @endsection
