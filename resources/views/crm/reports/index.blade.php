@@ -23,7 +23,7 @@
         <li class="nav-item">
             <a href="#search" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">List search (filter by fields)</span>
+                <span class="d-none d-md-block">Generate list of Material/In-house Product</span>
             </a>
         </li> 
         <li class="nav-item">
@@ -152,6 +152,7 @@
                                                             <i class="bi bi-three-dots"></i>
                                                         </a> 
                                                         <div class="dropdown-menu"> 
+                                                            <a class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</a>
                                                             <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
@@ -331,6 +332,7 @@
                                                             <i class="bi bi-three-dots"></i>
                                                         </a> 
                                                         <div class="dropdown-menu"> 
+                                                            <a class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</a>
                                                             <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>

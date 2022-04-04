@@ -30,6 +30,8 @@ class CreateMaterialProductsTable extends Migration
             $table->string('po_number')->nullable();
             $table->string('statutory_body')->nullable();
             $table->string('euc_material')->nullable();
+            $table->string('usage_tracking')->nullable();
+            $table->string('outlife_tracking')->nullable();
             
             $table->string('storage_room')->nullable();
             $table->string('house_type')->nullable();
@@ -72,6 +74,6 @@ class CreateMaterialProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matrial_peoducts');
+        Schema::dropIfExists('material_products');
     }
 }

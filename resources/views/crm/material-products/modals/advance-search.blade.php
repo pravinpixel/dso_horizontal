@@ -20,7 +20,23 @@
                             <select name="af_euc_material" id="" class="form-select" ng-model="af_euc_material">
                                 <option value="">-- select --</option>
                                 <option value="1">Yes</option>
-                                <option value="4">No</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div> 
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label for="" class="form-label">Usage Tracking</label>
+                            <select  id="" class="form-select">
+                                <option value="">-- select --</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div> 
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label for="" class="form-label">Outlife Tracking</label>
+                            <select  id="" class="form-select">
+                                <option value="">-- select --</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">

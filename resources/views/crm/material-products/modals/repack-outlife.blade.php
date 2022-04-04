@@ -7,14 +7,17 @@
             </div>				  
             <div class="modal-body  ">
              <h5 class="h5 text-primary text-center">Mat/Pdt outlife logsheet</h5>
-                <table class="table table-centered  bg-white table-bordered table-hover custom-center m-0">
-                    <thead class="bg-light text-primary-2 table-bordered table-hover"> 
+                <table class="table table-centered  bg-white table-bordered   custom-center m-0">
+                    <thead class="bg-light text-primary-2 table-bordered"> 
                         <tr>
                             <th width="200px">(Mother)Material/Product Draw status</th>
                             <th>Date/time stamp</th>
                             <th>Last accessed</th>
+                            <th>Input repack amt (lnyards)</th>
+                            <th>Remain amt (lnyards)</th>
                             <th>Auto-generate unique barcode label</th>
-                            <th>Qty cut (kitted prepreg)</th>
+                            <th>Repack size (lnyards)</th>
+                            <th>Qty cut</th>
                             <th>
                                 Remaining outlife (prepreg roll)
                                 Intital count: 
@@ -30,22 +33,25 @@
                             <td width="300px" colspan="3">
                                 <div class="row mb-2">
                                     <div class="col p-0">
-                                        <button class="btn btn-success">Draw Out</button>
+                                        <button class="btn btn-success w-100">Draw Out</button>
                                     </div>
                                     <div class="col p-0">11/09/2021 08:00</div>
                                     <div class="col p-0">HuiBeng</div>
                                 </div>
                                 <div class="row ">
                                     <div class="col p-0">
-                                        <button class="btn btn-secondary">Draw in</button>
+                                        <button class="btn btn-secondary w-100">Draw in</button>
                                     </div>
                                     <div class="col p-0">11/09/2021 08:00</div>
                                     <div class="col p-0">HuiBeng</div>
                                 </div>
                             </td>
+                            <td class="text-center"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" name="" id="" value="80" class="text-center form-control form-control-sm"></td>
                             <td>
                                 Roll2/1 
                             </td>
+                            <td class="text-center"><input type="number" name="" id="" value="80" class="text-center form-control form-control-sm"></td>
                             <td class="text-center"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
                             <td>29 days 17hrs</td>
                             <td>
@@ -61,6 +67,7 @@
                         <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                     </div>
                     <div class="col-6 ms-auto text-end">
+                        <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
                         <button class="btn btn-primary rounded-pill h-100">Save and Submit</button>
                     </div>
                 </div>

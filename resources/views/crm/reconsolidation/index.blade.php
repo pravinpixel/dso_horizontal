@@ -23,6 +23,7 @@
                     <th class="text-center table-th">Uploaded Filename </th>
                     <th class="text-center table-th">Reconciliation Date & Time</th>
                     <th width="100px" class="text-center table-th">Status</th>
+                    <th  class="text-center table-th">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,42 +32,119 @@
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
                 <tr>
                     <td class="text-center py-1">01/01/2021 10.30am</td>
                     <td class="text-center py-1">File 001</td>
                     <td class="text-center py-1">01/01/2021 11.30am</td>
                     <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
+                    <td class="text-center py-1">
+                        <div class="dropdown">
+                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a> 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                            </div>
+                        </div>
+                    </td> 
                 </tr>
             </tbody>
         </table>

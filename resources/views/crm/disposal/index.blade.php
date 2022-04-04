@@ -54,8 +54,6 @@
                                         <tr>
                                             <td class="child-td-lg"></td>
                                             <td class="child-td"></td>
-                                            
-                                            
                                             @if ($key2 == 0)
                                             <td class="child-td">Batch/1</td>
                                             @endif
@@ -120,7 +118,7 @@
                                                     </a> 
                                                     <div class="dropdown-menu"> 
                                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
+                                                        {{-- <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a> --}}
                                                         <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                         <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -148,13 +146,49 @@
             <div class="modal-content h-auto rounded-0 border-bottom shadow">
                 <div class="card-header text-center rounded-0 bg-primary text-white">
                     <div>
-                        <h4 class="modal-title mb-1" id="topModalLabel">Disposal</h4>
+                        <h4 class="modal-title mb-1" id="topModalLabel">Disposal / Used for TD or Expt Project</h4>
                         <span>Please fill in the information below</span>
                     </div>
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body p-4">
-                   <div class="row  ">
+                    <div class="row m-0 pt-4">
+                        <div class="col-md-6 border-end p-4">
+                            <label for="Pass_label" class="form-radio-primary mb-3">
+                                <input type="radio" name="group" class="form-check-input border-primary " checked id="Pass_label"> <span class="text-primary"> For Disposal</span>
+                            </label>
+                            <div class="d-flex align-items-center mb-3">
+                                <label for="" class="me-2">Qty : </label>
+                                <input type="number" class="form-control text-center my-2" name="" id="" value="10" style="width: 100px">
+                            </div>
+                            <span><strong>Supporting Documents (If any)</strong></span>
+                            <input type="file" name="" id="" class="form-control"> 
+                        </div>
+                        <div class="col-md-6 p-4">
+                            <label for="Pass_label" class="form-radio-primary mb-3">
+                                <input type="radio" name="group" class="form-check-input border-primary " checked id="Pass_label"> <span class="text-primary">User For TD/Expt Project</span>
+                            </label>
+                            <div class="mb-3">
+                                <span><strong>Supporting Documents (Approval email)</strong></span>
+                                <input type="file" name="" id="" class="form-control"> 
+                            </div>
+                            <div class="mb-3">
+                                <span><strong>* To be dsiposed after</span>
+                                <input type="date" name="" id="" class="form-control"> 
+                            </div>
+                            <strong>Accordance to EG1 Chemical UIMS 2021</strong>
+                            <ul>
+                                <li>2 years OEM unstated (liquids , others)</li>
+                                <li>5 years OEM unstated (dry , others)</li>
+                                <li>5 years OEM declare does not expire</li>
+                                <li>DSO in houes (ask Domain PMTS)</li>
+                            </ul>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="px-3 rounded-pill btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                   {{-- <div class="row  ">
                        <div class="col-md-6">
                             <label for="Pass_label" class="form-radio-success">
                                 <input type="radio" name="group" class="form-check-input border-success " checked id="Pass_label"> <span class="text-success"> Yes</span>
@@ -178,7 +212,7 @@
                        <div class="col-12 text-center mt-3">
                             <button class="btn btn-success rounded-pill">Submit and archive</button>
                        </div>
-                   </div>
+                   </div> --}}
                     {{-- <div class="row container py-3 col-lg-9 mx-auto">
                         <div class="col-md-4">
                             <label for="">Material Description*</label>

@@ -14,16 +14,15 @@
         <ul class="list-unstyled topbar-menu  float-end ms-auto mb-0">  
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ route('help.index') }}" >
-                    <i title="Help menu" class="bi bi-question-circle-fill noti-icon"></i>
+                    <i title="Help menu" class="bi bi-question-circle{{ Route::is('help.index') ? "-fill text-white" : "" }} noti-icon"></i>
                 </a> 
             </li> 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">
-                    <i  class="bi bi-bell noti-icon"></i>
+                    <i  class="bi bi-bell-fill noti-icon text-white"></i>
                     <span class="badge rounded-pill bg-danger" style="transform: translate(-10px, -12px);">5</span> 
                 </a> 
-            </li> 
-            
+            </li>            
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
@@ -49,7 +48,7 @@
 
                     <!-- item-->
                     <a href="{{ route('help.index') }}" class="dropdown-item notify-item">
-                        <i class="bi bi-question-circle-fill me-1"></i>
+                        <i class="bi bi-question-circle me-1"></i>
                         <span>Help </span>
                     </a>
 
@@ -72,5 +71,4 @@
     </div>
 </div>
 
- 
 <form action="{{ route('logout') }}" method="POST" id="logout_form">@csrf</form>

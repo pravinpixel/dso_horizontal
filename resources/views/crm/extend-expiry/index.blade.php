@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-body ">
                     <div class="row container py-3 col-lg-9 mx-auto">
-                        <div class="col-sm-3 mb-2 mb-sm-0 border-end  py-3">
+                        <div class="col-sm-4 mb-2 mb-sm-0 border-end  py-3">
                             <h1 class="h5">Extended QC Results Status :</h1>
                             <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <label for="Pass_label" class="nav-link active show form-radio-success" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-pass" role="tab" aria-controls="v-pills-pass" aria-selected="true">
@@ -158,8 +158,18 @@
                                     <input type="radio" name="group"  class="form-check-input border-danger" id="Fail_label"> <span class="text-danger">Fail</span>
                                 </label> 
                             </div>
-                        </div>                    
-                        <div class="col-sm-9">
+                            <br>
+
+                            <h1 class="h5">Accordance to EG1 Chemical UIMS 2021</h1>
+
+                            <ul>
+                                <li>2 years OEM unstated (liquids , others)</li>
+                                <li>5 years OEM unstated (dry , others)</li>
+                                <li>5 years OEM declare does not expire</li>
+                                <li>DSO in houes (ask Domain PMTS)</li> 
+                            </ul>
+                        </div>
+                        <div class="col-sm-8">
                             <div class="tab-content  p-3" id="v-pills-tabContent">
                                 <div class="tab-pane fade active show" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
                                     <p class="text-muted" style="text-transform: none !important">
