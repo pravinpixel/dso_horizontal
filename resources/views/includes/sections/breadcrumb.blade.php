@@ -47,7 +47,7 @@
                             ]) ? "Master Settings" : "" }}
 
                             {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
-                            {{ Route('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
+                            {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
                         </li>
                     </ol>
                 </div>
@@ -81,7 +81,7 @@
                         'help.menu.index','help.menu.create','help.menu.edit'
                     ]) ? "Master Settings" : "" }}
                     {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
-                    {{ Route('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
+                    {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
                     
                 </h4>
             </div>

@@ -31,7 +31,7 @@ Route::middleware(['auth_users'])->group(function () {
         return view('crm.disposal.index');  
     })->name('disposal');
     
-    Route::get('/print-barcode', function () {   
+    Route::get('/print-label', function () {   
         return view('crm.print-barcode.index');  
     })->name('print-barcode');
     

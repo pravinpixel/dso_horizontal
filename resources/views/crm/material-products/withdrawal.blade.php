@@ -221,6 +221,7 @@
                     <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of material/product</label>
                 </div>
                 <div class="col-6 ms-auto text-end">
+                    <button class="btn btn-success h-100 rounded-pill">Print Barcode</button>
                     <button class="btn btn-info h-100 rounded-pill">Export Logsheet</button>
                     <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
                 </div>

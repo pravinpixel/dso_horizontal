@@ -123,9 +123,9 @@
                                                         <i class="bi bi-three-dots-vertical"></i>
                                                     </a> 
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="bi bi-arrow-repeat me-1"></i>reconciliation</a>
-                                                        <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View batch deatils</a>
+                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="bi bi-arrow-repeat me-1"></i>To reconciliate</a>
+                                                        <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete batch reconciliation</a>
                                                     </div>
                                                 </div>
                                             </td> 

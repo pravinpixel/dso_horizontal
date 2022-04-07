@@ -61,7 +61,7 @@
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('print-barcode') }}" class="card-body btn">
                     <i class="text-warning bi bi-upc-scan fa-2x mb-2"></i>
-                    <div class="text-primary"><b> Print Barcode</b></div>
+                    <div class="text-primary"><b> Print Label</b></div>
                 </a>
             </div>
         </div> 
