@@ -33,50 +33,55 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     {
         $data  =  MaterialProducts::find($id);
         
-        if($request->has('sds_mill_cert_document')) {
+        try {
+            if($request->has('sds_mill_cert_document')) {
 
-            if(Storage::exists($data->sds_mill_cert_document)){
-
-                Storage::delete($data->sds_mill_cert_document);
+                if(Storage::exists($data->sds_mill_cert_document)){
+    
+                    Storage::delete($data->sds_mill_cert_document);
+                }
+    
+                $sds_mill_cert_document = $request->file('sds_mill_cert_document')->store('public/files/sds_mill_cert_document');
             }
-
-            $sds_mill_cert_document = $request->file('sds_mill_cert_document')->store('public/files/sds_mill_cert_document');
-        }
-
-        if($request->has('coc_coa_mill_cert_document')) {
-
-            if(Storage::exists($data->coc_coa_mill_cert_document)){
-
-                Storage::delete($data->coc_coa_mill_cert_document);
+    
+            if($request->has('coc_coa_mill_cert_document')) {
+    
+                if(Storage::exists($data->coc_coa_mill_cert_document)){
+    
+                    Storage::delete($data->coc_coa_mill_cert_document);
+                }
+    
+                $coc_coa_mill_cert_document = $request->file('coc_coa_mill_cert_document')->store('public/files/coc_coa_mill_cert_document');
             }
-
-            $coc_coa_mill_cert_document = $request->file('coc_coa_mill_cert_document')->store('public/files/coc_coa_mill_cert_document');
-        }
-
-        if($request->has('iqc_result')) {
-
-            if(Storage::exists($data->iqc_result)){
-
-                Storage::delete($data->iqc_result);
+    
+            if($request->has('iqc_result')) {
+    
+                if(Storage::exists($data->iqc_result)){
+    
+                    Storage::delete($data->iqc_result);
+                }
+    
+                $iqc_result = $request->file('iqc_result')->store('public/files/iqc_result');
             }
-
-            $iqc_result = $request->file('iqc_result')->store('public/files/iqc_result');
+    
+            $data->update([
+                'storage_room'                =>  $request->storage_room,
+                'house_type'                  =>  $request->house_type,
+                'owner_one'                   =>  $request->owner_one,
+                'owner_two'                   =>  $request->owner_two,
+                'department'                  =>  $request->department,
+                'access'                      =>  $request->access,
+                'date_in'                     =>  $request->date_in,
+                'date_of_expiry'              =>  $request->date_of_expiry,
+                'iqc_status'                  =>  $request->iqc_status,
+                'sds_mill_cert_document'      =>  $sds_mill_cert_document ?? $request->sds_mill_cert_document_URL,
+                'coc_coa_mill_cert_document'  =>  $coc_coa_mill_cert_document ?? $request->coc_coa_mill_cert_document_URL,
+                'iqc_result'                  =>  $iqc_result ?? $request->iqc_result_URL,
+            ]); 
+            Flash::success(__('dso.material_products_created'));
+        } catch (\Throwable $th) {
+            Flash::error(__('global.something'));
         }
-
-        $data->update([
-            'storage_room'                =>  $request->storage_room,
-            'house_type'                  =>  $request->house_type,
-            'owner_one'                   =>  $request->owner_one,
-            'owner_two'                   =>  $request->owner_two,
-            'department'                  =>  $request->department,
-            'access'                      =>  $request->access,
-            'date_in'                     =>  $request->date_in,
-            'date_of_expiry'              =>  $request->date_of_expiry,
-            'iqc_status'                  =>  $request->iqc_status,
-            'sds_mill_cert_document'      =>  $sds_mill_cert_document ?? $request->sds_mill_cert_document_URL,
-            'coc_coa_mill_cert_document'  =>  $coc_coa_mill_cert_document ?? $request->coc_coa_mill_cert_document_URL,
-            'iqc_result'                  =>  $iqc_result ?? $request->iqc_result_URL,
-        ]); 
     }
 
     public function update_form_three($id, $request)

@@ -96,7 +96,7 @@
                     print: {
                         text: "Yes !, Proceed to Print",
                         visible: true,
-                        className: "btn btn-success rounded-pill",
+                        className: "btn btn-primary rounded-pill",
                         closeModal: true,
                         value: "print",
                     },
@@ -104,7 +104,7 @@
                         text: "No !, Submit & Save",
                         value: "save",
                         visible: true,
-                        className: "btn btn-primary rounded-pill",
+                        className: "btn btn-success rounded-pill",
                         closeModal: true,
                     },
                 },

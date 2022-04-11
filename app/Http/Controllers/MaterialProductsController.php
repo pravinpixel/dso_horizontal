@@ -211,7 +211,6 @@ class MaterialProductsController extends Controller
     public function form_two_store(Request $request)
     {
         $result =  $this->MartialProductRepository->update_form_two(entry_id(), $request);         
-        Flash::success(__('global.inserted'));
         return redirect()->route('non-mandatory-form');
     }
     public function non_mandatory_form_index(Request $request)
