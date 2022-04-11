@@ -54,35 +54,76 @@
         });
     </script>
     <script>
-        function confirmPrint(e) {
+        function saveAsDraft(e) {
             e.preventDefault(); 
-            // $('#hidden_input').html(`<input type="hiddena" name="" value="Draft">`);
+            $('#hidden_input').html(`<input type="hidden" name="is_draft" value="1">`);
+            
             swal({
-                text: "Do You Want To Print?",
+                text: "Do You Want To Save Draft?",
                 icon: "info",
+                closeOnClickOutside: false,
                 buttons: {
                     cancel: {
-                        text: "Cancel",
+                        text: "No!, Cancel",
                         value: null,
                         visible: true,
                         className: "btn-light rounded-pill btn",
                         closeModal: true,
                     },
                     confirm: {
-                        text: "Proceed to print",
+                        text: "Yes ! Save Draft",
                         value: true,
                         visible: true,
-                        className: "btn btn-primary rounded-pill",
+                        className: "btn btn-secondary rounded-pill",
                         closeModal: true
                     }
                 },
             }).then((isConfirm) => {
                 if (isConfirm) {
-                    form.submit();
+                    $("#wizzard_non_mandatory_form").submit();
+                }   else {
+                    $('#hidden_input').html("");
+                }
+            });
+        }
+        function submitAndSave(e) {
+            e.preventDefault();
+            swal({
+                text: "Do You Want To Print?",
+                icon: "info",
+                closeOnClickOutside: false,
+                buttons: {
+                    print: {
+                        text: "Yes !, Proceed to Print",
+                        visible: true,
+                        className: "btn btn-success rounded-pill",
+                        closeModal: true,
+                        value: "print",
+                    },
+                    save: {
+                        text: "No !, Submit & Save",
+                        value: "save",
+                        visible: true,
+                        className: "btn btn-primary rounded-pill",
+                        closeModal: true,
+                    },
+                },
+            })
+            .then((value) => {
+                switch (value) {
+                    case "print":
+                        swal("print");
+                    break;
+                
+                    case "cancel":
+                        swal("cancel");
+                    break;
+
+                    case "save":
+                        $("#wizzard_non_mandatory_form").submit();
+                    break; 
                 }
             });
         }
     </script>
 @endsection
-
- 

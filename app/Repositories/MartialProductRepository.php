@@ -82,7 +82,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     public function update_form_three($id, $request)
     {
         $data       =   MaterialProducts::find($id);
-
+         
         try {
 
             if($request->has('upload_disposal_certificate')) {
@@ -120,10 +120,11 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 'date_of_shipment'            => $request->date_of_shipment,
                 'cost_per_unit'               => $request->cost_per_unit,
                 'remarks'                     => $request->remarks,
+                'is_draft'                    => $request->is_draft ?? 0
             ]);
 
             $request->session()->forget('material_product_id');
-
+            Flash::success(__('dso.material_products_created'));
         } catch (\Throwable $th) {
             Flash::error(__('global.something'));
         }

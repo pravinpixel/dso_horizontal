@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
    
     <ul class="nav nav-tabs">
         <li class="nav-item">

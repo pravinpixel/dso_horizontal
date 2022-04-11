@@ -16,6 +16,7 @@ class MaterialProducts extends Model
     ];
 
     protected $fillable = [
+        'is_draft',
         'category_selection',
         'barcode_number',
         'item_description',

@@ -42,7 +42,8 @@ class MaterialProductsController extends Controller
 
             $bulk_search = (object) $request->bulk_search;
             
-            $material_product = MaterialProducts::orWhere('item_description' , $bulk_search->item_description)
+            $material_product = MaterialProducts::where('is_draft', 0)
+                                                ->orWhere('item_description' , $bulk_search->item_description)
                                                 ->orWhere('brand', $bulk_search->brand)
                                                 ->orWhere('department', $bulk_search->dept)
                                                 ->orWhere('storage_room', $bulk_search->storage_area)
@@ -89,7 +90,8 @@ class MaterialProductsController extends Controller
  
             $row = (object) $request->advanced_search;
              
-            $material_product = MaterialProducts::orWhere('item_description' , $row->af_logsheet_id)
+            $material_product = MaterialProducts::where('is_draft', 0)
+                                                ->orWhere('item_description' , $row->af_logsheet_id)
                                                 ->orWhere('brand', $row->af_euc_material)
                                                 ->orWhere('department', $row->af_cas)
                                                 ->orWhere('storage_room', $row->af_supplier)
@@ -106,7 +108,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::paginate(5);
+        $material_product       =   MaterialProducts::where('is_draft', 0)->paginate(5);
 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
@@ -165,7 +167,6 @@ class MaterialProductsController extends Controller
     }
     public function form_one_store(MaterialProductsRequest $request)
     {    
-        
         $material_product = MaterialProducts::updateOrCreate([
             'category_selection'            =>   $request->session()->get('category_type'),
             'barcode_number'                =>   random_int(100000, 999999),
@@ -182,6 +183,7 @@ class MaterialProductsController extends Controller
             'euc_material'                  =>   $request->euc_material,
             'usage_tracking'                =>   $request->usage_tracking,
             'outlife_tracking'              =>   $request->outlife_tracking,
+            'is_draft'                      =>   $request->is_draft ?? 0
         ]);
         
         $request->session()->put('material_product_id', $material_product->id);
@@ -222,7 +224,6 @@ class MaterialProductsController extends Controller
     public function non_mandatory_form_store(Request $request)
     {         
         $result  =   $this->MartialProductRepository->update_form_three(entry_id(), $request);
-        Flash::success(__('dso.material_products_created'));
         return redirect()->route('list-material-products');
     } 
     // Edit Function
