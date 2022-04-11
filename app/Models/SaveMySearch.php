@@ -31,6 +31,8 @@ class SaveMySearch extends Model
         'serial',             
         'statutory_board',    
         'supplier',           
-        'unit_pkt_size',      
+        'unit_pkt_size',    
+        'usage_tracking',
+        'outlife_tracking'
     ];
 }

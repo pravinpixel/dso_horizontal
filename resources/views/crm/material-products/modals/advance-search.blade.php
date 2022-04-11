@@ -143,6 +143,30 @@
                             <small class="mb-1">Date of manufacture</small>
                             <input type="date" class="form-control" placeholder="Type here" ng-model="af_date_of_manufacture">
                         </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label for="" class="form-label">Extended QC status</label>
+                            <select name="af_extended_qc_status" id="" class="form-select" ng-model="af_extended_qc_status">
+                                <option value="">-- select --</option>
+                                <option value="1">Pass</option>
+                                <option value="2">Fail</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label for="" class="form-label">Required Usage Tracking</label>
+                            <select name="af_usage_tracking" id="" class="form-select" ng-model="af_usage_tracking">
+                                <option value="">-- select --</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label for="" class="form-label">Required Outlife Tracking</label>
+                            <select name="af_outlife_tracking" id="" class="form-select" ng-model="af_outlife_tracking">
+                                <option value="">-- select --</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option> 
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
