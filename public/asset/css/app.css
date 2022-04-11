@@ -5878,7 +5878,15 @@ fieldset:disabled .btn {
     padding: .75rem 1.25rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
-    border-radius: .25rem
+    border-radius: .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alert-close {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .alert-heading {
