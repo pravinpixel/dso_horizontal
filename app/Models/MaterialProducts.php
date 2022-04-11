@@ -29,6 +29,8 @@ class MaterialProducts extends Model
         'po_number',
         'statutory_body',
         'euc_material',
+        'usage_tracking',
+        'outlife_tracking',
 
         'storage_room',
         'house_type',

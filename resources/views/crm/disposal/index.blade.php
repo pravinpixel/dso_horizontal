@@ -45,7 +45,24 @@
                             <td class="child-td"></td>
                             <td class="child-td"></td>
                             <td class="child-td"></td>
-                            <td class="child-td"></td>
+                            <td class="child-td">
+                                <div class="dropdown">
+                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a> 
+                                    <div class="dropdown-menu"> 
+                                        {{-- <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a> --}}
+                                        {{-- <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a> --}}
+                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
+                                        <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
+                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
+                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackTransfers"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
+                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackOutlife"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
+                                        <a class="dropdown-item text-secondary" onclick="printModal()" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
+                                        <a class="dropdown-item text-danger" onclick="deleteModal()" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="collapse  " id="row_{{ $key+1 }}">
                             <td colspan="12" class="p-0">
@@ -118,7 +135,7 @@
                                                     </a> 
                                                     <div class="dropdown-menu"> 
                                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#disposalModal"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                                                        {{-- <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a> --}}
+                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
                                                         <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                         <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -152,6 +169,7 @@
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body p-4">
+                    <small>Please indicate selection below for <b>desposal/ used for TD or Expt project</b> </small>
                     <div class="row m-0 pt-4">
                         <div class="col-md-6 border-end p-4">
                             <label for="Pass_label" class="form-radio-primary mb-3">

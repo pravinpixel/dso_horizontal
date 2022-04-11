@@ -168,7 +168,7 @@
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </a> 
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch Details</a>
                                                                 </div>
                                                             </div>
                                                         </td> 
@@ -345,7 +345,7 @@
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </a> 
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch Details </a>
                                                                 </div>
                                                             </div>
                                                         </td> 
@@ -565,7 +565,7 @@
                                                                     <i class="bi bi-three-dots-vertical"></i>
                                                                 </a> 
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
+                                                                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View Batch Details</a>
                                                                 </div>
                                                             </div>
                                                         </td> 

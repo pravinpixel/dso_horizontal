@@ -24,6 +24,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             'po_number'                     =>   $request->po_number,
             'statutory_body'                =>   $request->statutory_body,
             'euc_material'                  =>   $request->euc_material,
+            'usage_tracking'                =>   $request->usage_tracking,
+            'outlife_tracking'              =>   $request->outlife_tracking,
         ]);
     }
 

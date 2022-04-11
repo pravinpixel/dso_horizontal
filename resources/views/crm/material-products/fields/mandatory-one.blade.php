@@ -104,3 +104,19 @@
         </div>
     </div>
 </div>
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Require usage  tracking <sup class="text-danger">*</sup></label>
+        <div class="col-8">
+            {!! Form::select('usage_tracking', ["No", "Yes"] , $material_product->usage_tracking ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Require outlife tracking<sup class="text-danger">*</sup></label>
+        <div class="col-8">
+            {!! Form::select('outlife_tracking', ["No", "Yes"] , $material_product->outlife_tracking ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+        </div>
+    </div>
+</div>

@@ -53,8 +53,8 @@ class MaterialProductsController extends Controller
         }
 
         if($request->save_advanced_search) {
-            $row = (object) $request->save_advanced_search['advanced_search'];
-            
+            $row = (object) $request->save_advanced_search['advanced_search']; 
+
             SaveMySearch::create([
                 'user_id'             =>  Sentinel::getUser()->id,
                 'search_title'        =>  $request->save_advanced_search['title'],
@@ -78,6 +78,8 @@ class MaterialProductsController extends Controller
                 'statutory_board'     =>  $row->af_statutory_board,
                 'supplier'            =>  $row->af_supplier,
                 'unit_pkt_size'       =>  $row->af_unit_pkt_size ,
+                'usage_tracking'      =>  $row->af_usage_tracking,
+                'outlife_tracking'    =>  $row->af_outlife_tracking,
             ]);
 
             return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
@@ -86,7 +88,7 @@ class MaterialProductsController extends Controller
         if($request->advanced_search) {
  
             $row = (object) $request->advanced_search;
-            
+             
             $material_product = MaterialProducts::orWhere('item_description' , $row->af_logsheet_id)
                                                 ->orWhere('brand', $row->af_euc_material)
                                                 ->orWhere('department', $row->af_cas)
@@ -163,6 +165,7 @@ class MaterialProductsController extends Controller
     }
     public function form_one_store(MaterialProductsRequest $request)
     {    
+        
         $material_product = MaterialProducts::updateOrCreate([
             'category_selection'            =>   $request->session()->get('category_type'),
             'barcode_number'                =>   random_int(100000, 999999),
@@ -177,6 +180,8 @@ class MaterialProductsController extends Controller
             'po_number'                     =>   $request->po_number,
             'statutory_body'                =>   $request->statutory_body,
             'euc_material'                  =>   $request->euc_material,
+            'usage_tracking'                =>   $request->usage_tracking,
+            'outlife_tracking'              =>   $request->outlife_tracking,
         ]);
         
         $request->session()->put('material_product_id', $material_product->id);
