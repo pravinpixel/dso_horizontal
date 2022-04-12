@@ -8,7 +8,7 @@
             <div class="modal-body modal-scroll">
                 <div class="text-s">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-action btn" ng-repeat="row in view_my_saved_search"> @{{ row.search_title }} - <small class="float-end text-secondary">@{{ row.created_at }}</small></li> 
+                        <li class="list-group-item list-group-item-action btn" ng-click="search_advanced_mode(row)" ng-repeat="row in view_my_saved_search_list"> @{{ row.search_title }} - <small class="float-end text-secondary">@{{ row.created_at }}</small></li> 
                     </ul>
                 </div>
             </div> 

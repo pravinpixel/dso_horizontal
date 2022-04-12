@@ -78,12 +78,11 @@
                 </div> 
                 <div class="col">
                     <label for=""  class="form-label">Owner 1/2</label>
-                    <select name="owner" class="form-select custom">
+                    <select name="owner" ng-model="filter.owner" class="form-select custom">
                         <option value="">-- select --</option>
-                        <option value="1">Vetri maran</option>
-                        <option value="2">Alan walker</option>
-                        <option value="3">Alex</option>
-                        <option value="4">Hema</option>
+                        @foreach ($owners as $row)
+                            <option value="{{ $row->id }}">{{ $row->first_name }} {{ $row->last_name }}</option>
+                        @endforeach 
                     </select>
                 </div> 
                 <div class="col">

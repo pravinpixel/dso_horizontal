@@ -11,6 +11,7 @@ use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\HouseTypes;
 use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
+use App\Models\User;
 use App\Models\SaveMySearch;
 use Laracasts\Flash\Flash;
 use Storage;
@@ -45,64 +46,25 @@ class MaterialProductsController extends Controller
         }
 
         if($request->bulk_search) {
-            
            $row         =   (object) $request->bulk_search;
            $result      =   $this->SearchRepositoryRepository->bulkSearch($row);
            if($result)  return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
 
         if($request->save_advanced_search) {
-            $row = (object) $request->save_advanced_search['advanced_search']; 
-
-            SaveMySearch::create([
-                'user_id'             =>  Sentinel::getUser()->id,
-                'search_title'        =>  $request->save_advanced_search['title'],
-                'batch'               =>  $row->af_batch,
-                'cas'                 =>  $row->af_cas,
-                'date_of_expiry'      =>  $row->af_date_of_expiry,
-                'date_of_manufacture' =>  $row->af_date_of_manufacture,
-                'date_of_shipment'    =>  $row->af_date_of_shipment,
-                'disposed'            =>  $row->af_disposed,
-                'euc_material'        =>  $row->af_euc_material,
-                'extended_expiry'     =>  $row->af_extended_expiry,
-                'extended_qc_status'  =>  $row->af_extended_qc_status,
-                'housing_number'      =>  $row->af_housing_number,
-                'housing_type'        =>  $row->af_housing_type,
-                'iqc_status'          =>  $row->af_iqc_status,
-                'logsheet_id'         =>  $row->af_logsheet_id,
-                'po_number'           =>  $row->af_po_number ,
-                'product_type'        =>  $row->af_product_type,
-                'project_name'        =>  $row->af_project_name,
-                'serial'              =>  $row->af_serial,
-                'statutory_board'     =>  $row->af_statutory_board,
-                'supplier'            =>  $row->af_supplier,
-                'unit_pkt_size'       =>  $row->af_unit_pkt_size ,
-                'usage_tracking'      =>  $row->af_usage_tracking,
-                'outlife_tracking'    =>  $row->af_outlife_tracking,
-            ]);
-
-            return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
+            $row        =   (object) $request->save_advanced_search['advanced_search']; 
+            $result     =   $this->SearchRepositoryRepository->StoreBulkSearch($row, $request);
+            if($result) return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
         }
 
         if($request->advanced_search) {
-            
-            $row = (object) $request->advanced_search;
-            
-            $material_product = MaterialProducts::select("*")
-                                                ->when($row->af_logsheet_id, function ($q) use ($row)  {
-                                                    $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id .'%');
-                                                })
-                                                ->when($row->af_supplier, function ($q) use ($row)  {
-                                                    $q->Where('supplier' , $row->af_supplier);
-                                                })
-                                                ->paginate(2);
-
-            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+            $row         =   (object) $request->advanced_search;
+            $result      =   $this->SearchRepositoryRepository->advanced_search($row);
+            if($result)  return response(['status' => true, 'data' => $result], Response::HTTP_OK);  
         }
 
         if($request->sort_by) {
             $sort_by = (object) $request->sort_by;
-
             $material_product       =  MaterialProducts::orderBy($sort_by->col_name, $sort_by->order_type)->paginate(5);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
@@ -154,7 +116,8 @@ class MaterialProductsController extends Controller
         $statutory_body_db      =   StatutoryBody::all();
         $house_type_db          =   HouseTypes::all();
         $unit_packing_size_db   =   PackingSizeData::all();
-        return view('crm.material-products.list', compact('storage_room_db','departments_db','statutory_body_db','house_type_db','unit_packing_size_db'));  
+        $owners                 =   User::all();
+        return view('crm.material-products.list', compact('owners','storage_room_db','departments_db','statutory_body_db','house_type_db','unit_packing_size_db'));  
     }
 
     public function change_product_category(Request $request)
@@ -216,13 +179,15 @@ class MaterialProductsController extends Controller
         $house_type_db      =   HouseTypes::pluck('name','id');
         $departments_db     =   Departments::pluck('name','id');
         $iqc_status         =   ["Pass", "Fail"];
+        $owners             =   User::pluck("first_name", 'id');
 
         return view('crm.material-products.wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
             'departments_db',
             'material_product',
-            'iqc_status'
+            'iqc_status',
+            'owners'
         ]));
     }
     public function form_two_store(Request $request)

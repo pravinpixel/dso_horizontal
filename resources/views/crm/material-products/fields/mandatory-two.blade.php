@@ -18,7 +18,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Owner 1  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('owner_one', $house_type_db , $material_product->owner_one ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+            {!! Form::select('owner_one', $owners , $material_product->owner_one ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Owner 2 (SE/PL/FM) <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('owner_two', $house_type_db , $material_product->owner_two ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+            {!! Form::select('owner_two', $owners , $material_product->owner_two ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
         </div>
     </div>
 </div>
