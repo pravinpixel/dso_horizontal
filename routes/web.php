@@ -74,6 +74,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
     Route::post('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
 
+    // Advanced Search
+    Route::get('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
+    Route::post('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
+
+
     Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
 
     // Change Product Category

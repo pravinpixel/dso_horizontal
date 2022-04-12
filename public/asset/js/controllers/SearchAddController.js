@@ -12,13 +12,15 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.on_date_of_expiry        =   true; 
     $scope.on_iqc_status            =   true; 
     $scope.on_used_for_td           =   true; 
-
+    $scope.filter_status            =   false;
+    $scope.bulk_search_status       =   false;
    
     // === Route Lists ===
-    var material_products_url         =  $('#get-material-products').val();
-    var edit_material_products_url    =  $('#edit-material-products').val();
-    var delete_material_products_url  =  $('#delete-material-products').val();
-    var get_save_search_url           =  $('#get-save-search').val();
+    var material_products_url                   =   $('#get-material-products').val();
+    var edit_material_products_url              =   $('#edit-material-products').val();
+    var delete_material_products_url            =   $('#delete-material-products').val();
+    var get_save_search_url                     =   $('#get-save-search').val();
+    
 
 
     // ==== Get Data form DB ====
@@ -35,12 +37,10 @@ app.controller('SearchAddController', function($scope, $http) {
         });
     }
     $scope.get_material_products();
-
     // ====== Edit Data DB ====
     $scope.edit_material_product = function (id) {
         window.location.replace(edit_material_products_url +'/'+ id);
     }
-
     // ====== Delete Data DB ====
     $scope.delete_material_product = function (id) {
       
@@ -78,99 +78,6 @@ app.controller('SearchAddController', function($scope, $http) {
             } 
         });
     }
-
-    //  ===== Pagination & Filters ====
-    $scope.getPage = function (link) { 
-        if($scope.material_products.current_page == link.label) {
-            return false
-        }
-        $http({
-            method: 'get', 
-            url: link.url,  
-        }).then(function(response) {
-            $scope.material_products = response.data.data; 
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });  
-    } 
-    $scope.next_Prev_page = function (params) {
-        $http({
-            method: 'get', 
-            url: params,  
-        }).then(function(response) {
-            $scope.material_products = response.data.data; 
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });  
-    }  
-    $scope.sort_by = function (name, type) {
-        $http({
-            method: 'post', 
-            url: material_products_url,
-            data : {
-                sort_by: {
-                    col_name :  name ,
-                    order_type :  type ,
-                }
-            }
-        }).then(function(response) {
-            $scope.material_products = response.data.data;
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });
-    }
-    $scope.search_barcode_number = function () {
-        $http({
-            method: 'post', 
-            url: material_products_url,
-            data : {
-                filters: $scope.barcode_number
-            }
-        }).then(function(response) {
-            $scope.material_products = response.data.data;
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });
-    } 
-    $scope.bulk_search = function () {
-        $http({
-            method: 'post', 
-            url: material_products_url,
-            data : {
-                bulk_search: {
-                    item_description  :  $scope.item_description    == undefined ? null : $scope.item_description,
-                    brand             :  $scope.brand               == undefined ? null : $scope.brand,
-                    owner             :  $scope.owner               == undefined ? null : $scope.owner,
-                    dept              :  $scope.dept                == undefined ? null : $scope.dept,
-                    storage_area      :  $scope.storage_area        == undefined ? null : $scope.storage_area,
-                    date_in           :  $scope.date_in             == undefined ? null : moment($scope.date_in).format('YYYY-MM-DD'),
-                }
-            }
-        }).then(function(response) {
-            $scope.material_products = response.data.data;
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });
-    }
-    $scope.reset_bulk_search = function () {
-        $scope.get_material_products();
-        $scope.item_description     = ''
-        $scope.brand                = ''
-        $scope.owner                = ''
-        $scope.dept                 = ''
-        $scope.storage_area         = ''
-        $scope.date_in              = ''
-    } 
     $scope.view_material_product = function (row) {
         $('#View_Material_Product_Details').modal('show'); 
         $scope.view_material_product_data  = [
@@ -190,38 +97,106 @@ app.controller('SearchAddController', function($scope, $http) {
             {name: 'Access' , item : row.access},
         ]
     }
+ 
+    //  ===== Pagination & Filters ====
+    $scope.next_Prev_page = function (params) {
+        if($scope.bulk_search_status  == true) {
+            var payload_data    =   {   
+                bulk_search: {
+                    item_description    :  $scope.filter.item_description    == undefined ? null : $scope.filter.item_description,
+                    category_selection  :  $scope.filter.category_selection  == undefined ? null : $scope.filter.category_selection,
+                    brand               :  $scope.filter.brand               == undefined ? null : $scope.filter.brand,
+                    owner               :  $scope.filter.owner               == undefined ? null : $scope.filter.owner,
+                    dept                :  $scope.filter.dept                == undefined ? null : $scope.filter.dept,
+                    storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
+                    date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
+                }
+            }
+        }   else {
+            var payload_data = {};
+        }
+        $http({
+            method: 'post', 
+            url: params,
+            data : payload_data
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            $scope.material_products.links.shift();
+            $scope.material_products.links.pop();
+        }, function(response) {
+            Message('danger', response.data.message);
+        });  
+    }
 
-    // Advanced Search Fitters
-    $scope.search_advanced_mode = () => {
+    $scope.sort_by = function (name, type) {
         $http({
             method: 'post', 
             url: material_products_url,
             data : {
-                advanced_search: {
-                    af_logsheet_id          : $scope.af_logsheet_id          ==  undefined   ?   null   :   $scope.af_logsheet_id, 
-                    af_euc_material         : $scope.af_euc_material         ==  undefined   ?   null   :   $scope.af_euc_material, 
-                    af_cas                  : $scope.af_cas                  ==  undefined   ?   null   :   $scope.af_cas, 
-                    af_supplier             : $scope.af_supplier             ==  undefined   ?   null   :   $scope.af_supplier, 
-                    af_batch                : $scope.af_batch                ==  undefined   ?   null   :   $scope.af_batch, 
-                    af_serial               : $scope.af_serial               ==  undefined   ?   null   :   $scope.af_serial, 
-                    af_statutory_board      : $scope.af_statutory_board      ==  undefined   ?   null   :   $scope.af_statutory_board, 
-                    af_housing_type         : $scope.af_housing_type         ==  undefined   ?   null   :   $scope.af_housing_type, 
-                    af_housing_number       : $scope.af_housing_number       ==  undefined   ?   null   :   $scope.af_housing_number, 
-                    af_unit_pkt_size        : $scope.af_unit_pkt_size        ==  undefined   ?   null   :   $scope.af_unit_pkt_size, 
-                    af_date_of_expiry       : $scope.af_date_of_expiry       ==  undefined   ?   null   :   moment($scope.af_date_of_expiry).format('YYYY-MM-DD'), 
-                    af_iqc_status           : $scope.af_iqc_status           ==  undefined   ?   null   :   $scope.af_iqc_status, 
-                    af_po_number            : $scope.af_po_number            ==  undefined   ?   null   :   $scope.af_po_number, 
-                    af_extended_expiry      : $scope.af_extended_expiry      ==  undefined   ?   null   :   moment($scope.af_extended_expiry).format('YYYY-MM-DD'), 
-                    af_extended_qc_status   : $scope.af_extended_qc_status   ==  undefined   ?   null   :   $scope.af_extended_qc_status, 
-                    af_disposed             : $scope.af_disposed             ==  undefined   ?   null   :   $scope.af_disposed, 
-                    af_project_name         : $scope.af_project_name         ==  undefined   ?   null   :   $scope.af_project_name, 
-                    af_product_type         : $scope.af_product_type         ==  undefined   ?   null   :   $scope.af_product_type, 
-                    af_date_of_shipment     : $scope.af_date_of_shipment     ==  undefined   ?   null   :   moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
-                    af_date_of_manufacture  : $scope.af_date_of_manufacture  ==  undefined   ?   null   :   moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
-                    af_usage_tracking       : $scope.af_usage_tracking       ==  undefined   ?   null   :   $scope.af_usage_tracking, 
-                    af_outlife_tracking     : $scope.af_outlife_tracking     ==  undefined   ?   null   :   $scope.af_outlife_tracking, 
+                sort_by: {
+                    col_name :  name ,
+                    order_type :  type ,
                 }
             }
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            $scope.material_products.links.shift();
+            $scope.material_products.links.pop();
+        }, function(response) {
+            Message('danger', response.data.message);
+        });
+    }
+
+    $scope.search_barcode_number = function () {
+        $http({
+            method: 'post', 
+            url: material_products_url,
+            data : {
+                filters: $scope.barcode_number
+            }
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            $scope.material_products.links.shift();
+            $scope.material_products.links.pop();
+        }, function(response) {
+            Message('danger', response.data.message);
+        });
+    } 
+
+    $scope.bulk_search = function () {
+        $scope.filter_status        =   true
+        $scope.bulk_search_status   =   true;
+        $http({
+            method: 'post', 
+            url: material_products_url,
+            data : {
+                bulk_search: {
+                    item_description    :  $scope.filter.item_description    == undefined ? null : $scope.filter.item_description,
+                    category_selection  :  $scope.filter.category_selection  == undefined ? null : $scope.filter.category_selection,
+                    brand               :  $scope.filter.brand               == undefined ? null : $scope.filter.brand,
+                    owner               :  $scope.filter.owner               == undefined ? null : $scope.filter.owner,
+                    dept                :  $scope.filter.dept                == undefined ? null : $scope.filter.dept,
+                    storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
+                    date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
+                }
+            }
+        }).then(function(response) {
+            $scope.material_products = response.data.data;
+            $scope.material_products.links.shift();
+            $scope.material_products.links.pop();
+        }, function(response) {
+            Message('danger', response.data.message);
+        });
+    }
+     
+    // Advanced Search Fitters
+    $scope.search_advanced_mode = () => { 
+        $scope.filter_status = false
+        $scope.filler_function();
+        $http({
+            method: 'post', 
+            url: material_products_url,
+            data :  $scope.filter_data 
         }).then(function(response) {
          
             $scope.material_products = response.data.data;
@@ -233,9 +208,62 @@ app.controller('SearchAddController', function($scope, $http) {
             Message('danger', response.data.message);
         });
     }
+  
+    $scope.reset_bulk_search = function () {
+        $scope.get_material_products();
+
+        $scope.filter_status    =   false
+
+        // ====Bulk Search Rest====
+            $scope.bulk_search_status           =   false
+            $scope.filter.item_description      =   " "
+            $scope.filter.category_selection    =   " "
+            $scope.filter.brand                 =   " "
+            $scope.filter.owner                 =   " "
+            $scope.filter.dept                  =   " "
+            $scope.filter.storage_area          =   " "
+            $scope.filter.date_in               =   " "
+        // ====Bulk Search Rest===
+        delete $scope.filter_data 
+    } 
+
+    $scope.filler_function =   () => {
+        if($scope.filter_status == true) {
+            $scope.filter_data  =   {
+                advanced_search: {
+                    af_logsheet_id         : $scope.af_logsheet_id          ==  undefined ? null : $scope.af_logsheet_id, 
+                    af_euc_material        : $scope.af_euc_material         ==  undefined ? null : $scope.af_euc_material, 
+                    af_cas                 : $scope.af_cas                  ==  undefined ? null : $scope.af_cas, 
+                    af_supplier            : $scope.af_supplier             ==  undefined ? null : $scope.af_supplier, 
+                    af_batch               : $scope.af_batch                ==  undefined ? null : $scope.af_batch, 
+                    af_serial              : $scope.af_serial               ==  undefined ? null : $scope.af_serial, 
+                    af_statutory_board     : $scope.af_statutory_board      ==  undefined ? null : $scope.af_statutory_board, 
+                    af_housing_type        : $scope.af_housing_type         ==  undefined ? null : $scope.af_housing_type, 
+                    af_housing_number      : $scope.af_housing_number       ==  undefined ? null : $scope.af_housing_number, 
+                    af_unit_pkt_size       : $scope.af_unit_pkt_size        ==  undefined ? null : $scope.af_unit_pkt_size, 
+                    af_date_of_expiry      : $scope.af_date_of_expiry       ==  undefined ? null : moment($scope.af_date_of_expiry).format('YYYY-MM-DD'), 
+                    af_iqc_status          : $scope.af_iqc_status           ==  undefined ? null : $scope.af_iqc_status, 
+                    af_po_number           : $scope.af_po_number            ==  undefined ? null : $scope.af_po_number, 
+                    af_extended_expiry     : $scope.af_extended_expiry      ==  undefined ? null : moment($scope.af_extended_expiry).format('YYYY-MM-DD'), 
+                    af_extended_qc_status  : $scope.af_extended_qc_status   ==  undefined ? null : $scope.af_extended_qc_status, 
+                    af_disposed            : $scope.af_disposed             ==  undefined ? null : $scope.af_disposed, 
+                    af_project_name        : $scope.af_project_name         ==  undefined ? null : $scope.af_project_name, 
+                    af_product_type        : $scope.af_product_type         ==  undefined ? null : $scope.af_product_type, 
+                    af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined ? null : moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
+                    af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined ? null : moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
+                    af_usage_tracking      : $scope.af_usage_tracking       ==  undefined ? null : $scope.af_usage_tracking, 
+                    af_outlife_tracking    : $scope.af_outlife_tracking     ==  undefined ? null : $scope.af_outlife_tracking, 
+                }
+            }
+        }   else {
+            $scope.filter_data  =   {}
+        }
+    }
+    $scope.filler_function();
+
+
 
     $scope.save_search_title    = () => {
-       
         var inputs =   {
             title : $scope.search_title,
             advanced_search: {

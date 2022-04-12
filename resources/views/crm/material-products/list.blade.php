@@ -1,12 +1,5 @@
 @extends('layouts.app')
 @section('content') 
-<style>
-    .dropdown-menu {
-        transform: translate(-53px, 40px) !important;
-        max-height: 400px !important;
-        overflow: auto
-    }
-</style>
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
         
         <div class="d-flex align-items-center mb-3">
@@ -69,19 +62,19 @@
                 </div>
                 <div class="col">
                     <label for="" class="form-label">Category selection</label>
-                    <select  class="form-select custom">
+                    <select ng-model="filter.category_selection" class="form-select custom">
                         <option value="">-- select --</option>
-                        <option value="3">Category 1</option>
-                        <option value="4">Category 2</option>
+                        <option value="in_house">In House</option>
+                        <option value="material">Material</option>
                     </select>
                 </div> 
                 <div class="col">
                     <label for="" class="form-label">Item description</label>
-                    <input type="text" ng-model="item_description" name="item_description" class="form-control custom" placeholder="Type here...">
+                    <input type="text" ng-model="filter.item_description" name="item_description" class="form-control custom" placeholder="Type here...">
                 </div> 
                 <div class="col">
                     <label for="" class="form-label">Brand</label>
-                    <input type="text" ng-model="brand" name="brand" class="form-control custom" placeholder="Type here...">
+                    <input type="text" ng-model="filter.brand" name="brand" class="form-control custom" placeholder="Type here...">
                 </div> 
                 <div class="col">
                     <label for=""  class="form-label">Owner 1/2</label>
@@ -95,7 +88,7 @@
                 </div> 
                 <div class="col">
                     <label for="" class="form-label">Dept</label>
-                    <select name="dept" ng-model="dept" id="" class="form-select custom">
+                    <select name="dept" ng-model="filter.dept" id="" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($departments_db as $item)
                             <option value="{{ $item->name }}">{{ $item->name }}</option>
@@ -104,7 +97,7 @@
                 </div> 
                 <div class="col">
                     <label for="" class="form-label">Storage area</label>
-                    <select name="storage_area" ng-model="storage_area" class="form-select custom">
+                    <select name="storage_area" ng-model="filter.storage_area" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($storage_room_db as $row)
                             <option value="{{ $row->name }}">{{ $row->name }}</option>
@@ -113,7 +106,7 @@
                 </div> 
                 <div class="col"> 
                     <label for="" class="form-label">Date in</label>
-                    <input type="date" ng-model="date_in" name="date_in" class="form-control custom" placeholder="Type here...">
+                    <input type="date" ng-model="filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
                 </div>
                 <div class="col d-flex align-items-center justify-content-center">
                     <div class="btn-group">
@@ -121,7 +114,8 @@
                         <button ng-click="reset_bulk_search()" class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button>
                     </div>
                 </div> 
-            </div> 
+            </div>
+         
         {{-- ====== Filletrs ===--}} 
     
         <table class="table table-centered table-bordered table-hovered bg-white">

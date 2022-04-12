@@ -21,14 +21,20 @@ use Maatwebsite\Excel\Facades\Excel;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 use App\Interfaces\MartialProductRepositoryInterface;
+use App\Interfaces\SearchRepositoryInterface;
+
 
 class MaterialProductsController extends Controller
 {
     private   $MartialProductRepository;
 
-    public function __construct(MartialProductRepositoryInterface $MartialProductRepository) 
+    public function __construct(
+            MartialProductRepositoryInterface $MartialProductRepository,
+            SearchRepositoryInterface   $SearchRepositoryRepository
+        ) 
     {
-        $this->MartialProductRepository = $MartialProductRepository;
+        $this->MartialProductRepository     =   $MartialProductRepository;
+        $this->SearchRepositoryRepository   =   $SearchRepositoryRepository;
     }
 
     public function index(Request $request)
@@ -39,18 +45,10 @@ class MaterialProductsController extends Controller
         }
 
         if($request->bulk_search) {
-
-            $bulk_search = (object) $request->bulk_search;
             
-            $material_product = MaterialProducts::where('is_draft', 0)
-                                                ->orWhere('item_description' , $bulk_search->item_description)
-                                                ->orWhere('brand', $bulk_search->brand)
-                                                ->orWhere('department', $bulk_search->dept)
-                                                ->orWhere('storage_room', $bulk_search->storage_area)
-                                                ->orWhere('date_in', $bulk_search->date_in)
-                                                ->paginate(5);
-
-            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+           $row         =   (object) $request->bulk_search;
+           $result      =   $this->SearchRepositoryRepository->bulkSearch($row);
+           if($result)  return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
 
         if($request->save_advanced_search) {
@@ -87,16 +85,17 @@ class MaterialProductsController extends Controller
         }
 
         if($request->advanced_search) {
- 
+            
             $row = (object) $request->advanced_search;
-             
-            $material_product = MaterialProducts::where('is_draft', 0)
-                                                ->orWhere('item_description' , $row->af_logsheet_id)
-                                                ->orWhere('brand', $row->af_euc_material)
-                                                ->orWhere('department', $row->af_cas)
-                                                ->orWhere('storage_room', $row->af_supplier)
-                                                ->orWhere('date_in', $row->af_batch)
-                                                ->paginate(5);
+            
+            $material_product = MaterialProducts::select("*")
+                                                ->when($row->af_logsheet_id, function ($q) use ($row)  {
+                                                    $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id .'%');
+                                                })
+                                                ->when($row->af_supplier, function ($q) use ($row)  {
+                                                    $q->Where('supplier' , $row->af_supplier);
+                                                })
+                                                ->paginate(2);
 
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
@@ -108,9 +107,27 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::where('is_draft', 0)->paginate(5);
-
+        $material_product       =   MaterialProducts::where('is_draft', 0)->paginate(5); 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+    }
+
+    public function advanced_search(Request $request)
+    {
+        if($request->advanced_search) {
+            
+            $row = (object) $request->advanced_search;
+            
+            $material_product = MaterialProducts::select("*")
+                                                ->when($row->af_logsheet_id, function ($q) use ($row)  {
+                                                    $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id .'%');
+                                                })
+                                                ->when($row->af_supplier, function ($q) use ($row)  {
+                                                    $q->Where('supplier' , $row->af_supplier);
+                                                })
+                                                ->paginate(2);
+
+            return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        }
     }
 
     public function my_search_history()
