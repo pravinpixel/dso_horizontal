@@ -18,13 +18,13 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.advance_search_pre_saved     =   true;
     $scope.view_my_saved_search_model   =   false;
     $scope.sort_by_payload              =   false;
-    // === Route Lists ===
-    var material_products_url                   =   $('#get-material-products').val();
-    var edit_material_products_url              =   $('#edit-material-products').val();
-    var delete_material_products_url            =   $('#delete-material-products').val();
-    var get_save_search_url                     =   $('#get-save-search').val();
-    
 
+    // === Route Lists ===
+    var material_products_url           =   $('#get-material-products').val();
+    var edit_material_products_url      =   $('#edit-material-products').val();
+    var delete_material_products_url    =   $('#delete-material-products').val();
+    var get_save_search_url             =   $('#get-save-search').val();
+    
 
     // ==== Get Data form DB ====
     $scope.get_material_products =  function () {
@@ -116,23 +116,27 @@ app.controller('SearchAddController', function($scope, $http) {
                     date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
                 }
             }
-        }  
-
-        if ($scope.advance_search_status == true) {
-            var payload_data = $scope.filter_data;
+        }  else {
+            if ($scope.advance_search_status == true) {
+                var payload_data = $scope.filter_data;
+            } else {
+                if ($scope.advance_search_pre_saved == true) {
+                    var payload_data = { advanced_search : $scope.advance_search_pre_saved_data}
+                } else {
+                    if ($scope.sort_by_payload ==   true) {
+                        var payload_data = $scope.sort_by_payload_data
+                    }
+                    else {
+                        var payload_data    =   {Empty : "0000"}
+                    }
+                }
+            }
         }
-
-        if ($scope.advance_search_pre_saved == true) {
-            var payload_data = { advanced_search : $scope.advance_search_pre_saved_data}
-        }
-        if ($scope.sort_by_payload ==   true) {
-            var payload_data = $scope.sort_by_payload_data
-        }
-           
+  
         $http({
             method: 'post', 
             url: params,
-            data : payload_data ?? {}
+            data : payload_data 
         }).then(function(response) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
@@ -221,12 +225,8 @@ app.controller('SearchAddController', function($scope, $http) {
 
         }  else {
             $scope.advance_search_pre_saved         =   true 
-
             $scope.advance_search_pre_saved_data    =   advanced_search
-
-            var payload_data   =  {advanced_search}
- 
-            console.log( "This assgin scope nee" , $scope.advance_search_pre_saved_data )
+            var payload_data   =  {advanced_search} 
         }
 
         $http({

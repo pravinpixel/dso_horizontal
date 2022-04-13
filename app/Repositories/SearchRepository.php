@@ -37,12 +37,16 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function advanced_search($row)
     {
+         
         return MaterialProducts::where('is_draft', 0)
-                                ->when($row->af_logsheet_id ?? $row->logsheet_id, function ($q) use ($row)  {
+                                ->when(!is_null($row->af_logsheet_id) ?? !is_null($row->logsheet_id) , function ($q) use ($row)  {
                                     $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id ?? $row->logsheet_id.'%');
                                 })
-                                ->when($row->af_supplier ?? $row->supplier, function ($q) use ($row)  {
+                                ->when(!is_null($row->af_supplier) ?? !is_null($row->supplier), function ($q) use ($row)  {
                                     $q->Where('supplier' , $row->af_supplier ?? $row->supplier);
+                                })
+                                ->when(!is_null($row->af_batch) ?? !is_null($row->batch), function ($q) use ($row)  {
+                                    $q->Where('brand' , $row->af_batch ?? $row->batch);
                                 })
                                 ->paginate(5);
     }
