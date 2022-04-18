@@ -189,7 +189,7 @@ return [
 	// Login / Logout
 	'login_successful'                                      => 'Your Successfully Logged in!',
 	'login_unsuccessful'                                    => 'Incorrect Login',
-	'incorrect_email_id_and_password'                       => 'Incorrect Email (or) Password',
+	'incorrect_email_id_and_password'                       => 'Incorrect User ID',
 	'login_unsuccessful_not_active'                         => 'Account is inactive',
 	'login_timeout'                                         => "Can't log in because of suspicious activity",
 	'logout_successful'                                     => 'Logged Out Successfully',

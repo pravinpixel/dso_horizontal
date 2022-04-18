@@ -103,7 +103,6 @@ app.controller('SearchAddController', function($scope, $http) {
  
     //  ===== Pagination & Filters ====
     $scope.next_Prev_page = function (params) {
-         
         if($scope.bulk_search_status  == true) {
             var payload_data    =   {   
                 bulk_search: {
@@ -122,17 +121,15 @@ app.controller('SearchAddController', function($scope, $http) {
             } else {
                 if ($scope.advance_search_pre_saved == true) {
                     var payload_data = { advanced_search : $scope.advance_search_pre_saved_data}
+                }
+                if ($scope.sort_by_payload == true) {
+                    var payload_data = $scope.sort_by_payload_data
                 } else {
-                    if ($scope.sort_by_payload ==   true) {
-                        var payload_data = $scope.sort_by_payload_data
-                    }
-                    else {
-                        var payload_data    =   {Empty : "0000"}
-                    }
+                    var payload_data    =   {Empty : "0000"}
                 }
             }
         }
-  
+
         $http({
             method: 'post', 
             url: params,
@@ -148,15 +145,13 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.sort_by = function (name, type) {
         $scope.sort_by_payload      =   true;
-
         $scope.sort_by_payload_data =   {
             sort_by: {
                 col_name    :  name ,
                 order_type  :  type ,
             }
         }
-        
-        
+         
         $http({
             method: 'post', 
             url: material_products_url,
@@ -189,6 +184,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.bulk_search = function () {
         $scope.filter_status        =   true
         $scope.bulk_search_status   =   true;
+        $scope.sort_by_payload      =   false;
         $http({
             method: 'post', 
             url: material_products_url,
@@ -215,20 +211,18 @@ app.controller('SearchAddController', function($scope, $http) {
     // Advanced Search Fitters
     $scope.search_advanced_mode = (advanced_search) => { 
 
-        $scope.filter_status            = true
-
+        $scope.filter_status            =   true
+        $scope.sort_by_payload          =   false;
+        $scope.bulk_search_status       =   false
         if (advanced_search === undefined) { 
-
+            $scope.filler_function();
             var payload_data                = $scope.filter_data 
             $scope.advance_search_status    = true 
-            $scope.filler_function();
-
         }  else {
             $scope.advance_search_pre_saved         =   true 
             $scope.advance_search_pre_saved_data    =   advanced_search
             var payload_data   =  {advanced_search} 
         }
-
         $http({
             method: 'post',
             url: material_products_url,

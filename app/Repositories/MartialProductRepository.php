@@ -64,7 +64,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 $iqc_result = $request->file('iqc_result')->store('public/files/iqc_result');
             }
     
-            $data->update([
+            return  $data->update([
                 'storage_room'                =>  $request->storage_room,
                 'house_type'                  =>  $request->house_type,
                 'owner_one'                   =>  $request->owner_one,
@@ -78,7 +78,6 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 'coc_coa_mill_cert_document'  =>  $coc_coa_mill_cert_document ?? $request->coc_coa_mill_cert_document_URL,
                 'iqc_result'                  =>  $iqc_result ?? $request->iqc_result_URL,
             ]); 
-            Flash::success(__('dso.material_products_created'));
         } catch (\Throwable $th) {
             Flash::error(__('global.something'));
         }
@@ -110,7 +109,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 $extended_qc_result = $request->file('extended_qc_result')->store('public/files/extended_qc_result');
             }
         
-            $data->update([
+            return $data->update([
                 'cas'                         => $request->cas,
                 'fm_1202'                     => $request->fm_1202,
                 'project_name'                => $request->project_name,
@@ -129,7 +128,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             ]);
 
             $request->session()->forget('material_product_id');
-            Flash::success(__('dso.material_products_created'));
+         
         } catch (\Throwable $th) {
             Flash::error(__('global.something'));
         }

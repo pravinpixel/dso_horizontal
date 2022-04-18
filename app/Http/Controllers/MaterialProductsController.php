@@ -180,7 +180,7 @@ class MaterialProductsController extends Controller
         $departments_db     =   Departments::pluck('name','id');
         $iqc_status         =   ["Pass", "Fail"];
         $owners             =   User::pluck("first_name", 'id');
-
+        
         return view('crm.material-products.wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
@@ -192,7 +192,8 @@ class MaterialProductsController extends Controller
     }
     public function form_two_store(Request $request)
     {
-        $result =  $this->MartialProductRepository->update_form_two(entry_id(), $request);         
+        $result =  $this->MartialProductRepository->update_form_two(entry_id(), $request);    
+        if($result) Flash::success(__('global.inserted'));     
         return redirect()->route('non-mandatory-form');
     }
     public function non_mandatory_form_index(Request $request)
@@ -205,6 +206,7 @@ class MaterialProductsController extends Controller
     public function non_mandatory_form_store(Request $request)
     {         
         $result  =   $this->MartialProductRepository->update_form_three(entry_id(), $request);
+        if($result) Flash::success(__('global.inserted'));
         return redirect()->route('list-material-products');
     } 
     // Edit Function
@@ -229,7 +231,7 @@ class MaterialProductsController extends Controller
     public function update_edit_form_one(Request $request, $id=null)
     {
         $result  =   $this->MartialProductRepository->update_form_one($id, $request);
-        Flash::success(__('global.updated'));
+        if($result) Flash::success(__('global.updated'));
         return redirect()->route('material-product.edit-form-two', $id);
     }
     public function edit_form_two(Request $request, $id=null)
@@ -240,6 +242,7 @@ class MaterialProductsController extends Controller
         $departments_db   =  Departments::pluck('name','id');
         $iqc_status       =  ["Pass", "Fail"];
         $edit_mode        =  true;
+        $owners             =   User::pluck("first_name", 'id');
 
         return view('crm.material-products.edit-wizard.mandatory-two', compact([
             'storage_room_db',
@@ -247,13 +250,14 @@ class MaterialProductsController extends Controller
             'departments_db',
             'material_product',
             'iqc_status',
-            'edit_mode'
+            'edit_mode',
+            'owners'
         ]));
     }
     public function update_edit_form_two(Request $request, $id=null)
     {
         $result  =   $this->MartialProductRepository->update_form_two($id, $request);
-        Flash::success(__('global.inserted'));
+        if($result) Flash::success(__('global.updated'));
         return redirect()->route('material-product.edit-form-three', $id);
     }
     public function edit_form_three(Request $request, $id=null)
@@ -265,7 +269,7 @@ class MaterialProductsController extends Controller
     public function update_edit_form_three(Request $request, $id=null)
     {
         $result  =   $this->MartialProductRepository->update_form_three($id, $request);
-        Flash::success(__('dso.material_products_created'));
+        if($result) Flash::success(__('global.updated'));
         return redirect()->route('list-material-products');
     }
 
