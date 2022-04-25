@@ -19,35 +19,31 @@ class UserSeeder extends Seeder
         $credentials = [
             'email'      => '123',
             'password'   => config('auth.password'),
-            'first_name' => 'Christopher',
+            'full_name' => 'Christopher',
         ];
         $userDb = Sentinel::registerAndActivate( $credentials );
 
         #======Create Role=======
         Sentinel::getRoleRepository()->createModel()->create( [
-            'name'       => 'Admin',
+            'name'       => 'Super Admin',
             'slug'       => 'admin',
         ])->users()->attach($userDb);
 
-        Sentinel::getRoleRepository()->createModel()->create( [
-            'name'       => 'User',
-            'slug'       => 'user',
-            'permissions'=> config('permission'),
-        ] );
 
-        $manager = Sentinel::getRoleRepository()->createModel()->create([
-            'name'       => 'Manager',
-            'slug'       => 'manager',
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'name'       => 'System Admin',
+            'slug'       => 'system-admin',
             'permissions'=> config('permission'),
         ]);
 
         $employee = Sentinel::getRoleRepository()->createModel()->create([
-            'name'       => 'Employee',
-            'slug'       => 'employee',
+            'name'       => 'Staff',
+            'slug'       => 'staff',
             'permissions'=> config('permission'),
         ]);
 
-        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '324','password'   => config('auth.password'),'first_name' => 'Anthony',]));
-        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '321','password'   => config('auth.password'),'first_name' => 'Christopher',]));
+        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '456','password'   => config('auth.password'),'full_name' => 'Anthony', 'alias_name' => "Anton"]));
+        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '678','password'   => config('auth.password'),'full_name' => 'Christopher', 'alias_name' => "Chris"]));
     }
 }

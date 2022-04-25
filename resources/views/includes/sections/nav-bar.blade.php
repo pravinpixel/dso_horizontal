@@ -30,7 +30,7 @@
                         <img src="{{ asset('public/asset/images/user.jpg') }}" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
-                        <span class="account-user-name">{{ Sentinel::getUser()->first_name }}</span>
+                        <span class="account-user-name">{{ Sentinel::getUser()->full_name }}</span>
                         <span class="account-position">{{ Sentinel::getUser()->roles[0]->name }}</span>
                     </span>
                 </a>

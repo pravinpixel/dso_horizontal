@@ -100,8 +100,9 @@ class MigrationCartalystSentinel extends Migration
             $table->string('password');
             $table->text('permissions')->nullable();
             $table->timestamp('last_login')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->string('full_name')->nullable();
+            $table->string('alias_name')->nullable();
+            $table->integer('department')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->unique('email');

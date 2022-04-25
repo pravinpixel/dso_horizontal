@@ -11,9 +11,8 @@
                 <thead>
                     <tr>
                         <th class="table-th">No</th>
-                        <th class="table-th">Name</th>
-                        <th class="table-th">Login ID</th>
-                        <th class="table-th">Last Login</th>
+                        <th class="table-th">Full Name</th>
+                        <th class="table-th">Department</th>
                         <th class="table-th">Roles</th>
                         <th class="table-th">Status</th>
                         <th class="table-th" width="100px">Action</th>
@@ -35,15 +34,13 @@
             ajax: "{{ route('user.index') }}",
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'first_name', name: 'first_name'},
-                {data: 'email', name: 'email'},               
-                {data: 'last_login', name: 'last_login'},
+                {data: 'full_name', name: 'full_name'},
+                {data: 'department', name: 'department'},
                 {data: 'role', name: 'role', defaultContent: '',},
                 {data: 'status', name: 'status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-      
     });
 </script>  
 @endsection

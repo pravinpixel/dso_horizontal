@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\Masters\Departments;
+use App\Models\User;
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
-use DataTables;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
+
 class UserController extends Controller
 {
     public function index(Request $request)
@@ -19,10 +24,13 @@ class UserController extends Controller
                                                 ->whereHas('roles',function($q){
                                                     $q->whereNotIn('slug',['admin','superadmin']);
                                                 });
-            return Datatables::eloquent($data)
+            return FacadesDataTables::eloquent($data)
 
             ->addColumn('role', function ($data) {
                 return $data->roles()->first()->name;
+            })
+            ->addColumn('department', function ($data) {
+                return Departments::find($data->department)->name ?? '-';
             })
             ->addColumn('status', function($data){
                 $status = 'Active';
@@ -53,13 +61,16 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        $roleDb = Sentinel::getRoleRepository()->whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
-        $userRole = null;
-        return view('masters.user.create', compact('roleDb','userRole'));
+        $roleDb         = Sentinel::getRoleRepository()->whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
+        $departmentDb   = Departments::latest()->pluck('name','id');
+        $userRole       = null;
+        $userDepartment = null;
+        return view('masters.user.create', compact('roleDb','userRole', 'departmentDb', 'userDepartment'));
     }
 
     public function store(Request $request)
     { 
+         
  
         $rules = [
             'email'     => 'required|unique:users|max:255',
@@ -73,20 +84,26 @@ class UserController extends Controller
         ];
 
         $this->validate($request, $rules, $customMessages);
-
-        //  Auth User Details
-        // $user  = Sentinel::getUser()->first_name;
-    
+  
         try {
-            $credentials = [
-                'first_name' => $request->first_name,
-                'last_name'  => $request->last_name,
+ 
+            //  Create a User Record
+            $user   =  User::create([
+                'full_name'  => $request->full_name,
+                'alias_name' => $request->alias_name,
+                'department' => $request->department,
                 'email'      => $request->email,
-                'password'   => config('auth.password'),
-            ];
+                'password'   => Hash::make(config('auth.password')),
+            ]);
 
-            // Create User Record
-            $user = Sentinel::registerAndActivate($credentials);
+            // find a Users
+            $user_activation = Sentinel::findById($user->id);
+
+            //  Create Activation Record for User 
+            $activation      = Activation::create($user_activation);
+
+            // To Complete a Activation 
+            Activation::complete($user_activation, $activation->code);
  
             //Attach the user to the role
             $role = Sentinel::findRoleById($request->role_id);
@@ -129,14 +146,18 @@ class UserController extends Controller
 
         $roleDb = Sentinel::getRoleRepository()->whereNotIn('slug',['admin','superadmin'])->pluck('name','id');
 
+        $departmentDb   = Departments::latest()->pluck('name','id');
+        $userRole       = null;
+        $userDepartment = $user->department;
+        
         $userRole = $user->roles[0]->id ?? null;
             
-        return view('masters.user.edit', compact('user','roleDb','userRole'));
+        return view('masters.user.edit', compact('user','roleDb','userRole','departmentDb','userDepartment'));
     }
 
     public function update(Request $request , $id)
     {
-        $user = Sentinel::findById($id);
+        $user = User::find($id);
        
         if (empty($user)) {
             Flash::error( __('global.not_found'));
@@ -145,28 +166,51 @@ class UserController extends Controller
         
         try {
        
-            $oldRole = Sentinel::findRoleById($user->roles[0]->id ?? null);
-           
-            $credentials = [
-                'first_name' => $request->first_name,
-                'last_name'  => $request->last_name,
+            //  Create a User Record
+            $updated_user = $user->update([
+                'full_name'  => $request->full_name,
+                'alias_name' => $request->alias_name,
+                'department' => $request->department,
                 'email'      => $request->email,
-                'password'   => config('auth.password'),
-            ];
+                'password'   => Hash::make(config('auth.password')),
+            ]);
 
-            if ($oldRole) {
-                //Remove a user from a role.
-                $oldRole->users()->detach($user);
-            }
+            // find a Users
+            $user_activation = Sentinel::findById($updated_user->id);
 
-            //Valid User For Update
+            //  Create Activation Record for User 
+            $activation      = Activation::create($user_activation);
+
+            // To Complete a Activation 
+            Activation::complete($user_activation, $activation->code);
+ 
+            //Attach the user to the role
             $role = Sentinel::findRoleById($request->role_id);
+            $role->users()->attach($updated_user);
+            
+            // $oldRole = Sentinel::findRoleById($user->roles[0]->id ?? null);
+           
+            // $credentials = [
+            //     'full_name'  => $request->full_name,
+            //     'alias_name' => $request->alias_name,
+            //     'department' => $request->department,
+            //     'email'      => $request->email,
+            //     'password'   => config('auth.password'),
+            // ];
 
-            //Assign a user to a role.
-            $role->users()->attach($user);
+            // if ($oldRole) {
+            //     //Remove a user from a role.
+            //     $oldRole->users()->detach($user);
+            // }
 
-            //Update User
-            Sentinel::update($user, $credentials);
+            // //Valid User For Update
+            // $role = Sentinel::findRoleById($request->role_id);
+
+            // //Assign a user to a role.
+            // $role->users()->attach($user);
+
+            // //Update User
+            // Sentinel::update($user, $credentials);
             
             Flash::success( __('auth.update_successful'));
             return redirect()->route('user.index');

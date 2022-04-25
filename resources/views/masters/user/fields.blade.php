@@ -5,15 +5,21 @@
     </div>
 </div>
 <div class="row mb-3">
-    <label class="col-2 text-end col-form-label">First Name</label>
+    <label class="col-2 text-end col-form-label">Full Name</label>
     <div class="col-10">
-        {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('full_name', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="row mb-3">
-    <label class="col-2 text-end col-form-label">Last Name</label>
+    <label class="col-2 text-end col-form-label">Alias Name</label>
     <div class="col-10">
-        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('alias_name', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="row mb-3">
+    <label class="col-2 text-end col-form-label">Department</label>
+    <div class="col-10">
+        {!! Form::select('department',$departmentDb , $userDepartment, ['class' =>'form-control', 'placeholder' => '-- Select Role --'])  !!}
     </div>
 </div>
 <div class="row mb-3">
@@ -22,3 +28,4 @@
         {!! Form::select('role_id',$roleDb , $userRole, ['class' =>'form-control', 'placeholder' => '-- Select Role --'])  !!}
     </div>
 </div>
+
