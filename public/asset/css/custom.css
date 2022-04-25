@@ -307,3 +307,23 @@ to {
     font-size: 19px;
     color: #12326a;
 }
+.ms-options {
+    min-height: auto !important;
+    max-height: 180px !important;
+}
+.ms-options  ul li {
+    list-style: none !important;
+}
+.ms-options  ul {
+    list-style-type: none !important;
+    list-style: none !important;
+    padding:0  !important;
+    margin: 0 !important;
+}
+
+.ms-options-wrap > button:focus, .ms-options-wrap > button {
+   display:block;width:100%;padding:.45rem 2.5rem .45rem .9rem;-moz-padding-start:calc(.9rem - 3px);font-size:.9rem;font-weight:400;line-height:1.5;color:#6c757d !important;background-color:#fff !important;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right .9rem center;background-size:16px 12px;border:1px solid #dee2e6 !important;border-radius:.25rem !important;-webkit-transition:border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;transition:border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;-webkit-appearance:none;-moz-appearance:none;appearance:none
+}
+.ms-options-wrap > button:after {
+    display: none !important;
+}

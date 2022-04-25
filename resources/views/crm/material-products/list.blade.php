@@ -81,7 +81,7 @@
                     <select name="owner" ng-model="filter.owner" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($owners as $row)
-                            <option value="{{ $row->id }}">{{ $row->first_name }} {{ $row->last_name }}</option>
+                            <option value="{{ $row->id }}">{{ $row->alias_name }}</option>
                         @endforeach 
                     </select>
                 </div> 

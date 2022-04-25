@@ -42,7 +42,21 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Access </label>
         <div class="col-8">
-            {!! Form::select('access', $house_type_db , $material_product->access ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
+            <select name="access[]" multiple="multiple" id="multiple_access" class="form-select">
+                <option>All</option>
+                @foreach ($staff_by_department as $row) 
+                    <optgroup label="{{ $row['name']}}">
+                        @foreach ($row['list'] as $staff) 
+                            <option 
+                                {{ in_array( $staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
+                                {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
+                                value="{{ $staff->id }}">
+                               {{ $staff->alias_name }}
+                            </option>
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
         </div>
     </div>
 </div>
@@ -103,4 +117,18 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+
+@section('styles')
+    <link rel="stylesheet" href="https://www.jquery-az.com/jquery/css/jquery.multiselect.css">
+@endsection
+
+@section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+    <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
+    <script>
+        $('#multiple_access').multiselect({
+            placeholder: '-- Select --'
+        });
+    </script>
+@endsection

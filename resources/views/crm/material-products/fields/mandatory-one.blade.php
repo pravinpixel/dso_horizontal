@@ -108,7 +108,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require usage  tracking <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('usage_tracking', ["No", "Yes"] , $material_product->usage_tracking ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+            {!! Form::select('usage_tracking', ["1" => "Yes", "0" => "No"] , $material_product->usage_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
         </div>
     </div>
 </div>
@@ -116,7 +116,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require outlife tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('outlife_tracking', ["No", "Yes"] , $material_product->outlife_tracking ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+            {!! Form::select('outlife_tracking', ["1" => "Yes", "0" => "No"] , $material_product->outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
         </div>
     </div>
 </div>

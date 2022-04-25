@@ -17,9 +17,10 @@ class UserSeeder extends Seeder
         
         #========Create User======
         $credentials = [
-            'email'      => '123',
-            'password'   => config('auth.password'),
-            'full_name' => 'Christopher',
+            'email'         => '123',
+            'password'      => config('auth.password'),
+            'full_name'     => 'Christopher',
+            'alias_name'    => 'Christopher',
         ];
         $userDb = Sentinel::registerAndActivate( $credentials );
 

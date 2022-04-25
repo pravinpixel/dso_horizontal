@@ -13,8 +13,7 @@ use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
 use App\Models\User;
 use App\Models\SaveMySearch;
-use Laracasts\Flash\Flash;
-use Storage;
+use Laracasts\Flash\Flash; 
 use Illuminate\Http\Response;
 use App\Exports\BulkExport;
 use App\Imports\BulkImport;
@@ -23,7 +22,8 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialProductsController extends Controller
 {
@@ -178,16 +178,41 @@ class MaterialProductsController extends Controller
         $storage_room_db    =   StorageRoom::pluck('name','id');
         $house_type_db      =   HouseTypes::pluck('name','id');
         $departments_db     =   Departments::pluck('name','id');
-        $iqc_status         =   ["Pass", "Fail"];
-        $owners             =   User::pluck("first_name", 'id');
-        
+        $iqc_status         =   [1 => "Pass", 0 => "Fail"];
+        $owners             =   User::pluck("alias_name", 'id');
+
+        $department             =   Departments::get();
+        $staff_db           =   [];
+
+
+        foreach($department as $data) {
+            $staff_department = User::where('department', $data->id)->get();
+
+            $user_group = [];
+
+            foreach($staff_department as $user) {
+                $user_group[] = $user;
+            }
+            $staff_db[] = [
+                "id"   =>  $data->id ?? "-",
+                "name" =>  $data->name ?? "-",
+                "list" =>  $user_group,
+            ];
+        }
+
+        $staff_db_decode        =   json_encode($staff_db);
+        $staff_by_department    =   $staff_db;
+       
+        $material_product_dropdown = json_decode($material_product->access);
         return view('crm.material-products.wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
             'departments_db',
             'material_product',
             'iqc_status',
-            'owners'
+            'owners',
+            'staff_by_department',
+            'material_product_dropdown'
         ]));
     }
     public function form_two_store(Request $request)
@@ -239,6 +264,7 @@ class MaterialProductsController extends Controller
         $material_product =  MaterialProducts::findOrFail($id);
         $storage_room_db  =  StorageRoom::pluck('name','id');
         $house_type_db    =  HouseTypes::pluck('name','id');
+        $staff_db         =  User::pluck('alias_name', 'id');
         $departments_db   =  Departments::pluck('name','id');
         $iqc_status       =  ["Pass", "Fail"];
         $edit_mode        =  true;
@@ -247,6 +273,7 @@ class MaterialProductsController extends Controller
         return view('crm.material-products.edit-wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
+            'staff_db',
             'departments_db',
             'material_product',
             'iqc_status',
