@@ -188,29 +188,6 @@ class UserController extends Controller
             $role = Sentinel::findRoleById($request->role_id);
             $role->users()->attach($updated_user);
             
-            // $oldRole = Sentinel::findRoleById($user->roles[0]->id ?? null);
-           
-            // $credentials = [
-            //     'full_name'  => $request->full_name,
-            //     'alias_name' => $request->alias_name,
-            //     'department' => $request->department,
-            //     'email'      => $request->email,
-            //     'password'   => config('auth.password'),
-            // ];
-
-            // if ($oldRole) {
-            //     //Remove a user from a role.
-            //     $oldRole->users()->detach($user);
-            // }
-
-            // //Valid User For Update
-            // $role = Sentinel::findRoleById($request->role_id);
-
-            // //Assign a user to a role.
-            // $role->users()->attach($user);
-
-            // //Update User
-            // Sentinel::update($user, $credentials);
             
             Flash::success( __('auth.update_successful'));
             return redirect()->route('user.index');
