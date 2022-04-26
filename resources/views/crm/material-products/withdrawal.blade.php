@@ -90,8 +90,6 @@
                                     </a> 
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                      
-                                     
                                     </div>
                                 </div>
                             </td> 
@@ -391,8 +389,7 @@
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
-							 </tr>
-					 
+							</tr>
 						@endif
 						
 						@if ($key ==0)
@@ -413,36 +410,6 @@
             </table>
             <div class="text-end ">
                 <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
-            </div>
-            <table class="table bg-white table-bordered table-hover custom-center mt-3">
-                <thead> 
-                    <tr>
-                        <th  class="bg-dark  text-white" style="padding: 5px !important;" colspan="7">Material/In-house Product Outlife Information</th>
-                    </tr>
-                    <tr>
-                          <th class="table-th child-td">Item description</th>
-						   <th class="table-th child-td">Batch#/ Serial#</th>
-                        <th class="table-th child-td">Date & time stamp</th>                       
-                        <th class="table-th child-td">Auto-generate unique barcode label</th>
-                        <th class="table-th child-td">Outlife expiry from last date/time</th>
-                        <th class="table-th child-td">Outlife expiry from current date/time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for ($key=0; $key<2; $key++)
-                        <tr>
-							<td class="child-td">Prepreg C3K</td>						 
-                            <td class="child-td">Roll2/1</td>                           
-                            <td class="child-td">HuiBeng</td>
-                            <td class="child-td">Roll2/1</td> 
-                            <td class="child-td">29 days 17hrs</td>
-                            <td class="child-td">11/09/2021 08:00</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-            <div class="text-end ">
-                <button class="btn btn-primary rounded-pill">Print outlife expiry</button>
             </div>
         </div> 
         <div class="tab-pane" id="Deduct_track_outlife">

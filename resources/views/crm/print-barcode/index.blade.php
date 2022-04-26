@@ -98,9 +98,9 @@
                 <div class="col-md-3 mb-2 text-start">
                     <label  for="td_expt" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" name="" id="td_expt">Used for TD/EXPT</label>
                 </div>
-                <div class="col-md-3 mb-2 text-start">
+                {{-- <div class="col-md-3 mb-2 text-start">
                     <label  for="Outlife" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" name="" id="Outlife">Outlife Expiry</label>
-                </div>
+                </div> --}}
                 <div class="col-md-3 mb-2 text-start">
                     <label  for="DOD" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" name="" id="DOD">DOD</label>
                 </div>
