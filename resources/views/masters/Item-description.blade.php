@@ -71,7 +71,7 @@
         <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0">
                 <div class="card-header bg-light p-2">
-                    <strong class="h5 text-primary">Storage Room</strong> 
+                    <strong class="h5 text-primary">storage area</strong> 
                     <div class="btn-group w-100 mt-1">
                         <input  type="text" name="storeage_room" ng-model="storeage_room" class="form-control" placeholder="Type here" ng-required required>
                         <button  ng-click="StoreStorageRoomData(storeage_room ,'storage_room')" class="btn btn-primary"><i class="fa fa-plus"></i></button>

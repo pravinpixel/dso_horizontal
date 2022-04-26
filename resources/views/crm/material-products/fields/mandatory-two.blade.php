@@ -1,6 +1,6 @@
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Storage Room <sup class="text-danger">*</sup></label>
+        <label for="" class="col-4">storage area <sup class="text-danger">*</sup></label>
         <div class="col-8">
             {!! Form::select('storage_room', $storage_room_db , $material_product->storage_room ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required'])  !!}
         </div>

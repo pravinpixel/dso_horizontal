@@ -29,14 +29,14 @@
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_size" class="form-check-input me-1">Pkt size </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_quantity" class="form-check-input me-1">Qty</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_owner_one" class="form-check-input me-1">Owner1/2 </label> 
-                            <label class="dropdown-item"><input type="checkbox" ng-model="on_storage_room" class="form-check-input me-1">Storage Room </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_storage_room" class="form-check-input me-1">storage area </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_house_type" class="form-check-input me-1">Housing type  </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_date_of_expiry" class="form-check-input me-1">DOE </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_iqc_status" class="form-check-input me-1">QC status  </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label>  --}}
                              <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Category selection</label>
                              <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner ½</label>
-                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Storage room</label>
+                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">storage area</label>
                              <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing type </label>
                              <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing #</label>
                              <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner 1/2</label>
@@ -95,7 +95,7 @@
                     </select>
                 </div> 
                 <div class="col">
-                    <label for="" class="form-label">Storage Room</label>
+                    <label for="" class="form-label">storage area</label>
                     <select name="storage_area" ng-model="filter.storage_area" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($storage_room_db as $row)
@@ -144,7 +144,7 @@
                         <i ng-click="sort_by('owner_one', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('owner_one', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
-                    <th ng-show="on_storage_room" class="position-relative table-th child-td">Storage Room
+                    <th ng-show="on_storage_room" class="position-relative table-th child-td">storage area
                         <i ng-click="sort_by('storage_room', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('storage_room', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>

@@ -107,7 +107,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Cost per unit</label>
         <div class="col-8">
-           {!! Form::text('cost_per_unit', $material_product->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+           {!! Form::number('cost_per_unit', $material_product->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>

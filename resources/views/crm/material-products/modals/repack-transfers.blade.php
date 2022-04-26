@@ -36,7 +36,7 @@
                                 <tr>
                                     <th width="200px">Repack Size(L)</th>
                                      <th>Qty</th>
-                                    <th>Storage Room</th>
+                                    <th>storage area</th>
                                     <th>Housing type</th>
                                      <th>Housing No</th>
                                     <th>Owner 1</th>

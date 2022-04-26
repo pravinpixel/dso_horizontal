@@ -11,7 +11,7 @@
                     <th class="table-th child-td">Pkt Size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage Room</th>
+                    <th class="table-th child-td">storage area</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
                     <th class="table-th child-td">DOE</th>

@@ -21,7 +21,7 @@
                         <div class="dropdown-menu" aria-labelledby="topnav-ecommerce" >
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Category selection</label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner ½</label>
-                            <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Storage room</label>
+                            <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">storage area</label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing type </label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Housing #</label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Owner 1/2</label>
@@ -59,7 +59,7 @@
                     <th class="table-th child-td">Pkt Size</th>
                     <th class="table-th child-td">Qty</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">Storage Room</th>
+                    <th class="table-th child-td">storage area</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
                     <th class="table-th child-td">DOE</th>

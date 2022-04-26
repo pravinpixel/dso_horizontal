@@ -10,9 +10,9 @@
                     <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                         <tr>
                             <th width="200px">Transfer Qty</th>
-                            {{-- <th>Storage room (able to add in new rooms in the future)</th>
+                            {{-- <th>storage area (able to add in new rooms in the future)</th>
                             <th>Housing type (able to add in new housing type in the future)</th> --}}
-                            <th>Storage room </th>
+                            <th>storage area </th>
                             <th>Housing type </th>
                             <th>Housing No.</th>
                             <th>Owner 1</th>

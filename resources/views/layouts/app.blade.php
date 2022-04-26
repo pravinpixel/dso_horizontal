@@ -198,14 +198,14 @@
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">storage area	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Item description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Keith/HuiBeng	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">storage area	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Item description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
@@ -228,7 +228,7 @@
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-action btn">Item Description Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Batch/Serial Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
-                            <li class="list-group-item list-group-item-action btn">Storage Room	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
+                            <li class="list-group-item list-group-item-action btn">storage area	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">QC Status	 Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li> 
                             <li class="list-group-item list-group-item-action btn">Used For TD/Expt Search - <small class="float-end text-secondary">02/12/2022 at 2.35 pm</small></li>  
                         </ul>
@@ -262,7 +262,7 @@
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Serial# *  (key in NIL if not applicable)</li>
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">COC/COA/Mill Cert (attach COC/COA/Mill Cert document)* - up to 3 only.</li>
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Statutory body (able to add in new bodies in the future)* for material not product</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Storage room (able to add in new rooms in the future)*</li>
+                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">storage area (able to add in new rooms in the future)*</li>
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Housing type (able to add in new housing type in the future)*</li>
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 1 * </li>
                         <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 2 (SE/PL/FM)*</li>
