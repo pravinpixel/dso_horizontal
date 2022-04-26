@@ -24,6 +24,8 @@ app.controller('SearchAddController', function($scope, $http) {
     var edit_material_products_url      =   $('#edit-material-products').val();
     var delete_material_products_url    =   $('#delete-material-products').val();
     var get_save_search_url             =   $('#get-save-search').val();
+    $scope.auth_id                      =   $('#auth-id').val();
+    $scope.auth_role                    =   $('#auth-role').val();
     
 
     // ==== Get Data form DB ====

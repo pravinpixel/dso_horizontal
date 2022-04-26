@@ -118,8 +118,8 @@
                     </div>
                 </div> 
             </div>
-        {{-- ====== Filletrs ===--}} 
-    
+        {{-- ====== Filletrs ===--}}
+        
         <table class="table table-centered table-bordered table-hovered bg-white">
             <thead>
                 <tr>
@@ -167,17 +167,19 @@
                         <i ng-click="sort_by('item_description', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('item_description', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
-                    <th class="table-th child-td">Actions </th>
+                    <th class="table-th child-td">Actions 
+                        
+                    </th>
                 </tr> 
             </thead>  
             <tbody>
-                <tr class="table-tr" ng-show="material_products.length != 0" ng-repeat="(index,row) in material_products.data track by row.id">
+                <tr class="table-tr" ng-if="row.access.includes(auth_id) || auth_role == 'admin'" ng-repeat="(index,row) in material_products.data track by row.id">
                     <td colspan="12" class="p-0 border-bottom ">
                         <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
                             <tr>
                                 <td class="child-td-lg" ng-show="on_item_description">
                                     <i class="bi bi-caret-right-fill float-start table-toggle-icon  " data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
-                                    @{{ row.item_description }} |   @{{ row.id }} 
+                                    @{{ row.item_description }}
                                 </td>
                                 <td class="child-td" ng-show="on_brand">@{{ row.brand }}</td>
                                 <td class="child-td" ng-show="on_batch"></td>
@@ -282,7 +284,7 @@
 
         <div class="pb-3">
             <page-pagination></page-pagination>
-        </div>  
+        </div>
 
         {{-- ======= START : App Models ==== --}}
             @include('crm.material-products.modals.view-list')
@@ -293,7 +295,6 @@
             @include('crm.material-products.modals.repack-outlife')
             @include('crm.material-products.modals.import-from-excel')
         {{-- ======= END : App Models ==== --}}
-         
     </div>
 @endsection
 
@@ -303,6 +304,8 @@
     <input type="hidden" id="edit-material-products" value="{{ route('material-product.edit-form-one') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
+    <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
+    <input type="hidden"   id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -310,4 +313,4 @@
     <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
-@endsection
+@endsection 

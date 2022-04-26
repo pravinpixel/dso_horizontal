@@ -70,6 +70,7 @@ class MaterialProductsController extends Controller
         }
 
         $material_product       =   MaterialProducts::latest()->paginate(5); 
+        
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -133,7 +134,7 @@ class MaterialProductsController extends Controller
         $category_selection_db  =   MasterCategories::pluck('name','id');
         $statutory_body_db      =   StatutoryBody::pluck('name','id');
         $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
-        $euc_material_db        =   ['Yes', 'No'];
+        $euc_material_db        =   [1 =>'Yes', 0 => 'No'];
         $edit_mode  = false;
 
         return view('crm.material-products.wizard.mandatory-one', compact([
@@ -245,7 +246,7 @@ class MaterialProductsController extends Controller
         $category_selection_db  =   MasterCategories::pluck('name','id');
         $statutory_body_db      =   StatutoryBody::pluck('name','id');
         $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
-        $euc_material_db        =   ['Yes', 'No'];
+        $euc_material_db        =   [1 =>'Yes', 0 => 'No'];
         $edit_mode  = true;
 
  

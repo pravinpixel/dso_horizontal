@@ -100,7 +100,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">EUC material  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('euc_material', $euc_material_db , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+            {!! Form::select('euc_material', $euc_material_db , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required'])  !!}
         </div>
     </div>
 </div>
