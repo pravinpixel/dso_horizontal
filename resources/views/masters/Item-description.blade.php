@@ -115,7 +115,7 @@
         <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0">
                 <div class="card-header bg-light p-2">
-                    <strong class="h5 text-primary">House Type</strong> 
+                    <strong class="h5 text-primary">Housing Type</strong> 
                     <div class="btn-group w-100 mt-1">
                         <input  type="text" name="house_type" ng-model="house_type" class="form-control" placeholder="Type here" ng-required required>
                         <button  ng-click="StoreHouseTypeData(house_type ,'house_types')" class="btn btn-primary"><i class="fa fa-plus"></i></button>

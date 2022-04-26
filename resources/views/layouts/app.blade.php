@@ -157,7 +157,7 @@
                                 <select name="" id="" class="form-select">
                                     <option value="">-- select --</option>
                                     <option value="1">Yes</option>
-                                    <option value="2">No but use for TD & EXPT</option> 
+                                    <option value="2">No but used for TD/Expt</option> 
                                 </select>
                             </div>
                             <div class="col-6 text-start mb-2 px-1">

@@ -309,7 +309,8 @@ to {
 }
 .ms-options {
     min-height: auto !important;
-    max-height: 180px !important;
+    max-height: 200px !important;
+    padding: 10px;
 }
 .ms-options  ul li {
     list-style: none !important;
@@ -326,4 +327,12 @@ to {
 }
 .ms-options-wrap > button:after {
     display: none !important;
+}
+
+.ms-search {
+    margin-bottom: 15px;
+}
+
+.ms-options-wrap > .ms-options > .ms-search input {
+    border: 1px groove !important;
 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\Departments;
+use App\Models\RoleUsers;
 use App\Models\User;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
@@ -157,42 +159,25 @@ class UserController extends Controller
 
     public function update(Request $request , $id)
     {
-        $user = User::find($id);
        
-        if (empty($user)) {
-            Flash::error( __('global.not_found'));
-            return redirect()->route('user.index');
-        }
-        
         try {
-       
-            //  Create a User Record
-            $updated_user = $user->update([
+        
+            User::find($id)->update([
                 'full_name'  => $request->full_name,
                 'alias_name' => $request->alias_name,
                 'department' => $request->department,
                 'email'      => $request->email,
-                'password'   => Hash::make(config('auth.password')),
             ]);
 
-            // find a Users
-            $user_activation = Sentinel::findById($updated_user->id);
-
-            //  Create Activation Record for User 
-            $activation      = Activation::create($user_activation);
-
-            // To Complete a Activation 
-            Activation::complete($user_activation, $activation->code);
- 
-            //Attach the user to the role
-            $role = Sentinel::findRoleById($request->role_id);
-            $role->users()->attach($updated_user);
-            
-            
+            RoleUsers::where("user_id",$id)->update([
+                "role_id"  => $request->role_id,
+            ]);
+        
             Flash::success( __('auth.update_successful'));
             return redirect()->route('user.index');
 
         } catch (\Throwable $th) {
+            Flash::error( __('auth.failed'));
             return redirect()->route('user.index');
         }
     }

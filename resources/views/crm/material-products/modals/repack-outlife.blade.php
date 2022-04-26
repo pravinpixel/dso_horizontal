@@ -11,7 +11,7 @@
                     <thead class="bg-light text-primary-2 table-bordered"> 
                         <tr>
                             <th width="200px">(Mother)Material/Product Draw status</th>
-                            <th>Date/time stamp</th>
+                            <th>Date & time stamp</th>
                             <th>Last accessed</th>
                             <th>Input repack amt (lnyards)</th>
                             <th>Remain amt (lnyards)</th>
@@ -55,8 +55,10 @@
                             <td class="text-center"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
                             <td>29 days 17hrs</td>
                             <td>
+                                <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i><br><br>
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
+                             
                         </tr>
                     </tbody>
                 </table>

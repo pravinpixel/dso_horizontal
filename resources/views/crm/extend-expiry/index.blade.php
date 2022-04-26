@@ -162,12 +162,12 @@
 
                             <h1 class="h5">Accordance to EG1 Chemical UIMS 2021</h1>
 
-                            <ul>
-                                <li>2 years OEM unstated (liquids , others)</li>
-                                <li>5 years OEM unstated (dry , others)</li>
-                                <li>5 years OEM declare does not expire</li>
-                                <li>DSO in houes (ask Domain PMTS)</li> 
-                            </ul>
+                            <div>
+                                <div>-   2 years OEM unstated (liquids , others)</div>
+                                <div>-   5 years OEM unstated (dry , others)</div>
+                                <div>-   5 years OEM declare does not expire</div>
+                                <div>-   DSO in house (ask Domain PMTS)</div> 
+                            </div>
                         </div>
                         <div class="col-sm-8">
                             <div class="tab-content  p-3" id="v-pills-tabContent">

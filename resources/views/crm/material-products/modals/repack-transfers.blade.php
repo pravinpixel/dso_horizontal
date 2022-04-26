@@ -13,7 +13,7 @@
                             <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                 <tr>
                            
-                                    <th>Time stamp</th>
+                                    <th>Date&time stamp</th>
                                     <th>Current accessed</th>
                                     <th>Input Used amt (L)</th>
                                     <th>Remain Amt (L)</th>

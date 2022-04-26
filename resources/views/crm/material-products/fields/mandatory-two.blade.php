@@ -43,18 +43,19 @@
         <label for="" class="col-4">Access </label>
         <div class="col-8">
             <select name="access[]" multiple="multiple" id="multiple_access" class="form-select">
-                <option>All</option>
-                @foreach ($staff_by_department as $row) 
-                    <optgroup label="{{ $row['name']}}">
-                        @foreach ($row['list'] as $staff) 
-                            <option 
-                                {{ in_array( $staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
-                                {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
-                                value="{{ $staff->id }}">
-                               {{ $staff->alias_name }}
-                            </option>
-                        @endforeach
-                    </optgroup>
+                @foreach ($staff_by_department as $row)  
+                    @if (count($row['list']) != 0)
+                        <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
+                            @foreach ($row['list'] as $staff) 
+                                <option 
+                                    {{ in_array( $staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
+                                    {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
+                                    value="{{ $staff->id }}">
+                                {{ $staff->alias_name }}
+                                </option>
+                            @endforeach
+                        </optgroup>
+                    @endif 
                 @endforeach
             </select>
         </div>
@@ -128,7 +129,10 @@
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
     <script>
         $('#multiple_access').multiselect({
-            placeholder: '-- Select --'
+            placeholder: '-- Select --',
+            search: true,
+            selectAll:true,
+            selectGroup : true,
         });
     </script>
 @endsection

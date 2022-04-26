@@ -181,11 +181,13 @@ class MaterialProductsController extends Controller
         $iqc_status         =   [1 => "Pass", 0 => "Fail"];
         $owners             =   User::pluck("alias_name", 'id');
 
-        $department             =   Departments::get();
+        $department         =   Departments::get();
+
         $staff_db           =   [];
 
 
         foreach($department as $data) {
+             
             $staff_department = User::where('department', $data->id)->get();
 
             $user_group = [];
@@ -193,6 +195,7 @@ class MaterialProductsController extends Controller
             foreach($staff_department as $user) {
                 $user_group[] = $user;
             }
+            
             $staff_db[] = [
                 "id"   =>  $data->id ?? "-",
                 "name" =>  $data->name ?? "-",
@@ -203,7 +206,7 @@ class MaterialProductsController extends Controller
         $staff_db_decode        =   json_encode($staff_db);
         $staff_by_department    =   $staff_db;
        
-        $material_product_dropdown = json_decode($material_product->access);
+        $material_product_dropdown = json_decode($material_product->access ?? null);
         return view('crm.material-products.wizard.mandatory-two', compact([
             'storage_room_db',
             'house_type_db',
@@ -244,6 +247,7 @@ class MaterialProductsController extends Controller
         $euc_material_db        =   ['Yes', 'No'];
         $edit_mode  = true;
 
+ 
         return view('crm.material-products.edit-wizard.mandatory-one', compact([
             'category_selection_db',
             'statutory_body_db',
@@ -264,11 +268,34 @@ class MaterialProductsController extends Controller
         $material_product =  MaterialProducts::findOrFail($id);
         $storage_room_db  =  StorageRoom::pluck('name','id');
         $house_type_db    =  HouseTypes::pluck('name','id');
-        $staff_db         =  User::pluck('alias_name', 'id');
         $departments_db   =  Departments::pluck('name','id');
         $iqc_status       =  ["Pass", "Fail"];
         $edit_mode        =  true;
-        $owners             =   User::pluck("first_name", 'id');
+        $owners           =    User::pluck("alias_name", 'id');
+
+        $department       =   Departments::get();
+        $staff_db         =   [];
+
+
+        foreach($department as $data) {
+            $staff_department = User::where('department', $data->id)->get();
+
+            $user_group = [];
+
+            foreach($staff_department as $user) {
+                $user_group[] = $user;
+            }
+            $staff_db[] = [
+                "id"   =>  $data->id ?? "-",
+                "name" =>  $data->name ?? "-",
+                "list" =>  $user_group,
+            ];
+        }
+
+        $staff_db_decode        =   json_encode($staff_db);
+        $staff_by_department    =   $staff_db;
+
+        $material_product_dropdown = json_decode($material_product->access);
 
         return view('crm.material-products.edit-wizard.mandatory-two', compact([
             'storage_room_db',
@@ -278,7 +305,9 @@ class MaterialProductsController extends Controller
             'material_product',
             'iqc_status',
             'edit_mode',
-            'owners'
+            'owners',
+            'staff_by_department',
+            'material_product_dropdown'
         ]));
     }
     public function update_edit_form_two(Request $request, $id=null)

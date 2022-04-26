@@ -194,11 +194,11 @@
 					    <th class="table-th child-td-lg"> Item Description</th>                    
                         <th class="table-th child-td">Batch/Serial#</th>
                         <th class="table-th child-td">Last accessed</th>
-                        <th class="table-th">Time stamp</th> 
+                        <th class="table-th">Date&time stamp</th> 
                         <th class="table-th">Used Amt (kg)</th>
                         <th class="table-th">Remain Amt (kg)</th>
                         <th class="table-th">Remarks</th>
-                        <th class="table-th">Action</th>
+                        <th class="table-th"> <i class="text-danger bi bi-trash3-fill"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -221,7 +221,7 @@
                     <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of material/product</label>
                 </div>
                 <div class="col-6 ms-auto text-end">
-                    <button class="btn btn-success h-100 rounded-pill">Print Barcode</button>
+                    {{-- <button class="btn btn-success h-100 rounded-pill">Print Barcode</button> --}}
                     <button class="btn btn-info h-100 rounded-pill">Export Logsheet</button>
                     <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
                 </div>
@@ -243,7 +243,7 @@
                             <th class="table-th child-td">DOE</th>
                             <th class="table-th child-td">QC status</th>
                             <th class="table-th child-td">Used for TD/Expt</th> 
-							  <th class="table-th child-td">Actions</th>
+							 <th class="table-th child-td">Actions</th>
                         </tr> 
                     </thead>
                     @for ($key=0; $key<3; $key++)
@@ -422,7 +422,7 @@
                     <tr>
                           <th class="table-th child-td">Item description</th>
 						   <th class="table-th child-td">Batch#/ Serial#</th>
-                        <th class="table-th child-td">Date/time stamp</th>                       
+                        <th class="table-th child-td">Date & time stamp</th>                       
                         <th class="table-th child-td">Auto-generate unique barcode label</th>
                         <th class="table-th child-td">Outlife expiry from last date/time</th>
                         <th class="table-th child-td">Outlife expiry from current date/time</th>
@@ -592,7 +592,7 @@
 						<th class="table-th child-td">Brand</th>
                         <th class="table-th child-td">Batch#/ Serial#</th>
 						<th class="table-th child-td">Last accessed</th>
-						<th class="table-th child-td">Date/time stamp</th>
+						<th class="table-th child-td">Date & time stamp</th>
                         <th class="table-th child-td">Unique Barcode Label</th>
                         <th class="table-th child-td">Pkt size(lnyards)</th>
                         <th class="table-th child-td">Qty</th>

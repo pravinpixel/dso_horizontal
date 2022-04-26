@@ -169,7 +169,7 @@
                     <button type="button" class="btn-close top-0 right-0 m-2 position-absolute" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <small>Please indicate selection below for <b>desposal/ used for TD or Expt project</b> </small>
+                    <small>Please indicate selection below for <b>Disposal/ used for TD or Expt project</b> </small>
                     <div class="row m-0 pt-4">
                         <div class="col-md-6 border-end p-4">
                             <label for="Pass_label" class="form-radio-primary mb-3">
@@ -184,14 +184,14 @@
                         </div>
                         <div class="col-md-6 p-4">
                             <label for="Pass_label" class="form-radio-primary mb-3">
-                                <input type="radio" name="group" class="form-check-input border-primary " checked id="Pass_label"> <span class="text-primary">User For TD/Expt Project</span>
+                                <input type="radio" name="group" class="form-check-input border-primary " checked id="Pass_label"> <span class="text-primary">Used for TD/Expt Project</span>
                             </label>
                             <div class="mb-3">
                                 <span><strong>Supporting Documents (Approval email)</strong></span>
                                 <input type="file" name="" id="" class="form-control"> 
                             </div>
                             <div class="mb-3">
-                                <span><strong>* To be dsiposed after</span>
+                                <span><strong>* To be Disposed after</span>
                                 <input type="date" name="" id="" class="form-control"> 
                             </div>
                             <strong>Accordance to EG1 Chemical UIMS 2021</strong>
@@ -199,7 +199,7 @@
                                 <li>2 years OEM unstated (liquids , others)</li>
                                 <li>5 years OEM unstated (dry , others)</li>
                                 <li>5 years OEM declare does not expire</li>
-                                <li>DSO in houes (ask Domain PMTS)</li>
+                                <li>DSO in house (ask Domain PMTS)</li>
                             </ul>
                         </div>
                         <div class="col-12 text-center mt-4">

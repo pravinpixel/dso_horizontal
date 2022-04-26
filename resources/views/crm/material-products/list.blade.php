@@ -95,7 +95,7 @@
                     </select>
                 </div> 
                 <div class="col">
-                    <label for="" class="form-label">Storage area</label>
+                    <label for="" class="form-label">Storage Room</label>
                     <select name="storage_area" ng-model="filter.storage_area" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($storage_room_db as $row)
@@ -144,7 +144,7 @@
                         <i ng-click="sort_by('owner_one', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('owner_one', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
-                    <th ng-show="on_storage_room" class="position-relative table-th child-td">Storage Room 
+                    <th ng-show="on_storage_room" class="position-relative table-th child-td">Storage Room
                         <i ng-click="sort_by('storage_room', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('storage_room', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
