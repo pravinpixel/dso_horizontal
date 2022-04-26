@@ -148,6 +148,7 @@ class MaterialProductsController extends Controller
     }
     public function form_one_store(MaterialProductsRequest $request)
     {    
+        
         $material_product = MaterialProducts::updateOrCreate([
             'category_selection'            =>   $request->session()->get('category_type'),
             'barcode_number'                =>   random_int(100000, 999999),

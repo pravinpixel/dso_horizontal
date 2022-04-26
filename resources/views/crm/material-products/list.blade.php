@@ -173,13 +173,14 @@
                 </tr> 
             </thead>  
             <tbody>
-                <tr class="table-tr" ng-if="row.access.includes(auth_id) || auth_role == 'admin'" ng-repeat="(index,row) in material_products.data track by row.id">
+                <tr class="table-tr"  ng-repeat="(index,row) in material_products.data track by row.id">
+                {{-- <tr class="table-tr" ng-if="row.access.includes(auth_id) || auth_role == 'admin'" ng-repeat="(index,row) in material_products.data track by row.id"> --}}
                     <td colspan="12" class="p-0 border-bottom ">
-                        <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
+                        <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : ''">
                             <tr>
                                 <td class="child-td-lg" ng-show="on_item_description">
                                     <i class="bi bi-caret-right-fill float-start table-toggle-icon  " data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
-                                    @{{ row.item_description }}
+                                    @{{ row.item_description }} 
                                 </td>
                                 <td class="child-td" ng-show="on_brand">@{{ row.brand }}</td>
                                 <td class="child-td" ng-show="on_batch"></td>
@@ -215,17 +216,17 @@
                                                 
                                                 <td class="child-td" ng-show="on_batch">
                                                     {{ $key2 == 0 ? "Batch/1" : "" }}
-                                                    {{ $key2 == 1 ? "Batch/2" : "" }}
+                                                
                                                 </td> 
 
                                                 <td class="child-td" ng-show="on_unit_packing_size">
                                                     {{ $key2 == 0 ? "1L" : "" }}
-                                                    {{ $key2 == 1 ? "1L" : "" }}
+                                                  
                                                 </td>   
 
                                                 <td class="child-td" ng-show="on_quantity">
                                                     {{ $key2 == 0 ? "30" : "" }}
-                                                    {{ $key2 == 1 ? "10" : "" }} 
+                                                   
                                                 </td>
 
                                                 <td class="child-td-lg" ng-show="on_owner_one">Keith/HuiBeng</td>
@@ -259,8 +260,25 @@
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                             <a class="dropdown-item text-secondary" href="#"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                             <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
-                                                            <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackTransfers"><i class="bi bi-box-seam me-1"></i>Repack/Transfer </a>
-                                                            <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackOutlife"><i class="bi bi-box2-fill me-1"></i>Repack/outlife</a>
+                                                            
+                                                            {{--  ==== REPACK OUTLIFE ====  --}}
+                                                                <a ng-if="row.outlife_tracking ==  1" class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackTransfers">
+                                                                    <i class="bi bi-box-seam me-1"></i>Repack/Transfer 
+                                                                </a>
+                                                                <a ng-if="row.outlife_tracking ==  0 || row.outlife_tracking ===  null" class="dropdown-item text-secondary link-disabled">
+                                                                    <i class="bi bi-box-seam me-1"></i>Repack/Transfer 
+                                                                </a>
+                                                            {{--  ==== REPACK OUTLIFE ====  --}}
+                                                            
+                                                            {{--  ==== REPACK OUTLIFE ====  --}}
+                                                                <a ng-if="row.outlife_tracking ==  1" class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#RepackOutlife">
+                                                                    <i class="bi bi-box2-fill me-1"></i>Repack/outlife
+                                                                </a>
+                                                                <a ng-if="row.outlife_tracking ==  0 || row.outlife_tracking ===  null" class="dropdown-item link-disabled">
+                                                                    <i class="bi bi-box2-fill me-1"></i>Repack/outlife
+                                                                </a>
+                                                            {{--  ==== REPACK OUTLIFE ====  --}}
+                                                         
                                                             <a class="dropdown-item text-secondary" onclick="printModal()" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
                                                             <a class="dropdown-item text-danger" onclick="deleteModal()" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                         </div>

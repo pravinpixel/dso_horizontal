@@ -594,7 +594,7 @@
 						<th class="table-th child-td">Last accessed</th>
 						<th class="table-th child-td">Date & time stamp</th>
                         <th class="table-th child-td">Unique Barcode Label</th>
-                        <th class="table-th child-td">Pkt size(lnyards)</th>
+                        <th class="table-th child-td">Pkt size</th>
                         <th class="table-th child-td">Qty</th>
                         <th class="table-th child-td">Remarks</th>
                         <th class="table-th child-td">Outlife expiry from last date/time</th>

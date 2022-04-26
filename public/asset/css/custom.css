@@ -340,3 +340,9 @@ to {
     background:  #fff9ee !important;
     color: #000 !important;
 }
+
+.link-disabled {
+    background: #f7f8f9 !important;
+    color: #d1d1d1 !important;
+    cursor: not-allowed !important;
+}
