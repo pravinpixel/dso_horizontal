@@ -53,19 +53,30 @@
                                             <option value="">CW</option>
                                         </select>
                                     </td>
-                                      <td style="padding: 0">15</td>
+                                    <td style="padding: 0">
+                                        <select name="" id="" class="form-select form-select-sm">
+                                            <option value="">CW </option>
+                                            <option value="">MA </option>
+                                            <option value="">SP </option>
+                                            <option value="">MR </option>
+                                            <option value="">Polymer </option>
+                                            <option value="">ChemShed1 </option>
+                                            <option value="">ChemShed2</option>
+                                        </select>
+                                    </td>
                                     <td style="padding: 0">
                                         <select name="" id="" class="form-select form-select-sm">
                                             <option value="">FC1</option>
-                                        </select></td>
-                                   <td>
-                                <select name="" id="" class="form-select form-select-sm">
-                                    <option value=""> -</option>
-                                    @for ($key=0;$key<20;$key++)
-                                        <option value="">@{{ index+1 }}</option>
-                                    @endfor
-                                </select>
-                            </td>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="" id="" class="form-select form-select-sm">
+                                            <option value=""> -</option>
+                                            @for ($key=0;$key<20;$key++)
+                                                <option value="">@{{ $key+1 }}</option>
+                                            @endfor
+                                        </select>
+                                    </td>
                                     <td style="padding: 0">
                                         <select name="" id="" class="form-select form-select-sm">
                                             <option value="">Keith</option>
@@ -76,7 +87,7 @@
                                             <option value="">HuiBeng</option>
                                         </select>
                                     </td>
-                                      <td style="padding: 0">Batch2/1</td>
+                                    <td style="padding: 0">Batch2/1</td>
                                     <td style="padding: 0">
                                         <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                                     </td>

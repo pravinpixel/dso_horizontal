@@ -107,6 +107,10 @@
                     <label for="" class="form-label">Date in</label>
                     <input type="date" ng-model="filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
                 </div>
+                <div class="col"> 
+                    <label for="" class="form-label">Date of expiry</label>
+                    <input type="date" ng-model="filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
+                </div>
                 <div class="col d-flex align-items-center justify-content-center">
                     <div class="btn-group">
                         <button ng-click="bulk_search()" class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
@@ -114,7 +118,6 @@
                     </div>
                 </div> 
             </div>
-         
         {{-- ====== Filletrs ===--}} 
     
         <table class="table table-centered table-bordered table-hovered bg-white">
@@ -169,8 +172,8 @@
             </thead>  
             <tbody>
                 <tr class="table-tr" ng-show="material_products.length != 0" ng-repeat="(index,row) in material_products.data track by row.id">
-                    <td colspan="12" class="p-0 border-bottom">
-                        <table class="table table-centered m-0">
+                    <td colspan="12" class="p-0 border-bottom ">
+                        <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
                             <tr>
                                 <td class="child-td-lg" ng-show="on_item_description">
                                     <i class="bi bi-caret-right-fill float-start table-toggle-icon  " data-bs-toggle="collapse" href="#row_@{{ index+1 }}" role="button" aria-expanded="false" aria-controls="row_@{{ index+1 }}"></i> 
@@ -186,7 +189,7 @@
                                 <td class="child-td" ng-show="on_date_of_expiry"></td>
                                 <td class="child-td" ng-show="on_iqc_status"></td>
                                 <td class="child-td" ng-show="on_used_for_td"></td>
-                            <td class="child-td">
+                                <td class="child-td">
                                     <div class="dropdown">
                                         <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="bi bi-three-dots-vertical"></i>
@@ -201,8 +204,8 @@
                             </tr>
                             <tr class="collapse show" id="row_@{{ index+1 }}">
                                 <td colspan="12" class="p-0">
-                                    <table class="table table-centered bg-white m-0">
-                                        @for ($key2=0; $key2<2; $key2++)
+                                    <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
+                                        @for ($key2=0; $key2<1; $key2++)
                                             <tr>
                                                 <td class="child-td-lg" ng-show="on_item_description"></td>
                                                 
@@ -285,7 +288,6 @@
             @include('crm.material-products.modals.view-list')
             @include('crm.material-products.modals.advance-search')
             @include('crm.material-products.modals.saved-search')
-            @include('crm.material-products.modals.transfer')
             @include('crm.material-products.modals.transfer')
             @include('crm.material-products.modals.repack-transfers')
             @include('crm.material-products.modals.repack-outlife')

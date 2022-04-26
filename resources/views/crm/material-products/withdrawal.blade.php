@@ -386,7 +386,7 @@
 						    <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							 <td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
+                            <td class="child-td"><input type="number" disabled name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
                             <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
@@ -401,7 +401,7 @@
 						  <td class="child-td">Brand 1</td>
                             <td class="child-td">Roll2/1</td>
 							<td class="child-td">0.5L</td>
-                            <td class="child-td"><input type="number"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
+                            <td class="child-td"><input type="number" disabled name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
                             <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
                             <td class="child-td">
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>

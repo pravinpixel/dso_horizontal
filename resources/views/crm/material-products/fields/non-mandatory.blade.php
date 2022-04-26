@@ -73,17 +73,33 @@
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Alert Threshold Qty for new</label>
+        <label for="" class="col-4">Alert Threshold Qty for new <i class="ms-1 text-warning dot-sm bi bi-circle-fill"></i></label>
         <div class="col-8">
-           {!! Form::text('alert_threshold_qty_for_new', $material_product->alert_threshold_qty_for_new ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+           {!! Form::number('alert_threshold_qty_for_new', $material_product->alert_threshold_qty_for_new ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Alert before expiry (in terms of weeks) for new</label>
+        <label for="" class="col-4">Alert before expiry (in terms of weeks) for new <i class="ms-1 text-warning dot-sm bi bi-circle-fill"></i></label>
         <div class="col-8">
-           {!! Form::text('alert_before_expiry', $material_product->alert_before_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+           {!! Form::number('alert_before_expiry', $material_product->alert_before_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Alert Threshold Qty for new <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></label>
+        <div class="col-8">
+           {!! Form::number('alert_threshold_qty_for_new_', $material_product->alert_threshold_qty_for_new ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Alert before expiry (in terms of weeks) for new <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></label>
+        <div class="col-8">
+           {!! Form::number('alert_before_expiry_', $material_product->alert_before_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -95,6 +111,7 @@
         </div>
     </div>
 </div>
+
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
         <label for="" class="col-4">Date of shipment</label>

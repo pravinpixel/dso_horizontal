@@ -68,13 +68,14 @@
                             <td>
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
-                        </tr> 
+                        </tr>
                     </tbody>
                 </table>
             </div> 
             <div class="modal-footer text-end  border-top">
+                <button class="btn btn-success rounded-pill me-2">Print barcode</button>
                 <button class="btn btn-primary rounded-pill">Click to confirm transfer</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+    </div>
 </div> 

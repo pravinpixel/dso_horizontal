@@ -72,7 +72,7 @@ option {
     margin-right: 4px;
     border-radius: 3px;
 }
-.table-fillters .col:nth-child(9) {
+.table-fillters .col:last-child{
     margin-right: 0 !important;
 }
 .table-fillters {
@@ -90,7 +90,7 @@ option {
     display: block !important;
     margin: 0;
     line-height: 23px;
-    min-height: 45px;
+    min-height: 25px;
     display: flex !important;
     justify-content: center;
     align-items: center;
@@ -335,4 +335,8 @@ to {
 
 .ms-options-wrap > .ms-options > .ms-search input {
     border: 1px groove !important;
+}
+.bg-draft {
+    background:  #fff9ee !important;
+    color: #000 !important;
 }

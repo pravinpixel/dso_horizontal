@@ -69,7 +69,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::where('is_draft', 0)->paginate(5); 
+        $material_product       =   MaterialProducts::latest()->paginate(5); 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -234,6 +234,7 @@ class MaterialProductsController extends Controller
     public function non_mandatory_form_store(Request $request)
     {         
         $result  =   $this->MartialProductRepository->update_form_three(entry_id(), $request);
+        $request->session()->forget('material_product_id');
         if($result) Flash::success(__('global.inserted'));
         return redirect()->route('list-material-products');
     } 
@@ -325,6 +326,7 @@ class MaterialProductsController extends Controller
     public function update_edit_form_three(Request $request, $id=null)
     {
         $result  =   $this->MartialProductRepository->update_form_three($id, $request);
+        $request->session()->forget('material_product_id');
         if($result) Flash::success(__('global.updated'));
         return redirect()->route('list-material-products');
     }

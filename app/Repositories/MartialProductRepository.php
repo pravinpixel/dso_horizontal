@@ -5,9 +5,9 @@ namespace App\Repositories;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\MaterialProducts;
 use Laracasts\Flash\Flash;
-use Storage;
 use Illuminate\Http\Response;
- 
+use Illuminate\Support\Facades\Storage;
+
 class MartialProductRepository implements MartialProductRepositoryInterface {
     public function update_form_one($id, $request)
     { 
@@ -126,8 +126,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 'remarks'                     => $request->remarks,
                 'is_draft'                    => $request->is_draft ?? 0
             ]);
-
-            $request->session()->forget('material_product_id');
+  
          
         } catch (\Throwable $th) {
             Flash::error(__('global.something'));
