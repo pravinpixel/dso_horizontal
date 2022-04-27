@@ -319,8 +319,10 @@
             </div> 
         </div>
     </div>
+
     {{-- ========= SCRIPTS  ==========--}}
         @include('includes.scripts')
     {{-- ========= SCRIPTS  ==========--}} 
+    
 </body>
 </html>
