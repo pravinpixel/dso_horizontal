@@ -1,9 +1,9 @@
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Category selection</label>
+        <label for="" class="col-4">Category selection <sup class="text-danger">*</sup></label>
         <div class="col-8">
             @if ($edit_mode == false)
-                <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select">
+                <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select" >
                     <option value=""> {{ category_type() ==  'material' ? 'Material' : 'In-house Products'}}</option>
                     <option value="material">Material</option>
                     <option value="in_house">In-house Products</option>
@@ -14,21 +14,13 @@
                 </select>
             @endif 
         </div>
-    </div> 
+    </div>
 </div> 
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Item Description</label>
+        <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
         <div class="col-8">
             {!! Form::text('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' , in_house_type() ]) !!}
-        </div>
-    </div>
-</div>
-<div class="col-lg-6 my-1">
-    <div class="row m-0 y-center">
-        <label for="" class="col-4">In-house Product Logsheet ID</label>
-        <div class="col-8">
-            {!! Form::number('in_house_product_logsheet_id', $material_product->in_house_product_logsheet_id?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
         </div>
     </div>
 </div>
@@ -50,9 +42,17 @@
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Unit Packing size <sup class="text-danger">*</sup></label>
+        <label for="" class="col-4">Unit of Measure <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('unit_packing_size', $unit_packing_size_db , $material_product->unit_packing_size?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --'])  !!}
+            {!! Form::select('unit_of_measure', $unit_packing_size_db , $material_product->unit_of_measure ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --'])  !!}
+        </div>
+    </div>
+</div> 
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Unit Packing value <sup class="text-danger">*</sup></label>
+        <div class="col-8">
+            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm'])  !!}
         </div>
     </div>
 </div> 
@@ -60,7 +60,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Quantity  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('quantity', $material_product->quantity?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::number('quantity', $material_product->quantity?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 'min'=> 1]) !!}
         </div>
     </div>
 </div>
@@ -100,15 +100,15 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">EUC material  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('euc_material', $euc_material_db , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required'])  !!}
+            {!! Form::select('euc_material', ["No", "Yes"] , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required'])  !!}
         </div>
     </div>
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Require usage  tracking <sup class="text-danger">*</sup></label>
+        <label for="" class="col-4">Require bulk volume tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('usage_tracking', ["1" => "Yes", "0" => "No"] , $material_product->usage_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
+            {!! Form::select('require_bulk_volume_tracking', ["No", "Yes"] , $material_product->require_bulk_volume_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
         </div>
     </div>
 </div>
@@ -116,7 +116,15 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require outlife tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('outlife_tracking', ["1" => "Yes", "0" => "No"] , $material_product->outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
+            {!! Form::select('require_outlife_tracking', ["No", "Yes"] , $material_product->require_outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required'])  !!}
+        </div>
+    </div>
+</div>
+<div class="col-lg-6 my-1">
+    <div class="row m-0 y-center">
+        <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
+        <div class="col-8">
+            {!! Form::number('outlife',  $material_product->outlife ?? null, ['class' =>'form-control form-control-sm','required'])  !!}
         </div>
     </div>
 </div>

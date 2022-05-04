@@ -18,6 +18,12 @@
                         <span class="h5">Non-Mandatory fields</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('other-form') }}" class="nav-link py-2 rounded-0 {{ Route::is('other-form') ? "active" : '' }}">
+                        <span class="h5">Others fields</span>
+                    </a>
+                </li>
+                
             </ul>
         </div>
         @yield('wizzard-form-content') 

@@ -8,15 +8,9 @@
         <a href="{{ route('mandatory-form-two') }}" class="btn btn-light rounded-pill shadow-sm border">
             <b><i class="bi bi-arrow-left-circle me-1"></i> Prev</b>
         </a>
-        <div class="float-end">
-            <button class="btn btn-secondary rounded-pill" onclick="saveAsDraft(event)">
-                <b><i class="bi bi-check-circle mse-1"></i> Save as Draft</b>
-            </button> 
-            <button class="btn btn-success rounded-pill" onclick="submitAndSave(event)">
-                <b><i class="bi bi-check-circle mse-1"></i> Submit & Save</b>
-            </button> 
-        </div> 
+        <button class="btn btn-primary float-end rounded-pill" type="submit" >
+            <b>Next <i class="bi bi-arrow-right-circle ms-1"></i></b>
+        </button>  
     </div>
 {!! Form::close() !!}
-
 @endsection
