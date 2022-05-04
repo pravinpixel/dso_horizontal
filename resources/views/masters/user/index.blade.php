@@ -1,7 +1,6 @@
 @extends('masters.index')
 
 @section('masters') 
-    
     <div class="card">
         <div class="card-header text-end ">
             <a class="btn btn-primary"  href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>
@@ -25,22 +24,21 @@
 @endsection 
 
 @section('scripts')
-<script type="text/javascript">
-    $(function () {
-      
-        var table = $('#data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('user.index') }}",
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'full_name', name: 'full_name'},
-                {data: 'department', name: 'department'},
-                {data: 'role', name: 'role', defaultContent: '',},
-                {data: 'status', name: 'status'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
+    <script type="text/javascript">
+        $(function () {
+            var table = $('#data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('user.index') }}",
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'full_name', name: 'full_name'},
+                    {data: 'department', name: 'department'},
+                    {data: 'role', name: 'role', defaultContent: '',},
+                    {data: 'status', name: 'status'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
         });
-    });
-</script>  
+    </script>  
 @endsection
