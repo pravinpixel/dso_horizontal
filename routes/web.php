@@ -95,6 +95,10 @@ Route::middleware(['auth_users'])->group(function () {
     // Add MaterialProducts Non Mandatory Fom
     Route::get('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_index'])->name('non-mandatory-form');
     Route::post('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_store'])->name('non-mandatory-form');
+
+    // Add MaterialProducts Non Mandatory Fom
+    Route::get('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_index'])->name('other-form');
+    Route::post('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_store'])->name('other-form');
     
     //  ==================================
 
