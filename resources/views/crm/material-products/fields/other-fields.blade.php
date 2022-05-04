@@ -1,7 +1,7 @@
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
         <label for="" class="col-4">Extended expiry</label>
-        <div class="col-8">
+        <div class="col-8">structuring
             {!! Form::text('extended_expiry', $material_product->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required', in_house_type()]) !!}
         </div>
     </div>
