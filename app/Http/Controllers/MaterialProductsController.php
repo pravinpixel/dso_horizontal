@@ -229,9 +229,7 @@ class MaterialProductsController extends Controller
     public function non_mandatory_form_index(Request $request)
     { 
         $material_product       =   MaterialProducts::find(entry_id());
-        $extended_qc_status     =   ['Pass','Fail'];
-
-        return view('crm.material-products.wizard.non-mandatory', compact('extended_qc_status','material_product'));  
+        return view('crm.material-products.wizard.non-mandatory', compact('material_product'));  
     }
     public function non_mandatory_form_store(Request $request)
     {         
@@ -240,6 +238,10 @@ class MaterialProductsController extends Controller
         if($result) Flash::success(__('global.inserted'));
         return redirect()->route('list-material-products');
     } 
+    public function other_form_index()
+    {
+        return view('crm.material-products.wizard.other-fields');
+    }
     // Edit Function
     public function edit_form_one(Request $request, $id=null)
     {
