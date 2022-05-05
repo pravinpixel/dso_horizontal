@@ -4,22 +4,22 @@
         <div class="card-header border-bottom p-0">
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
-                    <a href="{{ route('create.material-product',['type'=>'form-one']) }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-one') ? "active" : '' }}">
-                        <span class="h5">Mandatory Fields Page 1</span> 
+                    <a href="{{ route('create.material-product',['type'=>'form-one']) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-one' ? "active" : '' }}">
+                        <span class="h5">Mandatory Fields Page 1 </span> 
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('create.material-product',['type'=>'form-two']) }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-two') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-two']) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-two' ? "active" : '' }}">
                         <span class="h5">Mandatory Fields Page 2</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('create.material-product',['type'=>'form-three']) }}" class="nav-link py-2 rounded-0 {{ Route::is('non-mandatory-form') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-three']) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-three' ? "active" : '' }}">
                         <span class="h5">Non-Mandatory fields</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('create.material-product',['type'=>'form-four']) }}" class="nav-link py-2 rounded-0 {{ Route::is('other-form') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-four']) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-four' ? "active" : '' }}">
                         <span class="h5">Others fields</span>
                     </a>
                 </li>
@@ -27,9 +27,8 @@
         </div>
         @yield('wizzard-form-content') 
     </div>
-
     <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
-
+   
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script>
         var app = angular.module('MaterialProductApp', []);
