@@ -71,7 +71,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::with('batch')->latest()->paginate(5); 
+        $material_product       =   MaterialProducts::with('Batches')->latest()->paginate(5); 
         
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
@@ -242,31 +242,29 @@ class MaterialProductsController extends Controller
         }
     } 
 
-    public function destroy(Request $request, $id) 
+    public function destroy($id) 
     {
-
         $data   =   MaterialProducts::find($id);
-
-        if(Storage::exists($data->sds_mill_cert_document)){
-            Storage::delete($data->sds_mill_cert_document);
-        }
-
-        if(Storage::exists($data->coc_coa_mill_cert_document)){
-            Storage::delete($data->coc_coa_mill_cert_document);
-        }
-
-        if(Storage::exists($data->iqc_result)){
-            Storage::delete($data->iqc_result);
-        }
-
-        if(Storage::exists($data->upload_disposal_certificate)){
-            Storage::delete($data->upload_disposal_certificate);
-        }
-
-        if(Storage::exists($data->extended_qc_result)){
-            Storage::delete($data->extended_qc_result);
-        }
-
+ 
+        // foreach($data->Batches as $row) {
+        //     if(Storage::exists($row->sds_mill_cert_document)){
+        //         Storage::delete($row->sds_mill_cert_document);
+        //     }
+        //     if(Storage::exists($row->coc_coa_mill_cert_document)){
+        //         Storage::delete($row->coc_coa_mill_cert_document);
+        //     }
+        //     if(Storage::exists($row->iqc_result)){
+        //         Storage::delete($row->iqc_result);
+        //     }
+        //     if(Storage::exists($row->upload_disposal_certificate)){
+        //         Storage::delete($row->upload_disposal_certificate);
+        //     }
+        //     if(Storage::exists($row->extended_qc_result)){
+        //         Storage::delete($row->extended_qc_result);
+        //     }
+        //     $row->delete();
+        // }
+         
         $data->delete();
 
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);

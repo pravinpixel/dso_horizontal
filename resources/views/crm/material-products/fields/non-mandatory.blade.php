@@ -46,7 +46,7 @@
 
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Alert Threshold Qty (Upper limit)</label>
+        <label for="" class="col-4">Alert Threshold Qty <br><small>(Upper limit)</small></label>
         <div class="col-8">
            {!! Form::number('alert_threshold_qty_upper_limit', $material_product->alert_threshold_qty_upper_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
@@ -55,7 +55,7 @@
 
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Alert Threshold Qty (Lower limit)</label>
+        <label for="" class="col-4">Alert Threshold Qty <br><small>(Lower limit)</small></label>
         <div class="col-8">
            {!! Form::number('alert_threshold_qty_lower_limit', $material_product->alert_threshold_qty_lower_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
@@ -64,13 +64,12 @@
 
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Alert before expiry (weeks)</label>
+        <label for="" class="col-4">Alert before expiry <br><small>(weeks)</small></label>
         <div class="col-8">
            {!! Form::number('alert_before_expiry', $material_product->alert_before_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
-</div>
- 
+</div> 
 
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">

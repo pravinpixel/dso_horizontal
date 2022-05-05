@@ -30,7 +30,7 @@ class MaterialProducts extends Model
         'alert_before_expiry',
     ];
 
-    public function batch()
+    public function Batches()
     {
         return $this->hasMany(Batches::class, 'material_product_id', 'id');
     }
