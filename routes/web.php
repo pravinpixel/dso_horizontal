@@ -102,16 +102,8 @@ Route::middleware(['auth_users'])->group(function () {
     
     //  ==================================
 
-    // Edit MaterialProduct  Form ONE
-    Route::get('/edit/material-product/form-one/{id?}', [MaterialProductsController::class, 'edit_form_one'])->name('material-product.edit-form-one');
-    Route::post('/edit/material-product/form-one/{id?}', [MaterialProductsController::class, 'update_edit_form_one'])->name('edit-mandatory-form-one');
+    // Edit MaterialProduct 
+    Route::get('/edit/material-product/{type?}/{id?}/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit.material-product');
+    Route::post('/edit/material-product/{type?}/{id?}/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit.material-product');
 
-    // Edit MaterialProduct  Form TWO
-    Route::get('/edit/material-product/form-two/{id?}', [MaterialProductsController::class, 'edit_form_two'])->name('material-product.edit-form-two');
-    Route::post('/edit/material-product/form-two/{id?}', [MaterialProductsController::class, 'update_edit_form_two'])->name('edit-mandatory-form-two');
-
-    // EDit MaterialProducts Non Mandatory Fom
-    Route::get('/edit/material-product/form-three/{id?}', [MaterialProductsController::class, 'edit_form_three'])->name('material-product.edit-form-three');
-    Route::post('/edit/material-product/form-three/{id?}', [MaterialProductsController::class, 'update_edit_form_three'])->name('edit-mandatory-form-three');
 });
- 

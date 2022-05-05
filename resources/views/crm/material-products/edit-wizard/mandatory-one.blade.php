@@ -1,7 +1,7 @@
 @extends('crm.material-products.edit')
 @section('wizzard-form-content')
 
-    {!! Form::model($material_product, ['route' => ['edit-mandatory-form-one', $material_product->id], 'id' => 'wizzard_form_one', 'class' => 'row wizzard-form', 'method'=> 'post']) !!}
+    {!! Form::model($material_product, ['route' => ['edit.material-product', "type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id ], 'id' => 'wizzard_form_one', 'class' => 'row wizzard-form', 'method'=> 'post']) !!}
         <div class="card-body row">
             @include('crm.material-products.fields.mandatory-one')
         </div>
@@ -11,5 +11,5 @@
             </button>
         </div>
     {!! Form::close() !!}  
-
 @endsection 
+ 

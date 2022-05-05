@@ -24,18 +24,18 @@ class MaterialProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'category_selection'            =>   'required',
-            'item_description'              =>   'required',
-            'in_house_product_logsheet_id'  =>   'required',
-            'brand'                         =>   'required',
-            'supplier'                      =>   'required',
-            'unit_packing_size'             =>   'required',
-            'quantity'                      =>   'required',
-            'batch'                         =>   'required',
-            'serial'                        =>   'required',
-            'po_number'                     =>   'required',
-            'statutory_body'                =>   'required',
-            'euc_material'                  =>   'required',
+            'barcode_number'                    =>   'required', 
+            'is_draft'                          =>   'required', 
+            'category_selection'                =>   'required', 
+            'item_description'                  =>   'required', 
+            'unit_of_measure'                   =>   'required', 
+            'unit_packing_value'                =>   'required', 
+            'owner_one'                         =>   'required', 
+            'owner_two'                         =>   'required', 
+            'statutory_body'                    =>   'required', 
+            'alert_threshold_qty_upper_limit'   =>   'required', 
+            'alert_threshold_qty_lower_limit'   =>   'required', 
+            'alert_before_expiry'               =>   'required', 
         ];
     }
 }

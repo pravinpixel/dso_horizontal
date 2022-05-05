@@ -42,10 +42,13 @@ app.controller('SearchAddController', function($scope, $http) {
         });
     }
     $scope.get_material_products();
+
     // ====== Edit Data DB ====
-    $scope.edit_material_product = function (id) {
-        window.location.replace(edit_material_products_url +'/'+ id);
+
+    $scope.edit_material_product = function (id, batch_id) {
+        window.location.replace(`${edit_material_products_url}/form-one/${id}/${batch_id}`);
     }
+
     // ====== Delete Data DB ====
     $scope.delete_material_product = function (id) {
         swal({

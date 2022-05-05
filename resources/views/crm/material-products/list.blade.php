@@ -199,7 +199,7 @@
                                         </a> 
                                         <div class="dropdown-menu" >
                                             <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                            <a ng-click="edit_material_product(row.id)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                                            <a ng-click="edit_material_product(row.id, row.batch[0].id)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
                                             <a ng-click="delete_material_product(row.id)"  class="dropdown-item text-danger" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete</a> 
                                         </div>
                                     </div>
@@ -319,11 +319,11 @@
 @section('scripts')
 
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
-    <input type="hidden" id="edit-material-products" value="{{ route('material-product.edit-form-one') }}">
+    <input type="hidden" id="edit-material-products" value="{{ route('edit.material-product') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
-    <input type="hidden"   id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
+    <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>

@@ -17,3 +17,15 @@ if(! function_exists('entry_id')) {
         return session()->get('material_product_id');
     }
 }
+
+if(! function_exists('material_product')) {
+    function material_product() {
+        return session()->get('material_product_id');
+    }
+} 
+
+if(! function_exists('batch_id')) {
+    function batch_id() {
+        return session()->get('batch_id');
+    }
+} 

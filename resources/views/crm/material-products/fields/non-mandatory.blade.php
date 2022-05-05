@@ -12,7 +12,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">CAS#</label>
         <div class="col-8">
-            {!! Form::text('cas', $material_product->cas ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::text('cas', $batch->cas ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
         <label for="" class="col-4">FM1202 </label>
         <div class="col-8">
             <div class="form-control form-control-sm">                 
-                {!! Form::checkbox('fm_1202', $material_product->fm_1202 ?? null , true, ['class' => 'form-check-input me-2','required']) !!}
+                {!! Form::checkbox('fm_1202', $batch->fm_1202 ?? null , true, ['class' => 'form-check-input me-2','required']) !!}
                 <small>Yes! Included</small>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Project name</label>
         <div class="col-8">
-            {!! Form::text('project_name', $material_product->project_name ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::text('project_name', $batch->project_name ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -39,7 +39,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Material/Product type</label>
         <div class="col-8">
-            {!! Form::text('material_product_type', $material_product->material_product_type ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::text('material_product_type', $batch->material_product_type ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Date of manufacture</label>
         <div class="col-8">
-            {!! Form::date('date_of_manufacture', $material_product->date_of_manufacture ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::date('date_of_manufacture', $batch->date_of_manufacture ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Date of shipment</label>
         <div class="col-8">
-            {!! Form::date('date_of_shipment', $material_product->date_of_shipment ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::date('date_of_shipment', $batch->date_of_shipment ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -93,7 +93,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Cost per unit</label>
         <div class="col-8">
-           {!! Form::number('cost_per_unit', $material_product->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+           {!! Form::number('cost_per_unit', $batch->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div>
@@ -101,7 +101,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Remarks</label>
         <div class="col-8">
-           {!! Form::text('remarks', $material_product->remarks ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+           {!! Form::text('remarks', $batch->remarks ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
 </div> 

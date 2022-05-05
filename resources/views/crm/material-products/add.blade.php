@@ -86,12 +86,13 @@
                 },
             }).then((isConfirm) => {
                 if (isConfirm) {
-                    $("#wizzard_non_mandatory_form").submit();
+                    $("#other_form").submit();
                 }   else {
                     $('#hidden_input').html("");
                 }
             });
         }
+
         function submitAndSave(e) {
             e.preventDefault();
             swal({
@@ -126,7 +127,7 @@
                     break;
 
                     case "save":
-                        $("#wizzard_non_mandatory_form").submit();
+                        $("#other_form").submit();
                     break; 
                 }
             });

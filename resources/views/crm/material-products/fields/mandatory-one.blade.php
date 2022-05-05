@@ -28,7 +28,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Brand <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('brand', $material_product->brand?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('brand', $batch->brand?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Supplier <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('supplier', $material_product->supplier?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('supplier', $batch->supplier?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
         </div>
     </div>
 </div>
@@ -52,7 +52,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Unit Packing value <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm'])  !!}
+            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm', 'placeholder' => 'Type here...'])  !!}
         </div>
     </div>
 </div> 
@@ -60,7 +60,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Quantity  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('quantity', $material_product->quantity?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 'min'=> 1]) !!}
+            {!! Form::number('quantity', $batch->quantity?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 'min'=> 1]) !!}
         </div>
     </div>
 </div>
@@ -68,7 +68,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Batch #   <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('batch', $material_product->batch?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('batch', $batch->batch?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Serial #   <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('serial', $material_product->serial?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('serial', $batch->serial?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">PO Number  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('po_number', $material_product->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
+            {!! Form::text('po_number', $batch->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
         </div>
     </div>
 </div>
@@ -124,7 +124,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('outlife',  $material_product->outlife ?? null, ['class' =>'form-control form-control-sm','required'])  !!}
+            {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...'])  !!}
         </div>
     </div>
 </div>

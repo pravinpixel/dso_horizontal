@@ -9,6 +9,7 @@ class Batches extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'material_product_id',
         'brand',
         'supplier',
         'packing_size',
@@ -31,11 +32,11 @@ class Batches extends Model
         'date_in',
         'date_of_expiry',
         'coc_coa_mill_cert',
-        'iqs_status',
-        'iqs_result',
+        'iqc_status',
+        'iqc_result',
         'sds',
         'cas',
-        'fm1202',
+        'fm_1202',
         'project_name',
         'material_product_type',
         'date_of_manufacture',
@@ -46,6 +47,6 @@ class Batches extends Model
         'extended_qc_status',
         'extended_qc_result',
         'disposal_certificate',
-        'used_for_td/expt_only',
+        'used_for_td_expt_only',
     ];
 }
