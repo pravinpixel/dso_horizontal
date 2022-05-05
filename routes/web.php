@@ -106,7 +106,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
     Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
 
-    // Edit MaterialProduct 
-    Route::get('/edit/material-product/{type?}/{id?}/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit.material-product');
-    Route::post('/edit/material-product/{type?}/{id?}/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit.material-product');
+    // Edit  MaterialProduct 
+    Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
+    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
 });

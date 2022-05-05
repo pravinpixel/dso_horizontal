@@ -28,4 +28,10 @@ if(! function_exists('batch_id')) {
     function batch_id() {
         return session()->get('batch_id');
     }
-} 
+}
+
+if(! function_exists('wizard_mode')) {
+    function wizard_mode() {
+        return session()->get('wizard_mode');
+    }
+}

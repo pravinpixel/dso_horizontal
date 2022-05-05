@@ -2,7 +2,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Category selection <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            @if ($edit_mode == false)
+            @if (wizard_mode() != 'edit')
                 <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select" >
                     <option value=""> {{ category_type() ==  'material' ? 'Material' : 'In-house Products'}}</option>
                     <option value="material">Material</option>

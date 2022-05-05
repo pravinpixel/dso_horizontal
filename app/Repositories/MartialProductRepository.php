@@ -22,10 +22,17 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
 
         $fillable   = [];
 
-        foreach($inputs as $column => $row) $fillable[$column] = $row; 
+        foreach($inputs as $column => $row) $fillable[$column] = $row;
+
+        
+        if(wizard_mode() == 'duplicate') {
+            $batchMethod  = 'create';
+        }else {
+            $batchMethod = 'updateOrCreate';
+        }
 
         $material_product   =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
-        $batch              =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
+        $batch              =   $material_product->Batches()->$batchMethod(['id' => $batch_id], $fillable);
 
         $this->storeFiles($request, $batch);
 

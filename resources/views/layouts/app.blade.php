@@ -12,7 +12,7 @@
     {{--  ===== STYLES ======= --}}
         @include('includes.styles')
     {{--  ===== STYLES ======= --}}
-  
+    <input type="hidden" id="app_URL" value="{{ url('') }}">
 </head>
 <body>
     @include('flash::message')

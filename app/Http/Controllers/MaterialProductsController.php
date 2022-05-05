@@ -130,16 +130,24 @@ class MaterialProductsController extends Controller
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
 
-    public function wizardFormView(Request $request, $type=null , $id=null, $batch_id=null)
+    public function wizardFormView(Request $request, $type=null ,$wizard_mode=null, $id=null, $batch_id=null)
     {
-        if(Route::is('create.material-product', ['type' => $type])) {
-            $create_mode    =   true; 
-            $edit_mode      =   false;
-        } else {
-            $create_mode    =   false; 
-            $edit_mode      =   true;
+
+        if(Route::is('create.material-product')) {
+            $request->session()->forget('wizard_mode');
+            $request->session()->put('wizard_mode', 'create');
+        }
+         
+        if($request->route('wizard_mode') == 'edit') {
+            $request->session()->forget('wizard_mode');
+            $request->session()->put('wizard_mode', 'edit');
         }
 
+        if($request->route('wizard_mode') == 'duplicate') {
+            $request->session()->forget('wizard_mode');
+            $request->session()->put('wizard_mode', 'duplicate');
+        }
+ 
         $material_product       =  MaterialProducts::find(material_product() ?? $id);
         $batch                  =  Batches::find(batch_id() ?? $batch_id);
         $batch_id               =  $batch->id ?? null;
@@ -150,17 +158,31 @@ class MaterialProductsController extends Controller
         $house_type_db          =  HouseTypes::pluck('name','id');
         $departments_db         =  Departments::pluck('name','id');
         $iqc_status             =  [1 => "Pass", 0 => "Fail"];
-        $owners                 =  User::pluck("alias_name", 'id');
         $department             =  Departments::get();
 
+        $owners_list            =  User::pluck("alias_name", 'id');
+        $owners = [];
+        foreach ($owners_list as $key => $value) {
+            $owners[$value] = $value;
+        }
+        
         if($type == 'form-one') {
-            if($create_mode) {
+             
+            if(wizard_mode() == 'create') {
                 $view   = 'crm.material-products.wizard.mandatory-one';
-            } else {
+            }
+
+            if(wizard_mode() == 'edit') {
                 $view   = 'crm.material-products.edit-wizard.mandatory-one';
             }
-            $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','edit_mode','batch_id','batch'];
+            
+            if(wizard_mode() == 'duplicate') {
+                $view   = 'crm.material-products.duplicate-wizard.mandatory-one';
+            }
+             
+            $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','batch_id','batch'];
         }
+
         if($type == 'form-two') { 
             $staff_db           =   [];
             foreach($department as $data) {
@@ -180,40 +202,59 @@ class MaterialProductsController extends Controller
             $staff_by_department       =    $staff_db;
             $material_product_dropdown =    json_decode($batch->access ?? null);
 
-            if($create_mode) {
+            
+            if(wizard_mode() == 'create') {
                 $view   = 'crm.material-products.wizard.mandatory-two';
-            } else {
+            }
+
+            if(wizard_mode() == 'edit') {
                 $view   = 'crm.material-products.edit-wizard.mandatory-two';
             }
-            $params = ['material_product_dropdown','staff_by_department','staff_db','department','owners','iqc_status','storage_room_db','material_product','edit_mode','batch_id','batch','house_type_db','departments_db'];
+            
+            if(wizard_mode() == 'duplicate') {
+                $view   = 'crm.material-products.duplicate-wizard.mandatory-two';
+            }
+
+            $params = ['material_product_dropdown','staff_by_department','staff_db','department','owners','iqc_status','storage_room_db','material_product','batch_id','batch','house_type_db','departments_db'];
         }
         if($type == 'form-three') { 
-            if($create_mode) {
+             
+            if(wizard_mode() == 'create') {
                 $view   = 'crm.material-products.wizard.non-mandatory';
-            } else {
+            }
+
+            if(wizard_mode() == 'edit') {
                 $view   = 'crm.material-products.edit-wizard.non-mandatory';
             }
+
+            if(wizard_mode() == 'duplicate') {
+                $view   = 'crm.material-products.duplicate-wizard.non-mandatory';
+            }
+
             $params = ['material_product','batch','batch_id'];
         }
         if($type == 'form-four') { 
-            if($create_mode) {
+
+            if(wizard_mode() == 'create') {
                 $view   = 'crm.material-products.wizard.other-fields';
-            } else {
+            }
+
+            if(wizard_mode() == 'edit') {
                 $view   = 'crm.material-products.edit-wizard.other-fields';
             }
+
+            if(wizard_mode() == 'duplicate') {
+                $view   = 'crm.material-products.duplicate-wizard.other-fields';
+            }
+
             $params = ['material_product','batch','batch_id'];
         }
         return view($view, compact($params));
     }
 
-    public function storeWizardForm(Request $request, $type, $id=null, $batch_id=null)
+    public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
     {
          
-        if(Route::is('create.material-product', ['type' => $type])) {
-            $create_mode    =   true;
-        } else  {
-            $create_mode    =   false;
-        }
         $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
@@ -229,16 +270,26 @@ class MaterialProductsController extends Controller
         if($type == 'form-three'){ 
             $view   =  'form-four';
         }
-        if($type == 'form-four') { 
+        if($type == 'form-four') {  
             $request->session()->forget(['material_product_id','batch_id']);
             $view   =  'form-four';
         }
-        
+ 
         if($result) {
-            if($create_mode) {
+
+            if(wizard_mode() == 'create') {
                 return redirect()->route('create.material-product',['type' => $view]);
+            }
+
+            $request->session()->forget(['material_product_id','batch_id']);
+
+            if(wizard_mode() == 'edit') {
+                return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'edit',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
             } 
-            return redirect()->route('edit.material-product', ["type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
+            
+            if(wizard_mode() == 'duplicate') {
+                return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
+            }
         }
     } 
 

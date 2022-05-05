@@ -1,7 +1,7 @@
-@extends('crm.material-products.edit')
+@extends('crm.material-products.duplicate')
 @section('wizzard-form-content')
 
-    {!! Form::model($material_product, ['route' => ['edit_or_duplicate.material-product', "wizard_mode" => "edit", "type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id ], 'id' => 'wizzard_form_one', 'class' => 'row wizzard-form', 'method'=> 'post']) !!}
+    {!! Form::model($material_product, ['route' => ['edit_or_duplicate.material-product', "wizard_mode" => "duplicate", "type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id ], 'id' => 'wizzard_form_one', 'class' => 'row wizzard-form', 'method'=> 'post']) !!}
         <div class="card-body row">
             @include('crm.material-products.fields.mandatory-one')
         </div>

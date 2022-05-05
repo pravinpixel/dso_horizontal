@@ -22,8 +22,10 @@ app.controller('SearchAddController', function($scope, $http) {
     // === Route Lists ===
     var material_products_url           =   $('#get-material-products').val();
     var edit_material_products_url      =   $('#edit-material-products').val();
+    var duplicate_material_products_url =   $('#duplicate-material-products').val();
     var delete_material_products_url    =   $('#delete-material-products').val();
     var get_save_search_url             =   $('#get-save-search').val();
+    var app_URL                         =   $('#app_URL').val();
     $scope.auth_id                      =   $('#auth-id').val();
     $scope.auth_role                    =   $('#auth-role').val();
     
@@ -43,12 +45,13 @@ app.controller('SearchAddController', function($scope, $http) {
     }
     $scope.get_material_products();
 
-    // ====== Edit Data DB ====
+    // ====== Edit & Duplicate Data DB ====
 
-    $scope.edit_material_product = function (id, batch_id) {
-        window.location.replace(`${edit_material_products_url}/form-one/${id}/${batch_id}`);
+    $scope.editOrDuplicate = function (wizard_mode,id, batch_id) {
+        window.location.replace(`${app_URL}/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}`);
     }
 
+    
     // ====== Delete Data DB ====
     $scope.delete_material_product = function (id) {
         swal({
