@@ -23,8 +23,8 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
-use Illuminate\Bus\Batch;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class MaterialProductsController extends Controller
@@ -130,28 +130,38 @@ class MaterialProductsController extends Controller
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
 
-    public function wizardFormView($type, $id, $batch_id)
+    public function wizardFormView(Request $request, $type=null , $id=null, $batch_id=null)
     {
-        $material_product       =   MaterialProducts::findOrFail($id);
-        $batch                  =   Batches::find($batch_id);
-        $batch_id               =   $batch->id;
-        $category_selection_db  =   MasterCategories::pluck('name','id');
-        $statutory_body_db      =   StatutoryBody::pluck('name','id');
-        $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
-        $storage_room_db        =   StorageRoom::pluck('name','id');
-        $house_type_db          =   HouseTypes::pluck('name','id');
-        $departments_db         =   Departments::pluck('name','id');
-        $iqc_status             =   [1 => "Pass", 0 => "Fail"];
-        $owners                 =   User::pluck("alias_name", 'id');
-        $department             =   Departments::get();
+        if(Route::is('create.material-product', ['type' => $type])) {
+            $create_mode    =   true; 
+            $edit_mode      =   false;
+        } else {
+            $create_mode    =   false; 
+            $edit_mode      =   true;
+        }
 
-        $edit_mode              =   true;
+        $material_product       =  MaterialProducts::find(material_product() ?? $id);
+        $batch                  =  Batches::find(batch_id() ?? $batch_id);
+        $batch_id               =  $batch->id ?? null;
+        $category_selection_db  =  MasterCategories::pluck('name','id');
+        $statutory_body_db      =  StatutoryBody::pluck('name','id');
+        $unit_packing_size_db   =  PackingSizeData::pluck('name','id');
+        $storage_room_db        =  StorageRoom::pluck('name','id');
+        $house_type_db          =  HouseTypes::pluck('name','id');
+        $departments_db         =  Departments::pluck('name','id');
+        $iqc_status             =  [1 => "Pass", 0 => "Fail"];
+        $owners                 =  User::pluck("alias_name", 'id');
+        $department             =  Departments::get();
 
         if($type == 'form-one') {
-            $view   = 'crm.material-products.edit-wizard.mandatory-one';
+            if($create_mode) {
+                $view   = 'crm.material-products.wizard.mandatory-one';
+            } else {
+                $view   = 'crm.material-products.edit-wizard.mandatory-one';
+            }
             $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','edit_mode','batch_id','batch'];
         }
-        if($type == 'form-two') {
+        if($type == 'form-two') { 
             $staff_db           =   [];
             foreach($department as $data) {
                 $staff_department = User::where('department', $data->id)->get();
@@ -165,144 +175,76 @@ class MaterialProductsController extends Controller
                     "list" =>  $user_group,
                 ];
             }
-            $staff_db_decode        =   json_encode($staff_db);
-            $staff_by_department    =   $staff_db;
-            $material_product_dropdown = json_decode($batch->access ?? null);
 
-            $view   = 'crm.material-products.edit-wizard.mandatory-two';
+            $staff_db_decode           =    json_encode($staff_db);
+            $staff_by_department       =    $staff_db;
+            $material_product_dropdown =    json_decode($batch->access ?? null);
+
+            if($create_mode) {
+                $view   = 'crm.material-products.wizard.mandatory-two';
+            } else {
+                $view   = 'crm.material-products.edit-wizard.mandatory-two';
+            }
             $params = ['material_product_dropdown','staff_by_department','staff_db','department','owners','iqc_status','storage_room_db','material_product','edit_mode','batch_id','batch','house_type_db','departments_db'];
         }
-        if($type == 'form-three') {
-            $view   = 'crm.material-products.edit-wizard.non-mandatory';
+        if($type == 'form-three') { 
+            if($create_mode) {
+                $view   = 'crm.material-products.wizard.non-mandatory';
+            } else {
+                $view   = 'crm.material-products.edit-wizard.non-mandatory';
+            }
             $params = ['material_product','batch','batch_id'];
         }
-        if($type == 'form-four') {
-            $view   = 'crm.material-products.edit-wizard.other-fields';
+        if($type == 'form-four') { 
+            if($create_mode) {
+                $view   = 'crm.material-products.wizard.other-fields';
+            } else {
+                $view   = 'crm.material-products.edit-wizard.other-fields';
+            }
             $params = ['material_product','batch','batch_id'];
         }
-
         return view($view, compact($params));
     }
 
     public function storeWizardForm(Request $request, $type, $id=null, $batch_id=null)
     {
+         
+        if(Route::is('create.material-product', ['type' => $type])) {
+            $create_mode    =   true;
+        } else  {
+            $create_mode    =   false;
+        }
         $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
-            batch_id() ?? $batch_id, 
+            batch_id() ?? $batch_id,
             $request
         );
-         
-        if($type == 'form-one')     $view   =  'form-two';
-        if($type == 'form-two')     $view   =  'form-three';
-        if($type == 'form-three')   $view   =  'form-four';
-        if($type == 'form-four')    $view   =  'form-four';
-        if($result) return redirect()->route('edit.material-product', ["type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
-    }
-
-    public function form_one_index(Request $request)
-    {
-        $material_product       =   MaterialProducts::find(material_product());
-        $batch                  =   Batches::find(batch_id()) ?? null;
-        $category_selection_db  =   MasterCategories::pluck('name','id');
-        $statutory_body_db      =   StatutoryBody::pluck('name','id');
-        $unit_packing_size_db   =   PackingSizeData::pluck('name','id');
-        $euc_material_db        =   [1 =>'Yes', 0 => 'No'];
-        $edit_mode              =   false;
-
-        return view('crm.material-products.wizard.mandatory-one', compact([
-            'category_selection_db',
-            'statutory_body_db',
-            'unit_packing_size_db',
-            'material_product',
-            'euc_material_db',
-            'edit_mode',
-            'batch'
-        ]));
-    }
-    public function form_one_store(Request $request)
-    {    
-        $result =  $this->MartialProductRepository->save_material_product(material_product(), batch_id(), $request);
-        if($result) return redirect()->route('mandatory-form-two');
-    }
-
-    public function form_two_index(Request $request)
-    {
-        $material_product   =   MaterialProducts::find(entry_id()); 
-        $batch              =   Batches::find(batch_id()) ?? null;
-        $storage_room_db    =   StorageRoom::pluck('name','id');
-        $house_type_db      =   HouseTypes::pluck('name','id');
-        $departments_db     =   Departments::pluck('name','id');
-        $iqc_status         =   [1 => "Pass", 0 => "Fail"];
-        $owners             =   User::pluck("alias_name", 'id');
-        $department         =   Departments::get();
-        $staff_db           =   [];
-
-        foreach($department as $data) {
-             
-            $staff_department = User::where('department', $data->id)->get();
-
-            $user_group = [];
-
-            foreach($staff_department as $user) {
-                $user_group[] = $user;
-            }
-            
-            $staff_db[] = [
-                "id"   =>  $data->id ?? "-",
-                "name" =>  $data->name ?? "-",
-                "list" =>  $user_group,
-            ];
-        }
-
-        $staff_db_decode        =   json_encode($staff_db);
-        $staff_by_department    =   $staff_db;
-       
-        $material_product_dropdown = json_decode($batch->access ?? null);
- 
-
-        return view('crm.material-products.wizard.mandatory-two', compact([
-            'storage_room_db',
-            'house_type_db',
-            'departments_db',
-            'material_product',
-            'iqc_status',
-            'owners',
-            'staff_by_department',
-            'material_product_dropdown',
-            'batch'
-        ]));
-    }
-    public function form_two_store(Request $request)
-    {
-        $result =  $this->MartialProductRepository->save_material_product(material_product(), batch_id(), $request);
-        if($result) return redirect()->route('non-mandatory-form');
-    }
-    public function non_mandatory_form_index(Request $request)
-    { 
-        $material_product   =   MaterialProducts::find(entry_id());
-        $batch              =   Batches::find(batch_id()) ?? null;
-        return view('crm.material-products.wizard.non-mandatory', compact('material_product','batch'));  
-    }
-    public function non_mandatory_form_store(Request $request)
-    {         
-        $result =  $this->MartialProductRepository->save_material_product(material_product(), batch_id(), $request);
-        if($result) return redirect()->route('other-form');
-    } 
-    public function other_form_index()
-    {
-        $batch  =   Batches::find(batch_id()) ?? null;
-        return view('crm.material-products.wizard.other-fields',compact('batch'));
-    }
-    public function other_form_store(Request $request)
-    {
         
-        $result     =  $this->MartialProductRepository->save_material_product(material_product(), batch_id(), $request);
-        if($result) $request->session()->forget(['material_product_id','batch_id']);
-        return view('crm.material-products.wizard.other-fields');
+        if($type == 'form-one')  { 
+            $view   =  'form-two';
+        }
+        if($type == 'form-two')  { 
+            $view   =  'form-three';
+        }
+        if($type == 'form-three'){ 
+            $view   =  'form-four';
+        }
+        if($type == 'form-four') { 
+            $request->session()->forget(['material_product_id','batch_id']);
+            $view   =  'form-four';
+        }
+        
+        if($result) {
+            if($create_mode) {
+                return redirect()->route('create.material-product',['type' => $view]);
+            } 
+            return redirect()->route('edit.material-product', ["type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
+        }
     } 
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id) 
     {
+
         $data   =   MaterialProducts::find($id);
 
         if(Storage::exists($data->sds_mill_cert_document)){

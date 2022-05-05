@@ -4,26 +4,25 @@
         <div class="card-header border-bottom p-0">
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
-                    <a href="{{ route('mandatory-form-one') }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-one') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-one']) }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-one') ? "active" : '' }}">
                         <span class="h5">Mandatory Fields Page 1</span> 
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('mandatory-form-two') }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-two') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-two']) }}" class="nav-link py-2 rounded-0 {{ Route::is('mandatory-form-two') ? "active" : '' }}">
                         <span class="h5">Mandatory Fields Page 2</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('non-mandatory-form') }}" class="nav-link py-2 rounded-0 {{ Route::is('non-mandatory-form') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-three']) }}" class="nav-link py-2 rounded-0 {{ Route::is('non-mandatory-form') ? "active" : '' }}">
                         <span class="h5">Non-Mandatory fields</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('other-form') }}" class="nav-link py-2 rounded-0 {{ Route::is('other-form') ? "active" : '' }}">
+                    <a href="{{ route('create.material-product',['type'=>'form-four']) }}" class="nav-link py-2 rounded-0 {{ Route::is('other-form') ? "active" : '' }}">
                         <span class="h5">Others fields</span>
                     </a>
                 </li>
-                
             </ul>
         </div>
         @yield('wizzard-form-content') 
@@ -86,7 +85,7 @@
                 },
             }).then((isConfirm) => {
                 if (isConfirm) {
-                    $("#other_form").submit();
+                    $("#create_other_form").submit();
                 }   else {
                     $('#hidden_input').html("");
                 }
@@ -127,7 +126,7 @@
                     break;
 
                     case "save":
-                        $("#other_form").submit();
+                        $("#create_other_form").submit();
                     break; 
                 }
             });
