@@ -53,3 +53,5 @@ if(! function_exists('is_disable')) {
         return "is_disable".".".wizard_mode().".".$category_type."." ;
     }
 }
+
+ 

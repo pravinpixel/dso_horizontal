@@ -27,8 +27,11 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
 
         $this->storeFiles($request, $batch);
 
-        $request->session()->put('material_product_id', $material_product->id);
-        $request->session()->put('batch_id', $batch->id);
+        if(wizard_mode() == 'create') {
+            $request->session()->put('material_product_id', $material_product->id);
+            $request->session()->put('batch_id', $batch->id);
+        }
+
         return Flash::success(__('global.inserted'));
     }
  

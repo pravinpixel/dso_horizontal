@@ -132,27 +132,15 @@ class MaterialProductsController extends Controller
 
     public function wizardFormView(Request $request, $type=null ,$wizard_mode=null, $id=null, $batch_id=null)
     {
-        Log::info(material_product  ());
-        
-        Log::info(batch_id());
 
-        if(Route::is('create.material-product')) {
-            $request->session()->put('wizard_mode', 'create');
-        }
-         
-        if($request->route('wizard_mode') == 'edit') {
-            
-            $request->session()->put('wizard_mode', 'edit');
-        }
+        if(Route::is('create.material-product'))    $request->session()->put('wizard_mode', 'create');
+       
+        if($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
 
         if($request->route('wizard_mode') == 'duplicate') {
-            
             $request->session()->put('wizard_mode', 'duplicate');
-            
             $duplication        =   Batches::find($batch_id)->toArray();
-
             $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()],$duplication);
-
             $request->session()->put('material_product_id', $id);
             $request->session()->put('batch_id', $duplication_batch->id);
         }
@@ -175,26 +163,14 @@ class MaterialProductsController extends Controller
         foreach ($owners_list as $key => $value) {
             $owners[$value] = $value;
         }
-        
         if($type == 'form-one') {
-             
-            if(wizard_mode() == 'create') {
-                $view   = 'crm.material-products.wizard.mandatory-one';
-            }
-
-            if(wizard_mode() == 'edit') {
-                $view   = 'crm.material-products.edit-wizard.mandatory-one';
-            }
-            
-            if(wizard_mode() == 'duplicate') {
-                $view   = 'crm.material-products.duplicate-wizard.mandatory-one';
-            }
-             
+            if(wizard_mode() == 'create')    $view = 'crm.material-products.wizard.mandatory-one';
+            if(wizard_mode() == 'edit')      $view = 'crm.material-products.edit-wizard.mandatory-one';
+            if(wizard_mode() == 'duplicate') $view = 'crm.material-products.duplicate-wizard.mandatory-one';
             $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','batch_id','batch'];
         }
         if($type == 'form-two') { 
-            $staff_db           =   [];
-            foreach($department as $data) {
+            $staff_db = []; foreach($department as $data) {
                 $staff_department = User::where('department', $data->id)->get();
                 $user_group = [];
                 foreach($staff_department as $user) {
@@ -206,56 +182,26 @@ class MaterialProductsController extends Controller
                     "list" =>  $user_group,
                 ];
             }
-
             $staff_db_decode           =    json_encode($staff_db);
             $staff_by_department       =    $staff_db;
             $material_product_dropdown =    json_decode($batch->access ?? null);
 
-            
-            if(wizard_mode() == 'create') {
-                $view   = 'crm.material-products.wizard.mandatory-two';
-            }
-
-            if(wizard_mode() == 'edit') {
-                $view   = 'crm.material-products.edit-wizard.mandatory-two';
-            }
-            
-            if(wizard_mode() == 'duplicate') { 
-                $view   = 'crm.material-products.duplicate-wizard.mandatory-two';
-            }
-
+            if(wizard_mode() == 'create')    $view  = 'crm.material-products.wizard.mandatory-two';
+            if(wizard_mode() == 'edit')      $view  = 'crm.material-products.edit-wizard.mandatory-two';
+            if(wizard_mode() == 'duplicate') $view  = 'crm.material-products.duplicate-wizard.mandatory-two';
             $params = ['material_product_dropdown','staff_by_department','staff_db','department','owners','iqc_status','storage_room_db','material_product','batch_id','batch','house_type_db','departments_db'];
         }
+
         if($type == 'form-three') { 
-             
-            if(wizard_mode() == 'create') {
-                $view   = 'crm.material-products.wizard.non-mandatory';
-            }
-
-            if(wizard_mode() == 'edit') {
-                $view   = 'crm.material-products.edit-wizard.non-mandatory';
-            }
-
-            if(wizard_mode() == 'duplicate') {
-                $view   = 'crm.material-products.duplicate-wizard.non-mandatory';
-            }
-
+            if(wizard_mode() == 'create')    $view  = 'crm.material-products.wizard.non-mandatory';
+            if(wizard_mode() == 'edit')      $view  = 'crm.material-products.edit-wizard.non-mandatory';
+            if(wizard_mode() == 'duplicate') $view  = 'crm.material-products.duplicate-wizard.non-mandatory';
             $params = ['material_product','batch','batch_id'];
         }
         if($type == 'form-four') { 
-
-            if(wizard_mode() == 'create') {
-                $view   = 'crm.material-products.wizard.other-fields';
-            }
-
-            if(wizard_mode() == 'edit') {
-                $view   = 'crm.material-products.edit-wizard.other-fields';
-            }
-
-            if(wizard_mode() == 'duplicate') {
-                $view   = 'crm.material-products.duplicate-wizard.other-fields';
-            }
-
+            if(wizard_mode() == 'create')    $view = 'crm.material-products.wizard.other-fields';
+            if(wizard_mode() == 'edit')      $view = 'crm.material-products.edit-wizard.other-fields';
+            if(wizard_mode() == 'duplicate') $view = 'crm.material-products.duplicate-wizard.other-fields';
             $params = ['material_product','batch','batch_id'];
         }
         return view($view, compact($params));
@@ -263,40 +209,22 @@ class MaterialProductsController extends Controller
 
     public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
     {
-        // dd($request->all());
-        $result = $this->MartialProductRepository->save_material_product(
+        
+        $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
             $request
         );
         
-        if($type == 'form-one')  { 
-            $view   =  'form-two';
-        }
-        if($type == 'form-two')  { 
-            $view   =  'form-three';
-        }
-        if($type == 'form-three'){ 
-            $view   =  'form-four';
-        }
-        if($type == 'form-four') {
-            $view   =  'form-four';
-            forget_session(); return redirect()->route('list-material-products');
-        }
+        if($type == 'form-one')   $view  = 'form-two';
+        if($type == 'form-two')   $view  = 'form-three';
+        if($type == 'form-three') $view  = 'form-four';
+        if($type == 'form-four')  forget_session(); return redirect()->route('list-material-products');
  
         if($result) {
-
-            if(wizard_mode() == 'create') { 
-                return redirect()->route('create.material-product',['type' => $view]);
-            }
-
-            if(wizard_mode() == 'edit') {
-                return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'edit',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
-            } 
-            
-            if(wizard_mode() == 'duplicate') {
-                return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
-            }
+            if(wizard_mode() == 'create')     return redirect()->route('create.material-product',['type' => $view]);
+            if(wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'edit',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
+            if(wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
         }
     } 
 
