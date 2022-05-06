@@ -49,18 +49,7 @@ if(! function_exists('is_select')) {
 }
 
 if(! function_exists('is_disable')) {
-    function is_disable($type) {
-
-        if(wizard_mode() == 'create') {
-  
-            if($type == 'in_house') $status  = 'disabled';
-        }
-
-        if(wizard_mode() == 'edit') {
-  
-            if($type == 'in_house') $status  = '';
-        }
-        
-        return $status ?? null;
+    function is_disable($category_type) {
+        return "is_disable".".".wizard_mode().".".$category_type."." ;
     }
-} 
+}
