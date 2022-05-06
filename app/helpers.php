@@ -5,12 +5,7 @@ if(! function_exists('category_type')) {
         return session()->get('category_type');
     }
 }
-
-if(! function_exists('in_house_type')) {
-    function in_house_type() {
-        return category_type() == "material" ? 'disabled' : null ;
-    }
-}
+ 
 
 if(! function_exists('entry_id')) {
     function entry_id() {
@@ -41,3 +36,31 @@ if(! function_exists('forget_session')) {
         return session()->forget(['wizard_mode','batch_id','material_product_id']);
     }
 }
+if(! function_exists('is_select')) {
+    function is_select() {
+
+        if(wizard_mode() == 'create') {
+  
+            $status  = 'selected';
+        }
+  
+        return $status ?? null;
+    }
+}
+
+if(! function_exists('is_disable')) {
+    function is_disable($type) {
+
+        if(wizard_mode() == 'create') {
+  
+            if($type == 'in_house') $status  = 'disabled';
+        }
+
+        if(wizard_mode() == 'edit') {
+  
+            if($type == 'in_house') $status  = '';
+        }
+        
+        return $status ?? null;
+    }
+} 

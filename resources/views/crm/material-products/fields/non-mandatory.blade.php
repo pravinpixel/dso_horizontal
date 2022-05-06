@@ -12,7 +12,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">CAS#</label>
         <div class="col-8">
-            {!! Form::text('cas', $batch->cas ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::text('cas', $batch->cas ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required',is_disable(category_type())]) !!}
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
         <label for="" class="col-4">FM1202 </label>
         <div class="col-8">
             <div class="form-control form-control-sm">                 
-                {!! Form::checkbox('fm_1202', $batch->fm_1202 ?? null , true, ['class' => 'form-check-input me-2','required']) !!}
+                {!! Form::checkbox('fm_1202', $batch->fm_1202 ?? null , true, ['class' => 'form-check-input me-2','required',is_disable(category_type())]) !!}
                 <small>Yes! Included</small>
             </div>
         </div>
@@ -84,7 +84,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Date of shipment</label>
         <div class="col-8">
-            {!! Form::date('date_of_shipment', $batch->date_of_shipment ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
+            {!! Form::date('date_of_shipment', $batch->date_of_shipment ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required', is_disable(category_type())]) !!}
         </div>
     </div>
 </div>
@@ -103,4 +103,4 @@
            {!! Form::text('remarks', $batch->remarks ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required']) !!}
         </div>
     </div>
-</div> 
+</div>

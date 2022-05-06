@@ -32,6 +32,7 @@ class Batches extends Model
         'date_in',
         'date_of_expiry',
         'coc_coa_mill_cert',
+        'coc_coa_mill_cert_status',
         'iqc_status',
         'iqc_result',
         'sds',

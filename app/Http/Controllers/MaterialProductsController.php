@@ -151,8 +151,6 @@ class MaterialProductsController extends Controller
             
             $duplication        =   Batches::find($batch_id)->toArray();
 
-            
-
             $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()],$duplication);
 
             $request->session()->put('material_product_id', $id);
@@ -173,6 +171,7 @@ class MaterialProductsController extends Controller
 
         $owners_list            =  User::pluck("alias_name", 'id');
         $owners = [];
+
         foreach ($owners_list as $key => $value) {
             $owners[$value] = $value;
         }
@@ -193,7 +192,6 @@ class MaterialProductsController extends Controller
              
             $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','batch_id','batch'];
         }
-
         if($type == 'form-two') { 
             $staff_db           =   [];
             foreach($department as $data) {

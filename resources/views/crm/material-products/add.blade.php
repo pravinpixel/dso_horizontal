@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card border" style="overflow: hidden" ng-app="MaterialProductApp" ng-controller="MaterialProductController">
+    <div class="card border" style="overflow: hidden" >
         <div class="card-header border-bottom p-0">
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
@@ -29,33 +29,29 @@
     </div>
     <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+   
     <script>
-        var app = angular.module('MaterialProductApp', []);
+      
+        function  change_product_type() {
+            
+            var CategoryType  = $('#category_type').val();
 
-        app.controller('MaterialProductController', function($scope, $http) {
-            $scope.change_product_type =  function  () {
-
-                if($scope.category_product_type == '') return false ;
-                
-                $http({
-                    method: 'POST', 
-                    url: "{{ route('change-product-category') }}", 
-                    data: {
-                        type: $scope.category_product_type
-                    }
-                }).then(function(response) {
-
-                    Message('success', response.data.message);
-
-                    if(response.data.status == true) {
-                        location.reload();
-                    }
-                }, function(response) {
-                    Message('danger', response.data.message);
-                });
-            }
-        });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $.ajax({
+                type:'POST',
+                url:"{{ route('change-product-category') }}",
+                data:{type: CategoryType },
+                success:function(data){
+                    Message('success', data.message);
+                    location.reload();
+                }
+            });
+        }
     </script>
     <script>
         function saveAsDraft(e) {

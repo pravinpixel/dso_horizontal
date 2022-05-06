@@ -1,12 +1,12 @@
-<div class="col-lg-6 my-1">
+<div class="col-lg-6 my-1"> 
     <div class="row m-0 y-center">
         <label for="" class="col-4">Category selection <sup class="text-danger">*</sup></label>
         <div class="col-8">
             @if (wizard_mode() != 'edit')
-                <select ng-model="category_product_type" ng-change="change_product_type()" class="form-select" >
-                    <option value=""> {{ category_type() ==  'material' ? 'Material' : 'In-house Products'}}</option>
-                    <option value="material">Material</option>
-                    <option value="in_house">In-house Products</option>
+                <select onchange="change_product_type()" class="form-select" id="category_type">
+                    <option value=""> -- select --</option>
+                    <option {{ category_type() ==  'material' ? 'selected' : null }} value="material">Material</option>
+                    <option {{ category_type() ==  'in_house' ? 'selected' : null }} value="in_house">In-House Products</option> 
                 </select>
                 @else
                 <select disabled class="form-select">
@@ -20,7 +20,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' , in_house_type() ]) !!}
+            {!! Form::text('item_description', $material_product->item_description ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required' ]) !!}
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Supplier <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('supplier', $batch->supplier?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required']) !!}
+            {!! Form::text('supplier', $batch->supplier?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', is_disable(category_type())]) !!}
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">PO Number  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('po_number', $batch->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', in_house_type()]) !!}
+            {!! Form::text('po_number', $batch->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',is_disable(category_type())]) !!}
         </div>
     </div>
 </div>
@@ -92,7 +92,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Statutory body  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('statutory_body', $statutory_body_db , $material_product->statutory_body?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required'])  !!}
+            {!! Form::select('statutory_body', $statutory_body_db , $material_product->statutory_body?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required',is_disable(category_type())])  !!}
         </div>
     </div>
 </div>
@@ -100,7 +100,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">EUC material  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('euc_material', ["No", "Yes"] , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required'])  !!}
+            {!! Form::select('euc_material', ["No", "Yes"] , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required',is_disable(category_type())])  !!}
         </div>
     </div>
 </div>

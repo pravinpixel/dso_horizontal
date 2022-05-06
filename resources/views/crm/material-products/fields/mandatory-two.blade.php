@@ -78,9 +78,12 @@
                         <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
                             @foreach ($row['list'] as $staff) 
                                 <option 
+
                                     {{ in_array( $staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
                                     {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
+                                    {{ is_select() }}
                                     value="{{ $staff->id }}">
+
                                     {{ $staff->alias_name }}
                                 </option>
                             @endforeach
@@ -112,8 +115,10 @@
         <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
-                {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...']) !!}
-                <span class="btn btn-light btn-sm border-start"><input type="checkbox" name="" id="" class="form-check-input"></span>
+                {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',is_disable(category_type())]) !!}
+                <span class="btn btn-light btn-sm border-start">
+                    <input type="checkbox" name="coc_coa_mill_cert_status" class="form-check-input" {{ is_disable(category_type()) }}>
+                </span>
             </div>
             <small class="float-end"><i>Used for TD/Expt only</i></small>
         </div>
