@@ -132,20 +132,31 @@ class MaterialProductsController extends Controller
 
     public function wizardFormView(Request $request, $type=null ,$wizard_mode=null, $id=null, $batch_id=null)
     {
+        Log::info(material_product  ());
+        
+        Log::info(batch_id());
 
         if(Route::is('create.material-product')) {
-            $request->session()->forget('wizard_mode');
             $request->session()->put('wizard_mode', 'create');
         }
          
         if($request->route('wizard_mode') == 'edit') {
-            $request->session()->forget('wizard_mode');
+            
             $request->session()->put('wizard_mode', 'edit');
         }
 
         if($request->route('wizard_mode') == 'duplicate') {
-            $request->session()->forget('wizard_mode');
+            
             $request->session()->put('wizard_mode', 'duplicate');
+            
+            $duplication        =   Batches::find($batch_id)->toArray();
+
+            
+
+            $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()],$duplication);
+
+            $request->session()->put('material_product_id', $id);
+            $request->session()->put('batch_id', $duplication_batch->id);
         }
  
         $material_product       =  MaterialProducts::find(material_product() ?? $id);
@@ -211,7 +222,7 @@ class MaterialProductsController extends Controller
                 $view   = 'crm.material-products.edit-wizard.mandatory-two';
             }
             
-            if(wizard_mode() == 'duplicate') {
+            if(wizard_mode() == 'duplicate') { 
                 $view   = 'crm.material-products.duplicate-wizard.mandatory-two';
             }
 
@@ -254,7 +265,7 @@ class MaterialProductsController extends Controller
 
     public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
     {
-         
+        
         $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
@@ -270,18 +281,16 @@ class MaterialProductsController extends Controller
         if($type == 'form-three'){ 
             $view   =  'form-four';
         }
-        if($type == 'form-four') {  
-            $request->session()->forget(['material_product_id','batch_id']);
+        if($type == 'form-four') {
             $view   =  'form-four';
+            forget_session(); return redirect()->route('list-material-products');
         }
  
         if($result) {
 
-            if(wizard_mode() == 'create') {
+            if(wizard_mode() == 'create') { 
                 return redirect()->route('create.material-product',['type' => $view]);
             }
-
-            $request->session()->forget(['material_product_id','batch_id']);
 
             if(wizard_mode() == 'edit') {
                 return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'edit',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);

@@ -35,3 +35,9 @@ if(! function_exists('wizard_mode')) {
         return session()->get('wizard_mode');
     }
 }
+
+if(! function_exists('forget_session')) {
+    function forget_session() {
+        return session()->forget(['wizard_mode','batch_id','material_product_id']);
+    }
+}

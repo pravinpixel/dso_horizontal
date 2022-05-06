@@ -109,4 +109,5 @@ Route::middleware(['auth_users'])->group(function () {
     // Edit  MaterialProduct 
     Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
     Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
+
 });

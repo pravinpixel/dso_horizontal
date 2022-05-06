@@ -47,7 +47,8 @@
                             {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
                            
                             {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : "" }}
-                            {{ Route::is('edit.material-product') ? "Edit Materials / In-house Product" : "" }}
+                            {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : ""  }}
+                            {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : ""  }}
                         </li>
                     </ol>
                 </div>
@@ -82,8 +83,9 @@
                     {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
 
                     {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : "" }}
-                    {{ Route::is('edit.material-product') ? "Edit Materials / In-house Product" : "" }}
-
+                    
+                    {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : ""  }}
+                    {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : ""  }}
                 </h4>
             </div>
         </div>

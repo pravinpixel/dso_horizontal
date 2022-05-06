@@ -20,25 +20,15 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             'disposal_certificate'
         ]);
 
-        $fillable   = [];
-
-        foreach($inputs as $column => $row) $fillable[$column] = $row;
-
-        
-        if(wizard_mode() == 'duplicate') {
-            $batchMethod  = 'create';
-        }else {
-            $batchMethod = 'updateOrCreate';
-        }
-
+        $fillable = []; foreach($inputs as $column => $row) $fillable[$column] = $row;
+          
         $material_product   =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
-        $batch              =   $material_product->Batches()->$batchMethod(['id' => $batch_id], $fillable);
+        $batch              =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
 
         $this->storeFiles($request, $batch);
 
         $request->session()->put('material_product_id', $material_product->id);
         $request->session()->put('batch_id', $batch->id);
-
         return Flash::success(__('global.inserted'));
     }
  
