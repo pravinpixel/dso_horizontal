@@ -210,15 +210,18 @@
                                     <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
                                         <tr ng-repeat="batch in row.batches">
                                             <td class="child-td-lg" ng-show="on_item_description"></td>                                            
-                                            <td class="child-td" ng-show="on_brand"></td>
+                                            <td class="child-td" ng-show="on_brand">@{{ batch.brand }}</td>
                                             <td class="child-td" ng-show="on_batch">@{{ batch.batch }}</td>
                                             <td class="child-td" ng-show="on_unit_packing_size">@{{ batch.packing_size }}</td>   
                                             <td class="child-td" ng-show="on_quantity">@{{ batch.quantity }}</td>
                                             <td class="child-td-lg" ng-show="on_owner_one">@{{ batch.owner_one }} / @{{ batch.owner_two }}</td>
-                                            <td class="child-td" ng-show="on_storage_room">CW</td>
-                                            <td class="child-td" ng-show="on_house_type">FC1</td>
+                                            <td class="child-td" ng-show="on_storage_room">@{{ batch.storage_area }}</td>
+                                            <td class="child-td" ng-show="on_house_type">@{{ batch.housing_type }}</td>
                                             <td class="child-td" ng-show="on_date_of_expiry">
-                                                <small class="d-flex justify-content-center">@{{ row.date_of_expiry }}<i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></small>
+                                                <small class="d-flex justify-content-center">
+                                                    @{{ row.date_of_expiry }}
+                                                    <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i>
+                                                </small>
                                             </td>
                                             <td class="child-td" ng-show="on_iqc_status">
                                                 <small class="badge badge-success-lighten rounded-pill">PASS</small>

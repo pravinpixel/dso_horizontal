@@ -219,8 +219,10 @@ class MaterialProductsController extends Controller
         if($type == 'form-one')   $view  = 'form-two';
         if($type == 'form-two')   $view  = 'form-three';
         if($type == 'form-three') $view  = 'form-four';
-        if($type == 'form-four')  forget_session(); return redirect()->route('list-material-products');
- 
+        if($type == 'form-four') {
+            forget_session(); return redirect()->route('list-material-products');
+        }
+        
         if($result) {
             if(wizard_mode() == 'create')     return redirect()->route('create.material-product',['type' => $view]);
             if(wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'edit',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
