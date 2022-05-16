@@ -233,7 +233,7 @@
                                                         <i class="bi bi-three-dots"></i>
                                                     </a> 
                                                     <div class="dropdown-menu"> 
-                                                        <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye"></i> View batch details</a>
+                                                        <a class="dropdown-item text-secondary" href="#" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</a>
                                                         <a class="dropdown-item text-secondary" href="#" ng-click="editOrDuplicate('duplicate',row.id, batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                                                         <a class="dropdown-item text-secondary" href="#" ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
                                                         <a class="dropdown-item text-secondary" href="#" data-bs-toggle="modal" data-bs-target="#Transfers"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
@@ -281,6 +281,7 @@
         </div>
 
         {{-- ======= START : App Models ==== --}}
+            @include('crm.material-products.modals.view-batch-list')
             @include('crm.material-products.modals.view-list')
             @include('crm.material-products.modals.advance-search')
             @include('crm.material-products.modals.saved-search')
