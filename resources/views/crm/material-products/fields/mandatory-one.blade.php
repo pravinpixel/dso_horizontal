@@ -2,7 +2,6 @@
     <div class="row m-0 y-center"> 
         <label for="" class="col-4">Category selection <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {{ category_type() }}
             <input type="hidden" value="{{ category_type() ?? $material_product->category_selection ?? null}}" name="category_selection">
             <select required onchange="change_product_type()" class="form-select" id="category_type" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."category_selection.status") }}>
                 <option value=""> -- select --</option>

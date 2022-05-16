@@ -5,7 +5,7 @@
         @include('crm.material-products.fields.non-mandatory')
     </div>
     <div class="card-footer border-top bg-light"> 
-        <a href="{{ route('mandatory-form-two') }}" class="btn btn-light rounded-pill shadow-sm border">
+        <a href="{{ route('create.material-product',['type'=>'form-two']) }}" class="btn btn-light rounded-pill shadow-sm border">
             <b><i class="bi bi-arrow-left-circle me-1"></i> Prev</b>
         </a>
         <button class="btn btn-primary float-end rounded-pill" type="submit" >
