@@ -27,7 +27,7 @@
                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
                     <span class="account-user-avatar"> 
-                        <img src="{{ asset('public/asset/images/user.jpg') }}" alt="user-image" class="rounded-circle">
+                        <img src="http://www.staroceans.org/w3c/img_avatar.png" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
                         <span class="account-user-name">{{ Sentinel::getUser()->full_name }}</span>

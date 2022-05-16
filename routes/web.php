@@ -80,6 +80,8 @@ Route::middleware(['auth_users'])->group(function () {
 
 
     Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
+    Route::post('/delete-material-products-batch/{id?}', [MaterialProductsController::class, 'batch_destroy'])->name('delete-material-products-batch');
+
 
     // Change Product Category
     Route::post('/change-product-category', [MaterialProductsController::class, 'change_product_category'])->name('change-product-category');

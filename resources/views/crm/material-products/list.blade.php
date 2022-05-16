@@ -257,7 +257,7 @@
                                                         {{--  ==== REPACK OUTLIFE ====  --}}
                                                         
                                                         <a class="dropdown-item text-secondary" onclick="printModal()" href="#"><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
-                                                        <a class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)" href="#"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
+                                                        <a class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
                                                     </div>
                                                 </div>
                                             </td>
@@ -296,6 +296,7 @@
 
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
+    <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">

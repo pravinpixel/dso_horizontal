@@ -20,14 +20,15 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.sort_by_payload              =   false;
 
     // === Route Lists ===
-    var material_products_url           =   $('#get-material-products').val();
-    var edit_material_products_url      =   $('#edit-material-products').val();
-    var duplicate_material_products_url =   $('#duplicate-material-products').val();
-    var delete_material_products_url    =   $('#delete-material-products').val();
-    var get_save_search_url             =   $('#get-save-search').val();
-    var app_URL                         =   $('#app_URL').val();
-    $scope.auth_id                      =   $('#auth-id').val();
-    $scope.auth_role                    =   $('#auth-role').val();
+    var material_products_url               =   $('#get-material-products').val();
+    var edit_material_products_url          =   $('#edit-material-products').val();
+    var duplicate_material_products_url     =   $('#duplicate-material-products').val();
+    var delete_material_products_url        =   $('#delete-material-products').val();
+    var delete_material_products_batch_url  =   $('#delete-material-products-batch').val();
+    var get_save_search_url                 =   $('#get-save-search').val();
+    var app_URL                             =   $('#app_URL').val();
+    $scope.auth_id                          =   $('#auth-id').val();
+    $scope.auth_role                        =   $('#auth-role').val();
     
 
     // ==== Get Data form DB ====
@@ -78,6 +79,42 @@ app.controller('SearchAddController', function($scope, $http) {
                 $http({
                     method: 'POST', 
                     url: delete_material_products_url +"/"+id, 
+                }).then(function(response) {
+                    $scope.data = response.data; 
+                    $scope.get_material_products();
+                    Message('success', response.data.message); 
+                }, function(response) {
+                    $scope.data = response.data || 'Request failed';
+                });
+            } 
+        });
+    }
+
+    $scope.delete_batch_material_product = function (id) {
+        swal({
+            text: "Are you sure want to Delete?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes! Delete",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-danger rounded-pill",
+                    closeModal: true
+                }
+            }, 
+        }).then((isConfirm) => {
+            if(isConfirm) {
+                $http({
+                    method: 'POST', 
+                    url: delete_material_products_batch_url +"/"+id, 
                 }).then(function(response) {
                     $scope.data = response.data; 
                     $scope.get_material_products();
