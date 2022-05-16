@@ -16,7 +16,6 @@ class BulkImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-         
         return new MaterialProducts([
             'barcode_number'                => $row['barcode_number'],
             'category_selection'            => $row['category_selection'],
@@ -30,6 +29,5 @@ class BulkImport implements ToModel, WithHeadingRow
             'serial'                        => $row['serial'],
             'po_number'                     => $row['po_number'],
         ]);
-        
     }
 }

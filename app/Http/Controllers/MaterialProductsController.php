@@ -116,9 +116,7 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000|mimes:xlsx,xls',
         ]);
-        
         Excel::import(new BulkImport, $request->file('select_file'));
-
         Flash::success(__('global.imported')); 
         return back();
     }
