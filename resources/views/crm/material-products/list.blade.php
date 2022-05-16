@@ -26,11 +26,11 @@
                             {{-- <label class="dropdown-item"><input type="checkbox" ng-model="on_item_description" class="form-check-input me-1">Item Description</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_brand" class="form-check-input me-1">Brand</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_batch" class="form-check-input me-1">Batch/Serial#</label> 
-                            <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_size" class="form-check-input me-1">Pkt size </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_unit_packing_value" class="form-check-input me-1">Pkt size </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_quantity" class="form-check-input me-1">Qty</label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_owner_one" class="form-check-input me-1">Owner1/2 </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_storage_room" class="form-check-input me-1">storage area </label> 
-                            <label class="dropdown-item"><input type="checkbox" ng-model="on_house_type" class="form-check-input me-1">Housing type  </label> 
+                            <label class="dropdown-item"><input type="checkbox" ng-model="on_housing" class="form-check-input me-1">Housing type  </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_date_of_expiry" class="form-check-input me-1">DOE </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_iqc_status" class="form-check-input me-1">QC status  </label> 
                             <label class="dropdown-item"><input type="checkbox" ng-model="on_used_for_td" class="form-check-input me-1">Used for TD/Expt </label>  --}}
@@ -135,9 +135,9 @@
                         <i ng-click="sort_by('batch', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('batch', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
-                    <th ng-show="on_unit_packing_size" class="position-relative table-th child-td">Pkt size 
-                        <i ng-click="sort_by('unit_packing_size', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
-                        <i ng-click="sort_by('unit_packing_size', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                    <th ng-show="on_unit_packing_value" class="position-relative table-th child-td">Pkt size 
+                        <i ng-click="sort_by('unit_packing_value', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                        <i ng-click="sort_by('unit_packing_value', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
                     <th ng-show="on_quantity" class="position-relative table-th child-td">Qty 
                         <i ng-click="sort_by('quantity', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
@@ -151,9 +151,9 @@
                         <i ng-click="sort_by('storage_room', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
                         <i ng-click="sort_by('storage_room', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
-                    <th ng-show="on_house_type" class="position-relative table-th child-td">Housing type 
-                        <i ng-click="sort_by('house_type', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
-                        <i ng-click="sort_by('house_type', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
+                    <th ng-show="on_housing" class="position-relative table-th child-td">Housing type 
+                        <i ng-click="sort_by('housing', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
+                        <i ng-click="sort_by('housing', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
                     </th>
                     <th ng-show="on_date_of_expiry" class="position-relative table-th child-td">DOE 
                         <i ng-click="sort_by('date_of_expiry', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
@@ -184,11 +184,11 @@
                                 </td>
                                 <td class="child-td" ng-show="on_brand">@{{ row.brand }}</td>
                                 <td class="child-td" ng-show="on_batch"></td>
-                                <td class="child-td" ng-show="on_unit_packing_size">@{{ row.unit_packing_size }}L</td>
+                                <td class="child-td" ng-show="on_unit_packing_value">@{{ row.unit_packing_value }}L</td>
                                 <td class="child-td" ng-show="on_quantity">@{{ row.quantity }} <i class="text-success dot-sm bi bi-circle-fill"></i></td>
                                 <td class="child-td-lg" ng-show="on_owner_one"></td>
                                 <td class="child-td" ng-show="on_storage_room"></td>
-                                <td class="child-td" ng-show="on_house_type"></td>
+                                <td class="child-td" ng-show="on_housing"></td>
                                 <td class="child-td" ng-show="on_date_of_expiry"></td>
                                 <td class="child-td" ng-show="on_iqc_status"></td>
                                 <td class="child-td" ng-show="on_used_for_td"></td>
@@ -212,11 +212,11 @@
                                             <td class="child-td-lg" ng-show="on_item_description"></td>                                            
                                             <td class="child-td" ng-show="on_brand">@{{ batch.brand }}</td>
                                             <td class="child-td" ng-show="on_batch">@{{ batch.batch }}</td>
-                                            <td class="child-td" ng-show="on_unit_packing_size">@{{ batch.packing_size }}</td>   
+                                            <td class="child-td" ng-show="on_unit_packing_value">@{{ batch.packing_size }}</td>   
                                             <td class="child-td" ng-show="on_quantity">@{{ batch.quantity }}</td>
                                             <td class="child-td-lg" ng-show="on_owner_one">@{{ batch.owner_one }} / @{{ batch.owner_two }}</td>
                                             <td class="child-td" ng-show="on_storage_room">@{{ batch.storage_area }}</td>
-                                            <td class="child-td" ng-show="on_house_type">@{{ batch.housing_type }}</td>
+                                            <td class="child-td" ng-show="on_housing">@{{ batch.housing_type }}</td>
                                             <td class="child-td" ng-show="on_date_of_expiry">
                                                 <small class="d-flex justify-content-center">
                                                     @{{ row.date_of_expiry }}

@@ -67,7 +67,18 @@ class MaterialProductsController extends Controller
 
         if($request->sort_by) {
             $sort_by = (object) $request->sort_by;
-            $material_product       =  MaterialProducts::orderBy($sort_by->col_name, $sort_by->order_type)->paginate(5);
+            $material_product       =  MaterialProducts::with(["Batches" => function($qBatch) use ($sort_by){
+                                                                if((in_array($sort_by->col_name, ['brand','batch','quantity','owner_one','housing','date_of_expiry','iqc_status']))) {
+                                                                    $qBatch->orderBy($sort_by->col_name, $sort_by->order_type);
+                                                                }
+                                                            }])
+                                                            ->when($sort_by->col_name == 'id', function ($q) use ($sort_by) {
+                                                                $q->orderBy($sort_by->col_name, $sort_by->order_type);
+                                                            })
+                                                            ->when($sort_by->col_name == 'unit_packing_value', function ($q) use ($sort_by) {
+                                                                $q->orderBy($sort_by->col_name, $sort_by->order_type);
+                                                            })
+                                                            ->paginate(5);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 

@@ -11,35 +11,34 @@ class SearchRepository implements SearchRepositoryInterface {
     public function bulkSearch($row)
     {
         return MaterialProducts::with("Batches")->where('is_draft', 0)
-                                ->when($row->category_selection, function ($q) use ($row) {
-                                    $q->where('category_selection' , $row->category_selection ?? null);
-                                })
-                                ->when($row->item_description, function ($q) use ($row)  {
-                                    $q->where('item_description', 'LIKE', '%' .$row->item_description.'%');
-                                })
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('dept', 'LIKE', '%' .$row->dept.'%');
-                                })
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('owner_one', 'LIKE', '%' .$row->owner.'%');
-                                })
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('brand', 'LIKE', '%' .$row->brand.'%');
-                                })
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('storage_area', 'LIKE', '%' .$row->storage_area.'%');
-                                })
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('date_in', 'LIKE', '%' .$row->date_in.'%');
-                                }) 
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->where('date_of_expiry', 'LIKE', '%' .$row->date_of_expiry.'%');
-                                }) 
-                                ->paginate(5);
+        ->when($row->category_selection, function ($q) use ($row) {
+            $q->where('category_selection' , $row->category_selection ?? null);
+        })
+        ->when($row->item_description, function ($q) use ($row)  {
+            $q->where('item_description', 'LIKE', '%' .$row->item_description.'%');
+        })
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('dept', 'LIKE', '%' .$row->dept.'%');
+        })
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('owner_one', 'LIKE', '%' .$row->owner.'%');
+        })
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('brand', 'LIKE', '%' .$row->brand.'%');
+        })
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('storage_area', 'LIKE', '%' .$row->storage_area.'%');
+        })
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('date_in', 'LIKE', '%' .$row->date_in.'%');
+        }) 
+        ->WhereHas('Batches', function($q) use ($row){
+            $q->where('date_of_expiry', 'LIKE', '%' .$row->date_of_expiry.'%');
+        })
+        ->paginate(5);
     }
     public function advanced_search($row)
     {
-         
         return MaterialProducts::where('is_draft', 0)
                                 ->when(!is_null($row->af_logsheet_id) ?? !is_null($row->logsheet_id) , function ($q) use ($row)  {
                                     $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id ?? $row->logsheet_id.'%');

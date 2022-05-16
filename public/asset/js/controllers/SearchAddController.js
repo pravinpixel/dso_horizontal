@@ -4,11 +4,11 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.on_item_description          =   true;
     $scope.on_brand                     =   true;
     $scope.on_batch                     =   true;
-    $scope.on_unit_packing_size         =   true;
+    $scope.on_unit_packing_value        =   true;
     $scope.on_quantity                  =   true; 
     $scope.on_owner_one                 =   true; 
     $scope.on_storage_room              =   true; 
-    $scope.on_house_type                =   true; 
+    $scope.on_housing                   =   true; 
     $scope.on_date_of_expiry            =   true; 
     $scope.on_iqc_status                =   true; 
     $scope.on_used_for_td               =   true; 
