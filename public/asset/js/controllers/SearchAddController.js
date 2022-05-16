@@ -127,22 +127,67 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     $scope.view_material_product = function (row) {
-        $('#View_Material_Product_Details').modal('show'); 
+        $('#View_Material_Product_Details').modal('show');
         $scope.view_material_product_data  = [
             {name: "Category Selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
             {name: 'Item description' , item : row.item_description},
-            {name: 'In-house Product Logsheet ID#' , item : row.in_house_product_logsheet_id},
-            {name: 'EUC material' , item : row.euc_material},
-            {name: 'Brand' , item : row.brand},
-            {name: 'Supplier' , item : row.supplier},
-            {name: 'Unit Packing size' , item : row.unit_packing_size},
+            {name: 'EUC material' , item : row.batches[0].euc_material},
+            {name: 'Brand' , item : row.batches[0].brand},
+            {name: 'Supplier' , item : row.batches[0].supplier},
+            {name: 'Unit Packing size' , item : row.unit_packing_value},
             {name: 'Statutory body' , item : row.statutory_body},
             {name: 'Owner 1' , item : row.owner_one},
             {name: 'Owner 2 (SE/PL/FM)' , item : row.owner_two},
-            {name: 'Remarks' , item : row.remarks},
-            {name: 'Alert Threshold Qty for new material/product description' , item : row.alert_threshold_qty_for_new},
+            {name: 'Remarks' , item : row.batches[0].remarks},
+            {name: 'Alert Threshold Qty for new Lower limit' , item : row.alert_threshold_qty_lower_limit},
+            {name: 'Alert Threshold Qty for new Upper  limit' , item : row.alert_threshold_qty_upper_limit},
             {name: 'Alert before expiry (in terms of weeks) for new material/product description' , item : row.alert_before_expiry},
-            {name: 'Access' , item : row.access},
+            {name: 'Access' , item : row.batches[0].access},
+        ]
+    }
+
+    $scope.view_batch_details = function (row, batch) {
+        console.log(batch)
+        $('#View_Batch_Details').modal('show');
+        $scope.view_batch_details_data  = [
+            {name: "Material description", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
+            {name: 'In-house Product description' , item : row.item_description},
+            {name: 'EUC material' , item : batch.euc_material},
+            {name: 'Cas' , item : batch.cas},
+            {name: 'FM1202 (checked if FM1202 is available)' , item : batch.fm_1202},
+            {name: 'Upload SDS/Mill Cert Document' , item : batch.sds},
+            {name: 'Brand' , item : batch.brand},
+            {name: 'Supplier' , item : batch.supplier},
+            {name: 'Unit Packing Value' , item : row.unit_packing_value},
+            {name: 'Quantity' , item : batch.quantity},
+            {name: 'Batch' , item : batch.batch},
+            {name: 'Lot# ' , item : ""},
+            {name: 'Serial#' , item : ""},
+            {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert},
+            {name: 'Statutory body' , item : batch.statutory_body},
+            {name: 'Storage area' , item : batch.storage_area},
+            {name: 'Housing type' , item : batch.housing_type},
+            {name: 'Owner 1' , item : batch.owner_one},
+            {name: 'Owner 2 (SE/PL/FM)' , item : batch.owner_two},
+            {name: 'Date in' , item : batch.date_in},
+            {name: 'Date of expiry' , item : batch.date_of_expiry},
+            {name: 'IQC status' , item : batch.iqc_status},
+            {name: 'IQC result' , item : batch.iqc_result},
+            {name: 'For product only, can attach COC/COA under IQC.' , item : ""},
+            {name: 'PO Number' , item : batch.po_number},
+            {name: 'Extended expiry' , item : batch.extended_expiry},
+            {name: 'Extended QC status (P/F)' , item : batch.extended_qc_status},
+            {name: 'Extended QC result' , item : batch.extended_qc_result},
+            {name: 'Disposed ' , item : ""},
+            {name: 'Upload disposal certificate' , item : batch.disposal_certificate},
+            {name: 'Project name' , item : batch.project_name},
+            {name: 'Remarks' , item : batch.remarks},
+            {name: 'Alert Threshold Qty for new material/product description (red amber green indicator to reflect quantity health status) (All owner 1/2 to receive notification)' , item : ""},
+            {name: 'Alert before expiry (in terms of weeks) for new material/product description (red amber green indicator to warn owners on near expiry items) (All owner 1/2 to receive notification)' , item : ""},
+            {name: 'Dept' , item : batch.dept},
+            {name: 'Material/Product type' , item : ""},
+            {name: 'Cost per unit' , item : batch.cost_per_unit},
+            {name: 'Access' , item : batch.access},
         ]
     }
  

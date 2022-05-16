@@ -236,59 +236,6 @@
                 </div> 
             </div> 
         </div>
-    </div>  
-    <div id="View_Batch_Material_Product_details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog w-100 modal-right h-100">
-            <div class="modal-content h-100 rounded-0 ">
-                <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>View details</h4>
-                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
-                </div>
-                <div class="modal-body modal-scroll-2 p-0">
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Material description </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">In-house Product description</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">In-house Product Logsheet ID# (hyperlink to logsheet)* - for product only ; phase 2</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">EUC material* (checked if EUC material)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">CAS#</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">FM1202 (checked if FM1202 is available)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Upload SDS/Mill Cert Document*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Brand* </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Supplier* (for products, can input names instead) </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Unit Packing size (select units) * </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Quantity * </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Batch # * (key in NIL if not applicable)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Lot# *  (key in NIL if not applicable)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Serial# *  (key in NIL if not applicable)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">COC/COA/Mill Cert (attach COC/COA/Mill Cert document)* - up to 3 only.</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Statutory body (able to add in new bodies in the future)* for material not product</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">storage area (able to add in new rooms in the future)*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Housing type (able to add in new housing type in the future)*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 1 * </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Owner 2 (SE/PL/FM)*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Date in *</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Date of expiry (Date)* </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">IQC status (P/F)* </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"IQC result (Visual check for non-IQC items. Attach QC document for IQC items)* </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">For product only, can attach COC/COA under IQC."</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">PO Number*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended expiry</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended QC status (P/F)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Extended QC result (Visual check if no QC conducted/Attach QC document if QC conducted)</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Disposed (Y/N but used for TD&EXPT project) </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Upload disposal certificate</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Project name </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Remarks </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"Alert Threshold Qty for new material/product description (red amber green indicator to reflect quantity health status)  (All owner 1/2 to receive notification) "</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">"Alert before expiry (in terms of weeks) for new material/product description (red amber green indicator to warn owners on near expiry items) (All owner 1/2 to receive notification) "</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Dept*</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Material/Product type </li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Cost per unit</li>
-                        <li class="list-group-item list-group-item-action d-flex justify-content-start align-items-start">Access (default everyone can see, indicate who only can see) drop down list with lab groups then further breakdown into names*</li>
-                    </ol> 
-                </div> 
-            </div> 
-        </div>
     </div> 
     <div id="View_Material_Product_details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
