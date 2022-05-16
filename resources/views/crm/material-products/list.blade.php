@@ -81,7 +81,7 @@
                     <select name="owner" ng-model="filter.owner" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($owners as $row)
-                            <option value="{{ $row->id }}">{{ $row->alias_name }}</option>
+                            <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
                         @endforeach 
                     </select>
                 </div> 
@@ -90,7 +90,7 @@
                     <select name="dept" ng-model="filter.dept" id="" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($departments_db as $item)
-                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach 
                     </select>
                 </div> 
@@ -99,7 +99,7 @@
                     <select name="storage_area" ng-model="filter.storage_area" class="form-select custom">
                         <option value="">-- select --</option>
                         @foreach ($storage_room_db as $row)
-                            <option value="{{ $row->name }}">{{ $row->name }}</option>
+                            <option value="{{ $row->id }}">{{ $row->name }}</option>
                         @endforeach 
                     </select>
                 </div> 
@@ -109,7 +109,7 @@
                 </div>
                 <div class="col"> 
                     <label for="" class="form-label">Date of expiry</label>
-                    <input type="date" ng-model="filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
+                    <input type="date" ng-model="filter.date_of_expiry" name="date_of_expiry" class="form-control custom" placeholder="Type here...">
                 </div>
                 <div class="col d-flex align-items-center justify-content-center">
                     <div class="btn-group">

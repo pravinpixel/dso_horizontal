@@ -203,6 +203,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     dept                :  $scope.filter.dept                == undefined ? null : $scope.filter.dept,
                     storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
                     date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
+                    date_of_expiry      :  $scope.filter.date_of_expiry     == undefined ? null : moment($scope.filter.date_of_expiry).format('YYYY-MM-DD'),
                 }
             }
         }  else {
@@ -287,6 +288,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     dept                :  $scope.filter.dept                == undefined ? null : $scope.filter.dept,
                     storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
                     date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
+                    date_of_expiry      :  $scope.filter.date_of_expiry     == undefined ? null : moment($scope.filter.date_of_expiry).format('YYYY-MM-DD'),
                 }
             }
         }).then(function(response) {
@@ -343,13 +345,8 @@ app.controller('SearchAddController', function($scope, $http) {
 
         // ====Bulk Search Rest====
             $scope.bulk_search_status           =   false
-            $scope.filter.item_description      =   " "
-            $scope.filter.category_selection    =   " "
-            $scope.filter.brand                 =   " "
-            $scope.filter.owner                 =   " "
-            $scope.filter.dept                  =   " "
-            $scope.filter.storage_area          =   " "
-            $scope.filter.date_in               =   " "
+            $scope.filter =   ""
+            
         // ====Bulk Search Rest===
         delete $scope.filter_data 
     } 

@@ -72,7 +72,6 @@ class MaterialProductsController extends Controller
         }
 
         $material_product       =   MaterialProducts::with('Batches')->latest()->paginate(5); 
-        
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -126,7 +125,6 @@ class MaterialProductsController extends Controller
     public function change_product_category(Request $request)
     {
         $request->session()->put('category_type', $request->type);
-         
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
 
@@ -206,7 +204,6 @@ class MaterialProductsController extends Controller
         }
         return view($view, compact($params));
     }
-
     public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
     {
         
@@ -229,7 +226,6 @@ class MaterialProductsController extends Controller
             if(wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
         }
     } 
-
     public function destroy($id) 
     {
         MaterialProducts::find($id)->delete();

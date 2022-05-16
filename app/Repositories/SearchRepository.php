@@ -10,29 +10,31 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 class SearchRepository implements SearchRepositoryInterface {
     public function bulkSearch($row)
     {
-        return MaterialProducts::where('is_draft', 0)
+        return MaterialProducts::with("Batches")->where('is_draft', 0)
                                 ->when($row->category_selection, function ($q) use ($row) {
                                     $q->where('category_selection' , $row->category_selection ?? null);
                                 })
                                 ->when($row->item_description, function ($q) use ($row)  {
-                                    $q->where('item_description', 'LIKE', '%' . $row->item_description ?? null .'%');
+                                    $q->where('item_description', 'LIKE', '%' .$row->item_description.'%');
                                 })
-                                ->when($row->owner, function ($q) use ($row)  {
-                                    $q->where('owner_one' , $row->owner  ?? null);
-                                    // $q->where('owner_two' , $row->owner  ?? null);
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('dept', 'LIKE', '%' .$row->dept.'%');
                                 })
-                                ->when($row->brand, function ($q) use ($row)  {
-                                    $q->where('brand' , $row->brand  ?? null);
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('owner_one', 'LIKE', '%' .$row->owner.'%');
                                 })
-                                ->when($row->dept, function ($q) use ($row)  {
-                                    $q->where('department' , $row->dept  ?? null);
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('brand', 'LIKE', '%' .$row->brand.'%');
                                 })
-                                ->when($row->storage_area, function ($q) use ($row)  {
-                                    $q->where('storage_room' , $row->storage_area  ?? null);
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('storage_area', 'LIKE', '%' .$row->storage_area.'%');
                                 })
-                                ->when($row->date_in, function ($q) use ($row)  {
-                                    $q->where('created_at' , $row->date_in  ?? null);
-                                })
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('date_in', 'LIKE', '%' .$row->date_in.'%');
+                                }) 
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->where('date_of_expiry', 'LIKE', '%' .$row->date_of_expiry.'%');
+                                }) 
                                 ->paginate(5);
     }
     public function advanced_search($row)
