@@ -1,11 +1,21 @@
-<td class="box" ng-show="on_item_description"></td>   
+<div class="box" ng-show="on_item_description"></div>   
+
 @foreach ($tableAllColumns as $column) 
-    <td ng-if="on_{{ $column['name'] }}" class="box">
-        {!! $column['batch'] !!}
-        abcd
-    </td>
+    <div ng-if="on_{{ $column['name'] }}" class="box">
+        @if ($column['name']=="iqc_status")
+            <small class="badge badge-success-lighten rounded-pill">PASS</small>
+            @elseif($column['name']=="date_of_expiry")
+                {{ $column['batch'] }}
+                <i class="ms-1 text-{{ $column['name']  == 1 ? "success" : "danger"}} dot-sm bi bi-circle-fill"></i>
+            @elseif($column['name']=="used_for_td_expt_only")
+                -
+            @else
+                {!! $column['batch'] !!}
+        @endif 
+    </div>
 @endforeach
-<td class="box">
+
+<div class="box box-sm">
     <div class="dropdown">
         <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="bi bi-three-dots"></i>
@@ -35,4 +45,4 @@
             <a class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a> 
         </div>
     </div>
-</td>
+</div>

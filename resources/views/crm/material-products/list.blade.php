@@ -19,47 +19,42 @@
             @include('crm.material-products.partials.table-filter')
         {{-- ====== Filletrs ===--}}
          
-        <div class="table-responsive">
-            <table class="table table-centered table-bordered table-hovered bg-white ">
-                <thead>
+        <div class="table-responsive shadow-lg bg-white">
+            <div class="custom-table">
+                <div class="custom-table-head">
                     {{-- ======= Table Header  ====== --}}
                         {!! $table_th_columns !!}
                     {{-- ======= Table Header  ====== --}}
-                </thead>
-                <tbody>
-                    <tr class="table-tr"  ng-repeat="(index,row) in material_products.data track by row.id">
-                    {{-- <tr class="table-tr" ng-if="row.access.includes(auth_id) || auth_role == 'admin'" ng-repeat="(index,row) in material_products.data track by row.id"> --}}
-                        <td colspan="12" class="p-0 border-bottom ">
-                            <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : ''">
-                                <tr>
-                                    {{-- ======= Matrial Product Data  ====== --}}
-                                        {!! $table_td_columns !!} 
-                                    {{-- ======= Matrial Product Data  ====== --}}
-                                </tr>
-                                <tr class="collapse show" id="row_@{{ index+1 }}">
-                                    <td colspan="12" class="p-0">
-                                        <table class="table table-centered m-0" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
-                                            <tr ng-repeat="batch in row.batches">
-                                                {{-- ======= Matrial Product Batches Data  ====== --}}
-                                                    {!! $batch_table_td_columns !!} 
-                                                {{-- ======= Matrial Product Batches Data  ====== --}}
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr> 
-                    <tr ng-show="material_products.data.length == 0">
-                        <td colspan="12" class="text-center" >
+                </div>
+                <div class="custom-table-body">
+                    <div class="custom-tabel-row"  ng-repeat="(index,row) in material_products.data track by row.id">
+                        {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
+                        <div class="custom-table" ng-class="row.is_draft == 1 ? 'bg-draft' : ''">
+                            <div class="custom-table-head">
+                                {{-- ======= Matrial Product Data  ====== --}}
+                                    {!! $table_td_columns !!} 
+                                {{-- ======= Matrial Product Data  ====== --}}
+                            </div>
+                            <div class="custom-table collapse show" id="row_@{{ index+1 }}" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
+                                <div class="custom-table-row" ng-repeat="batch in row.batches">
+                                    {{-- ======= Matrial Product Batches Data  ====== --}}
+                                        {!! $batch_table_td_columns !!} 
+                                    {{-- ======= Matrial Product Batches Data  ====== --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div ng-show="material_products.data.length == 0">
+                        <div colspan="12" class="text-center" >
                             No data found
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="pb-3">
-            <page-pagination></page-pagination>
+        <div class="py-3">
+            <page-pagination>
+            </page-pagination>
         </div>
 
         {{-- ======= START : App Models ==== --}}
