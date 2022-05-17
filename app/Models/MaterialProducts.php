@@ -22,8 +22,6 @@ class MaterialProducts extends Model
         'item_description',
         'unit_of_measure',
         'unit_packing_value',
-        'owner_one',
-        'owner_two',
         'statutory_body',
         'alert_threshold_qty_upper_limit',
         'alert_threshold_qty_lower_limit',

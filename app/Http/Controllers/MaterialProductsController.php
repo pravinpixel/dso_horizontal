@@ -25,6 +25,7 @@ use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
 class MaterialProductsController extends Controller
@@ -128,7 +129,41 @@ class MaterialProductsController extends Controller
         $house_type_db          =   HouseTypes::all();
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
-        return view('crm.material-products.list', compact('owners','storage_room_db','departments_db','statutory_body_db','house_type_db','unit_packing_size_db'));  
+        $parentTable            =   Schema::getColumnListing("material_products");
+        $childTable             =   Schema::getColumnListing("batches");
+
+        $allColumns             =  array_merge($parentTable, $childTable);
+        $tableColumns           =  array_combine($allColumns  ,$allColumns ); 
+        unset($tableColumns['id'], $tableColumns['created_at'], $tableColumns['item_description'], $tableColumns['updated_at'], $tableColumns['deleted_at'],$tableColumns['is_draft'],);
+ 
+        $tableAllColumns = [];
+        foreach ($tableColumns as $key => $value) {
+            $tableAllColumns[$key] = [
+                "name" => $key,
+                "row"  => '{{ row.'.$value.' }}',
+                "batch"  => '{{ batch.'.$value.' }}',
+            ];
+        }
+
+        $table_th_columns       = view('crm.material-products.partials.table-th-column', compact('tableAllColumns'));
+        $table_td_columns       = view('crm.material-products.partials.table-td-column', compact('tableAllColumns'));
+        $batch_table_td_columns = view('crm.material-products.partials.batch-table-td-column', compact('tableAllColumns'));
+
+
+        return view('crm.material-products.list', 
+            compact(
+                'table_th_columns',
+                'table_td_columns',
+                'tableAllColumns',
+                'batch_table_td_columns',
+                'owners',
+                'storage_room_db',
+                'departments_db',
+                'statutory_body_db',
+                'house_type_db',
+                'unit_packing_size_db',
+                'tableAllColumns'
+            ));  
     }
 
     public function change_product_category(Request $request)

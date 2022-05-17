@@ -346,3 +346,35 @@ to {
     color: #d1d1d1 !important;
     cursor: not-allowed !important;
 }
+.tableColumns-dropdown {
+    position: relative;
+}
+.tableColumns-menu {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    z-index: -111111;
+    opacity: 0;
+    border-radius: 25px;
+    background-color: white;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00000027;
+}
+.tableColumns-menu .menu-list {
+    max-height: 380px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 250px;
+}
+.tableColumns-menu .menu-list label {
+    text-align: left !important;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    line-height: 35px;
+}
+.tableColumns-dropdown:hover .tableColumns-menu{
+    z-index: 1 !important;
+    opacity: 1;
+}
