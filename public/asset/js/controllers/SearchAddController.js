@@ -14,7 +14,6 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.on_used_for_td_expt_only     =   true; 
     // ==== END :For Check Box column Filters ===
 
-
     $scope.filter_status                =   false;
     $scope.bulk_search_status           =   false;
     $scope.advance_search_status        =   false;
