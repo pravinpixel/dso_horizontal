@@ -117,7 +117,59 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000|mimes:xlsx,xls',
         ]);
-        Excel::import(new BulkImport, $request->file('select_file'));
+        
+        $array = Excel::toArray(new BulkImport, $request->file('select_file'));
+      
+        foreach($array[0] as $key => $row) {
+            if(!is_null($row['category_selection'])) {
+                $result  = MaterialProducts::updateOrCreate([
+                    'category_selection'                =>   $row['category_selection'],
+                    'item_description'                  =>   $row['item_description'],
+                    'unit_of_measure'                   =>   $row['unit_of_measure'],
+                    'unit_packing_value'                =>   $row['unit_packing_value'],
+                    'statutory_body'                    =>   $row['statutory_body'],
+                    'alert_threshold_qty_upper_limit'   =>   $row['alert_threshold_qty_upper_limit'],
+                    'alert_threshold_qty_lower_limit'   =>   $row['alert_threshold_qty_lower_limit'],
+                    'alert_before_expiry'               =>   $row['alert_before_expiry_weeks'],
+                ]);
+                $result->Batches()->updateOrCreate([
+                    'brand'                         =>  $row['brand'],
+                    'supplier'                      =>  $row['supplier'],
+                    'packing_size'                  =>  $row['unit_packing_value'],
+                    'quantity'                      =>  $row['quantity'],
+                    'batch'                         =>  $row['batch'],
+                    'serial'                        =>  $row['serial'],
+                    'po_number'                     =>  $row['po_number'],
+                    'statutory_body'                =>  $row['statutory_body'],
+                    'euc_material'                  =>  $row['euc_material'],
+                    'require_bulk_volume_tracking'  =>  $row['require_bulk_volume_tracking'],
+                    'require_outlife_tracking'      =>  $row['require_outlife_tracking'],
+                    'outlife'                       =>  $row['outlife_days'],
+                    'storage_area'                  =>  $row['storage_area'],
+                    'housing_type'                  =>  $row['housing_type'],
+                    'housing'                       =>  $row['housing'],
+                    'owner_one'                     =>  $row['owner_1'],
+                    'owner_two'                     =>  $row['owner_2_seplfm'],
+                    'dept'                          =>  $row['dept'],
+                    'access'                        =>  $row['access'],
+                    'date_in'                       =>  $row['date_in'],
+                    'date_of_expiry'                =>  $row['date_of_expiry'],
+                    'coc_coa_mill_cert'             =>  $row['coccoamill_cert'],
+                    'iqc_status'                    =>  $row['iqc_status_pf'],
+                    'iqc_result'                    =>  $row['iqc_result'],
+                    'sds'                           =>  $row['sds'],
+                    'cas'                           =>  $row['cas'],
+                    'fm_1202'                       =>  $row['fm1202'],
+                    'project_name'                  =>  $row['project_name'],
+                    'material_product_type'         =>  $row['materialproduct_type'],
+                    'date_of_manufacture'           =>  $row['date_of_manufacture'],
+                    'date_of_shipment'              =>  $row['date_of_shipment'],
+                    'cost_per_unit'                 =>  $row['cost_per_unit_sgd'],
+                    'remarks'                       =>  $row['remarks'], 
+                ]);
+            }
+        }
+
         Flash::success(__('global.imported')); 
         return back();
     }

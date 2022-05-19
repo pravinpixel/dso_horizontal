@@ -377,8 +377,8 @@ app.controller('SearchAddController', function($scope, $http) {
                     af_product_type        : $scope.af_product_type         ==  undefined ? null : $scope.af_product_type, 
                     af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined ? null : moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
                     af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined ? null : moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
-                    af_usage_tracking      : $scope.af_usage_tracking       ==  undefined ? null : $scope.af_usage_tracking, 
-                    af_outlife_tracking    : $scope.af_outlife_tracking     ==  undefined ? null : $scope.af_outlife_tracking, 
+                    af_require_bulk_volume_tracking : $scope.af_require_bulk_volume_tracking       ==  undefined ? null : $scope.af_require_bulk_volume_tracking, 
+                    af_require_outlife_tracking     : $scope.af_require_outlife_tracking     ==  undefined   ?   null   :   $scope.af_require_outlife_tracking, 
                 }
             }
         }   else {
@@ -411,8 +411,8 @@ app.controller('SearchAddController', function($scope, $http) {
                 af_product_type        : $scope.af_product_type         ==  undefined   ?   null   :   $scope.af_product_type, 
                 af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined   ?   null   :   moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
                 af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined   ?   null   :   moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
-                af_usage_tracking      : $scope.af_usage_tracking       ==  undefined   ?   null   :   $scope.af_usage_tracking, 
-                af_outlife_tracking    : $scope.af_outlife_tracking     ==  undefined   ?   null   :   $scope.af_outlife_tracking, 
+                af_require_bulk_volume_tracking      : $scope.af_require_bulk_volume_tracking       ==  undefined   ?   null   :   $scope.af_require_bulk_volume_tracking, 
+                af_require_outlife_tracking    : $scope.af_require_outlife_tracking     ==  undefined   ?   null   :   $scope.af_require_outlife_tracking, 
             }
         }
  

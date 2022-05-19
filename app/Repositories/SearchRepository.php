@@ -39,16 +39,27 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function advanced_search($row)
     {
-        return MaterialProducts::where('is_draft', 0)
-                                ->when(!is_null($row->af_logsheet_id) ?? !is_null($row->logsheet_id) , function ($q) use ($row)  {
-                                    $q->where('in_house_product_logsheet_id', 'LIKE', '%' . $row->af_logsheet_id ?? $row->logsheet_id.'%');
-                                })
-                                ->when(!is_null($row->af_supplier) ?? !is_null($row->supplier), function ($q) use ($row)  {
-                                    $q->Where('supplier' , $row->af_supplier ?? $row->supplier);
-                                })
-                                ->when(!is_null($row->af_batch) ?? !is_null($row->batch), function ($q) use ($row)  {
-                                    $q->Where('brand' , $row->af_batch ?? $row->batch);
-                                })
+        return MaterialProducts::with("Batches")->where('is_draft', 0)
+                                ->WhereHas('Batches', function($q) use ($row){
+                                    $q->when(!is_null($row->af_euc_material) ?? !is_null($row->euc_material), function ($q) use ($row)  {
+                                        $q->Where('euc_material' , $row->af_euc_material ?? $row->euc_material);
+                                    }); 
+                                    $q->when(!is_null($row->af_require_bulk_volume_tracking) ?? !is_null($row->require_bulk_volume_tracking), function ($q) use ($row)  {
+                                        $q->Where('require_bulk_volume_tracking' , $row->af_require_bulk_volume_tracking ?? $row->require_bulk_volume_tracking);
+                                    });
+                                    $q->when(!is_null($row->af_require_outlife_tracking) ?? !is_null($row->require_outlife_tracking), function ($q) use ($row)  {
+                                        $q->Where('require_outlife_tracking' , $row->af_require_outlife_tracking ?? $row->require_outlife_tracking);
+                                    });
+                                    $q->when(!is_null($row->af_cas) ?? !is_null($row->cas), function ($q) use ($row)  {
+                                        $q->Where('cas' , $row->af_cas ?? $row->cas);
+                                    });
+                                    $q->when(!is_null($row->af_supplier) ?? !is_null($row->supplier), function ($q) use ($row)  {
+                                        $q->where('supplier', 'LIKE', '%' .$row->supplier.'%');
+                                    });
+                                    $q->when(!is_null($row->af_batch) ?? !is_null($row->batch), function ($q) use ($row)  {
+                                        $q->where('batch', 'LIKE', '%' .$row->batch.'%');
+                                    });
+                                }) 
                                 ->paginate(5);
     }
     public function StoreBulkSearch($row, $request)

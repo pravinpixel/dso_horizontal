@@ -12,28 +12,24 @@
                 <div class="text-center">
                     <div class="row m-0">
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">In-house Product Logsheet ID#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="af_logsheet_id">
-                        </div> 
+                            <label class="form-label">EUC Material</label>
+                            <select class="form-select" ng-model="af_require_outlife_tracking">
+                                <option value="">-- select --</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">EUC Material</label>
-                            <select name="af_euc_material" id="" class="form-select" ng-model="af_euc_material">
+                            <label class="form-label">Require Bulk volume tracking</label>
+                            <select class="form-select" ng-model="af_require_bulk_volume_tracking">
                                 <option value="">-- select --</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Usage Tracking</label>
-                            <select  id="" class="form-select">
-                                <option value="">-- select --</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div> 
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Outlife Tracking</label>
-                            <select  id="" class="form-select">
+                            <label class="form-label">Outlife Tracking</label>
+                            <select class="form-select"  ng-model="af_outlife_tracking">
                                 <option value="">-- select --</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -56,8 +52,8 @@
                             <input type="text" class="form-control" placeholder="Type here" ng-model="af_serial">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Statutory board</label>
-                            <select name="af_statutory_board" id="" class="form-select" ng-model="af_statutory_board">
+                            <label class="form-label">Statutory board</label>
+                            <select name="af_statutory_board" class="form-select" ng-model="af_statutory_board">
                                 <option value="">-- select --</option>
                                 @foreach ($statutory_body_db as $row)
                                     <option value="{{ $row->name }}">{{ $row->name }}</option>
@@ -65,8 +61,8 @@
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Housing type</label>
-                            <select name="af_housing_type" id="" class="form-select" ng-model="af_housing_type">
+                            <label class="form-label">Housing type</label>
+                            <select name="af_housing_type" class="form-select" ng-model="af_housing_type">
                                 <option value="">-- select --</option>
                                 @foreach ($house_type_db as $row)
                                     <option value="{{ $row->name }}">{{ $row->name }}</option>
@@ -74,8 +70,8 @@
                             </select>
                         </div> 
                          <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Housing No</label>
-                            <select name="af_housing_number" id="" class="form-select form-select-sm" ng-model="af_housing_number">
+                            <label class="form-label">Housing No</label>
+                            <select name="af_housing_number" class="form-select form-select-sm" ng-model="af_housing_number">
                                 <option value=""> -</option>
                                 @for ($key=0;$key<20;$key++)
                                     <option value="{{ $key+1 }}">{{ $key+1 }}</option>
@@ -83,8 +79,8 @@
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Unit Packing size</label>
-                            <select name="af_unit_pkt_size" id="" class="form-select" ng-model="af_unit_pkt_size">
+                            <label class="form-label">Unit Packing size</label>
+                            <select name="af_unit_pkt_size" class="form-select" ng-model="af_unit_pkt_size">
                                 <option value="">-- select --</option>
                                 @foreach ($unit_packing_size_db as $row)
                                     <option value="{{ $row->name }}">{{ $row->name }}</option>
@@ -96,8 +92,8 @@
                             <input type="date" class="form-control" placeholder="Type here" ng-model="af_date_of_expiry">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">IQC status </label>
-                            <select name="af_iqc_status" id="" class="form-select" ng-model="af_iqc_status">
+                            <label class="form-label">IQC status </label>
+                            <select name="af_iqc_status" class="form-select" ng-model="af_iqc_status">
                                 <option value="">-- select --</option>
                                 <option value="1">Pass</option>
                                 <option value="2">Fail</option> 
@@ -112,16 +108,16 @@
                             <input type="date" class="form-control" placeholder="Type here" ng-model="af_extended_expiry">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Extended QC status</label>
-                            <select name="af_extended_qc_status" id="" class="form-select" ng-model="af_extended_qc_status">
+                            <label class="form-label">Extended QC status</label>
+                            <select name="af_extended_qc_status" class="form-select" ng-model="af_extended_qc_status">
                                 <option value="">-- select --</option>
                                 <option value="1">Pass</option>
                                 <option value="2">Fail</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Disposed</label>
-                            <select name="af_disposed" id="" class="form-select" ng-model="af_disposed">
+                            <label class="form-label">Disposed</label>
+                            <select name="af_disposed" class="form-select" ng-model="af_disposed">
                                 <option value="">-- select --</option>
                                 <option value="1">Yes</option>
                                 <option value="2">No but used for TD/Expt</option> 
@@ -144,24 +140,24 @@
                             <input type="date" class="form-control" placeholder="Type here" ng-model="af_date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Extended QC status</label>
-                            <select name="af_extended_qc_status" id="" class="form-select" ng-model="af_extended_qc_status">
+                            <label class="form-label">Extended QC status</label>
+                            <select name="af_extended_qc_status" class="form-select" ng-model="af_extended_qc_status">
                                 <option value="">-- select --</option>
                                 <option value="1">Pass</option>
                                 <option value="2">Fail</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Required Usage Tracking</label>
-                            <select name="af_usage_tracking" id="" class="form-select" ng-model="af_usage_tracking">
+                            <label class="form-label">Required Usage Tracking</label>
+                            <select name="af_usage_tracking" class="form-select" ng-model="af_usage_tracking">
                                 <option value="">-- select --</option>
                                 <option value="0">No</option>
                                 <option value="1">Yes</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label for="" class="form-label">Required Outlife Tracking</label>
-                            <select name="af_outlife_tracking" id="" class="form-select" ng-model="af_outlife_tracking">
+                            <label class="form-label">Required Outlife Tracking</label>
+                            <select name="af_outlife_tracking" class="form-select" ng-model="af_outlife_tracking">
                                 <option value="">-- select --</option>
                                 <option value="0">No</option>
                                 <option value="1">Yes</option> 
