@@ -1,9 +1,9 @@
-<div ng-show="on_item_description" class="box sticky-left">
-    <a class="bi bi-caret-right-fill table-toggle-icon" 
+<div ng-show="on_item_description" class="box sticky-left justify-content-start">
+    <a class="bi bi-caret-right-fill table-toggle-icon me-auto" 
         data-bs-toggle="collapse"
         href="#row_@{{ index+1 }}"
         role="button" title="@{{ row.item_description}}">
-        @{{ row.item_description |  limitTo: 9 }}..
+        @{{ row.item_description |  limitTo: 12 }}..
     </a>
 </div>
 

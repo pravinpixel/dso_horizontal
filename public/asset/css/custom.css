@@ -429,6 +429,9 @@ to {
 .custom-table-head {
     border-bottom: 1px solid #eeeeee;
 }
-.dropdown-menu.show  {
+.box .dropdown-menu.show  {
     transform: translate(-274px, 1px) !important;
+}
+.fa-1x {
+    font-size: 20px !important;
 }

@@ -30,7 +30,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Brand <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('brand', $batch->brand?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
+            {!! Form::text('brand', $batch->brand?? "In House", ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")
             ]) !!}
         </div>
@@ -50,7 +50,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Unit of Measure <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('unit_of_measure', $unit_packing_size_db , $material_product->unit_of_measure ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --', 
+            {!! Form::select('unit_of_measure', $unit_packing_size_db , $material_product->unit_of_measure ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --', 'required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."unit_of_measure.status")
             ])  !!}
         </div>
@@ -60,7 +60,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Unit Packing value <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm', 'placeholder' => 'Type here...',
+            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm', 'placeholder' => 'Type here...','required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."unit_packing_value.status")
             ])  !!}
         </div>
@@ -150,7 +150,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...',
+            {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...','required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."outlife.status")
             ])  !!}
         </div>

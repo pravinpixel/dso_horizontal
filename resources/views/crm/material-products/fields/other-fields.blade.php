@@ -2,7 +2,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Extended expiry</label>
         <div class="col-8">
-            {!! Form::text('extended_expiry', $batch->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? $material_product->category_selection ?? null)."extended_expiry.status")]) !!}
+            {!! Form::date('extended_expiry', $batch->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? $material_product->category_selection ?? null)."extended_expiry.status")]) !!}
         </div>
     </div>
 </div>

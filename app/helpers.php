@@ -33,14 +33,21 @@ if(! function_exists('wizard_mode')) {
 
 if(! function_exists('forget_session')) {
     function forget_session() {
-        return session()->forget(['wizard_mode','batch_id','material_product_id']);
+        return session()->forget([
+            'wizard_mode',
+            'batch_id',
+            'material_product_id',
+            'form-one',
+            'form-two',
+            'form-three',
+            'form-four',
+        ]);
     }
 }
 if(! function_exists('is_select')) {
     function is_select() {
 
         if(wizard_mode() == 'create') {
-  
             $status  = 'selected';
         }
   
@@ -53,5 +60,15 @@ if(! function_exists('is_disable')) {
         return "is_disable".".".wizard_mode().".".$category_type."." ;
     }
 }
-
  
+ 
+if(! function_exists('completed_tab')) {
+    function completed_tab($type) {
+        if(session()->get($type)  ==  'completed') {
+            return route('create.material-product',['type'=>$type]);
+        } 
+        else {
+            return "#";
+        }
+    }
+}

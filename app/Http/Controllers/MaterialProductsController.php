@@ -309,9 +309,24 @@ class MaterialProductsController extends Controller
             $request
         );
         
-        if($type == 'form-one')   $view  = 'form-two';
-        if($type == 'form-two')   $view  = 'form-three';
-        if($type == 'form-three') $view  = 'form-four';
+        if($type == 'form-one') {
+            if(wizard_mode() == 'create') {
+                $request->session()->put('form-one', 'completed');
+            }
+            $view  = 'form-two';
+        }
+        if($type == 'form-two') {
+            if(wizard_mode() == 'create') {
+                $request->session()->put('form-two', 'completed');
+            }
+            $view  = 'form-three';
+        }  
+        if($type == 'form-three') {
+            if(wizard_mode() == 'create') {
+                $request->session()->put('form-three', 'completed');
+            }
+            $view  = 'form-four';
+        }
         if($type == 'form-four') {
             forget_session(); return redirect()->route('list-material-products');
         }

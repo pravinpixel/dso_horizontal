@@ -90,9 +90,9 @@
                         <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
                             @foreach ($row['list'] as $staff) 
                                 <option  
-                                    {{ in_array( $staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
+                                    {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
                                     {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
-                                    {{ is_select() }}
+                                    {{-- {{ is_select() }} --}}
                                     value="{{ $staff->id }}">
 
                                     {{ $staff->alias_name }}
@@ -130,9 +130,11 @@
         <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
-                {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
+                {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
+                    $material_product->Batches[0]->coc_coa_mill_cert ? '' : "required",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                 ]) !!}
+                {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                 <span class="btn btn-light btn-sm border-start">
                     <input type="checkbox" name="coc_coa_mill_cert_status" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert_status.status") }}>
                 </span>
@@ -143,11 +145,11 @@
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">IQC status <sup class="text-danger">*</sup></label>
+        <label for="" class="col-4">IQC status  (P/F)<sup class="text-danger">*</sup></label>
         <div class="col-8">
             {!! Form::select('iqc_status', $iqc_status , $batch->iqc_status ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_status.status")
-            ])  !!}
+            ])  !!} 
         </div>
     </div>
 </div>
@@ -157,8 +159,10 @@
         <div class="col-8 ">
             <div class="d-flex y-center border rounded p-0">
                 {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
+                    $material_product->Batches[0]->iqc_result ? '' : "required",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status")
                 ]) !!}
+                {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                 <span class="btn btn-light btn-sm border-start">
                     <input type="checkbox" name="" id="" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}>
                 </span>
