@@ -23,7 +23,6 @@ class MasterController extends Controller
 
     public function index()
     {        
-        
         return view('masters.Item-description');
     }
 

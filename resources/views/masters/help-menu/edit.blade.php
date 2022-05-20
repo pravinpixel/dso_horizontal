@@ -6,7 +6,7 @@
         {!! Form::model($data, ['route' => ['help.menu.update', $data->id],"id" => "helpForm", "Method" => "PUT",'files'=>true]) !!}
             @include('masters.help-menu.fields')
             <div class="text-end">
-                <a href="{{ route('help.menu.index') }}" class="btn btn-light me-2">back</a>
+                <a href="{{ route('help.menu.index') }}" class="btn btn-light me-2">Back</a>
                 <button type="submit" class="btn btn-primary fw-bold">Save</button>
             </div> 
         {!! Form::close() !!}

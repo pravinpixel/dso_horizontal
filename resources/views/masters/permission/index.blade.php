@@ -3,7 +3,7 @@
 @section('masters')
     <form action="{{ route('permission.store') }}" method="post" class="card">
         @csrf 
-        <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover">
+        <table class="table table-bordered table-centered m-0 tr-sm table-hover">
             <thead class="bg-primary-2 text-white">
                 <tr>
                     <th colspan="5">

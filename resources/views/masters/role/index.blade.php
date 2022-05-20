@@ -7,7 +7,7 @@
             <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
         </div> 
         <div class="card-body"> 
-            <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover" id="data-table">
+            <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
                         <th class="table-th" width="10%">No</th>

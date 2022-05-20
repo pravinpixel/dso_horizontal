@@ -175,7 +175,7 @@ class UserController extends Controller
             return redirect()->route('user.index');
 
         } catch (\Throwable $th) {
-            Flash::error( __('auth.failed'));
+            Flash::error("Oops!, User Id All Ready Taken !");
             return redirect()->route('user.index');
         }
     }

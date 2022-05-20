@@ -7,7 +7,7 @@
             @include('masters.role.fields')
             <div class="row ">
                 <div class="col-10 offset-2">
-                    <a href="{{ route('role.index') }}" class="btn btn-light">back</a>
+                    <a href="{{ route('role.index') }}" class="btn btn-light">Back</a>
                     <button type="submit" class="btn btn-primary fw-bold">Update</button>
                 </div>
             </div> 

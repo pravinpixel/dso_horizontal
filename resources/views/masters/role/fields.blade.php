@@ -5,7 +5,7 @@
     </div>
 </div>
  
-<table class="table table-bordered table-centered text-center  tr-sm table-hover">
+<table class="table table-bordered table-centered  tr-sm table-hover">
     <thead class="bg-primary-2 text-white">
         <tr>
             <th rowspan="2" width="200px">Menus</th>

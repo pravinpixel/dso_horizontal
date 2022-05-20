@@ -6,7 +6,7 @@
         {!! Form::open(['route' => 'role.store',"id" => "roleForm", "Method" => "POST"]) !!}
             @include('masters.role.fields')
             <div class="text-end">
-                <a href="{{ route('role.index') }}" class="btn btn-light me-2">back</a>
+                <a href="{{ route('role.index') }}" class="btn btn-light me-2">Back</a>
                 <button type="submit" class="btn btn-primary fw-bold">Save</button>
             </div> 
         {!! Form::close() !!}

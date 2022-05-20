@@ -7,7 +7,7 @@
             <a class="btn btn-primary"  href="{{ route('help.menu.create') }}"><i class="fa fa-plus"></i> Add help</a>
         </div> 
         <div class="card-body"> 
-            <table class="table table-bordered table-centered text-center m-0 tr-sm table-hover" id="data-table">
+            <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
                         <th class="table-th" width="10%">No</th>
@@ -30,7 +30,7 @@
                 serverSide: true,
                 ajax: "{{ route('help.menu.index') }}",
                 columns: [
-                    {data: 'DT_RowIndex', name: 'id',},
+                    {data: 'DT_RowIndex', name: 'id', orderable: false, searchable: false},
                     {data: 'title', name: 'title'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
