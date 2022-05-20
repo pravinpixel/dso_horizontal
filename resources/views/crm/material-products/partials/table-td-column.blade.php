@@ -2,8 +2,8 @@
     <a class="bi bi-caret-right-fill table-toggle-icon" 
         data-bs-toggle="collapse"
         href="#row_@{{ index+1 }}"
-        role="button" >
-        @{{ row.item_description }}
+        role="button" title="@{{ row.item_description}}">
+        @{{ row.item_description |  limitTo: 9 }}..
     </a>
 </div>
 

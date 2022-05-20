@@ -191,9 +191,9 @@ class MaterialProductsController extends Controller
         $tableAllColumns = [];
         foreach ($tableColumns as $key => $value) {
             $tableAllColumns[$key] = [
-                "name" => $key,
-                "row"  => '{{ row.'.$value.' }}',
-                "batch"  => '{{ batch.'.$value.' }}',
+                "name"      => $key,
+                "row"       => '{{ row.'.$value.' }}',
+                "batch"     => '{{ batch.'.$value.' }}',
             ];
         }
 
