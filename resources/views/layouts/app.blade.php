@@ -17,7 +17,7 @@
 <body>
     @include('flash::message')
 
-    <div class="sticky-top">
+    <div class="sticky-top" id="navigation_menu">
         @include('includes.sections.nav-bar')
         @include('includes.sections.top-nav-bar')
     </div> 

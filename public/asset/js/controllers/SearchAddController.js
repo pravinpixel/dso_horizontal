@@ -149,7 +149,6 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     $scope.view_batch_details = function (row, batch) {
-        console.log(batch)
         $('#View_Batch_Details').modal('show');
         $scope.view_batch_details_data  = [
             {name: "Material description", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
