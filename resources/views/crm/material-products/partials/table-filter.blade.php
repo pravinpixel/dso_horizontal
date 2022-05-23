@@ -19,7 +19,7 @@
     </div>
     <div class="col">
         <label for="" class="form-label">Category selection</label>
-        <select ng-model="filter.category_selection" class="form-select custom">
+        <select ng-model="advanced_filter.category_selection" class="form-select custom">
             <option value="">-- select --</option>
             <option value="in_house">In House</option>
             <option value="material">Material</option>
@@ -27,24 +27,25 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Item description</label>
-        <input type="text" ng-model="filter.item_description" name="item_description" class="form-control custom" placeholder="Type here...">
+        <input type="text" ng-model="advanced_filter.item_description" name="item_description" class="form-control custom" placeholder="Type here...">
     </div> 
     <div class="col">
         <label for="" class="form-label">Brand</label>
-        <input type="text" ng-model="filter.brand" name="brand" class="form-control custom" placeholder="Type here...">
+        <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom" placeholder="Type here...">
     </div> 
     <div class="col">
         <label for=""  class="form-label">Owner 1/2</label>
-        <select name="owner" ng-model="filter.owner" class="form-select custom">
+        <select name="owner_one" ng-model="advanced_filter.owner_one" class="form-select custom">
             <option value="">-- select --</option>
             @foreach ($owners as $row)
                 <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
             @endforeach 
         </select>
+        <input class="d-none" type="text" ng-model="advanced_filter.owner_two" ng-value="advanced_filter.owner_one">
     </div> 
     <div class="col">
         <label for="" class="form-label">Dept</label>
-        <select name="dept" ng-model="filter.dept" id="" class="form-select custom">
+        <select name="dept" ng-model="advanced_filter.dept" id="" class="form-select custom">
             <option value="">-- select --</option>
             @foreach ($departments_db as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -53,7 +54,7 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">storage area</label>
-        <select name="storage_area" ng-model="filter.storage_area" class="form-select custom">
+        <select name="storage_area" ng-model="advanced_filter.storage_area" class="form-select custom">
             <option value="">-- select --</option>
             @foreach ($storage_room_db as $row)
                 <option value="{{ $row->id }}">{{ $row->name }}</option>
@@ -62,15 +63,15 @@
     </div> 
     <div class="col"> 
         <label for="" class="form-label">Date in</label>
-        <input type="date" ng-model="filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
+        <input type="date" ng-model="advanced_filter.date_in" name="date_in" class="form-control custom" placeholder="Type here...">
     </div>
     <div class="col"> 
         <label for="" class="form-label">Date of expiry</label>
-        <input type="date" ng-model="filter.date_of_expiry" name="date_of_expiry" class="form-control custom" placeholder="Type here...">
+        <input type="date" ng-model="advanced_filter.date_of_expiry" name="date_of_expiry" class="form-control custom" placeholder="Type here...">
     </div>
     <div class="col d-flex align-items-center justify-content-center">
         <div class="btn-group">
-            <button ng-click="bulk_search()" class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
+            <button ng-click="search_advanced_mode()" class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
             <button ng-click="reset_bulk_search()" class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button>
         </div>
     </div> 
