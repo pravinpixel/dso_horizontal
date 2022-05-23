@@ -63,7 +63,7 @@ class MaterialProductsController extends Controller
         if($request->advanced_search) {
             $row         =   (object) $request->advanced_search;
             $result      =   $this->SearchRepositoryRepository->advanced_search($row);
-            if($result)  return response(['status' => true, 'data' => $result], Response::HTTP_OK);  
+            if($result) return response(['status' => true, 'data' => $result], Response::HTTP_OK);  
         }
 
         if($request->sort_by) {

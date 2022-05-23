@@ -6,7 +6,12 @@ use App\Interfaces\SearchRepositoryInterface;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-  
+use Illuminate\Support\Arr;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Schema;
+
 class SearchRepository implements SearchRepositoryInterface {
     public function bulkSearch($row)
     {
@@ -37,30 +42,23 @@ class SearchRepository implements SearchRepositoryInterface {
         })
         ->paginate(5);
     }
-    public function advanced_search($row)
+    public function advanced_search($filter)
     {
-        return MaterialProducts::with("Batches")->where('is_draft', 0)
-                                ->WhereHas('Batches', function($q) use ($row){
-                                    $q->when(!is_null($row->af_euc_material) ?? !is_null($row->euc_material), function ($q) use ($row)  {
-                                        $q->Where('euc_material' , $row->af_euc_material ?? $row->euc_material);
-                                    }); 
-                                    $q->when(!is_null($row->af_require_bulk_volume_tracking) ?? !is_null($row->require_bulk_volume_tracking), function ($q) use ($row)  {
-                                        $q->Where('require_bulk_volume_tracking' , $row->af_require_bulk_volume_tracking ?? $row->require_bulk_volume_tracking);
-                                    });
-                                    $q->when(!is_null($row->af_require_outlife_tracking) ?? !is_null($row->require_outlife_tracking), function ($q) use ($row)  {
-                                        $q->Where('require_outlife_tracking' , $row->af_require_outlife_tracking ?? $row->require_outlife_tracking);
-                                    });
-                                    $q->when(!is_null($row->af_cas) ?? !is_null($row->cas), function ($q) use ($row)  {
-                                        $q->Where('cas' , $row->af_cas ?? $row->cas);
-                                    });
-                                    $q->when(!is_null($row->af_supplier) ?? !is_null($row->supplier), function ($q) use ($row)  {
-                                        $q->where('supplier', 'LIKE', '%' .$row->supplier.'%');
-                                    });
-                                    $q->when(!is_null($row->af_batch) ?? !is_null($row->batch), function ($q) use ($row)  {
-                                        $q->where('batch', 'LIKE', '%' .$row->batch.'%');
-                                    });
-                                }) 
-                                ->paginate(5);
+        $material_table =  ['barcode_number','category_selection','item_description','unit_of_measure','unit_packing_value','statutory_body','alert_threshold_qty_upper_limit','alert_threshold_qty_lower_limit','alert_before_expiry'];
+        foreach($filter as $column => $value) {
+            $filter_result[]    =  MaterialProducts::with("Batches")
+                                    ->where('is_draft', 0)
+                                    ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
+                                        $q->where($column , $value); 
+                                    })
+                                    ->WhereHas('Batches', function($q) use ($column, $value){
+                                        $q->Where($column , 'LIKE', '%' .$value.'%');
+                                    })
+                                    ->get();
+        }
+        $collection         =   Arr::flatten($filter_result);
+        $myCollectionObj    =   collect($collection);
+        return $this->paginate($myCollectionObj);
     }
     public function StoreBulkSearch($row, $request)
     {
@@ -89,6 +87,16 @@ class SearchRepository implements SearchRepositoryInterface {
             'unit_pkt_size'       =>  $row->af_unit_pkt_size ,
             'usage_tracking'      =>  $row->af_usage_tracking,
             'outlife_tracking'    =>  $row->af_outlife_tracking,
+        ]);
+    }
+
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page   =   $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items  =   $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
+            'path'      =>  LengthAwarePaginator::resolveCurrentPath(),
+            'pageName'  =>  "page",
         ]);
     }
 }
