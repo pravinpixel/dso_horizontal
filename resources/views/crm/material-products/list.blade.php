@@ -20,7 +20,7 @@
         {{-- ====== Filletrs ===--}}
          
         <div class="table-responsive shadow-lg bg-white">
-            <div class="custom-table" style=" min-height: 260px !important;">
+            <div class="custom-table" style=" min-height: 460px !important;">
                 <div class="custom-table-head">
                     {{-- ======= Table Header  ====== --}}
                         {!! $table_th_columns !!}

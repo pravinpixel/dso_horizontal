@@ -110,8 +110,8 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Statutory body  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('statutory_body', $statutory_body_db , $material_product->statutory_body?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required',
-                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."statutory_body.status")
+            {!! Form::select('statutory_body', $statutory_body_db , $batch->statutory_body ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required',
+                config(is_disable(category_type() ?? $batch->category_selection ?? null)."statutory_body.status")
             ]) !!}
         </div>
     </div>

@@ -17,7 +17,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             'iqc_result',
             'sds',
             'extended_qc_result',
-            'disposal_certificate'
+            'disposal_certificate',
         ]);
 
         $fillable = []; foreach($inputs as $column => $row) $fillable[$column] = $row;
