@@ -6,7 +6,7 @@
                 <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
             </div>
             <div class="modal-body modal-scroll-2 p-0"> 
-                <ol class="list-group list-group-numbered">
+                <ol class="list-group list-group-numbered" style="overflow: hidden">
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_batch_details_data">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">@{{ row.name }}</div>

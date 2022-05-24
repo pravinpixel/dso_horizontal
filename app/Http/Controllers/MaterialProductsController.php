@@ -23,6 +23,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -336,6 +337,23 @@ class MaterialProductsController extends Controller
             if(wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
         }
     } 
+    public function view_batch($id)
+    {
+        $data = Batches::findOrFail($id);
+         
+        $user_name = [];
+        foreach (json_decode($data->access) as $users ) {
+            $user_name[]  = User::find($users)->alias_name;
+        }
+        
+        return [
+            "access"          => $user_name,
+            "department"      => Departments::find($data->dept)->name,
+            "statutory_body"  => StatutoryBody::find($data->statutory_body)->name,
+            "storage_area"    => StorageRoom::find($data->storage_area)->name,
+            "housing_type"    => HouseTypes::find($data->housing_type)->name,
+        ];
+    }
     public function destroy($id) 
     {
         MaterialProducts::find($id)->delete();

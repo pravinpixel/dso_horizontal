@@ -60,6 +60,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             $sds              =   $request->file('sds')->store('public/files/sds');
             $batch  ->  sds   =   $sds;
             $batch  ->  save();
+            // dd($batch);
         }
         if($request->has('extended_qc_result')) {
             if(Storage::exists($batch->extended_qc_result)){

@@ -74,6 +74,9 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
     Route::post('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
 
+    // Get Material Bathes Data
+    Route::get('/get-material-batch/{batch?}', [MaterialProductsController::class, 'view_batch'])->name('get-batch-material-products');
+
     // Advanced Search
     Route::get('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
     Route::post('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');

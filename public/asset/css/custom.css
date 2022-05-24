@@ -402,6 +402,7 @@ to {
     justify-content: center !important;
     z-index:11 !important
 }
+ 
 .custom-table-row  .box:nth-last-child(1) ,
 .custom-table-head  .box:nth-last-child(1),
 .custom-table-row  .box:nth-child(1),

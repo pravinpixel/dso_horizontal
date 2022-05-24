@@ -60,7 +60,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Unit Packing value <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm', 'placeholder' => 'Type here...','required', 
+            {!! Form::number('unit_packing_value', $material_product->unit_packing_value?? null, ['class' =>'form-control form-control-sm', 'placeholder' => 'Type here...','required', "step" => "0.01",
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."unit_packing_value.status")
             ])  !!}
         </div>

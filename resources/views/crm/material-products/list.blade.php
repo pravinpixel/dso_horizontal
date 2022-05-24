@@ -20,7 +20,7 @@
         {{-- ====== Filletrs ===--}}
          
         <div class="table-responsive shadow-lg bg-white">
-            <div class="custom-table">
+            <div class="custom-table" style=" min-height: 260px !important;">
                 <div class="custom-table-head">
                     {{-- ======= Table Header  ====== --}}
                         {!! $table_th_columns !!}
@@ -75,6 +75,7 @@
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
+    <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
