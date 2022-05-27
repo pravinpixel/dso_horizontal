@@ -41,6 +41,7 @@ if(! function_exists('forget_session')) {
             'form-two',
             'form-three',
             'form-four',
+            'category_type'
         ]);
     }
 }

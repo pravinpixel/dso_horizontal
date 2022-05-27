@@ -2,12 +2,19 @@
 
 namespace App\Repositories;
 
+use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Interfaces\MartialProductRepositoryInterface;
+use App\Models\BarCodeFormat;
 use App\Models\MaterialProducts;
+use Faker\Provider\Barcode;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Storage;
 
 class MartialProductRepository implements MartialProductRepositoryInterface {
+
+    public function __construct(BarCodeLabelRepositoryInterface $barCodeLabelRepository)    {
+        $this->barCodeLabelRepository       =   $barCodeLabelRepository;
+    }
 
     public function save_material_product($material_product_id=null, $batch_id=null, $request) {
          
@@ -24,10 +31,12 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
           
         $material_product   =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
         $batch              =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
+ 
 
         $this->storeFiles($request, $batch);
 
-        if(wizard_mode() == 'create') {
+        if(wizard_mode() == 'create') { 
+            $this->barCodeLabelRepository->generateBarcode($material_product, $batch);
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
         }

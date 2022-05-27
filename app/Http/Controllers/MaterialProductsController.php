@@ -17,6 +17,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Http\Response;
 use App\Exports\BulkExport;
 use App\Imports\BulkImport;
+use App\Interfaces\BarCodeLabelRepositoryInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
@@ -35,11 +36,13 @@ class MaterialProductsController extends Controller
 
     public function __construct(
             MartialProductRepositoryInterface $MartialProductRepository,
-            SearchRepositoryInterface   $SearchRepositoryRepository
+            SearchRepositoryInterface   $SearchRepositoryRepository,
+            BarCodeLabelRepositoryInterface $barCodeLabelRepository
         ) 
     {
         $this->MartialProductRepository     =   $MartialProductRepository;
         $this->SearchRepositoryRepository   =   $SearchRepositoryRepository;
+        $this->barCodeLabelRepository       =   $barCodeLabelRepository;
     }
 
     public function index(Request $request)
@@ -175,7 +178,7 @@ class MaterialProductsController extends Controller
         return back();
     }
     public function list_index()
-    {
+    { 
         $storage_room_db        =   StorageRoom::all();
         $departments_db         =   Departments::all();
         $statutory_body_db      =   StatutoryBody::all();
@@ -202,7 +205,7 @@ class MaterialProductsController extends Controller
         $table_td_columns       = view('crm.material-products.partials.table-td-column', compact('tableAllColumns'));
         $batch_table_td_columns = view('crm.material-products.partials.batch-table-td-column', compact('tableAllColumns'));
 
-
+        forget_session();
         return view('crm.material-products.list', 
             compact(
                 'table_th_columns',
@@ -259,9 +262,10 @@ class MaterialProductsController extends Controller
             $owners[$value] = $value;
         }
         if($type == 'form-one') {
-            if(wizard_mode() == 'create')    $view = 'crm.material-products.wizard.mandatory-one';
-            if(wizard_mode() == 'edit')      $view = 'crm.material-products.edit-wizard.mandatory-one';
-            if(wizard_mode() == 'duplicate') $view = 'crm.material-products.duplicate-wizard.mandatory-one';
+            if(wizard_mode() == 'create')       $view   =   'crm.material-products.wizard.mandatory-one';
+            if(wizard_mode() == 'edit')         $view   =   'crm.material-products.edit-wizard.mandatory-one';
+            if(wizard_mode() == 'duplicate')    $view   =   'crm.material-products.duplicate-wizard.mandatory-one';
+           
             $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','batch_id','batch'];
         }
         if($type == 'form-two') { 
@@ -302,13 +306,14 @@ class MaterialProductsController extends Controller
         return view($view, compact($params));
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
-    {
+    { 
+      
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
             $request
         );
-        
+  
         if($type == 'form-one') {
             if(wizard_mode() == 'create') {
                 $request->session()->put('form-one', 'completed');

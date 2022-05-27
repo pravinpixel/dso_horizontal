@@ -49,5 +49,11 @@ class Batches extends Model
         'extended_qc_result',
         'disposal_certificate',
         'used_for_td_expt_only',
+        'actions'
     ];
+
+    public function BarCodeGenOne()
+    {
+        return $this->hasMany(BarCodeGenOne::class, 'batch_id', 'id');
+    }
 }

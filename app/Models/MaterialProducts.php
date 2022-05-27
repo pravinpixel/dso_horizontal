@@ -31,4 +31,6 @@ class MaterialProducts extends Model
     {
         return $this->hasMany(Batches::class, 'material_product_id', 'id');
     }
-} 
+
+    
+}

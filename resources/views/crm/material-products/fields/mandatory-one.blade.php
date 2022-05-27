@@ -30,7 +30,10 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Brand <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('brand', $batch->brand?? "In House", ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
+            @php
+                $brand = category_type() ==  'material' ? null : "In-House"
+            @endphp
+            {!! Form::text('brand', $batch->brand ?? $brand, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")
             ]) !!}
         </div>
