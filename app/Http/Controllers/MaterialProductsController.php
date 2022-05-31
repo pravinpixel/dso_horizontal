@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Monolog\Handler\IFTTTHandler;
 
 class MaterialProductsController extends Controller
 {
@@ -112,8 +113,17 @@ class MaterialProductsController extends Controller
 
     public function my_search_history()
     {
-        $data = SaveMySearch::where('user_id', Sentinel::getUser()->id)->get();
-        return response(['status' => true, 'data' => $data], Response::HTTP_OK);
+        $data  = User::findOrFail(auth_user()->id);
+        return response(['status' => true, 'data' => $data->search_history], Response::HTTP_OK);
+    }
+
+    public function save_search_history(Request $request)
+    {
+        // search_history
+        $data  = User::findOrFail(auth_user()->id);
+        $data->search_history  = json_encode($request->data);
+        $data->save();
+        return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);
     }
 
     public function import_excel(Request $request)
@@ -131,7 +141,7 @@ class MaterialProductsController extends Controller
                     'item_description'                  =>   $row['item_description'],
                     'unit_of_measure'                   =>   $row['unit_of_measure'],
                     'unit_packing_value'                =>   $row['unit_packing_value'],
-                    'statutory_body'                    =>   $row['statutory_body'],
+                    // 'statutory_body'                    =>   $row['statutory_body'],
                     'alert_threshold_qty_upper_limit'   =>   $row['alert_threshold_qty_upper_limit'],
                     'alert_threshold_qty_lower_limit'   =>   $row['alert_threshold_qty_lower_limit'],
                     'alert_before_expiry'               =>   $row['alert_before_expiry_weeks'],

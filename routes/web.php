@@ -66,6 +66,7 @@ Route::middleware(['auth_users'])->group(function () {
 
     //  Listing Page
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
+    Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
      
     Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
     Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');

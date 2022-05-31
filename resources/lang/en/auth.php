@@ -187,7 +187,7 @@ return [
 	'activation_email_unsuccessful'                         => 'Unable to Send Activation Email',
 	
 	// Login / Logout
-	'login_successful'                                      => 'Your Successfully Logged in!',
+	'login_successful'                                      => 'Successfully Logged in!', 
 	'login_unsuccessful'                                    => 'Incorrect Login',
 	'incorrect_email_id_and_password'                       => 'Incorrect User ID',
 	'login_unsuccessful_not_active'                         => 'Account is inactive',

@@ -1,5 +1,7 @@
 <?php
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+
 if(! function_exists('category_type')) {
     function category_type() {
         return session()->get('category_type');
@@ -71,5 +73,11 @@ if(! function_exists('completed_tab')) {
         else {
             return "#";
         }
+    }
+}
+
+if(! function_exists('auth_user')) {
+    function auth_user() {
+        return Sentinel::getUser();
     }
 }

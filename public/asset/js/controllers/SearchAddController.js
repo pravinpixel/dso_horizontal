@@ -365,39 +365,15 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.filler_function();
  
     $scope.save_search_title    = () => {
-        var inputs =   {
-            title : $scope.search_title,
-            advanced_search: {
-                af_logsheet_id         : $scope.af_logsheet_id          ==  undefined   ?   null   :   $scope.af_logsheet_id, 
-                af_euc_material        : $scope.af_euc_material         ==  undefined   ?   null   :   $scope.af_euc_material, 
-                af_cas                 : $scope.af_cas                  ==  undefined   ?   null   :   $scope.af_cas, 
-                af_supplier            : $scope.af_supplier             ==  undefined   ?   null   :   $scope.af_supplier, 
-                af_batch               : $scope.af_batch                ==  undefined   ?   null   :   $scope.af_batch, 
-                af_serial              : $scope.af_serial               ==  undefined   ?   null   :   $scope.af_serial, 
-                af_statutory_board     : $scope.af_statutory_board      ==  undefined   ?   null   :   $scope.af_statutory_board, 
-                af_housing_type        : $scope.af_housing_type         ==  undefined   ?   null   :   $scope.af_housing_type, 
-                af_housing_number      : $scope.af_housing_number       ==  undefined   ?   null   :   $scope.af_housing_number, 
-                af_unit_pkt_size       : $scope.af_unit_pkt_size        ==  undefined   ?   null   :   $scope.af_unit_pkt_size, 
-                af_date_of_expiry      : $scope.af_date_of_expiry       ==  undefined   ?   null   :   moment($scope.af_date_of_expiry).format('YYYY-MM-DD'), 
-                af_iqc_status          : $scope.af_iqc_status           ==  undefined   ?   null   :   $scope.af_iqc_status, 
-                af_po_number           : $scope.af_po_number            ==  undefined   ?   null   :   $scope.af_po_number, 
-                af_extended_expiry     : $scope.af_extended_expiry      ==  undefined   ?   null   :   moment($scope.af_extended_expiry).format('YYYY-MM-DD'), 
-                af_extended_qc_status  : $scope.af_extended_qc_status   ==  undefined   ?   null   :   $scope.af_extended_qc_status, 
-                af_disposed            : $scope.af_disposed             ==  undefined   ?   null   :   $scope.af_disposed, 
-                af_project_name        : $scope.af_project_name         ==  undefined   ?   null   :   $scope.af_project_name, 
-                af_product_type        : $scope.af_product_type         ==  undefined   ?   null   :   $scope.af_product_type, 
-                af_date_of_shipment    : $scope.af_date_of_shipment     ==  undefined   ?   null   :   moment($scope.af_date_of_shipment).format('YYYY-MM-DD'), 
-                af_date_of_manufacture : $scope.af_date_of_manufacture  ==  undefined   ?   null   :   moment($scope.af_date_of_manufacture).format('YYYY-MM-DD'),
-                af_require_bulk_volume_tracking      : $scope.af_require_bulk_volume_tracking       ==  undefined   ?   null   :   $scope.af_require_bulk_volume_tracking, 
-                af_require_outlife_tracking    : $scope.af_require_outlife_tracking     ==  undefined   ?   null   :   $scope.af_require_outlife_tracking, 
-            }
+        if($scope.search_title === undefined ) {
+            Message('danger', "Search Title is Required !");
+            return false
         }
- 
+   
         $http({
             method: 'post', 
-            url: material_products_url,
-            data : {save_advanced_search : inputs}
-
+            url: get_save_search_url,
+            data : {data : $scope.advanced_filter , title :  $scope.search_title}
         }).then(function(response) {
             $scope.material_products = response.data.data;
             Message('success', response.data.message);
@@ -415,7 +391,8 @@ app.controller('SearchAddController', function($scope, $http) {
             method: 'get', 
             url: get_save_search_url,  
         }).then(function(response) {
-            $scope.view_my_saved_search_list = response.data.data; 
+            $scope.view_my_saved_search_list = JSON.parse(response.data.data); 
+            console.log($scope.view_my_saved_search_list)
         });
     } 
 
