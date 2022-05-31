@@ -342,6 +342,11 @@ class MaterialProductsController extends Controller
             if(wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', [ "wizard_mode"=> 'duplicate',"type" => $view , "id" => material_product() ?? $id , batch_id() ?? $batch_id]);
         }
     } 
+
+    public function show_batch($id)
+    {
+        return Batches::findOrFail($id);
+    }
     public function view_batch($id)
     {
         $data = Batches::findOrFail($id);

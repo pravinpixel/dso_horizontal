@@ -76,6 +76,7 @@ Route::middleware(['auth_users'])->group(function () {
 
     // Get Material Bathes Data
     Route::get('/get-material-batch/{batch?}', [MaterialProductsController::class, 'view_batch'])->name('get-batch-material-products');
+    Route::get('/get-batch/{batch?}', [MaterialProductsController::class, 'show_batch'])->name('get-batch');
 
     // Advanced Search
     Route::get('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
@@ -115,4 +116,5 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
     Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
 
+    
 });

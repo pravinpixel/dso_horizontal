@@ -1,3 +1,4 @@
+ 
 app.controller('SearchAddController', function($scope, $http) { 
   
     // ====For Check Box column Filters ===
@@ -24,6 +25,8 @@ app.controller('SearchAddController', function($scope, $http) {
     // === Route Lists ===
     var material_products_url               =   $('#get-material-products').val();
     var get_batch_material_products         =   $('#get-batch-material-products').val();
+    var get_batch                           =   $('#get-batch').val();
+    var get_masters                         =   $('#get_masters').val();
     var edit_material_products_url          =   $('#edit-material-products').val();
     var duplicate_material_products_url     =   $('#duplicate-material-products').val();
     var delete_material_products_url        =   $('#delete-material-products').val();
@@ -413,6 +416,17 @@ app.controller('SearchAddController', function($scope, $http) {
             url: get_save_search_url,  
         }).then(function(response) {
             $scope.view_my_saved_search_list = response.data.data; 
+        });
+    } 
+
+    $http.get(get_masters).then((res)   => {
+        $scope.MasterData = res.data
+    });
+
+    $scope.Transfers = (id) => {
+        $http.get(`${get_batch}/${id}`).then((res) => {
+            $scope.TransfersBatch = res.data
+            $('#Transfers').modal('show');
         });
     }
 });

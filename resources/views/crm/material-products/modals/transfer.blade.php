@@ -22,47 +22,36 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="200px" class="text-center"><input type="number" name="" id="" value="5" class="text-center form-control form-control-sm"></td>
+                            <td width="200px" class="text-center">
+                                <input type="number" name="" id="" value="@{{ TransfersBatch.quantity }}" class="text-center form-control form-control-sm">
+                            </td>
                             <td>
                                 <select name="" id="" class="form-select form-select-sm">
-                                    <option value="">AR</option> 
-                                    <option value="">CW</option> 
-                                    <option value="">MA</option> 
-                                    <option value="">SP</option> 
-                                    <option value="">MR</option> 
-                                    <option value="">Polymer</option> 
-                                    <option value="">ChemShed1</option> 
-                                    <option value="">ChemShed2</option> 
+                                    <option ng-selected="row.id == TransfersBatch.storage_area" ng-value="row.id" ng-repeat="row in MasterData.storage_room">@{{ row.name }}</option>
                                 </select>
                             </td>
                             <td>
                                 <select name="" id="" class="form-select form-select-sm">
-                                    <option value=""> Flammable Cabinet</option>
-                                    <option value=""> Acid Cabinet</option>
-                                    <option value=""> Base Cabinet</option>
-                                    <option value=""> Metal Cabinet</option>
-                                    <option value=""> Racks</option>
-                                    <option value=""> Dry Cabinet</option>
-                                    <option value=""> Pallet </option>
-                                    <option value=""> Freezer</option>
+                                    <option ng-selected="row.id == TransfersBatch.housing_type" ng-value="row.id" ng-repeat="row in MasterData.house_types">@{{ row.name }}</option>
                                 </select>
                             </td>
                             <td>
                                 <select name="" id="" class="form-select form-select-sm">
-                                    <option value=""> -</option>
+                                    <option value="@{{ TransfersBatch.housing }}"> @{{ TransfersBatch.housing }} </option>
+                                    {!! $housing = "@{{ TransfersBatch.housing }}" !!}
                                     @for ($key=0;$key<20;$key++)
-                                        <option value="">@{{ index+1 }}</option>
+                                        <option value="{{ $key + 1 }}" {{ $key + 1 == $housing ? "selected" : "" }}>{{ $key + 1 }} </option>
                                     @endfor
                                 </select>
                             </td>
                             <td>
                                 <select name="" id="" class="form-select form-select-sm">
-                                    <option value="">Beng HJibn</option>
+                                    <option value="@{{ TransfersBatch.owner_one }}">@{{ TransfersBatch.owner_one }}</option>
                                 </select>
                             </td>
                             <td>
                                 <select name="" id="" class="form-select form-select-sm">
-                                    <option value="">HuiBeng</option>
+                                    <option value="@{{ TransfersBatch.owner_two }}">@{{ TransfersBatch.owner_two }}</option>
                                 </select>
                             </td>
                             <td>

@@ -44,7 +44,17 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function advanced_search($filter)
     {
-        $material_table =  ['barcode_number','category_selection','item_description','unit_of_measure','unit_packing_value','statutory_body','alert_threshold_qty_upper_limit','alert_threshold_qty_lower_limit','alert_before_expiry'];
+        $material_table =  [
+            'barcode_number',
+            'category_selection',
+            'item_description',
+            'unit_of_measure',
+            'unit_packing_value',
+            'alert_threshold_qty_upper_limit',
+            'alert_threshold_qty_lower_limit',
+            'alert_before_expiry',
+        ];
+        
         foreach($filter as $column => $value) {
             $filter_result[]    =  MaterialProducts::with("Batches")->where('is_draft', 0)
                                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 

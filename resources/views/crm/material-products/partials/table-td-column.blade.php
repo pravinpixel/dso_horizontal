@@ -3,7 +3,7 @@
         data-bs-toggle="collapse"
         href="#row_@{{ index+1 }}"
         role="button" title="@{{ row.item_description}}">
-        @{{ row.item_description |  limitTo: 12 }}..
+        @{{ row.item_description |  limitTo: 12 }}
     </a>
 </div>
 

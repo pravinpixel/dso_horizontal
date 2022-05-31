@@ -76,8 +76,12 @@
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
     <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
+    <input type="hidden" id="get-batch" value="{{ route("get-batch") }}">
+    <input type="hidden" id="get_masters" value="{{ route("get_masters") }}">
+
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
