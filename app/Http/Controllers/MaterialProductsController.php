@@ -113,16 +113,26 @@ class MaterialProductsController extends Controller
 
     public function my_search_history()
     {
-        $data  = User::findOrFail(auth_user()->id);
-        return response(['status' => true, 'data' => $data->search_history], Response::HTTP_OK);
+        $data  = User::with('SaveMySearch')->where('id', auth_user()->id)->first();
+
+        $history = [];
+        foreach($data->SaveMySearch as $row) {
+            $history[] =  [
+                "search_title"  => $row->search_title,
+                "search_data"   => json_decode($row->search_data),
+            ];
+        }
+        return response(['status' => true, 'data' => $history], Response::HTTP_OK);
     }
 
     public function save_search_history(Request $request)
     {
         // search_history
-        $data  = User::findOrFail(auth_user()->id);
-        $data->search_history  = json_encode($request->data);
-        $data->save();
+        $data   =   User::findOrFail(auth_user()->id);
+        $data->SaveMySearch()->create([
+            'search_title'  => $request->title, 
+            'search_data'   => json_encode($request->data),
+        ]);
         return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);
     }
 

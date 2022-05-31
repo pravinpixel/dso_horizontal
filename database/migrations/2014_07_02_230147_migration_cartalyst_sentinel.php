@@ -103,7 +103,6 @@ class MigrationCartalystSentinel extends Migration
             $table->string('full_name')->nullable();
             $table->string('alias_name')->nullable();
             $table->integer('department')->nullable();
-            $table->longText('search_history')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->unique('email');

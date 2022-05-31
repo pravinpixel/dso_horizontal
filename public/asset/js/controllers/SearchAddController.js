@@ -308,7 +308,8 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     // Advanced Search Fitters
-    $scope.search_advanced_mode = (advanced_search) => {
+    $scope.search_advanced_mode = (advanced_search, type) => {
+           
         $scope.filter_status            =   true
         $scope.sort_by_payload          =   false;
         $scope.bulk_search_status       =   false
@@ -320,6 +321,12 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.advance_search_pre_saved         =   true 
             $scope.advance_search_pre_saved_data    =   advanced_search
             var payload_data   =  $scope.advanced_filter
+        }
+        
+        if (type == 'saved_search') {
+            var payload_data = {
+                advanced_search : advanced_search
+            }
         }
         $http({
             method: 'post',
@@ -391,10 +398,10 @@ app.controller('SearchAddController', function($scope, $http) {
             method: 'get', 
             url: get_save_search_url,  
         }).then(function(response) {
-            $scope.view_my_saved_search_list = JSON.parse(response.data.data); 
+            $scope.view_my_saved_search_list = response.data.data; 
             console.log($scope.view_my_saved_search_list)
         });
-    } 
+    }
 
     $http.get(get_masters).then((res)   => {
         $scope.MasterData = res.data
