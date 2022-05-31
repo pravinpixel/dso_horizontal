@@ -8,9 +8,18 @@
             <div class="modal-body modal-scroll">
                 <div class="text-s">
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-action btn" ng-click="search_advanced_mode(row.search_data, 'saved_search')" ng-repeat="row in view_my_saved_search_list"> 
-                            @{{ row.search_title }} - 
-                            <small class="float-end text-secondary">@{{ row.created_at }}</small>
+                        <li class="list-group-item list-group-item-action btn align-items-center" ng-repeat="row in view_my_saved_search_list"> 
+                            <small class="float-end text-secondary" ng-click="removeSearchRecord(row.id)">
+                                <i class="fa fa-times  text-danger"></i>
+                            </small> 
+                            <div class="text-capitalize" ng-click="search_advanced_mode(row.search_data, 'saved_search')" >
+                                <div class="fw-bold">
+                                    @{{ row.search_title }}
+                                </div>  
+                                <small class="text-secondary">
+                                    @{{ row.created_at }}
+                                </small> 
+                            </div> 
                         </li> 
                     </ul>
                 </div>

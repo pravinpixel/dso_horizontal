@@ -118,8 +118,10 @@ class MaterialProductsController extends Controller
         $history = [];
         foreach($data->SaveMySearch as $row) {
             $history[] =  [
+                "id"            => $row->id,
                 "search_title"  => $row->search_title,
                 "search_data"   => json_decode($row->search_data),
+                "created_at"    => date("F j, Y, g:i a", strtotime($row->created_at)),
             ];
         }
         return response(['status' => true, 'data' => $history], Response::HTTP_OK);
@@ -134,6 +136,11 @@ class MaterialProductsController extends Controller
             'search_data'   => json_encode($request->data),
         ]);
         return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);
+    }
+    public function delete_search_history($id)
+    {
+        SaveMySearch::findOrFail($id)->delete();
+        return response(['status' => true, "message" => "Delete Success !"], Response::HTTP_OK);
     }
 
     public function import_excel(Request $request)

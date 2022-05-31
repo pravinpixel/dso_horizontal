@@ -399,8 +399,44 @@ app.controller('SearchAddController', function($scope, $http) {
             url: get_save_search_url,  
         }).then(function(response) {
             $scope.view_my_saved_search_list = response.data.data; 
-            console.log($scope.view_my_saved_search_list)
         });
+    }
+    $scope.removeSearchRecord = (id) => {
+        swal({
+            text: "Are you sure want to Delete?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes! Delete",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-danger rounded-pill",
+                    closeModal: true
+                }
+            }, 
+        }).then((isConfirm) => {
+            if(isConfirm) {
+                $http({
+                    method: 'DELETE', 
+                    url: get_save_search_url +"/" + id  
+                }).then(function(response) {
+                    $http({
+                        method: 'get', 
+                        url: get_save_search_url,  
+                    }).then(function(response) {
+                        $scope.view_my_saved_search_list = response.data.data; 
+                    });
+                    Message('success', response.data.message);
+                });
+            } 
+        });  
     }
 
     $http.get(get_masters).then((res)   => {
