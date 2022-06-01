@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                             <td width="200px" class="text-center">
-                                <input type="number" ng-model="TransfersBatch.quantity" value="@{{ TransfersBatch.quantity }}" class="text-center form-control form-control-sm">
+                                <input type="number" ng-model="TransfersBatch.quantity" ng-value="TransfersBatch.quantity" class="text-center form-control form-control-sm">
                             </td>
                             <td>
                                 <select  class="form-select form-select-sm" ng-model="TransfersBatch.storage_area">
@@ -55,14 +55,14 @@
                                 </select>
                             </td>
                             <td>
-                                <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                <a ng-click="clearTransferBatch()" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div> 
             <div class="modal-footer text-end  border-top">
-                <button class="btn btn-success rounded-pill me-2">Print barcode</button>
+                {{-- <button class="btn btn-success rounded-pill me-2">Print barcode</button> --}}
                 <button class="btn btn-primary rounded-pill" ng-click="transferBatch()">Click to confirm transfer</button>
             </div>
         </div>

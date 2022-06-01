@@ -452,10 +452,48 @@ app.controller('SearchAddController', function($scope, $http) {
     }
     
     $scope.transferBatch = () => {
+          
+        if($scope.TransfersBatch.quantity == '' || $scope.TransfersBatch.storage_area == '' || $scope.TransfersBatch.housing_type == '' || $scope.TransfersBatch.housing   == '' || $scope.TransfersBatch.owner_one == '' || $scope.TransfersBatch.owner_two == '') {
+            Message('danger', "All fields is Required !");
+            return false
+        } 
+
         $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
             $scope.get_material_products();
             Message('success', response.data.message);
             $('#Transfers').modal('hide');
+        });
+    }
+    $scope.clearTransferBatch = () => {
+        swal({
+            text: "Do you want to clear fields ?",
+            icon: "info",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes! Delete",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-danger rounded-pill",
+                    closeModal: true
+                }
+            }, 
+        }).then((isConfirm) => {
+            if(isConfirm) {
+                $scope.TransfersBatch.quantity = ''
+                $scope.TransfersBatch.storage_area = ''
+                $scope.TransfersBatch.housing_type = ''
+                $scope.TransfersBatch.housing   = ''
+                $scope.TransfersBatch.owner_one = ''
+                $scope.TransfersBatch.owner_two = ''
+                $scope.$apply()
+            } 
         });
     }
 });
