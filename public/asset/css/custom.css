@@ -430,6 +430,9 @@ a {
     background-color: #163269 !important;
     color: white !important;
 }
+.custom-table-head:hover .box a{
+    color: white !important;
+}
  
 .custom-table-row  .box:nth-last-child(1) ,
 .custom-table-head  .box:nth-last-child(1)
