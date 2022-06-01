@@ -452,8 +452,11 @@ app.controller('SearchAddController', function($scope, $http) {
     }
     
     $scope.transferBatch = () => {
-          
         if($scope.TransfersBatch.quantity == '' || $scope.TransfersBatch.storage_area == '' || $scope.TransfersBatch.housing_type == '' || $scope.TransfersBatch.housing   == '' || $scope.TransfersBatch.owner_one == '' || $scope.TransfersBatch.owner_two == '') {
+            Message('danger', "All fields is Required !");
+            return false
+        } 
+        if($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing   == null || $scope.TransfersBatch.owner_one == null || $scope.TransfersBatch.owner_two == null) {
             Message('danger', "All fields is Required !");
             return false
         } 
