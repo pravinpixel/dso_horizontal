@@ -4,7 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
-
+use App\Http\Controllers\TransferBatchController;
 use App\Models\Masters\HelpMenu;
 
 /*
@@ -118,5 +118,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
     Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
 
-    
+    // Transfer Batches
+    Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
 });

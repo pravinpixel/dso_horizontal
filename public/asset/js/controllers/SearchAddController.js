@@ -32,6 +32,7 @@ app.controller('SearchAddController', function($scope, $http) {
     var delete_material_products_url        =   $('#delete-material-products').val();
     var delete_material_products_batch_url  =   $('#delete-material-products-batch').val();
     var get_save_search_url                 =   $('#get-save-search').val();
+    var transfer_batch                      =   $('#transfer_batch').val();
     var app_URL                             =   $('#app_URL').val();
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val();
@@ -444,9 +445,17 @@ app.controller('SearchAddController', function($scope, $http) {
     });
 
     $scope.Transfers = (id) => {
-        $http.get(`${get_batch}/${id}`).then((res) => {
-            $scope.TransfersBatch = res.data
+        $http.get(`${get_batch}/${id}`).then((response) => {
+            $scope.TransfersBatch   = response.data 
             $('#Transfers').modal('show');
+        });
+    }
+    
+    $scope.transferBatch = () => {
+        $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
+            $scope.get_material_products();
+            Message('success', response.data.message);
+            $('#Transfers').modal('hide');
         });
     }
 });

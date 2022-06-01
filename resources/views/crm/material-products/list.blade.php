@@ -78,7 +78,7 @@
     <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
     <input type="hidden" id="get-batch" value="{{ route("get-batch") }}">
     <input type="hidden" id="get_masters" value="{{ route("get_masters") }}">
-
+    <input type="hidden" id="transfer_batch" value="{{ route("transfer-batch") }}"> 
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
     

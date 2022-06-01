@@ -12,6 +12,8 @@ use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
 use Illuminate\Http\Response;
 use App\Interfaces\MasterRepositoryInterface;
+use App\Models\User;
+
 class MasterController extends Controller
 {
     private   $MasterRepository;
@@ -33,7 +35,7 @@ class MasterController extends Controller
         $result['storage_room']     =   StorageRoom::latest()->get();
         $result['departments']      =   Departments::latest()->get();
         $result['house_types']      =   HouseTypes::latest()->get();
-
+        $result['owners']           =   User::latest()->get();
         return  $result;
     }
     public function store_master(Request $request)

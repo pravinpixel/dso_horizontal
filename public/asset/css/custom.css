@@ -386,6 +386,12 @@ to {
     justify-content: left;
     align-items:center;
 }
+a {
+    cursor: pointer !important;
+}
+.box {
+    font-size: 11px !important;
+}
 .sticky-right {
     background: white !important;
     position: sticky;
@@ -411,6 +417,18 @@ to {
     background: white ;
     position: sticky !important;
     justify-content: center;
+}
+.custom-table-row:hover .box{
+    background-color: #4087F8 !important;
+    color: white !important;
+}
+.custom-table-row:hover .box .bi-three-dots{
+    color: white !important;
+}
+
+.custom-table-head:hover .box {
+    background-color: #163269 !important;
+    color: white !important;
 }
  
 .custom-table-row  .box:nth-last-child(1) ,

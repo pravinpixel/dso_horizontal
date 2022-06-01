@@ -89,7 +89,7 @@
                                         <td class="child-td">CW</td>
                                         <td class="child-td">FC1</td>
                                         <td class="child-td"><small class="d-flex">31/10/2021  <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i></small> </td>
-                                        <td class="child-td"><small class="badge badge-success-lighten rounded-pill">PASS</small></td>
+                                        <td class="child-td"><small class="badge bg-success rounded-pill">PASS</small></td>
                                         <td class="child-td">-</td>
                                         <td class="child-td">
                                             <div class="dropdown">
@@ -149,7 +149,7 @@
                                         <td class="child-td">CW</td>
                                         <td class="child-td">FC1</td>
                                         <td class="child-td"><small class="d-flex">31/10/2021 <i class="ms-1 text-warning dot-sm bi bi-circle-fill"></i></small> </td>
-                                        <td class="child-td"><small class="badge badge-success-lighten rounded-pill">PASS</small></td>
+                                        <td class="child-td"><small class="badge bg-success rounded-pill">PASS</small></td>
                                         <td class="child-td">yes</td>
                                         <td class="child-td">
                                             <div class="dropdown">

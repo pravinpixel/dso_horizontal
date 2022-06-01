@@ -115,13 +115,13 @@
                                             </td>
                                             <td class="child-td">
                                                 @if ($key2 == 0)
-                                                    <small class="badge badge-success-lighten rounded-pill">PASS</small>
+                                                    <small class="badge bg-success rounded-pill">PASS</small>
                                                 @endif
                                                 @if ($key2 == 1)
                                                     <small class="badge badge-danger-lighten rounded-pill">FALL</small>
                                                 @endif 
                                                 @if ($key2 == 2)
-                                                    <small class="badge badge-success-lighten rounded-pill">PASS</small>
+                                                    <small class="badge bg-success rounded-pill">PASS</small>
                                                 @endif
                                                 @if ($key2 == 3)
                                                     <small class="badge badge-danger-lighten rounded-pill">FALL</small>
