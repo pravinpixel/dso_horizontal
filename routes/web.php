@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
 use App\Models\Masters\HelpMenu;
@@ -31,11 +32,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/disposal', function () {   
         return view('crm.disposal.index');  
     })->name('disposal');
-    
-    Route::get('/print-label', function () {   
-        return view('crm.print-barcode.index');  
-    })->name('print-barcode');
-    
+     
     Route::get('/reconciliation', function () {   
         return view('crm.reconsolidation.index');  
     })->name('reconsolidation');
@@ -123,4 +120,8 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
     Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
     
+
+    // ===================== Print Label ===================== 
+        Route::get('/print-label', [PrintBarcodeController::class, 'index'])->name('print-barcode'); 
+    // ===================== Print Label =====================
 });

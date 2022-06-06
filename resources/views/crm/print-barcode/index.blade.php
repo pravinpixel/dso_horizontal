@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </td> 
-                <td class="child-td" style="padding: 0 !important"><input type="number" min="1"  class="text-center form-control form-control-sm m-0 " name="" id="" value="10"></td> 
+                <td class="child-td" style="padding: 0 !important"><input type="number" class="text-center form-control form-control-sm m-0 " name="" id="" value="10"></td> 
             </tr>
             @endfor
         </table> 

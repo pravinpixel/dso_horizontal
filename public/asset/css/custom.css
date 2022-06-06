@@ -23,15 +23,14 @@ option {
     color: white !important;
     background-color: #12326A !important;
     font-size: 12px !important;
-    padding: 5px !important;
+    padding: 10px !important;
     letter-spacing: .5px;
     font-weight: normal !important;
-    
 }
 
 .box {
     vertical-align: middle !important;
-    padding: 5px !important;
+    padding: 10px !important;
     width: 139px !important;
     min-width: 139px !important;
     max-width: 139px !important;
@@ -390,7 +389,7 @@ a {
     cursor: pointer !important;
 }
 .box {
-    font-size: 11px !important;
+    font-size: 13px !important;
 }
 .sticky-right {
     background: white !important;
@@ -470,4 +469,24 @@ a {
 .ng-invalid-max ,
 .ng-valid.ng-valid-min.ng-dirty.ng-valid-parse.ng-empty.ng-touched {
     border:1px solid #d55858 !important;
+}
+.custom-table th {
+    background: #12326a !important;
+    color: white !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.custom-table td {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    font-size: 12px;
+}
+ 
+#print-table_wrapper {
+    background:  white !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: 0 0 10px lightgray;
 }
