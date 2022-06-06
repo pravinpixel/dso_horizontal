@@ -50,7 +50,7 @@ class MaterialProductsController extends Controller
     public function index(Request $request)
     {
         if($request->filters) {
-            $material_product       =  BarcodeFormat::where('barcode_label', 'LIKE', "%{$request->filters}%")->paginate(5);
+            $material_product      =   $this->SearchRepositoryRepository->barCodeSearch($request); 
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
@@ -89,8 +89,8 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::with('Batches','UnitOfMeasure')->latest()->paginate(5); 
-        return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
+        $material_product           =   MaterialProducts::with('Batches','UnitOfMeasure')->latest()->paginate(5); 
+        return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 
     public function advanced_search(Request $request)
@@ -237,9 +237,9 @@ class MaterialProductsController extends Controller
             }
         }
 
-        $table_th_columns       = view('crm.material-products.partials.table-th-column', compact('tableAllColumns'));
-        $table_td_columns       = view('crm.material-products.partials.table-td-column', compact('tableAllColumns'));
-        $batch_table_td_columns = view('crm.material-products.partials.batch-table-td-column', compact('tableAllColumns'));
+        $table_th_columns        = view('crm.material-products.partials.table-th-column', compact('tableAllColumns'));
+        $table_td_columns        = view('crm.material-products.partials.table-td-column', compact('tableAllColumns'));
+        $batch_table_td_columns  = view('crm.material-products.partials.batch-table-td-column', compact('tableAllColumns'));
 
         forget_session();
         return view('crm.material-products.list', 

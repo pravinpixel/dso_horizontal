@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\SearchRepositoryInterface;
+use App\Models\BarcodeFormat;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -13,6 +14,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Schema;
 
 class SearchRepository implements SearchRepositoryInterface {
+    public function barCodeSearch($request)
+    {
+        return BarcodeFormat::where('barcode_label', 'LIKE', "%{$request->filters}%")->paginate(5);
+    }
     public function bulkSearch($row)
     {
         return MaterialProducts::with("Batches")->where('is_draft', 0)
