@@ -23,6 +23,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
+use App\Models\BarcodeFormat;
 use App\Models\Batches;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
@@ -49,7 +50,7 @@ class MaterialProductsController extends Controller
     public function index(Request $request)
     {
         if($request->filters) {
-            $material_product       =  MaterialProducts::where('barcode_number', 'LIKE', "%{$request->filters}%")->paginate(5);
+            $material_product       =  BarcodeFormat::where('barcode_label', 'LIKE', "%{$request->filters}%")->paginate(5);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 

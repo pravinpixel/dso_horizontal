@@ -515,7 +515,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 $scope.CurrentAccessed          =   CurrentAccessed.join() 
             break;
             case "store" :
-                if($scope.RepackTransferPackingSize === null || $scope.RepackTransferPackingSize === undefined) {
+                if($scope.RepackTransfer.PackingSize === null || $scope.RepackTransfer.PackingSize === undefined) {
                     Message('danger', "Input Used amt (L) is Required !");
                     return false;
                 }
@@ -529,7 +529,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 }
                 $http.post(repack_batch, $scope.RepackTransfer).then((response) => {
                     $scope.get_material_products();
-                    Message('success', response.data.message);
+                    Message(response.data.status == true ? 'success' : 'danger', response.data.message);
                     $('#RepackTransfers').modal('hide');
                 }); 
             break;

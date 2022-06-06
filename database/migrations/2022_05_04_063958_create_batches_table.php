@@ -13,6 +13,8 @@ class CreateBatchesTable extends Migration
      */
     public function up()
     {
+        
+
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->integer('material_product_id');
@@ -54,11 +56,16 @@ class CreateBatchesTable extends Migration
             $table->string('extended_qc_status')->nullable();
             $table->string('extended_qc_result')->nullable();
             $table->string('disposal_certificate')->nullable();
-            $table->string('used_for_td_expt_only')->nullable();
+            $table->string('used_for_td_expt_only')->nullable(); 
+             
+            $table->longText('actions')->nullable()->default(json_encode([
+                "repack_code"     =>  null,
+                "packing_value"  =>  null,
+                "packing_size"   =>  null,
+                "remain_amount"  =>  null,
+            ]));
 
-            $table->longText('actions')->nullable();
             $table->longText('repack_size')->nullable();
-
             $table->softDeletes();
             $table->timestamps();
         });

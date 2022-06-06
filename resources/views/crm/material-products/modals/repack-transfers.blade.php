@@ -27,10 +27,10 @@
                                     <td style="padding: 0">@{{ CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                                     <td style="padding: 0">@{{ CurrentAccessed }}</td>
                                     <td style="padding: 0">
-                                        <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransferPackingSize" class="text-center form-control form-control-sm">
+                                        <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransfer.PackingSize" class="text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
-                                        @{{ RepackTransferPackSize - RepackTransferPackingSize}}
+                                        @{{ RepackTransferPackSize - RepackTransfer.PackingSize}}
                                     </td>
                                 </tr> 
                             </tbody>
