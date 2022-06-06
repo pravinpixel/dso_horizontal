@@ -14,9 +14,9 @@ class BarCodeGenOne extends Model
         "brand",
         "self_gen_one",
     ];
-
+    
     public function BarCodeGenTwo()
     {
-        return $this->hasOne(BarCodeGenTwo::class, 'gen_one_id', 'id');
+        return $this->hasMany(BarCodeGenTwo::class, 'gen_one_id', 'id');
     }
 }

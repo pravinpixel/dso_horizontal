@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarCodeFormatsTable extends Migration
+class CreateBarcodeFormatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateBarCodeFormatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bar_code_formats', function (Blueprint $table) {
+        Schema::create('barcode_formats', function (Blueprint $table) {
             $table->id();
-            $table->integer("material_product_id")->nullable();
             $table->integer("batch_id")->nullable();
-            $table->integer("category_selection")->nullable();
-            $table->text("description")->nullable();
+            $table->text("category_selection")->nullable();
+            $table->text("item_description")->nullable();
             $table->text("brand")->nullable();
             $table->string("self_gen_one")->nullable();
+            $table->boolean("is_self_gen_two")->default(false);
             $table->text("batch")->nullable();
             $table->text("serial")->nullable();
             $table->string("self_gen_two")->nullable();
@@ -39,6 +39,6 @@ class CreateBarCodeFormatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bar_code_formats');
+        Schema::dropIfExists('barcode_formats');
     }
 }

@@ -430,7 +430,7 @@ a {
     background-color: #163269 !important;
     color: white !important;
 }
-.custom-table-head:hover .box a{
+.custom-table-head:hover .box .table-toggle-icon,.bi-three-dots-vertical{
     color: white !important;
 }
  
