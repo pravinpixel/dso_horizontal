@@ -55,7 +55,10 @@ class CreateBatchesTable extends Migration
             $table->string('extended_qc_result')->nullable();
             $table->string('disposal_certificate')->nullable();
             $table->string('used_for_td_expt_only')->nullable();
+
             $table->longText('actions')->nullable();
+            $table->longText('repack_size')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

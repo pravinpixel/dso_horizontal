@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
 use App\Models\Masters\HelpMenu;
 
@@ -120,4 +121,6 @@ Route::middleware(['auth_users'])->group(function () {
 
     // Transfer Batches
     Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
+    Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
+    
 });

@@ -194,7 +194,7 @@
                         <td class="child-td">Brand 1</td>
                         <td class="child-td">Roll2/1</td>
                         <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
                         <td class="child-td">
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
@@ -204,7 +204,7 @@
                         <td class="child-td">Brand 1</td>
                         <td class="child-td">Roll2/1</td>
                             <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
                         <td class="child-td">
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
@@ -374,7 +374,7 @@
                         <td class="child-td">Brand 1</td>
                         <td class="child-td">Roll2/1</td>
                         <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
                         <td class="child-td">
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
@@ -384,7 +384,7 @@
                         <td class="child-td">Brand 1</td>
                         <td class="child-td">Roll2/1</td>
                             <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
+                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
                         <td class="child-td">
                             <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>

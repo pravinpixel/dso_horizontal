@@ -88,7 +88,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product       =   MaterialProducts::with('Batches')->latest()->paginate(5); 
+        $material_product       =   MaterialProducts::with('Batches','UnitOfMeasure')->latest()->paginate(5); 
         return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -221,11 +221,19 @@ class MaterialProductsController extends Controller
  
         $tableAllColumns = [];
         foreach ($tableColumns as $key => $value) {
-            $tableAllColumns[$key] = [
-                "name"      => $key,
-                "row"       => '{{ row.'.$value.' }}',
-                "batch"     => '{{ batch.'.$value.' }}',
-            ];
+            if($value == "unit_of_measure") {
+                $tableAllColumns[$key] = [
+                    "name"      => $key,
+                    "row"       => '{{ row.'.$value.'.name }}',
+                    "batch"     => '{{ batch.'.$value.' }}',
+                ];
+            } else {
+                $tableAllColumns[$key] = [
+                    "name"      => $key,
+                    "row"       => '{{ row.'.$value.' }}',
+                    "batch"     => '{{ batch.'.$value.' }}',
+                ];
+            }
         }
 
         $table_th_columns       = view('crm.material-products.partials.table-th-column', compact('tableAllColumns'));

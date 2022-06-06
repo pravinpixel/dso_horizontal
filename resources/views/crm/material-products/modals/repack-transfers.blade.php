@@ -12,19 +12,26 @@
                         <table class="table table-centered bg-white table-bordered table-hover custom-center mb-3">
                             <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                 <tr>
-                           
                                     <th>Date&time stamp</th>
                                     <th>Current accessed</th>
-                                    <th>Input Used amt (L)</th>
-                                    <th>Remain Amt (L)</th>
+                                    <th>Input Used amt (@{{ RepackTransferMeasure }})</th>
+                                    <th>
+                                        <span>Current Pkt Size : <span class="lead"><b>@{{ RepackTransferPackSize }}</b></span></span>
+                                        <hr class="bg-secondary">
+                                        Remain Amt (@{{ RepackTransferMeasure }})
+                                    </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody> 
                                 <tr>
-                                    <td style="padding: 0">10/09/2021 at 08:00</td>
-                                    <td style="padding: 0">Ziv</td>
-                                    <td style="padding: 0"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
-                                    <td style="padding: 0">15</td>
+                                    <td style="padding: 0">@{{ CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td style="padding: 0">@{{ CurrentAccessed }}</td>
+                                    <td style="padding: 0">
+                                        <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransferPackingSize" class="text-center form-control form-control-sm">
+                                    </td>
+                                    <td style="padding: 0">
+                                        @{{ RepackTransferPackSize - RepackTransferPackingSize}}
+                                    </td>
                                 </tr> 
                             </tbody>
                         </table>
@@ -34,7 +41,8 @@
                         <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
                             <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                 <tr>
-                                    <th width="200px">Repack Size(L)</th>
+                                    <th width="200px"> 
+                                        Repack Size(@{{ RepackTransferMeasure }})</th>
                                      <th>Qty</th>
                                     <th>storage area</th>
                                     <th>Housing type</th>
@@ -47,49 +55,44 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="padding: 0" width="200px" class="text-center"><input type="number" name="" id="" value="5" class="text-center form-control form-control-sm"></td>
+                                    <td style="padding: 0" width="200px" class="text-center">
+                                        <input type="number" min="1" ng-model="RepackTransfer.repack_size" ng-value="RepackTransfer.repack_size"class="border-0 rounded-0 text-center form-control form-control-sm">
+                                    </td>
                                     <td style="padding: 0">
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value="">CW</option>
+                                        <input type="number" min="1" ng-model="RepackTransfer.quantity" ng-value="RepackTransfer.quantity" class="border-0 rounded-0 text-center form-control form-control-sm">
+                                    </td>
+                                    <td style="padding: 0">
+                                        <select  class="border-0 rounded-0 form-select form-select-sm" ng-model="RepackTransfer.storage_area">
+                                            <option ng-selected="row.id == RepackTransfer.storage_area" ng-value="row.id" ng-repeat="row in MasterData.storage_room">@{{ row.name }}</option>
                                         </select>
                                     </td>
                                     <td style="padding: 0">
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value="">CW </option>
-                                            <option value="">MA </option>
-                                            <option value="">SP </option>
-                                            <option value="">MR </option>
-                                            <option value="">Polymer </option>
-                                            <option value="">ChemShed1 </option>
-                                            <option value="">ChemShed2</option>
+                                        <select  class="border-0 rounded-0 form-select form-select-sm" ng-model="RepackTransfer.housing_type">
+                                            <option ng-selected="row.id == RepackTransfer.housing_type" ng-value="row.id" ng-repeat="row in MasterData.house_types">@{{ row.name }}</option>
                                         </select>
                                     </td>
                                     <td style="padding: 0">
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value="">FC1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value=""> -</option>
+                                        <select  class="border-0 rounded-0 form-select form-select-sm"  ng-model="RepackTransfer.housing">>
+                                            <option value="@{{ RepackTransfer.housing }}"> @{{ RepackTransfer.housing }} </option>
+                                            {!! $housing = "@{{ RepackTransfer.housing }}" !!}
                                             @for ($key=0;$key<20;$key++)
-                                                <option value="">@{{ $key+1 }}</option>
+                                                <option value="{{ $key + 1 }}" {{ $key + 1 == $housing ? "selected" : "" }}>{{ $key + 1 }} </option>
                                             @endfor
                                         </select>
                                     </td>
                                     <td style="padding: 0">
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value="">Keith</option>
+                                        <select  class="border-0 rounded-0 form-select form-select-sm" ng-model="RepackTransfer.owner_one">
+                                            <option ng-selected="row.alias_name == RepackTransfer.owner_one" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
                                         </select>
                                     </td>
                                     <td style="padding: 0">
-                                        <select name="" id="" class="form-select form-select-sm">
-                                            <option value="">HuiBeng</option>
+                                        <select class="border-0 rounded-0 form-select form-select-sm" ng-model="RepackTransfer.owner_two">
+                                            <option ng-selected="row.alias_name == RepackTransfer.owner_two" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
                                         </select>
                                     </td>
-                                    <td style="padding: 0">Batch2/1</td>
+                                    <td style="padding: 0">-</td>
                                     <td style="padding: 0">
-                                        <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                        <i  ng-click="RepackTransfers('clear')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                                     </td>
                                 </tr> 
                             </tbody>
@@ -98,7 +101,7 @@
                 </div>
             </div> 
             <div class="modal-footer text-end  border-top">
-                <button class="btn btn-primary rounded-pill">Click to confirm and proceed to print label page</button>
+                <button class="btn btn-primary rounded-pill"  ng-click="RepackTransfers('store')">Click to confirm and proceed to print label page</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

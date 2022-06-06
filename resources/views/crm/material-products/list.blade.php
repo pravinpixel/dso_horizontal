@@ -6,7 +6,7 @@
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                    <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-end ms-auto text-end">
@@ -79,6 +79,7 @@
     <input type="hidden" id="get-batch" value="{{ route("get-batch") }}">
     <input type="hidden" id="get_masters" value="{{ route("get_masters") }}">
     <input type="hidden" id="transfer_batch" value="{{ route("transfer-batch") }}"> 
+    <input type="hidden" id="repack_batch" value="{{ route("repack-batch") }}"> 
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}">
     

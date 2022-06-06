@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">PO Number</small>
-                            <input type="number" class="form-control" placeholder="Type here" ng-model="advanced_filter.po_number">
+                            <input type="number" min="1"  class="form-control" placeholder="Type here" ng-model="advanced_filter.po_number">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Extended expiry</small>

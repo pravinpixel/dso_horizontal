@@ -467,3 +467,7 @@ a {
     left: 0;
     z-index: 11111 !important;
 }
+.ng-invalid-max ,
+.ng-valid.ng-valid-min.ng-dirty.ng-valid-parse.ng-empty.ng-touched {
+    border:1px solid #d55858 !important;
+}

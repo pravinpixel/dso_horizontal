@@ -167,12 +167,12 @@
                         <tr>
                             <th>System Stock</th>
                             <td>:</td>
-                            <td><input type="number" class="bg-none form-control "  value="10"></td>
+                            <td><input type="number" min="1"  class="bg-none form-control "  value="10"></td>
                         </tr>
                         <tr>
                             <th>Physical Stock</th>
                             <td>:</td>
-                            <td><input type="number" class="bg-none form-control "  value="10"></td>
+                            <td><input type="number" min="1"  class="bg-none form-control "  value="10"></td>
                         </tr>
                         <tr>
                             <th>Remarks</th>

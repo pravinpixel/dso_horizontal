@@ -33,6 +33,7 @@ app.controller('SearchAddController', function($scope, $http) {
     var delete_material_products_batch_url  =   $('#delete-material-products-batch').val();
     var get_save_search_url                 =   $('#get-save-search').val();
     var transfer_batch                      =   $('#transfer_batch').val();
+    var repack_batch                        =   $('#repack_batch').val();
     var app_URL                             =   $('#app_URL').val();
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val();
@@ -459,7 +460,7 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing   == null || $scope.TransfersBatch.owner_one == null || $scope.TransfersBatch.owner_two == null) {
             Message('danger', "All fields is Required !");
             return false
-        } 
+        }
 
         $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
             $scope.get_material_products();
@@ -498,5 +499,73 @@ app.controller('SearchAddController', function($scope, $http) {
                 $scope.$apply()
             } 
         });
+    }
+
+    // Repack And Transfer 
+    $scope.CurrentDate = new Date();
+
+    $scope.RepackTransfers = (type,batch, row) => {
+        switch (type) {
+            case "view":
+                $("#RepackTransfers").modal("show");
+                $scope.RepackTransfer           =   batch;
+                $scope.RepackTransferPackSize   =   row.unit_packing_value
+                $scope.RepackTransferMeasure    =   row.unit_of_measure[0].name
+                const CurrentAccessed           =   JSON.parse($scope.RepackTransfer.access);
+                $scope.CurrentAccessed          =   CurrentAccessed.join() 
+            break;
+            case "store" :
+                if($scope.RepackTransferPackingSize === null || $scope.RepackTransferPackingSize === undefined) {
+                    Message('danger', "Input Used amt (L) is Required !");
+                    return false;
+                }
+                if($scope.RepackTransfer.repack_size == ''|| $scope.RepackTransfer.quantity == '' || $scope.RepackTransfer.storage_area == '' || $scope.RepackTransfer.housing_type == '' || $scope.RepackTransfer.housing   == '' || $scope.RepackTransfer.owner_one == '' || $scope.RepackTransfer.owner_two == '') {
+                    Message('danger', "All fields is Required !");
+                    return false
+                } 
+                if($scope.RepackTransfer.repack_size == null || $scope.RepackTransfer.quantity == null || $scope.RepackTransfer.storage_area == null || $scope.RepackTransfer.housing_type == null || $scope.RepackTransfer.housing   == null || $scope.RepackTransfer.owner_one == null || $scope.RepackTransfer.owner_two == null) {
+                    Message('danger', "All fields is Required !");
+                    return false
+                }
+                $http.post(repack_batch, $scope.RepackTransfer).then((response) => {
+                    $scope.get_material_products();
+                    Message('success', response.data.message);
+                    $('#RepackTransfers').modal('hide');
+                }); 
+            break;
+            case "clear" :
+                swal({
+                    text: "Do you want to clear fields ?",
+                    icon: "info",
+                    buttons: {
+                        cancel: {
+                            text: "Cancel",
+                            value: null,
+                            visible: true,
+                            className: "btn-light rounded-pill btn",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "Yes! Delete",
+                            value: true,
+                            visible: true,
+                            className: "btn btn-danger rounded-pill",
+                            closeModal: true
+                        }
+                    }, 
+                }).then((isConfirm) => {
+                    if(isConfirm) {
+                        $scope.RepackTransfer.quantity = ''
+                        $scope.RepackTransfer.storage_area = ''
+                        $scope.RepackTransfer.housing_type = ''
+                        $scope.RepackTransfer.housing   = ''
+                        $scope.RepackTransfer.owner_one = ''
+                        $scope.RepackTransfer.owner_two = ''
+                        $scope.$apply()
+                    } 
+                });
+                break;
+            default: break;
+        }
     }
 });

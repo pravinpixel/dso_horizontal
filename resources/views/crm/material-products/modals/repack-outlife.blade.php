@@ -22,7 +22,7 @@
                                 Remaining outlife (prepreg roll)
                                 Intital count: 
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <input type="number" name="" id="" style="width: 45px" value="30" class="me-1 p-0 text-center form-control form-control-sm"> days
+                                    <input type="number" min="1"  name="" id="" style="width: 45px" value="30" class="me-1 p-0 text-center form-control form-control-sm"> days
                                 </div>
                             </th>
                             <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -46,13 +46,13 @@
                                     <div class="col p-0">HuiBeng</div>
                                 </div>
                             </td>
-                            <td class="text-center"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
-                            <td class="text-center"><input type="number" name="" id="" value="80" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1"  name="" id="" value="10" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1"  name="" id="" value="80" class="text-center form-control form-control-sm"></td>
                             <td>
                                 Roll2/1 
                             </td>
-                            <td class="text-center"><input type="number" name="" id="" value="80" class="text-center form-control form-control-sm"></td>
-                            <td class="text-center"><input type="number" name="" id="" value="10" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1"  name="" id="" value="80" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1"  name="" id="" value="10" class="text-center form-control form-control-sm"></td>
                             <td>29 days 17hrs</td>
                             <td>
                                 <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i><br><br>

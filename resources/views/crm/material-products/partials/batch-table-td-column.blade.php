@@ -27,7 +27,7 @@
             <a class="dropdown-item text-secondary"  ng-click="Transfers(batch.id)"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
 
             {{--  ==== REPACK OUTLIFE ====  --}}
-                <a ng-if="batch.require_outlife_tracking ==  1" class="dropdown-item text-secondary"  data-bs-toggle="modal" data-bs-target="#RepackTransfers">
+                <a ng-if="batch.require_outlife_tracking ==  1" class="dropdown-item text-secondary" ng-click="RepackTransfers('view',batch , row)">
                     <i class="bi bi-box-seam me-1"></i>Repack/Transfer 
                 </a>
                 <a ng-if="batch.require_outlife_tracking ==  0 || batch.require_outlife_tracking ===  null" class="dropdown-item text-secondary link-disabled">

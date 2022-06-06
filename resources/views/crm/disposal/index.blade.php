@@ -177,7 +177,7 @@
                             </label>
                             <div class="d-flex align-items-center mb-3">
                                 <label for="" class="me-2">Qty : </label>
-                                <input type="number" class="form-control text-center my-2" name="" id="" value="10" style="width: 100px">
+                                <input type="number" min="1"  class="form-control text-center my-2" name="" id="" value="10" style="width: 100px">
                             </div>
                             <span><strong>Supporting Documents (If any)</strong></span>
                             <input type="file" name="" id="" class="form-control"> 
@@ -213,7 +213,7 @@
                             </label>
                             <div class="d-flex align-items-center">
                                 <label for="" class="me-2">Qty : </label>
-                                <input type="number" class="form-control text-center my-2" name="" id="" style="width: 100px">
+                                <input type="number" min="1"  class="form-control text-center my-2" name="" id="" style="width: 100px">
                             </div>
                             <br>
                             <label for="Fail_label" class="form-radio-danger  my-2" >
@@ -267,7 +267,7 @@
                                 <div class="tab-pane fade active show align-items-center pt-4" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab">
                                     <div class="d-flex align-items-center h-100">
                                         <label for="" class="me-2">Quantity : </label>
-                                        <input type="number" class="form-control text-center" name="" id="" style="width: 200px">
+                                        <input type="number" min="1"  class="form-control text-center" name="" id="" style="width: 200px">
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-fail" role="tabpanel" aria-labelledby="v-pills-fail-tab">

@@ -138,7 +138,7 @@
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
                                 <small class="mb-1">PO Number</small>
-                                <input type="number" class="form-control" placeholder="Type here">
+                                <input type="number" min="1"  class="form-control" placeholder="Type here">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
                                 <small class="mb-1">Extended expiry</small>
