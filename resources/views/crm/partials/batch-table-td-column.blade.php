@@ -55,8 +55,8 @@
 
         @if ($page_name === 'PRINT_BARCODE_LABEL')
             <div class="btn-group"> 
-                <button class="btn btn-light btn-sm border" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
-                <button ng-click="view_print_barcode(batch.id)" class="btn btn-light btn-sm border"><i class="fa fa-print"></i></button>
+                <button title="View Batch Details" class="btn bg-light btn-sm border text-primary2" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
+                <button title="Print Batch Label" class="btn btn-light btn-sm border text-primary" ng-click="view_print_barcode(batch.id)"><i class="fa fa-print"></i></button>
             </div>
         @endif
     </div>

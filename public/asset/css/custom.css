@@ -48,6 +48,9 @@ option {
     font-size: 10px !important;
 }
  
+.text-primary2 {
+    color: #12326A !important;
+}
 .bg-primary-2 {
     background-color: #12326A !important;
 }
