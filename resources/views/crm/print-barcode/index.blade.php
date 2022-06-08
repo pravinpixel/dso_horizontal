@@ -65,15 +65,7 @@
         {{-- ======= END : App Models ==== --}}
     </div>
         
-    <div class="d-flex align-items-center mb-3">
-        <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
-            <div class="input-group align-items-center" title="Scan Barcode">
-                <i class="bi bi-upc-scan font-20 mx-2"></i>
-                <input type="text" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-            </div> 
-        </div>  
-    </div> 
-    @include('includes.sections.filter')
+   
     <div class="">
         <table class="table table-bordered table-hover bg-white">
             <thead>
