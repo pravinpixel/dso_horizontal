@@ -1,6 +1,6 @@
 <div ng-show="on_item_description" class="sticky-left">
     <div class="box position-relative h-100 th">
-        Item Description 
+        Item Description
         <i ng-click="sort_by('id', 'asc')" class="bi bi-arrow-up  position-absolute top-0 right-0 cur_ponit"></i>
         <i ng-click="sort_by('id', 'desc')" class="bi bi-arrow-down  position-absolute bottom-0 right-0 cur_ponit"></i>
     </div>
@@ -14,5 +14,7 @@
         </span>
     </div>
 @endforeach
-<div class="box th box-sm">Actions</div>
- 
+<div class="box th border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm" : null}}">
+    Actions
+    {{ $page_name === 'PRINT_BARCODE_LABEL'  ? "/ Qty to print" : null}}
+</div>

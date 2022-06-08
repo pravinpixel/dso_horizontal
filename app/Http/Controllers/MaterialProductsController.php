@@ -18,6 +18,7 @@ use Illuminate\Http\Response;
 use App\Exports\BulkExport;
 use App\Imports\BulkImport;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
+use App\Interfaces\DsoRepositoryInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
@@ -39,12 +40,14 @@ class MaterialProductsController extends Controller
     public function __construct(
             MartialProductRepositoryInterface $MartialProductRepository,
             SearchRepositoryInterface   $SearchRepositoryRepository,
-            BarCodeLabelRepositoryInterface $barCodeLabelRepository
+            BarCodeLabelRepositoryInterface $barCodeLabelRepository ,
+            DsoRepositoryInterface $dsoRepositoryInterface
         ) 
     {
         $this->MartialProductRepository     =   $MartialProductRepository;
         $this->SearchRepositoryRepository   =   $SearchRepositoryRepository;
         $this->barCodeLabelRepository       =   $barCodeLabelRepository;
+        $this->dsoRepository                =   $dsoRepositoryInterface;
     }
 
     public function index(Request $request)
@@ -205,57 +208,12 @@ class MaterialProductsController extends Controller
         Flash::success(__('global.imported')); 
         return back();
     }
+
     public function list_index()
     { 
-        $storage_room_db        =   StorageRoom::all();
-        $departments_db         =   Departments::all();
-        $statutory_body_db      =   StatutoryBody::all();
-        $house_type_db          =   HouseTypes::all();
-        $unit_packing_size_db   =   PackingSizeData::all();
-        $owners                 =   User::all();
-        $parentTable            =   Schema::getColumnListing("material_products");
-        $childTable             =   Schema::getColumnListing("batches");
-
-        $allColumns             =  array_merge($parentTable, $childTable);
-        $tableColumns           =  array_combine($allColumns  ,$allColumns ); 
-        unset($tableColumns['id'], $tableColumns['created_at'], $tableColumns['item_description'], $tableColumns['updated_at'], $tableColumns['deleted_at'],$tableColumns['is_draft'],);
- 
-        $tableAllColumns = [];
-        foreach ($tableColumns as $key => $value) {
-            if($value == "unit_of_measure") {
-                $tableAllColumns[$key] = [
-                    "name"      => $key,
-                    "row"       => '{{ row.'.$value.'.name }}',
-                    "batch"     => '{{ batch.'.$value.' }}',
-                ];
-            } else {
-                $tableAllColumns[$key] = [
-                    "name"      => $key,
-                    "row"       => '{{ row.'.$value.' }}',
-                    "batch"     => '{{ batch.'.$value.' }}',
-                ];
-            }
-        }
-
-        $table_th_columns        = view('crm.material-products.partials.table-th-column', compact('tableAllColumns'));
-        $table_td_columns        = view('crm.material-products.partials.table-td-column', compact('tableAllColumns'));
-        $batch_table_td_columns  = view('crm.material-products.partials.batch-table-td-column', compact('tableAllColumns'));
-
-        forget_session();
-        return view('crm.material-products.list', 
-            compact(
-                'table_th_columns',
-                'table_td_columns',
-                'tableAllColumns',
-                'batch_table_td_columns',
-                'owners',
-                'storage_room_db',
-                'departments_db',
-                'statutory_body_db',
-                'house_type_db',
-                'unit_packing_size_db',
-                'tableAllColumns'
-            ));  
+        $page_name  =  "MATERIAL_SEARCH_OR_ADD";
+        $view       =  "crm.material-products.list";
+        return  $this->dsoRepository->renderPage($page_name, $view);
     }
 
     public function change_product_category(Request $request)
@@ -388,7 +346,7 @@ class MaterialProductsController extends Controller
         $data = Batches::findOrFail($id);
          
         $user_name = [];
-        foreach (json_decode($data->access) as $users ) {
+        foreach (json_decode($data->access ?? '[]') as $users ) {
             $user_name[]  = User::find($users)->alias_name;
         }
         

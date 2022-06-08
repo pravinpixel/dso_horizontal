@@ -490,3 +490,9 @@ a {
     margin: 20px 0 !important;
     box-shadow: 0 0 10px lightgray;
 }
+.custom_number_input {
+    width: 100%;
+    outline: none;
+    border-radius: 0;
+    border: 1px solid lightgray;
+}

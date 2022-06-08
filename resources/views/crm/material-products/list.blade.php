@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content') 
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
-        
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
@@ -16,7 +15,7 @@
         </div>
 
         {{-- = ==== Filletrs ====--}}
-            @include('crm.material-products.partials.table-filter')
+            @include('crm.partials.table-filter')
         {{-- ====== Filletrs ===--}}
          
         <div class="table-responsive shadow-lg bg-white">

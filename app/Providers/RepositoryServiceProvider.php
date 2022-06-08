@@ -14,8 +14,9 @@ use App\Repositories\MartialProductRepository;
  
 use App\Repositories\BarCodeLabelRepository;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
-
+use App\Interfaces\DsoRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
+use App\Repositories\DsoRepository;
 use App\Repositories\SearchRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -34,6 +35,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SearchRepositoryInterface::class, SearchRepository::class); 
 
         $this->app->bind(BarCodeLabelRepositoryInterface::class, BarCodeLabelRepository::class); 
+
+        $this->app->bind(DsoRepositoryInterface::class, DsoRepository::class); 
+
     }
 
     /**
