@@ -18,4 +18,10 @@ class PrintBarcodeController extends Controller
         $view       = "crm.print-barcode.index";
         return $this->dsoRepository->renderPage($page_name, $view);
     }
+
+    public function show($id)
+    {
+        $batch = Batches::with('BatchMaterialProduct')->findOrFail($id);
+        return view('crm.print-barcode.show', compact('batch'));
+    }
 }

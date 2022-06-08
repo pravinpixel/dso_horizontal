@@ -54,10 +54,9 @@
         @endif 
 
         @if ($page_name === 'PRINT_BARCODE_LABEL')
-            <div class="btn-group">
-                {{-- <input type="number" class="btn ps-1 pe-0 bg-white btn-sm custom_number_input" value="1" min="1" max="3"> --}}
+            <div class="btn-group"> 
                 <button class="btn btn-light btn-sm border" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
-                <button class="btn btn-light btn-sm border"><i class="fa fa-print"></i></button>
+                <button ng-click="view_print_barcode(batch.id)" class="btn btn-light btn-sm border"><i class="fa fa-print"></i></button>
             </div>
         @endif
     </div>

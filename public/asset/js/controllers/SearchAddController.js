@@ -568,4 +568,9 @@ app.controller('SearchAddController', function($scope, $http) {
             default: break;
         }
     }
+
+    // Print Barcode
+    $scope.view_print_barcode = (id) => {
+        window.location.href =  `print-label/${id}`
+    }
 });

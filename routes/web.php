@@ -123,5 +123,6 @@ Route::middleware(['auth_users'])->group(function () {
 
     // ===================== Print Label ===================== 
         Route::get('/print-label', [PrintBarcodeController::class, 'index'])->name('print-barcode'); 
+        Route::get('/print-label/{id?}', [PrintBarcodeController::class, 'show'])->name('print-barcode'); 
     // ===================== Print Label =====================
 });
