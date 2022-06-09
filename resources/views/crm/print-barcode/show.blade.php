@@ -30,8 +30,8 @@
             </table> 
         </div>
         <div class="row m-0">
-            <div class="col-md-4 p-0 pe-3" > 
-                <div class="border card text-center rounded-5 p-3 print-card" id="printableBarcodeLabel">
+            <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel"> 
+                <div class="border card text-center rounded-5 p-3 print-card" >
                     <img ng-if="Barcode" width="200px" class="mx-auto" src="https://lh3.googleusercontent.com/EASWqGp10M-RQANx9krxrmGHuH0_u6Jy_9lN9JPJhuFRDVKe8KrgEXGkOW8Yorum5tyg-vrx-cg0L5vy-t-7dFEg0eiwfyC7xJZ5WqUT=s660">
                     <div >
                         <small  ng-if="batch_id">Batch /{{ $batch->id }}</small>
@@ -44,7 +44,7 @@
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">
                         <div id="printImages">
-
+                            <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" >
                         </div>
                     </div>
                     <div class="text-end">  
@@ -52,7 +52,7 @@
                         <small class="text-dark" ng-if="date_of_shipment">DOD: {{ $batch->date_of_shipment }}</small>
                     </div>
                 </div>         
-                <div class="text-center">
+                <div class="text-center" id="Print-btn">
                     <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button>
                     <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
                 </div> 
@@ -99,7 +99,7 @@
                                 <label  for="DOE" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="date_of_expiry" id="DOE">DOE</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="GHSPictogram" id="GHS-Pictogram-checked-input">GHS Pictogram</label>
+                                <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS Pictogram</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="ownners" id="Owner1">Owner1/Owner2</label>
@@ -113,7 +113,7 @@
                         </div>  
                     </div>
                 </div> 
-                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated h-100" style="top: 0" ng-if="GHSPictogram">
+                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated h-100 " style="top: 0" id="GHSPictogramMenu">
                     <div class="card-header border-bottom bg-light text-dark">
                         <h3 class="h5 text-center">Select the pictogram for your label:</h3>
                     </div>
@@ -201,6 +201,10 @@
                                 </div>
                             </label>
                         </div>
+                        <hr>
+                        <button class="btn btn-light border rounded-pill my-3" ng-click="removeGHS()">
+                            <i class="fa fa-times me-1"> </i> Remove
+                        </button> 
                         <button class="btn btn-primary rounded-pill my-3" ng-click="confirmGHS()">
                             <i class="fa fa-check me-1"> </i>confirm
                         </button> 

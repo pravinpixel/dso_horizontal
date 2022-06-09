@@ -9,6 +9,11 @@ app.controller("PrintController", ($scope, $http) => {
     $scope.used_for_td_expt_only    = true
 
     $scope.confirmGHS = () => {
+        $("#GHSPictogramMenu").hide();
+        $scope.GHSPictogram = true
+    } 
+    $scope.removeGHS = () => {
+        $('#printImages img').remove()
         $scope.GHSPictogram = false
     } 
     $scope.printBarcodeLabel = () => {
@@ -20,8 +25,8 @@ app.controller("PrintController", ($scope, $http) => {
             Message('danger', "Print size is Required !");
             return false
         }
-
-        for (let index = 0; index < $scope.print_qty; index++) {
+        $( "#printBox div").remove()
+        for (let index = 0; index < $scope.print_qty; index++) { 
             $( "#printableBarcodeLabel").clone().appendTo("#printBox" );
         }
         var a = window.open('', '', 'height=10000, width=10000');
@@ -30,14 +35,23 @@ app.controller("PrintController", ($scope, $http) => {
         a.document.write(`
             <style>
                 @media print, screen {
+                    #Print-btn{
+                        display:none
+                    }
                     #printableBarcodeLabel {
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                        min-height:100vh
+                    }
+                    .print-card{
                         border  :   1px solid gray !important;
                         background  :   white;
                         padding : 30px;
                         margin  :30px auto;
                         text-align:center;
                         border-radius:15px;
-                        width: ${$scope.print_size == 'small' ? '350px' : null};
+                        width: ${$scope.print_size == 'small' ? '350px' : '650px'};
                         clear: both;
                         page-break-after: always;
                     }
@@ -57,6 +71,9 @@ app.controller("PrintController", ($scope, $http) => {
                         padding:0 5px;
                         font-weight:bold !important
                     }
+                    #printImages img {
+                        width:100px !important
+                    }
                 }
             </style>
         `);
@@ -65,6 +82,12 @@ app.controller("PrintController", ($scope, $http) => {
         a.document.close();
         a.print();
     }
+
+    $("#GHSPictogramMenu").hide();
+    $scope.GHSPictogramMenu = () => {
+        $("#GHSPictogramMenu").show();
+    }
+    
 })
 function changeGhsDiagram(id) {
     $('#printImages img').remove()
