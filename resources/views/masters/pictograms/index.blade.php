@@ -11,6 +11,7 @@
                     <tr>
                         <th class="table-th">No</th>
                         <th class="table-th">Name</th>
+                        <th class="table-th">Image</th>
                         <th class="table-th" width="100px">Action</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
+                    {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

@@ -62,4 +62,9 @@ class Batches extends Model
     {
         return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id');
     } 
+
+    public function BatchBarcode()
+    {
+        return $this->hasOne(BarcodeFormat::class, 'batch_id', 'id');
+    } 
 }

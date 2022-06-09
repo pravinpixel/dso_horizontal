@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div ng-app="PrintLabelApp" ng-controller="PrintController">
-        <div>
+        <div> 
             <table class="table table-bordered bg-white">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -31,9 +31,11 @@
         </div>
         <div class="row m-0">
             <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel"> 
-                <div class="border card text-center rounded-5 p-3 print-card" >
-                    <img ng-if="Barcode" width="200px" class="mx-auto" src="https://lh3.googleusercontent.com/EASWqGp10M-RQANx9krxrmGHuH0_u6Jy_9lN9JPJhuFRDVKe8KrgEXGkOW8Yorum5tyg-vrx-cg0L5vy-t-7dFEg0eiwfyC7xJZ5WqUT=s660">
-                    <div >
+                <div class="border card text-center rounded-5 p-3 print-card" > 
+                    <div class="barcode_label" ng-if="Barcode" >
+                        {{ $batch->BatchBarcode->barcode_label }}
+                    </div>
+                    <div>
                         <small  ng-if="batch_id">Batch /{{ $batch->id }}</small>
                         <div class="text-primary">
                             <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
@@ -51,11 +53,7 @@
                         <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
                         <small class="text-dark" ng-if="date_of_shipment">DOD: {{ $batch->date_of_shipment }}</small>
                     </div>
-                </div>         
-                <div class="text-center" id="Print-btn">
-                    <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button>
-                    <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
-                </div> 
+                </div>  
             </div>
             <div class="col-md-8 p-0 position-relative">
                 <div class="card shadow-sm border" >
@@ -72,8 +70,8 @@
                                 </select>
                             </div>
                             <div class="col-md-8 text-end">
-                                {{-- <button class="btn btn-outline-primary rounded-pill"><i class="fa fa-eye me-1"></i> Preview</button> --}}
-                                <button class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> Print</button>
+                                <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button>
+                                <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
                             </div>
                         </div>
                     </div>
@@ -113,99 +111,31 @@
                         </div>  
                     </div>
                 </div> 
-                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated h-100 " style="top: 0" id="GHSPictogramMenu">
+                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated" style="top: 0" id="GHSPictogramMenu">
                     <div class="card-header border-bottom bg-light text-dark">
                         <h3 class="h5 text-center">Select the pictogram for your label:</h3>
                     </div>
                     <div class="card-body bg-white"> 
                         <div class="row m-0">
-                            <label onclick="changeGhsDiagram('pictograms_1')"  class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img id="pictograms_1" src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
-                            <label onclick="changeGhsDiagram()" class="col-4 position-relative text-white row my-2"  for="Explosives">
-                                <div class="col-4">
-                                    <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" width="50px">
-                                </div>
-                                <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                    <input type="radio" name="pictograms" id="Explosives" class="checked-input me-1">
-                                    <span><b>Explosives</b></span>
-                                </div>
-                            </label>
+                            @if ($pictograms)
+                                @foreach ($pictograms as $pictogram)
+                                    <label onclick="changeGhsDiagram('pictograms_{{ $pictogram->id }}')" class="col-4 position-relative text-white row my-2"  for="pictogramsLab_{{ $pictogram->id }}">
+                                        <div class="col-4">
+                                            <img id="pictograms_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
+                                        </div>
+                                        <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
+                                            <input type="radio"  name="pictograms" id="pictogramsLab_{{ $pictogram->id }}" class="checked-input me-1">
+                                            <span><b>{{ $pictogram->name }}</b></span>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            @endif 
                         </div>
                         <hr>
-                        <button class="btn btn-light border rounded-pill my-3" ng-click="removeGHS()">
+                        <button class="btn btn-light border rounded-pill my-2" ng-click="removeGHS()">
                             <i class="fa fa-times me-1"> </i> Remove
                         </button> 
-                        <button class="btn btn-primary rounded-pill my-3" ng-click="confirmGHS()">
+                        <button class="btn btn-primary rounded-pill my-2" ng-click="confirmGHS()">
                             <i class="fa fa-check me-1"> </i>confirm
                         </button> 
                     </div>
@@ -217,8 +147,25 @@
 @endsection
 @section('styles')
     <style>
+        @font-face {
+            font-family: 'barcode font';
+            font-style: normal;
+            font-weight: 400;
+            src: local('barcode font'), url('https://fonts.cdnfonts.com/s/10997/BarcodeFont.woff') format('woff');
+        }
+    </style>
+
+
+    <style>
         #printImages img {
             width: 95px !important
+        }
+         
+        .barcode_label {
+            font-family: 'barcode font', Courier;
+            font-size: 58px !important;
+            color: black !important;
+            letter-spacing: 3px
         }
     </style>
 @endsection

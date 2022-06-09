@@ -34,10 +34,14 @@ app.controller("PrintController", ($scope, $http) => {
         a.document.write('<body>');
         a.document.write(`
             <style>
+                @font-face {
+                    font-family: 'barcode font';
+                    font-style: normal;
+                    font-weight: 400;
+                    src: local('barcode font'), url('https://fonts.cdnfonts.com/s/10997/BarcodeFont.woff') format('woff');
+                }   
                 @media print, screen {
-                    #Print-btn{
-                        display:none
-                    }
+                    
                     #printableBarcodeLabel {
                         display:flex;
                         justify-content:center;
@@ -73,6 +77,12 @@ app.controller("PrintController", ($scope, $http) => {
                     }
                     #printImages img {
                         width:100px !important
+                    }
+                    .barcode_label {
+                        font-family: 'barcode font', Courier;
+                        font-size: 58px !important;
+                        color: black !important;
+                        letter-spacing: 3px
                     }
                 }
             </style>

@@ -1,6 +1,7 @@
 <?php
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Storage;
 
 if(! function_exists('category_type')) {
     function category_type() {
@@ -79,5 +80,15 @@ if(! function_exists('completed_tab')) {
 if(! function_exists('auth_user')) {
     function auth_user() {
         return Sentinel::getUser();
+    }
+}
+if(! function_exists('storageGet')) {
+    function storageGet($src) {
+        if (Storage::exists($src)) { 
+            $file = asset(str_replace('public', 'public/storage/',$src)) ;
+        } else {
+            $file =  $src ;
+        }
+        return $file;
     }
 }

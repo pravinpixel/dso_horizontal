@@ -21,7 +21,8 @@ class PictogramController extends Controller
     {
         if($request->ajax()) {
             $data = Pictogram::select('*');
-            return DataTables::eloquent($data)->addColumn('action', function ($data) {
+            return DataTables::eloquent($data)
+            ->addColumn('action', function ($data) {
                 $action = '
                     <div class="btn-group border">
                         <a href="'.route('pictogram.edit', $data->id).'" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
@@ -31,7 +32,12 @@ class PictogramController extends Controller
                         </form>
                     </div>';
                 return $action;
-            })->addIndexColumn()->make(true);
+            })
+            ->addColumn('image', function ($data) {
+                return  '<img src="'.storageGet($data->image).'" class="img-png" width="50px">';
+            })
+            ->rawColumns(['action','image'])
+            ->addIndexColumn()->make(true);
         }
         return view('masters.pictograms.index');
     }
@@ -54,15 +60,15 @@ class PictogramController extends Controller
      */
     public function store(Request $request)
     {
-
-        if($request->has('images')) {
-            $image = Storage::put('files/pictograms', $request->file('images'));
+       
+        if($request->has('image')) {
+            $image = Storage::put('public/files/pictograms/', $request->file('image'));
         } 
 
        
         Pictogram::create([
-            'name'         =>  $request->name,
-            'image'         =>  $image ?? "",
+            'name'      =>  $request->name,
+            'image'     =>  $image,
         ]);
 
         Flash::success(__('global.inserted'));
@@ -107,12 +113,12 @@ class PictogramController extends Controller
             if(Storage::exists($data->image)){
                 Storage::delete($data->image);
             }
-            $image = $request->file('image')->store('public/files/helps-image');
+            $image = $request->file('image')->store('public/files/pictograms');
         }
          
         $data->update([
             'name'         =>  $request->name,
-            'status'        =>  1
+            'image'        =>  $image
         ]);
 
         Flash::success(__('global.updated'));

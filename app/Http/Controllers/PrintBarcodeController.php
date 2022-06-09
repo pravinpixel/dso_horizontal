@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
+use App\Models\Pictogram;
 use Illuminate\Http\Request;
 
 class PrintBarcodeController extends Controller
@@ -21,8 +22,9 @@ class PrintBarcodeController extends Controller
 
     public function show($id)
     {
-        $batch = Batches::with('BatchMaterialProduct')->findOrFail($id);
-        return view('crm.print-barcode.show', compact('batch'));
+        $batch       = Batches::with('BatchMaterialProduct')->findOrFail($id);
+        $pictograms  = Pictogram::get();
+        return view('crm.print-barcode.show', compact('batch','pictograms'));
     }
 
     public function print(Request $request)

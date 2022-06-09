@@ -52,7 +52,7 @@
             <page-pagination>
             </page-pagination>
         </div>
-
+        
         {{-- ======= START : App Models ==== --}}
             @include('crm.material-products.modals.view-batch-list')
             @include('crm.material-products.modals.view-list')
