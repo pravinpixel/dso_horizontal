@@ -4,8 +4,8 @@
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\Admin\RoleController;
     use App\Http\Controllers\Admin\PermissionController; 
-    use App\Http\Controllers\Admin\HelpMenuController; 
-
+    use App\Http\Controllers\Admin\HelpMenuController;
+    use App\Http\Controllers\Admin\PictogramController;
 
 Route::middleware(['auth_users'])->group(function () {
     Route::get('/item-description', [MasterController::class, 'index'])->name('master-settings');
@@ -50,4 +50,12 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/edit/{id}', [HelpMenuController::class, 'edit'])->name('help.menu.edit');
     Route::post('/edit/{id}', [HelpMenuController::class, 'update'])->name('help.menu.update');
     Route::post('/delete/{id}', [HelpMenuController::class, 'delete'])->name('help.menu.delete');
+
+    
+    Route::get('/pictogram', [PictogramController::class, 'index'])->name('pictogram.index');
+    Route::get('/pictogram/create', [PictogramController::class, 'create'])->name('pictogram.create');
+    Route::post('/pictogram/create', [PictogramController::class, 'store'])->name('pictogram.store');
+    Route::get('/pictogram/{id?}', [PictogramController::class, 'edit'])->name('pictogram.edit');
+    Route::post('/pictogram/delete/{id?}', [PictogramController::class, 'destroy'])->name('pictogram.delete');
+    Route::put('/pictogram/{id?}', [PictogramController::class, 'update'])->name('pictogram.update');
 });

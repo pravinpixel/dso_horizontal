@@ -345,13 +345,16 @@ class MaterialProductsController extends Controller
     {
         $data = Batches::findOrFail($id);
          
+         
         $user_name = [];
-        foreach (json_decode($data->access ?? '[]') as $users ) {
-            $user_name[]  = User::find($users)->alias_name;
-        }
-        
+ 
+        if($data->access !== null || $data->access != 'Default') {
+            foreach (json_decode($data->access ?? '[]') as $users ) {
+                $user_name[]  = User::find($users)->alias_name;
+            }
+        } 
         return [
-            "access"          => $user_name,
+            "access"          => $user_name ?? null,
             "department"      => Departments::find($data->dept)->name,
             "statutory_body"  => StatutoryBody::find($data->statutory_body)->name,
             "storage_area"    => StorageRoom::find($data->storage_area)->name,
