@@ -15,8 +15,8 @@
     </div>
 @endforeach
 
-<div class="box d-flex align-items-center  border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm" : null}}" >
-    <div class="d-flex align-items-center justify-content-between">
+<div class="box border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm d-flex align-items-center" : null}}" >
+    <div class="{{$page_name === 'PRINT_BARCODE_LABEL'  ? "d-flex align-items-center justify-content-between" : null }}">
         @if ($page_name === 'MATERIAL_SEARCH_OR_ADD')
             <div class="dropdown mx-1">
                 <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +54,7 @@
         @endif 
 
         @if ($page_name === 'PRINT_BARCODE_LABEL')
-            <div class="btn-group"> 
+            <div class="btn-group mx-auto"> 
                 <button title="View Batch Details" class="btn bg-light btn-sm border text-primary2" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
                 <button title="Print Batch Label" class="btn btn-light btn-sm border text-primary" ng-click="view_print_barcode(batch.id)"><i class="fa fa-print"></i></button>
             </div>

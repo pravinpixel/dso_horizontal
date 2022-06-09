@@ -24,4 +24,10 @@ class PrintBarcodeController extends Controller
         $batch = Batches::with('BatchMaterialProduct')->findOrFail($id);
         return view('crm.print-barcode.show', compact('batch'));
     }
+
+    public function print(Request $request)
+    {
+        $printData = $request->data;
+        dd($printData);
+    }
 }
