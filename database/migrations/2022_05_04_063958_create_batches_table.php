@@ -58,7 +58,7 @@ class CreateBatchesTable extends Migration
             $table->string('disposal_certificate')->nullable();
             $table->string('used_for_td_expt_only')->nullable(); 
              
-            $table->longText('actions')->nullable()->default(json_encode([
+            $table->text('actions')->nullable()->default(json_encode([
                 "repack_code"     =>  null,
                 "packing_value"  =>  null,
                 "packing_size"   =>  null,
