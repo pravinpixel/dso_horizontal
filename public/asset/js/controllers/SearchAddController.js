@@ -43,7 +43,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.get_material_products =  function () {
         $http({
             method: 'get', 
-            url: material_products_url,  
+            url: material_products_url,   
         }).then(function(response) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
@@ -51,6 +51,7 @@ app.controller('SearchAddController', function($scope, $http) {
         }, function(response) {
             Message('danger', response.data.message);
         });
+       
     }
     $scope.get_material_products();
 
