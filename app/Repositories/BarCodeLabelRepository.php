@@ -3,7 +3,7 @@ namespace App\Repositories;
 
 use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\BarcodeFormat;
-use Illuminate\Support\Facades\Log;  
+ 
 class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
     public function generateBarcode($material_product, $batch)
     { 
