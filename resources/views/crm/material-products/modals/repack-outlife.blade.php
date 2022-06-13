@@ -5,7 +5,7 @@
                 <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>				  
-            <div class="modal-body  ">
+            <div class="modal-body"> 
              <h5 class="h5 text-primary text-center">Mat/Pdt outlife logsheet</h5>
                 <table class="table table-centered  bg-white table-bordered   custom-center m-0">
                     <thead class="bg-light text-primary-2 table-bordered"> 
@@ -13,16 +13,16 @@
                             <th width="200px">(Mother)Material/Product Draw status</th>
                             <th>Date & time stamp</th>
                             <th>Last accessed</th>
-                            <th>Input repack amt (lnyards)</th>
-                            <th>Remain amt (lnyards)</th>
+                            <th>Input repack amt (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
+                            <th>Remain amt (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
                             <th>Auto-generate unique barcode label</th>
-                            <th>Repack size (lnyards)</th>
+                            <th>Repack size (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
                             <th>Qty cut</th>
                             <th>
                                 Remaining outlife (prepreg roll)
                                 Intital count: 
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <input type="number" min="1"  name="" id="" style="width: 45px" value="30" class="me-1 p-0 text-center form-control form-control-sm"> days
+                                    <input type="text" min="1" disabled style="width: 45px" value="@{{ RepackOutlifeData.outlife }}" class="me-1 p-0 text-center fw-bold form-control form-control-sm"> days
                                 </div>
                             </th>
                             <th> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -46,8 +46,8 @@
                                     <div class="col p-0">HuiBeng</div>
                                 </div>
                             </td>
-                            <td class="text-center"><input type="number" min="1"  name="" id="" value="10" class="text-center form-control form-control-sm"></td>
-                            <td class="text-center"><input type="number" min="1"  name="" id="" value="80" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1" ng-model="RepackOutlifeData.Input_repack_amt" class="text-center form-control form-control-sm"></td>
+                            <td class="text-center"><input type="number" min="1" disabled value="@{{ RepackOutlifeData.quantity - RepackOutlifeData.Input_repack_amt }}" class="text-center form-control form-control-sm"></td>
                             <td>
                                 Roll2/1 
                             </td>

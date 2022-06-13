@@ -122,8 +122,8 @@
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
         <label for="" class="col-4">EUC material  <sup class="text-danger">*</sup></label>
-        <div class="col-8">
-            {!! Form::select('euc_material', ["No", "Yes"] , $material_product->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required',
+        <div class="col-8"> 
+            {!! Form::select('euc_material', ["No", "Yes"] , $batch->euc_material?? null, ['class' =>'form-select form-select-sm' ,'required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."euc_material.status")
             ])  !!}
         </div>
@@ -133,7 +133,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require bulk volume tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('require_bulk_volume_tracking', ["No", "Yes"] , $material_product->require_bulk_volume_tracking ?? null, ['class' =>'form-select form-select-sm','required',
+            {!! Form::select('require_bulk_volume_tracking', ["No", "Yes"] , $batch->require_bulk_volume_tracking ?? null, ['class' =>'form-select form-select-sm','required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."require_bulk_volume_tracking.status")
             ])  !!}
         </div>
@@ -143,7 +143,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require outlife tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('require_outlife_tracking', ["No", "Yes"] , $material_product->require_outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required','id'=>'require_outlife_tracking_status_input', 'onchange' => 'outlifeChange()',
+            {!! Form::select('require_outlife_tracking', ["No", "Yes"] , $batch->require_outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required','id'=>'require_outlife_tracking_status_input', 'onchange' => 'outlifeChange()',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."require_outlife_tracking.status")
             ])  !!}
         </div>

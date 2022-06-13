@@ -573,8 +573,7 @@ app.controller('SearchAddController', function($scope, $http) {
     // Print Barcode
     $scope.view_print_barcode = (id) => {
         window.location.href =  `print-label/${id}`
-    }
-
+    } 
     $scope.printBatchLabel = (id) => {
         swal({
             text: "Do you want to print?",
@@ -600,5 +599,10 @@ app.controller('SearchAddController', function($scope, $http) {
                 window.location.href =  `print-label/${id}`
             } 
         });
+    }
+
+    $scope.RepackOutlife  = (batch, unit_of_measure) => { 
+        $('#RepackOutlife').modal('show');
+        $scope.RepackOutlifeData = {...batch, unit_of_measure};
     }
 });

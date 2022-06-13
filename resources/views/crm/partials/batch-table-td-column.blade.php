@@ -39,7 +39,7 @@
                     {{--  ==== REPACK OUTLIFE ====  --}}
 
                     {{--  ==== REPACK OUTLIFE ====  --}}
-                        <a ng-if="batch.require_outlife_tracking ==  1" class="dropdown-item text-secondary"  data-bs-toggle="modal" data-bs-target="#RepackOutlife">
+                        <a ng-if="batch.require_outlife_tracking ==  1" class="dropdown-item text-secondary"  ng-click="RepackOutlife(batch, row.unit_of_measure)">
                             <i class="bi bi-box2-fill me-1"></i>Repack/outlife
                         </a>
                         <a ng-if="batch.require_outlife_tracking ==  0 || batch.require_outlife_tracking ===  null" class="dropdown-item link-disabled">
