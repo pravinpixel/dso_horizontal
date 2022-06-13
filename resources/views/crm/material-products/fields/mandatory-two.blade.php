@@ -89,7 +89,7 @@
                     @if (count($row['list']) != 0)
                         <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
                             @foreach ($row['list'] as $staff) 
-                                <option  
+                                <option 
                                     {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
                                     {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
                                     {{-- {{ is_select() }} --}}

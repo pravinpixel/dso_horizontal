@@ -143,17 +143,17 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Require outlife tracking<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::select('require_outlife_tracking', ["No", "Yes"] , $material_product->require_outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required',
+            {!! Form::select('require_outlife_tracking', ["No", "Yes"] , $material_product->require_outlife_tracking ?? null, ['class' =>'form-select form-select-sm','required','id'=>'require_outlife_tracking_status_input', 'onchange' => 'outlifeChange()',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."require_outlife_tracking.status")
             ])  !!}
         </div>
     </div>
 </div>
-<div class="col-lg-6 my-1">
+<div class="col-lg-6 my-1" id="outlife_input">
     <div class="row m-0 y-center">
         <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...','required', 
+            {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...','required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."outlife.status")
             ])  !!}
         </div>
