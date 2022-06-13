@@ -17,12 +17,14 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('item_description', $material_product->item_description ?? null, [
-                'class'         => 'form-control form-select-sm', 
-                'placeholder'   => 'Type here...', 
-                'required',
-                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."item_description.status")
-            ]) !!}
+            {!! Form::text('item_description', $material_product->item_description ?? null , [
+                    'class'        => 'form-control form-select-sm', 
+                    'placeholder'  => 'Type here...', 
+                    'value'        => 'Type here...', 
+                    'required',
+                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."item_description.status")
+                ]) 
+            !!}
         </div>
     </div>
 </div>
@@ -33,7 +35,8 @@
             @php
                 $brand = category_type() ==  'material' ? null : "In-House"
             @endphp
-            {!! Form::text('brand', $batch->brand ?? $brand, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
+            {!! Form::text('brand', $batch->brand ?? $brand, 
+                ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")
             ]) !!}
         </div>
@@ -91,9 +94,11 @@
 </div>
 <div class="col-lg-6 my-1">
     <div class="row m-0 y-center">
-        <label for="" class="col-4">Serial #   <sup class="text-danger">*</sup></label>
+        <label for="" class="col-4">Serial # <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('serial', is_reset('serial', $batch->serial ?? null , category_type() ?? $material_product->category_selection ?? null), ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
+            {!! Form::text('serial', 
+                is_reset('serial', $batch->serial ?? null , category_type() ?? $material_product->category_selection ?? null), 
+                ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."serial.status")
             ]) !!}
         </div>

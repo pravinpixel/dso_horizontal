@@ -254,13 +254,30 @@ class MaterialProductsController extends Controller
         foreach ($owners_list as $key => $value) {
             $owners[$value] = $value;
         }
+        if($material_product != null) {
+            foreach($material_product->toArray() as $key => $value) {
+                $material_product->{$key} = is_reset(
+                    $key,
+                    $value,
+                    $material_product->category_selection ?? category_type()
+                );
+            }
+            foreach($batch->toArray() as $key => $value) {
+                $batch->{$key} = is_reset(
+                    $key,
+                    $value,
+                    $material_product->category_selection ?? category_type()
+                );
+            }
+        } 
+
         if($type == 'form-one') {
             if(wizard_mode() == 'create')       $view   =   'crm.material-products.wizard.mandatory-one';
             if(wizard_mode() == 'edit')         $view   =   'crm.material-products.edit-wizard.mandatory-one';
             if(wizard_mode() == 'duplicate')    $view   =   'crm.material-products.duplicate-wizard.mandatory-one';
-           
             $params = ['category_selection_db','statutory_body_db','unit_packing_size_db','material_product','batch_id','batch'];
         }
+        
         if($type == 'form-two') { 
             $staff_db = []; foreach($department as $data) {
                 $staff_department = User::where('department', $data->id)->get();
