@@ -66,6 +66,7 @@ class CreateBatchesTable extends Migration
             ]));
 
             $table->longText('repack_size')->nullable();
+            $table->integer('barcode_number')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class CreateMaterialProductsTable extends Migration
         Schema::create('material_products', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('barcode_number')->nullable();
+            // $table->integer('barcode_number')->nullable();
             $table->integer('is_draft')->nullable()->default(0);
  
             $table->string('category_selection')->nullable();

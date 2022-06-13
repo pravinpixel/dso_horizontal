@@ -3,7 +3,9 @@ namespace App\Repositories;
 
 use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\BarcodeFormat;
- 
+use App\Models\Batches;
+use App\Models\MaterialProducts;
+
 class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
     public function generateBarcode($material_product, $batch)
     { 
@@ -89,6 +91,8 @@ class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
 
     public function storeBarcodeFormate($material_product, $batch, $self_gen_one , $self_gen_two)
     {
+        Batches::updateOrCreate(["id" => $batch->id ?? null],["barcode_number" => ($material_product->category_selection == 'material' ? "1" : "2").$self_gen_one.$self_gen_two]);
+
         BarcodeFormat::updateOrCreate(["batch_id" => $batch->id ?? null],[
             "category_selection"    =>  $material_product->category_selection,
             "item_description"      =>  $material_product->item_description,

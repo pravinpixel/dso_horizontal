@@ -50,7 +50,8 @@ class Batches extends Model
         'disposal_certificate',
         'used_for_td_expt_only',
         'actions',
-        'repack_size'
+        'repack_size',
+        'barcode_number'
     ];
 
     public function BarCodeGenOne()

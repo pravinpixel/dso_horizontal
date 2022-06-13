@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Schema;
 class SearchRepository implements SearchRepositoryInterface {
     public function barCodeSearch($request)
     {
-        return BarcodeFormat::where('barcode_label', 'LIKE', "%{$request->filters}%")->paginate(5);
+        return MaterialProducts::with("Batches")
+                    ->WhereHas('Batches', function($q) use ($request){
+                        $q->where('barcode_number', 'LIKE', "%{$request->filters}%");
+                    })
+                    ->paginate(5);
     }
     public function bulkSearch($row)
     {
