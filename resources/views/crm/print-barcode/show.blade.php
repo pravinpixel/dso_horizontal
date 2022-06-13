@@ -70,7 +70,7 @@
                                 </select>
                             </div>
                             <div class="col-md-8 text-end">
-                                <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button>
+                                {{-- <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button> --}}
                                 <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
                             </div>
                         </div>

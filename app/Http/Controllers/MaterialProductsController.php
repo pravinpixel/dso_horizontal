@@ -225,7 +225,7 @@ class MaterialProductsController extends Controller
     public function wizardFormView(Request $request, $type=null ,$wizard_mode=null, $id=null, $batch_id=null)
     {
 
-        if(Route::is('create.material-product'))    $request->session()->put('wizard_mode', 'create');
+        if(Route::is('create.material-product')) $request->session()->put('wizard_mode', 'create');
        
         if($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
 
@@ -248,7 +248,6 @@ class MaterialProductsController extends Controller
         $departments_db         =  Departments::pluck('name','id');
         $iqc_status             =  [1 => "Pass", 0 => "Fail"];
         $department             =  Departments::get();
-
         $owners_list            =  User::pluck("alias_name", 'id');
         $owners = [];
 
@@ -301,12 +300,12 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode=null, $id=null, $batch_id=null)
     { 
-      
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
             $request
         );
+ 
   
         if($type == 'form-one') {
             if(wizard_mode() == 'create') {
@@ -344,10 +343,7 @@ class MaterialProductsController extends Controller
     public function view_batch($id)
     {
         $data = Batches::findOrFail($id);
-         
-         
         $user_name = [];
- 
         if($data->access !== null || $data->access != 'Default') {
             foreach (json_decode($data->access ?? '[]') as $users ) {
                 $user_name[]  = User::find($users)->alias_name;
