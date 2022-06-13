@@ -57,16 +57,15 @@ class CreateBatchesTable extends Migration
             $table->string('extended_qc_result')->nullable();
             $table->string('disposal_certificate')->nullable();
             $table->string('used_for_td_expt_only')->nullable(); 
-             
             $table->string('actions')->nullable()->default(json_encode([
                 "repack_code"     =>  null,
-                "packing_value"  =>  null,
-                "packing_size"   =>  null,
-                "remain_amount"  =>  null,
+                "packing_value"   =>  null,
+                "packing_size"    =>  null,
+                "remain_amount"   =>  null,
             ]));
-
             $table->longText('repack_size')->nullable();
             $table->integer('barcode_number')->nullable();
+            $table->integer('end_of_batch')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

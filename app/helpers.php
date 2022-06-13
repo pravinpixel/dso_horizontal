@@ -92,3 +92,11 @@ if(! function_exists('storageGet')) {
         return $file;
     }
 }
+
+if(! function_exists('is_reset')) {
+    function is_reset($column, $value, $category_type) {
+        $wizard_mode    = wizard_mode();
+        $reset_status   = config("is_disable.{$wizard_mode}.{$category_type}.{$column}.reset");
+        return $reset_status !== true ? $value :  null ;
+    }
+}

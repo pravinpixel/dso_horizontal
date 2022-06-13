@@ -43,7 +43,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Supplier <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('supplier', $batch->supplier?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
+            {!! Form::text('supplier', $batch->supplier ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."supplier.status")
             ]) !!}
         </div>
@@ -93,7 +93,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Serial #   <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('serial', $batch->serial?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
+            {!! Form::text('serial', is_reset('serial', $batch->serial ?? null , category_type() ?? $material_product->category_selection ?? null), ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."serial.status")
             ]) !!}
         </div>
@@ -103,8 +103,8 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">PO Number  <sup class="text-danger">*</sup></label>
         <div class="col-8">
-            {!! Form::text('po_number', $batch->po_number?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
-                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."po_number.status")
+            {!! Form::text('po_number', is_reset('po_number', $batch->po_number ?? null , category_type() ?? $material_product->category_selection ?? null) , ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
+                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."po_number.status"),
             ]) !!}
         </div>
     </div>
