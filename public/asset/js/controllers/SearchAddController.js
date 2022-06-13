@@ -574,4 +574,31 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.view_print_barcode = (id) => {
         window.location.href =  `print-label/${id}`
     }
+
+    $scope.printBatchLabel = (id) => {
+        swal({
+            text: "Do you want to print?",
+            icon: "info",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Proceed to print",
+                    value: true,
+                    visible: true,
+                    className: "btn-primary rounded-pill btn",
+                    closeModal: true
+                }
+            }, 
+        }).then((isConfirm) => {
+            if(isConfirm) {
+                window.location.href =  `print-label/${id}`
+            } 
+        });
+    }
 });

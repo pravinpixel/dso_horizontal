@@ -47,7 +47,7 @@
                         </a>
                     {{--  ==== REPACK OUTLIFE ====  --}}
 
-                    <a class="dropdown-item text-secondary" onclick="printModal()" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
+                    <a class="dropdown-item text-secondary" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</a>
                     <a class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</a>  
                 </div>
             </div>
