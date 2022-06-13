@@ -470,9 +470,10 @@ a {
     z-index: 11111 !important;
 }
 .ng-invalid-max ,
-.ng-valid.ng-valid-min.ng-dirty.ng-valid-parse.ng-empty.ng-touched {
+.ng-invalid.ng-invalid-min.ng-dirty.ng-invalid-parse  {
     border:1px solid #d55858 !important;
 }
+ 
 .custom-table th {
     background: #12326a !important;
     color: white !important;
