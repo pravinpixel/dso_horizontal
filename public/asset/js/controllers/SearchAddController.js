@@ -634,15 +634,14 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.RepackOutlifeDrawIn = () => {
         if($scope.RepackOutlifeValidation() != false) {
-            $scope.DrawInTimeStamp = Date.now() ;
+            $scope.draw_in_time_stamp = Date.now() ;
             $scope.draw_out = true
         }
     }
-    $scope.RepackOutlifeDrawOut = () => {
-        if($scope.RepackOutlifeValidation()) {
-            $scope.DrawOutTimeStamp = Date.now() ;
-            $scope.draw_in = false
-        }
+    $scope.RepackOutlifeDrawOut = (repack_id) => {
+        $scope.draw_out_time_stamp = Date.now() ;
+        $scope.draw_in = false
+        $scope.repack_id = repack_id;
     }
 
     $scope.StoreRepackOutlifeData = () => {
@@ -655,5 +654,16 @@ app.controller('SearchAddController', function($scope, $http) {
                 }
             })
         }
+    }
+
+    $scope.StoreDrawOutRepackOutlifeData = () => {
+        var repack_id = $scope.repack_id;
+        $http.post(`repack-batch/${$scope.CurrentBatchId}`,{...$scope.RepackOutlifeList, repack_id }).then((res) => {
+            $scope.RepackOutlifeActionData = res.data
+            if(res.data.status === true) {
+                $scope.get_material_products();
+                $('#RepackOutlife').modal('hide'); 
+            }
+        }) 
     }
 });

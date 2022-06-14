@@ -30,48 +30,48 @@
                             <td width="300px" colspan="3">
                                 <div class="row mb-2">
                                     <div class="col p-0">
-                                         Draw In 
+                                         Draw In  
                                     </div>
-                                    <div class="col p-0">@{{ repack_row.draw_in_time_stamp }}</div>
+                                    <div class="col p-0">@{{ repack_row.created_at }}</div>
                                     <div class="col p-0">
                                         <span ng-repeat='user in RepackOutlifeList.last_access'>@{{ user }}</span>
                                     </div>
                                 </div>
                                 <div class="row ">
                                     <div class="col p-0">
-                                        <input class="btn-sm btn btn-success" type="button" value="Draw Out" ng-click="RepackOutlifeDrawOut()">
+                                        <input class="btn-sm btn btn-success" type="button" value="Draw Out" ng-click="RepackOutlifeDrawOut(repack_row.id)">
                                     </div>
-                                    <div class="col p-0">@{{ repack_row.draw_out_time_stamp }}</div>
+                                    <div class="col p-0">@{{ repack_row.updated_at != repack_row.created_at ? repack_row.updated_at : null }} @{{ draw_out_time_stamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
                                     <div class="col p-0">
                                         <span ng-repeat='user in RepackOutlifeList.last_access'>@{{ user }}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center">@{{ repack_row.input_repack_amount }}</td>
-                            <td class="text-center">@{{ repack_row.remain_amount }}</td>
+                            <td class="text-center">
+                                <input type="number" class="form-control form-control-sm" ng-model='repack_row.input_repack_amount'>
+                            </td>
+                            <td class="text-center">@{{ repack_row.quantity - repack_row.input_repack_amount }}</td>
                             <td class="text-center">@{{ repack_row.unique_barcode_label }}</td>
                             <td class="text-center">@{{ repack_row.repack_size }}</td>
                             <td class="text-center">@{{ repack_row.qty_cut }}</td>
                             <td>@{{ repack_row.remain_days }}</td>
                             <td>-</td>
-                        </tr> 
+                        </tr>
                     </tbody>
-                    <tfoot class="bg-light">
+                    <tfoot class="bg-light" ng-if="RepackOutlifeList.repack_outlife.length === 0">
                         <tr>
                             <td width="300px" colspan="3">
                                 <div class="row ">
                                     <div class="col p-0">
                                         <input class="btn-sm btn btn-secondary" type="button" value="Draw in" ng-click="RepackOutlifeDrawIn()" ng-disabled="draw_in === false">
                                     </div>
-                                    <div class="col p-0">@{{ DrawInTimeStamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
+                                    <div class="col p-0">@{{ draw_in_time_stamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
                                     <div class="col p-0">
                                         <span ng-repeat='user in RepackOutlifeData.last_access'>@{{ user }}</span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col p-0">
-                                        -
-                                    </div>
+                                    <div class="col p-0">-</div>
                                     <div class="col p-0">@{{ DrawOutTimeStamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
                                     <div class="col p-0">
                                         <span ng-repeat='user1 in RepackOutlifeData.last_access'>@{{ user1 }}</span>
@@ -107,7 +107,8 @@
                     </div>
                     <div class="col-6 ms-auto text-end">
                         <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
-                        <button class="btn btn-primary rounded-pill h-100" ng-click="StoreRepackOutlifeData()">Save and Submit</button>
+                        <button  ng-if="RepackOutlifeList.repack_outlife.length === 0" class="btn btn-primary rounded-pill h-100" ng-click="StoreRepackOutlifeData()">Save and Submit</button>
+                        <button  ng-if="RepackOutlifeList.repack_outlife.length !== 0" class="btn btn-primary rounded-pill h-100" ng-click="StoreDrawOutRepackOutlifeData()">Save and Submit</button>
                     </div>
                 </div>
             </div>

@@ -67,6 +67,16 @@ class RepackBatchController extends Controller
     public function repack_outlife (Request $request, $id)
     {
    
+        if($request->repack_id) {
+            RepackOutlife::find($request->repack_id)->update(["id" => $request->repack_id]);
+            
+            Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
+            return response()->json([
+                "status"    => true,
+                "message"   => "Success !"
+            ]);
+        }
+
         RepackOutlife::create([
             'batch_id'              => $id, 
             'quantity'              => $request->quantity, 
