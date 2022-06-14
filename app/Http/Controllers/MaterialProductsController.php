@@ -92,7 +92,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
 
-        $material_product           =   MaterialProducts::with('Batches','UnitOfMeasure')->latest()->paginate(5); 
+        $material_product           =   MaterialProducts::with('Batches','Batches.RepackOutlife','UnitOfMeasure')->latest()->paginate(5); 
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -321,8 +321,7 @@ class MaterialProductsController extends Controller
             material_product() ?? $id, 
             batch_id() ?? $batch_id,
             $request
-        );
- 
+        ); 
   
         if($type == 'form-one') {
             if(wizard_mode() == 'create') {

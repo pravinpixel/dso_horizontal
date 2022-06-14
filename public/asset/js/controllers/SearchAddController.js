@@ -603,6 +603,8 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.RepackOutlife  = (batch, unit_of_measure) => { 
         $('#RepackOutlife').modal('show');
+        console.log(batch)
+        console.log(batch.repack_outlife)
         $scope.RepackOutlifeData = {...batch, unit_of_measure};
     }
 });

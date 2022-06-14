@@ -67,5 +67,10 @@ class Batches extends Model
     public function BatchBarcode()
     {
         return $this->hasOne(BarcodeFormat::class, 'batch_id', 'id');
-    } 
+    }
+
+    public function RepackOutlife()
+    {
+        return $this->hasMany(RepackOutlife::class, 'batch_id', 'id');
+    }
 }

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Schema;
 class SearchRepository implements SearchRepositoryInterface {
     public function barCodeSearch($request)
     {
-        return MaterialProducts::with("Batches")
+        return MaterialProducts::with("Batches","Batches.RepackOutlife")
                     ->WhereHas('Batches', function($q) use ($request){
                         $q->where('barcode_number', 'LIKE', "%{$request->filters}%");
                     })
@@ -24,7 +24,7 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function bulkSearch($row)
     {
-        return MaterialProducts::with("Batches")->where('is_draft', 0)
+        return MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
         ->when($row->category_selection, function ($q) use ($row) {
             $q->where('category_selection' , $row->category_selection ?? null);
         })
@@ -65,7 +65,7 @@ class SearchRepository implements SearchRepositoryInterface {
         ];
         
         foreach($filter as $column => $value) {
-            $filter_result[]    =  MaterialProducts::with("Batches")->where('is_draft', 0)
+            $filter_result[]    =  MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
                                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                                         $q->where($column , $value); 
                                     })
