@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
+use App\Models\RepackOutlife;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
- 
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class RepackBatchController extends Controller
 {
@@ -56,6 +58,33 @@ class RepackBatchController extends Controller
         return response()->json([
             "status" => true,
             "message" => "Transfer Success !"
+        ]);
+    }
+    public function get_repack_outlife($id)
+    {
+        return Batches::with('RepackOutlife')->find($id);
+    }
+    public function repack_outlife (Request $request, $id)
+    {
+   
+        RepackOutlife::create([
+            'batch_id'              => $id, 
+            'quantity'              => $request->quantity, 
+            'draw_in_time_stamp'    => date("Y-m-d h:i:sa"),
+            'draw_out_time_stamp'   => '-',
+            'draw_in_last_access'   => json_encode($request->access),
+            'draw_out_last_access'  => json_encode($request->access),
+            'input_repack_amount'   => $request->Draw_input_repack_amt,
+            'remain_amount'         => $request->quantity - $request->Draw_input_repack_amt,
+            'repack_size'           => $request->Draw_repack_size,
+            'qty_cut'               => $request->Draw_qty_cut,
+        ]);
+
+        Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
+
+        return response()->json([
+            "status"    => true,
+            "message"   => "Success !"
         ]);
     }
 }

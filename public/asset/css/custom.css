@@ -95,7 +95,7 @@ option {
     justify-content: center;
     align-items: center;
 }
-.table-fillters .col:hover, .col:active, .col:focus .form-label{
+.table-fillters .col:hover,  .form-label{
     background-color: var(--bs-primary);
     color: white !important;
 }

@@ -126,4 +126,9 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/print-label/{id?}', [PrintBarcodeController::class, 'show'])->name('print-barcode'); 
         Route::post('/print-label/{id?}', [PrintBarcodeController::class, 'print'])->name('print-barcode'); 
     // ===================== Print Label =====================
+
+    // ==================== Repack Draw IN / OUT Flow ===============
+        Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
+        Route::post('/repack-batch/{batch_id}', [RepackBatchController::class, 'repack_outlife'])->name('repack_outlife'); 
+    // ==================== Repack Draw IN / OUT Flow ===============
 });

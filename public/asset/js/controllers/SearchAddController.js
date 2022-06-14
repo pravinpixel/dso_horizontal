@@ -600,11 +600,60 @@ app.controller('SearchAddController', function($scope, $http) {
             } 
         });
     }
+    $scope.RepackOutlife  = (batch, unit_of_measure) => {  
+        $scope.CurrentBatchId =  batch.id
+ 
+        $http.get(`repack-batch/${$scope.CurrentBatchId}`).then((res) => {
+            var last_access = JSON.parse(res.data.access)
+            $scope.RepackOutlifeList = {...res.data, last_access}
+            $('#RepackOutlife').modal('show');  
+        }) 
 
-    $scope.RepackOutlife  = (batch, unit_of_measure) => { 
-        $('#RepackOutlife').modal('show');
-        console.log(batch)
-        console.log(batch.repack_outlife)
-        $scope.RepackOutlifeData = {...batch, unit_of_measure};
+        var last_access = JSON.parse(batch.access)
+        $scope.RepackOutlifeData = {...batch, unit_of_measure , last_access};
+    }
+
+ 
+    $scope.draw_out = false
+    $scope.draw_in  = true
+
+    $scope.RepackOutlifeValidation = () => {
+        if($scope.RepackOutlifeData.Draw_input_repack_amt === undefined || $scope.RepackOutlifeData.Draw_input_repack_amt === null) {
+            Message('danger', "Input Repack Amount Required !");
+            return false
+        }
+        if($scope.RepackOutlifeData.Draw_repack_size === undefined || $scope.RepackOutlifeData.Draw_repack_size === null) {
+            Message('danger', "Repack Size Required !");
+            return false
+        }
+        if($scope.RepackOutlifeData.Draw_qty_cut === undefined || $scope.RepackOutlifeData.Draw_qty_cut === null) {
+            Message('danger', "Qty cut Required !");
+            return false
+        }
+    }
+
+    $scope.RepackOutlifeDrawIn = () => {
+        if($scope.RepackOutlifeValidation() != false) {
+            $scope.DrawInTimeStamp = Date.now() ;
+            $scope.draw_out = true
+        }
+    }
+    $scope.RepackOutlifeDrawOut = () => {
+        if($scope.RepackOutlifeValidation()) {
+            $scope.DrawOutTimeStamp = Date.now() ;
+            $scope.draw_in = false
+        }
+    }
+
+    $scope.StoreRepackOutlifeData = () => {
+        if($scope.RepackOutlifeValidation() != false) {
+            $http.post(`repack-batch/${$scope.CurrentBatchId}`,$scope.RepackOutlifeData).then((res) => {
+                $scope.RepackOutlifeActionData = res.data
+                if(res.data.status === true) {
+                    $scope.get_material_products();
+                    $('#RepackOutlife').modal('hide'); 
+                }
+            })
+        }
     }
 });
