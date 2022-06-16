@@ -24,7 +24,7 @@ option {
     background-color: #12326A !important;
     font-size: 12px !important;
     padding: 10px !important;
-    letter-spacing: .5px;
+    letter-spacing: 1px;
     font-weight: normal !important;
 }
 
@@ -35,6 +35,7 @@ option {
     min-width: 139px !important;
     max-width: 139px !important;
     font-size: 14px !important;
+    color: black;
 } 
 .box.box-sm {
     width: 60px !important;
@@ -385,8 +386,10 @@ to {
 }
 .custom-table-head .box {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items:center;
+    text-align: center;
+    border-right: 1px solid #eee;
 }
 a {
     cursor: pointer !important;
