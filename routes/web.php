@@ -129,6 +129,10 @@ Route::middleware(['auth_users'])->group(function () {
 
     // ==================== Repack Draw IN / OUT Flow ===============
         Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
-        Route::post('/repack-batch/{batch_id}', [RepackBatchController::class, 'repack_outlife'])->name('repack_outlife'); 
+        Route::post('/repack-batch/{batch_id}', [RepackBatchController::class, 'repack_outlife'])->name('repack_outlife');
+        // Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
+
+        Route::post('/store-repack-batch/{batch_id}', [RepackBatchController::class, 'store_repack_outlife'])->name('store_repack_outlife');
+        
     // ==================== Repack Draw IN / OUT Flow ===============
 });

@@ -87,4 +87,5 @@
     <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
+    <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>
 @endsection

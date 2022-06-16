@@ -500,3 +500,55 @@ a {
     border-radius: 0;
     border: 1px solid lightgray;
 }
+.btn-draw {
+    width: 100px;
+    border-radius: 33px;
+    outline: none;
+    border: 1px solid gray;
+    font-weight: bold;
+    transition: all .5s;
+}
+.btn-draw:active {
+    opacity: .5;
+}
+.draw-out {
+    background: #d9fff1;
+    color: #008e5a;
+}
+.draw-in {
+    background: #f1f1f1;
+    color: #63736d;
+}
+.draw-in:hover {
+    background: #63736d;
+    color: #f1f1f1;
+}
+.custom-input:disabled {
+    font-weight: normal;
+    background: none;
+    border: none;
+    outline: none;
+    text-align: center !important;
+}
+.btn-draw:disabled {
+    font-weight: normal;
+    background: none;
+    border: none;
+    outline: none;
+}
+.draw_time {
+    border: none;
+    resize: none;
+    box-shadow: none;
+    outline: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -8,6 +8,7 @@ use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class RepackBatchController extends Controller
@@ -69,7 +70,6 @@ class RepackBatchController extends Controller
    
         if($request->repack_id) {
             RepackOutlife::find($request->repack_id)->update(["id" => $request->repack_id]);
-            
             Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
             return response()->json([
                 "status"    => true,
@@ -92,9 +92,57 @@ class RepackBatchController extends Controller
 
         Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
 
+
         return response()->json([
             "status"    => true,
             "message"   => "Success !"
         ]);
     }
-}
+
+    public function store_repack_outlife(Request $request , $id)
+    {
+        $repack_data    =   $request->all();
+        $newestRepack   =   RepackOutlife::where("batch_id", $id)->get()->last();
+         
+        foreach($repack_data as $key => $repack)  {
+            if($repack['draw_out']['time_stamp'] == null) {
+                $repack_data[$key]['draw_in']['status']  = false;
+                $repack_data[$key]['draw_out']['status'] = true;
+            } else {
+                $repack_data[$key]['draw_out']['status'] = false; 
+            }
+
+            if(!empty($newestRepack)) {
+                if($newestRepack->draw_in == 0 && $newestRepack->draw_out == 0) {
+                    $stop_next_draw_in = false;
+                } else {
+                    $stop_next_draw_in = true;
+                }
+            } else {
+                $stop_next_draw_in = false;
+            }
+            
+            Batches::find($id)->update(['quantity' => $repack['balance_amount']]);
+            RepackOutlife::updateOrCreate(["id" => $repack['id']],[
+                'batch_id'              => $id, 
+                'quantity'              => $repack['balance_amount'] ,
+                'draw_in'               => $repack_data[$key]['draw_in']['status'], 
+                'draw_out'              => $repack_data[$key]['draw_out']['status'], 
+                'draw_in_time_stamp'    => $repack_data[$key]['draw_in']['time_stamp'],
+                'draw_out_time_stamp'   => $repack_data[$key]['draw_out']['time_stamp'],
+                'draw_in_last_access'   => $repack['last_access'],
+                'draw_out_last_access'  => $repack['last_access'],
+                'input_repack_amount'   => $repack['repack_amount'],
+                'remain_amount'         => $repack['balance_amount'],
+                'repack_size'           => $repack['repack_size'],
+                'qty_cut'               => $repack['qty_cut'],
+                'remain_days'           => $repack['remaining_days'] ?? null,
+            ]);
+        }
+        return response()->json([
+            "status"         => true,
+            "new_draw_in"    => $stop_next_draw_in,
+            "message"        => "Success !"
+        ]);
+    }
+} 

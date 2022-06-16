@@ -1,114 +1,77 @@
-<div id="RepackOutlife" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
+<div id="RepackOutlife" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog custom-modal-dialog modal-top">
         <div class="modal-content rounded-0 border-bottom shadow">
             <div class="modal-header rounded-0 bg-primary text-white  ">
                 <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>				  
-            <div class="modal-body"> 
-                <h5 class="h5 text-primary text-center">Mat/Pdt outlife logsheet</h5>
-                <table class="table table-centered  bg-white table-bordered   custom-center m-0">
-                    <thead class="bg-light text-primary-2 table-bordered"> 
+            <form name="repackOutlifeForm" class="modal-body p-2" style="border: none !important"> 
+                <table class="table table-centered  bg-white table-bordered custom-center m-0">
+                    <thead class="bg-primary-2 text-white"> 
                         <tr>
-                            <th>(Mother)Material/Product Draw status</th>
-                            <th>Date & time stamp</th>
-                            <th>Last accessed</th>
-                            <th>Input repack amt (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
-                            <th>Remain amt (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
-                            <th>Auto-generate unique barcode label</th>
-                            <th>Repack size (@{{ RepackOutlifeData.unit_of_measure.name }})</th>
-                            <th>Qty cut</th>
-                            <th>
-                                Remaining outlife (prepreg roll)
-                                Intital count: @{{ RepackOutlifeData.outlife }}  days
+                            <th colspan="10">
+                                Mat/Pdt outlife logsheet
                             </th>
+                        </tr>
+                        <tr>
+                            <td>Material / Product Draw status</td>
+                            <td>Date & time stamp</td>
+                            <td>Last accessed</td>
+                            <td> Input repack Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
+                            <td>Remain Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
+                            <td>Auto-generate unique barcode label</td>
+                            <td>Repack size <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
+                            <td>Qty cut</td>
+                            <td>
+                                Remaining outlife (prepreg roll) <br>
+                                Intital count: @{{ repack_outlife_days }}  days
+                            </td>
                             <th> <i class="text-danger bi bi-trash3-fill"></i></th>
                         </tr>
                     </thead>
-                    <tbody style="max-height: 80vh !important;over-flow:auto">  
-                        <tr ng-repeat="repack_row in RepackOutlifeList.repack_outlife">
-                            <td width="300px" colspan="3">
-                                <div class="row mb-2">
-                                    <div class="col p-0">
-                                         Draw In  
-                                    </div>
-                                    <div class="col p-0">@{{ repack_row.created_at }}</div>
-                                    <div class="col p-0">
-                                        <span ng-repeat='user in RepackOutlifeList.last_access'>@{{ user }}</span>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col p-0">
-                                        <input class="btn-sm btn btn-success" type="button" value="Draw Out" ng-click="RepackOutlifeDrawOut(repack_row.id)">
-                                    </div>
-                                    <div class="col p-0">@{{ repack_row.updated_at != repack_row.created_at ? repack_row.updated_at : null }} @{{ draw_out_time_stamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
-                                    <div class="col p-0">
-                                        <span ng-repeat='user in RepackOutlifeList.last_access'>@{{ user }}</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <input type="number" class="form-control form-control-sm" ng-model='repack_row.input_repack_amount'>
-                            </td>
-                            <td class="text-center">@{{ repack_row.quantity - repack_row.input_repack_amount }}</td>
-                            <td class="text-center">@{{ repack_row.unique_barcode_label }}</td>
-                            <td class="text-center">@{{ repack_row.repack_size }}</td>
-                            <td class="text-center">@{{ repack_row.qty_cut }}</td>
-                            <td>@{{ repack_row.remain_days }}</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
-                    <tfoot class="bg-light" ng-if="RepackOutlifeList.repack_outlife.length === 0">
-                        <tr>
-                            <td width="300px" colspan="3">
-                                <div class="row ">
-                                    <div class="col p-0">
-                                        <input class="btn-sm btn btn-secondary" type="button" value="Draw in" ng-click="RepackOutlifeDrawIn()" ng-disabled="draw_in === false">
-                                    </div>
-                                    <div class="col p-0">@{{ draw_in_time_stamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
-                                    <div class="col p-0">
-                                        <span ng-repeat='user in RepackOutlifeData.last_access'>@{{ user }}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col p-0">-</div>
-                                    <div class="col p-0">@{{ DrawOutTimeStamp | date:"dd/MM/yyyy 'at' h:mma" }}</div>
-                                    <div class="col p-0">
-                                        <span ng-repeat='user1 in RepackOutlifeData.last_access'>@{{ user1 }}</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <input type="number" min="1" ng-max="RepackOutlifeData.quantity" ng-model="RepackOutlifeData.Draw_input_repack_amt" class="text-center form-control form-control-sm">
-                            </td>
-                            <td class="text-center">
-                                @{{ RepackOutlifeData.quantity - RepackOutlifeData.Draw_input_repack_amt }}
-                            </td>
-                            <td>Roll2/1</td>
-                            <td class="text-center">
-                                <input type="number" min="1" ng-model="RepackOutlifeData.Draw_repack_size" value="80" class="text-center form-control form-control-sm">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" min="1" ng-model="RepackOutlifeData.Draw_qty_cut" value="10" class="text-center form-control form-control-sm">
-                            </td>
-                            <td>-</td>
+                    <tbody>
+                        <tr ng-repeat="repack in repack_outlife_table">
                             <td>
-                                {{-- <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i><br><br> --}}
-                                <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                <input type="button" repack-table="OUT" ng-disabled="repack.draw_out.status === false" value="Draw Out" class="btn-draw draw-out"> <br> <br>
+                                <input type="button" repack-table="IN" ng-disabled="repack.draw_in.status === false" value="Draw In" class="btn-draw draw-in">
                             </td>
+                            <td style="padding: 0">
+                                <textarea class="draw_time" readonly ng-model='repack.draw_out.time_stamp'  ng-required="repack.draw_out.status != false" cols="25" rows="1"></textarea>
+                                <textarea class="draw_time" readonly ng-model='repack.draw_in.time_stamp' ng-required="repack.draw_in.status != false" cols="25" rows="1"></textarea>
+                            </td>
+                            <td>
+                                <small>@{{ repack.last_access }}</small>
+                            </td> 
+                            <td class="text-center">
+                                @{{ repack.repack_amount }}
+                                <input type="number" ng-if="repack.draw_in.status" required  false" ng-min="1" ng-max="repack.initial_amount" repack-table="REPACK_INPUT" class="form-control form-control-sm custom-input" ng-model='repack.repack_amount'>
+                            </td>
+                            <td class="text-center">
+                                <input type="number" disabled class="form-control form-control-sm custom-input" ng-model='repack.balance_amount'>
+                            </td>
+                            <td>XXX / 1</td>
+                            <td class="text-center">
+                                <input type="number" ng-disabled="repack.draw_in.status === false" required class="form-control form-control-sm custom-input" ng-model='repack.repack_size'>
+                            </td>
+                            <td class="text-center">
+                                <input type="number" ng-disabled="repack.draw_in.status === false" required class="form-control form-control-sm custom-input" ng-model='repack.qty_cut'>
+                            </td> 
+                            <td>@{{ repack.remaining_days }}</td>
+                            <td>-</td>
                         </tr>
-                    </tfoot>
+                    </tbody> 
                 </table> 
-            </div> 
-            <div class="card-footer ">
+            </form> 
+            <div class="card-footer bg-light">
                 <div class="row align-items-center">
                     <div class="shadow-sm border col-4">
                         <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                     </div>
                     <div class="col-6 ms-auto text-end">
                         <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
-                        <button  ng-if="RepackOutlifeList.repack_outlife.length === 0" class="btn btn-primary rounded-pill h-100" ng-click="StoreRepackOutlifeData()">Save and Submit</button>
-                        <button  ng-if="RepackOutlifeList.repack_outlife.length !== 0" class="btn btn-primary rounded-pill h-100" ng-click="StoreDrawOutRepackOutlifeData()">Save and Submit</button>
+                        @{{ next_draw }}
+                        <button class="btn btn-primary rounded-pill h-100" ng-disabled="repackOutlifeForm.$invalid" ng-click="saveRepackOutlife()">Save and Submit</button>
+                        {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
                     </div>
                 </div>
             </div>

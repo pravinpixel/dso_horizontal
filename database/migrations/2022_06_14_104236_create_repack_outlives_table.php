@@ -17,8 +17,8 @@ class CreateRepackOutlivesTable extends Migration
             $table->id();
             $table->integer('batch_id');
             $table->integer('quantity')->nullable();
-            $table->boolean('draw_in')->nullable();
-            $table->boolean('draw_out')->nullable();
+            $table->boolean('draw_in')->nullable()->default(true);
+            $table->boolean('draw_out')->nullable()->default(false);
             $table->string('draw_in_time_stamp')->nullable();
             $table->string('draw_out_time_stamp')->nullable();
             $table->string('draw_in_last_access')->nullable();
