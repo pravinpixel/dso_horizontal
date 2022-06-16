@@ -113,7 +113,7 @@
     <div class="row m-0 y-center">
         <label for="" class="col-4">Cost per unit</label>
         <div class="col-8">
-           {!! Form::number('cost_per_unit', $batch->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
+           {!! Form::number('cost_per_unit', $batch->cost_per_unit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',"step" => "0.01",
             config(is_disable(category_type() ?? $material_product->category_selection ?? null)."cost_per_unit.status")
            ]) !!}
         </div>
