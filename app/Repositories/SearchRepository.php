@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Interfaces\SearchRepositoryInterface;
-use App\Models\BarcodeFormat;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -11,7 +10,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Schema;
 
 class SearchRepository implements SearchRepositoryInterface {
     public function barCodeSearch($request)
@@ -106,6 +104,29 @@ class SearchRepository implements SearchRepositoryInterface {
             'usage_tracking'      =>  $row->af_usage_tracking,
             'outlife_tracking'    =>  $row->af_outlife_tracking,
         ]);
+    }
+
+    public function sortingOrder($sort_by)
+    { 
+        $material_table =  [
+            'barcode_number',
+            'category_selection',
+            'item_description',
+            'unit_of_measure',
+            'unit_packing_value',
+            'alert_threshold_qty_upper_limit',
+            'alert_threshold_qty_lower_limit',
+            'alert_before_expiry',
+        ];
+        
+        return  MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
+                                    ->when(in_array($sort_by->col_name, $material_table) == true, function ($q) use ($sort_by) { 
+                                        $q->orderBy($sort_by->col_name, $sort_by->order_type);
+                                    })
+                                    ->WhereHas('Batches', function($q) use ($sort_by){
+                                        $q->orderBy($sort_by->col_name, $sort_by->order_type);
+                                    })
+                                    ->paginate(5);
     }
 
     public function paginate($items, $perPage = 5, $page = null, $options = [])

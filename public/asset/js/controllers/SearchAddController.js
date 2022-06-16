@@ -253,9 +253,9 @@ app.controller('SearchAddController', function($scope, $http) {
         }
          
         $http({
-            method: 'post', 
-            url: material_products_url,
-            data :  $scope.sort_by_payload_data
+            method  :   'post', 
+            url     :   material_products_url,
+            data    :   $scope.sort_by_payload_data
         }).then(function(response) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();

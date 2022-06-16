@@ -1,10 +1,14 @@
-<div ng-show="on_item_description" class="box sticky-left justify-content-start">
-    <a class="bi bi-caret-right-fill table-toggle-icon me-auto" 
-        data-bs-toggle="collapse"
-        href="#row_@{{ index+1 }}"
-        role="button" title="@{{ row.item_description}}">
-        @{{ row.item_description |  limitTo: 12 }}
-    </a>
+<div ng-show="on_item_description" class="box box-lg sticky-left justify-content-start">
+    <div class="w-100 text-start d-flex">
+        <a class="bi bi-chevron-right table-toggle-icon me-auto" 
+            data-bs-toggle="collapse"
+            href="#row_@{{ index+1 }}"
+            role="button" title="@{{ row.item_description}}">
+        </a>
+        <small class="text-start ms-1 col">
+            @{{ row.item_description.replace('/', " / ")  }}
+        </small>
+    </div>
 </div>
 
 @foreach ($tableAllColumns as $key =>  $column) 

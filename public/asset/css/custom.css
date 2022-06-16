@@ -36,14 +36,19 @@ option {
     max-width: 139px !important;
     font-size: 14px !important;
     color: black;
-} 
+}
+.box.box-lg {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
 .box.box-sm {
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
     text-align: center;
     position: sticky;
-    right: 0;
+    right: 0; 
 }
 .dot-sm {
     font-size: 10px !important;
@@ -337,10 +342,7 @@ to {
 .ms-options-wrap > .ms-options > .ms-search input {
     border: 1px groove !important;
 }
-.bg-draft {
-    background:  #fff9ee !important;
-    color: #000 !important;
-}
+
 
 .link-disabled {
     background: #f7f8f9 !important;
@@ -411,7 +413,7 @@ a {
     left: 0 !important;
     text-align: center;
     justify-content: center !important;
-    z-index:11 !important
+    z-index:11 !important; 
 }
  
 .custom-table-row  .box:nth-last-child(1) ,
@@ -429,6 +431,17 @@ a {
 }
 .custom-table-row:hover .box .bi-three-dots{
     color: white !important;
+}
+
+.drafted .custom-table-head .box {
+    background-color: gray !important;
+    color: white !important;
+}
+.drafted .custom-table-head .box .bi {
+    color: white;
+}
+.drafted {
+    border: 1px solid gray;
 }
 
 .custom-table-head:hover .box {

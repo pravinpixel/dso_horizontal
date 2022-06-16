@@ -4100,19 +4100,26 @@ fieldset:disabled .btn {
         transition: none
     }
 }
-.cur_ponit {
-    cursor: pointer !important
-}
 .btn-sort {
-    cursor: pointer;
     position: absolute;
-    opacity: .5;
-    margin: 2px ;
+    top: 14%;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3px;
 }
-.btn-sort:hover ,
-.btn-sort:focus ,
-.btn-sort:active  {
+.btn-sort i:nth-child(1) {
+    transform: translateY(9px);
+}
+.cur_ponit ,
+.btn-sort i {
+    cursor: pointer !important;
+}
+.btn-sort:hover i,
+.btn-sort:focus i,
+.btn-sort:active  i {
     opacity: 1;
 }
 .fade:not(.show) {
