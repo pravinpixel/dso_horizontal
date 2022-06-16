@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Database\Seeder;
 
@@ -28,9 +29,7 @@ class UserSeeder extends Seeder
             'name'       => 'Super Admin',
             'slug'       => 'admin',
         ])->users()->attach($userDb);
-
-
-
+ 
         Sentinel::getRoleRepository()->createModel()->create([
             'name'       => 'System Admin',
             'slug'       => 'system-admin',
@@ -45,5 +44,18 @@ class UserSeeder extends Seeder
 
         $employee->users()->attach(Sentinel::registerAndActivate(['email' => '456','password'   => config('auth.password'),'full_name' => 'Anthony', 'alias_name' => "Anton"]));
         $employee->users()->attach(Sentinel::registerAndActivate(['email' => '678','password'   => config('auth.password'),'full_name' => 'Christopher', 'alias_name' => "Chris"]));
+
+       
+
+        
+       
+  
+        User::create([
+            'email'         => '1231223',
+            'password'      => config('auth.password'),
+            'full_name'     => 'Christopher',
+            'alias_name'    => 'Christopher',
+            'department'    => "2",
+        ]); 
     }
 }

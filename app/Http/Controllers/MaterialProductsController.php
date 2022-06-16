@@ -134,9 +134,13 @@ class MaterialProductsController extends Controller
     public function save_search_history(Request $request)
     {
         // search_history
+        $validated = $request->validate([
+            'search_title' => 'required|unique:save_my_searches',
+        ]);
+
         $data   =   User::findOrFail(auth_user()->id);
         $data->SaveMySearch()->create([
-            'search_title'  => $request->title, 
+            'search_title'  => $request->search_title, 
             'search_data'   => json_encode($request->data),
         ]);
         return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);

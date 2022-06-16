@@ -382,14 +382,14 @@ app.controller('SearchAddController', function($scope, $http) {
         $http({
             method: 'post', 
             url: get_save_search_url,
-            data : {data : $scope.advanced_filter , title :  $scope.search_title}
+            data : {data : $scope.advanced_filter , search_title :  $scope.search_title}
         }).then(function(response) {
             $scope.material_products = response.data.data;
             Message('success', response.data.message);
             $scope.search_title = ''
             $('#save-search-name').modal('hide');
         }, function(response) {
-            Message('danger', response.data.message);
+            Message('danger', response.data.errors.search_title[0]);
         });
     }
 
