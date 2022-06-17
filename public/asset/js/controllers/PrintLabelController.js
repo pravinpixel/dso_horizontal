@@ -12,10 +12,7 @@ app.controller("PrintController", ($scope, $http) => {
         $("#GHSPictogramMenu").hide();
         $scope.GHSPictogram = true
     } 
-    $scope.removeGHS = () => {
-        $('#printImages img').remove()
-        $scope.GHSPictogram = false
-    } 
+ 
     $scope.printBarcodeLabel = () => {
         if($scope.print_qty == '' || $scope.print_qty == undefined || $scope.print_qty === null) {
             Message('danger', "Print Qty is Required !");
@@ -99,7 +96,4 @@ app.controller("PrintController", ($scope, $http) => {
     }
     
 })
-function changeGhsDiagram(id) {
-    $('#printImages img').remove()
-    $(`#${id}`).clone().appendTo("#printImages")
-}
+ 

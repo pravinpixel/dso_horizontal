@@ -4,9 +4,9 @@
     <div ng-if="on_{{ $column['name'] }}" class="box text-center">
         @if ($column['name']=="iqc_status")
             <small class="badge bg-success rounded-pill">PASS</small>
-            @elseif($column['name']=="date_of_expiry")
+            @elseif($column['name'] ==  "date_of_expiry")
                 {{ $column['batch'] }}
-                <i class="ms-1  text-{{ $column['name']  == 1 ? "success" : "danger"}} dot-sm bi bi-circle-fill"></i>
+                <i class="ms-1 text-success dot-sm bi bi-circle-fill"></i>
             @elseif($column['name']=="used_for_td_expt_only")
                 - 
             @else

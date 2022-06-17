@@ -46,7 +46,11 @@
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">
                         <div id="printImages">
-                            <img src="{{ asset('public/asset/images/pictograms/flammables.png') }}" class="img-png" >
+                            @if ($pictograms)
+                                @foreach ($pictograms as $pictogram)
+                                    <img id="pictograms_{{ $pictogram->id }}" ng-if="pictogramsLab_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
+                                @endforeach
+                            @endif 
                         </div>
                     </div>
                     <div class="text-end">  
@@ -119,12 +123,12 @@
                         <div class="row m-0">
                             @if ($pictograms)
                                 @foreach ($pictograms as $pictogram)
-                                    <label onclick="changeGhsDiagram('pictograms_{{ $pictogram->id }}')" class="col-4 position-relative text-white row my-2"  for="pictogramsLab_{{ $pictogram->id }}">
+                                    <label  class="col-4 position-relative text-white row my-2"  for="pictogramsLab_{{ $pictogram->id }}">
                                         <div class="col-4">
                                             <img id="pictograms_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
                                         </div>
                                         <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                            <input type="radio"  name="pictograms" id="pictogramsLab_{{ $pictogram->id }}" class="checked-input me-1">
+                                            <input type="checkbox" name="pictograms" ng-model="pictogramsLab_{{ $pictogram->id }}" id="pictogramsLab_{{ $pictogram->id }}" class="checked-input me-1 form-check-input">
                                             <span><b>{{ $pictogram->name }}</b></span>
                                         </div>
                                     </label>
@@ -132,12 +136,9 @@
                             @endif 
                         </div>
                         <hr>
-                        <button class="btn btn-light border rounded-pill my-2" ng-click="removeGHS()">
-                            <i class="fa fa-times me-1"> </i> Remove
-                        </button> 
-                        <button class="btn btn-primary rounded-pill my-2" ng-click="confirmGHS()">
-                            <i class="fa fa-check me-1"> </i>confirm
-                        </button> 
+                        <button class="btn btn-light border rounded-pill my-2" ng-click="confirmGHS()">
+                            <i class="fa fa-times me-1"> </i> Close
+                        </button>  
                     </div>
                 </div>
             </div>
