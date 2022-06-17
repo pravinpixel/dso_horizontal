@@ -128,10 +128,10 @@
                 ])  !!}
             </div>
         </div>
-        <div class="row m-0 y-center my-2" id="outlife_input">
+        <div class="row m-0 y-center my-2" >
             <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...','required',
+                {!! Form::number('outlife',  $batch->outlife ?? null, ['class' =>'form-control form-control-sm','required', 'placeholder' => 'Type here...','required',"id"=>"outlife_input",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."outlife.status")
                 ])  !!}
             </div>

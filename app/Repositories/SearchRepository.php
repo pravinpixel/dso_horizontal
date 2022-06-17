@@ -108,8 +108,7 @@ class SearchRepository implements SearchRepositoryInterface {
 
     public function sortingOrder($sort_by)
     { 
-        $material_table =  [
-            'barcode_number',
+        $material_table =  [ 
             'category_selection',
             'item_description',
             'unit_of_measure',

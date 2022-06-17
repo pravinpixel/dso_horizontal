@@ -43,7 +43,7 @@ class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
                         }
                     }
 
-                    if($material_product->category_selection == "material") {
+                    if($material_product->category_selection == "material" || $material_product->category_selection == "Material") {
                         $material_series    =   BarcodeFormat::where('category_selection', "material")->get();
                         if(count($material_series) == 0) {
                             $isSeries = (object) [

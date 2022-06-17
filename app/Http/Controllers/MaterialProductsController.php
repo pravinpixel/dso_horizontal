@@ -148,7 +148,7 @@ class MaterialProductsController extends Controller
 
         foreach ($array[0] as $key => $row) {
             if (!is_null($row['category_selection'])) {
-                $result  = MaterialProducts::updateOrCreate([
+                $material  = MaterialProducts::updateOrCreate([
                     'category_selection'                =>   $row['category_selection'],
                     'item_description'                  =>   $row['item_description'],
                     'unit_of_measure'                   =>   $row['unit_of_measure'],
@@ -158,7 +158,7 @@ class MaterialProductsController extends Controller
                     'alert_threshold_qty_lower_limit'   =>   $row['alert_threshold_qty_lower_limit'],
                     'alert_before_expiry'               =>   $row['alert_before_expiry_weeks'],
                 ]);
-                $result->Batches()->updateOrCreate([
+                $batch = $material->Batches()->updateOrCreate([
                     'brand'                         =>  $row['brand'],
                     'supplier'                      =>  $row['supplier'],
                     'packing_size'                  =>  $row['unit_packing_value'],
@@ -193,6 +193,7 @@ class MaterialProductsController extends Controller
                     'cost_per_unit'                 =>  $row['cost_per_unit_sgd'],
                     'remarks'                       =>  $row['remarks'],
                 ]);
+                $this->barCodeLabelRepository->generateBarcode($material, $batch);
             }
         }
 

@@ -56,9 +56,9 @@
     function outlifeChange() {
         var input = $('#require_outlife_tracking_status_input').val();
         if(input != 1) {
-            $("#outlife_input").hide()
+            $("#outlife_input").prop('disabled', true);
         } else {
-            $("#outlife_input").show()
+            $("#outlife_input").prop('disabled', false);
         }
     }
     outlifeChange()
