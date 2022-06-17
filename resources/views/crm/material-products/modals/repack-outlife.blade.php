@@ -43,7 +43,7 @@
                                 <small>@{{ repack.last_access }}</small>
                             </td> 
                             <td class="text-center">
-                                @{{ repack.repack_amount }}
+                                {{-- @{{ repack.repack_amount }} --}}
                                 <input type="number" ng-if="repack.draw_in.status" required  false" ng-min="1" ng-max="repack.initial_amount" repack-table="REPACK_INPUT" class="form-control form-control-sm custom-input" ng-model='repack.repack_amount'>
                             </td>
                             <td class="text-center">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-6 ms-auto text-end">
                         <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
-                        @{{ next_draw }}
+                        {{-- @{{ next_draw }} --}}
                         <button class="btn btn-primary rounded-pill h-100" ng-disabled="repackOutlifeForm.$invalid" ng-click="saveRepackOutlife()">Save and Submit</button>
                         {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
                     </div>
