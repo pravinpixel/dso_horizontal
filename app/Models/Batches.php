@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Models;
- 
+
+use App\Models\Masters\HouseTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Batches extends Model
 {
     use HasFactory;
@@ -72,5 +72,9 @@ class Batches extends Model
     public function RepackOutlife()
     {
         return $this->hasMany(RepackOutlife::class, 'batch_id', 'id');
+    }
+    public function HousingType()
+    {
+        return  $this->hasOne(HouseTypes::class, 'id', 'housing_type'); 
     }
 }

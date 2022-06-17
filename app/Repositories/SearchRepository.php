@@ -22,7 +22,7 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function bulkSearch($row)
     {
-        return MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
+        return MaterialProducts::with("Batches","Batches.RepackOutlife")
         ->when($row->category_selection, function ($q) use ($row) {
             $q->where('category_selection' , $row->category_selection ?? null);
         })
@@ -63,7 +63,7 @@ class SearchRepository implements SearchRepositoryInterface {
         ];
         
         foreach($filter as $column => $value) {
-            $filter_result[]    =  MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
+            $filter_result[]    =  MaterialProducts::with("Batches","Batches.RepackOutlife")
                                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                                         $q->where($column , $value); 
                                     })
@@ -118,7 +118,7 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_before_expiry',
         ];
         
-        return  MaterialProducts::with("Batches","Batches.RepackOutlife")->where('is_draft', 0)
+        return  MaterialProducts::with("Batches","Batches.RepackOutlife")
                                     ->when(in_array($sort_by->col_name, $material_table) == true, function ($q) use ($sort_by) { 
                                         $q->orderBy($sort_by->col_name, $sort_by->order_type);
                                     })

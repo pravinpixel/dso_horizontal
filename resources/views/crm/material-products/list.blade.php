@@ -26,7 +26,7 @@
                     {{-- ======= Table Header  ====== --}}
                 </div>
                 <div class="custom-table-body">
-                    <div class="custom-tabel-row"  ng-repeat="(index,row) in material_products.data track by row.id">
+                    <div class="custom-tabel-row"  ng-repeat="(index,row) in material_products.data">
                         {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                         <div class="custom-table" ng-class="row.is_draft == 1 ? 'drafted' : ''">
                             <div class="custom-table-head">
