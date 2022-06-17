@@ -7,7 +7,7 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.on_batch                     =   true;
         $scope.on_serial                    =   true;
         $scope.on_quantity                  =   true; 
-        $scope.on_packing_size              =   true; 
+        $scope.on_unit_packing_value        =   true; 
         $scope.storage_area                 =   true; 
         $scope.housing_type                 =   true; 
         $scope.on_date_of_expiry            =   true; 
