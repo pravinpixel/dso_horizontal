@@ -12,6 +12,76 @@
                 <div class="text-center">
                     <div class="row m-0">
                         <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Category Selection</label>
+                            <select class="form-select" ng-model="advanced_filter.category_selection">
+                                <option value="">-- select --</option>
+                                <option value="material">Material</option>
+                                <option value="in-house">In-House</option>
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Item Description</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.item_description">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Brand</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.brand">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Ownner 1/2</label>
+                            <select class="form-select" ng-model="advanced_filter.owner_one">
+                                <option value="">-- select --</option>
+                                <option ng-value="user.id" ng-repeat="user in MasterData.owners">@{{ user.alias_name }}</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Departments</label>
+                            <select class="form-select" ng-model="advanced_filter.departments">
+                                <option value="">-- select --</option>
+                                <option ng-value="user.id" ng-repeat="user in MasterData.departments">@{{ user.name }}</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Storage Room</label>
+                            <select class="form-select" ng-model="advanced_filter.departments">
+                                <option value="">-- select --</option>
+                                <option ng-value="user.id" ng-repeat="user in MasterData.storage_room">@{{ user.name }}</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Date In</small>
+                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_in">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Date of expiry</small>
+                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_expiry">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Supplier</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.supplier">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Batch#</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.batch">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">Serial#</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.serial">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <small class="mb-1">PO Number</small>
+                            <input type="number" min="1"  class="form-control" placeholder="Type here" ng-model="advanced_filter.po_number">
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Statutory board</label>
+                            <select name="advanced_filter.statutory_body" class="form-select" ng-model="advanced_filter.statutory_body">
+                                <option value="">-- select --</option>
+                                @foreach ($statutory_body_db as $row)
+                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                @endforeach
+                            </select>
+                        </div> 
+                        <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">EUC Material</label>
                             <select class="form-select" ng-model="advanced_filter.euc_material">
                                 <option value="">-- select --</option>
@@ -28,30 +98,13 @@
                             </select>
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">CAS#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.cas">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Supplier</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.supplier">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Batch#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.batch">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Serial#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.serial">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Statutory board</label>
-                            <select name="advanced_filter.statutory_body" class="form-select" ng-model="advanced_filter.statutory_body">
+                            <label class="form-label">Required Outlife Tracking</label>
+                            <select name="advanced_filter.require_outlife_tracking" class="form-select" ng-model="advanced_filter.require_outlife_tracking">
                                 <option value="">-- select --</option>
-                                @foreach ($statutory_body_db as $row)
-                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
-                                @endforeach
+                                <option value="0">No</option>
+                                <option value="1">Yes</option> 
                             </select>
-                        </div> 
+                        </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Housing type</label>
                             <select name="advanced_filter.housing_type" class="form-select" ng-model="advanced_filter.housing_type">
@@ -61,7 +114,7 @@
                                 @endforeach
                             </select>
                         </div> 
-                         <div class="col-6 text-start mb-2 px-1">
+                        <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Housing No</label>
                             <select name="advanced_filter.housing" class="form-select form-select-sm" ng-model="advanced_filter.housing">
                                 <option value=""> -</option>
@@ -71,19 +124,6 @@
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Unit Packing size</label>
-                            <select name="advanced_filter.unit_packing_value" class="form-select" ng-model="advanced_filter.unit_packing_value">
-                                <option value="">-- select --</option>
-                                @foreach ($unit_packing_size_db as $row)
-                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
-                                @endforeach	 
-                            </select>
-                        </div> 
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Date of expiry</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_expiry">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">IQC status </label>
                             <select name="advanced_filter.iqc_status" class="form-select" ng-model="advanced_filter.iqc_status">
                                 <option value="">-- select --</option>
@@ -92,30 +132,13 @@
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">PO Number</small>
-                            <input type="number" min="1"  class="form-control" placeholder="Type here" ng-model="advanced_filter.po_number">
-                        </div>
+                            <small class="mb-1">CAS#</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.cas">
+                        </div>  
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Extended expiry</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.extended_expiry">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Extended QC status</label>
-                            <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
-                                <option value="">-- select --</option>
-                                <option value="1">Pass</option>
-                                <option value="2">Fail</option> 
-                            </select>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            {{-- this is not avaliable --}}
-                            <label class="form-label">Disposed</label>
-                            <select name="advanced_filter.disposed" class="form-select" ng-model="advanced_filter.disposed">
-                                <option value="">-- select --</option>
-                                <option value="1">Yes</option>
-                                <option value="2">No but used for TD/Expt</option> 
-                            </select>
-                        </div>
+                            <small class="mb-1">FM 1202</small>
+                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.fm_1202">
+                        </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Project name </small>
                             <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.project_name">
@@ -125,37 +148,67 @@
                             <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.material_product_type">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Date of shipment</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_shipment">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of manufacture</small>
                             <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Extended QC status</label>
-                            <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
-                                <option value="">-- select --</option>
-                                <option value="1">Pass</option>
-                                <option value="2">Fail</option> 
-                            </select>
-                        </div>
+                            <small class="mb-1">Date of shipment</small>
+                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_shipment">
+                        </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Required Usage Tracking</label>
-                            <select name="advanced_filter.usage_tracking" class="form-select" ng-model="advanced_filter.usage_tracking">
+                            <label class="form-label">Unit Packing size</label>
+                            <select  class="form-select" ng-model="advanced_filter.unit_packing_value">
                                 <option value="">-- select --</option>
-                                <option value="0">No</option>
-                                <option value="1">Yes</option> 
+                                @foreach ($unit_packing_size_db as $row)
+                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                @endforeach	 
                             </select>
-                        </div>
+                        </div>  
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Required Outlife Tracking</label>
-                            <select name="advanced_filter.require_outlife_tracking" class="form-select" ng-model="advanced_filter.require_outlife_tracking">
+                            <label class="form-label">Used for TD/EXPT only</label>
+                            <select class="form-select" ng-model="advanced_filter.used_for_td_expt_only">
                                 <option value="">-- select --</option>
-                                <option value="0">No</option>
-                                <option value="1">Yes</option> 
+                                <option value="1">Yes</option>
+                                <option value="2">No</option> 
                             </select>
                         </div>
+                        {{-- <div class="col-6 text-start mb-2 px-1">
+                                <small class="mb-1">Extended expiry</small>
+                                <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.extended_expiry">
+                            </div>
+                            <div class="col-6 text-start mb-2 px-1">
+                                <label class="form-label">Extended QC status</label>
+                                <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
+                                    <option value="">-- select --</option>
+                                    <option value="1">Pass</option>
+                                    <option value="2">Fail</option> 
+                                </select>
+                            </div>
+                            <div class="col-6 text-start mb-2 px-1">
+                                <label class="form-label">Disposed</label>
+                                <select name="advanced_filter.disposed" class="form-select" ng-model="advanced_filter.disposed">
+                                    <option value="">-- select --</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2">No but used for TD/Expt</option> 
+                                </select>
+                            </div>
+                            <div class="col-6 text-start mb-2 px-1">
+                                <label class="form-label">Extended QC status</label>
+                                <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
+                                    <option value="">-- select --</option>
+                                    <option value="1">Pass</option>
+                                    <option value="2">Fail</option> 
+                                </select>
+                            </div>
+                            <div class="col-6 text-start mb-2 px-1">
+                                <label class="form-label">Required Usage Tracking</label>
+                                <select name="advanced_filter.usage_tracking" class="form-select" ng-model="advanced_filter.usage_tracking">
+                                    <option value="">-- select --</option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option> 
+                                </select>
+                            </div> 
+                        --}}
                     </div>
                 </div>
             </div>
