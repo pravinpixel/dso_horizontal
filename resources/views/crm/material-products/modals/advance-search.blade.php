@@ -211,6 +211,48 @@
                         --}}
                     </div>
                 </div>
+                <form name="dateForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="daterange1" class="control-label">Simple picker</label>
+                        <input date-range-picker id="daterange1" name="daterange1" class="form-control date-picker" type="text"
+                               ng-model="date" required ng-change="SimplePickerChange();"/>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': dateForm.daterange2.$invalid}">
+                        <label for="daterange2" class="control-label">Picker with min and max date</label>
+                        <input date-range-picker id="daterange2" name="daterange2" class="form-control date-picker" type="text"
+                               min="'2015-01-23'" max="'2015-08-25'" ng-model="date"
+                               required/>
+                        <div class="help-block" ng-messages="dateForm.daterange2.$error">
+                            <p ng-message="min">Start date is too far in the past.</p>
+                            <p ng-message="max">End date is too far in the future.</p>
+                            <p ng-message="required">Range is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="daterange3" class="control-label">Picker with custom locale</label>
+                        <input date-range-picker id="daterange3" name="daterange3" class="form-control date-picker" type="text"
+                               ng-model="date" options="opts" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="daterange4" class="control-label">Clearable picker</label>
+                        <input date-range-picker id="daterange4" name="daterange4" class="form-control date-picker" type="text"
+                               ng-model="date" clearable="true" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="daterange5" class="control-label">Picker with custom format</label>
+                        <input date-range-picker name="daterange5" id="daterange5" class="form-control date-picker" type="text"
+                           ng-model="date" options="{locale: {format: 'MMMM D, YYYY'}}" required/>
+                    </div>
+                    <div class="form-grou">
+                        <button type="button" class="btn" ng-click="setStartDate()">Set Start Date to 4 days ago</button>
+                        <button type="button" class="btn" ng-click="setRange()">Set Range to 4 days ago</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="daterange6" class="control-label">Single date</label>
+                        <input date-range-picker name="daterange6" id="daterange6" class="form-control date-picker" type="text"
+                               ng-model="singleDate" options="{singleDatePicker: true}" required/>
+                    </div>
+                </form> 
             </div>
             <div class="modal-footer border-top text-center">
                 <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save this search</label>
@@ -218,8 +260,7 @@
             </div>
         </div> 
     </div>
-</div>
- 
+</div> 
 <div class="modal fade" id="save-search-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
