@@ -4102,7 +4102,7 @@ fieldset:disabled .btn {
 }
 .btn-sort {
     position: absolute;
-    top: 14%;
+    top: 3%;
     right: 0;
     display: flex;
     flex-direction: column;
@@ -4116,6 +4116,7 @@ fieldset:disabled .btn {
 .cur_ponit ,
 .btn-sort i {
     cursor: pointer !important;
+    margin: 3px 0;
 }
 .btn-sort:hover i,
 .btn-sort:focus i,

@@ -117,15 +117,13 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
         ];
-        
-        return  MaterialProducts::with("Batches","Batches.RepackOutlife")
-                                    ->when(in_array($sort_by->col_name, $material_table) == true, function ($q) use ($sort_by) { 
-                                        $q->orderBy($sort_by->col_name, $sort_by->order_type);
-                                    })
-                                    ->WhereHas('Batches', function($q) use ($sort_by){
-                                        $q->orderBy($sort_by->col_name, $sort_by->order_type);
-                                    })
-                                    ->paginate(5);
+        if(in_array($sort_by->col_name, $material_table)) {
+            return  MaterialProducts::with(['Batches','Batches.RepackOutlife'])->orderBy($sort_by->col_name, $sort_by->order_type)->paginate(5);
+        } else {
+            return MaterialProducts::with(['Batches' => function ($q) use ($sort_by) {
+                $q->orderBy($sort_by->col_name, $sort_by->order_type);
+            },'Batches.RepackOutlife'])->paginate(5);
+        }
     }
 
     public function paginate($items, $perPage = 5, $page = null, $options = [])
