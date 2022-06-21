@@ -33,6 +33,9 @@ class DsoRepository implements DsoRepositoryInterface
             $tableColumns['updated_at'], 
             $tableColumns['deleted_at'],
             $tableColumns['is_draft'],
+            $tableColumns['coc_coa_mill_cert_status'],
+            $tableColumns['actions'],
+            $tableColumns['end_of_batch']
         );
 
         $tableAllColumns = [];

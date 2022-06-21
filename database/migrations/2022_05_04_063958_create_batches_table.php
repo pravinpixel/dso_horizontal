@@ -40,7 +40,7 @@ class CreateBatchesTable extends Migration
             $table->string('date_in')->nullable();
             $table->string('date_of_expiry')->nullable();
             $table->string('coc_coa_mill_cert')->nullable();
-            $table->string('coc_coa_mill_cert_status')->nullable();
+            $table->string('coc_coa_mill_cert_status')->nullable()->default('off');
             $table->string('iqc_status')->nullable();
             $table->string('iqc_result')->nullable();
             $table->string('sds')->nullable();

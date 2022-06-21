@@ -120,8 +120,8 @@
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                     ]) !!}
                     {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
-                    <span class="btn btn-light btn-sm border-start">
-                        <input type="checkbox" onclick="skip_this_input('coc_coa_mill_cert_check_box','coc_coa_mill_cert_input')" id="coc_coa_mill_cert_check_box" name="coc_coa_mill_cert_status" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert_status.status") }}>
+                    <span class="btn btn-light btn-sm border-start"> 
+                        <input type="checkbox" {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box" onclick="skip_this_input('coc_coa_mill_cert_check_box','coc_coa_mill_cert_input')">
                     </span>
                 </div>
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
