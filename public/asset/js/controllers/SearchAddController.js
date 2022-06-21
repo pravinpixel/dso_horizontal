@@ -245,6 +245,7 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     $scope.sort_by = function (name, type) {
+        console.log(type)
         $scope.sort_by_payload      =   true;
         $scope.sort_by_payload_data =   {
             sort_by: {
@@ -448,11 +449,11 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.Transfers = (id) => {
         $http.get(`${get_batch}/${id}`).then((response) => {
-            $scope.TransfersBatch   = response.data 
+            $scope.TransfersBatch               = response.data 
+            $scope.TransfersBatchMaxQuantity    =   response.data.quantity
             $('#Transfers').modal('show');
         });
-    }
-    
+    } 
     $scope.transferBatch = () => {
         if($scope.TransfersBatch.quantity == '' || $scope.TransfersBatch.storage_area == '' || $scope.TransfersBatch.housing_type == '' || $scope.TransfersBatch.housing   == '' || $scope.TransfersBatch.owner_one == '' || $scope.TransfersBatch.owner_two == '') {
             Message('danger', "All fields is Required !");
@@ -461,8 +462,7 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing   == null || $scope.TransfersBatch.owner_one == null || $scope.TransfersBatch.owner_two == null) {
             Message('danger', "All fields is Required !");
             return false
-        }
-
+        } 
         $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
             $scope.get_material_products();
             Message('success', response.data.message);

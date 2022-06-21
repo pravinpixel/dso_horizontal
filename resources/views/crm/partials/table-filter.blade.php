@@ -6,7 +6,7 @@
             </button>
             <div class="tableColumns-menu"> 
                 <div class="menu-list"> 
-                    @php asort($tableAllColumns)    @endphp
+                    @php asort($tableAllColumns) @endphp
                     @foreach ($tableAllColumns as $column) 
                         <label>
                             <input type="checkbox" ng-model="on_{{ $column['name'] }}" class="form-check-input me-1">

@@ -1,7 +1,7 @@
 <div id="Transfers" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" >
     <div class="modal-dialog custom-modal-dialog modal-top">
         <div class="modal-content rounded-0 border-bottom shadow">
-            <div class="modal-header rounded-0 bg-primary text-white  ">
+            <div class="modal-header rounded-0 bg-primary text-white">
                 <h4 class="modal-title" id="topModalLabel">Transfer batch</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                             <td width="200px" class="text-center">
-                                <input type="number" min="1"  ng-model="TransfersBatch.quantity" ng-value="TransfersBatch.quantity" class="text-center form-control form-control-sm">
+                                <input type="number" min="1" max="@{{ TransfersBatchMaxQuantity }}" ng-model="TransfersBatch.quantity" ng-value="TransfersBatch.quantity" class="text-center form-control form-control-sm">
                             </td>
                             <td>
                                 <select  class="form-select form-select-sm" ng-model="TransfersBatch.storage_area">
