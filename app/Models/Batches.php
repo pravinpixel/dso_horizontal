@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,7 @@ class Batches extends Model
         'housing',
         'owner_one',
         'owner_two',
-        'dept',
+        'department',
         'access',
         'date_in',
         'date_of_expiry',
@@ -77,4 +78,9 @@ class Batches extends Model
     {
         return  $this->hasOne(HouseTypes::class, 'id', 'housing_type'); 
     }
+
+    public function Department()
+    {
+        return  $this->hasOne(Departments::class, 'id', 'department'); 
+    } 
 }

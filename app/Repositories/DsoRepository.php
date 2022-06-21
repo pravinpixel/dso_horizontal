@@ -37,7 +37,7 @@ class DsoRepository implements DsoRepositoryInterface
 
         $tableAllColumns = [];
         foreach ($tableColumns as $key => $value) {
-            if($value == "unit_of_measure" || $value == "housing_type") {
+            if($value == "unit_of_measure" || $value == "housing_type" || $value == "department")  {
                 $tableAllColumns[$key] = [
                     "name"      => $key,
                     "row"       => '{{ row.'.$value.'.name }}',

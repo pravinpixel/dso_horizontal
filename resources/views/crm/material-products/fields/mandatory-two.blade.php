@@ -63,10 +63,10 @@
             </div>
         </div>
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Dept <sup class="text-danger">*</sup></label>
+            <label for="" class="col-4">department <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::select('dept', $departments_db , $batch->dept ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
-                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."dept.status")
+                {!! Form::select('department', $departments_db , $batch->department ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
+                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."department.status")
                 ])  !!}
             </div>
         </div>

@@ -12,7 +12,7 @@ Require outlife tracking and outlife (days)
 Storage area 
 Housing type and
 Owner 1/Owner 2 (SE/PL/FM)
-Dept
+department
 Access
 Date in
 Date of expiry

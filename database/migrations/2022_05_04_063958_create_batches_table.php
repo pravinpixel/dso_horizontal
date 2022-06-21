@@ -35,7 +35,7 @@ class CreateBatchesTable extends Migration
             $table->string('housing')->nullable();
             $table->string('owner_one')->nullable();
             $table->string('owner_two')->nullable();
-            $table->string('dept')->nullable();
+            $table->string('department')->nullable();
             $table->string('access')->nullable();
             $table->string('date_in')->nullable();
             $table->string('date_of_expiry')->nullable();

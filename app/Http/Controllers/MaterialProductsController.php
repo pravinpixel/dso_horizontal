@@ -79,7 +79,7 @@ class MaterialProductsController extends Controller
             $result     =   $this->SearchRepository->sortingOrder($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-        $material_product           =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'UnitOfMeasure')->latest()->paginate(50);
+        $material_product           =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')->latest()->paginate(50);
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -176,7 +176,7 @@ class MaterialProductsController extends Controller
                     'housing'                       =>  $row['housing'],
                     'owner_one'                     =>  $row['owner_1'],
                     'owner_two'                     =>  $row['owner_2_seplfm'],
-                    'dept'                          =>  $row['dept'],
+                    'department'                          =>  $row['department'],
                     'access'                        =>  $row['access'],
                     'date_in'                       =>  $row['date_in'],
                     'date_of_expiry'                =>  $row['date_of_expiry'],
@@ -361,7 +361,7 @@ class MaterialProductsController extends Controller
         }
         return [
             "access"          => $user_name ?? null,
-            "department"      => Departments::find($data->dept)->name,
+            "department"      => Departments::find($data->department)->name,
             "statutory_body"  => StatutoryBody::find($data->statutory_body)->name,
             "storage_area"    => StorageRoom::find($data->storage_area)->name,
             "housing_type"    => HouseTypes::find($data->housing_type)->name,

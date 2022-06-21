@@ -9,7 +9,13 @@
 </div>
 @foreach ($tableAllColumns as $column)
     <div ng-if="on_{{ $column['name'] }}" class="position-relative box th"> 
-        {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
+        
+        @if ($column['name'] == 'iqc_status')
+            IQC Status
+            @else
+            {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
+        @endif
+        
         <div class="btn-sort">
             <i class="bi bi-caret-up-fill" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
             <i class="bi bi-caret-down-fill" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>

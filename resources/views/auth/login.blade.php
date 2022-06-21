@@ -29,7 +29,7 @@
                 </div><br>
                 <div style="width: 350px " class="mx-auto p-3 border rounded-5 bg-white shadow-hover text-center align-items-center d-flex justify-content-center">
                     <div>
-                        <h4 class="account-titlse m-0">login via your barcode</h4>
+                        <h4 class="account-titlse m-0">Login via your barcode</h4>
                         <img class="my-2" width="300px" src="https://lh3.googleusercontent.com/EASWqGp10M-RQANx9krxrmGHuH0_u6Jy_9lN9JPJhuFRDVKe8KrgEXGkOW8Yorum5tyg-vrx-cg0L5vy-t-7dFEg0eiwfyC7xJZ5WqUT=s660" alt="">
                         <p class="m-0  ">SCAN WITH YOUR BARCODE TO LOG IN</p>
                     </div>

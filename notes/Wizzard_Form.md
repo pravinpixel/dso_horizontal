@@ -20,7 +20,7 @@ Housing type *
 Housing # *
 Owner 1 * 
 Owner 2 (SE/PL/FM)*
-Dept*
+department*
 Access *
 Date in *
 Date of expiry * 

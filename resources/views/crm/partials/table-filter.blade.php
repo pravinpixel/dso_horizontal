@@ -10,7 +10,7 @@
                     @foreach ($tableAllColumns as $column) 
                         <label>
                             <input type="checkbox" ng-model="on_{{ $column['name'] }}" class="form-check-input me-1">
-                            <span class="text-capitalize">{{ str_replace('_', " ", $column['name']) }}</span>
+                            <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
                         </label>
                     @endforeach
                 </div>
@@ -45,8 +45,8 @@
         <input class="d-none" type="text" ng-model="advanced_filter.owner_two" ng-value="advanced_filter.owner_one">
     </div> 
     <div class="col">
-        <label for="" class="form-label">Dept</label>
-        <select name="dept" ng-model="advanced_filter.dept" id="" class="form-select custom">
+        <label for="" class="form-label">Department</label>
+        <select name="department" ng-model="advanced_filter.department" id="" class="form-select custom">
             <option value="">-- select --</option>
             @foreach ($departments_db as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -54,7 +54,7 @@
         </select>
     </div> 
     <div class="col">
-        <label for="" class="form-label">storage area</label>
+        <label for="" class="form-label">Storage area</label>
         <select name="storage_area" ng-model="advanced_filter.storage_area" class="form-select custom">
             <option value="">-- select --</option>
             @foreach ($storage_room_db as $row)

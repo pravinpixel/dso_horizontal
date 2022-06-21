@@ -24,7 +24,7 @@
                     <th class="table-th child-td">storage area</th>
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">DOE</th>
-                    <th class="table-th child-td">QC status</th>
+                    <th class="table-th child-td">IQC status</th>
                     <th class="table-th child-td">Used for TD/Expt</th>
                     <th class="table-th child-td">Actions</th>
                 </tr> 

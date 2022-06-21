@@ -30,7 +30,7 @@ class SearchRepository implements SearchRepositoryInterface {
             $q->where('item_description', 'LIKE', '%' .$row->item_description.'%');
         })
         ->WhereHas('Batches', function($q) use ($row){
-            $q->where('dept', 'LIKE', '%' .$row->dept.'%');
+            $q->where('department', 'LIKE', '%' .$row->department.'%');
         })
         ->WhereHas('Batches', function($q) use ($row){
             $q->where('owner_one', 'LIKE', '%' .$row->owner.'%');

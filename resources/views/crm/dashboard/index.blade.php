@@ -207,7 +207,7 @@
                                     <td>254</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Extends</b></td>
+                                    <td><b>Extend</b></td>
                                     <td>250</td>
                                     <td>540</td>
                                     <td>254</td>

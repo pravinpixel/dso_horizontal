@@ -38,7 +38,7 @@
         </select>
     </div> 
     <div class="col">
-        <label for="" class="form-label">Dept</label>
+        <label for="" class="form-label">department</label>
         <select name="" id="" class="form-select custom">
             <option value="">-- select --</option>
             <option value="1">EGP1</option>

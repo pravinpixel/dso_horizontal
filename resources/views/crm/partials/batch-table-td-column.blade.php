@@ -11,6 +11,7 @@
 
             @elseif($column['name'] == "housing_type")
                 {{ $column['batch'] }} ({{ $tableAllColumns["housing"]["batch"] }})
+            
             @else
                 {!! $column['batch'] !!}
         @endif
