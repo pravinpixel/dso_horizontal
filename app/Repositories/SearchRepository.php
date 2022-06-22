@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class SearchRepository implements SearchRepositoryInterface {
     public function barCodeSearch($request)
@@ -61,16 +62,36 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
         ];
-        
+ 
+        $date = [
+            "date_in",
+            "date_of_expiry",
+            "date_of_manufacture",
+            "date_of_shipment"
+        ];
+
+        // dd($filter);
+       
+
         foreach($filter as $column => $value) {
-            $filter_result[]    =  MaterialProducts::with("Batches","Batches.RepackOutlife")
-                                    ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
-                                        $q->where($column , $value); 
-                                    })
-                                    ->WhereHas('Batches', function($q) use ($column, $value){
-                                        $q->Where($column , 'LIKE', '%' .$value.'%');
+            if(in_array($column, $date) === false) {
+                $filter_result[]    =  MaterialProducts::with("Batches","Batches.RepackOutlife")
+                    ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
+                        $q->where($column , $value); 
+                    })
+                    ->WhereHas('Batches', function($q) use ($column, $value){
+                        $q->Where($column , 'LIKE', '%' .$value.'%');
+                    })
+                    ->get();
+            } else {
+  
+            $filter_result[]    =   MaterialProducts::with("Batches","Batches.RepackOutlife")
+                                    ->WhereHas('Batches', function($q) use ($value){
+                                        $q->whereDate('date_in', '>=', $value['startDate'])
+                                        ->whereDate('date_in', '<=', $value['endDate']);
                                     })
                                     ->get();
+            }
         }
         $collection         =   Arr::flatten($filter_result);
         $myCollectionObj    =   collect($collection);

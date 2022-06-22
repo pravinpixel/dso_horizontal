@@ -88,10 +88,14 @@
                             return date.format(opts.locale.format);
                         }
                     };
-                    if (opts.singleDatePicker && objValue) {
-                        return f(objValue);
-                    } else if (objValue.startDate) {
-                        return [f(objValue.startDate), f(objValue.endDate)].join(opts.locale.separator);
+                    if( objValue !== undefined) {
+                        if (opts.singleDatePicker && objValue ) {
+                            return f(objValue);
+                        } else if (objValue.startDate ) {
+                            return [f(objValue.startDate), f(objValue.endDate)].join(opts.locale.separator);
+                        } else {
+                            return '';
+                        } 
                     } else {
                         return '';
                     }

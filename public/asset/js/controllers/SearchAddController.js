@@ -6,7 +6,7 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.on_batch                     =   true;
         $scope.on_serial                    =   true;
         $scope.on_quantity                  =   true; 
-        // $scope.on_unit_packing_value        =   true; 
+        // $scope.on_unit_packing_value     =   true; 
         $scope.storage_area                 =   true; 
         $scope.housing_type                 =   true; 
         $scope.on_date_of_expiry            =   true; 
@@ -310,9 +310,13 @@ app.controller('SearchAddController', function($scope, $http) {
         });
     }
 
+    $scope.clear_advanced_filter = () => {
+        $scope.advanced_filter  =   {}
+    }
+
     // Advanced Search Fitters
-    $scope.search_advanced_mode = (advanced_search, type) => {
-           
+    $scope.search_advanced_mode = (advanced_search, type) => { 
+      
         $scope.filter_status            =   true
         $scope.sort_by_payload          =   false;
         $scope.bulk_search_status       =   false
@@ -325,18 +329,30 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.advance_search_pre_saved_data    =   advanced_search
             var payload_data   =  $scope.advanced_filter
         }
-        
         if (type == 'saved_search') {
             var payload_data = {
                 advanced_search : advanced_search
             }
         }
+
+        Object.keys(payload_data.advanced_search).map((item) => {
+            if(
+                item == "date_in" ||
+                item == "date_of_expiry" ||
+                item == "date_of_manufacture" ||
+                item == "date_of_shipment"
+            ) {
+                payload_data.advanced_search[item].startDate  =  moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
+                payload_data.advanced_search[item].endDate    =  moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
+            }
+        })
+
         $http({
             method: 'post',
             url: material_products_url,
             data :  payload_data
         }).then(function(response) {
-            $scope.material_products = response.data.data;
+            $scope.material_products    =   response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
             $('#advance-search-ng-modal').modal('hide');
@@ -350,14 +366,13 @@ app.controller('SearchAddController', function($scope, $http) {
   
     $scope.reset_bulk_search = function () {
         $scope.get_material_products();
-
         $scope.filter_status            =   false;
         $scope.advance_search_status    =   false;
         $scope.sort_by_payload          =   false;
 
         // ====Bulk Search Rest====
-            $scope.bulk_search_status           =   false
-            $scope.filter =   ""
+            $scope.bulk_search_status   =   false
+            $scope.filter               =   ""
             
         // ====Bulk Search Rest===
         delete $scope.filter_data 

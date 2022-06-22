@@ -1406,8 +1406,8 @@
         },
 
         clickCancel: function(e) {
-            this.startDate = this.oldStartDate;
-            this.endDate = this.oldEndDate;
+            this.startDate  = this.oldStartDate;
+            this.endDate    = this.oldEndDate;
             this.hide();
             this.element.trigger('cancel.daterangepicker', this);
         },

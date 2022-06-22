@@ -36,14 +36,14 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Departments</label>
-                            <select class="form-select" ng-model="advanced_filter.departments">
+                            <select class="form-select" ng-model="advanced_filter.department">
                                 <option value="">-- select --</option>
                                 <option ng-value="user.id" ng-repeat="user in MasterData.departments">@{{ user.name }}</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Storage Room</label>
-                            <select class="form-select" ng-model="advanced_filter.departments">
+                            <select class="form-select" ng-model="advanced_filter.storage_room">
                                 <option value="">-- select --</option>
                                 <option ng-value="user.id" ng-repeat="user in MasterData.storage_room">@{{ user.name }}</option> 
                             </select>
@@ -212,9 +212,14 @@
                     </div>
                 </div> 
             </div>
-            <div class="modal-footer border-top text-center">
-                <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name"><input type="checkbox" name="" class="form-check-input" id="xxxx"> Save this search</label>
-                <button ng-click="search_advanced_mode()" class="btn btn-primary mx-auto col-3 rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
+            <div class="card-footer border-top text-center align-items-center row m-0">
+                <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name" class="col-4 p-0">
+                    <input type="checkbox"  class="form-check-input" id="xxxx"> Save this search
+                </label>
+                <div class="text-end col-8  p-0">
+                    <button ng-click="clear_advanced_filter()" class="btn btn-light rounded-pill"><i class="bi bi-x me-1"></i> clear</button>
+                    <button ng-click="search_advanced_mode()" class="btn btn-primary rounded-pill"><i class="bi bi-search me-1"></i> Search</button>
+                </div>
             </div>
         </div> 
     </div>
