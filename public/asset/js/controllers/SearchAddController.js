@@ -35,8 +35,7 @@ app.controller('SearchAddController', function($scope, $http) {
     var repack_batch                        =   $('#repack_batch').val();
     var app_URL                             =   $('#app_URL').val();
     $scope.auth_id                          =   $('#auth-id').val();
-    $scope.auth_role                        =   $('#auth-role').val();
-    
+    $scope.auth_role                        =   $('#auth-role').val(); 
 
     // ==== Get Data form DB ====
     $scope.get_material_products =  function () {
@@ -47,6 +46,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);
         });

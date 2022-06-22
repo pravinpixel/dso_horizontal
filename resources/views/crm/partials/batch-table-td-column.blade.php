@@ -8,10 +8,8 @@
                 {{ $column['batch'] }}
                 <i class="ms-1 text-success dot-sm bi bi-circle-fill"></i>
             @elseif($column['name']=="used_for_td_expt_only") 
-
             @elseif($column['name'] == "housing_type")
                 {{ $column['batch'] }} ({{ $tableAllColumns["housing"]["batch"] }})
-            
             @else
                 {!! $column['batch'] !!}
         @endif
