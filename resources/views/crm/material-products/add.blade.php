@@ -65,9 +65,8 @@
 </script>
 <script>
     function saveAsDraft(e) {
-        e.preventDefault(); 
+        e.preventDefault();  
         $('#hidden_input').html(`<input type="hidden" name="is_draft" value="1">`);
-        
         swal({
             text: "Do You Want To Save Draft?",
             icon: "info",
@@ -99,6 +98,7 @@
 
     function submitAndSave(e) {
         e.preventDefault();
+        $('#hidden_input').html(`<input type="hidden" name="is_draft" value="0">`);
         swal({
             text: "Do You Want To Print?",
             icon: "info",
@@ -120,16 +120,15 @@
                 },
             },
         })
-        .then((value) => {
+        .then((value) => { 
             switch (value) {
                 case "print":
                     swal("print");
                 break;
-            
                 case "cancel":
                     swal("cancel");
-                break;
-
+                    $('#hidden_input').html("");
+                break; 
                 case "save":
                     $("#create_other_form").submit();
                 break; 
