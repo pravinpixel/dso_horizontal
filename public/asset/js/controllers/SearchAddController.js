@@ -373,9 +373,9 @@ app.controller('SearchAddController', function($scope, $http) {
         // ====Bulk Search Rest====
             $scope.bulk_search_status   =   false
             $scope.filter               =   ""
-            
         // ====Bulk Search Rest===
         delete $scope.filter_data 
+        $scope.clear_advanced_filter()
     } 
 
     $scope.filler_function =   () => {

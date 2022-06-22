@@ -1,5 +1,5 @@
 <div id="advance-search-ng-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg w-100 modal-right h-100">
+    <div class="modal-dialog  w-100 modal-right h-100">
         <div class="modal-content h-100 rounded-0">
             <div class="modal-header bg-primary text-white border-0 rounded-0">
                 <h4>Advanced Search Filter</h4>  
