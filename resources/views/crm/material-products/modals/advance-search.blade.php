@@ -1,5 +1,5 @@
 <div id="advance-search-ng-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog w-100 modal-right h-100">
+    <div class="modal-dialog modal-lg w-100 modal-right h-100">
         <div class="modal-content h-100 rounded-0">
             <div class="modal-header bg-primary text-white border-0 rounded-0">
                 <h4>Advanced Search Filter</h4>  
@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body modal-scroll">
                 <div class="text-center">
-                    <div class="row m-0">
+                    <div class="row m-0"> 
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Category Selection</label>
                             <select class="form-select" ng-model="advanced_filter.category_selection">
@@ -50,11 +50,11 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date In</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_in">
+                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_in">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of expiry</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_expiry">
+                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_expiry">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Supplier</small>
@@ -149,11 +149,11 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of manufacture</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_manufacture">
+                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of shipment</small>
-                            <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_shipment">
+                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_shipment">
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Unit Packing size</label>
@@ -174,7 +174,7 @@
                         </div>
                         {{-- <div class="col-6 text-start mb-2 px-1">
                                 <small class="mb-1">Extended expiry</small>
-                                <input type="date" class="form-control" placeholder="Type here" ng-model="advanced_filter.extended_expiry">
+                                <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.extended_expiry">
                             </div>
                             <div class="col-6 text-start mb-2 px-1">
                                 <label class="form-label">Extended QC status</label>

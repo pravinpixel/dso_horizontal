@@ -1,1 +1,2 @@
-var app = angular.module('SearchAddApp', []);
+var app = angular.module('SearchAddApp', ['ngMessages', 'daterangepicker']);
+ 

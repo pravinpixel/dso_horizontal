@@ -1,5 +1,4 @@
 app.controller('SearchAddController', function($scope, $http) { 
-  
     // ====For Check Box column Filters ===
         $scope.on_item_description          =   true;
         $scope.on_barcode_number            =   true;

@@ -17968,13 +17968,13 @@ body.auth-fluid-pages[data-leftbar-compact-mode=condensed] {
     .daterangepicker .drp-calendar.left .calendar-table {
         padding-right: 8px
     }
-    .daterangepicker .drp-calendar,
+    /* .daterangepicker .drp-calendar,
     .daterangepicker .ranges {
         float: left
-    }
+    } */
 }
 
-@media (min-width:730px) {
+/* @media (min-width:730px) {
     .daterangepicker .ranges {
         width: auto
     }
@@ -17987,7 +17987,7 @@ body.auth-fluid-pages[data-leftbar-compact-mode=condensed] {
     .daterangepicker .drp-calendar.left {
         clear: none!important
     }
-}
+} */
 
 
 /*!
