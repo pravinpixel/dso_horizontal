@@ -84,7 +84,7 @@
                                         {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
                                         {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
                                         {{-- {{ is_select() }} --}}
-                                        value="{{ $staff->alias_name }}">
+                                        value="{{ $staff->id }}">
     
                                         {{ $staff->alias_name }}
                                     </option>

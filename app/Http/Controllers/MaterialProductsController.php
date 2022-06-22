@@ -352,13 +352,15 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $data = Batches::findOrFail($id);
-        $user_name = [];
+        $data       =   Batches::findOrFail($id);
+        $user_name  =   [];
+
         if ($data->access !== null || $data->access != 'Default') {
             foreach (json_decode($data->access ?? '[]') as $users) {
                 $user_name[]  = User::find($users)->alias_name;
             }
         }
+        
         return [
             "access"          => $user_name ?? null,
             "department"      => Departments::find($data->department)->name,
