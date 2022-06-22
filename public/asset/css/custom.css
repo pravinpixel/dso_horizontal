@@ -1,4 +1,6 @@
-
+* {
+   text-transform: capitalize !important;
+}
 .table-toggle-icon.collapsed::before {
     transform: rotate(0deg);
     transition: .1s all !important;

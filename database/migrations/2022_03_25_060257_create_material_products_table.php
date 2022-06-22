@@ -17,7 +17,7 @@ class CreateMaterialProductsTable extends Migration
             $table->id();
 
             // $table->integer('barcode_number')->nullable();
-            $table->integer('is_draft')->nullable()->default(0);
+            $table->integer('is_draft')->nullable()->default(1);
  
             $table->string('category_selection')->nullable();
             $table->string('item_description')->nullable();
