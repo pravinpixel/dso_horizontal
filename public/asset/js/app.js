@@ -101,3 +101,21 @@ function removeLoader(){
         $( "#preLoader" ).remove(); //makes page more lightweight 
     });  
 }
+$('.two-digits').keyup(function(){
+    if($(this).val().indexOf('.')!=-1){         
+        if($(this).val().split(".")[1].length > 2){                
+            if( isNaN( parseFloat( this.value ) ) ) return;
+            this.value = parseFloat(this.value).toFixed(2);
+        }  
+    }            
+    return this; //for chaining
+});
+$('.three-digits').keyup(function(){
+    if($(this).val().indexOf('.')!=-1){         
+        if($(this).val().split(".")[1].length > 3){                
+            if( isNaN( parseFloat( this.value ) ) ) return;
+            this.value = parseFloat(this.value).toFixed(3);
+        }  
+    }            
+    return this; //for chaining
+});
