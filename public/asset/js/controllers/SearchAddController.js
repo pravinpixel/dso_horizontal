@@ -37,6 +37,9 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val(); 
 
+    $scope.current_date =   moment(new Date()).format('YYYY-MM-DD')
+
+
     // ==== Get Data form DB ====
     $scope.get_material_products =  function () {
         $http({
