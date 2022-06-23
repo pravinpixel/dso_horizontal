@@ -29,3 +29,107 @@
     </div>
     <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
 @endsection
+@section('scripts')
+<script> 
+    function  change_product_type() {
+        var CategoryType  = $('#category_type').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+        $.ajax({
+            type:'POST',
+            url:"{{ route('change-product-category') }}",
+            data:{type: CategoryType },
+            success:function(data){
+                Message('success', data.message);
+                location.reload();
+            }
+        });
+    }
+    function outlifeChange() {
+        var input = $('#require_outlife_tracking_status_input').val();
+        if(input != 1) {
+            $("#outlife_input").prop('disabled', true);
+        } else {
+            $("#outlife_input").prop('disabled', false);
+        }
+    }
+    outlifeChange()
+</script>
+<script>
+    function saveAsDraft(e) {
+        e.preventDefault();  
+        $('#hidden_input').html(`<input type="hidden" name="is_draft" value="1">`);
+        swal({
+            text: "Do You Want To Save Draft?",
+            icon: "info",
+            closeOnClickOutside: false,
+            buttons: {
+                cancel: {
+                    text: "No!, Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes ! Save Draft",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-secondary rounded-pill",
+                    closeModal: true
+                }
+            },
+        }).then((isConfirm) => {
+            if (isConfirm) {
+                $("#create_other_form").submit();
+            }   else {
+                $('#hidden_input').html("");
+            }
+        });
+    }
+
+    function submitAndSave(e) {
+        e.preventDefault();
+        $('#hidden_input').html(`<input type="hidden" name="is_draft" value="0">`);
+        swal({
+            text: "Do You Want To Print?",
+            icon: "info",
+            closeOnClickOutside: false,
+            buttons: {
+                print: {
+                    text: "Yes !, Proceed to Print",
+                    visible: true,
+                    className: "btn btn-primary rounded-pill",
+                    closeModal: true,
+                    value: "print",
+                },
+                save: {
+                    text: "No !, Submit & Save",
+                    value: "save",
+                    visible: true,
+                    className: "btn btn-success rounded-pill",
+                    closeModal: true,
+                },
+            },
+        })
+        .then((value) => { 
+            switch (value) {
+                case "print":
+                    swal("print");
+                break;
+                case "cancel":
+                    swal("cancel");
+                    $('#hidden_input').html("");
+                break; 
+                case "save":
+                    $("#create_other_form").submit();
+                break; 
+            }
+        });
+    }
+</script>
+@endsection

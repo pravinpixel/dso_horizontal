@@ -32,11 +32,8 @@
 @endsection
 @section('scripts')
 <script> 
-    
     function  change_product_type() {
-        
         var CategoryType  = $('#category_type').val();
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
