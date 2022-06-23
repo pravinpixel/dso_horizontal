@@ -30,8 +30,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="repack in repack_outlife_table">
-                            <td>
+                        <tr ng-repeat="repack in repack_outlife_table" >
+                            <td> 
                                 <input type="button" repack-table="OUT" ng-disabled="repack.draw_out.status === false" value="Draw Out" class="btn-draw draw-out"> <br> <br>
                                 <input type="button" repack-table="IN" ng-disabled="repack.draw_in.status === false" value="Draw In" class="btn-draw draw-in">
                             </td>
@@ -42,8 +42,8 @@
                             <td>
                                 <small>@{{ repack.last_access }}</small>
                             </td> 
-                            <td class="text-center">
-                                {{-- @{{ repack.repack_amount }} --}}
+                            <td class="text-center"> 
+                                <span ng-if="!repack.draw_in.status">@{{ repack.repack_amount }}</span>
                                 <input type="number" ng-if="repack.draw_in.status" required  false" ng-min="1" ng-max="repack.initial_amount" repack-table="REPACK_INPUT" class="form-control form-control-sm custom-input" ng-model='repack.repack_amount'>
                             </td>
                             <td class="text-center">
@@ -69,8 +69,7 @@
                     </div>
                     <div class="col-6 ms-auto text-end">
                         <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
-                        {{-- @{{ next_draw }} --}}
-                        <button class="btn btn-primary rounded-pill h-100" ng-disabled="repackOutlifeForm.$invalid" ng-click="saveRepackOutlife()">Save and Submit</button>
+                        <button class="btn btn-primary rounded-pill h-100" ng-disabled="repackOutlifeForm.$invalid || disable_repack_outlife" ng-click="saveRepackOutlife()">Save and Submit</button>
                         {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
+use App\Models\User;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -63,7 +64,16 @@ class RepackBatchController extends Controller
     }
     public function get_repack_outlife($id)
     {
-        return Batches::with('RepackOutlife')->find($id);
+        $Batches    =    Batches::with('RepackOutlife')->find($id);
+ 
+        $users = [];
+        if(!is_null($Batches->access)) {
+            foreach(json_decode($Batches->access) as $user_id) {
+                $users[] = User::find($user_id)->alias_name;
+            }
+            $Batches->access = json_encode($users[0]);
+        } 
+        return $Batches;
     }
     public function repack_outlife (Request $request, $id)
     {
