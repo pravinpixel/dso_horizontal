@@ -335,9 +335,9 @@ class MaterialProductsController extends Controller
             $view  = 'form-four';
         }
         if ($type == 'form-four') {
-            if($request->is_print == 1) {
-                $print_batch_id =  batch_id() ?? $batch_id;
-                forget_session();
+            $print_batch_id =  batch_id() ?? $batch_id;
+            forget_session();
+            if($request->is_print == 1) { 
                 return redirect()->route('print-barcode', ["id" => $print_batch_id]);
             } else {
                 return redirect()->route('list-material-products');
