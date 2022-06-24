@@ -119,14 +119,15 @@
         .then((value) => { 
             switch (value) {
                 case "print":
-                    swal("print");
+                    $('#hidden_input').append(`<input type="hidden" name="is_print" value="1">`);
+                    $("#edit_other_form").submit();
                 break;
                 case "cancel":
                     swal("cancel");
                     $('#hidden_input').html("");
                 break; 
                 case "save":
-                    $("#create_other_form").submit();
+                    $("#edit_other_form").submit();
                 break; 
             }
         });
