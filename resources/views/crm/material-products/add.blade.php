@@ -120,7 +120,8 @@
         .then((value) => { 
             switch (value) {
                 case "print":
-                    swal("print");
+                    $('#hidden_input').append(`<input type="hidden" name="is_print" value="1">`);
+                    $("#create_other_form").submit();
                 break;
                 case "cancel":
                     swal("cancel");
