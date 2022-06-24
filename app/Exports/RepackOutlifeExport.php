@@ -38,11 +38,11 @@ class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, W
     public function headings(): array
     {
         return [
-            'draw_in_time_stamp',
-            'draw_out_time_stamp',
-            'input_repack_amount',
-            'remain_days',
-            'qty_cut'
+            'Date Draw In',
+            'Date Draw Out',
+            'Input Repack Amount',
+            'Remaining Out Life',
+            'Quantity Cut'
         ];
     }
     public function registerEvents(): array
@@ -52,8 +52,9 @@ class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, W
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(20);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(30);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
             },
         ];
     }
