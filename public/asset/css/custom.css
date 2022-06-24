@@ -472,7 +472,7 @@ a {
     border-bottom: 1px solid #eeeeee;
 }
 .box .dropdown-menu.show  {
-    transform: translate(-274px, 1px) !important;
+    transform: translate(-291px, 1px) !important
 }
 .fa-1x {
     font-size: 20px !important;
