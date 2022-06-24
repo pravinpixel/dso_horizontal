@@ -176,7 +176,7 @@ class MaterialProductsController extends Controller
                     'housing'                       =>  $row['housing'],
                     'owner_one'                     =>  $row['owner_1'],
                     'owner_two'                     =>  $row['owner_2_seplfm'],
-                    'department'                          =>  $row['department'],
+                    'department'                    =>  $row['dept'] ,
                     'access'                        =>  $row['access'],
                     'date_in'                       =>  $row['date_in'],
                     'date_of_expiry'                =>  $row['date_of_expiry'],
