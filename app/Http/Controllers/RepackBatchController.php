@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RepackOutlifeExport;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class RepackBatchController extends Controller
@@ -154,5 +156,11 @@ class RepackBatchController extends Controller
             "new_draw_in"    => $stop_next_draw_in,
             "message"        => "Success !"
         ]);
+    }
+
+    public function export_repack_outlife($id)
+    {
+        $excel_file_name =  "Repack-Outlife-".date("Y-M-d  h-i A").".xlsx";
+        return Excel::download(new RepackOutlifeExport($id), $excel_file_name);
     }
 } 

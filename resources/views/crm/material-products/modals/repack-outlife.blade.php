@@ -60,7 +60,7 @@
                             <td>-</td>
                         </tr>
                     </tbody> 
-                </table> 
+                </table>
             </form> 
             <div class="card-footer bg-light">
                 <div class="row align-items-center">
@@ -68,7 +68,7 @@
                         <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                     </div>
                     <div class="col-6 ms-auto text-end">
-                        <button class="btn btn-info rounded-pill h-100">Export logsheet</button>
+                        <button class="btn btn-info rounded-pill h-100" ng-click="exportRepackOutlife()">Export logsheet</button>
                         <button class="btn btn-primary rounded-pill h-100" ng-disabled="repackOutlifeForm.$invalid || disable_repack_outlife" ng-click="saveRepackOutlife()">Save and Submit</button>
                         {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
                     </div>

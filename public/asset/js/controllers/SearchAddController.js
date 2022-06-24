@@ -697,11 +697,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $('#RepackOutlife').modal('show');
         }) 
     }
-
-    
-
-
-
+  
     $scope.next_draw = false
     $scope.saveRepackOutlife = () => {
         if($scope.repackOutlifeForm.$invalid){
@@ -790,5 +786,9 @@ app.controller('SearchAddController', function($scope, $http) {
             }) 
             $('#RepackOutlife').modal('hide');
         })
+    }
+
+    $scope.exportRepackOutlife = () => {
+        location.replace(`export-repack-batch/${$scope.currentBatchId}`)
     }
 });

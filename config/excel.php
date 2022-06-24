@@ -60,15 +60,15 @@ return [
         |
         */
         'properties'             => [
-            'creator'        => '',
-            'lastModifiedBy' => '',
-            'title'          => '',
-            'description'    => '',
-            'subject'        => '',
-            'keywords'       => '',
-            'category'       => '',
-            'manager'        => '',
-            'company'        => '',
+            'creator'        => 'Patrick Brouwers',
+            'lastModifiedBy' => 'Patrick Brouwers',
+            'title'          => 'Invoices Export',
+            'description'    => 'Latest Invoices',
+            'subject'        => 'Invoices',
+            'keywords'       => 'invoices,export,spreadsheet',
+            'category'       => 'Invoices',
+            'manager'        => 'Patrick Brouwers',
+            'company'        => 'Maatwebsite',
         ],
     ],
 

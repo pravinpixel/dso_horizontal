@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RepackOutlife extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'batch_id',
         'quantity',

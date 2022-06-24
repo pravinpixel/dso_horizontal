@@ -133,6 +133,7 @@ Route::middleware(['auth_users'])->group(function () {
         // Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
 
         Route::post('/store-repack-batch/{batch_id}', [RepackBatchController::class, 'store_repack_outlife'])->name('store_repack_outlife');
+        Route::get('/export-repack-batch/{batch_id}', [RepackBatchController::class, 'export_repack_outlife'])->name('export_repack_outlife');
         
     // ==================== Repack Draw IN / OUT Flow ===============
 });
