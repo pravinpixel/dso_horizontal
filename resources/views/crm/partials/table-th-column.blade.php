@@ -22,7 +22,18 @@
         </div>
     </div>
 @endforeach
-<div class="box th border-start {{ $page_name !== 'PRINT_BARCODE_LABEL' ? 'box-sm' : null }}">
-    Actions
-    {{ $page_name === 'PRINT_BARCODE_LABEL' ? '/ Qty to print' : null }}
-</div>
+ 
+@switch($page_name)
+    @case($page_name == 'MATERIAL_SEARCH_OR_ADD')
+        <div class="box th border-start box-sm">
+            Actions 
+        </div> 
+    @break
+    @case($page_name == 'PRINT_BARCODE_LABEL')
+        <div class="box th border-start">
+            Actions / Qty to print
+        </div> 
+    @break
+
+    @default
+@endswitch
