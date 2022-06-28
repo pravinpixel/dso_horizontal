@@ -50,11 +50,11 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date In</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_in">
+                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_in">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of expiry</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_expiry">
+                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_expiry">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Supplier</small>
@@ -149,11 +149,11 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of manufacture</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_manufacture">
+                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of shipment</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.date_of_shipment">
+                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_shipment">
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Unit Packing size</label>
