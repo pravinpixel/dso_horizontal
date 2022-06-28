@@ -24,29 +24,32 @@ class DsoRepository implements DsoRepositoryInterface
         $owners                 =   User::all();
 
         $tableColumns           =   tableOrder::getTableColumn();
- 
         $tableAllColumns = [];
         foreach ($tableColumns as $key => $value) {
-            if($value == "unit_of_measure" || $value == "housing_type" || $value == "department")  {
+             
+            if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department")  {
                 $tableAllColumns[$key] = [
+                    "status"    => $value['status'],
                     "name"      => $key,
-                    "row"       => '{{ row.'.$value.'.name }}',
-                    "batch"     => '{{ batch.'.$value.'.name }}',
+                    "row"       => '{{ row.'.$value['name'].'.name }}',
+                    "batch"     => '{{ batch.'.$value['name'].'.name }}',
                 ];
-            } elseif($value =="date_of_expiry")  {
+            } elseif($value['name'] =="date_of_expiry")  {
                 $tableAllColumns[$key] = [
+                    "status"    => $value['status'],
                     "name"      => $key,
-                    "row"       => '{{ row.'.$value.' }}',
+                    "row"       => '{{ row.'.$value['name'].' }}',
                     "batch"     => '
-                        {{ batch.'.$value.'}}
-                        <i class="ms-1 text-{{ batch.'.$value.' >= '."current_date".' == true ? '."'success'".' : '."'danger'".'}} dot-sm bi bi-circle-fill"></i>
+                        {{ batch.'.$value['name'].'}}
+                        <i class="ms-1 text-{{ batch.'.$value['name'].' >= '."current_date".' == true ? '."'success'".' : '."'danger'".'}} dot-sm bi bi-circle-fill"></i>
                     '
                 ];
             } else {
                 $tableAllColumns[$key] = [
+                    "status"    => $value['status'],
                     "name"      => $key,
-                    "row"       => '{{ row.'.$value.' }}',
-                    "batch"     => '{{ batch.'.$value.' }}',
+                    "row"       => '{{ row.'.$value['name'].' }}',
+                    "batch"     => '{{ batch.'.$value['name'].' }}',
                 ];
             }
         }

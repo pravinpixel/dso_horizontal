@@ -1,17 +1,17 @@
 app.controller('SearchAddController', function($scope, $http) { 
     // ====For Check Box column Filters ===
-        $scope.on_item_description          =   true;
-        $scope.on_barcode_number            =   true;
-        $scope.on_brand                     =   true;
-        $scope.on_batch                     =   true;
-        $scope.on_serial                    =   true;
-        $scope.on_quantity                  =   true; 
-        // $scope.on_unit_packing_value     =   true; 
-        $scope.storage_area                 =   true; 
-        $scope.housing_type                 =   true; 
-        $scope.on_date_of_expiry            =   true; 
-        $scope.on_iqc_status                =   true; 
-        $scope.on_used_for_td_expt_only     =   true; 
+        // $scope.on_item_description          =   true;
+        // $scope.on_barcode_number            =   true;
+        // $scope.on_brand                     =   true;
+        // $scope.on_batch                     =   true;
+        // $scope.on_serial                    =   true;
+        // $scope.on_quantity                  =   true; 
+        // // $scope.on_unit_packing_value     =   true; 
+        // $scope.storage_area                 =   true; 
+        // $scope.housing_type                 =   true; 
+        // $scope.on_date_of_expiry            =   true; 
+        // $scope.on_iqc_status                =   true; 
+        // $scope.on_used_for_td_expt_only     =   true; 
     // ==== END :For Check Box column Filters ===
   
 
@@ -38,7 +38,6 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val(); 
     $scope.current_date                     =   moment(new Date()).format('YYYY-MM-DD')
-    const allTableColumns                   =   JSON.parse($('#all_columns').val());
     $scope.on_all_check_box = false
     
     $scope.select_all_check_box = () => {

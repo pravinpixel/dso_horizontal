@@ -5,14 +5,15 @@
                 <i class="bi bi-caret-down-square-fill"></i>  
             </button>
             <div class="tableColumns-menu"> 
-                <div class="menu-list"> 
+                <div class="menu-list"
+                    ng-init="@foreach ($tableAllColumns as $column) on_{{ $column['name'] }} = {{ $column['status'] == 1 ? 'true' : 'false' }};@endforeach "> 
                     <label>
                         <input type="checkbox" ng-model="on_all_check_box" ng-change="select_all_check_box()" class="form-check-input me-1">
                         <span>All</span>
                     </label> 
                     @foreach ($tableAllColumns as $column)  
-                        <label>
-                            <input type="checkbox" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
+                        <label> 
+                            <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
                             <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
                         </label>
                     @endforeach
@@ -80,4 +81,3 @@
         </div>
     </div> 
 </div>
-<input type="hidden" id="all_columns" value="{{ json_encode($tableAllColumns) }}">

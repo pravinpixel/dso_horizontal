@@ -16,12 +16,13 @@ class tableOrder extends Model
 
     static  function getTableColumn()
     {
-        $result = tableOrder::where('status', 1)->orderBy('order_by')->get();
+        $result = tableOrder::orderBy('order_by')->get();
         $column = [];
-        foreach ($result as $key => $value) {
-            if($value->status == true) {
-                $column[$value->column] =  $value->column;
-            }
+        foreach ($result as $key => $value) { 
+            $column[$value->column] = [
+                "name"      =>  $value->column,
+                "status"    =>  $value->status
+            ]; 
         }
         return $column;
     }
