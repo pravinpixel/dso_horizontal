@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             StatutorySeeder::class,
             StorageRoomSeeder::class,
             BarcodeSeeder::class,
-            PictogramSeeder::class
+            PictogramSeeder::class,
+            TableOrderSeeder::class
         ]); 
     }
 }
