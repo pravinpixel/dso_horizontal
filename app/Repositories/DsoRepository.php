@@ -21,6 +21,7 @@ class DsoRepository implements DsoRepositoryInterface
         $house_type_db          =   HouseTypes::all();
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
+        
         $parentTable            =   Schema::getColumnListing("material_products");
         $childTable             =   Schema::getColumnListing("batches");
         $allColumns             =   array_merge($parentTable, $childTable);

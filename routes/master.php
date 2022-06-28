@@ -6,6 +6,7 @@
     use App\Http\Controllers\Admin\PermissionController; 
     use App\Http\Controllers\Admin\HelpMenuController;
     use App\Http\Controllers\Admin\PictogramController;
+use App\Http\Controllers\Admin\TableOrderController;
 
 Route::middleware(['auth_users'])->group(function () {
     Route::get('/item-description', [MasterController::class, 'index'])->name('master-settings');
@@ -58,4 +59,10 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/pictogram/{id?}', [PictogramController::class, 'edit'])->name('pictogram.edit');
     Route::post('/pictogram/delete/{id?}', [PictogramController::class, 'destroy'])->name('pictogram.delete');
     Route::put('/pictogram/{id?}', [PictogramController::class, 'update'])->name('pictogram.update');
+
+
+    // Table Order
+   
+    Route::get('/table-order', [TableOrderController::class, 'index'])->name('table-order.index');
+
 });

@@ -16,18 +16,18 @@
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Search or Add</a></li>
                         @endif
                         <li class="breadcrumb-item active">
-                            {{ Route::is('dashboard') ? "Dashboard" : "" }}
-                            {{ Route::is('list-material-products') ? "Search or Add" : "" }}
-                            {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : "" }}
-                            {{ Route::is('disposal') ? "Early Disposal" : "" }}
-                            {{ Route::is('print-barcode') ? "Print Label" : "" }}
-                            {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
-                            {{ Route::is('reports') ? "Reports" : "" }}
-                            {{ Route::is('list-search') ? "List Search" : "" }}
-                            {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
-                            {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                            {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }}
-                            {{ Route::is(['user-access']) ? "User Access" : "" }}
+                            {{ Route::is('dashboard') ? "Dashboard" : null }}
+                            {{ Route::is('list-material-products') ? "Search or Add" : null }}
+                            {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : null }}
+                            {{ Route::is('disposal') ? "Early Disposal" : null }}
+                            {{ Route::is('print-barcode') ? "Print Label" : null }}
+                            {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : null }}
+                            {{ Route::is('reports') ? "Reports" : null }}
+                            {{ Route::is('list-search') ? "List Search" : null }}
+                            {{ Route::is('extend-expiry') ? "Extend Expiry" : null }}
+                            {{ Route::is('threshold-qty') ? "Threshold Qty" : null }}
+                            {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : null }}
+                            {{ Route::is(['user-access']) ? "User Access" : null }}
                             {{ Route::is([
                                 'master-settings',
                                 'get_masters',
@@ -40,31 +40,32 @@
                                 'role.create',
                                 'role.edit',
                                 'permission.index',
+                                'table-order.index',
                                 'help.menu.index','help.menu.create','help.menu.edit'
-                            ]) ? "Master Settings" : "" }}
+                            ]) ? "Master Settings" : null }}
 
-                            {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
-                            {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
+                            {{ Route::is(['help.index','help.document']) ? "Help Menu" : null }}
+                            {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : null }}
                            
-                            {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : "" }}
-                            {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : ""  }}
-                            {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : ""  }}
+                            {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : null }}
+                            {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : null  }}
+                            {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : null  }}
                         </li>
                     </ol>
                 </div>
                 <h4 class="page-title">
-                    {{ Route::is('dashboard') ? "Dashboard" : "" }}
-                    {{ Route::is('list-material-products') ? "Search or Add" : "" }}
-                    {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : "" }}
-                    {{ Route::is('disposal') ? "Early Disposal" : "" }}
-                    {{ Route::is('print-barcode') ? "Print Label  " : "" }}
-                    {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : "" }}
-                    {{ Route::is('reports') ? "Reports" : "" }}
-                    {{ Route::is('list-search') ? "List Search" : "" }}
-                    {{ Route::is('extend-expiry') ? "Extend Expiry" : "" }}
-                    {{ Route::is('threshold-qty') ? "Threshold Qty" : "" }}
-                    {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : "" }} 
-                    {{ Route::is(['user-access']) ? "User Access" : "" }}
+                    {{ Route::is('dashboard') ? "Dashboard" : null }}
+                    {{ Route::is('list-material-products') ? "Search or Add" : null }}
+                    {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : null }}
+                    {{ Route::is('disposal') ? "Early Disposal" : null }}
+                    {{ Route::is('print-barcode') ? "Print Label  " : null }}
+                    {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : null }}
+                    {{ Route::is('reports') ? "Reports" : null }}
+                    {{ Route::is('list-search') ? "List Search" : null }}
+                    {{ Route::is('extend-expiry') ? "Extend Expiry" : null }}
+                    {{ Route::is('threshold-qty') ? "Threshold Qty" : null }}
+                    {{ Route::is('near-expiry-expired') ? "Near Expiry / Expired / Failed IQC " : null }} 
+                    {{ Route::is(['user-access']) ? "User Access" : null }}
                     {{ Route::is([
                         'master-settings',
                         'get_masters',
@@ -77,15 +78,16 @@
                         'role.create',
                         'role.edit',
                         'permission.index',
+                        'table-order.index',
                         'help.menu.index','help.menu.create','help.menu.edit'
-                    ]) ? "Master Settings" : "" }}
-                    {{ Route::is(['help.index','help.document']) ? "Help Menu" : "" }}
-                    {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : "" }}
+                    ]) ? "Master Settings" : null }}
+                    {{ Route::is(['help.index','help.document']) ? "Help Menu" : null }}
+                    {{ Route::is('disposed-items') ? "Disposed Materials/In-house Products" : null }}
 
-                    {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : "" }}
+                    {{ Route::is('create.material-product') ? "Add Materials / In-house Product" : null }}
                     
-                    {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : ""  }}
-                    {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : ""  }}
+                    {{ Request::route('wizard_mode') == 'edit' ? "Edit Materials / In-house Product" : null  }}
+                    {{ Request::route('wizard_mode') == 'duplicate' ? "Duplicate Materials / In-house Product" : null  }}
                 </h4>
             </div>
         </div>
