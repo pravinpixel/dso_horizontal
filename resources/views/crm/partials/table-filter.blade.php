@@ -10,7 +10,7 @@
                         <input type="checkbox" ng-model="on_all_check_box" ng-change="select_all_check_box()" class="form-check-input me-1">
                         <span>All</span>
                     </label> 
-                    @php asort($tableAllColumns) @endphp @foreach ($tableAllColumns as $column)  
+                    @foreach ($tableAllColumns as $column)  
                         <label>
                             <input type="checkbox" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
                             <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>

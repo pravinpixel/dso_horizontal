@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\tableOrder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class TableOrderSeeder extends Seeder
@@ -28,11 +29,25 @@ class TableOrderSeeder extends Seeder
             $tableColumns['is_draft'],
             $tableColumns['coc_coa_mill_cert_status'],
             $tableColumns['actions'],
-            $tableColumns['end_of_batch']
+            $tableColumns['end_of_batch'],
+            $tableColumns['access'],
+            $tableColumns['coc_coa_mill_cert'],
+            $tableColumns['iqc_result'],
+            $tableColumns['iqc_status'],
+            $tableColumns['cas'],
+            $tableColumns['fm_1202'],
+            $tableColumns['remarks'],
+            $tableColumns['extended_qc_result'],
+            $tableColumns['disposal_certificate'],
         );
-        
-        tableOrder::create([
-            'column' => json_encode($tableColumns)
-        ]);
+        $i = 0;
+        foreach($tableColumns as $key => $value) { 
+            tableOrder::create([
+                'order_by'      => $i + 1,
+                'column'        => $value,
+                'status'        => true
+            ]);
+            $i++;
+        }
     }
 }

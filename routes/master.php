@@ -64,5 +64,6 @@ Route::middleware(['auth_users'])->group(function () {
     // Table Order
    
     Route::get('/table-order', [TableOrderController::class, 'index'])->name('table-order.index');
+    Route::post('/table-order', [TableOrderController::class, 'store'])->name('table-order.store');
 
 });

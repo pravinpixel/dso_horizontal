@@ -16,6 +16,8 @@ class CreateTableOrdersTable extends Migration
         Schema::create('table_orders', function (Blueprint $table) {
             $table->id();
             $table->longText('column')->nullable();
+            $table->boolean('status')->default(0);
+            $table->integer('order_by')->nullable();
             $table->timestamps();
         });
     }

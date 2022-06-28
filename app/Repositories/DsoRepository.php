@@ -8,6 +8,7 @@ use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
+use App\Models\tableOrder;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 
@@ -21,24 +22,9 @@ class DsoRepository implements DsoRepositoryInterface
         $house_type_db          =   HouseTypes::all();
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
-        
-        $parentTable            =   Schema::getColumnListing("material_products");
-        $childTable             =   Schema::getColumnListing("batches");
-        $allColumns             =   array_merge($parentTable, $childTable);
-        $tableColumns           =   array_combine($allColumns  ,$allColumns ); 
 
-        unset(
-            $tableColumns['id'], 
-            $tableColumns['created_at'], 
-            $tableColumns['item_description'], 
-            $tableColumns['updated_at'], 
-            $tableColumns['deleted_at'],
-            $tableColumns['is_draft'],
-            $tableColumns['coc_coa_mill_cert_status'],
-            $tableColumns['actions'],
-            $tableColumns['end_of_batch']
-        );
-
+        $tableColumns           =   tableOrder::getTableColumn();
+ 
         $tableAllColumns = [];
         foreach ($tableColumns as $key => $value) {
             if($value == "unit_of_measure" || $value == "housing_type" || $value == "department")  {
