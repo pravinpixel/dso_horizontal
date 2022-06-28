@@ -6,10 +6,13 @@
             </button>
             <div class="tableColumns-menu"> 
                 <div class="menu-list"> 
-                    @php asort($tableAllColumns) @endphp
-                    @foreach ($tableAllColumns as $column) 
+                    <label>
+                        <input type="checkbox" ng-model="on_all_check_box" ng-change="select_all_check_box()" class="form-check-input me-1">
+                        <span>All</span>
+                    </label> 
+                    @php asort($tableAllColumns) @endphp @foreach ($tableAllColumns as $column)  
                         <label>
-                            <input type="checkbox" ng-model="on_{{ $column['name'] }}" class="form-check-input me-1">
+                            <input type="checkbox" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
                             <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
                         </label>
                     @endforeach
@@ -77,3 +80,4 @@
         </div>
     </div> 
 </div>
+<input type="hidden" id="all_columns" value="{{ json_encode($tableAllColumns) }}">
