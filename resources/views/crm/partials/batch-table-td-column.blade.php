@@ -1,18 +1,18 @@
 <div class="box box-lg" ng-show="on_item_description"></div>   
- 
 @foreach ($tableAllColumns as $column) 
-    <div ng-if="on_{{ $column['name'] }}" class="box text-center">
-        @if ($column['name']=="iqc_status")
-            <small class="badge bg-success rounded-pill">PASS</small> 
-            {{-- @elseif($column['name']=="used_for_td_expt_only")  --}}
-            @elseif($column['name'] == "housing_type")
-                {{ $column['batch'] }} ({{ $tableAllColumns["housing"]["batch"] }})
-            @else
+    @if ($column['name']!="item_description")
+        <div ng-if="on_{{ $column['name'] }}" class="box text-center">
+            @if ($column['name']=="iqc_status")
+                <small class="badge bg-success rounded-pill">PASS</small> 
+                @elseif($column['name'] == "housing_type")
+                    {{ $column['batch'] }} 
+                    ({{ $tableAllColumns["housing"]["batch"] }})
+                @else
                 {!! $column['batch'] !!}
-        @endif
-    </div>
+            @endif
+        </div>
+    @endif 
 @endforeach
-
 <div class="box border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm d-flex align-items-center" : null}}" >
     <div class="{{$page_name === 'PRINT_BARCODE_LABEL'  ? "d-flex align-items-center justify-content-between" : null }}">
         @if ($page_name === 'MATERIAL_SEARCH_OR_ADD')
@@ -20,8 +20,7 @@
                 <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-three-dots"></i>
                 </a> 
-                <div class="dropdown-menu"  > 
-                    
+                <div class="dropdown-menu"> 
                     <a class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</a>
                     <a class="dropdown-item text-secondary"  ng-click="editOrDuplicate('duplicate',row.id, batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                     <a class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
