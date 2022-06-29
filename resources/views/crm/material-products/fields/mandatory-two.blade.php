@@ -116,7 +116,7 @@
             <div class="col-8 ">
                 <div class="d-flex y-center border rounded p-0">
                     {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
-                        $material_product->Batches[0]->coc_coa_mill_cert ? '' : "required",
+                        $batch->coc_coa_mill_cert_status != "on" ? 'required' : null ,
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                     ]) !!}
                     {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
@@ -128,7 +128,8 @@
                         @endif
                         name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
                         class="form-check-input" 
-                        onclick="skip_this_input_two()">
+                        {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
+                        onclick="change_coc_coa_status()">
                     </span>
                 </div>
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
@@ -147,19 +148,21 @@
             <div class="col-8 ">
                 <div class="d-flex y-center border rounded p-0">
                     {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
-                        $material_product->Batches[0]->iqc_result ? '' : "required",
+                        $batch->iqc_result_status != "on" ? 'required' : null,
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
                         "id" => "iqc_status_input"
                     ]) !!}
-                    {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
-                    <span class="btn btn-light btn-sm border-start">
+                    {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : null !!} 
+                    <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" 
-                        {{ $material_product->Batches[0]->iqc_result == null ? 'checked' : null}}
-                        onclick="skip_this_input()" 
-                        id="iqc_result_check_box" 
+                        @if ($material_product->Batches[0]->iqc_result == null)
+                            {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                        @endif
+                        {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
+                        name="iqc_result_status" id="iqc_result_check_box"
                         class="form-check-input" 
-                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}>
-                    </span>
+                        onclick="change_iqc_result_status()">
+                    </span> 
                 </div>
                 <small class="float-end"><i>Visual check done</i></small>
             </div>
@@ -182,24 +185,23 @@
             selectAll   :   true,
             selectGroup :   true,
         }); 
-        skip_this_input  = () => { 
-            const input = $("#iqc_status_input").val()
-            if(input === null || input == '') {
-                $('#iqc_result_check_box').is(":checked") === true 
-                ?   $("#iqc_status_input").prop('required',false)
-                :   $("#iqc_status_input").prop('required',true)
-            } 
-        }
-        skip_this_input_two  = () => {
-            const input = $("#coc_coa_mill_cert_input").val()
-            if(input === null || input == '') {
-                $('#coc_coa_mill_cert_check_box').is(":checked") === true 
-                ?   $("#coc_coa_mill_cert_input").prop('required',false)
-                :   $("#coc_coa_mill_cert_input").prop('required',true)
+        change_coc_coa_status = () => {
+            const checkBox      =    $('#coc_coa_mill_cert_check_box')
+            const formInput     =    $('#coc_coa_mill_cert_input')
+            if( checkBox.is(":checked") == true ){
+                formInput.prop('required', false)
+            } else {
+                formInput.prop('required', true)
             }
-
         }
-        skip_this_input_two()
-        skip_this_input()
+        change_iqc_result_status = () => {
+            const checkBox      =    $('#iqc_result_check_box')
+            const formInput     =    $('#iqc_status_input')
+            if( checkBox.is(":checked") == true ){
+                formInput.prop('required', false)
+            } else {
+                formInput.prop('required', true)
+            }
+        }
     </script>
 @endsection

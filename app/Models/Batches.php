@@ -52,7 +52,8 @@ class Batches extends Model
         'used_for_td_expt_only',
         'actions',
         'repack_size',
-        'barcode_number'
+        'barcode_number',
+        'iqc_result_status'
     ];
 
     public function BarCodeGenOne()

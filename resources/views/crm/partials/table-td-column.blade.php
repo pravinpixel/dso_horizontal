@@ -14,7 +14,6 @@
     @if ($column['name']!="item_description")
         <div ng-if="on_{{ $column['name'] }}" class="box" >
             @if ($column['name']=="unit_packing_value")
-                {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @else
                 {!! $column['row'] !!} 
             @endif

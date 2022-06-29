@@ -4,6 +4,8 @@
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
                 <small class="badge bg-success rounded-pill">PASS</small>  
+                @elseif($column['name'] == "unit_packing_value")
+                    {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")
                     {{ $column['batch'] }} 
                     ({{ $tableAllColumns["housing"]["batch"] }})
