@@ -33,7 +33,15 @@ class DsoRepository implements DsoRepositoryInterface
                     "row"       => '{{ row.'.$value['name'].'.name }}',
                     "batch"     => '{{ batch.'.$value['name'].'.name }}',
                 ];
-            } elseif($value['name'] =="date_of_expiry")  {
+            }elseif( $value['name'] == 'used_for_td_expt_only') {
+                $tableAllColumns[$key] = [
+                    "status"    =>  $value['status'],
+                    "name"      =>  $key,
+                    "row"       =>  '{{ row.'.$value['name'].'.name }}',
+                    "batch"     =>  '{{ batch.'.$value['name'].' == '."1".' == true ? '."'Yes'".' : '."'No'".'}}',
+                ];
+            }
+            elseif($value['name'] =="date_of_expiry")  {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
                     "name"      => $key,

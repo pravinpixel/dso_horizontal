@@ -3,7 +3,7 @@
     @if ($column['name']!="item_description")
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
-                <small class="badge bg-success rounded-pill">PASS</small> 
+                <small class="badge bg-success rounded-pill">PASS</small>  
                 @elseif($column['name'] == "housing_type")
                     {{ $column['batch'] }} 
                     ({{ $tableAllColumns["housing"]["batch"] }})

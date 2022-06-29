@@ -28,6 +28,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['deleted_at'],
             $tableColumns['is_draft'],
             $tableColumns['coc_coa_mill_cert_status'],
+            $tableColumns['repack_size'],
             $tableColumns['actions'],
             $tableColumns['end_of_batch'],
             $tableColumns['access'],
