@@ -54,6 +54,7 @@
         var input = $('#require_outlife_tracking_status_input').val();
         if(input != 1) {
             $("#outlife_input").prop('disabled', true);
+            $("#outlife_input").val(null)
         } else {
             $("#outlife_input").prop('disabled', false);
         }
