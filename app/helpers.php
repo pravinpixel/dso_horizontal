@@ -32,6 +32,7 @@ if(! function_exists('wizard_mode')) {
 if(! function_exists('forget_session')) {
     function forget_session() {
         return session()->forget([
+            'is_skip_duplicate',
             'wizard_mode',
             'batch_id',
             'material_product_id',
@@ -89,7 +90,11 @@ if(! function_exists('is_reset')) {
         $reset_status   = config("is_disable.{$wizard_mode}.{$category_type}.{$column}.reset");
          
         if($reset_status != null) {
-            return $reset_status !== true ? $value :  null;
+            if(session()->get('is_skip_duplicate') === null) {
+                return $reset_status !== true ? $value :  null; 
+            } else {
+                return $value;
+            }
         } else {
             return $value;
         }

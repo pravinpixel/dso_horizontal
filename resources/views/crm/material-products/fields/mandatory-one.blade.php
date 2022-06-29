@@ -76,8 +76,8 @@
     <div class="col-lg-6">
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Batch #   <sup class="text-danger">*</sup></label>
-            <div class="col-8">
-                {!! Form::text('batch', $batch->batch?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
+            <div class="col-8"> 
+                {!! Form::text('batch', $batch->batch ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."batch.status")
                 ]) !!}
             </div>

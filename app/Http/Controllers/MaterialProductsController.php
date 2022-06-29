@@ -318,9 +318,11 @@ class MaterialProductsController extends Controller
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
-        );
-
+        ); 
         if ($type == 'form-one') {
+            if(wizard_mode() == 'duplicate') {
+                $request->session()->put('is_skip_duplicate', 'skip');
+            }
             if (wizard_mode() == 'create') {
                 $request->session()->put('form-one', 'completed');
             }
