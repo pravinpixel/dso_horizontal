@@ -6,16 +6,18 @@
             </button>
             <div class="tableColumns-menu"> 
                 <div class="menu-list"
-                    ng-init="@foreach ($tableAllColumns as $column) on_{{ $column['name'] }} = {{ $column['status'] == 1 ? 'true' : 'false' }};@endforeach "> 
+                    ng-init="@foreach ($tableAllColumns as $column)@if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing') on_{{ $column['name'] }} = {{ $column['status'] == 1 ? 'true' : 'false' }};  @endif @endforeach "> 
                     <label>
                         <input type="checkbox" ng-model="on_all_check_box" ng-change="select_all_check_box()" class="form-check-input me-1">
                         <span>All</span>
                     </label> 
                     @foreach ($tableAllColumns as $column)  
-                        <label> 
-                            <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
-                            <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
-                        </label>
+                        @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing')
+                            <label> 
+                                <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
+                                <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
+                            </label>
+                        @endif
                     @endforeach
                 </div>
             </div>

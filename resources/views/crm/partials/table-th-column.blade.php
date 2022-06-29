@@ -11,7 +11,7 @@
     @if ($column['name'] != 'item_description')
         <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">  
             @if ($column['name'] == 'iqc_status')
-                IQC Status
+                IQC Status 
                 @else
                 {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif 
@@ -19,7 +19,7 @@
                 <i class="bi bi-caret-up-fill" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
                 <i class="bi bi-caret-down-fill" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
             </div>
-        </div>
+        </div> 
     @endif
 @endforeach
  
@@ -34,6 +34,5 @@
             Actions / Qty to print
         </div> 
     @break
-
     @default
 @endswitch

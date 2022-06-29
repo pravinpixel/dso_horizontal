@@ -24,9 +24,8 @@ class DsoRepository implements DsoRepositoryInterface
         $owners                 =   User::all();
 
         $tableColumns           =   tableOrder::getTableColumn();
-        $tableAllColumns = [];
+        $tableAllColumns        = [];
         foreach ($tableColumns as $key => $value) {
-             
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department")  {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
@@ -52,7 +51,7 @@ class DsoRepository implements DsoRepositoryInterface
                     "batch"     => '{{ batch.'.$value['name'].' }}',
                 ];
             }
-        }
+        } 
 
         $table_th_columns        = view('crm.partials.table-th-column', compact('tableAllColumns','page_name'));
         $table_td_columns        = view('crm.partials.table-td-column', compact('tableAllColumns','page_name'));
