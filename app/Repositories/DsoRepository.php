@@ -22,7 +22,6 @@ class DsoRepository implements DsoRepositoryInterface
         $house_type_db          =   HouseTypes::all();
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
-
         $tableColumns           =   tableOrder::getTableColumn();
         $tableAllColumns        = [];
         foreach ($tableColumns as $key => $value) {
@@ -64,10 +63,8 @@ class DsoRepository implements DsoRepositoryInterface
         $table_th_columns        = view('crm.partials.table-th-column', compact('tableAllColumns','page_name'));
         $table_td_columns        = view('crm.partials.table-td-column', compact('tableAllColumns','page_name'));
         $batch_table_td_columns  = view('crm.partials.batch-table-td-column', compact('tableAllColumns','page_name'));
-        forget_session();
-
-        return view($view,
-        compact(
+        forget_session(); 
+        return view($view, compact(
             'table_th_columns',
             'table_td_columns', 
             'batch_table_td_columns',

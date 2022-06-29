@@ -40,7 +40,6 @@ class TableOrderSeeder extends Seeder
             $tableColumns['extended_qc_result'],
             $tableColumns['disposal_certificate'],
         );
-
         $i = 0; 
         foreach($tableColumns as $key => $value) {
             if($value == 'category_selection') {
@@ -62,97 +61,99 @@ class TableOrderSeeder extends Seeder
                 $data = 6;
                 $status = true;
             }elseif($value == 'quantity') {
-                $data = 6;
+                $data = 7;
                 $status = true;
             }elseif($value == 'batch') {
-                $data = 7;
-                $status = false;
-            }elseif($value == 'serial') {
                 $data = 8;
                 $status = false;
-            }elseif($value == 'po_number') {
+            }elseif($value == 'serial') {
                 $data = 9;
                 $status = false;
-            }elseif($value == 'statutory_body') {
+            }elseif($value == 'po_number') {
                 $data = 10;
                 $status = false;
-            }elseif($value == 'euc_material') {
+            }elseif($value == 'statutory_body') {
                 $data = 11;
                 $status = false;
-            }elseif($value == 'require_bulk_volume_tracking') {
+            }elseif($value == 'euc_material') {
                 $data = 12;
                 $status = false;
-            }elseif($value == 'require_outlife_tracking') {
+            }elseif($value == 'require_bulk_volume_tracking') {
                 $data = 13;
                 $status = false;
-            }elseif($value == 'outlife') {
+            }elseif($value == 'require_outlife_tracking') {
                 $data = 14;
                 $status = false;
-            }elseif($value == 'storage_area') {
+            }elseif($value == 'outlife') {
                 $data = 15;
-                $status = true;
-            }elseif($value == 'housing_type') {
+                $status = false;
+            }elseif($value == 'storage_area') {
                 $data = 16;
                 $status = true;
-            }elseif($value == 'housing') {
+            }elseif($value == 'housing_type') {
                 $data = 17;
                 $status = true;
-            }elseif($value == 'owner_one') {
+            }elseif($value == 'housing') {
                 $data = 18;
                 $status = true;
-            }elseif($value == 'owner_two') {
+            }elseif($value == 'owner_one') {
                 $data = 19;
                 $status = true;
-            }elseif($value == 'department') {
+            }elseif($value == 'owner_two') {
                 $data = 20;
                 $status = true;
-            }elseif($value == 'date_in') {
+            }elseif($value == 'department') {
                 $data = 21;
+                $status = true;
+            }elseif($value == 'date_in') {
+                $data = 22;
                 $status = false;
             }elseif($value == 'date_of_expiry') {
-                $data = 22;
+                $data = 23;
                 $status = true;
             }elseif($value == 'iqc_status') {
-                $data = 23;
-                $status = false;
-            }elseif($value == 'cas') {
                 $data = 24;
                 $status = false;
-            }elseif($value == 'project_name') {
+            }elseif($value == 'cas') {
                 $data = 25;
                 $status = false;
-            }elseif($value == 'material_product_type') {
+            }elseif($value == 'project_name') {
                 $data = 26;
                 $status = false;
-            }elseif($value == 'alert_threshold_qty_upper_limit') {
+            }elseif($value == 'material_product_type') {
                 $data = 27;
                 $status = false;
-            }elseif($value == 'alert_threshold_qty_lower_limit') {
+            }elseif($value == 'alert_threshold_qty_upper_limit') {
                 $data = 28;
                 $status = false;
-            }elseif($value == 'alert_before_expiry') {
+            }elseif($value == 'alert_threshold_qty_lower_limit') {
                 $data = 29;
                 $status = false;
-            }elseif($value == 'date_of_manufacture') {
+            }elseif($value == 'alert_before_expiry') {
                 $data = 30;
                 $status = false;
-            }elseif($value == 'date_of_shipment') {
+            }elseif($value == 'date_of_manufacture') {
                 $data = 31;
                 $status = false;
-            }elseif($value == 'cost_per_unit') {
+            }elseif($value == 'date_of_shipment') {
                 $data = 32;
                 $status = false;
-            }elseif($value == 'extended_expiry') {
+            }elseif($value == 'cost_per_unit') {
                 $data = 33;
                 $status = false;
-            }elseif($value == 'extended_qc_status') {
+            }elseif($value == 'extended_expiry') {
                 $data = 34;
                 $status = false;
-            }elseif($value == 'used_for_td_expt_only') {
+            }elseif($value == 'extended_qc_status') {
                 $data = 35;
+                $status = false;
+            }elseif($value == 'used_for_td_expt_only') {
+                $data = 36;
+                $status = true;
+            }elseif($value == 'barcode_number') {
+                $data = 37;
                 $status = true;
             } 
-
             tableOrder::create([
                 'order_by'  => $data ?? $i + 1,
                 'column'    => $value,
