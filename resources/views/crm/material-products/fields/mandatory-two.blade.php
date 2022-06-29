@@ -154,7 +154,7 @@
                     {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                     <span class="btn btn-light btn-sm border-start">
                         <input type="checkbox" 
-                        {{ $material_product->category_selection == null ? 'checked' : null}}
+                        {{ $material_product->Batches[0]->iqc_result == null ? 'checked' : null}}
                         onclick="skip_this_input()" 
                         id="iqc_result_check_box" 
                         class="form-check-input" 
@@ -172,6 +172,7 @@
 @endsection
 
 @section('scripts')
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
     <script>
@@ -181,15 +182,17 @@
             selectAll   :   true,
             selectGroup :   true,
         }); 
-        skip_this_input  = () => {
-            if($("#iqc_status_input").val() === null) {
+        skip_this_input  = () => { 
+            const input = $("#iqc_status_input").val()
+            if(input === null || input == '') {
                 $('#iqc_result_check_box').is(":checked") === true 
                 ?   $("#iqc_status_input").prop('required',false)
                 :   $("#iqc_status_input").prop('required',true)
             } 
         }
         skip_this_input_two  = () => {
-            if($("#coc_coa_mill_cert_input").val() === null) {
+            const input = $("#coc_coa_mill_cert_input").val()
+            if(input === null || input == '') {
                 $('#coc_coa_mill_cert_check_box').is(":checked") === true 
                 ?   $("#coc_coa_mill_cert_input").prop('required',false)
                 :   $("#coc_coa_mill_cert_input").prop('required',true)
