@@ -29,3 +29,17 @@
     </div>
     <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a> 
 @endsection
+@section('scripts')
+<script>
+    function outlifeChange() {
+        var input = $('#require_outlife_tracking_status_input').val();
+        if(input != 1) {
+            $("#outlife_input").prop('disabled', true);
+            $("#outlife_input").val(null)
+        } else {
+            $("#outlife_input").prop('disabled', false);
+        }
+    }
+    outlifeChange()
+</script>
+@endsection

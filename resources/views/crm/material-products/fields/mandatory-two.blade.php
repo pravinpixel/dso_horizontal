@@ -120,8 +120,14 @@
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                     ]) !!}
                     {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
+
                     <span class="btn btn-light btn-sm border-start"> 
-                        <input type="checkbox" {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box" 
+                        <input type="checkbox" 
+                        @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
+                            {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
+                        @endif
+                        name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                        class="form-check-input" 
                         onclick="skip_this_input_two()">
                     </span>
                 </div>
@@ -147,7 +153,12 @@
                     ]) !!}
                     {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                     <span class="btn btn-light btn-sm border-start">
-                        <input type="checkbox" onclick="skip_this_input()" id="iqc_result_check_box" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}>
+                        <input type="checkbox" 
+                        {{ $material_product->category_selection == null ? 'checked' : null}}
+                        onclick="skip_this_input()" 
+                        id="iqc_result_check_box" 
+                        class="form-check-input" 
+                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}>
                     </span>
                 </div>
                 <small class="float-end"><i>Visual check done</i></small>
@@ -171,14 +182,19 @@
             selectGroup :   true,
         }); 
         skip_this_input  = () => {
-            $('#iqc_result_check_box').is(":checked") === true 
-            ?   $("#iqc_status_input").prop('required',false)
-            :   $("#iqc_status_input").prop('required',true)
+            if($("#iqc_status_input").val() === null) {
+                $('#iqc_result_check_box').is(":checked") === true 
+                ?   $("#iqc_status_input").prop('required',false)
+                :   $("#iqc_status_input").prop('required',true)
+            } 
         }
         skip_this_input_two  = () => {
-            $('#coc_coa_mill_cert_check_box').is(":checked") === true 
-            ?   $("#coc_coa_mill_cert_input").prop('required',false)
-            :   $("#coc_coa_mill_cert_input").prop('required',true)
+            if($("#coc_coa_mill_cert_input").val() === null) {
+                $('#coc_coa_mill_cert_check_box').is(":checked") === true 
+                ?   $("#coc_coa_mill_cert_input").prop('required',false)
+                :   $("#coc_coa_mill_cert_input").prop('required',true)
+            }
+
         }
         skip_this_input_two()
         skip_this_input()
