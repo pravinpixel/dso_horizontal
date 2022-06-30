@@ -54,14 +54,8 @@ class MaterialProductsController extends Controller
         if ($request->filters) {
             $material_product      =   $this->SearchRepository->barCodeSearch($request);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
-        }
-
-        if ($request->bulk_search) {
-            $row         =   (object) $request->bulk_search;
-            $result      =   $this->SearchRepository->bulkSearch($row);
-            if ($result)  return response(['status' => true, 'data' => $result], Response::HTTP_OK);
-        }
-
+        } 
+        
         if ($request->save_advanced_search) {
             $row        =   (object) $request->save_advanced_search['advanced_search'];
             $result     =   $this->SearchRepository->StoreBulkSearch($row, $request);

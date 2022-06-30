@@ -16,7 +16,6 @@ app.controller('SearchAddController', function($scope, $http) {
   
 
     $scope.filter_status                =   false;
-    $scope.bulk_search_status           =   false;
     $scope.advance_search_status        =   false;
     $scope.advance_search_pre_saved     =   true;
     $scope.view_my_saved_search_model   =   false;
@@ -305,31 +304,16 @@ app.controller('SearchAddController', function($scope, $http) {
  
     //  ===== Pagination & Filters ====
     $scope.next_Prev_page = function (params) {
-        if($scope.bulk_search_status  == true) {
-            var payload_data    =   {   
-                bulk_search: {
-                    item_description    :  $scope.filter.item_description    == undefined ? null : $scope.filter.item_description,
-                    category_selection  :  $scope.filter.category_selection  == undefined ? null : $scope.filter.category_selection,
-                    brand               :  $scope.filter.brand               == undefined ? null : $scope.filter.brand,
-                    owner               :  $scope.filter.owner               == undefined ? null : $scope.filter.owner,
-                    department                :  $scope.filter.department                == undefined ? null : $scope.filter.department,
-                    storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
-                    date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
-                    date_of_expiry      :  $scope.filter.date_of_expiry == undefined ? null : moment($scope.filter.date_of_expiry).format('YYYY-MM-DD'),
-                }
+        if ($scope.advance_search_status == true) {
+            var payload_data = $scope.filter_data;
+        } else {
+            if ($scope.advance_search_pre_saved == true) {
+                var payload_data = { advanced_search : $scope.advance_search_pre_saved_data}
             }
-        }  else {
-            if ($scope.advance_search_status == true) {
-                var payload_data = $scope.filter_data;
+            if ($scope.sort_by_payload == true) {
+                var payload_data = $scope.sort_by_payload_data
             } else {
-                if ($scope.advance_search_pre_saved == true) {
-                    var payload_data = { advanced_search : $scope.advance_search_pre_saved_data}
-                }
-                if ($scope.sort_by_payload == true) {
-                    var payload_data = $scope.sort_by_payload_data
-                } else {
-                    var payload_data    =   {Empty : "0000"}
-                }
+                var payload_data    =   {Empty : "0000"}
             }
         }
 
@@ -384,34 +368,7 @@ app.controller('SearchAddController', function($scope, $http) {
             Message('danger', response.data.message);
         });
     } 
-
-    $scope.bulk_search = function () {
-        $scope.filter_status        =   true
-        $scope.bulk_search_status   =   true;
-        $scope.sort_by_payload      =   false;
-        $http({
-            method: 'post', 
-            url: material_products_url,
-            data : {
-                bulk_search: {
-                    item_description    :  $scope.filter.item_description    == undefined ? null : $scope.filter.item_description,
-                    category_selection  :  $scope.filter.category_selection  == undefined ? null : $scope.filter.category_selection,
-                    brand               :  $scope.filter.brand               == undefined ? null : $scope.filter.brand,
-                    owner               :  $scope.filter.owner               == undefined ? null : $scope.filter.owner,
-                    department                :  $scope.filter.department                == undefined ? null : $scope.filter.department,
-                    storage_area        :  $scope.filter.storage_area        == undefined ? null : $scope.filter.storage_area,
-                    date_in             :  $scope.filter.date_in             == undefined ? null : moment($scope.filter.date_in).format('YYYY-MM-DD'),
-                    date_of_expiry      :  $scope.filter.date_of_expiry     == undefined ? null : moment($scope.filter.date_of_expiry).format('YYYY-MM-DD'),
-                }
-            }
-        }).then(function(response) {
-            $scope.material_products = response.data.data;
-            $scope.material_products.links.shift();
-            $scope.material_products.links.pop();
-        }, function(response) {
-            Message('danger', response.data.message);
-        });
-    }
+ 
 
     $scope.clear_advanced_filter = () => {
         $scope.advanced_filter  =   {}
@@ -422,7 +379,6 @@ app.controller('SearchAddController', function($scope, $http) {
       
         $scope.filter_status            =   true
         $scope.sort_by_payload          =   false;
-        $scope.bulk_search_status       =   false
         if (advanced_search === undefined) { 
             $scope.filler_function();
             var payload_data                =   $scope.filter_data 
@@ -474,7 +430,6 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.sort_by_payload          =   false;
 
         // ====Bulk Search Rest====
-            $scope.bulk_search_status   =   false
             $scope.filter               =   ""
         // ====Bulk Search Rest===
         delete $scope.filter_data 

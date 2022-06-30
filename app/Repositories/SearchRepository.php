@@ -34,7 +34,6 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
         ];
- 
         $date = [
             "date_in",
             "date_of_expiry",
@@ -55,15 +54,14 @@ class SearchRepository implements SearchRepositoryInterface {
                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                         $q->where($column , $value); 
                     }) 
-                    ->dd();
+                    ->get();
             } else {
-  
-            $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
-                                    ->WhereHas('Batches', function($q) use ($value){
-                                        $q->whereDate('date_in', '>=', $value['startDate'])
-                                        ->whereDate('date_in', '<=', $value['endDate']);
-                                    })
-                                    ->get();
+                $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
+                                        ->WhereHas('Batches', function($q) use ($value){
+                                            $q->whereDate('date_in', '>=', $value['startDate'])
+                                            ->whereDate('date_in', '<=', $value['endDate']);
+                                        })
+                                        ->get();
             }
         }
         $collection         =   Arr::flatten($filter_result);
