@@ -52,6 +52,8 @@ class SearchRepository implements SearchRepositoryInterface {
     }
     public function advanced_search($filter)
     {
+        
+
         $material_table =  [
             'barcode_number',
             'category_selection',
@@ -71,18 +73,18 @@ class SearchRepository implements SearchRepositoryInterface {
         ];
         foreach($filter as $column => $value) {
             if(in_array($column, $date) === false) {
-                $filter_result[]    =  MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
+                $filter_result[]    =  MaterialProducts::with('Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                         $q->where($column , $value); 
                     })
                     ->WhereHas('Batches', function($q) use ($column, $value){
                         // $q->Where($column , 'LIKE', '%' .$value.'%');
-                        $q->where($column , $value); 
+                        $q->where($column , $value)->orderBy($column);
                     })
                     ->get();
             } else {
   
-            $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
+                $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
                                     ->WhereHas('Batches', function($q) use ($value){
                                         $q->whereDate('date_in', '>=', $value['startDate'])
                                         ->whereDate('date_in', '<=', $value['endDate']);
