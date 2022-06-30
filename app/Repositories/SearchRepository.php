@@ -21,39 +21,9 @@ class SearchRepository implements SearchRepositoryInterface {
                     })
                     ->paginate(5);
     }
-    public function bulkSearch($row)
-    {
-        return MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
-        ->when($row->category_selection, function ($q) use ($row) {
-            $q->where('category_selection' , $row->category_selection ?? null);
-        })
-        ->when($row->item_description, function ($q) use ($row)  {
-            $q->where('item_description', 'LIKE', '%' .$row->item_description.'%');
-        })
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('department', 'LIKE', '%' .$row->department.'%');
-        })
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('owner_one', 'LIKE', '%' .$row->owner.'%');
-        })
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('brand', 'LIKE', '%' .$row->brand.'%');
-        })
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('storage_area', 'LIKE', '%' .$row->storage_area.'%');
-        })
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('date_in', 'LIKE', '%' .$row->date_in.'%');
-        }) 
-        ->WhereHas('Batches', function($q) use ($row){
-            $q->where('date_of_expiry', 'LIKE', '%' .$row->date_of_expiry.'%');
-        })
-        ->paginate(5);
-    }
+    
     public function advanced_search($filter)
     {
-        
-
         $material_table =  [
             'barcode_number',
             'category_selection',
@@ -73,18 +43,22 @@ class SearchRepository implements SearchRepositoryInterface {
         ];
         foreach($filter as $column => $value) {
             if(in_array($column, $date) === false) {
-                $filter_result[]    =  MaterialProducts::with('Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
+                $filter_result[]    =  MaterialProducts::with([
+                        'Batches' => function($q) use ($column, $value){
+                            $q->Where($column , $value);
+                        }, 
+                        'Batches.RepackOutlife',
+                        'Batches.HousingType', 
+                        'Batches.Department', 
+                        'UnitOfMeasure'
+                    ])
                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                         $q->where($column , $value); 
-                    })
-                    ->WhereHas('Batches', function($q) use ($column, $value){
-                        // $q->Where($column , 'LIKE', '%' .$value.'%');
-                        $q->where($column , $value)->orderBy($column);
-                    })
-                    ->get();
+                    }) 
+                    ->dd();
             } else {
   
-                $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
+            $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
                                     ->WhereHas('Batches', function($q) use ($value){
                                         $q->whereDate('date_in', '>=', $value['startDate'])
                                         ->whereDate('date_in', '<=', $value['endDate']);
