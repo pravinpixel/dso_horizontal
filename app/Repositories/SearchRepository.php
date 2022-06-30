@@ -76,7 +76,8 @@ class SearchRepository implements SearchRepositoryInterface {
                         $q->where($column , $value); 
                     })
                     ->WhereHas('Batches', function($q) use ($column, $value){
-                        $q->Where($column , 'LIKE', '%' .$value.'%');
+                        // $q->Where($column , 'LIKE', '%' .$value.'%');
+                        $q->where($column , $value); 
                     })
                     ->get();
             } else {
