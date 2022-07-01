@@ -35,9 +35,9 @@
                                 {{-- ======= Matrial Product Data  ====== --}}
                             </div>
                             <div class="custom-table collapse show batch-table" id="row_@{{ index+1 }}">
-                                <div class="custom-table-row" ng-repeat="batch in row.batches">
+                                <div class="custom-table-row " ng-repeat="batch in row.batches">
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
-                                        {!! $batch_table_td_columns !!}
+                                        {!! $batch_table_td_columns !!} 
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
                                 </div>
                             </div>

@@ -1,6 +1,5 @@
 @extends('layouts.app')
-@section('content')
-
+@section('content') 
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
@@ -8,31 +7,34 @@
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
                     <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                 </div>
-            </div> 
+            </div>
+            <div class="col-6 d-flex justify-content-end ms-auto text-end">
+              
+            </div>
         </div>
 
         {{-- = ==== Filletrs ====--}}
             @include('crm.partials.table-filter')
         {{-- ====== Filletrs ===--}}
-        
+         
         <div class="table-responsive shadow-lg bg-white">
-            <div class="custom-table" style=" min-height: 460px !important;">
+            <div class="custom-table d-none" style=" min-height: 460px !important;">
                 <div class="custom-table-head">
                     {{-- ======= Table Header  ====== --}}
                         {!! $table_th_columns !!}
                     {{-- ======= Table Header  ====== --}}
                 </div>
                 <div class="custom-table-body">
-                    <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data track by row.id">
+                    <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data" ng-class="row.is_draft == 1 ? 'drafted' : 'non-drafted'">
                         {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
-                        <div class="custom-table" ng-class="row.is_draft == 1 ? 'bg-draft' : ''">
+                        <div class="custom-table">
                             <div class="custom-table-head">
                                 {{-- ======= Matrial Product Data  ====== --}}
                                     {!! $table_td_columns !!} 
                                 {{-- ======= Matrial Product Data  ====== --}}
                             </div>
-                            <div class="custom-table collapse show" id="row_@{{ index+1 }}" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
-                                <div class="custom-table-row" ng-repeat="batch in row.batches">
+                            <div class="custom-table collapse show batch-table" id="row_@{{ index+1 }}">
+                                <div class="custom-table-row " ng-repeat="batch in row.batches">
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
                                         {!! $batch_table_td_columns !!} 
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
@@ -52,7 +54,7 @@
             <page-pagination>
             </page-pagination>
         </div>
-        
+
         {{-- ======= START : App Models ==== --}}
             @include('crm.material-products.modals.view-batch-list')
             @include('crm.material-products.modals.view-list')
@@ -63,7 +65,7 @@
             @include('crm.material-products.modals.repack-outlife')
             @include('crm.material-products.modals.import-from-excel')
         {{-- ======= END : App Models ==== --}}
-    </div> 
+    </div>
 @endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />

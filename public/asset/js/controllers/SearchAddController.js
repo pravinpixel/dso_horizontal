@@ -148,6 +148,14 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            
+            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
+                var QtyCount = 0
+                item.batches.map((batch, bIndex) => {
+                   return  QtyCount += Number(batch.quantity)
+                }) 
+                return {...item , ...{ totalQuantity : QtyCount}};
+            })
             $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);
@@ -161,7 +169,6 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.editOrDuplicate = function (wizard_mode,id, batch_id , is_parent) { 
         window.location.replace(`${app_URL}/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}/${is_parent != undefined ? is_parent : ''}`);
     }
-
     
     // ====== Delete Data DB ====
     $scope.delete_material_product = function (id) {
@@ -325,6 +332,13 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
+                var QtyCount = 0
+                item.batches.map((batch, bIndex) => {
+                   return  QtyCount += Number(batch.quantity)
+                }) 
+                return {...item , ...{ totalQuantity : QtyCount}};
+            })
         }, function(response) {
             Message('danger', response.data.message);
         });  
@@ -348,6 +362,13 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
+                var QtyCount = 0
+                item.batches.map((batch, bIndex) => {
+                   return  QtyCount += Number(batch.quantity)
+                }) 
+                return {...item , ...{ totalQuantity : QtyCount}};
+            })
         }, function(response) {
             Message('danger', response.data.message);
         });
@@ -364,6 +385,13 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
+                var QtyCount = 0
+                item.batches.map((batch, bIndex) => {
+                   return  QtyCount += Number(batch.quantity)
+                }) 
+                return {...item , ...{ totalQuantity : QtyCount}};
+            })
         }, function(response) {
             Message('danger', response.data.message);
         });
@@ -414,6 +442,13 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products    =   response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
+            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
+                var QtyCount = 0
+                item.batches.map((batch, bIndex) => {
+                   return  QtyCount += Number(batch.quantity)
+                }) 
+                return {...item , ...{ totalQuantity : QtyCount}};
+            })
             $('#advance-search-ng-modal').modal('hide');
             if ($scope.view_my_saved_search_model  ==  true) {
                 $('#saved-search-ng-modal').modal('hide');

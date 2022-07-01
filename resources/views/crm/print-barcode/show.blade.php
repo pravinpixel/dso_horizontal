@@ -33,7 +33,7 @@
             <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel"> 
                 <div class="border card text-center rounded-5 p-3 print-card" > 
                     <div class="barcode_label" ng-if="Barcode" >
-                        {{ $batch->BatchBarcode->barcode_label }}
+                        {{ $batch->barcode_number }}
                     </div>
                     <div>
                         <small  ng-if="batch_id">Batch /{{ $batch->id }}</small>

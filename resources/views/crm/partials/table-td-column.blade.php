@@ -14,8 +14,10 @@
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch')
         <div ng-if="on_{{ $column['name'] }}" class="box" >
             @if ($column['name']=="unit_packing_value")
+                @elseif($column['name']=="quantity")
+                    @{{ row.totalQuantity }}
                 @else
-                {!! $column['row'] !!} 
+                {!! $column['row'] !!}
             @endif
         </div>
     @endif

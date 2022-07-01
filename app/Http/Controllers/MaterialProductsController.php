@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\MaterialProductsRequest;
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
@@ -15,23 +14,17 @@ use App\Models\User;
 use App\Models\SaveMySearch;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Response;
-use App\Exports\BulkExport;
 use App\Imports\BulkImport;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Interfaces\DsoRepositoryInterface;
 use Maatwebsite\Excel\Facades\Excel;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
-use App\Models\BarcodeFormat;
 use App\Models\Batches;
-use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
-use Monolog\Handler\IFTTTHandler;
 
 class MaterialProductsController extends Controller
 {
