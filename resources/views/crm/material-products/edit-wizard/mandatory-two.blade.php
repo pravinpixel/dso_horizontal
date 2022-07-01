@@ -5,7 +5,7 @@
         @include('crm.material-products.fields.mandatory-two')
     </div>
     <div class="card-footer border-top bg-light"> 
-        <a href="{{ route('edit_or_duplicate.material-product', ["wizard_mode" => "edit","type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id]) }}" class="btn btn-light rounded-pill shadow-sm border">
+        <a href="{{ route('edit_or_duplicate.material-product', ["wizard_mode" => "edit","type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id,"is_parent" =>  is_parent()]) }}" class="btn btn-light rounded-pill shadow-sm border">
             <b><i class="bi bi-arrow-left-circle me-1"></i> Prev</b>
         </a>
         <button class="btn btn-primary float-end rounded-pill" type="submit" >

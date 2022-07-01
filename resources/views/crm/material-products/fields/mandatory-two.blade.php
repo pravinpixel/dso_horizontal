@@ -75,8 +75,10 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {{ config(is_disable(category_type() ?? $material_product->category_selection)."access.status") }}
-                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select"  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
+                <select name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
+                    multiple="multiple" id="multiple_access"
+                    @endif  
+                    class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
                     @foreach ($staff_by_department as $row)  
                         @if (count($row['list']) != 0)
                             <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
@@ -93,7 +95,7 @@
                             </optgroup>
                         @endif
                     @endforeach
-                </select>
+                </select> 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
