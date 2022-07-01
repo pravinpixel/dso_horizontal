@@ -8,22 +8,20 @@
     </div>
 </div>
 @foreach ($tableAllColumns as $column)
-    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one')
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch')
         <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">
             @if ($column['name'] == 'iqc_status')
                 IQC Status
-                @elseif ($column['name'] == 'owner_two')
-                    Ownners
-                    
-                @else
-                {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
-            @endif 
+                @elseif ($column['name'] == 'housing_type') Housing
+                @elseif ($column['name'] == 'owner_two') Ownners
+                @elseif ($column['name'] == 'serial')Batch# / Serial#
+                @else   {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
+            @endif
             <div class="btn-sort">
                 <i class="bi bi-arrow-up" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
                 <i class="bi bi-arrow-down" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
             </div>
         </div>
-        
     @endif
 @endforeach
 

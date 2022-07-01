@@ -26,18 +26,18 @@
                     {{-- ======= Table Header  ====== --}}
                 </div>
                 <div class="custom-table-body">
-                    <div class="custom-tabel-row"  ng-repeat="(index,row) in material_products.data">
+                    <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data" ng-class="row.is_draft == 1 ? 'drafted' : 'non-drafted'">
                         {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
-                        <div class="custom-table" ng-class="row.is_draft == 1 ? 'drafted' : ''">
+                        <div class="custom-table">
                             <div class="custom-table-head">
                                 {{-- ======= Matrial Product Data  ====== --}}
                                     {!! $table_td_columns !!} 
                                 {{-- ======= Matrial Product Data  ====== --}}
                             </div>
-                            <div class="custom-table collapse show" id="row_@{{ index+1 }}" ng-class="row.is_draft == 1 ? 'bg-draft' : 'bg-white'">
+                            <div class="custom-table collapse show batch-table" id="row_@{{ index+1 }}">
                                 <div class="custom-table-row" ng-repeat="batch in row.batches">
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
-                                        {!! $batch_table_td_columns !!} 
+                                        {!! $batch_table_td_columns !!}
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
                                 </div>
                             </div>

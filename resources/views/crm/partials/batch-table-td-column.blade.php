@@ -1,11 +1,13 @@
 <div class="box box-lg" ng-show="on_item_description"></div>   
 @foreach ($tableAllColumns as $column) 
-    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one')
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
                 <small class="badge bg-success rounded-pill">PASS</small>  
                 @elseif ($column['name'] == 'owner_two')
                     {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
+                @elseif ($column['name'] == 'serial')
+                {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!} 
                 @elseif($column['name'] == "unit_packing_value")
                     {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")
@@ -20,8 +22,8 @@
     <div class="{{$page_name === 'PRINT_BARCODE_LABEL'  ? "d-flex align-items-center justify-content-between" : null }}">
         @if ($page_name === 'MATERIAL_SEARCH_OR_ADD')
             <div class="dropdown mx-1">
-                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-three-dots"></i>
+                <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots text-dark"></i>
                 </a> 
                 <div class="dropdown-menu"> 
                     <a class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</a>

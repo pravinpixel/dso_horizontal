@@ -12,10 +12,18 @@
                         <span>All</span>
                     </label> 
                     @foreach ($tableAllColumns as $column)  
-                        @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing')
+                        @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
                             <label> 
                                 <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
-                                <span >{{ ucfirst(str_replace('_', " ", $column['name'])) }}</span>
+                                <span>
+                                    @if ($column['name'] == 'iqc_status')
+                                        IQC Status
+                                        @elseif ($column['name'] == 'housing_type') Housing
+                                        @elseif ($column['name'] == 'owner_two') Ownners
+                                        @elseif ($column['name'] == 'serial')Batch# / Serial#
+                                        @else   {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
+                                    @endif
+                                </span>
                             </label>
                         @endif
                     @endforeach
