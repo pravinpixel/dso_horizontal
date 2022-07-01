@@ -2,8 +2,8 @@
     <div class="box position-relative h-100 th box-lg">
         Item Description
         <div class="btn-sort">
-            <i class="bi bi-caret-up-fill" ng-click="sort_by('item_description', 'ASC')" ></i>
-            <i class="bi bi-caret-down-fill" ng-click="sort_by('item_description', 'DESC')"></i>
+            <i class="bi bi-arrow-up" ng-click="sort_by('item_description', 'ASC')" ></i>
+            <i class="bi bi-arrow-down" ng-click="sort_by('item_description', 'DESC')"></i>
         </div>
     </div>
 </div>
@@ -16,8 +16,8 @@
                 {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif 
             <div class="btn-sort">
-                <i class="bi bi-caret-up-fill" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
-                <i class="bi bi-caret-down-fill" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
+                <i class="bi bi-arrow-up" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
+                <i class="bi bi-arrow-down" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
             </div>
         </div> 
     @endif

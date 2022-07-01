@@ -4105,22 +4105,26 @@ fieldset:disabled .btn {
     top: 3%;
     right: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-right: 3px;
 }
+.btn-sort i{
+    opacity: .5;
+}
+
 .btn-sort i:nth-child(1) {
-    transform: translateY(9px);
+    transform: translateX(5px);
 }
 .cur_ponit ,
 .btn-sort i {
     cursor: pointer !important;
     margin: 3px 0;
 }
-.btn-sort:hover i,
-.btn-sort:focus i,
-.btn-sort:active  i {
+
+.btn-sort i:hover,
+.btn-sort i:focus,
+.btn-sort  i:active {
     opacity: 1;
 }
 .fade:not(.show) {

@@ -110,7 +110,9 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_before_expiry',
         ];
         if(in_array($sort_by->col_name, $material_table)) {
-            return  MaterialProducts::with(['Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure'])->orderBy($sort_by->col_name, $sort_by->order_type)->paginate(5);
+            return  MaterialProducts::with(['Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure'])
+            ->orderBy($sort_by->col_name, $sort_by->order_type)
+            ->paginate(5);
         } else {
             return MaterialProducts::with(['Batches' => function ($q) use ($sort_by) {
                 $q->orderBy($sort_by->col_name, $sort_by->order_type);

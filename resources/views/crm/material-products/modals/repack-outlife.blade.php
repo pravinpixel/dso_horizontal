@@ -32,8 +32,8 @@
                     <tbody>
                         <tr ng-repeat="repack in repack_outlife_table" >
                             <td> 
-                                <input type="button" repack-table="OUT" ng-disabled="repack.draw_out.status === false" value="Draw Out" class="btn-draw draw-out"> <br> <br>
-                                <input type="button" repack-table="IN" ng-disabled="repack.draw_in.status === false" value="Draw In" class="btn-draw draw-in">
+                                <input type="button" repack-table="OUT" ng-disabled="repack.draw_out.status === false" value="Draw In" class="btn-draw draw-in"> <br> <br>
+                                <input type="button" repack-table="IN" ng-disabled="repack.draw_in.status === false" value="Draw Out" class="btn-draw draw-out">
                             </td>
                             <td style="padding: 0">
                                 <textarea class="draw_time" readonly ng-model='repack.draw_out.time_stamp'  ng-required="repack.draw_out.status != false" cols="25" rows="1"></textarea>
