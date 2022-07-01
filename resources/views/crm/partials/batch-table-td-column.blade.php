@@ -1,14 +1,15 @@
 <div class="box box-lg" ng-show="on_item_description"></div>   
 @foreach ($tableAllColumns as $column) 
-    @if ($column['name']!="item_description")
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one')
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
                 <small class="badge bg-success rounded-pill">PASS</small>  
+                @elseif ($column['name'] == 'owner_two')
+                    {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
                 @elseif($column['name'] == "unit_packing_value")
                     {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")
-                    {{ $column['batch'] }} 
-                    ({{ $tableAllColumns["housing"]["batch"] }})
+                    {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
                 @else
                 {!! $column['batch'] !!}
             @endif

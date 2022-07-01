@@ -11,7 +11,7 @@
     </div>
 </div> 
 @foreach ($tableAllColumns as $key =>  $column) 
-    @if ($column['name']!="item_description")
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one')
         <div ng-if="on_{{ $column['name'] }}" class="box" >
             @if ($column['name']=="unit_packing_value")
                 @else

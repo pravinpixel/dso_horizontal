@@ -8,10 +8,13 @@
     </div>
 </div>
 @foreach ($tableAllColumns as $column)
-    @if ($column['name'] != 'item_description')
-        <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">  
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one')
+        <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">
             @if ($column['name'] == 'iqc_status')
-                IQC Status 
+                IQC Status
+                @elseif ($column['name'] == 'owner_two')
+                    Ownners
+                    
                 @else
                 {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif 
@@ -19,20 +22,21 @@
                 <i class="bi bi-arrow-up" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
                 <i class="bi bi-arrow-down" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
             </div>
-        </div> 
+        </div>
+        
     @endif
 @endforeach
- 
+
 @switch($page_name)
     @case($page_name == 'MATERIAL_SEARCH_OR_ADD')
         <div class="box th border-start box-sm">
-            Actions 
-        </div> 
+            Actions
+        </div>
     @break
     @case($page_name == 'PRINT_BARCODE_LABEL')
         <div class="box th border-start">
             Actions / Qty to print
-        </div> 
+        </div>
     @break
     @default
 @endswitch
