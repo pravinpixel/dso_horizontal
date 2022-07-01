@@ -212,9 +212,15 @@ class MaterialProductsController extends Controller
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
 
-    public function wizardFormView(Request $request, $type = null, $wizard_mode = null, $id = null, $batch_id = null)
+    public function wizardFormView(Request $request, $type = null, $wizard_mode = null, $id = null, $batch_id = null , $is_parent = null)
     {
 
+        if($is_parent == 1) {
+            $request->session()->put('edit_mode', 'parent');
+        } else {
+            $request->session()->put('edit_mode', 'batch');
+        }
+       
         if (Route::is('create.material-product')) $request->session()->put('wizard_mode', 'create');
 
         if ($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
@@ -346,7 +352,7 @@ class MaterialProductsController extends Controller
 
         if ($result) {
             if (wizard_mode() == 'create')     return redirect()->route('create.material-product', ['type' => $view]);
-            if (wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'edit', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id]);
+            if (wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'edit', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id , "is_parent" =>  is_parent()]);
             if (wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'duplicate', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id]);
         }
     }

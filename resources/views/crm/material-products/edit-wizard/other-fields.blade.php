@@ -1,6 +1,6 @@
 @extends('crm.material-products.edit')
 @section('wizzard-form-content')
-    {!! Form::model($material_product, ['route' => ['edit_or_duplicate.material-product', "wizard_mode"=>'edit',"type" => 'form-four' , "id" => $material_product->id , "batch_id" => $batch_id ], 'id' => 'edit_other_form', 'class' => 'row wizzard-form', 'method'=> 'post','files'=>true]) !!}
+    {!! Form::model($material_product, ['route' => ['edit_or_duplicate.material-product', "wizard_mode"=>'edit',"type" => 'form-four' , "id" => $material_product->id , "batch_id" => $batch_id , "is_parent" =>  is_parent() ], 'id' => 'edit_other_form', 'class' => 'row wizzard-form', 'method'=> 'post','files'=>true]) !!}
         <div class="card-body row">
             @include('crm.material-products.fields.other-fields')
         </div>

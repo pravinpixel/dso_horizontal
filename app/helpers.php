@@ -1,6 +1,7 @@
 <?php
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 if(! function_exists('category_type')) {
@@ -40,7 +41,8 @@ if(! function_exists('forget_session')) {
             'form-two',
             'form-three',
             'form-four',
-            'category_type'
+            'category_type',
+            'edit_mode',
         ]);
     }
 }
@@ -54,9 +56,21 @@ if(! function_exists('is_select')) {
         return $status ?? null;
     }
 }
+if(! function_exists('is_parent')) {
+    function is_parent() {
+        return  session()->get('edit_mode') == 'parent' ? 1 : '';
+    }
+}
 if(! function_exists('is_disable')) {
     function is_disable($category_type) {
-        return "is_disable".".".wizard_mode().".".$category_type."." ;
+        $wizard_mode = wizard_mode();
+        $edit_mode   = session()->get('edit_mode');
+ 
+        if(wizard_mode() != 'edit') {
+            return "is_disable.{$wizard_mode}.{$category_type}." ;
+        }
+
+        return "is_disable.{$wizard_mode}.{$edit_mode}.{$category_type}.";
     }
 }
 if(! function_exists('completed_tab')) {

@@ -113,8 +113,8 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
 
     // Edit  MaterialProduct 
-    Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
-    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
+    Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
+    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
 
     // Transfer Batches
     Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');

@@ -75,7 +75,8 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
+                {{ config(is_disable(category_type() ?? $material_product->category_selection)."access.status") }}
+                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select"  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
                     @foreach ($staff_by_department as $row)  
                         @if (count($row['list']) != 0)
                             <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">

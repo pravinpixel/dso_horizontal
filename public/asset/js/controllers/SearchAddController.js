@@ -158,8 +158,8 @@ app.controller('SearchAddController', function($scope, $http) {
 
     // ====== Edit & Duplicate Data DB ====
 
-    $scope.editOrDuplicate = function (wizard_mode,id, batch_id) { 
-        window.location.replace(`${app_URL}/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}`);
+    $scope.editOrDuplicate = function (wizard_mode,id, batch_id , is_parent) { 
+        window.location.replace(`${app_URL}/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}/${is_parent != undefined ? is_parent : ''}`);
     }
 
     
