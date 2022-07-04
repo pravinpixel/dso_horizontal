@@ -66,7 +66,15 @@ class MaterialProductsController extends Controller
             $result     =   $this->SearchRepository->sortingOrder($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-        $material_product           =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure','Batches.StorageArea')->latest()->paginate(50);
+       
+        $material_product   =   MaterialProducts::with([
+            'Batches', 
+            'Batches.RepackOutlife',
+            'Batches.HousingType', 
+            'Batches.Department', 
+            'UnitOfMeasure',
+            'Batches.StorageArea'
+        ])->latest()->paginate(config('app.paginate'));
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 
@@ -83,7 +91,7 @@ class MaterialProductsController extends Controller
                 ->when($row->af_supplier, function ($q) use ($row) {
                     $q->Where('supplier', $row->af_supplier);
                 })
-                ->paginate(2);
+                ->paginate(config('app.paginate'));
 
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
         }
@@ -364,7 +372,6 @@ class MaterialProductsController extends Controller
                 $user_name[]  = User::find($users)->alias_name;
             }
         }
-        
         return [
             "access"          => $user_name ?? null,
             "department"      => Departments::find($data->department)->name,

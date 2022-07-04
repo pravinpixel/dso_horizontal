@@ -10,12 +10,13 @@ use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use App\Models\tableOrder;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class DsoRepository implements DsoRepositoryInterface
 {
     public function renderPage($page_name, $view)
-    {
+    { 
         $storage_room_db        =   StorageRoom::all();
         $departments_db         =   Departments::all();
         $statutory_body_db      =   StatutoryBody::all();

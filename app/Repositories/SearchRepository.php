@@ -15,11 +15,18 @@ use Illuminate\Support\Facades\Log;
 class SearchRepository implements SearchRepositoryInterface {
     public function barCodeSearch($request)
     {
-        return MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
-                    ->WhereHas('Batches', function($q) use ($request){
-                        $q->where('barcode_number', 'LIKE', "%{$request->filters}%");
-                    })
-                    ->paginate(5);
+        return MaterialProducts::with([
+            'Batches', 
+            'Batches.RepackOutlife',
+            'Batches.HousingType', 
+            'Batches.Department', 
+            'UnitOfMeasure',
+            'Batches.StorageArea'
+        ])
+        ->WhereHas('Batches', function($q) use ($request){
+            $q->where('barcode_number', 'LIKE', "%{$request->filters}%");
+        })
+        ->paginate(config('app.paginate'));
     }
     
     public function advanced_search($filter)
@@ -45,23 +52,31 @@ class SearchRepository implements SearchRepositoryInterface {
                 $filter_result[]    =  MaterialProducts::with([
                         'Batches' => function($q) use ($column, $value){
                             $q->Where($column , $value);
-                        }, 
+                        },  
                         'Batches.RepackOutlife',
                         'Batches.HousingType', 
                         'Batches.Department', 
-                        'UnitOfMeasure'
+                        'UnitOfMeasure',
+                        'Batches.StorageArea'
                     ])
                     ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) { 
                         $q->where($column , $value); 
                     }) 
                     ->get();
             } else {
-                $filter_result[]    =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')
-                                        ->WhereHas('Batches', function($q) use ($value){
-                                            $q->whereDate('date_in', '>=', $value['startDate'])
-                                            ->whereDate('date_in', '<=', $value['endDate']);
-                                        })
-                                        ->get();
+                $filter_result[]    =   MaterialProducts::with([
+                    'Batches', 
+                    'Batches.RepackOutlife',
+                    'Batches.HousingType', 
+                    'Batches.Department', 
+                    'UnitOfMeasure',
+                    'Batches.StorageArea'
+                ])
+                ->WhereHas('Batches', function($q) use ($value){
+                    $q->whereDate('date_in', '>=', $value['startDate'])
+                    ->whereDate('date_in', '<=', $value['endDate']);
+                })
+                ->get();
             }
         }
         $collection         =   Arr::flatten($filter_result);
@@ -110,20 +125,35 @@ class SearchRepository implements SearchRepositoryInterface {
             'alert_before_expiry',
         ];
         if(in_array($sort_by->col_name, $material_table)) {
-            return  MaterialProducts::with(['Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure'])
+            return  MaterialProducts::with([
+                'Batches', 
+                'Batches.RepackOutlife',
+                'Batches.HousingType', 
+                'Batches.Department', 
+                'UnitOfMeasure',
+                'Batches.StorageArea'
+            ])
             ->orderBy($sort_by->col_name, $sort_by->order_type)
-            ->paginate(5);
+            ->paginate(config('app.paginate'));
         } else {
-            return MaterialProducts::with(['Batches' => function ($q) use ($sort_by) {
-                $q->orderBy($sort_by->col_name, $sort_by->order_type);
-            },'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure'])->paginate(5);
+            return MaterialProducts::with([
+                'Batches' => function ($q) use ($sort_by) {
+                    $q->orderBy($sort_by->col_name, $sort_by->order_type);
+                },
+                'Batches.RepackOutlife',
+                'Batches.HousingType', 
+                'Batches.Department', 
+                'UnitOfMeasure',
+                'Batches.StorageArea'
+            ])->paginate(config('app.paginate'));
         }
     }
 
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    public function paginate($items, $page = null, $options = [])
     {
-        $page   =   $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items  =   $items instanceof Collection ? $items : Collection::make($items);
+        $perPage    =   config('app.paginate');
+        $page       =   $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items      =   $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
             'path'      =>  LengthAwarePaginator::resolveCurrentPath(),
             'pageName'  =>  "page",
