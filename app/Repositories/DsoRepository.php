@@ -23,7 +23,7 @@ class DsoRepository implements DsoRepositoryInterface
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
         $tableColumns           =   tableOrder::getTableColumn();
-        $tableAllColumns        = [];
+        $tableAllColumns        =   [];
         foreach ($tableColumns as $key => $value) {
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
                 $tableAllColumns[$key] = [
