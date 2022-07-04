@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
+use App\Models\Masters\StorageRoom;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 class Batches extends Model
@@ -84,4 +85,9 @@ class Batches extends Model
     {
         return  $this->hasOne(Departments::class, 'id', 'department'); 
     } 
+
+    public function StorageArea()
+    {
+        return  $this->hasOne(StorageRoom::class, 'id', 'storage_area'); 
+    }  
 }

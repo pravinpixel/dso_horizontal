@@ -66,7 +66,7 @@ class MaterialProductsController extends Controller
             $result     =   $this->SearchRepository->sortingOrder($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-        $material_product           =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure')->latest()->paginate(50);
+        $material_product           =   MaterialProducts::with('Batches', 'Batches.RepackOutlife','Batches.HousingType', 'Batches.Department', 'UnitOfMeasure','Batches.StorageArea')->latest()->paginate(50);
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 

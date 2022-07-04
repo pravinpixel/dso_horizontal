@@ -25,7 +25,7 @@ class DsoRepository implements DsoRepositoryInterface
         $tableColumns           =   tableOrder::getTableColumn();
         $tableAllColumns        = [];
         foreach ($tableColumns as $key => $value) {
-            if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department")  {
+            if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
                     "name"      => $key,

@@ -8,9 +8,7 @@
                     <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                 </div>
             </div>
-            <div class="col-6 d-flex justify-content-end ms-auto text-end">
-              
-            </div>
+            <div class="col-6 d-flex justify-content-end ms-auto text-end"></div>
         </div>
 
         {{-- = ==== Filletrs ====--}}
