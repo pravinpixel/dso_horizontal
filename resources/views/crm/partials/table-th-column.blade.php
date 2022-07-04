@@ -8,7 +8,7 @@
     </div>
 </div>
 @foreach ($tableAllColumns as $column)
-    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch')
+    @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">
             @if ($column['name'] == 'iqc_status')
                 IQC Status

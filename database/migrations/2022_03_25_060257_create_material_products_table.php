@@ -23,6 +23,7 @@ class CreateMaterialProductsTable extends Migration
             $table->string('item_description')->nullable();
             $table->string('unit_of_measure')->nullable();
             $table->string('unit_packing_value')->nullable();
+            $table->string('quantity')->nullable();
 
             $table->integer('alert_threshold_qty_upper_limit')->nullable();
             $table->integer('alert_threshold_qty_lower_limit')->nullable();

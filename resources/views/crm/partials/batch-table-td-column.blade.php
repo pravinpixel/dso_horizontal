@@ -29,7 +29,7 @@
                     <a class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</a>
                     <a class="dropdown-item text-secondary"  ng-click="editOrDuplicate('duplicate',row.id, batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</a>
                     <a class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</a>
-                    <a class="dropdown-item text-secondary"  ng-click="Transfers(batch.id)"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
+                    <a class="dropdown-item text-secondary"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</a>
 
                     {{--  ==== REPACK OUTLIFE ====  --}}
                         <a ng-if="batch.require_outlife_tracking ==  1" class="dropdown-item text-secondary" ng-click="RepackTransfers('view',batch , row)">

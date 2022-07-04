@@ -554,10 +554,10 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.MasterData = res.data
     });
 
-    $scope.Transfers = (id) => {
+    $scope.Transfers = (id, quantity) => {
         $http.get(`${get_batch}/${id}`).then((response) => {
             $scope.TransfersBatch               = response.data 
-            $scope.TransfersBatchMaxQuantity    =   response.data.quantity
+            $scope.TransfersBatchMaxQuantity    =   quantity
             $('#Transfers').modal('show');
         });
     } 
@@ -598,12 +598,12 @@ app.controller('SearchAddController', function($scope, $http) {
             }, 
         }).then((isConfirm) => {
             if(isConfirm) {
-                $scope.TransfersBatch.quantity = ''
-                $scope.TransfersBatch.storage_area = ''
-                $scope.TransfersBatch.housing_type = ''
-                $scope.TransfersBatch.housing   = ''
-                $scope.TransfersBatch.owner_one = ''
-                $scope.TransfersBatch.owner_two = ''
+                $scope.TransfersBatch.quantity      = ''
+                $scope.TransfersBatch.storage_area  = ''
+                $scope.TransfersBatch.housing_type  = ''
+                $scope.TransfersBatch.housing       = ''
+                $scope.TransfersBatch.owner_one     = ''
+                $scope.TransfersBatch.owner_two     = ''
                 $scope.$apply()
             } 
         });
