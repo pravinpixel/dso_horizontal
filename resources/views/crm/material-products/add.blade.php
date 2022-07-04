@@ -32,14 +32,13 @@
 @endsection
 @section('scripts')
 <script> 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     function  change_product_type() {
-        var CategoryType  = $('#category_type').val();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        
+        var CategoryType  = $('#category_type').val(); 
         $.ajax({
             type:'POST',
             url:"{{ route('change-product-category') }}",
@@ -60,6 +59,26 @@
         }
     }
     outlifeChange()
+    wordMatchSuggest = (element) => {
+        $.ajax({
+            type    :   'GET',
+            url     :   "{{ route('suggestion') }}",
+            data    :  {
+                "name"  : element.name,
+                "value" : element.value,
+            } ,
+            success:function(response){
+                $(`#${element.list.id}`).html('')
+                if(response.data != undefined || response.data != null) {
+                    Object.values(response.data).map((item) => { 
+                        if(element.value !== item) {
+                            $(`#${element.list.id}`).append(`<option value="${item}">`)
+                        }
+                    })
+                }
+            }
+        });
+    }
 </script>
 <script>
     function saveAsDraft(e) {

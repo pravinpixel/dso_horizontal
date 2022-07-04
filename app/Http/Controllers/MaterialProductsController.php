@@ -21,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -406,5 +407,14 @@ class MaterialProductsController extends Controller
         }
         $data->delete();
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
+    }
+    public function suggestion(Request $request)
+    {
+        try {
+            $data =  MaterialProducts::where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+        } catch (\Throwable $th) {
+            $data =  Batches::where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+        }
+        return response(['status' => true,  'data' => collect($data)->unique()], Response::HTTP_OK);
     }
 }

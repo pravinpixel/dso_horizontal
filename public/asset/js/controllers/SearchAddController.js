@@ -881,4 +881,4 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.exportRepackOutlife = () => {
         location.replace(`export-repack-batch/${$scope.currentBatchId}`)
     }
-});
+}); 

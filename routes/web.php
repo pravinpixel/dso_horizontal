@@ -136,4 +136,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/export-repack-batch/{batch_id}', [RepackBatchController::class, 'export_repack_outlife'])->name('export_repack_outlife');
         
     // ==================== Repack Draw IN / OUT Flow ===============
+
+
+    // Word Suggestion 
+    Route::get('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
 });

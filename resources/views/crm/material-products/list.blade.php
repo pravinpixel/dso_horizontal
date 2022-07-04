@@ -83,7 +83,6 @@
     <input type="hidden" id="repack_batch" value="{{ route("repack-batch") }}"> 
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}"> 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('public/asset/js/vendors/daterangepicker.js') }}"></script>
@@ -93,6 +92,5 @@
     <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
-    <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>
-
+    <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
 @endsection

@@ -133,5 +133,25 @@
             }
         });
     }
+    wordMatchSuggest = (element) => {
+        $.ajax({
+            type    :   'GET',
+            url     :   "{{ route('suggestion') }}",
+            data    :  {
+                "name"  : element.name,
+                "value" : element.value,
+            } ,
+            success:function(response){
+                $(`#${element.list.id}`).html('')
+                if(response.data != undefined || response.data != null) {
+                    Object.values(response.data).map((item) => { 
+                        if(element.value !== item) {
+                            $(`#${element.list.id}`).append(`<option value="${item}">`)
+                        }
+                    })
+                }
+            }
+        });
+    }
 </script>
 @endsection

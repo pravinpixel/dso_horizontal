@@ -119,3 +119,4 @@ $('.three-digits').keyup(function(){
     }            
     return this; //for chaining
 });
+$(":input").attr("autocomplete","off");

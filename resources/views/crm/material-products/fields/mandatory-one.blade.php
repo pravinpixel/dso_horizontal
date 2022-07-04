@@ -17,15 +17,17 @@
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
-            <div class="col-8">
+            <div class="col-8"> 
                 {!! Form::text('item_description', $material_product->item_description ?? null , [
-                        'class'        => 'form-control form-select-sm', 
-                        'placeholder'  => 'Type here...', 
-                        'value'        => 'Type here...', 
+                        'class'         => 'form-control form-select-sm', 
+                        'placeholder'   => 'Type here...', 
+                        'list'          => 'item_descriptions', 
+                        "onkeyup"       => "wordMatchSuggest(this)",
                         'required',
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."item_description.status")
-                    ]) 
+                    ])
                 !!}
+                <datalist id="item_descriptions"></datalist>
             </div>
         </div>
         <div class="row m-0 y-center my-2">
@@ -36,8 +38,11 @@
                 @endphp
                 {!! Form::text('brand', $batch->brand ?? $brand, 
                     ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
+                    'list'          => 'brands', 
+                    "onkeyup"       => "wordMatchSuggest(this)",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")
                 ]) !!}
+                <datalist id="brands"></datalist>
             </div>
         </div>
         <div class="row m-0 y-center my-2">
