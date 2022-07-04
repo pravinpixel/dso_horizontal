@@ -51,7 +51,7 @@ class MaterialProductsController extends Controller
         
         if ($request->save_advanced_search) {
             $row        =   (object) $request->save_advanced_search['advanced_search'];
-            $result     =   $this->SearchRepository->StoreBulkSearch($row, $request);
+            $result     =   $this->SearchRepository->storeBulkSearch($row, $request);
             if ($result) return response(['status' => true,  'message' => trans('response.create')], Response::HTTP_CREATED);
         }
 
