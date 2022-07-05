@@ -557,8 +557,8 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.Transfers = (id, quantity) => {
         $http.get(`${get_batch}/${id}`).then((response) => {
-            $scope.TransfersBatch               = response.data 
-            $scope.TransfersBatchMaxQuantity    =   quantity
+            $scope.TransfersBatch               =   response.data 
+            $scope.TransfersBatchMaxQuantity    =   response.data.quantity
             $('#Transfers').modal('show');
         });
     } 
