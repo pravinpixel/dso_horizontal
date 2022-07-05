@@ -172,6 +172,14 @@
                                 <option value="2">No</option> 
                             </select>
                         </div>
+                        <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" ng-model="advanced_filter.is_draft">
+                                <option value="">-- select --</option>
+                                <option value="1">Draft</option>
+                                <option value="0">Active</option> 
+                            </select>
+                        </div>
                     </div>
                 </div> 
             </div>

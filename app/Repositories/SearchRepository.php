@@ -41,6 +41,7 @@ class SearchRepository implements SearchRepositoryInterface
             'alert_threshold_qty_upper_limit',
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
+            'is_draft'
         ];
         $date = [
             "date_in",
