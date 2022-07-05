@@ -91,8 +91,9 @@ class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
 
     public function storeBarcodeFormate($material_product, $batch, $self_gen_one , $self_gen_two)
     {
-        Batches::updateOrCreate(["id" => $batch->id ?? null],["barcode_number" => ($material_product->category_selection == 'material' ? "1" : "2").$self_gen_one.$self_gen_two]);
-
+        // dd($batch->actions);
+        $barcode_label = ($material_product->category_selection == 'material' ? "1" : "2").$self_gen_one.$self_gen_two;
+        Batches::updateOrCreate(["id" => $batch->id ?? null],["barcode_number" => $barcode_label]); 
         BarcodeFormat::updateOrCreate(["batch_id" => $batch->id ?? null],[
             "category_selection"    =>  $material_product->category_selection,
             "item_description"      =>  $material_product->item_description,
@@ -101,7 +102,7 @@ class BarCodeLabelRepository implements BarCodeLabelRepositoryInterface {
             "batch"                 =>  $batch->batch,
             "serial"                =>  $batch->serial,
             "self_gen_two"          =>  $self_gen_two, 
-            "barcode_label"         => ($material_product->category_selection == 'material' ? "1" : "2").$self_gen_one.$self_gen_two,
+            "barcode_label"         =>  $barcode_label,
         ]);
     }
     public function generateZeros($incrementValue)

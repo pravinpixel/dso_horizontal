@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Exports\RepackOutlifeExport;
 use App\Interfaces\BarCodeLabelRepositoryInterface;
+use App\Models\BarcodeFormat;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -23,41 +25,49 @@ class RepackBatchController extends Controller
 
     public function repack(Request $request)
     {
-        $material_product   =   MaterialProducts::find($request->material_product_id);
-        $repackBatch        =   $request->all();
-     
-        $OldBatch           =   Batches::find($request->id);
-        $repackBatchValue   =   json_decode($OldBatch->actions);
-     
-        if($repackBatchValue->repack_code == null) {
+        $material_product       =   MaterialProducts::find($request->material_product_id);
+        $current_batch          =   Batches::find($request->id);
+        $current_batch_action   =   json_decode($current_batch->actions);
+        
+        if($current_batch_action->repack_code == null) {
+            BarcodeFormat::find($request->id)->update([
+                "repack_one" => "01"
+            ]);
             $repack_code = "01";
-        }elseif($repackBatchValue->repack_code == "01"){
+        }
+        if($current_batch_action->repack_code == "01") {
+            BarcodeFormat::find($request->id)->update([
+                "repack_two" => "01"
+            ]);
             $repack_code = "02";
-        }  elseif($repackBatchValue->repack_code == "02") {
+        }
+        if($current_batch_action->repack_code == "02") {
             return response()->json([
                 "status"    => false,
                 "message"   => "Batch is Already Two Time  Repacked !"
-            ]);
+            ]); 
         }
-       
-        $OldBatch->actions =  json_encode([
-            "repack_code"    =>  $repack_code,
-            "packing_value"  =>  null,
-            "packing_size"   =>  null,
-            "remain_amount"  =>  null,
+  
+        $current_batch->update([
+            "actions" => json_encode([
+                "repack_code"    =>  $repack_code,
+                "packing_value"  =>  null,
+                "packing_size"   =>  null,
+                "remain_amount"  =>  null,
+            ])
         ]);
-        $OldBatch->save();
+          
+        $created_batch  =   $current_batch->replicate();
+        $created_batch  ->  created_at  = Carbon::now();
+        $created_batch  ->  actions     =   json_encode([
+                                                "repack_code"    =>  null,
+                                                "packing_value"  =>  $material_product->unit_packing_value,
+                                                "packing_size"   =>  $request->PackingSize,
+                                                "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
+                                            ]); 
+        $created_batch  ->  save();
 
-        $repackBatch["actions"] = json_encode([
-            "repack_code"    =>  null,
-            "packing_value"  =>  $material_product->unit_packing_value,
-            "packing_size"   =>  $request->PackingSize,
-            "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
-        ]);
-
-        $createdBatch       =   $material_product->Batches()->create($request->all());
-        $Batches            =   Batches::find($createdBatch->id);
-        $this->barCodeLabelRepository->generateBarcode($material_product, $Batches);
+        $this->barCodeLabelRepository->generateBarcode($material_product, $created_batch);
 
         return response()->json([
             "status" => true,

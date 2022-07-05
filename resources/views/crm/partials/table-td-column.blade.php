@@ -19,10 +19,10 @@
                     <span ng-if="row.is_draft == 1" class="badge bg-secondary rounded-pill">Draft</span>
                 @elseif($column['name']=="quantity")
                     @{{ row.totalQuantity }}
-                    <span ng-if="row.totalQuantity <= row.alert_threshold_qty_upper_limit && row.totalQuantity <= row.alert_threshold_qty_lower_limit">
+                    <span ng-if="row.totalQuantity < row.alert_threshold_qty_upper_limit && row.totalQuantity <= row.alert_threshold_qty_lower_limit">
                         <i class="ms-1 text-warning dot-sm bi bi-circle-fill"></i>
                     </span>
-                    <span ng-if="row.totalQuantity >= row.alert_threshold_qty_lower_limit">
+                    <span ng-if="row.totalQuantity > row.alert_threshold_qty_lower_limit">
                         <i class="ms-1 text-danger dot-sm bi bi-circle-fill"></i>
                     </span>
                 @else
