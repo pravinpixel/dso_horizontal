@@ -153,6 +153,9 @@ class TableOrderSeeder extends Seeder
             }elseif($value == 'barcode_number') {
                 $data = 37;
                 $status = true;
+            }elseif($value == 'is_draft') {
+                $data   = 38;
+                $status = true;
             } 
             tableOrder::create([
                 'order_by'  => $data ?? $i + 1,

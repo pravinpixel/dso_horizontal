@@ -36,7 +36,7 @@ app.controller('SearchAddController', function($scope, $http) {
     var app_URL                             =   $('#app_URL').val();
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val(); 
-    $scope.current_date                     =   moment(new Date()).format('DD-MM-YYYY')
+    $scope.current_date                     =   moment(new Date()).format('YYYY-MM-DD')
     $scope.on_all_check_box = false
     
     $scope.select_all_check_box = () => {
@@ -429,8 +429,8 @@ app.controller('SearchAddController', function($scope, $http) {
                 item == "date_of_manufacture" ||
                 item == "date_of_shipment"
             ) {
-                payload_data.advanced_search[item].startDate  =  moment(payload_data.advanced_search[item].startDate).format('DD-MM-YYYY')
-                payload_data.advanced_search[item].endDate    =  moment(payload_data.advanced_search[item].endDate).format('DD-MM-YYYY')
+                payload_data.advanced_search[item].startDate  =  moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
+                payload_data.advanced_search[item].endDate    =  moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
             }
         })
 
