@@ -875,6 +875,8 @@ app.controller('SearchAddController', function($scope, $http) {
                         remaining_days  : null,
                     });
                 }
+                console.log(response)
+                Message('success',"Repack Outlife Saved !")
             }) 
             $('#RepackOutlife').modal('hide');
         })

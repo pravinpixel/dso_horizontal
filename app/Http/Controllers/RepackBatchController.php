@@ -30,15 +30,15 @@ class RepackBatchController extends Controller
         $current_batch_action   =   json_decode($current_batch->actions);
         
         if($current_batch_action->repack_code == null) {
-            BarcodeFormat::find($request->id)->update([
-                "repack_one" => "01"
-            ]);
+            // BarcodeFormat::find($request->id)->update([
+            //     "repack_one" => "01"
+            // ]);
             $repack_code = "01";
         }
         if($current_batch_action->repack_code == "01") {
-            BarcodeFormat::find($request->id)->update([
-                "repack_two" => "01"
-            ]);
+            // BarcodeFormat::find($request->id)->update([
+            //     "repack_two" => "01"
+            // ]);
             $repack_code = "02";
         }
         if($current_batch_action->repack_code == "02") {
@@ -89,7 +89,6 @@ class RepackBatchController extends Controller
     }
     public function repack_outlife (Request $request, $id)
     {
-   
         if($request->repack_id) {
             RepackOutlife::find($request->repack_id)->update(["id" => $request->repack_id]);
             Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
@@ -113,7 +112,6 @@ class RepackBatchController extends Controller
         ]);
 
         Batches::find($id)->update(['quantity' => $request->quantity - $request->Draw_input_repack_amt]);
-
 
         return response()->json([
             "status"    => true,
