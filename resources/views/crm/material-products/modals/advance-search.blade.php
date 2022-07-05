@@ -172,49 +172,12 @@
                                 <option value="2">No</option> 
                             </select>
                         </div>
-                        {{-- <div class="col-6 text-start mb-2 px-1">
-                                <small class="mb-1">Extended expiry</small>
-                                <input type="text" date-range-picker class="form-control" placeholder="Type here" ng-model="advanced_filter.extended_expiry">
-                            </div>
-                            <div class="col-6 text-start mb-2 px-1">
-                                <label class="form-label">Extended QC status</label>
-                                <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
-                                    <option value="">-- select --</option>
-                                    <option value="1">Pass</option>
-                                    <option value="2">Fail</option> 
-                                </select>
-                            </div>
-                            <div class="col-6 text-start mb-2 px-1">
-                                <label class="form-label">Disposed</label>
-                                <select name="advanced_filter.disposed" class="form-select" ng-model="advanced_filter.disposed">
-                                    <option value="">-- select --</option>
-                                    <option value="1">Yes</option>
-                                    <option value="2">No but used for TD/Expt</option> 
-                                </select>
-                            </div>
-                            <div class="col-6 text-start mb-2 px-1">
-                                <label class="form-label">Extended QC status</label>
-                                <select name="advanced_filter.extended_qc_status" class="form-select" ng-model="advanced_filter.extended_qc_status">
-                                    <option value="">-- select --</option>
-                                    <option value="1">Pass</option>
-                                    <option value="2">Fail</option> 
-                                </select>
-                            </div>
-                            <div class="col-6 text-start mb-2 px-1">
-                                <label class="form-label">Required Usage Tracking</label>
-                                <select name="advanced_filter.usage_tracking" class="form-select" ng-model="advanced_filter.usage_tracking">
-                                    <option value="">-- select --</option>
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option> 
-                                </select>
-                            </div> 
-                        --}}
                     </div>
                 </div> 
             </div>
             <div class="card-footer border-top text-center align-items-center row m-0">
-                <label for="xxxx" data-bs-toggle="modal" data-bs-target="#save-search-name" class="col-4 p-0">
-                    <input type="checkbox"  class="form-check-input" id="xxxx"> Save this search
+                <label for="saveThisSearch" class="col-4 p-0">
+                    <input type="checkbox" onclick="saved_this_search(this)"  class="form-check-input" id="saveThisSearch"> Save this search
                 </label>
                 <div class="text-end col-8  p-0">
                     <button ng-click="clear_advanced_filter()" class="btn btn-light rounded-pill"><i class="bi bi-x me-1"></i> clear</button>
@@ -224,13 +187,13 @@
         </div> 
     </div>
 </div> 
-<div class="modal fade" id="save-search-name" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade" id="save-search-name" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white border-0 rounded-0">
                 <h4>Search Title</h4>  
                 <div class="ms-auto">
-                    <button class="rounded-pill btn btn-light btn-sm shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                    <button class="rounded-pill btn btn-light btn-sm shadow-sm border" onclick="uncheckedSavedSearch()" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
                 </div>
             </div>
             <div class="modal-body">

@@ -497,6 +497,7 @@ app.controller('SearchAddController', function($scope, $http) {
             Message('success', response.data.message);
             $scope.search_title = ''
             $('#save-search-name').modal('hide');
+            $('#saveThisSearch').prop('checked', false);
         }, function(response) {
             Message('danger', response.data.errors.search_title[0]);
         });

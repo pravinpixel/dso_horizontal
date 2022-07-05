@@ -139,7 +139,7 @@
                     <div class="d-flex align-items-center">
                         <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
                        <div>
-                            <p class="mb-1">Extended</p>
+                            <p class="mb-1">Extend</p>
                             <strong>3520</strong>
                        </div>
                     </div>

@@ -120,3 +120,15 @@ $('.three-digits').keyup(function(){
     return this; //for chaining
 });
 $(":input").attr("autocomplete","off");
+
+
+saved_this_search = (e) => {
+    if(e.checked ===  true) {
+        $('#save-search-name').modal('show')
+    } else {
+        $('#save-search-name').modal('hide')
+    }
+}
+uncheckedSavedSearch = (e) => {
+    $('#saveThisSearch').prop('checked', false);
+}
