@@ -51,20 +51,23 @@ class SearchRepository implements SearchRepositoryInterface
         foreach ($filter as $column => $value) {
             if (in_array($column, $date) === false) {
                 $filter_result[]    =  MaterialProducts::with([
-                    'Batches' => function ($q) use ($column, $value) {
-                        $q->Where($column, $value);
+                    'Batches' => function ($q) use ($column, $value , $material_table) {
+                        $q->when(in_array($column, $material_table) == false, function ($q) use ($column, $value) {
+                            $q->where($column, $value);
+                        });
                     },
                     'Batches.RepackOutlife',
                     'Batches.HousingType',
                     'Batches.Department',
                     'UnitOfMeasure',
                     'Batches.StorageArea'
-                ])
-                    ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) {
-                        $q->where($column, $value);
-                    })
+                ]) 
+                ->when(in_array($column, $material_table) == true, function ($q) use ($column, $value) {
+                    $q->where($column, $value);
+                })
                     ->get();
             } else {
+                 
                 $filter_result[]    =   MaterialProducts::with([
                     'Batches',
                     'Batches.RepackOutlife',

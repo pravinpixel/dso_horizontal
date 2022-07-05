@@ -31,14 +31,13 @@ option {
 }
 
 .box {
-    padding: 10px !important;
+    padding: 10px  10px  10px  20px !important;
     width: 139px !important;
     min-width: 139px !important;
     max-width: 139px !important;
     font-size: 14px !important;
     color: black;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 .box.box-lg {
