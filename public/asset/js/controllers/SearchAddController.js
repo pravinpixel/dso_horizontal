@@ -639,6 +639,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 $http.post(repack_batch, $scope.RepackTransfer).then((response) => {
                     $scope.get_material_products();
                     Message(response.data.status == true ? 'success' : 'danger', response.data.message);
+                    
                     $('#RepackTransfers').modal('hide');
                 }); 
             break;
