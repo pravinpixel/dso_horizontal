@@ -12,7 +12,7 @@
 </div> 
 @foreach ($tableAllColumns as $key =>  $column) 
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
-        <div ng-if="on_{{ $column['name'] }}" class="box" >
+        <div ng-if="on_{{ $column['name'] }}" class="box justify-content-start" >
             @if ($column['name']=="unit_packing_value")
                 @elseif($column['name']=="quantity")
                     @{{ row.totalQuantity }}

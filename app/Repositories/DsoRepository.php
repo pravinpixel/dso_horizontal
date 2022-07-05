@@ -39,7 +39,14 @@ class DsoRepository implements DsoRepositoryInterface
                     "status"    =>  $value['status'],
                     "name"      =>  $key,
                     "row"       =>  '{{ row.'.$value['name'].'.name }}',
-                    "batch"     =>  '{{ batch.'.$value['name'].' == '."1".' == true ? '."'Yes'".' : '."'No'".'}}',
+                    "batch"     =>  '
+                        <span class="badge badge-outline-success rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' == true">
+                            Yes
+                        </span>
+                        <span class="badge badge-outline-secondary rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' != true">
+                            No
+                        </span>
+                    ',
                 ];
             }
             elseif($value['name'] =="date_of_expiry")  {

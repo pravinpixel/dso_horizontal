@@ -31,7 +31,7 @@ option {
 }
 
 .box {
-    padding: 10px  10px  10px  20px !important;
+    padding: 10px !important;
     width: 139px !important;
     min-width: 139px !important;
     max-width: 139px !important;
