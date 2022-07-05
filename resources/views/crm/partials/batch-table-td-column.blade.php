@@ -4,6 +4,8 @@
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
                 <small class="badge bg-success rounded-pill">PASS</small>  
+                @elseif ($column['name'] == 'is_draft') 
+                    @{{ row.is_draft == 1 ? 'Draft' : 'Active' }}
                 @elseif ($column['name'] == 'owner_two')
                     {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
                 @elseif ($column['name'] == 'serial')

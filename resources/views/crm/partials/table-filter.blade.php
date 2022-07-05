@@ -18,6 +18,7 @@
                                 <span>
                                     @if ($column['name'] == 'iqc_status')
                                         IQC Status
+                                        @elseif ($column['name'] == 'is_draft') Status
                                         @elseif ($column['name'] == 'housing_type') Housing
                                         @elseif ($column['name'] == 'owner_two') Ownners
                                         @elseif ($column['name'] == 'serial')Batch# / Serial#
