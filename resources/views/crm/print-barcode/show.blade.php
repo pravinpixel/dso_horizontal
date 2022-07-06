@@ -20,7 +20,7 @@
                     <td>{{ $batch->brand }}</td>
                     <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
                     <td>{{ $batch->owner_one }} , {{ $batch->owner_one }}</td>
-                    <td>{{ $batch->date_of_expiry }}</td>
+                    <td>{{  Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
                     <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
                     <td>{{ $batch->project_name }}</td>  
                     <td>
@@ -36,10 +36,10 @@
                         {{ $batch->barcode_number }}
                     </div>
                     <div>
-                        <small  ng-if="batch_id">Batch /{{ $batch->id }}</small>
+                        <small  ng-if="batch_id">{{ $batch->batch }} / {{ $batch->serial }}</small>
                         <div class="text-primary">
                             <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
-                            <p class="m-0" ng-if="date_of_expiry">{{ $batch->date_of_expiry }}</p>
+                            <p class="m-0" ng-if="date_of_expiry">{{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</p>
                             <p class="m-0" ng-if="project_name">{{ $batch->project_name }}</p>
                             <p class="m-0" ng-if="ownners">Owner1/2 : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
                         </div> 
