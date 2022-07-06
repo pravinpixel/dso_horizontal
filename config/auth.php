@@ -16,7 +16,7 @@ return [
     'password' => '!!_XYZ_!!',
 
     'defaults' => [
-        'guard' => 'web',
+        'guard'     => 'web',
         'passwords' => 'users',
     ],
 

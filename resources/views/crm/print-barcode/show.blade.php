@@ -2,17 +2,17 @@
 @section('content')
     <div ng-app="PrintLabelApp" ng-controller="PrintController">
         <div> 
-            <table class="table table-bordered bg-white">
+            <table class="table table-bordered bg-white custom">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th> Item Description</th>
-                        <th>Brand</th>
-                        <th>Batch/Serial#</th>
-                        <th>Owner1/2</th>
-                        <th>DOE</th>
-                        <th>Used for TD/Expt</th> 
-                        <th>Project Name</th>
-                        <th>Qty to print</th>
+                        <th class="p-1"> Item Description</th>
+                        <th class="p-1">Brand</th>
+                        <th class="p-1">Batch/Serial#</th>
+                        <th class="p-1">Owner1/2</th>
+                        <th class="p-1">DOE</th>
+                        <th class="p-1">Used for TD/Expt</th> 
+                        <th class="p-1">Project Name</th>
+                        <th class="p-1">Qty to print</th>
                     </tr> 
                 </thead>
                 <tr>
@@ -24,7 +24,7 @@
                     <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
                     <td>{{ $batch->project_name }}</td>  
                     <td>
-                        <input type="number" class="text-center fw-bold form-control form-control-sm m-0 " ng-model="print_qty">
+                        @{{ print_qty }}
                     </td> 
                 </tr>
             </table> 
@@ -63,18 +63,28 @@
                 <div class="card shadow-sm border" >
                     <div class="card-header bg-light border-bottom">
                         <div class="row m-0">
-                            <div class="col-md-4 d-flex align-items-center">
-                                <label class="me-2">
-                                    Style
-                                </label>
-                                <select ng-model="print_size" class="form-select form-select-md rounded-pill">
-                                    <option value="">-- Select Label Size --</option>
-                                    <option value="small">Small</option>
-                                    <option value="big">Big</option>
-                                </select>
+                            <div class="col-md-3 p-0">
+                                <div class="d-flex align-items-center">
+                                    <label class="me-2">
+                                        Qty
+                                    </label>
+                                    <input type="number" class="fw-bold form-control rounded-pill" ng-model="print_qty">
+                                </div> 
                             </div>
-                            <div class="col-md-8 text-end">
-                                {{-- <button type="button" class="btn btn-success-light rounded-pill" data-bs-dismiss="modal">Amend</button> --}}
+                            <div class="col-md-4  ">
+                                <div class="d-flex align-items-center">
+                                    <label class="me-2">
+                                        Style
+                                    </label>
+                                    <select ng-model="print_size" class="form-select form-select-md rounded-pill">
+                                        <option value="">-- Select Label Size --</option>
+                                        <option value="small">Small</option>
+                                        <option value="big">Big</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5 text-end p-0">
+                                <a href="{{ route('print-barcode') }}" class="btn btn-light border rounded-pill shadow-sm"><i class="fa fa-times me-1"></i>Cancle & back</a>
                                 <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
                             </div>
                         </div>
