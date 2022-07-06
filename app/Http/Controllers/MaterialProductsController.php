@@ -316,11 +316,12 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
     {
+        
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
-        ); 
+        );
         if ($type == 'form-one') {
             if(wizard_mode() == 'duplicate') {
                 $request->session()->put('is_skip_duplicate', 'skip');

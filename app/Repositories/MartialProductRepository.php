@@ -17,7 +17,6 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     }
 
     public function save_material_product($material_product_id=null, $batch_id=null, $request) {
-         
         $inputs = $request->except([
             '_token',
             'coc_coa_mill_cert',
