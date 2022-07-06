@@ -26,7 +26,7 @@
                     {{-- ======= Table Header  ====== --}}
                 </div>
                 <div class="custom-table-body">
-                    <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data" ng-class="row.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                    <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data">
                         {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                         <div class="custom-table">
                             <div class="custom-table-head">
@@ -35,7 +35,7 @@
                                 {{-- ======= Matrial Product Data  ====== --}}
                             </div>
                             <div class="custom-table collapse show batch-table" id="row_@{{ index+1 }}">
-                                <div class="custom-table-row " ng-repeat="batch in row.batches">
+                                <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
                                         {!! $batch_table_td_columns !!} 
                                     {{-- ======= Matrial Product Batches Data  ====== --}}
