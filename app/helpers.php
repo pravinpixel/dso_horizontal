@@ -30,8 +30,8 @@ if(! function_exists('wizard_mode')) {
         return session()->get('wizard_mode');
     }
 }
-if(! function_exists('forget_session')) {
-    function forget_session() {
+if(! function_exists('forgot_session')) {
+    function forgot_session() {
         return session()->forget([
             'is_skip_duplicate',
             'wizard_mode',
@@ -102,7 +102,6 @@ if(! function_exists('is_reset')) {
     function is_reset($column, $value, $category_type) {
         $wizard_mode    = wizard_mode();
         $reset_status   = config("is_disable.{$wizard_mode}.{$category_type}.{$column}.reset");
-         
         if($reset_status != null) {
             if(session()->get('is_skip_duplicate') === null) {
                 return $reset_status !== true ? $value :  null; 
@@ -112,5 +111,84 @@ if(! function_exists('is_reset')) {
         } else {
             return $value;
         }
+    }
+}
+
+if(! function_exists('checkIsMaterialColumn')) {
+    function checkIsMaterialColumn($column) {
+        $data =  [ 
+            'category_selection',
+            'item_description',
+            'unit_of_measure',
+            'unit_packing_value',
+            'alert_threshold_qty_upper_limit',
+            'alert_threshold_qty_lower_limit',
+            'alert_before_expiry',
+            'is_draft'
+        ];
+        return in_array($column, $data) == true ? 1 : 0 ;
+    }
+}
+if(! function_exists('checkIsBatchesColumn')) {
+    function checkIsBatchesColumn($column) {
+        $data =  [
+            'barcode_number',
+            'material_product_id',
+            'brand',
+            'supplier',
+            'packing_size',
+            'quantity',
+            'batch',
+            'serial',
+            'po_number',
+            'statutory_body',
+            'euc_material',
+            'require_bulk_volume_tracking',
+            'require_outlife_tracking',
+            'outlife',
+            'storage_area',
+            'housing_type',
+            'housing',
+            'owner_one',
+            'owner_two',
+            'department',
+            'access',
+            'date_in',
+            'date_of_expiry',
+            'coc_coa_mill_cert',
+            'coc_coa_mill_cert_status',
+            'iqc_status',
+            'iqc_result',
+            'sds',
+            'cas',
+            'fm_1202',
+            'project_name',
+            'material_product_type',
+            'date_of_manufacture',
+            'date_of_shipment',
+            'cost_per_unit',
+            'remarks',
+            'extended_expiry',
+            'extended_qc_status',
+            'extended_qc_result',
+            'disposal_certificate',
+            'used_for_td_expt_only',
+            'actions',
+            'repack_size',
+            'barcode_number',
+            'iqc_result_status'
+        ];
+        return in_array($column, $data) == true ? 1 : 0 ;
+    }
+}
+if(! function_exists('checkIsBatchDateColumn')) {
+    function checkIsBatchDateColumn($column) {
+        $data =  [
+            "date_in",
+            "date_of_expiry",
+            "date_of_manufacture",
+            "date_of_shipment"
+        ];
+        return in_array($column, $data) == true ? 1 : 0 ;
     }
 }

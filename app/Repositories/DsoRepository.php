@@ -25,7 +25,7 @@ class DsoRepository implements DsoRepositoryInterface
         $owners                 =   User::all();
         $tableColumns           =   tableOrder::getTableColumn();
         $tableAllColumns        =   [];
-        Log::info($tableColumns);
+ 
         foreach ($tableColumns as $key => $value) {
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
                 $tableAllColumns[$key] = [
@@ -72,7 +72,7 @@ class DsoRepository implements DsoRepositoryInterface
         $table_th_columns        = view('crm.partials.table-th-column', compact('tableAllColumns','page_name'));
         $table_td_columns        = view('crm.partials.table-td-column', compact('tableAllColumns','page_name'));
         $batch_table_td_columns  = view('crm.partials.batch-table-td-column', compact('tableAllColumns','page_name'));
-        forget_session(); 
+        forgot_session(); 
         return view($view, compact(
             'table_th_columns',
             'table_td_columns', 
