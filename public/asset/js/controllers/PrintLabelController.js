@@ -79,7 +79,8 @@ app.controller("PrintController", ($scope, $http) => {
                         font-family: 'barcode font', Courier;
                         font-size: 58px !important;
                         color: black !important;
-                        letter-spacing: 3px
+                        letter-spacing: 3px;
+                        margin-bottom: 15px !important
                     }
                 }
             </style>
