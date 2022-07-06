@@ -871,15 +871,14 @@ app.controller('SearchAddController', function($scope, $http) {
                         qty_cut         : null,
                         remaining_days  : null,
                     });
-                }
-                console.log(response)
+                } 
                 Message('success',"Repack Outlife Saved !")
             }) 
+            if($('#exportLogCheckBox').is(':checked')) {
+                location.replace(`export-repack-batch/${$scope.currentBatchId}`);
+                $('#exportLogCheckBox').prop('checked', false)
+            }
             $('#RepackOutlife').modal('hide');
         })
-    }
-
-    $scope.exportRepackOutlife = () => {
-        location.replace(`export-repack-batch/${$scope.currentBatchId}`)
     }
 }); 
