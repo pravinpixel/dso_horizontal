@@ -26,10 +26,11 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "100",
             "alert_threshold_qty_lower_limit" => "10",
             "alert_before_expiry"             => "704",
-            "is_draft"                        => "0",
             "quantity"                        => 175,
         ];
         $data = [
+            "is_draft"                        => "0",
+
             "quantity"                     => 175,
             "brand"                        => "Hexcel",
             "supplier"                     => "Peter Parker",

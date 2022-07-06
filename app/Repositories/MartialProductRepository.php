@@ -27,7 +27,10 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         ]);
         
 
-        $fillable   = []; foreach($inputs as $column => $row) $fillable[$column] = $row;
+        $fillable   = []; 
+        foreach($inputs as $column => $row) {
+            $fillable[$column] = $row;
+        }
         $material_product   =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
         $batch              =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
 

@@ -11,6 +11,7 @@ class Batches extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'is_draft',
         'material_product_id',
         'brand',
         'supplier',

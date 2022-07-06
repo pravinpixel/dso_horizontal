@@ -124,7 +124,6 @@ if(! function_exists('checkIsMaterialColumn')) {
             'alert_threshold_qty_upper_limit',
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
-            'is_draft'
         ];
         return in_array($column, $data) == true ? 1 : 0 ;
     }
@@ -132,6 +131,7 @@ if(! function_exists('checkIsMaterialColumn')) {
 if(! function_exists('checkIsBatchesColumn')) {
     function checkIsBatchesColumn($column) {
         $data =  [
+            'is_draft',
             'barcode_number',
             'material_product_id',
             'brand',

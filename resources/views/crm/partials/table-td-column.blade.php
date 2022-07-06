@@ -15,8 +15,6 @@
         <div ng-if="on_{{ $column['name'] }}" class="box justify-content-start" >
             @if ($column['name']=="unit_packing_value")
                 @elseif ($column['name'] == 'is_draft')
-                    <span ng-if="row.is_draft != 1" class="badge bg-success rounded-pill">Active</span>
-                    <span ng-if="row.is_draft == 1" class="badge bg-secondary rounded-pill">Draft</span>
                 @elseif($column['name']=="quantity")
                     @{{ row.totalQuantity }}
                     <span ng-if="row.totalQuantity < row.alert_threshold_qty_upper_limit && row.totalQuantity <= row.alert_threshold_qty_lower_limit">

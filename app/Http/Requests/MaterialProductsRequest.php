@@ -25,7 +25,6 @@ class MaterialProductsRequest extends FormRequest
     {
         return [
             'barcode_number'                    =>   'required', 
-            'is_draft'                          =>   'required', 
             'category_selection'                =>   'required', 
             'item_description'                  =>   'required', 
             'unit_of_measure'                   =>   'required', 
