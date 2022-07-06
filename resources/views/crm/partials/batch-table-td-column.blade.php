@@ -3,10 +3,10 @@
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @if ($column['name']=="iqc_status")
-                <small class="badge bg-success rounded-pill">PASS</small>  
+                <small class="badge bg-success rounded-pill mx-auto">PASS</small>  
                 @elseif ($column['name'] == 'is_draft') 
-                    <span ng-if="batch.is_draft != 1" class="badge bg-success rounded-pill">Active</span>
-                    <span ng-if="batch.is_draft == 1" class="badge bg-secondary rounded-pill">Draft</span> 
+                    <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
+                    <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
                 @elseif ($column['name'] == 'owner_two')
                     {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
                 @elseif ($column['name'] == 'serial')

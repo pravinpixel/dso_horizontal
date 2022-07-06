@@ -30,7 +30,6 @@ class MaterialProductSeeder extends Seeder
         ];
         $data = [
             "is_draft"                        => "0",
-
             "quantity"                     => 175,
             "brand"                        => "Hexcel",
             "supplier"                     => "Peter Parker",
@@ -67,5 +66,46 @@ class MaterialProductSeeder extends Seeder
         $material_product = MaterialProducts::create($parent_data);
         $batch            = $material_product->Batches()->create($data);
         $this->barCodeLabelRepository->generateBarcode($material_product, $batch);
+
+        $parent_data_two = [
+            "category_selection"              => "in_house",
+            "item_description"                => "Acetone 90% Ind grade",
+            "unit_of_measure"                 => "8",
+            "unit_packing_value"              => "175",
+            "alert_threshold_qty_upper_limit" => "150",
+            "alert_threshold_qty_lower_limit" => "35",
+            "alert_before_expiry"             => "850",
+            "quantity"                        => 250,
+        ];
+        $data_two = [
+            "is_draft"                        => "0",
+            "quantity"                     => 250,
+            "brand"                        => "CLP",
+            "batch"                        => "892872763",
+            "serial"                       => "731RR1111143777",
+            "require_bulk_volume_tracking" => "0",
+            "require_outlife_tracking"     => "1",
+            "storage_area"                 => "5",
+            "housing_type"                 => "9",
+            "housing"                      => "15",
+            "owner_one"                    => "Christopher",
+            "owner_two"                    => "Chris",
+            "department"                   => "5",
+            "access"                       => json_encode(["4"]),
+            "date_in"                      => "2005-12-22",
+            "date_of_expiry"               => "2023-06-03",
+            "coc_coa_mill_cert_status"     => "on",
+            "iqc_status"                   => "1",
+            "iqc_result_status"            => "on",
+            "fm_1202"                      => "on",
+            "project_name"                 => "Lillith Pena",
+            "material_product_type"        => "Felix Santiago",
+            "date_of_manufacture"          => "2022-07-06",
+            "cost_per_unit"                => "465",
+            "remarks"                      => "Kimberly Snider",
+        ];
+        $material_product_two = MaterialProducts::create($parent_data_two);
+        $batch_two            = $material_product_two->Batches()->create($data_two);
+        $this->barCodeLabelRepository->generateBarcode($material_product_two, $batch_two);
     }
 }

@@ -444,8 +444,8 @@ a {
 }
  
 .batch-table .custom-table-row:hover .box {
-    background-color: #4087F8 !important;
-    color: white !important;
+    background-color: #E6F1F9 !important;
+    color: #4087F8 !important;
 }
 .custom-table-head:hover .box {
     background-color: #163269 !important;

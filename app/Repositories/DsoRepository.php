@@ -40,12 +40,8 @@ class DsoRepository implements DsoRepositoryInterface
                     "name"      =>  $key,
                     "row"       =>  '{{ row.'.$value['name'].'.name }}',
                     "batch"     =>  '
-                        <span class="badge badge-outline-success rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' == true">
-                            Yes
-                        </span>
-                        <span class="badge badge-outline-secondary rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' != true">
-                            No
-                        </span>
+                        <span class="badge mx-auto badge-outline-success rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' == true">Yes</span>
+                        <span class="badge mx-auto badge-outline-danger rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' != true">No</span>
                     ',
                 ];
             }
