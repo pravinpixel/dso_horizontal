@@ -55,7 +55,7 @@
                     </div>
                     <div class="text-end">  
                         <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
-                        <small class="text-dark" ng-if="date_of_shipment">DOD: {{ $batch->date_of_shipment }}</small>
+                        <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->date_of_shipment)->format('d/m/Y')}}</small>
                     </div>
                 </div>  
             </div>
