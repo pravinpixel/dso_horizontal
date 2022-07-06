@@ -29,7 +29,7 @@
                     <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data">
                         {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                         <div class="custom-table">
-                            <div class="custom-table-head">
+                            <div class="custom-table-head parent-row">
                                 {{-- ======= Matrial Product Data  ====== --}}
                                     {!! $table_td_columns !!} 
                                 {{-- ======= Matrial Product Data  ====== --}}

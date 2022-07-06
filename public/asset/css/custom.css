@@ -29,7 +29,10 @@ option {
     letter-spacing: 1px;
     font-weight: normal !important;
 }
-
+.parent-row .box {
+    background: #4188F9 !important;
+    color: #EBF5FE !important;
+}
 .box {
     padding: 10px !important;
     width: 139px !important;
@@ -39,6 +42,7 @@ option {
     color: black;
     display: flex;
     align-items: center;
+    background: white;
 }
 .box.box-lg {
     width: 200px !important;
