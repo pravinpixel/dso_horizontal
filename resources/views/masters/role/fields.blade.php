@@ -62,13 +62,6 @@
             <td><input type="checkbox" {{ $permissions['user.delete.extend_expiry'] == 'true' ?  "checked" : ""}} value="true" class="delete form-check-input" name="user.delete.extend_expiry"></td>
         </tr>
         <tr>
-            <th>Extend Expiry </th>
-            <td><input type="checkbox" {{ $permissions['user.view.extend_expiry'] == 'true' ?  "checked" : ""}} value="true" class="view form-check-input" name="user.view.extend_expiry"></td>
-            <td><input type="checkbox" {{ $permissions['user.add.extend_expiry'] == 'true' ?  "checked" : ""}} value="true" class="add form-check-input" name="user.add.extend_expiry"></td>
-            <td><input type="checkbox" {{ $permissions['user.edit.extend_expiry'] == 'true' ?  "checked" : ""}} value="true" class="edit form-check-input" name="user.edit.extend_expiry"></td>
-            <td><input type="checkbox" {{ $permissions['user.delete.extend_expiry'] == 'true' ?  "checked" : ""}} value="true" class="delete form-check-input" name="user.delete.extend_expiry"></td>
-        </tr>
-        <tr>
             <th>Report </th>
             <td><input type="checkbox" {{ $permissions['user.view.report'] == 'true' ?  "checked" : ""}} value="true" class="view form-check-input" name="user.view.report"></td>
             <td><input type="checkbox" {{ $permissions['user.add.report'] == 'true' ?  "checked" : ""}} value="true" class="add form-check-input" name="user.add.report"></td>

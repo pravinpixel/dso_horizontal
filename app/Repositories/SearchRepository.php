@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\SearchRepositoryInterface;
+use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -16,18 +17,23 @@ class SearchRepository implements SearchRepositoryInterface
 {
     public function barCodeSearch($request)
     {
-        return MaterialProducts::with([
-            'Batches',
-            'Batches.RepackOutlife',
-            'Batches.HousingType',
-            'Batches.Department',
-            'UnitOfMeasure',
-            'Batches.StorageArea'
-        ])
-            ->WhereHas('Batches', function ($q) use ($request) {
-                $q->where('barcode_number', 'LIKE', "%{$request->filters}%");
+        try {
+            $parent_id = Batches::where('barcode_number', $request->filters)->first()->material_product_id;
+            return MaterialProducts::with([
+                'Batches',
+                'Batches.RepackOutlife',
+                'Batches.HousingType',
+                'Batches.Department',
+                'UnitOfMeasure',
+                'Batches.StorageArea'
+            ])
+            ->WhereHas('Batches', function ($q) use ($parent_id) {
+                $q->where('material_product_id', $parent_id);
             })
             ->paginate(config('app.paginate'));
+        } catch (\Throwable $th) {
+            log::info($th->getMessage());
+        }
     }
 
     public function advanced_search($filter)
