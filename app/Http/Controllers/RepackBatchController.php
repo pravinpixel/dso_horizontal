@@ -25,54 +25,75 @@ class RepackBatchController extends Controller
 
     public function repack(Request $request)
     {
-        $material_product       =   MaterialProducts::find($request->material_product_id);
-        $current_batch          =   Batches::find($request->id);
-        $current_batch_action   =   json_decode($current_batch->actions);
-        
-        if($current_batch_action->repack_code == null) {
-            // BarcodeFormat::find($request->id)->update([
-            //     "repack_one" => "01"
-            // ]);
-            $repack_code = "01";
-        }
-        if($current_batch_action->repack_code == "01") {
-            // BarcodeFormat::find($request->id)->update([
-            //     "repack_two" => "01"
-            // ]);
-            $repack_code = "02";
-        }
-        if($current_batch_action->repack_code == "02") {
-            return response()->json([
-                "status"    => false,
-                "message"   => "Batch is Already Two Time  Repacked !"
-            ]); 
-        }
-  
-        $current_batch->update([
-            "actions" => json_encode([
-                "repack_code"    =>  $repack_code,
-                "packing_value"  =>  null,
-                "packing_size"   =>  null,
-                "remain_amount"  =>  null,
-            ])
-        ]);
-          
-        $created_batch  =   $current_batch->replicate();
-        $created_batch  ->  created_at  = Carbon::now();
-        $created_batch  ->  actions     =   json_encode([
-                                                "repack_code"    =>  null,
-                                                "packing_value"  =>  $material_product->unit_packing_value,
-                                                "packing_size"   =>  $request->PackingSize,
-                                                "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
-                                            ]); 
-        $created_batch  ->  save();
+        $material_product          = MaterialProducts::find($request->material_product_id);
+        $current_batch             = Batches::find($request->id);
+        $created_batch             = $current_batch->replicate();
+        $created_batch->created_at = Carbon::now();
+        $created_batch->quantity   = $request->quantity;
+        $created_batch->save();
 
-        $this->barCodeLabelRepository->generateBarcode($material_product, $created_batch);
+        $current_batch->update([
+            'quantity' =>   $current_batch->quantity -  $request->quantity ,
+            'action' => json_encode([
+                    "repack_code"    =>  null,
+                    "packing_value"  =>  $material_product->unit_packing_value,
+                    "packing_size"   =>  $request->PackingSize,
+                    "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
+                ])
+        ]);
 
         return response()->json([
-            "status" => true,
-            "message" => "Transfer Success !"
+            "status"    => true,
+            "message"   => "Transfer Success !"
         ]);
+        // $material_product       =   MaterialProducts::find($request->material_product_id);
+        // $current_batch          =   Batches::find($request->id);
+        // $current_batch_action   =   json_decode($current_batch->actions);
+        
+        // if($current_batch_action->repack_code == null) {
+        //     // BarcodeFormat::find($request->id)->update([
+        //     //     "repack_one" => "01"
+        //     // ]);
+        //     $repack_code = "01";
+        // }
+        // if($current_batch_action->repack_code == "01") {
+        //     // BarcodeFormat::find($request->id)->update([
+        //     //     "repack_two" => "01"
+        //     // ]);
+        //     $repack_code = "02";
+        // }
+        // if($current_batch_action->repack_code == "02") {
+        //     return response()->json([
+        //         "status"    => false,
+        //         "message"   => "Batch is Already Two Time  Repacked !"
+        //     ]); 
+        // }
+  
+        // $current_batch->update([
+        //     "actions" => json_encode([
+        //         "repack_code"    =>  $repack_code,
+        //         "packing_value"  =>  null,
+        //         "packing_size"   =>  null,
+        //         "remain_amount"  =>  null,
+        //     ])
+        // ]);
+          
+        // $created_batch  =   $current_batch->replicate();
+        // $created_batch  ->  created_at  = Carbon::now();
+        // $created_batch  ->  actions     =   json_encode([
+                                            //     "repack_code"    =>  null,
+                                            //     "packing_value"  =>  $material_product->unit_packing_value,
+                                            //     "packing_size"   =>  $request->PackingSize,
+                                            //     "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
+                                            // ]); 
+        // $created_batch  ->  save();
+
+        // $this->barCodeLabelRepository->generateBarcode($material_product, $created_batch);
+
+        // return response()->json([
+        //     "status" => true,
+        //     "message" => "Transfer Success !"
+        // ]);
     }
     public function get_repack_outlife($id)
     {
