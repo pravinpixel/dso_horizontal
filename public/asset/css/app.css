@@ -4437,6 +4437,7 @@ fieldset:disabled .btn {
 .dropdown-item.disabled,
 .dropdown-item:disabled {
     pointer-events: none;
+    color: #969696;
     background-color: #f4f6fb;
     border-bottom: 1px solid #ffffff;
 }

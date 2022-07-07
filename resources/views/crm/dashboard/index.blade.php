@@ -176,10 +176,9 @@
                                 <tr>
                                     <th>
                                         <select name="" id="" class="form-select">
-                                            <option value="">-- Choose Material --</option>
-                                            <option value="">Type A Material</option>
-                                            <option value="">Type B Material</option>
-                                            <option value="">Type C Material</option>
+                                            <option value="">-- Choose Category --</option>
+                                            <option value="">Material</option>
+                                            <option value="">In-House</option>
                                         </select>
                                     </th>
                                     <th>Product 1</th>
