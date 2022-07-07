@@ -45,7 +45,7 @@
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('extend-expiry') }}" class="card-body btn">
                     <i class="text-warning bi bi-arrow-up-right-square fa-2x mb-2"></i>
-                    <div class="text-primary"><b> Extend Expiry</b></div>
+                    <div class="text-primary"><b> Extended Expiry</b></div>
                 </a>
             </div>
         </div> 
@@ -139,7 +139,7 @@
                     <div class="d-flex align-items-center">
                         <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
                        <div>
-                            <p class="mb-1">Extend</p>
+                            <p class="mb-1">Extended</p>
                             <strong>3520</strong>
                        </div>
                     </div>
@@ -207,7 +207,7 @@
                                     <td>254</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Extend</b></td>
+                                    <td><b>Extended</b></td>
                                     <td>250</td>
                                     <td>540</td>
                                     <td>254</td>
