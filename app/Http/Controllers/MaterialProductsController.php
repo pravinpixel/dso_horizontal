@@ -376,10 +376,10 @@ class MaterialProductsController extends Controller
         }
         return [
             "access"          => $user_name ?? null,
-            "department"      => Departments::find($data->department)->name,
-            "statutory_body"  => StatutoryBody::find($data->statutory_body)->name,
-            "storage_area"    => StorageRoom::find($data->storage_area)->name,
-            "housing_type"    => HouseTypes::find($data->housing_type)->name,
+            "department"      => Departments::find($data->department)->name ?? null,
+            "statutory_body"  => StatutoryBody::find($data->statutory_body)->name ?? null,
+            "storage_area"    => StorageRoom::find($data->storage_area)->name ?? null,
+            "housing_type"    => HouseTypes::find($data->housing_type)->name ?? null,
         ];
     }
     public function destroy($id)
