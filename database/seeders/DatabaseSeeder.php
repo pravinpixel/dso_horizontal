@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             PackSizeSeeder::class,
             StatutorySeeder::class,
             StorageRoomSeeder::class,
-            BarcodeSeeder::class,
             PictogramSeeder::class,
             TableOrderSeeder::class,
             MaterialProductSeeder::class

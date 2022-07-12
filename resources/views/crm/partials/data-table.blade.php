@@ -24,7 +24,7 @@
                 </div>
             </div> 
             <div ng-show="material_products.data.length == 0">
-                <div colspan="12" class="text-center" >
+                <div class="text-center" >
                     No data found
                 </div>
             </div>
