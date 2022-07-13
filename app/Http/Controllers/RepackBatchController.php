@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RepackOutlifeExport;
-use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\BarcodeFormat;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
@@ -18,10 +17,6 @@ use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 
 class RepackBatchController extends Controller
 {
-    public function __construct(BarCodeLabelRepositoryInterface $barCodeLabelRepository)
-    {
-        $this->barCodeLabelRepository   =   $barCodeLabelRepository;
-    }
 
     public function repack(Request $request)
     {
@@ -88,7 +83,6 @@ class RepackBatchController extends Controller
                                             // ]); 
         // $created_batch  ->  save();
 
-        // $this->barCodeLabelRepository->generateBarcode($material_product, $created_batch);
 
         // return response()->json([
         //     "status" => true,

@@ -1,16 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Models\MaterialProducts;
 use Illuminate\Database\Seeder;
 
 class MaterialProductSeeder extends Seeder
 {
-    public function __construct(BarCodeLabelRepositoryInterface $barCodeLabelRepository)    {
-        $this->barCodeLabelRepository = $barCodeLabelRepository;
-    }
     /**
      * Run the database seeds.
      *
@@ -62,10 +57,10 @@ class MaterialProductSeeder extends Seeder
             "cost_per_unit"                => "465",
             "remarks"                      => "Kimberly Snider",
             "used_for_td_expt_only"        => "1",
+            "barcode_number"               => generateBarcode('material')
         ];
         $material_product = MaterialProducts::create($parent_data);
-        $batch            = $material_product->Batches()->create($data);
-        $this->barCodeLabelRepository->generateBarcode($material_product, $batch);
+        $material_product->Batches()->create($data);
 
         $parent_data_two = [
             "category_selection"              => "in_house",
@@ -103,9 +98,9 @@ class MaterialProductSeeder extends Seeder
             "date_of_manufacture"          => "2022-07-06",
             "cost_per_unit"                => "465",
             "remarks"                      => "Kimberly Snider",
+            "barcode_number"               => generateBarcode('in_house')
         ];
         $material_product_two = MaterialProducts::create($parent_data_two);
-        $batch_two            = $material_product_two->Batches()->create($data_two);
-        $this->barCodeLabelRepository->generateBarcode($material_product_two, $batch_two);
+        $material_product_two->Batches()->create($data_two);
     }
 }

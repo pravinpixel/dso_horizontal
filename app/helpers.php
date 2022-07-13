@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Batches;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -190,5 +191,15 @@ if(! function_exists('checkIsBatchDateColumn')) {
             "date_of_shipment"
         ];
         return in_array($column, $data) == true ? 1 : 0 ;
+    }
+}
+
+if(! function_exists('generateBarcode')) {
+    function generateBarcode($type) { 
+        $category_code  = $type === 'material' ? 1 : 2 ;
+        do {
+            $barcode_number = random_int(1000000000, 9999999999);
+        } while (Batches::where("barcode_number", "=", $category_code.$barcode_number)->first());
+        return $category_code.$barcode_number;
     }
 }

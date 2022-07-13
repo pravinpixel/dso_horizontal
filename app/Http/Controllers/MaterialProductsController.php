@@ -15,7 +15,6 @@ use App\Models\SaveMySearch;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Response;
 use App\Imports\BulkImport;
-use App\Interfaces\BarCodeLabelRepositoryInterface;
 use App\Interfaces\DsoRepositoryInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
@@ -34,12 +33,10 @@ class MaterialProductsController extends Controller
     public function __construct(
         MartialProductRepositoryInterface $MartialProductRepository,
         SearchRepositoryInterface   $SearchRepository,
-        BarCodeLabelRepositoryInterface $barCodeLabelRepository,
         DsoRepositoryInterface $dsoRepositoryInterface
     ) {
         $this->MartialProductRepository     =   $MartialProductRepository;
         $this->SearchRepository   =   $SearchRepository;
-        $this->barCodeLabelRepository       =   $barCodeLabelRepository;
         $this->dsoRepository                =   $dsoRepositoryInterface;
     }
 
@@ -190,11 +187,9 @@ class MaterialProductsController extends Controller
                         'cost_per_unit'                 =>  $row['cost_per_unit_sgd'],
                         'remarks'                       =>  $row['remarks'],
                     ]);
-                    $this->barCodeLabelRepository->generateBarcode($material, $batch);
                     Flash::success(__('global.imported'));
                 } catch (\Throwable $th) {
                     Flash::error($th->getMessage());
-                    Log::info($th->getMessage());
                 }
             }
         }

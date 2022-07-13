@@ -19,7 +19,7 @@ class CreateBatchesTable extends Migration
             $table->integer('is_draft')->nullable()->default(1);
             $table->integer('material_product_id');
             $table->string('brand')->nullable();
-            $table->integer('barcode_number')->nullable();
+            $table->string('barcode_number')->nullable();
             $table->string('supplier')->nullable();
             $table->string('packing_size')->nullable();
             $table->integer('quantity')->nullable();
