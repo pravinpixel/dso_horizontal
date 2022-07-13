@@ -17,6 +17,7 @@ class SearchRepository implements SearchRepositoryInterface
 {
     public function barCodeSearch($request)
     {
+        Log::info($request->filters);
         Log::info(Batches::where('barcode_number', $request->filters)->first());
         try {
             
