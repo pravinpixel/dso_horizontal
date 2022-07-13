@@ -18,25 +18,25 @@ class SearchRepository implements SearchRepositoryInterface
     public function barCodeSearch($request)
     {
         Log::info($request->filters);
-        Log::info(Batches::where('barcode_number', $request->filters)->first());
-        try {
+        Log::info(Batches::where('barcode_number', $request->filters)->get());
+        // try {
             
-            $parent_id = Batches::where('barcode_number', $request->filters)->first()->material_product_id;
-            return MaterialProducts::with([
-                'Batches',
-                'Batches.RepackOutlife',
-                'Batches.HousingType',
-                'Batches.Department',
-                'UnitOfMeasure',
-                'Batches.StorageArea'
-            ])
-            ->WhereHas('Batches', function ($q) use ($parent_id) {
-                $q->where('material_product_id', $parent_id);
-            })
-            ->paginate(config('app.paginate'));
-        } catch (\Throwable $th) {
-            log::info($th->getMessage());
-        }
+        //     $parent_id = Batches::where('barcode_number', $request->filters)->first()->material_product_id;
+        //     return MaterialProducts::with([
+        //         'Batches',
+        //         'Batches.RepackOutlife',
+        //         'Batches.HousingType',
+        //         'Batches.Department',
+        //         'UnitOfMeasure',
+        //         'Batches.StorageArea'
+        //     ])
+        //     ->WhereHas('Batches', function ($q) use ($parent_id) {
+        //         $q->where('material_product_id', $parent_id);
+        //     })
+        //     ->paginate(config('app.paginate'));
+        // } catch (\Throwable $th) {
+        //     log::info($th->getMessage());
+        // }
     }
 
     public function advanced_search($filter)
