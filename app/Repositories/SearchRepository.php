@@ -19,6 +19,7 @@ class SearchRepository implements SearchRepositoryInterface
     {
         Log::info($request->filters);
         Log::info(Batches::where('barcode_number', $request->filters)->get());
+        Batches::where('barcode_number', $request->filters)->dd()
         // try {
             
         //     $parent_id = Batches::where('barcode_number', $request->filters)->first()->material_product_id;
