@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Batches;
+use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
@@ -14,7 +14,7 @@ class TransferBatchController extends Controller
         $created_batch                  =   $current_batch->replicate();
         $created_batch->created_at      =   Carbon::now();
         $created_batch->quantity        =   $request->quantity;
-        $created_batch->barcode_number  =   generateBarcode($current_batch->category_selection);
+        $created_batch->barcode_number  =   generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
         $created_batch->save();
 
         $current_batch->update([

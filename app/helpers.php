@@ -193,8 +193,9 @@ if(! function_exists('checkIsBatchDateColumn')) {
         return in_array($column, $data) == true ? 1 : 0 ;
     }
 }
-
+ 
 if(! function_exists('generateBarcode')) {
+     
     function generateBarcode($type) { 
         $category_code  = $type === 'material' ? 1 : 2 ;
         do {

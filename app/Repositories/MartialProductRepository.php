@@ -6,6 +6,7 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\BarCodeFormat;
 use App\Models\MaterialProducts;
 use Faker\Provider\Barcode;
+use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,28 +21,20 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             'extended_qc_result',
             'disposal_certificate',
         ]);
-
+ 
         $fillable   = []; 
         foreach($inputs as $column => $row) {
             $fillable[$column] = $row;
         }
-        $material_product   =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
-        $batch              =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
-
-        // $batch->RepackOutlife()->updateOrCreate(['id' => $batch_id], $fillable);
- 
+         
+        $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
+        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
         $this->storeFiles($request, $batch);
-
+        
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
         } 
-
-        // if(wizard_mode() == 'create') { 
-        //     $request->session()->put('material_product_id', $material_product->id);
-        //     $request->session()->put('batch_id', $batch->id);
-        // }
-
         return Flash::success(__('global.inserted'));
     }
  
