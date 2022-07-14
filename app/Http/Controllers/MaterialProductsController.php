@@ -71,7 +71,8 @@ class MaterialProductsController extends Controller
             'Batches.HousingType', 
             'Batches.Department', 
             'UnitOfMeasure',
-            'Batches.StorageArea'
+            'Batches.StorageArea',
+            'Batches.StatutoryBody',
         ])->latest()->paginate(config('app.paginate'));
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }

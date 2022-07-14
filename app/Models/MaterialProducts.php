@@ -35,7 +35,5 @@ class MaterialProducts extends Model
     public function UnitOfMeasure()
     {
         return  $this->hasOne(PackingSizeData::class, 'id', 'unit_of_measure'); 
-    }
-
-   
+    } 
 }

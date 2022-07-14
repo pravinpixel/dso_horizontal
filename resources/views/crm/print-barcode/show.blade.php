@@ -41,7 +41,7 @@
                             <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
                             <p class="m-0" ng-if="date_of_expiry">{{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</p>
                             <p class="m-0" ng-if="project_name">{{ $batch->project_name }}</p>
-                            <p class="m-0" ng-if="ownners">Owner1/2 : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
+                            <p class="m-0" ng-if="owners">Owner1/2 : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
                         </div> 
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">
@@ -114,7 +114,7 @@
                                 <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS Pictogram</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="ownners" id="Owner1">Owner1/Owner2</label>
+                                <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="owners" id="Owner1">Owner1/Owner2</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="td_expt" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="used_for_td_expt_only" id="td_expt">Used for TD/EXPT</label>

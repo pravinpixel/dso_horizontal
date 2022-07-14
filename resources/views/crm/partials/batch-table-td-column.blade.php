@@ -15,6 +15,8 @@
                     {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")
                     {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
+                @elseif($column['name'] == "statutory_body")
+                    @{{ batch.statutory_body.name }}
                 @elseif($column['name'] == "date_of_expiry")
                     {{ $column['batch'] }}
                     <span>

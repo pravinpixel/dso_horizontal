@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
 @endsection
 @section('scripts')
+
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
@@ -59,4 +60,26 @@
     <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
+    <script>
+            wordMatchSuggest = (element) => {
+            $.ajax({
+                type    :   'GET',
+                url     :   "{{ route('suggestion') }}",
+                data    :  {
+                    "name"  : element.name,
+                    "value" : element.value,
+                } ,
+                success:function(response){
+                    $(`#${element.list.id}`).html('')
+                    if(response.data != undefined || response.data != null) {
+                        Object.values(response.data).map((item) => { 
+                            if(element.value !== item) {
+                                $(`#${element.list.id}`).append(`<option value="${item}">`)
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    </script>
 @endsection

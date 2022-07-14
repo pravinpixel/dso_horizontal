@@ -21,7 +21,8 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Item Description</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.item_description">
+                            <input type="text" class="form-control" list="ad_item_description" onkeyup="wordMatchSuggest(this)" placeholder="Type here" ng-model="advanced_filter.item_description">
+                            <datalist id="ad_item_description"></datalist>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Brand</small>
@@ -31,7 +32,7 @@
                             <label class="form-label">Ownner 1/2</label>
                             <select class="form-select" ng-model="advanced_filter.owner_one">
                                 <option value="">-- select --</option>
-                                <option ng-value="user.id" ng-repeat="user in MasterData.owners">@{{ user.alias_name }}</option> 
+                                <option ng-value="user.alias_name" ng-repeat="user in MasterData.owners">@{{ user.alias_name }}</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">

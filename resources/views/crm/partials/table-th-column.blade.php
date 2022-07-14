@@ -14,8 +14,11 @@
                 IQC Status
                 @elseif ($column['name'] == 'is_draft') Status
                 @elseif ($column['name'] == 'housing_type') Housing
-                @elseif ($column['name'] == 'owner_two') Ownners
+                @elseif ($column['name'] == 'owner_two') owners
                 @elseif ($column['name'] == 'serial')Batch# / Serial#
+                @elseif ($column['name'] == 'po_number') PO number
+                @elseif ($column['name'] == 'cas') CAS#
+                @elseif ($column['name'] == 'euc_material') EUC Material
                 @else   {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif
             <div class="btn-sort">

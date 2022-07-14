@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
+use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -91,4 +92,9 @@ class Batches extends Model
     {
         return  $this->hasOne(StorageRoom::class, 'id', 'storage_area'); 
     }  
+    
+    public function StatutoryBody()
+    {
+        return  $this->hasOne(StatutoryBody::class, 'id', 'statutory_body'); 
+    }
 }

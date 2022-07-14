@@ -12,7 +12,7 @@
                         <span>All</span>
                     </label> 
                     @foreach ($tableAllColumns as $column)  
-                        @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
+                        @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id' && $column['name'] != 'packing_size')
                             <label> 
                                 <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
                                 <span>
@@ -20,8 +20,9 @@
                                         IQC Status
                                         @elseif ($column['name'] == 'is_draft') Status
                                         @elseif ($column['name'] == 'housing_type') Housing
-                                        @elseif ($column['name'] == 'owner_two') Ownners
-                                        @elseif ($column['name'] == 'serial')Batch# / Serial#
+                                        @elseif ($column['name'] == 'owner_two') owners
+                                        @elseif ($column['name'] == 'serial') Batch# / Serial#
+                                        @elseif ($column['name'] == 'po_number') PO number
                                         @else   {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
                                     @endif
                                 </span>
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </div> 
-        <button  data-bs-toggle="modal" data-bs-target="#advance-search-ng-modal"  class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
+        <button data-bs-toggle="modal" data-bs-target="#advance-search-ng-modal" class="rounded-pill btn btn-sm btn-light shadow-sm border"><i class="bi bi-funnel-fill me-1"></i></i> Advanced filter</button>
     </div>
     <div class="col">
         <label for="" class="form-label">Category selection</label>
@@ -43,8 +44,9 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Item description</label>
-        <input type="text" ng-model="advanced_filter.item_description" name="item_description" class="form-control custom" placeholder="Type here...">
-    </div> 
+        <input type="text" ng-model="advanced_filter.item_description" list="td_item_description" onkeyup="wordMatchSuggest(this)" name="item_description" class="form-control custom" placeholder="Type here...">
+        <datalist id="td_item_description"></datalist>
+    </div>
     <div class="col">
         <label for="" class="form-label">Brand</label>
         <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom" placeholder="Type here...">

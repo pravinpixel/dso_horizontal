@@ -25,7 +25,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.HousingType',
                 'Batches.Department',
                 'UnitOfMeasure',
-                'Batches.StorageArea'
+                'Batches.StorageArea',
+                'Batches.StatutoryBody'
             ])
             ->WhereHas('Batches', function ($q) use ($parent_id) {
                 $q->where('material_product_id', $parent_id);
@@ -44,19 +45,25 @@ class SearchRepository implements SearchRepositoryInterface
                 $filter_result[] =  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
                                                     ->where($column,$value)->get();
             }
+
             if(checkIsBatchesColumn($column) == 1) {
                 $filter_result[] = MaterialProducts::with([
-                    'Batches',
+                    'Batches' => function ($q) use ($column, $value) {
+                        $q->where($column, $value);
+                    },
                     'Batches.RepackOutlife',
                     'Batches.HousingType',
                     'Batches.Department',
                     'UnitOfMeasure',
-                    'Batches.StorageArea'
+                    'Batches.StorageArea',
+                    'Batches.StatutoryBody',
                 ])
                 ->WhereHas('Batches', function ($q) use ($column, $value) {
-                    $q->where($column,$value);
-                })->get();
+                    $q->where($column, $value);
+                })
+                ->get();
             }
+
             if(checkIsBatchDateColumn($column) == 1) {
                 $filter_result[] =  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
                             ->WhereHas('Batches', function ($q) use ($value) {
@@ -79,7 +86,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.HousingType',
                 'Batches.Department',
                 'UnitOfMeasure',
-                'Batches.StorageArea'
+                'Batches.StorageArea',
+                'Batches.StatutoryBody',
             ])
             ->orderBy($sort_by->col_name, $sort_by->order_type)
             ->paginate(config('app.paginate'));
@@ -92,7 +100,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.HousingType',
                 'Batches.Department',
                 'UnitOfMeasure',
-                'Batches.StorageArea'
+                'Batches.StorageArea',
+                'Batches.StatutoryBody',
             ])->paginate(config('app.paginate'));
         }
     }
