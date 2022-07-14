@@ -461,6 +461,8 @@ app.controller('SearchAddController', function($scope, $http) {
         $scope.advance_search_status    =   false;
         $scope.sort_by_payload          =   false;
 
+        $scope.barcode_number = ''
+
         // ====Bulk Search Rest====
             $scope.filter               =   ""
         // ====Bulk Search Rest===
