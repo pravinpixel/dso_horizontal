@@ -45,17 +45,7 @@ class DsoRepository implements DsoRepositoryInterface
                     ',
                 ];
             }
-            elseif($value['name'] =="date_of_expiry")  {
-                $tableAllColumns[$key] = [
-                    "status"    => $value['status'],
-                    "name"      => $key,
-                    "row"       => '{{ row.'.$value['name'].'  }}',
-                    "batch"     => '
-                        {{ batch.'.$value['name'].' | date : "dd/MM/y"}}
-                        <i class="ms-1 text-{{ batch.'.$value['name'].' >= '."current_date".' == true ? '."'success'".' : '."'danger'".'}} dot-sm bi bi-circle-fill"></i>
-                    '
-                ];
-            } else {
+            else {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
                     "name"      => $key,

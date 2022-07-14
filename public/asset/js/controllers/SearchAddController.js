@@ -37,7 +37,23 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.auth_id                          =   $('#auth-id').val();
     $scope.auth_role                        =   $('#auth-role').val(); 
     $scope.current_date                     =   moment(new Date()).format('YYYY-MM-DD')
-    $scope.on_all_check_box = false
+    $scope.on_all_check_box                 =   false
+ 
+    $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
+        var given   =  moment(date_of_expiry, "YYYY-MM-DD");
+        var day     =  moment.duration(given.diff(current_date)).asDays();
+
+        if(current_date >= date_of_expiry) {
+            return 'text-danger'
+        } else {
+            if(day < 21) {
+                return 'text-warning'
+            } 
+            if(day > 21) {
+                return 'text-success'
+            }
+        }
+    }
     
     $scope.select_all_check_box = () => {
         if($scope.on_all_check_box === true) {
@@ -886,3 +902,4 @@ app.controller('SearchAddController', function($scope, $http) {
         })
     }
 }); 
+

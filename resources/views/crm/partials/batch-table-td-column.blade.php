@@ -15,6 +15,11 @@
                     {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")
                     {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
+                @elseif($column['name'] == "date_of_expiry")
+                    {{ $column['batch'] }}
+                    <span>
+                        <i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i>
+                    </span>
                 @else
                 {!! $column['batch'] !!}
             @endif
