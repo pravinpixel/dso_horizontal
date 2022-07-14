@@ -199,7 +199,7 @@ if(! function_exists('generateBarcode')) {
     function generateBarcode($type) { 
         $category_code  = $type === 'material' ? 1 : 2 ;
         do {
-            $barcode_number = random_int(1000000000, 9999999999);
+            $barcode_number = random_int(10000000000, 99999999999);
         } while (Batches::where("barcode_number", "=", $category_code.$barcode_number)->first());
         return $category_code.$barcode_number;
     }
