@@ -44,7 +44,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->coc_coa_mill_cert)){
                 Storage::delete($batch->coc_coa_mill_cert);
             }
-            $coc_coa_mill_cert              =   $request->file('coc_coa_mill_cert')->store('public/files/coc_coa_mill_cert');
+            $coc_coa_mill_cert              =  storeFiles('coc_coa_mill_cert');
+            Log::info( $coc_coa_mill_cert);
             $batch  ->  coc_coa_mill_cert   =   $coc_coa_mill_cert;
             $batch  ->  save();
         }
@@ -52,7 +53,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->iqc_result)){
                 Storage::delete($batch->iqc_result);
             }
-            $iqc_result              =   $request->file('iqc_result')->store('public/files/iqc_result');
+            $iqc_result              =   storeFiles('iqc_result');
             $batch  ->  iqc_result   =   $iqc_result;
             $batch  ->  save();
         }
@@ -60,7 +61,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->sds)){
                 Storage::delete($batch->sds);
             }
-            $sds              =   $request->file('sds')->store('public/files/sds');
+            $sds              =   storeFiles('sds');
             $batch  ->  sds   =   $sds;
             $batch  ->  save();
             // dd($batch);
@@ -69,7 +70,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->extended_qc_result)){
                 Storage::delete($batch->extended_qc_result);
             }
-            $extended_qc_result              =   $request->file('extended_qc_result')->store('public/files/extended_qc_result');
+            $extended_qc_result              =   storeFiles('extended_qc_result');
             $batch  ->  extended_qc_result   =   $extended_qc_result;
             $batch  ->  save();
         }
@@ -78,8 +79,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->disposal_certificate)){
                 Storage::delete($batch->disposal_certificate);
             }
-            $disposal_certificate              =   $request->file('disposal_certificate')->store('public/files/disposal_certificate');
-            $batch  ->  disposal_certificate   =   $disposal_certificate;
+            $disposal_certificate              =    storeFiles('disposal_certificate');
+            $batch  ->  disposal_certificate   =    $disposal_certificate;
             $batch  ->  save();
         }
     } 

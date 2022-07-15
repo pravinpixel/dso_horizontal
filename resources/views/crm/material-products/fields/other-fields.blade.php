@@ -29,11 +29,15 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Used for TD/Expt only</label>
             <div class="col-8">
-                {!! Form::select('used_for_td_expt_only', ['No', 'Yes'], $batch->used_for_td_expt_only ?? null, [
+                {{-- {!! Form::select('used_for_td_expt_only', ['No', 'Yes'], $batch->used_for_td_expt_only ?? null, [
                     'class' => 'form-select form-select-sm', 
                     'placeholder' => '-- Select --', 
                     $batch->coc_coa_mill_cert_status != 'on' ? "disabled" : null,
-                ]) !!}
+                ]) !!} --}}
+                <select class="form-select form-select-sm" name="used_for_td_expt_only" {{ $batch->coc_coa_mill_cert_status != 'on' ? "disabled" : null }} >
+                    <option {{ $batch->coc_coa_mill_cert_status == 'off' ? "selected" : null }} value="No"> No </option>
+                    <option {{ $batch->coc_coa_mill_cert_status == 'on' ? "selected" : null }} value="Yes"> Yes </option>
+                </select>
             </div>
         </div>
     </div>

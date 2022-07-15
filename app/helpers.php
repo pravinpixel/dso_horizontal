@@ -204,3 +204,14 @@ if(! function_exists('generateBarcode')) {
         return $category_code.$barcode_number;
     }
 }
+
+if(! function_exists('storeFiles')) {
+    function storeFiles($fileName) { 
+        $file               =   request()->file($fileName);
+        $OriginalName       =   $file->getClientOriginalName();
+        $OriginalExtension  =   $file->getClientOriginalExtension();
+        $baseName           =   basename($OriginalName, '.'.$OriginalExtension);
+        $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
+        return $file->storeAs('public/files/'.$fileName , $newFileName );
+    }
+}
