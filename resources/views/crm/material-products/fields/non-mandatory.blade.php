@@ -9,6 +9,11 @@
                     ]) !!}
                     {!! isset($material_product->Batches[0]->sds) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                 </div>
+                @if ($batch->sds)
+                    <a href="{{ storageGet($batch->sds) }}" download="{{ storageGet($batch->sds) }}">
+                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/sds/','' ,$batch->sds),0,20) }}</small>
+                    </a>
+                @endif
             </div>
         </div>
         <div class="row m-0 y-center my-2">

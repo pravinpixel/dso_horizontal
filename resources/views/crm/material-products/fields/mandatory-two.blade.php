@@ -147,6 +147,11 @@
                         </span>
                     @endif 
                 </div>
+                @if ($batch->coc_coa_mill_cert)
+                    <a href="{{ storageGet($batch->coc_coa_mill_cert) }}" download="{{ storageGet($batch->coc_coa_mill_cert) }}">
+                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$batch->coc_coa_mill_cert),0,20) }}</small>
+                    </a>
+                @endif
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>
         </div>
@@ -179,6 +184,12 @@
                         onclick="change_iqc_result_status()">
                     </span> 
                 </div>
+                @if ($batch->iqc_result)
+                    <a href="{{ storageGet($batch->iqc_result) }}" download="{{ storageGet($batch->iqc_result) }}">
+                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/iqc_result/','' ,$batch->iqc_result),0,20) }}</small>
+                    </a>
+                @endif
+                
                 <small class="float-end"><i>Visual check done</i></small>
             </div>
         </div>
