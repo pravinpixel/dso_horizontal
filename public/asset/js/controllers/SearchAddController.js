@@ -303,7 +303,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert ?? "-"},
                 {name: 'IQC status (P/F)' , item : batch.iqc_status == 0 ? "Fail" : "Pass"},
                 {name: 'IQC result' , item : batch.iqc_result == 0 ? "Fail" : "Pass"},
-                {name: 'Cas #' , item : batch.cas},
+                {name: 'CAS #' , item : batch.cas},
                 {name: 'FM1202 ' , item : batch.fm_1202},
                 {name: 'Project name' , item : batch.project_name},
                 {name: 'Material/Product type' , item : batch.material_product_type},
