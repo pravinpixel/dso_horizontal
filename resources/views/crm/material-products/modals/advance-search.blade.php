@@ -62,8 +62,11 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Storage area</label>
-                            <select name="advanced_filter.storage_area" class="form-select" ng-model="advanced_filter.storage_area">
-                                <option value="data.id" ng-reapeat="data in storageRoomData">data.name</option> 
+                            <select name="storage_area" ng-model="advanced_filter.storage_area" class="form-select">
+                                <option value="">-- select --</option>
+                                @foreach ($storage_room_db as $row)
+                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                @endforeach 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
@@ -76,7 +79,7 @@
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Housing No</label>
+                            <label class="form-label">Housing #</label>
                             <select name="advanced_filter.housing" class="form-select form-select-sm" ng-model="advanced_filter.housing">
                                 <option value=""> -</option>
                                 @for ($key=0;$key<20;$key++)
@@ -105,7 +108,7 @@
                             <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.project_name">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Material/In-house Product type</small>
+                            <small class="mb-1">Material / Product type </small>
                             <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.material_product_type">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
@@ -115,15 +118,6 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Date of shipment</small>
                             <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_shipment">
-                        </div> 
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Unit Packing size</label>
-                            <select  class="form-select" ng-model="advanced_filter.unit_packing_value">
-                                <option value="">-- select --</option>
-                                @foreach ($unit_packing_size_db as $row)
-                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
-                                @endforeach	 
-                            </select>
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Used for TD/EXPT only</label>

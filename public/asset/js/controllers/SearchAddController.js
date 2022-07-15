@@ -38,6 +38,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.auth_role                        =   $('#auth-role').val(); 
     $scope.current_date                     =   moment(new Date()).format('YYYY-MM-DD')
     $scope.on_all_check_box                 =   false
+      
  
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given   =  moment(date_of_expiry, "YYYY-MM-DD");
