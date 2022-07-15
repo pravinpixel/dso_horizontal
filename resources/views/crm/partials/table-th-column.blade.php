@@ -14,7 +14,7 @@
                 IQC Status 
                 @elseif ($column['name'] == 'is_draft') Status
                 @elseif ($column['name'] == 'housing_type') Housing
-                @elseif ($column['name'] == 'owner_two') owners
+                @elseif ($column['name'] == 'owner_two') Owners
                 @elseif ($column['name'] == 'serial')Batch# / Serial#
                 @elseif ($column['name'] == 'po_number') PO number
                 @elseif ($column['name'] == 'cas') CAS#
@@ -26,7 +26,8 @@
                 @elseif ($column['name'] == 'euc_material') EUC Material
                 @elseif ($column['name'] == 'outlife'  ) Outlife (days)
                 @elseif ($column['name'] == 'used_for_td_expt_only'  ) Used for TD/Expt only
-                @else   {{ Log::info($column['name']) }} {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
+                @elseif ($column['name'] == 'extended_qc_status')  Extended QC status 
+                @else {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif
             <div class="btn-sort">
                 <i class="bi bi-arrow-up" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>

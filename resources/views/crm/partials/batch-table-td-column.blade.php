@@ -7,21 +7,15 @@
                 @elseif ($column['name'] == 'is_draft') 
                     <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
                     <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
-                @elseif ($column['name'] == 'owner_two')
-                    {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
-                @elseif ($column['name'] == 'serial')
-                    {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!} 
-                @elseif($column['name'] == "unit_packing_value")
-                    {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
-                @elseif($column['name'] == "housing_type")
-                    {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
-                @elseif($column['name'] == "statutory_body")
-                    @{{ batch.statutory_body.name }}
-                @elseif($column['name'] == "date_of_expiry")
-                    {{ $column['batch'] }}
-                    <span>
-                        <i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i>
-                    </span>
+                @elseif ($column['name'] == 'owner_two')            {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
+                @elseif ($column['name'] == 'serial')               {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!} 
+                @elseif($column['name'] == "unit_packing_value")    {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
+                @elseif($column['name'] == "housing_type")          {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
+                @elseif($column['name'] == "statutory_body")        @{{ batch.statutory_body.name }}
+                @elseif($column['name'] == "date_of_expiry")        {{ $column['batch'] }} <span><i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i></span>
+                @elseif($column['name'] == "euc_material")  @{{ batch.euc_material == 1 ? 'Yes' : 'No' }} 
+                @elseif($column['name'] == "require_bulk_volume_tracking")  @{{ batch.require_bulk_volume_tracking == 1 ? 'Yes' : 'No' }} 
+                @elseif($column['name'] == "require_outlife_tracking")  @{{ batch.require_outlife_tracking == 1 ? 'Yes' : 'No' }}   
                 @else
                 {!! $column['batch'] !!}
             @endif

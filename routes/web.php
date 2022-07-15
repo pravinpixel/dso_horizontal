@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\HelpMenuController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
-use App\Models\Masters\HelpMenu;
 
 /*
 |--------------------------------------------------------------------------
