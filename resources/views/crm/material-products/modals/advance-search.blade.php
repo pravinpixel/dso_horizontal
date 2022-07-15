@@ -61,6 +61,12 @@
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
+                            <label class="form-label">Storage area</label>
+                            <select name="advanced_filter.storage_area" class="form-select" ng-model="advanced_filter.storage_area">
+                                <option value="data.id" ng-reapeat="data in storageRoomData">data.name</option> 
+                            </select>
+                        </div>
+                        <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label">Housing type</label>
                             <select name="advanced_filter.housing_type" class="form-select" ng-model="advanced_filter.housing_type">
                                 <option value="">-- select --</option>
