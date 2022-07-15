@@ -12,52 +12,6 @@
                 <div class="text-center">
                     <div class="row m-0"> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Category Selection</label>
-                            <select class="form-select" ng-model="advanced_filter.category_selection">
-                                <option value="">-- select --</option>
-                                <option value="material">Material</option>
-                                <option value="in-house">In-House</option>
-                            </select>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Item Description</small>
-                            <input type="text" class="form-control" list="ad_item_description" onkeyup="wordMatchSuggest(this)" placeholder="Type here" ng-model="advanced_filter.item_description">
-                            <datalist id="ad_item_description"></datalist>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Brand</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.brand">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Ownner 1/2</label>
-                            <select class="form-select" ng-model="advanced_filter.owner_one">
-                                <option value="">-- select --</option>
-                                <option ng-value="user.alias_name" ng-repeat="user in MasterData.owners">@{{ user.alias_name }}</option> 
-                            </select>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Departments</label>
-                            <select class="form-select" ng-model="advanced_filter.department">
-                                <option value="">-- select --</option>
-                                <option ng-value="user.id" ng-repeat="user in MasterData.departments">@{{ user.name }}</option> 
-                            </select>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label">Storage Room</label>
-                            <select class="form-select" ng-model="advanced_filter.storage_room">
-                                <option value="">-- select --</option>
-                                <option ng-value="user.id" ng-repeat="user in MasterData.storage_room">@{{ user.name }}</option> 
-                            </select>
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Date In</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_in">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1">Date of expiry</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_expiry">
-                        </div>
-                        <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1">Supplier</small>
                             <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.supplier">
                         </div>
