@@ -34,7 +34,7 @@ class DsoRepository implements DsoRepositoryInterface
                     "row"       => '{{ row.'.$value['name'].'.name }}',
                     "batch"     => '{{ batch.'.$value['name'].'.name }}',
                 ];
-            }elseif( $value['name'] == 'used_for_td_expt_only') {
+            }elseif( $value['name'] == 'used_for_td_expt_only' ||  $value['name'] == 'euc_material' ||$value['name'] == 'require_bulk_volume_tracking' ||$value['name'] == 'require_outlife_tracking' ) {
                 $tableAllColumns[$key] = [
                     "status"    =>  $value['status'],
                     "name"      =>  $key,
