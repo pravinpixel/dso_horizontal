@@ -268,9 +268,9 @@ app.controller('SearchAddController', function($scope, $http) {
             {name: 'Unit Packing size' , item : row.unit_packing_value},
             {name: 'Owner 1 /2' , item : `${row.batches[0].owner_one} / ${row.batches[0].owner_two}`},
             {name: 'Statutory body' , item : row.batches[0].statutory_body.name ?? "-"},
-            {name: 'Alert Threshold Qty for new Lower limit' , item : row.alert_threshold_qty_lower_limit},
-            {name: 'Alert Threshold Qty for new Upper  limit' , item : row.alert_threshold_qty_upper_limit},
-            {name: 'Alert before expiry (in terms of weeks) for new material/product description' , item : row.alert_before_expiry},
+            {name: 'Alert Threshold Qty (Upper limit) ' , item : row.alert_threshold_qty_lower_limit},
+            {name: 'Alert Threshold Qty (lower limit) ' , item : row.alert_threshold_qty_upper_limit},
+            {name: 'Alert before expiry (in weeks)' , item : row.alert_before_expiry},
         ]
     }
 
