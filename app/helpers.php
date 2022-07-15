@@ -66,12 +66,12 @@ if(! function_exists('is_disable')) {
     function is_disable($category_type) {
         $wizard_mode = wizard_mode();
         $edit_mode   = session()->get('edit_mode');
- 
+        
         if(wizard_mode() != 'edit') {
             return "is_disable.{$wizard_mode}.{$category_type}." ;
+        } else {
+            return "is_disable.{$wizard_mode}.{$edit_mode}.{$category_type}.";
         }
-
-        return "is_disable.{$wizard_mode}.{$edit_mode}.{$category_type}.";
     }
 }
 if(! function_exists('completed_tab')) {

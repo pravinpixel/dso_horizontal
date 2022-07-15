@@ -124,16 +124,28 @@
                     ]) !!}
                     {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
 
-                    <span class="btn btn-light btn-sm border-start"> 
-                        <input type="checkbox" 
-                        @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
-                            {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
-                        @endif
-                        name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                        class="form-check-input" 
-                        {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
-                        onclick="change_coc_coa_status()">
-                    </span>
+                    @if (wizard_mode() == 'duplicate')
+                        <span class="btn btn-light btn-sm border-start"> 
+                            <input type="checkbox" 
+                                @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
+                                    {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
+                                @endif
+                                name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                                class="form-check-input"  
+                            onclick="change_coc_coa_status()">
+                        </span>
+                        @else
+                        <span class="btn btn-light btn-sm border-start"> 
+                            <input type="checkbox" 
+                            @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
+                                {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
+                            @endif
+                            name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                            class="form-check-input" 
+                            {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
+                            onclick="change_coc_coa_status()">
+                        </span>
+                    @endif 
                 </div>
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>

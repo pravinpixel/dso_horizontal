@@ -2,7 +2,7 @@
  
 // disabled
     return [
-        "create" => [ 
+        "create" => [
             "material" => [
                 "category_selection"                => ['status' => null , "reset" => false],
                 "item_description"                  => ['status' => null , "reset" => false],
@@ -53,7 +53,7 @@
             "in_house" => [
                 "category_selection"                => ['status' => null , "reset" => false],
                 "item_description"                  => ['status' => null , "reset" => false],
-                "brand"                             => ['status' => null , "reset" => false],
+                "brand"                             => ['status' => 'disabled' , "reset" => false],
                 "supplier"                          => ['status' => 'disabled' , "reset" => false],
                 "unit_of_measure"                   => ['status' => null , "reset" => false],
                 "unit_packing_value"                => ['status' => null , "reset" => false],
@@ -75,8 +75,8 @@
                 "access"                            => ['status' => null , "reset" => false],
                 "date_in"                           => ['status' => null , "reset" => false],
                 "date_of_expiry"                    => ['status' => null , "reset" => false],
-                "coc_coa_mill_cert"                 => ['status' => "disabled" , "reset" => false],
-                "coc_coa_mill_cert_status"          => ['status' => "disabled" , "reset" => false],
+                "coc_coa_mill_cert"                 => ['status' => null , "reset" => false],
+                "coc_coa_mill_cert_status"          => ['status' => null , "reset" => false],
                 "iqc_status"                        => ['status' => null , "reset" => false],
                 "iqc_result"                        => ['status' => null , "reset" => false],
                 "sds"                               => ['status' => null , "reset" => false],
@@ -136,10 +136,10 @@
                 "alert_threshold_qty_upper_limit"   => ['status' => 'disabled' , "reset" => false],
                 "alert_threshold_qty_lower_limit"   => ['status' => 'disabled' , "reset" => false],
                 "alert_before_expiry"               => ['status' => 'disabled' , "reset" => false],
-                "date_of_manufacture"               => ['status' => null , "reset" => false],
-                "date_of_shipment"                  => ['status' => null , "reset" => false],
+                "date_of_manufacture"               => ['status' => null , "reset" => true],
+                "date_of_shipment"                  => ['status' => null , "reset" => true],
                 "cost_per_unit"                     => ['status' => null , "reset" => false],
-                "remarks"                           => ['status' => null , "reset" => false],
+                "remarks"                           => ['status' => null , "reset" => true],
                 "extended_expiry"                   => ['status' => 'disabled' , "reset" => false],
                 "extended_qc_status"                => ['status' => 'disabled' , "reset" => false],
                 "extended_qc_result"                => ['status' => 'disabled' , "reset" => false],
@@ -149,7 +149,7 @@
             "in_house" => [
                 "category_selection"                => ['status' => 'disabled' , "reset" => false],
                 "item_description"                  => ['status' => 'disabled' , "reset" => false],
-                "brand"                             => ['status' => null , "reset" => false],
+                "brand"                             => ['status' => 'disabled' , "reset" => false],
                 "supplier"                          => ['status' => 'disabled' , "reset" => false],
                 "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                 "unit_packing_value"                => ['status' => null , "reset" => false],
@@ -171,8 +171,8 @@
                 "access"                            => ['status' => null , "reset" => false],
                 "date_in"                           => ['status' => null , "reset" => true],
                 "date_of_expiry"                    => ['status' => null , "reset" => true],
-                "coc_coa_mill_cert"                 => ['status' => 'disabled' , "reset" => false],
-                "coc_coa_mill_cert_status"          => ['status' => 'disabled' , "reset" => false],
+                "coc_coa_mill_cert"                 => ['status' => null , "reset" => true],
+                "coc_coa_mill_cert_status"          => ['status' => null , "reset" => true],
                 "iqc_status"                        => ['status' => null , "reset" => true],
                 "iqc_result"                        => ['status' => null , "reset" => true],
                 "sds"                               => ['status' => null , "reset" => true],
@@ -388,4 +388,4 @@
                 ],
             ]
         ],
-    ]; 
+    ];
