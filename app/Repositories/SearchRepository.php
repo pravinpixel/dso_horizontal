@@ -7,10 +7,6 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Support\Arr;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class SearchRepository implements SearchRepositoryInterface
@@ -39,43 +35,34 @@ class SearchRepository implements SearchRepositoryInterface
 
     public function advanced_search($filter)
     { 
-        foreach ($filter as $column => $value) {
-           
-            if(checkIsMaterialColumn($column) == 1) {
-                $filter_result[] =  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
-                                                    ->where($column,$value)->get();
-            }
-
-            if(checkIsBatchesColumn($column) == 1) {
-                $filter_result[] = MaterialProducts::with([
-                    'Batches' => function ($q) use ($column, $value) {
-                        $q->where($column, $value);
-                    },
-                    'Batches.RepackOutlife',
-                    'Batches.HousingType',
-                    'Batches.Department',
-                    'UnitOfMeasure',
-                    'Batches.StorageArea',
-                    'Batches.StatutoryBody',
-                ])
-                ->WhereHas('Batches', function ($q) use ($column, $value) {
-                    $q->where($column, $value);
-                })
-                ->get();
-            }
-
-            if(checkIsBatchDateColumn($column) == 1) {
-                $filter_result[] =  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
-                            ->WhereHas('Batches', function ($q) use ($value) {
-                                $q->whereDate('date_in', '>=', $value['startDate'])
-                                    ->whereDate('date_in', '<=', $value['endDate']);
-                            })
-                            ->get();
-            }
-        }
-        $collection         =   Arr::flatten($filter_result);
-        $myCollectionObj    =   collect($collection);
-        return $this->paginate($myCollectionObj);
+        $material_table =  [
+            'quantity',
+            'category_selection',
+            'item_description',
+            'unit_of_measure',
+            'unit_packing_value',
+            'alert_threshold_qty_upper_limit',
+            'alert_threshold_qty_lower_limit',
+            'alert_before_expiry',
+        ];
+         
+        return  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
+                                    ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) { 
+                                        foreach($filter as $column => $value) { 
+                                            $q->where($column , $value); 
+                                        }
+                                    })
+                                    ->WhereHas('Batches', function($q) use ($filter){
+                                        foreach($filter as $column => $value) { 
+                                            if(checkIsBatchDateColumn($column)) {
+                                                $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                                            } else {
+                                                $q->where($column , $value);
+                                            }
+                                        }
+                                    })
+                                    ->paginate(config('app.paginate'));
+          
     } 
     public function sortingOrder($sort_by)
     {
@@ -134,16 +121,5 @@ class SearchRepository implements SearchRepositoryInterface
             'usage_tracking'      =>  $row->af_usage_tracking,
             'outlife_tracking'    =>  $row->af_outlife_tracking,
         ]);
-    }
-
-    public function paginate($items, $page = null, $options = [])
-    {
-        $perPage    =   config('app.paginate');
-        $page       =   $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items      =   $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
-            'path'      =>  LengthAwarePaginator::resolveCurrentPath(),
-            'pageName'  =>  "page",
-        ]);
-    }
+    } 
 }
