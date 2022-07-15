@@ -57,7 +57,7 @@ class MaterialProductSeeder extends Seeder
             "cost_per_unit"                => "465",
             "remarks"                      => "Kimberly Snider",
             "used_for_td_expt_only"        => "1",
-            "barcode_number"               => generateBarcode('material')
+            "barcode_number"               => '114220115600'
         ];
         $material_product = MaterialProducts::create($parent_data);
         $material_product->Batches()->create($data);
@@ -106,7 +106,7 @@ class MaterialProductSeeder extends Seeder
             "cost_per_unit"                => "465",
             "remarks"                      => "Kimberly Snider",
             "used_for_td_expt_only"        => "1",
-            "barcode_number"               => generateBarcode('material')
+            "barcode_number"               => '214820155609'
         ];
         $material_product_two = MaterialProducts::create($parent_data_two);
         $material_product_two->Batches()->create($data_two);
