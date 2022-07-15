@@ -20,6 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use Carbon\Carbon;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -224,9 +225,13 @@ class MaterialProductsController extends Controller
         if ($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
 
         if ($request->route('wizard_mode') == 'duplicate') {
+            
             $request->session()->put('wizard_mode', 'duplicate');
             $duplication        =   Batches::find($batch_id)->toArray();
             $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()], $duplication);
+            $duplication_batch->update([
+                "barcode_number" => generateBarcode(MaterialProducts::find($duplication_batch->material_product_id)->category_selection)
+            ]);  
             $request->session()->put('material_product_id', $id);
             $request->session()->put('batch_id', $duplication_batch->id);
         }
