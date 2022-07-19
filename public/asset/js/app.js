@@ -133,9 +133,37 @@ uncheckedSavedSearch = (e) => {
     $('#saveThisSearch').prop('checked', false);
 }
 
+ 
+$('.need-word-match').keyup((element) => {
 
-$('.wordMatchSuggest').keyup((element) => {
-    const input = element.target
+    if(element.target.hasAttribute("list") == false) {
+        var listAtt     =   document.createAttribute("list");
+        listAtt.value   =   `td_${element.target.name}`;
+        element.target.setAttributeNode(listAtt)
 
-    console.log(input.name)
-})
+        var dataList    =   document.createElement("datalist");
+        dataList.id     =   `td_${element.target.name}`;
+        element.target.parentNode.append(dataList)
+    } 
+
+    fetch('/dso_horizontal/get-suggestion', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        body: JSON.stringify({
+            "name"  : element.target.name,
+            "value" : element.target.value,
+        })
+    }).then(response => response.json()).then(response => {
+        $(`#td_${element.target.name}`).html('')
+        if(response.data != undefined || response.data != null) {
+            Object.values(response.data).map((item) => { 
+                if(element.target.value !== item) {
+                    $(`#td_${element.target.name}`).append(`<option value="${item}">`)
+                }
+            })
+        }
+    }); 
+})  

@@ -54,11 +54,11 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Item description</label>
-        <input type="text" ng-model="advanced_filter.item_description" name="item_description" class="form-control custom wordMatchSuggest" placeholder="Type here...">
+        <input type="text" ng-model="advanced_filter.item_description" name="item_description" class="form-control custom need-word-match" placeholder="Type here...">
     </div>
     <div class="col">
         <label for="" class="form-label">Brand</label>
-        <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom wordMatchSuggest" placeholder="Type here..." >
+        <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom need-word-match" placeholder="Type here..." >
     </div> 
     <div class="col">
         <label for=""  class="form-label">Owner 1/2</label>

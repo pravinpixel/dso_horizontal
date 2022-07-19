@@ -136,7 +136,6 @@ Route::middleware(['auth_users'])->group(function () {
         
     // ==================== Repack Draw IN / OUT Flow ===============
 
-
     // Word Suggestion 
-    Route::get('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
+    Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
 });

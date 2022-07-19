@@ -49,18 +49,22 @@ class SearchRepository implements SearchRepositoryInterface
         return  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
                                     ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) { 
                                         foreach($filter as $column => $value) { 
-                                            $q->where($column , $value); 
+                                            if($value != '') {
+                                                $q->where($column , $value); 
+                                            }
                                         }
                                     })
                                     ->WhereHas('Batches', function($q) use ($filter){
                                         foreach($filter as $column => $value) { 
-                                            if(checkIsBatchDateColumn($column)) {
-                                                $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                                            } elseif($column == 'owner_one') {
-                                                $q->where('owner_one' , $value)
-                                                ->orWhere('owner_two' , $value);
-                                            } else {
-                                                $q->where($column , $value);
+                                            if($value != '') {
+                                                if(checkIsBatchDateColumn($column)) {
+                                                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                                                } elseif($column == 'owner_one') {
+                                                    $q->where('owner_one' , $value)
+                                                    ->orWhere('owner_two' , $value);
+                                                } else {
+                                                    $q->where($column , $value);
+                                                }
                                             }
                                         }
                                     })

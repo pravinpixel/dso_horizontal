@@ -13,19 +13,19 @@
                     <div class="row m-0"> 
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Supplier</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.supplier">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.supplier" name="supplier">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Batch#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.batch">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.batch" name="batch">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Serial#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.serial">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.serial" name="serial">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">PO Number</small>
-                            <input type="number" min="1"  class="form-control" placeholder="Type here" ng-model="advanced_filter.po_number">
+                            <input type="number" min="1"  class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.po_number" name="po_number">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Statutory board</label>
@@ -97,27 +97,27 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">CAS#</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.cas">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.cas" name="cas">
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">FM 1202</small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.fm_1202">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.fm_1202" name="fm_1202">
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Project name </small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.project_name">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.project_name" name="project_name">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Material / Product type </small>
-                            <input type="text" class="form-control" placeholder="Type here" ng-model="advanced_filter.material_product_type">
+                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.material_product_type" name="material_product_type">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Date of manufacture</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_manufacture">
+                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_manufacture" name="date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Date of shipment</small>
-                            <input type="text" date-range-picker class="form-control" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_shipment">
+                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_shipment" name="date_of_shipment">
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Used for TD/EXPT only</label>
