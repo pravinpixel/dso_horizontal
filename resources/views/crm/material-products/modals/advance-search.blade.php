@@ -32,7 +32,7 @@
                             <select name="advanced_filter.statutory_body" class="form-select" ng-model="advanced_filter.statutory_body">
                                 <option value="">-- select --</option>
                                 @foreach ($statutory_body_db as $row)
-                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
                         </div> 
@@ -74,7 +74,7 @@
                             <select name="advanced_filter.housing_type" class="form-select" ng-model="advanced_filter.housing_type">
                                 <option value="">-- select --</option>
                                 @foreach ($house_type_db as $row)
-                                    <option value="{{ $row->name }}">{{ $row->name }}</option>
+                                    <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
                         </div> 
