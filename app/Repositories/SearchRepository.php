@@ -14,7 +14,7 @@ class SearchRepository implements SearchRepositoryInterface
     public function barCodeSearch($request)
     {
         try {
-            $parent_id = Batches::where('barcode_number', (string) $request->filters)->first()->material_product_id;
+            $parent_id = Batches::where('is_draft',0)->where('barcode_number', (string) $request->filters)->first()->material_product_id;
             return MaterialProducts::with([
                 'Batches',
                 'Batches.RepackOutlife',
@@ -46,29 +46,45 @@ class SearchRepository implements SearchRepositoryInterface
             'alert_before_expiry',
         ];
          
-        return  MaterialProducts::with(['Batches','Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
-                                    ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) { 
-                                        foreach($filter as $column => $value) { 
-                                            if($value != '') {
-                                                $q->where($column , $value); 
-                                            }
-                                        }
-                                    })
-                                    ->WhereHas('Batches', function($q) use ($filter){
-                                        foreach($filter as $column => $value) { 
-                                            if($value != '') {
-                                                if(checkIsBatchDateColumn($column)) {
-                                                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                                                } elseif($column == 'owner_one') {
-                                                    $q->where('owner_one' , $value)
-                                                    ->orWhere('owner_two' , $value);
-                                                } else {
-                                                    $q->where($column , $value);
-                                                }
-                                            }
-                                        }
-                                    })
-                                    ->paginate(config('app.paginate'));
+        return  MaterialProducts::with(['Batches' => function ($q) use ($filter){
+            foreach($filter as $column => $value) { 
+                if(checkIsBatchDateColumn($column)) {
+                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                } elseif($column == 'owner_one') {
+                    $q->where('owner_one' , $value)
+                    ->orWhere('owner_two' , $value);
+                } else {
+                    if($value != '') {
+                        Log::info("In side TRUE");
+                        $q->where($column , $value);
+                    }
+                }
+            }
+        },
+        'Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
+        ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) { 
+            foreach($filter as $column => $value) { 
+                if($value != '') {
+                    $q->where($column , $value); 
+                }
+            }
+        })
+        ->WhereHas('Batches', function($q) use ($filter){
+            foreach($filter as $column => $value) { 
+                if(checkIsBatchDateColumn($column)) {
+                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                } elseif($column == 'owner_one') {
+                    $q->where('owner_one' , $value)
+                    ->orWhere('owner_two' , $value);
+                } else {
+                    if($value != '') {
+                        Log::info("In side TRUE");
+                        $q->where($column , $value);
+                    }
+                }
+            }
+        })
+        ->paginate(config('app.paginate'));
           
     }
     public function sortingOrder($sort_by)

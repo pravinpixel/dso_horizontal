@@ -229,6 +229,7 @@ class MaterialProductsController extends Controller
             $request->session()->put('wizard_mode', 'duplicate');
             $duplication        =   Batches::find($batch_id)->toArray();
             $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()], $duplication);
+            Log::info($duplication_batch);
             $duplication_batch->update([
                 "barcode_number" => generateBarcode(MaterialProducts::find($duplication_batch->material_product_id)->category_selection)
             ]);  
@@ -317,7 +318,7 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
     {
-        
+         
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,
