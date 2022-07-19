@@ -56,6 +56,9 @@ class SearchRepository implements SearchRepositoryInterface
                                         foreach($filter as $column => $value) { 
                                             if(checkIsBatchDateColumn($column)) {
                                                 $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                                            } elseif($column == 'owner_one') {
+                                                $q->where('owner_one' , $value)
+                                                ->orWhere('owner_two' , $value);
                                             } else {
                                                 $q->where($column , $value);
                                             }
@@ -63,7 +66,7 @@ class SearchRepository implements SearchRepositoryInterface
                                     })
                                     ->paginate(config('app.paginate'));
           
-    } 
+    }
     public function sortingOrder($sort_by)
     {
         if (checkIsMaterialColumn($sort_by->col_name) == 1) {

@@ -300,7 +300,11 @@ app.controller('SearchAddController', function($scope, $http) {
                 {name: 'Access' , item : res.data.access.join(",") },
                 {name: 'Date in' , item : batch.date_in},
                 {name: 'Date of expiry' , item : batch.date_of_expiry},
-                {name: 'SDS' , item : batch.sds ?? "-"},
+                {name: 'SDS' , item : `
+                    <a href="${batch.sds.replace('public/files/','public/storage/files/')}" download="${batch.sds.replace('public/files/','public/storage/files')}">
+                        <i class="fa fa-download"></i> <small>customers_1657891040</small>
+                    </a>
+                `},
                 {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert ?? "-"},
                 {name: 'IQC status (P/F)' , item : batch.iqc_status == 0 ? "Fail" : "Pass"},
                 {name: 'IQC result' , item : batch.iqc_result == 0 ? "Fail" : "Pass"},

@@ -132,3 +132,10 @@ saved_this_search = (e) => {
 uncheckedSavedSearch = (e) => {
     $('#saveThisSearch').prop('checked', false);
 }
+
+
+$('.wordMatchSuggest').keyup((element) => {
+    const input = element.target
+
+    console.log(input.name)
+})

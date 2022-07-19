@@ -54,16 +54,15 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Item description</label>
-        <input type="text" ng-model="advanced_filter.item_description" list="td_item_description" onkeyup="wordMatchSuggest(this)" name="item_description" class="form-control custom" placeholder="Type here...">
-        <datalist id="td_item_description"></datalist>
+        <input type="text" ng-model="advanced_filter.item_description" name="item_description" class="form-control custom wordMatchSuggest" placeholder="Type here...">
     </div>
     <div class="col">
         <label for="" class="form-label">Brand</label>
-        <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom" placeholder="Type here...">
+        <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom wordMatchSuggest" placeholder="Type here..." >
     </div> 
     <div class="col">
         <label for=""  class="form-label">Owner 1/2</label>
-        <select name="owner_one" ng-model="advanced_filter.owner_one" class="form-select custom">
+        <select name="owner_one" ng-model="advanced_filter.owner_one" class="form-select custom" >
             <option value="">-- select --</option>
             @foreach ($owners as $row)
                 <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
