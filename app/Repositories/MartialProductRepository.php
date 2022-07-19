@@ -30,6 +30,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
         $this->storeFiles($request, $batch);
+
+   
         
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {
             $request->session()->put('material_product_id', $material_product->id);
