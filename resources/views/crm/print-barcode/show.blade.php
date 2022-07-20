@@ -36,12 +36,19 @@
                         {{ $batch->barcode_number }}
                     </div>
                     <div>
-                        <small  ng-if="batch_id">{{ $batch->batch }} / {{ $batch->serial }}</small>
+                        <small  ng-if="batch_id">
+                            <b class="text-dark">Batch#/Serial#</b> : {{ $batch->batch }} / {{ $batch->serial }}
+                        </small>
                         <div class="text-primary">
                             <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
-                            <p class="m-0" ng-if="date_of_expiry">{{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</p>
-                            <p class="m-0" ng-if="project_name">{{ $batch->project_name }}</p>
-                            <p class="m-0" ng-if="owners">Owner1/2 : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
+                            <p class="m-0" ng-if="date_of_expiry">
+                                <b class="text-dark">DOE</b> :   {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
+                            </p>
+                            <p class="m-0" ng-if="project_name">
+                                <b class="text-dark">Project name</b> : 
+                                {{ $batch->project_name }}
+                            </p>
+                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owner 1/2</b>  : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
                         </div> 
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">

@@ -17,7 +17,7 @@
                 {!! $column['batch'] !!}
             @endif
         </div>
-    @endif 
+    @endif
 @endforeach
 <div class="box border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm d-flex align-items-center" : null}}" >
     <div class="{{$page_name === 'PRINT_BARCODE_LABEL'  ? "d-flex align-items-center justify-content-between" : null }}">
