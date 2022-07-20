@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         $credentials = [
             'email'         => '123',
             'password'      => config('auth.password'),
-            'full_name'     => 'Christopher',
-            'alias_name'    => 'christopher',
+            'full_name'     => 'Elena',
+            'alias_name'    => 'Elena',
         ];
         $userDb = Sentinel::registerAndActivate( $credentials );
 
@@ -42,15 +42,15 @@ class UserSeeder extends Seeder
             'permissions'=> config('permission'),
         ]);
 
-        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '456','password'   => config('auth.password'),'full_name' => 'Anthony', 'alias_name' => "Anton"]));
-        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '678','password'   => config('auth.password'),'full_name' => 'Christopher', 'alias_name' => "Chris"]));
+        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '456','password'   => config('auth.password'),'full_name' => 'Hesbrew', 'alias_name' => "Hesbrew"]));
+        $employee->users()->attach(Sentinel::registerAndActivate(['email' => '678','password'   => config('auth.password'),'full_name' => 'Ainsley', 'alias_name' => "Ainsley"]));
  
   
         User::create([
             'email'         => '1231223',
             'password'      => config('auth.password'),
-            'full_name'     => 'Mark Antony',
-            'alias_name'    => 'mark',
+            'full_name'     => 'Mia',
+            'alias_name'    => 'Mia',
             'department'    => 2,
         ]); 
     }
