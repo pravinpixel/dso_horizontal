@@ -80,8 +80,7 @@ class SearchRepository implements SearchRepositoryInterface
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                 } elseif($column == 'owner_one') {
                     if($value != '') {
-                        $q->where('owner_one' , $value)
-                        ->orWhere('owner_two' , $value);
+                        $q->where('owner_one', (string) $value)->orWhere('owner_two',(string)  $value);
                     }
                 } else {
                     if($value != '') {
@@ -89,7 +88,6 @@ class SearchRepository implements SearchRepositoryInterface
                     }
                 }
             }
-            
         })
         ->paginate(config('app.paginate'));
           
