@@ -81,7 +81,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.on_extended_qc_status = true
             $scope.on_fm_1202 = true
             // $scope.on_housing = true
-            // $scope.on_housing_type = true
+            $scope.on_housing_type = true
             $scope.on_iqc_result = true
             $scope.on_iqc_status = true
             $scope.on_material_product_id = true
@@ -99,7 +99,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.on_require_outlife_tracking = true
             $scope.on_sds = true
             $scope.on_serial = true
-            // $scope.on_statutory_body = true
+            $scope.on_statutory_body = true
             $scope.on_storage_area = true
             $scope.on_supplier = true
             // $scope.on_unit_of_measure = true
