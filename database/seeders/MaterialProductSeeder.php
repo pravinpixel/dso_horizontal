@@ -75,7 +75,7 @@ class MaterialProductSeeder extends Seeder
         $data_two = [
             "is_draft"                      => "0",
             "quantity"                     => 155,
-            "brand"                        => "Hexcel",
+            "brand"                        => "In-House",
             "supplier"                     => "Peter Parker",
             "batch"                        => "19F482MBi64",
             "serial"                       => "31R000043777",
