@@ -28,7 +28,7 @@
         @yield('wizzard-form-content') 
     </div>
     <a onclick="clearEntryData()"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
-    <div id="clearEntry" onclick="clearEntryData()"></div>
+    {{-- <div id="clearEntry" onclick="clearEntryData()"></div> --}}
     <script>
         function clearEntryData ()  {
             swal({

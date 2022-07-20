@@ -2,20 +2,32 @@
 @foreach ($tableAllColumns as $column) 
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
-            @if ($column['name']=="iqc_status")
-                <small class="badge bg-success rounded-pill mx-auto">PASS</small>  
-                @elseif ($column['name'] == 'is_draft') 
+            @switch($column['name'])
+                @case('iqc_status')
+                    <span ng-if="batch.iqc_status != 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
+                    <span ng-if="batch.iqc_status == 1" class="mx-auto badge bg-danger rounded-pill">FAIL</span> 
+                @break
+                @case('is_draft')
                     <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
                     <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
-                @elseif ($column['name'] == 'owner_two')         {!! $tableAllColumns['owner_one']['batch'].' , ' !!} {!! $tableAllColumns['owner_two']['batch'] !!} 
-                @elseif ($column['name'] == 'serial')            {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!} 
-                @elseif($column['name'] == "unit_packing_value") {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
-                @elseif($column['name'] == "housing_type")       {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
-                @elseif($column['name'] == "statutory_body")     @{{ batch.statutory_body.name }}
-                @elseif($column['name'] == "date_of_expiry")     {{ $column['batch'] }} <span><i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i></span>
-                @else
-                {!! $column['batch'] !!}
-            @endif
+                @break
+                @case('owner_two')
+                    {!! $tableAllColumns['owner_one']['batch'].' , ' !!} {!! $tableAllColumns['owner_two']['batch'] !!} 
+                @break
+                @case('serial')
+                    {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!}  
+                @break
+                @case('housing_type')
+                    {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
+                @break
+                @case('statutory_body')
+                    @{{ batch.statutory_body.name }}
+                @break
+                @case('date_of_expiry')
+                    {{ $column['batch'] }} <span><i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i></span>
+                @break
+                @default {!! $column['batch'] !!}
+            @endswitch 
         </div>
     @endif
 @endforeach
@@ -28,7 +40,7 @@
                 </a> 
                 <div class="dropdown-menu"> 
                     <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
-                    <button class="dropdown-item text-secondary"  ng-click="editOrDuplicate('duplicate',row.id, batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
+                    <button class="dropdown-item text-secondary"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
                     <button class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
 

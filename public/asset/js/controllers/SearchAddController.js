@@ -897,5 +897,10 @@ app.controller('SearchAddController', function($scope, $http) {
             $('#RepackOutlife').modal('hide');
         })
     }
-}); 
 
+    $scope.duplicateThisBatch = (id) => {
+        $http.get('duplicate-batch/' + id).then((res) => {
+            window.location.replace(`material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
+        })
+    }
+});

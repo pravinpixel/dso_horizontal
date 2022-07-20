@@ -138,4 +138,5 @@ Route::middleware(['auth_users'])->group(function () {
 
     // Word Suggestion 
     Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
+    Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
 });

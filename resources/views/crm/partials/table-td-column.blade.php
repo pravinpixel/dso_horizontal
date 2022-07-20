@@ -13,17 +13,19 @@
 @foreach ($tableAllColumns as $key =>  $column) 
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="box justify-content-start" >
-            @if ($column['name']=="unit_packing_value")
-                @elseif ($column['name'] == 'category_selection') @{{ row.category_selection == 'material' ? 'Material' : ''}} @{{ row.category_selection == 'in_house' ? 'In-house Product' : ''}}
-                @elseif ($column['name'] == 'is_draft')
-                @elseif($column['name']=="quantity")
-                    @{{ row.totalQuantity }}
-                    <span>
-                        <i class="ms-1 @{{ row.totalQuantity < row.alert_threshold_qty_lower_limit == true ? 'text-danger' : row.alert_threshold_qty_lower_limit < row.totalQuantity < row.alert_threshold_qty_upper_limit == true ? 'text-warning' : row.totalQuantity > row.alert_threshold_qty_upper_limit == true ? 'text-success' : null }} dot-sm bi bi-circle-fill"></i>
-                    </span>
-                @else
+            @switch($column['name'])
+                @case('unit_packing_value')
+                    {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
+                @break
+                @case('category_selection')
+                    @{{ row.category_selection == 'material' ? 'Material' : ''}} @{{ row.category_selection == 'in_house' ? 'In-house Product' : ''}}
+                @break
+                @case('quantity')
+                    @{{ row.totalQuantity }}    <span><i class="ms-1 @{{ row.totalQuantity < row.alert_threshold_qty_lower_limit == true ? 'text-danger' : row.alert_threshold_qty_lower_limit < row.totalQuantity < row.alert_threshold_qty_upper_limit == true ? 'text-warning' : row.totalQuantity > row.alert_threshold_qty_upper_limit == true ? 'text-success' : null }} dot-sm bi bi-circle-fill"></i></span>
+                @break
+                @default
                 {!! $column['row'] !!}
-            @endif
+            @endswitch 
         </div>
     @endif
 @endforeach

@@ -224,18 +224,8 @@ class MaterialProductsController extends Controller
 
         if ($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
 
-        if ($request->route('wizard_mode') == 'duplicate') {
-            
-            $request->session()->put('wizard_mode', 'duplicate');
-            $duplication        =   Batches::find($batch_id)->toArray();
-            $duplication_batch  =   Batches::updateOrCreate(["id" => batch_id()], $duplication);
-            
-            $duplication_batch->update([
-                "barcode_number" => generateBarcode(MaterialProducts::find($duplication_batch->material_product_id)->category_selection),
-      
-            ]);  
-            $request->session()->put('material_product_id', $id);
-            $request->session()->put('batch_id', $duplication_batch->id);
+        if ($request->route('wizard_mode') == 'duplicate') { 
+            $request->session()->put('wizard_mode', 'duplicate');  
         }
 
         $material_product       =  MaterialProducts::find(material_product() ?? $id);
@@ -326,9 +316,6 @@ class MaterialProductsController extends Controller
         );
         if ($type == 'form-one') {
             if(wizard_mode() == 'duplicate') {
-                
-                Log::info(batch_id());
-
                 $request->session()->put('is_skip_duplicate', 'skip'); 
             }
             if (wizard_mode() == 'create') {
@@ -422,5 +409,23 @@ class MaterialProductsController extends Controller
             $data =  Batches::where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
         }
         return response(['status' => true,  'data' => collect($data)->unique()], Response::HTTP_OK);
+    }
+    public function duplicate_batch($id)
+    {
+        $current_batch                  =   Batches::find($id);
+        $created_batch                  =   $current_batch->replicate();
+        $created_batch->created_at      =   Carbon::now();
+        $created_batch->is_draft        =   1;
+        $created_batch->barcode_number  =   generateBarcode(MaterialProducts::find($created_batch->material_product_id)->category_selection);
+        $created_batch->save(); 
+        request()->session()->put('material_product_id', $created_batch->material_product_id);
+        request()->session()->put('batch_id', $created_batch->id);
+
+        return response()->json([
+            "status"                =>  true,
+            "wizard_mode"           =>  "duplicate",
+            "batch_id"              =>  $created_batch->id,
+            "material_product_id"   =>  $created_batch->material_product_id,
+        ]);
     }
 }

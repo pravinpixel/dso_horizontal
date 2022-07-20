@@ -25,6 +25,7 @@ class HouseTypeSeeder extends Seeder
             ['name' => "Dry Cabinet"],
             ['name' => "Freezer"],
             ['name' => "Pallet"],
+            ['name' => "Nil"],
         ];
                 
         HouseTypes::insert($data);
