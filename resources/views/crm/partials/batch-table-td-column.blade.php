@@ -7,7 +7,7 @@
                 @elseif ($column['name'] == 'is_draft') 
                     <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
                     <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
-                @elseif ($column['name'] == 'owner_two')         {!! $tableAllColumns['owner_one']['batch'].',' !!} {!! $tableAllColumns['owner_two']['batch'].',' !!} 
+                @elseif ($column['name'] == 'owner_two')         {!! $tableAllColumns['owner_one']['batch'].' , ' !!} {!! $tableAllColumns['owner_two']['batch'] !!} 
                 @elseif ($column['name'] == 'serial')            {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!} 
                 @elseif($column['name'] == "unit_packing_value") {!! $column['row'] !!} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @elseif($column['name'] == "housing_type")       {{ $column['batch'] }} - {{ $tableAllColumns["housing"]["batch"] }}
