@@ -232,7 +232,7 @@ class MaterialProductsController extends Controller
             
             $duplication_batch->update([
                 "barcode_number" => generateBarcode(MaterialProducts::find($duplication_batch->material_product_id)->category_selection),
-                'is_draft'       => 1
+      
             ]);  
             $request->session()->put('material_product_id', $id);
             $request->session()->put('batch_id', $duplication_batch->id);
@@ -326,6 +326,9 @@ class MaterialProductsController extends Controller
         );
         if ($type == 'form-one') {
             if(wizard_mode() == 'duplicate') {
+                
+                Log::info(batch_id());
+
                 $request->session()->put('is_skip_duplicate', 'skip'); 
             }
             if (wizard_mode() == 'create') {

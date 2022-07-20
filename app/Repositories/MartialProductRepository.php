@@ -47,7 +47,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 Storage::delete($batch->coc_coa_mill_cert);
             }
             $coc_coa_mill_cert              =  storeFiles('coc_coa_mill_cert');
-            Log::info( $coc_coa_mill_cert);
+            
             $batch  ->  coc_coa_mill_cert   =   $coc_coa_mill_cert;
             $batch  ->  save();
         }

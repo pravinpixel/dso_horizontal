@@ -2,6 +2,7 @@
 
 use App\Models\Batches;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -214,4 +215,4 @@ if(! function_exists('storeFiles')) {
         $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
         return $file->storeAs('public/files/'.$fileName , $newFileName );
     }
-}
+} 

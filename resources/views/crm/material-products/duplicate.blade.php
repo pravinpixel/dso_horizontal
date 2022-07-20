@@ -28,6 +28,7 @@
         @yield('wizzard-form-content') 
     </div>
     <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a> 
+    <div id="clearEntry" onclick="clearEntry()"></div>
 @endsection
 @section('scripts')
 <script>
@@ -97,6 +98,48 @@
                 break; 
                 case "save":
                     $("#duplicate_other_form").submit();
+                break; 
+            }
+        });
+    }
+    clearEntry = () => {
+        swal({
+            text: "Do you skip this Duplicate batch changes ?",
+            icon: "info",
+            closeOnClickOutside: false,
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    visible: true,
+                    className: "btn btn-light rounded-pill",
+                    closeModal: true,
+                    value: "No! cancel it",
+                },
+                save: {
+                    text: "Yes !, Skip",
+                    value: "save",
+                    visible: true,
+                    className: "btn btn-success rounded-pill",
+                    closeModal: true,
+                },
+            },
+        }).then((value) => { 
+            switch (value) {
+                case "cancel":
+                    swal("cancel");
+                        break; 
+                        case "save":
+                        $.ajax({
+                            type    :   'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url     :   "{{ route('delete-material-products-batch', request()->route()->batch_id) }}",
+                            success:function(response){
+                                window.location.replace('{{ route("list-material-products") }}');
+                            }
+                        });
                 break; 
             }
         });
