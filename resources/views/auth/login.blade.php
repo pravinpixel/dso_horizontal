@@ -17,7 +17,7 @@
                             <div>
                                 <div class="btn-group d-flex bg-white rounded-pill shadow border">
                                     <i class="fa fa-user btn bg-lmight rounded-pill m-1 text-secondary" style="font-size: 25px"></i>
-                                    <input name="user_login_id" class=" form-control-lg  form-control rounded-pill m-1 border-0 bg-light ms-0" placeholder="Type here .." type="password">
+                                    <input name="user_login_id" class=" form-control-lg  form-control rounded-pill m-1 border-0 bg-light ms-0" placeholder="Type here .." type="password" required>
                                 </div>
                             </div>
                         </div>

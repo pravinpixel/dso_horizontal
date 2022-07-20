@@ -73,15 +73,9 @@ class SearchRepository implements SearchRepositoryInterface
             }
         })
         ->WhereHas('Batches', function($q) use ($filter){
-            
             foreach($filter as $column => $value) { 
-
                 if(checkIsBatchDateColumn($column)) {
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                } elseif($column == 'owner_one') {
-                    if($value != '') {
-                        $q->where('owner_one', (string) $value)->orWhere('owner_two',(string)  $value);
-                    }
                 } else {
                     if($value != '') {
                         $q->where($column , $value);
@@ -90,7 +84,6 @@ class SearchRepository implements SearchRepositoryInterface
             }
         })
         ->paginate(config('app.paginate'));
-          
     }
     public function sortingOrder($sort_by)
     {
