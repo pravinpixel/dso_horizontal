@@ -27,9 +27,53 @@
         </div> 
         @yield('wizzard-form-content') 
     </div>
-    <a onclick="clearEntry()"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
-    <div id="clearEntry" onclick="clearEntry()"></div>
-
+    <a onclick="clearEntryData()"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
+    <div id="clearEntry" onclick="clearEntryData()"></div>
+    <script>
+        function clearEntryData ()  {
+            swal({
+                title:'Cancel Entry ?',
+                text: "Changes you made may not be saved.",
+                icon: "info",
+                closeOnClickOutside: false,
+                buttons: {
+                    cancel: {
+                        text: "Cancel",
+                        visible: true,
+                        className: "btn btn-light rounded-pill",
+                        closeModal: true,
+                        value: "No! cancel it",
+                    },
+                    save: {
+                        text: "Yes !, Leave",
+                        value: "save",
+                        visible: true,
+                        className: "btn btn-success rounded-pill",
+                        closeModal: true,
+                    },
+                },
+            }).then((value) => { 
+                switch (value) {
+                    case "cancel":
+                        swal("cancel");
+                            break; 
+                            case "save":
+                            $.ajax({
+                                type    :   'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                url     :   "{{ route('delete-material-products-batch', request()->route()->batch_id) }}",
+                                success:function(response){
+                                    window.location.replace('{{ route("list-material-products") }}');
+                                }
+                            });
+                    break; 
+                }
+            });
+        }
+    </script>
 @endsection
 @section('scripts')
 <script>
@@ -103,49 +147,7 @@
             }
         });
     }
-    clearEntry = () => {
-        swal({
-            title:'Cancel Entry ?',
-            text: "Changes you made may not be saved.",
-            icon: "info",
-            closeOnClickOutside: false,
-            buttons: {
-                cancel: {
-                    text: "Cancel",
-                    visible: true,
-                    className: "btn btn-light rounded-pill",
-                    closeModal: true,
-                    value: "No! cancel it",
-                },
-                save: {
-                    text: "Yes !, Leave",
-                    value: "save",
-                    visible: true,
-                    className: "btn btn-success rounded-pill",
-                    closeModal: true,
-                },
-            },
-        }).then((value) => { 
-            switch (value) {
-                case "cancel":
-                    swal("cancel");
-                        break; 
-                        case "save":
-                        $.ajax({
-                            type    :   'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url     :   "{{ route('delete-material-products-batch', request()->route()->batch_id) }}",
-                            success:function(response){
-                                window.location.replace('{{ route("list-material-products") }}');
-                            }
-                        });
-                break; 
-            }
-        });
-    }
- 
+     
 </script>
+
 @endsection

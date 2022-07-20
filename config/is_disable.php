@@ -149,7 +149,7 @@
             "in_house" => [
                 "category_selection"                => ['status' => 'disabled' , "reset" => false],
                 "item_description"                  => ['status' => 'disabled' , "reset" => false],
-                "brand"                             => ['status' => 'disabled' , "reset" => false],
+                "brand"                             => ['status' => 'disabled' , "reset" => true],
                 "supplier"                          => ['status' => 'disabled' , "reset" => false],
                 "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                 "unit_packing_value"                => ['status' => null , "reset" => false],
