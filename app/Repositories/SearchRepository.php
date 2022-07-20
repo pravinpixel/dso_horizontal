@@ -46,19 +46,20 @@ class SearchRepository implements SearchRepositoryInterface
             'alert_before_expiry',
         ];
          
-        return  MaterialProducts::with(['Batches' => function ($q) use ($filter){
-            foreach($filter as $column => $value) { 
-                if(checkIsBatchDateColumn($column)) {
-                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                } elseif($column == 'owner_one') {
-                    $q->where('owner_one' , $value)
-                    ->orWhere('owner_two' , $value);
-                } else {
-                    if($value != '') {
-                        Log::info("In side TRUE");
-                        $q->where($column , $value);
+        return  MaterialProducts::with(['Batches' => function ($q) use ($filter,$material_table){
+            foreach($filter as $column => $value) {
+                if(in_array($column, $material_table) != 1) {
+                    if(checkIsBatchDateColumn($column)) {
+                        $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                    } elseif($column == 'owner_one') {
+                        $q->where('owner_one' , $value)
+                        ->orWhere('owner_two' , $value);
+                    } else {
+                        if($value != '') {
+                            $q->where($column , $value);
+                        }
                     }
-                }
+                } 
             }
         },
         'Batches.RepackOutlife','Batches.HousingType','Batches.Department','UnitOfMeasure','Batches.StorageArea'])
@@ -70,7 +71,9 @@ class SearchRepository implements SearchRepositoryInterface
             }
         })
         ->WhereHas('Batches', function($q) use ($filter){
+            
             foreach($filter as $column => $value) { 
+
                 if(checkIsBatchDateColumn($column)) {
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                 } elseif($column == 'owner_one') {
@@ -78,11 +81,11 @@ class SearchRepository implements SearchRepositoryInterface
                     ->orWhere('owner_two' , $value);
                 } else {
                     if($value != '') {
-                        Log::info("In side TRUE");
                         $q->where($column , $value);
                     }
                 }
             }
+            
         })
         ->paginate(config('app.paginate'));
           
