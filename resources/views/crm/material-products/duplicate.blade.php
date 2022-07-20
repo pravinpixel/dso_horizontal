@@ -27,8 +27,9 @@
         </div> 
         @yield('wizzard-form-content') 
     </div>
-    <a href="{{ route('list-material-products') }}"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a> 
+    <a onclick="clearEntry()"><i class="bi bi-x-circle"></i> <u>Cancel & Back</u> </a>
     <div id="clearEntry" onclick="clearEntry()"></div>
+
 @endsection
 @section('scripts')
 <script>
@@ -104,7 +105,8 @@
     }
     clearEntry = () => {
         swal({
-            text: "Do you skip this Duplicate batch changes ?",
+            title:'Cancel Entry ?',
+            text: "Changes you made may not be saved.",
             icon: "info",
             closeOnClickOutside: false,
             buttons: {
@@ -116,7 +118,7 @@
                     value: "No! cancel it",
                 },
                 save: {
-                    text: "Yes !, Skip",
+                    text: "Yes !, Leave",
                     value: "save",
                     visible: true,
                     className: "btn btn-success rounded-pill",
@@ -144,5 +146,6 @@
             }
         });
     }
+ 
 </script>
 @endsection
