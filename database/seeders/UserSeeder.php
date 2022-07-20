@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email'         => '123',
             'password'      => config('auth.password'),
             'full_name'     => 'Christopher',
-            'alias_name'    => 'Christopher',
+            'alias_name'    => 'christopher',
         ];
         $userDb = Sentinel::registerAndActivate( $credentials );
 
@@ -44,18 +44,14 @@ class UserSeeder extends Seeder
 
         $employee->users()->attach(Sentinel::registerAndActivate(['email' => '456','password'   => config('auth.password'),'full_name' => 'Anthony', 'alias_name' => "Anton"]));
         $employee->users()->attach(Sentinel::registerAndActivate(['email' => '678','password'   => config('auth.password'),'full_name' => 'Christopher', 'alias_name' => "Chris"]));
-
-       
-
-        
-       
+ 
   
         User::create([
             'email'         => '1231223',
             'password'      => config('auth.password'),
-            'full_name'     => 'Christopher',
-            'alias_name'    => 'Christopher',
-            'department'    => "2",
+            'full_name'     => 'Mark Antony',
+            'alias_name'    => 'mark',
+            'department'    => 2,
         ]); 
     }
 }
