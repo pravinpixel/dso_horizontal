@@ -6,7 +6,7 @@
                 @if (wizard_mode() == 'create' || session()->get('edit_mode') == 'parent')
                         <input type="hidden" value="{{ category_type() ?? $material_product->category_selection ?? null}}" name="category_selection">
                         @php
-                            $category = category_type() ?? $material_product->category_selection
+                            $category = category_type() ?? $material_product->category_selection ?? null
                         @endphp
                         <select required onchange="change_product_type()" class="form-select" id="category_type" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."category_selection.status") }}>
                             <option value=""> -- select -- </option>

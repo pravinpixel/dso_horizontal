@@ -75,7 +75,8 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                <select required name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
+                <input type="text" id="access_flag" class="position-absolute" style="opacity: 0" />
+                <select name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
                     multiple="multiple" id="multiple_access"
                     @endif  
                     class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
@@ -216,7 +217,23 @@
             search      :   true,
             selectAll   :   true,
             selectGroup :   true,
-        }); 
+            // onLoad  : function( element ) {  // fires at end of list initialization
+            //     element.hide()
+            // },
+            onOptionClick : function( element, option ){
+                if(element.value == '') {
+                    $('#access_flag').attr('required', true)
+                } else {
+                    $('#access_flag').attr('required', false)
+                }
+            }
+        });
+       
+        if($("#multiple_access").val() === null) {
+            $('#access_flag').attr('required', true)
+        }
+         
+        // multiple_access
         change_coc_coa_status = () => {
             const checkBox      =    $('#coc_coa_mill_cert_check_box')
             const formInput     =    $('#coc_coa_mill_cert_input')
