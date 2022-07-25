@@ -7,8 +7,13 @@
                     <input type="hidden" value="{{ category_type() ?? $material_product->category_selection ?? null}}" name="category_selection">
                     <select required onchange="change_product_type()" class="form-select" id="category_type" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."category_selection.status") }}>
                         <option value=""> -- select --</option>
-                        <option {{ category_type() ==  'material' ? 'selected' : null }} {{ $material_product->category_selection ?? null ==  'material' ? 'selected' : null }} value="material">Material</option>
-                        <option {{ category_type() ==  'in_house' ? 'selected' : null }} {{ $material_product->category_selection ?? null ==  'in_house' ? 'selected' : null }} value="in_house">In-House Products</option> 
+                        @if (category_type() ==  'material' || $material_product->category_selection ?? null ==  'material')
+                            <option selected value="material">Material</option>
+                            <option value="in_house">In-House Products</option>
+                            @else
+                            <option value="material">Material</option>
+                            <option selected value="in_house">In-House Products</option>
+                        @endif
                     </select>
                         @else
                     <input type="text" disabled value="{{ $material_product->category_selection }}" class="form-control form-select-sm">
