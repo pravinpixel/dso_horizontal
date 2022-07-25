@@ -3,7 +3,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Storage area <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::select('storage_area', $storage_room_db , $batch->storage_area ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
+               {!! Form::select('storage_area', $storage_room_db , is_reset('storage_area', $batch->storage_area ?? null , category_type() ?? $material_product->category_selection ?? null), ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."storage_area.status")
                 ])  !!}
             </div>
@@ -75,7 +75,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                <select name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
+                <select required name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
                     multiple="multiple" id="multiple_access"
                     @endif  
                     class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
@@ -177,15 +177,18 @@
                     {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : null !!} 
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" 
-                        @if ($material_product->Batches[0]->iqc_result == null)
-                            {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
-                        @endif
-                        {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
-                        name="iqc_result_status" id="iqc_result_check_box"
-                        class="form-check-input" 
-                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
-                        onclick="change_iqc_result_status()">
-                    </span> 
+                            @if (is_reset('iqc_result', $batch->iqc_result ?? null , category_type() ?? $material_product->category_selection ?? null) != null)
+                                @if ($material_product->Batches[0]->iqc_result == null)
+                                    {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                                @endif
+                            @endif
+                            {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
+                            name="iqc_result_status" id="iqc_result_check_box"
+                            class="form-check-input" 
+                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
+                            onclick="change_iqc_result_status()" 
+                        />
+                    </span>  
                 </div>
                 @if ($batch->iqc_result)
                     <a href="{{ storageGet($batch->iqc_result) }}" download="{{ storageGet($batch->iqc_result) }}">

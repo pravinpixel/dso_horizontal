@@ -305,7 +305,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 iqc_status                  : batch.iqc_status == 0 ? "Fail" : "Pass",
                 iqc_result                  : batch.iqc_result.replace('public/files/', 'public/storage/files/'),
                 cas                         : batch.cas,
-                fm_1202                     : batch.fm_1202,
+                fm_1202                     : batch.fm_1202 == 'on' ? "Yes" : "No",
                 project_name                : batch.project_name,
                 material_product_type       : batch.material_product_type,
                 date_of_manufacture         : batch.date_of_manufacture,

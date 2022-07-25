@@ -106,6 +106,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">PO Number  <sup class="text-danger">*</sup></label>
             <div class="col-8">
+                {{-- {{ dd(config("is_disable.duplicate.material.po_number.reset"))}} --}}
                 {!! Form::text('po_number', is_reset('po_number', $batch->po_number ?? null , category_type() ?? $material_product->category_selection ?? null) , ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."po_number.status"),
                 ]) !!}
@@ -115,7 +116,7 @@
             <label for="" class="col-4">Statutory body  <sup class="text-danger">*</sup></label>
             <div class="col-8">
                 {!! Form::select('statutory_body', $statutory_body_db , $batch->statutory_body ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --','required',
-                    config(is_disable(category_type() ?? $batch->category_selection ?? null)."statutory_body.status")
+                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."statutory_body.status")
                 ]) !!}
             </div>
         </div>
