@@ -105,7 +105,11 @@ if(! function_exists('is_reset')) {
         $wizard_mode    = wizard_mode();
         $reset_status   = config("is_disable.{$wizard_mode}.{$category_type}.{$column}.reset");
         if($reset_status == true || $reset_status == 1) {
-            return null;
+            if(session()->get('is_skip_duplicate') === null) {
+                return null;
+            } else {
+                return $value;
+            }
         } else {
             return $value;
         }
