@@ -16,8 +16,7 @@ class HouseTypeSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => "Flammable Cabinet as 1 item"],
-            ['name' => "Cabinet"],
+            ['name' => "Flammable Cabinet"],
             ['name' => "Acid Cabinet"],
             ['name' => "Base Cabinet"],
             ['name' => "Metal Cabinet"],
