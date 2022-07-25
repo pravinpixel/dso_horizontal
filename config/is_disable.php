@@ -131,7 +131,7 @@
                 "sds"                               => ['status' => null , "reset" => true],
                 "cas"                               => ['status' => null , "reset" => false],
                 "fm_1202"                           => ['status' => null , "reset" => false],
-                "project_name"                      => ['status' => null , "reset" => true],
+                "project_name"                      => ['status' => null , "reset" => false],
                 "material_product_type"             => ['status' => null , "reset" => false],
                 "alert_threshold_qty_upper_limit"   => ['status' => 'disabled' , "reset" => false],
                 "alert_threshold_qty_lower_limit"   => ['status' => 'disabled' , "reset" => false],
