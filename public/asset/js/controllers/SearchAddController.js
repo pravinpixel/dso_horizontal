@@ -277,51 +277,48 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.view_batch_details = function (row, batch) {
         $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
-           $('#View_Batch_Details').modal('show');
-         
-            $scope.view_batch_details_data  = [
-                {name: "Category selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
-                {name: 'Item Description' , item : row.item_description},
-                {name: 'Brand' , item : batch.brand},
-                {name: 'Supplier' , item : batch.supplier},
-                {name: 'Packing size ' , item : row.unit_packing_value},
-                {name: 'Quantity' , item : batch.quantity},
-                {name: 'Batch #' , item : batch.batch},
-                {name: 'Serial#' , item : batch.serial},
-                {name: 'PO #' , item : batch.po_number},
-                {name: 'Statutory body' , item : batch.statutory_body.name ?? '-'},
-                {name: 'EUC material' , item : batch.euc_material == 1 ? "Yes" : batch.euc_material == 0 ? "No" : "-"},
-                {name: 'Require bulk volume tracking' , item : batch.require_bulk_volume_tracking == 1 ? "Yes" : batch.require_bulk_volume_tracking == 0 ? "No" : "-"},
-                {name: 'Require outlife tracking and outlife (days)' , item :  `${batch.require_outlife_tracking == 1 ? "Yes" : batch.require_outlife_tracking == 0 ? "No" : "-"}  ( ${batch.outlife ?? "0"})`},
-                {name: 'Storage area' , item : batch.storage_area.name ?? '-'},
-                {name: 'Housing type and #' , item : `${batch.housing_type.name} / ${batch.housing}`},
-                {name: 'Owner 1/Owner 2 (SE/PL/FM)' , item : `${batch.owner_one} / ${batch.owner_two}`},
-                {name: 'Department' , item : res.data.department},
-                {name: 'Access' , item : res.data.access.join(",") },
-                {name: 'Date in' , item : batch.date_in},
-                {name: 'Date of expiry' , item : batch.date_of_expiry},
-                {name: 'SDS' , item :  'batch.sds'},
-                {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert !== null ?
-                    `<a class='link' target='_blank' href='${batch.coc_coa_mill_cert.replace('public/files/', 'public/storage/files/')}'> 
-                        <i class="fa fa-download me-1"></i> Download
-                    </a>`
-                : '-'}, //batch.coc_coa_mill_cert
-                {name: 'IQC status (P/F)' , item : batch.iqc_status == 0 ? "Fail" : "Pass"},
-                {name: 'IQC result' , item : batch.iqc_result == 0 ? "Fail" : "Pass"},
-                {name: 'CAS #' , item : batch.cas},
-                {name: 'FM1202 ' , item : batch.fm_1202},
-                {name: 'Project name' , item : batch.project_name},
-                {name: 'Material/Product type' , item : batch.material_product_type},
-                {name: 'Date of manufacture' , item : batch.date_of_manufacture},
-                {name: 'Date of shipment ' , item : batch.date_of_shipment},
-                {name: 'Cost per unit' , item : batch.cost_per_unit},
-                {name: 'Remarks' , item : batch.remarks},
-                {name: 'Extended expiry' , item : batch.extended_expiry ?? '-'},
-                {name: 'Extended QC status (P/F)' , item : batch.extended_qc_status ?? '-'},
-                {name: 'Extended QC result' , item : batch.extended_qc_result ?? '-'},
-                {name: 'Disposed certificate' , item : batch.disposal_certificate ?? '-'},
-                {name: 'Used for TD/Expt only ' , item : batch.used_for_td_expt_only == 1 ? 'Yes' : batch.used_for_td_expt_only == 0 ? "No" : "-"},
-            ]
+            $('#View_Batch_Details').modal('show');
+            $scope.batchOverview = {
+                category_selection          : row.category_selection == 'in_house' ? 'In-house Product'                                                                      : 'Material',
+                item_description            : row.item_description,
+                brand                       : batch.brand,
+                supplier                    : batch.supplier,
+                unit_packing_value          : row.unit_packing_value,
+                quantity                    : batch.quantity,
+                batch                       : batch.batch,
+                serial                      : batch.serial,
+                po_number                   : batch.po_number,
+                statutory_body              : batch.statutory_body.name ?? '-',
+                euc_material                : batch.euc_material == 1 ? "Yes"                                                                                                : batch.euc_material == 0 ? "No"                : "-",
+                require_bulk_volume_tracking: batch.require_bulk_volume_tracking == 1 ? "Yes"                                                                                : batch.require_bulk_volume_tracking == 0 ? "No": "-",
+                require_outlife_tracking    : `${batch.require_outlife_tracking == 1 ? "Yes" : batch.require_outlife_tracking == 0 ? "No" : "-"}  ( ${batch.outlife ?? "0"})`,
+                storage_area                : batch.storage_area.name ?? '-',
+                housing                     : `${batch.housing_type.name ?? '-'} / ${batch.housing}`,
+                owners                      : `${batch.owner_one} / ${batch.owner_two}`,
+                department                  : res.data.department,
+                access                      : res.data.access.join(","),
+                date_in                     : batch.date_in,
+                date_of_expiry              : batch.date_of_expiry,
+                sds                         : batch.sds.replace('public/files/', 'public/storage/files/'),
+                date_of_expiry              : batch.date_of_expiry,
+                coc_coa_mill_cert           : batch.coc_coa_mill_cert.replace('public/files/', 'public/storage/files/'), 
+                iqc_status                  : batch.iqc_status == 0 ? "Fail" : "Pass",
+                iqc_result                  : batch.iqc_result.replace('public/files/', 'public/storage/files/'),
+                cas                         : batch.cas,
+                fm_1202                     : batch.fm_1202,
+                project_name                : batch.project_name,
+                material_product_type       : batch.material_product_type,
+                date_of_manufacture         : batch.date_of_manufacture,
+                date_of_shipment            : batch.date_of_shipment,
+                cost_per_unit               : batch.cost_per_unit,
+                remarks                     : batch.remarks,
+                extended_expiry             : batch.extended_expiry ?? ' - ',
+                extended_qc_status          : batch.extended_qc_status ?? ' - ',
+                extended_qc_status          : batch.extended_qc_status ?? ' - ',
+                extended_qc_result          : batch.extended_qc_result ?? ' - ',
+                disposal_certificate        : batch.disposal_certificate ?? ' - ',
+                used_for_td_expt_only       : batch.used_for_td_expt_only == 1 ? 'Yes'                                                                                       : batch.used_for_td_expt_only == 0 ? "No"       : "-",
+            } 
         });
     }
  
