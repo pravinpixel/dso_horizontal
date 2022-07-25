@@ -10,7 +10,7 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_batch_details_data">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">@{{ row.name }}</div>
-                            <div ng-bind="row.item"></div>
+                            <div ng-bind-html="row.item"></div>
                         </div>
                     </li>
                 </ol> 

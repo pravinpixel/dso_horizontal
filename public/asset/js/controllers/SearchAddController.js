@@ -278,7 +278,7 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.view_batch_details = function (row, batch) {
         $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
            $('#View_Batch_Details').modal('show');
-          
+         
             $scope.view_batch_details_data  = [
                 {name: "Category selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
                 {name: 'Item Description' , item : row.item_description},
@@ -301,7 +301,11 @@ app.controller('SearchAddController', function($scope, $http) {
                 {name: 'Date in' , item : batch.date_in},
                 {name: 'Date of expiry' , item : batch.date_of_expiry},
                 {name: 'SDS' , item :  'batch.sds'},
-                {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert ?? "-"},
+                {name: 'COC/COA/Mill Cert ' , item : batch.coc_coa_mill_cert !== null ?
+                    `<a class='link' target='_blank' href='${batch.coc_coa_mill_cert.replace('public/files/', 'public/storage/files/')}'> 
+                        <i class="fa fa-download me-1"></i> Download
+                    </a>`
+                : '-'}, //batch.coc_coa_mill_cert
                 {name: 'IQC status (P/F)' , item : batch.iqc_status == 0 ? "Fail" : "Pass"},
                 {name: 'IQC result' , item : batch.iqc_result == 0 ? "Fail" : "Pass"},
                 {name: 'CAS #' , item : batch.cas},
@@ -904,3 +908,7 @@ app.controller('SearchAddController', function($scope, $http) {
         })
     }
 });
+
+$("#download").click(() => {
+    alert("h")
+})

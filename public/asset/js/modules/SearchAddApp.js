@@ -1,2 +1,2 @@
-var app = angular.module('SearchAddApp', ['ngMessages', 'daterangepicker']);
+var app = angular.module('SearchAddApp', ['ngMessages', 'daterangepicker','ngSanitize']);
  
