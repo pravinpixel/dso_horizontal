@@ -44,7 +44,7 @@
                     'placeholder' => '-- Select --', 
                     $batch->coc_coa_mill_cert_status != 'on' ? "disabled" : null,
                 ]) !!} --}}
-                <select class="form-select form-select-sm" name="used_for_td_expt_only" {{ $batch->coc_coa_mill_cert_status != 'on' ? "disabled" : null }}  {{ session()->get('edit_mode') == 'parent' ? "disabled" : null}} >
+                <select class="form-select form-select-sm" name="used_for_td_expt_only"  disabled  >
                     <option {{ $batch->coc_coa_mill_cert_status == 'off' ? "selected" : null }} value="No"> No </option>
                     <option {{ $batch->coc_coa_mill_cert_status == 'on' ? "selected" : null }} value="Yes"> Yes </option>
                 </select>
