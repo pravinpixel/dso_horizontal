@@ -178,10 +178,8 @@
                     {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : null !!} 
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" 
-                            @if (is_reset('iqc_result', $batch->iqc_result ?? null , category_type() ?? $material_product->category_selection ?? null) != null)
-                                @if ($material_product->Batches[0]->iqc_result == null)
-                                    {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
-                                @endif
+                            @if ($material_product->Batches[0]->iqc_result == null)
+                                {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
                             @endif
                             {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
                             name="iqc_result_status" id="iqc_result_check_box"
