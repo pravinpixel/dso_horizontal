@@ -127,7 +127,7 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" >
                         <div class="w-100  d-flex justify-content-between align-items-center">
                             <div class="fw-bold">SDS</div>
-                            <div class="btn-group mt-1" ng-if="batchOverview.sds">
+                            <div class="btn-group mt-1" ng-if="batchOverview.sds != null">
                                 <a class="btn btn-sm btn-outline-primary" href="@{{ batchOverview.sds }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
                                 <a class="btn btn-sm btn-primary" href="@{{ batchOverview.sds }}" download><i class="fa fa-download me-1"></i>Download</a>
                             </div>
@@ -136,7 +136,7 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" >
                         <div class="w-100  d-flex justify-content-between align-items-center">
                             <div class="fw-bold">COC/COA/Mill Cert</div>
-                            <div class="btn-group mt-1" ng-if="batchOverview.coc_coa_mill_cert">
+                            <div class="btn-group mt-1" ng-if="batchOverview.coc_coa_mill_cert != null">
                                 <a class="btn btn-sm btn-outline-primary" href="@{{ batchOverview.coc_coa_mill_cert }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
                                 <a class="btn btn-sm btn-primary" href="@{{ batchOverview.coc_coa_mill_cert }}" download><i class="fa fa-download me-1"></i>Download</a>
                             </div>
@@ -151,7 +151,7 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" >
                         <div class="w-100  d-flex justify-content-between align-items-center">
                             <div class="fw-bold">IQC result</div>
-                            <div class="btn-group mt-1" ng-if="batchOverview.iqc_result">
+                            <div class="btn-group mt-1" ng-if="batchOverview.iqc_result != null">
                                 <a class="btn btn-sm btn-outline-primary" href="@{{ batchOverview.iqc_result }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
                                 <a class="btn btn-sm btn-primary" href="@{{ batchOverview.iqc_result }}" download><i class="fa fa-download me-1"></i>Download</a>
                             </div>
