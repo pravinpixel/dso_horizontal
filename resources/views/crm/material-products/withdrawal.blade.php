@@ -11,8 +11,7 @@
             <div class="col text-end">
                 @include('crm.partials.table-column-filter') 
             </div>
-        </div> 
-        @{{ withdrawalType }}
+        </div>
         <div class="card" ng-if="withdrawalType">
             <ul class="nav nav-tabs bg-light">
                 <li class="nav-item">
