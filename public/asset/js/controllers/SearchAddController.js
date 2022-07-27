@@ -419,6 +419,8 @@ app.controller('SearchAddController', function($scope, $http) {
             switch (pageName) {
                 case 'MATERIAL_WITHDRAWAL':
                         $scope.withdrawalStatus = true
+                        $scope.withdrawalEntry  = response.data.data.data[0]
+
                         if(response.data.data === null) {
                             $scope.withdrawalStatus = false
                         } 

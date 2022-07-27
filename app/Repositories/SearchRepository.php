@@ -14,6 +14,25 @@ class SearchRepository implements SearchRepositoryInterface
     public function barCodeSearch($request)
     {
         try {
+
+            if(session()->get('page_name') == 'MATERIAL_WITHDRAWAL') {
+                return MaterialProducts::with([
+                    'Batches' =>  function($q) use ($request) {
+                        $q->where('barcode_number', (string) $request->filters); 
+                    },
+                    'Batches.RepackOutlife',
+                    'Batches.HousingType',
+                    'Batches.Department',
+                    'UnitOfMeasure',
+                    'Batches.StorageArea',
+                    'Batches.StatutoryBody'
+                ])
+                ->WhereHas('Batches', function ($q) use ($request) {
+                    $q->where('barcode_number', (string) $request->filters);
+                })
+                ->paginate(config('app.paginate'));
+            }
+
             $parent_id = Batches::where('is_draft',0)->where('barcode_number', (string) $request->filters)->first()->material_product_id;
             return MaterialProducts::with([
                 'Batches',
@@ -27,7 +46,7 @@ class SearchRepository implements SearchRepositoryInterface
             ->WhereHas('Batches', function ($q) use ($parent_id) {
                 $q->where('material_product_id', $parent_id);
             })
-            ->paginate(config('app.paginate'));
+            ->paginate(config('app.paginate')); 
             
         } catch (\Throwable $th) {
             log::info($th->getMessage());

@@ -24,7 +24,9 @@ class DsoRepository implements DsoRepositoryInterface
         $unit_packing_size_db   =   PackingSizeData::all();
         $owners                 =   User::all();
         $tableColumns           =   tableOrder::getTableColumn();
-        $tableAllColumns        =   [];
+        $tableAllColumns        =   []; 
+        request()->session()->put('page_name', $page_name);
+     
  
         foreach ($tableColumns as $key => $value) {
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
@@ -53,7 +55,7 @@ class DsoRepository implements DsoRepositoryInterface
                     "batch"     => '{{ batch.'.$value['name'].' }}',
                 ];
             }
-        } 
+        }
 
         $table_th_columns        = view('crm.partials.table-th-column', compact('tableAllColumns','page_name'));
         $table_td_columns        = view('crm.partials.table-td-column', compact('tableAllColumns','page_name'));
