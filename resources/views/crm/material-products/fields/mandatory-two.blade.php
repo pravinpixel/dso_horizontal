@@ -179,9 +179,13 @@
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" 
                             @if ($material_product->Batches[0]->iqc_result == null)
-                                {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                                @if (wizard_mode() !== 'duplicate')
+                                    {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                                @endif
                             @endif
+                            
                             {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
+
                             name="iqc_result_status" id="iqc_result_check_box"
                             class="form-check-input" 
                             {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
