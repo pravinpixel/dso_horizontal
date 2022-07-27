@@ -188,6 +188,7 @@ app.controller('SearchAddController', function($scope, $http) {
             })
 
             // console.log($scope.material_products.data)
+            // console.log("Success D-NONE")
             $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);
@@ -426,10 +427,9 @@ app.controller('SearchAddController', function($scope, $http) {
                         } 
                         $scope.withdrawalType = response.data.data.data[0].batches[0].withdrawal_type
                         
-                        $(".custom-table").removeClass('d-none')
                     break;
                 default:
-                    $scope.withdrawalStatus = false
+                    $scope.withdrawalStatus = false 
                     break;
             }
             $scope.material_products = response.data.data;

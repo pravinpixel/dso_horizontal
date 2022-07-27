@@ -1,5 +1,5 @@
 <div class="table-responsive shadow-lg bg-white">
-    <div class="custom-table d-none" style=" min-height: {{ $page_name != 'MATERIAL_WITHDRAWAL' ? '460px' : 'auto'}} !important;" >
+    <div class="custom-table" style=" min-height: {{ $page_name != 'MATERIAL_WITHDRAWAL' ? '460px' : 'auto'}} !important;" >
         <div class="custom-table-head">
             {{-- ======= Table Header  ====== --}}
                 {!! $table_th_columns !!}

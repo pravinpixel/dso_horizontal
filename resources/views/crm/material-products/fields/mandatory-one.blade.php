@@ -22,15 +22,12 @@
             <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
             <div class="col-8"> 
                 {!! Form::text('item_description', $material_product->item_description ?? null , [
-                        'class'         => 'form-control form-select-sm', 
+                        'class'         => 'form-control form-select-sm need-word-match', 
                         'placeholder'   => 'Type here...', 
-                        'list'          => 'item_descriptions', 
-                        "onkeyup"       => "wordMatchSuggest(this)",
                         'required',
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."item_description.status")
                     ])
-                !!}
-                <datalist id="item_descriptions"></datalist>
+                !!} 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
@@ -40,18 +37,15 @@
                     $brand = category_type() ==  'material' ? null : "In-House"
                 @endphp
                 {!! Form::text('brand', $batch->brand ?? $brand, 
-                    ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required',
-                    'list'          => 'brands', 
-                    "onkeyup"       => "wordMatchSuggest(this)",
+                    ['class' => 'form-control form-select-sm need-word-match', 'placeholder' => 'Type here...','required',
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")
-                ]) !!}
-                <datalist id="brands"></datalist>
+                ]) !!} 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Supplier <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::text('supplier', $batch->supplier ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...','required', 
+                {!! Form::text('supplier', $batch->supplier ?? null, ['class' => 'form-control form-select-sm need-word-match', 'placeholder' => 'Type here...','required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."supplier.status")
                 ]) !!}
             </div>

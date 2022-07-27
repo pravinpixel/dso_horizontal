@@ -135,7 +135,6 @@ uncheckedSavedSearch = (e) => {
 
  
 $('.need-word-match').keyup((element) => {
-
     if(element.target.hasAttribute("list") == false) {
         var listAtt     =   document.createAttribute("list");
         listAtt.value   =   `td_${element.target.name}`;

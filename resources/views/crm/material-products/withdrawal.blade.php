@@ -33,12 +33,12 @@
                     </a>
                 </li> 
             </ul>
-            <section ng-if="withdrawalStatus == true" class="border border-top-0 card-body">
+            <section class="border border-top-0 card-body">
                 <div class="mb-3">
                     @include('crm.partials.data-table')
                 </div>
                 <div ng-if="withdrawalType == 'DIRECT_DEDUCT'"> 
-                    <table class="table bg-white table-bordered table-hover custom-center">
+                    <table class="table bg-white table-bordered table-hover">
                         <thead>
                             <tr class="bg text-white">
                                 <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Withdrawal Cart</span></th>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_USAGE'">
-                    <table class="table bg-white table-bordered table-hover custom-center">
+                    <table class="table bg-white table-bordered table-hover">
                         <thead>
                             <tr class="bg-primary text-white">
                                 <th class="bg-dark text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'">
-                    <table class="table bg-white table-bordered custom-center">
+                    <table class="table bg-white table-bordered">
                         <thead>
                             <tr class="bg text-white">
                                 <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="11"><span class="text-center">Withdrawal Cart</span></th>

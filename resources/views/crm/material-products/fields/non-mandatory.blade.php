@@ -39,26 +39,20 @@
             <label for="" class="col-4">Project name</label>
             <div class="col-8">
                 {!! Form::text('project_name', $batch->project_name ?? null, [
-                    'class' => 'form-control form-select-sm', 
-                    'placeholder' => 'Type here...',
-                    'list'          => 'project_names', 
-                    "onkeyup"       => "wordMatchSuggest(this)",
+                    'class' => 'form-control form-select-sm need-word-match', 
+                    'placeholder' => 'Type here...', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."project_name.status")
-                ]) !!}
-                <datalist id="project_names"></datalist>
+                ]) !!} 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Material/Product type</label>
             <div class="col-8">
                 {!! Form::text('material_product_type', $batch->material_product_type ?? null, [
-                    'class' => 'form-control form-select-sm', 
-                    'placeholder' => 'Type here...',
-                    'list'          => 'material_product_types', 
-                    "onkeyup"       => "wordMatchSuggest(this)",
+                    'class' => 'form-control form-select-sm need-word-match', 
+                    'placeholder' => 'Type here...',  
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."material_product_type.status")
-                ]) !!}
-                <datalist id="material_product_types"></datalist>
+                ]) !!} 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
