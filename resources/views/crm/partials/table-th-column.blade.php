@@ -20,8 +20,8 @@
                 @elseif ($column['name'] == 'cas') CAS#
                 @elseif ($column['name'] == 'euc_material') EUC Material
                 @elseif ($column['name'] == 'material_product_type') Material/Product type 
-                @elseif ($column['name'] == 'alert_threshold_qty_upper_limit') Alert Threshold Qty (Upper limit)
-                @elseif ($column['name'] == 'alert_threshold_qty_lower_limit') Alert Threshold Qty (Lower limit)
+                @elseif ($column['name'] == 'alert_threshold_qty_upper_limit') Alert threshold Qty (upper limit)
+                @elseif ($column['name'] == 'alert_threshold_qty_lower_limit') Alert threshold Qty (lower limit)
                 @elseif ($column['name'] == 'alert_before_expiry') Alert before expiry (weeks)
                 @elseif ($column['name'] == 'euc_material') EUC Material
                 @elseif ($column['name'] == 'outlife'  ) Outlife (days)
