@@ -61,6 +61,7 @@ class CreateBatchesTable extends Migration
             $table->string('used_for_td_expt_only')->nullable(); 
             $table->longText('repack_size')->nullable();
             $table->integer('end_of_batch')->nullable()->default(0);
+            $table->string('withdrawal_type')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -322,6 +322,21 @@ class MaterialProductsController extends Controller
             $request
         );
         if ($type == 'form-one') {
+            
+            $current_batch = Batches::find(batch_id() ?? $batch_id);
+            if($current_batch->require_bulk_volume_tracking == 0 || $current_batch->require_outlife_tracking == 0) {
+                $withdrawal_type = 'DIRECT_DEDUCT';
+            }
+            if($current_batch->require_bulk_volume_tracking == 1 || $current_batch->require_outlife_tracking == 0) {
+                $withdrawal_type = 'DEDUCT_TRACK_USAGE';
+            }
+            if($current_batch->require_bulk_volume_tracking == 1 || $current_batch->require_outlife_tracking == 1) {
+                $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
+            }
+            
+            $current_batch->update([
+                'withdrawal_type' => $withdrawal_type
+            ]);
             if(wizard_mode() == 'duplicate') {
                 $request->session()->put('is_skip_duplicate', 'skip'); 
             }
@@ -343,10 +358,10 @@ class MaterialProductsController extends Controller
             $view  = 'form-four';
         }
         if ($type == 'form-four') {
-            $print_batch_id =  batch_id() ?? $batch_id;
-            forgot_session();
+            $this_batch_id =  batch_id() ?? $batch_id;
+            forgot_session();  
             if($request->is_print == 1) { 
-                return redirect()->route('print-barcode', ["id" => $print_batch_id]);
+                return redirect()->route('print-barcode', ["id" => $this_batch_id]);
             } else {
                 return redirect()->route('list-material-products');
             }

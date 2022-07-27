@@ -28,6 +28,7 @@ class SearchRepository implements SearchRepositoryInterface
                 $q->where('material_product_id', $parent_id);
             })
             ->paginate(config('app.paginate'));
+            
         } catch (\Throwable $th) {
             log::info($th->getMessage());
         }

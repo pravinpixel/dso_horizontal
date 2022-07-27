@@ -1,5 +1,5 @@
 <div class="table-responsive shadow-lg bg-white">
-    <div class="custom-table d-none" style=" min-height: 460px !important;">
+    <div class="custom-table d-none" style=" min-height: {{ $page_name != 'MATERIAL_WITHDRAWAL' ? '460px' : 'auto'}} !important;" >
         <div class="custom-table-head">
             {{-- ======= Table Header  ====== --}}
                 {!! $table_th_columns !!}
@@ -45,7 +45,9 @@
         </div>
     </div>
 </div>
-<div class="py-3">
-    <page-pagination>
-    </page-pagination>
-</div>
+@if ($page_name !== 'MATERIAL_WITHDRAWAL')
+    <div class="py-3">
+        <page-pagination>
+        </page-pagination>
+    </div>
+@endif

@@ -14,7 +14,7 @@ app.controller('SearchAddController', function($scope, $http) {
         // $scope.on_used_for_td_expt_only     =   true; 
     // ==== END :For Check Box column Filters ===
   
-
+    $scope.withdrawalStatus             = false
     $scope.filter_status                =   false;
     $scope.advance_search_status        =   false;
     $scope.advance_search_pre_saved     =   true;
@@ -26,7 +26,7 @@ app.controller('SearchAddController', function($scope, $http) {
     var get_batch_material_products         =   $('#get-batch-material-products').val();
     var get_batch                           =   $('#get-batch').val();
     var get_masters                         =   $('#get_masters').val();
-    var edit_material_products_url          =   $('#edit-material-products').val();
+    var pageName                            =   $('#page-name').val();
     var duplicate_material_products_url     =   $('#duplicate-material-products').val();
     var delete_material_products_url        =   $('#delete-material-products').val();
     var delete_material_products_batch_url  =   $('#delete-material-products-batch').val();
@@ -403,6 +403,13 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     $scope.search_barcode_number = function () {
+        if($scope.barcode_number === undefined)  {
+            return false
+        }
+        if($scope.barcode_number === null)  {
+            return false
+        }
+        console.log($scope.barcode_number)
         $http({
             method: 'post', 
             url: material_products_url,
@@ -410,6 +417,18 @@ app.controller('SearchAddController', function($scope, $http) {
                 filters: $scope.barcode_number
             }
         }).then(function(response) {
+            switch (pageName) {
+                case 'MATERIAL_WITHDRAWAL':
+                        $scope.withdrawalStatus = true
+                        if(response.data.data === null) {
+                            $scope.withdrawalStatus = false
+                        }
+                        $(".custom-table").removeClass('d-none')
+                    break;
+                default:
+                    $scope.withdrawalStatus = false
+                    break;
+            }
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
@@ -423,6 +442,7 @@ app.controller('SearchAddController', function($scope, $http) {
         }, function(response) {
             Message('danger', response.data.message);
         });
+        
     } 
  
 
@@ -919,8 +939,10 @@ app.controller('SearchAddController', function($scope, $http) {
             window.location.replace(`material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
         })
     }
-});
 
-$("#download").click(() => {
-    alert("h")
-})
+    // =========================   WITHDRAWAL MODULE   ====================
+
+        
+        
+    // =========================   END : WITHDRAWAL MODULE   ==============
+});

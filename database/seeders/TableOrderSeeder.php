@@ -16,13 +16,14 @@ class TableOrderSeeder extends Seeder
      */
     public function run()
     {
-        $parentTable            =   Schema::getColumnListing("material_products");
+        $parentTable            =   Schema::getColumnListing("material_products"); 
         $childTable             =   Schema::getColumnListing("batches");
         $allColumns             =   array_merge($parentTable, $childTable);
         $tableColumns           =   array_combine($allColumns,$allColumns );  
 
         unset(
             $tableColumns['id'], 
+            $tableColumns['withdrawal_type'], 
             $tableColumns['created_at'],  
             $tableColumns['updated_at'], 
             $tableColumns['deleted_at'],
