@@ -199,7 +199,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 @section('styles')
     <link rel="stylesheet" href="https://www.jquery-az.com/jquery/css/jquery.multiselect.css"> 

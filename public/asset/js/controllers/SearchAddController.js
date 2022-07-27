@@ -168,11 +168,26 @@ app.controller('SearchAddController', function($scope, $http) {
             
             $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
                 var QtyCount = 0
+                var draftBatchCount = 0
                 item.batches.map((batch, bIndex) => {
+                    console.log(item.batches.length, "batch Length")
+                    if (batch.is_draft == 1 ) {
+                        draftBatchCount += 1
+                    } 
                    return  QtyCount += Number(batch.quantity)
                 }) 
-                return {...item , ...{ totalQuantity : QtyCount}};
+                var hideParentRow;
+                if(item.batches.length == draftBatchCount) {
+                    console.log(item.batches.length,"batches.length")
+                    console.log(draftBatchCount,"draftBatchCount")
+                    hideParentRow = 1
+                } else {
+                    hideParentRow = 0
+                }
+                return {...item , ...{ totalQuantity : QtyCount,hideParentRow : hideParentRow}};
             })
+
+            console.log($scope.material_products.data)
             $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);

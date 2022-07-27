@@ -6,7 +6,7 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
-            <div class="custom-table-row"  ng-repeat="(index,row) in material_products.data">
+            <div class="custom-table-row" ng-if="{{ $page_name === 'PRINT_BARCODE_LABEL' ? 'row.hideParentRow == 0' : true}}"  ng-repeat="(index,row) in material_products.data">
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">
                     <div class="custom-table-head parent-row">
@@ -19,11 +19,11 @@
                             @switch($page_name)
                                 @case('MATERIAL_SEARCH_OR_ADD')
                                     <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
-                                            {!! $batch_table_td_columns !!} 
+                                        {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
                                 @case('PRINT_BARCODE_LABEL')
-                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-if="batch.is_draft != 1">
+                                    <div class="custom-table-row" ng-repeat="batch in row.batches" ng-if="batch.is_draft != 1">
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
