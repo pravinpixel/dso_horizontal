@@ -7,7 +7,6 @@
                     {!! Form::file('sds',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."sds.status")
                     ]) !!}
-                    {!! isset($material_product->Batches[0]->sds) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
                 </div>
                 @if ($batch->sds)
                     <a href="{{ storageGet($batch->sds) }}" download="{{ storageGet($batch->sds) }}">

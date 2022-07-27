@@ -123,7 +123,6 @@
                         $batch->coc_coa_mill_cert_status != "on" ? 'required' : null ,
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                     ]) !!}
-                    {!! isset($material_product->Batches[0]->coc_coa_mill_cert) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : "" !!} 
 
                     @if (wizard_mode() == 'duplicate')
                         <span class="btn btn-light btn-sm border-start"> 
@@ -175,7 +174,6 @@
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
                         "id" => "iqc_status_input"
                     ]) !!}
-                    {!! isset($material_product->Batches[0]->iqc_result) ? "<i class='fa fa-check-circle me-2 fa-1x text-success'></i> " : null !!} 
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" 
                             @if ($material_product->Batches[0]->iqc_result == null)
