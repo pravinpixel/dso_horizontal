@@ -409,7 +409,6 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.barcode_number === null)  {
             return false
         }
-        console.log($scope.barcode_number)
         $http({
             method: 'post', 
             url: material_products_url,
@@ -422,7 +421,9 @@ app.controller('SearchAddController', function($scope, $http) {
                         $scope.withdrawalStatus = true
                         if(response.data.data === null) {
                             $scope.withdrawalStatus = false
-                        }
+                        } 
+                        $scope.withdrawalType = response.data.data.data[0].batches[0].withdrawal_type
+                        
                         $(".custom-table").removeClass('d-none')
                     break;
                 default:

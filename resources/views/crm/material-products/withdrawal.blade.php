@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content') 
-    
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
@@ -15,20 +14,20 @@
         </div> 
         <div class="card">
             <ul class="nav nav-tabs bg-light">
-                <li class="nav-item">
-                    <a href="#Direct_Deduct" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                <li class="nav-item" >
+                    <a class="nav-link" ng-class="withdrawalType == 'DIRECT_DEDUCT' ? 'active' : ''">
                         <i class="mdi mdi-home-variant d-md-none d-block"></i>
                         <span class="d-none d-md-block">Direct Deduct</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Deduct_track_bulk_vol" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                    <a class="nav-link" ng-class="withdrawalType == 'DEDUCT_TRACK_USAGE' ? 'active' : ''">
                         <i class="mdi mdi-account-circle d-md-none d-block"></i>
                         <span class="d-none d-md-block">Deduct & Track Usage</span>
                     </a>
                 </li> 
                 <li class="nav-item">
-                    <a href="#Deduct_track_outlife" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                    <a class="nav-link" ng-class="withdrawalType == 'DEDUCT_TRACK_OUTLIFE' ? 'active' : ''">
                         <i class="mdi mdi-account-circle d-md-none d-block"></i>
                         <span class="d-none d-md-block">Deduct & Track Outlife</span>
                     </a>
@@ -50,7 +49,6 @@
             @include('crm.material-products.modals.import-from-excel')
         {{-- ======= END : App Models ==== --}}
     </div>
-    
 @endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
