@@ -49,15 +49,15 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Owner 1  <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::select('owner_one', $owners , $batch->owner_one ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
+                {!! Form::select('owner_one', $owners , $batch->owner_one ?? null, ['class' =>'ownner_select form-select form-select-sm need-word-match', 'placeholder' => '-- Select --' , 'required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status")
-                ])  !!}
+                ])  !!} 
             </div>
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Owner 2 (SE/PL/FM) <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::select('owner_two', $owners , $batch->owner_two ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
+                {!! Form::select('owner_two', $owners , $batch->owner_two ?? null, ['class' =>'form-select ownner_select form-select-sm ', 'placeholder' => '-- Select --' , 'required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_two.status")
                 ])  !!}
             </div>
@@ -205,13 +205,17 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://www.jquery-az.com/jquery/css/jquery.multiselect.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('scripts')
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ 
     <script>
+        $('.ownner_select').select2();
+
         $('#multiple_access').multiselect({
             placeholder :   '-- Select --',
             search      :   true,
@@ -228,7 +232,6 @@
                 }
             }
         });
-       
         if($("#multiple_access").val() === null) {
             $('#access_flag').attr('required', true)
         }

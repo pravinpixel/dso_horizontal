@@ -21,7 +21,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Item Description <sup class="text-danger">*</sup></label>
             <div class="col-8"> 
-                {!! Form::text('item_description', $material_product->item_description ?? null , [
+                    {!! Form::text('item_description', $material_product->item_description ?? null , [
                         'class'         => 'form-control form-select-sm need-word-match', 
                         'placeholder'   => 'Type here...', 
                         'required',
