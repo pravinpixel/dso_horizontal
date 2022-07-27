@@ -63,12 +63,21 @@
                 </div>
             </div>
         @endif 
-
         @if ($page_name === 'PRINT_BARCODE_LABEL')
             <div class="btn-group mx-auto"> 
                 <button title="View Batch Details" class="btn bg-light btn-sm border text-primary2" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
                 <button title="Print Batch Label" class="btn btn-light btn-sm border text-primary" ng-click="view_print_barcode(batch.id)"><i class="fa fa-print"></i></button>
             </div>
         @endif
+        @if ($page_name === 'MATERIAL_WITHDRAWAL')
+            <div class="dropdown mx-1">
+                <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots text-dark"></i> 
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
+                </div>
+            </div>
+        @endif 
     </div>
 </div>

@@ -49,4 +49,7 @@
         </div>
     @break
     @default
+    <div class="box th border-start box-sm">
+        Actions
+    </div>
 @endswitch

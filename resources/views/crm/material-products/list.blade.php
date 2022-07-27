@@ -38,7 +38,6 @@
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
 @endsection
 @section('scripts')
-
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">

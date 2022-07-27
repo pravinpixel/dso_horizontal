@@ -42,4 +42,14 @@
             </div>
         </div>
     @endif
+    @if ($page_name === 'MATERIAL_WITHDRAWAL')
+        <div class="dropdown">
+            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+            </a> 
+            <div class="dropdown-menu" >
+                <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+            </div>
+        </div>
+    @endif
 </div>

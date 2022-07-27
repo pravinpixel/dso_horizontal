@@ -205,6 +205,13 @@ class MaterialProductsController extends Controller
         return  $this->dsoRepository->renderPage($page_name, $view);
     }
 
+    public function withdrawal()
+    {
+        $page_name  =  "MATERIAL_WITHDRAWAL";
+        $view       =  "crm.material-products.withdrawal";
+        return  $this->dsoRepository->renderPage($page_name, $view);
+    }
+
     public function change_product_category(Request $request)
     {
         $request->session()->put('category_type', $request->type);

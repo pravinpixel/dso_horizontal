@@ -170,7 +170,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 var QtyCount = 0
                 var draftBatchCount = 0
                 item.batches.map((batch, bIndex) => {
-                    console.log(item.batches.length, "batch Length")
+                    // console.log(item.batches.length, "batch Length")
                     if (batch.is_draft == 1 ) {
                         draftBatchCount += 1
                     } 
@@ -178,8 +178,8 @@ app.controller('SearchAddController', function($scope, $http) {
                 }) 
                 var hideParentRow;
                 if(item.batches.length == draftBatchCount) {
-                    console.log(item.batches.length,"batches.length")
-                    console.log(draftBatchCount,"draftBatchCount")
+                    // console.log(item.batches.length,"batches.length")
+                    // console.log(draftBatchCount,"draftBatchCount")
                     hideParentRow = 1
                 } else {
                     hideParentRow = 0
@@ -187,7 +187,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 return {...item , ...{ totalQuantity : QtyCount,hideParentRow : hideParentRow}};
             })
 
-            console.log($scope.material_products.data)
+            // console.log($scope.material_products.data)
             $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);
@@ -373,7 +373,7 @@ app.controller('SearchAddController', function($scope, $http) {
     }
 
     $scope.sort_by = function (name, type) {
-        console.log(type)
+        // console.log(type)
         $scope.sort_by_payload      =   true;
         $scope.sort_by_payload_data =   {
             sort_by: {
@@ -645,7 +645,7 @@ app.controller('SearchAddController', function($scope, $http) {
         switch (type) {
             case "view":
                 $("#RepackTransfers").modal("show");
-                console.log(row.unit_of_measure.name)
+                // console.log(row.unit_of_measure.name)
                 $scope.RepackTransfer           =   batch;
                 $scope.RepackTransferPackSize   =   row.unit_packing_value
                 $scope.RepackTransferMeasure    =   row.unit_of_measure.name
@@ -879,7 +879,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     var newRow = true
 
                     $scope.repack_outlife_table.forEach(element => {
-                        console.log(element.balance_amount)
+                        // console.log(element.balance_amount)
                         if(element.balance_amount == 0) {
                             newRow = false
                         }

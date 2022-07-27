@@ -27,8 +27,12 @@
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
+                                
                                 @default
-                            @endswitch 
+                                <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                    {!! $batch_table_td_columns !!} 
+                                </div>
+                            @endswitch
                         {{-- ======= Matrial Product Batches Data  ====== --}}
                     </div>
                 </div>

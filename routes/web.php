@@ -20,10 +20,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/dashboard', function () {   
         return view('crm.dashboard.index');  
     })->name('dashboard');
-      
-    Route::get('/withdrawal-material-products', function () {   
-        return view('crm.material-products.withdrawal');  
-    })->name('withdrawal-material-products');
+       
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
@@ -59,14 +56,14 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
     })->name('disposed-items');
-     
 
     //  Listing Page
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
     Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
     Route::delete('/get-save-search/{id?}', [MaterialProductsController::class, 'delete_search_history'])->name('get-save-search');
-     
     Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
+    Route::get('/withdrawal-material-products', [MaterialProductsController::class, 'withdrawal'])->name('withdrawal-material-products');
+  
     Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
 
     //  Get Material OR Products  List
