@@ -279,12 +279,13 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.view_material_product = function (row) {
         $('#View_Material_Product_Details').modal('show');
         
+        
         $scope.view_material_product_data  = [
             {name: "Category Selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
             {name: 'Item description' , item : row.item_description},
             {name: 'Unit Packing size' , item : row.unit_packing_value},
             {name: 'Owner 1 /2' , item : `${row.batches[0].owner_one} / ${row.batches[0].owner_two}`},
-            {name: 'Statutory body' , item : row.batches[0].statutory_body.name ?? "-"},
+            {name: 'Statutory body' , item : row.batches[0].statutory_body !== null ? row.batches[0].statutory_body.name : ''},
             {name: 'Alert threshold Qty (upper limit) ' , item : row.alert_threshold_qty_lower_limit},
             {name: 'Alert threshold Qty (lower limit) ' , item : row.alert_threshold_qty_upper_limit},
             {name: 'Alert before expiry (in weeks)' , item : row.alert_before_expiry},
@@ -304,12 +305,12 @@ app.controller('SearchAddController', function($scope, $http) {
                 batch                       : batch.batch,
                 serial                      : batch.serial,
                 po_number                   : batch.po_number,
-                statutory_body              : batch.statutory_body.name ?? '-',
-                euc_material                : batch.euc_material == 1 ? "Yes"                                                                                                : batch.euc_material == 0 ? "No"                : "-",
-                require_bulk_volume_tracking: batch.require_bulk_volume_tracking == 1 ? "Yes"                                                                                : batch.require_bulk_volume_tracking == 0 ? "No": "-",
+                statutory_body              : batch.statutory_body !== null ? batch.statutory_body.name : '-',
+                euc_material                : batch.euc_material == 1 ? "Yes"   : batch.euc_material == 0 ? "No"    : "-",
+                require_bulk_volume_tracking: batch.require_bulk_volume_tracking == 1 ? "Yes"   : batch.require_bulk_volume_tracking == 0 ? "No": "-",  
                 require_outlife_tracking    : `${batch.require_outlife_tracking == 1 ? "Yes" : batch.require_outlife_tracking == 0 ? "No" : "-"}  ( ${batch.outlife ?? "0"})`,
-                storage_area                : batch.storage_area.name ?? '-',
-                housing                     : `${batch.housing_type.name ?? '-'} / ${batch.housing}`,
+                storage_area                : batch.storage_area !== null ? batch.storage_area.name : '-',
+                housing                     : `${batch.housing_type !== null ? batch.housing_type.name : '-'} / ${batch.housing}`,
                 owners                      : `${batch.owner_one} / ${batch.owner_two}`,
                 department                  : res.data.department,
                 access                      : res.data.access.join(","),
