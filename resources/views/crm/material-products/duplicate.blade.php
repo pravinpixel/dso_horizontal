@@ -45,7 +45,7 @@
                         value: "No cancel it",
                     },
                     save: {
-                        text: "Yes !, Leave",
+                        text: "Yes , Leave",
                         value: "save",
                         visible: true,
                         className: "btn btn-success rounded-pill",
@@ -116,14 +116,14 @@
             closeOnClickOutside: false,
             buttons: {
                 print: {
-                    text: "Yes !, Proceed to Print",
+                    text: "Yes , Proceed to Print",
                     visible: true,
                     className: "btn btn-primary rounded-pill",
                     closeModal: true,
                     value: "print",
                 },
                 save: {
-                    text: "No !, Submit & Save",
+                    text: "No , Submit & Save",
                     value: "save",
                     visible: true,
                     className: "btn btn-success rounded-pill",
