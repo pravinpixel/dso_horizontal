@@ -242,8 +242,10 @@
             const formInput     =    $('#coc_coa_mill_cert_input')
             if( checkBox.is(":checked") == true ){
                 formInput.prop('required', false)
+                formInput.prop('disabled', true)
             } else {
                 formInput.prop('required', true)
+                formInput.prop('disabled', false)
             }
         }
         change_iqc_result_status = () => {
@@ -255,5 +257,15 @@
                 formInput.prop('required', true)
             }
         }
+
+        const checkBox      =    $('#coc_coa_mill_cert_check_box')
+            const formInput     =    $('#coc_coa_mill_cert_input')
+            if( checkBox.is(":checked") == true ){
+                formInput.prop('required', false)
+                formInput.prop('disabled', true)
+            } else {
+                formInput.prop('required', true)
+                formInput.prop('disabled', false)
+            }
     </script>
 @endsection
