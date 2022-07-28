@@ -146,7 +146,6 @@
                                     @endif
                                     name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
                                     class="form-check-input" 
-                                    {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
                                     {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
                                     onclick="change_coc_coa_status()">
                                 </span>
@@ -220,9 +219,7 @@
                                     {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
                                 @endif
                             @endif
-                            
                             {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
-
                             name="iqc_result_status" id="iqc_result_check_box"
                             class="form-check-input" 
                             {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
