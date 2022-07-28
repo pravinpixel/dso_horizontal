@@ -337,9 +337,7 @@ class MaterialProductsController extends Controller
             $current_batch->update([
                 'withdrawal_type' => $withdrawal_type
             ]);
-            if(wizard_mode() == 'duplicate') {
-                $request->session()->put('is_skip_duplicate', 'skip'); 
-            }
+           
             if (wizard_mode() == 'create') {
                 $request->session()->put('form-one', 'completed');
             }
@@ -434,15 +432,22 @@ class MaterialProductsController extends Controller
     }
     public function duplicate_batch($id)
     {
+        
         $current_batch                  =   Batches::find($id);
         $created_batch                  =   $current_batch->replicate();
         $created_batch->created_at      =   Carbon::now();
         $created_batch->is_draft        =   1;
-        $created_batch->barcode_number  =   generateBarcode(MaterialProducts::find($created_batch->material_product_id)->category_selection);
+        $batch_parent_category           =   MaterialProducts::find($created_batch->material_product_id)->category_selection;
+        $created_batch->barcode_number  =   generateBarcode($batch_parent_category); 
+        foreach($created_batch->toArray() as $column => $value) {
+            $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
+            if($rest == 1) {
+                $created_batch->$column = NULL;
+            }
+        }
         $created_batch->save(); 
         request()->session()->put('material_product_id', $created_batch->material_product_id);
         request()->session()->put('batch_id', $created_batch->id);
-
         return response()->json([
             "status"                =>  true,
             "wizard_mode"           =>  "duplicate",

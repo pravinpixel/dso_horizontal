@@ -35,7 +35,6 @@ if(! function_exists('wizard_mode')) {
 if(! function_exists('forgot_session')) {
     function forgot_session() {
         return session()->forget([
-            'is_skip_duplicate',
             'wizard_mode',
             'batch_id',
             'material_product_id',
