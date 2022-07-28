@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HelpMenuController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
+use App\Http\Controllers\WithdrawalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,4 +137,6 @@ Route::middleware(['auth_users'])->group(function () {
     // Word Suggestion 
     Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
     Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
+
+    Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
 });

@@ -427,21 +427,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 filters: $scope.barcode_number
             }
         }).then(function(response) {
-            switch (pageName) {
-                case 'MATERIAL_WITHDRAWAL':
-                        $scope.withdrawalStatus = true
-                        $scope.withdrawalEntry  = response.data.data.data[0]
-
-                        if(response.data.data === null) {
-                            $scope.withdrawalStatus = false
-                        } 
-                        $scope.withdrawalType = response.data.data.data[0].batches[0].withdrawal_type
-                        
-                    break;
-                default:
-                    $scope.withdrawalStatus = false 
-                    break;
-            }
+            
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
@@ -452,11 +438,43 @@ app.controller('SearchAddController', function($scope, $http) {
                 }) 
                 return {...item , ...{ totalQuantity : QtyCount}};
             })
+
+            switch (pageName) {
+                case 'MATERIAL_WITHDRAWAL':
+                        $scope.withdrawalStatus = true
+                     
+                        if(response.data.data === null) {
+                            $scope.withdrawalStatus = false
+                        } 
+                        $scope.withdrawalType = response.data.data.data[0].batches[0].withdrawal_type
+                        
+                        if($scope.directDeduct === undefined) {
+                            $scope.directDeduct = []
+                        }
+                        $scope.material_products.data.map((material) => {
+                            material.batches.map((batch) => { 
+                                if(batch.barcode_number == $scope.barcode_number) {
+                                    if(batch.withdrawal_type == "DIRECT_DEDUCT") {
+                                        $scope.directDeduct.push({...batch,item_description :material.item_description , unit_packing_value : material.unit_packing_value,category_selection : material.category_selection })
+                                    }
+                                } 
+                            })
+                        }); 
+                    break;
+                default:
+                    $scope.withdrawalStatus = false 
+                    break;
+            }
+
         }, function(response) {
             Message('danger', response.data.message);
         });
         
     } 
+
+    $scope.removeDirectDetectRow = (index) => {
+        $scope.directDeduct.splice(index,1)
+    }
  
 
     $scope.clear_advanced_filter = () => {

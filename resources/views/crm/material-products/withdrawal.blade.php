@@ -33,62 +33,55 @@
                     </a>
                 </li> 
             </ul>
-            <section class="border border-top-0 card-body">
+            <section class="border border-top-0 card-body"> 
+
                 <div class="mb-3">
                     @include('crm.partials.data-table')
                 </div>
                 <div ng-if="withdrawalType == 'DIRECT_DEDUCT'"> 
-                    <table class="table bg-white table-bordered table-hover">
-                        <thead>
-                            <tr class="bg text-white">
-                                <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Withdrawal Cart</span></th>
-                            </tr>
-                            <tr>
-                                <th class="table-th child-td">Item description</th>
-                                <th class="table-th child-td">Brand</th>
-                                <th class="table-th child-td">Batch#/ Serial#</th>
-                                <th class="table-th child-td">Pkt size</th>
-                                <th class="table-th child-td">Withdraw Qty</th>
-                                <th class="table-th child-td">Remarks</th>
-                                <th class="table-th child-td"> <i class="text-danger bi bi-trash3-fill"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for ($key=0; $key<2; $key++)
-                                @if ($key == 1)
-                                
-                                <tr class="bg-secondary text-white">
-                                <td class="child-td">Prepreg C3K</td>
-                                    <td class="child-td">Brand 1</td>
-                                    <td class="child-td">Roll2/1</td>
-                                    <td class="child-td">0.5L</td>
-                                    <td class="child-td"><input type="number" disabled name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
-                                    <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
-                                    <td class="child-td">
-                                        <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
-                                    </td>
-                                    </tr>
-                                @endif
-                                
-                                @if ($key ==0)
+                    <form action="{{ route('withdrawal.direct-deduct') }}" method="POST">
+                        @csrf
+                        <table class="table bg-white table-bordered table-hover table-striped">
+                            <thead>
+                                <tr class="bg text-white">
+                                    <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7">
+                                        <span class="text-center">Withdrawal Cart</span>
+                                    </th>
+                                </tr>
                                 <tr>
-                                <td class="child-td">Prepreg C3K</td>
-                                <td class="child-td">Brand 1</td>
-                                    <td class="child-td">Roll2/1</td>
-                                    <td class="child-td">0.5L</td>
-                                    <td class="child-td"><input type="number" disabled name="" class="form-control w-auto p-0 form-control-sm text-center" value="10"></td>
-                                    <td class="child-td"><input type="text"  name="" class="form-control w-auto p-0 form-control-sm text-center" value="AME"></td>
-                                    <td class="child-td">
-                                        <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                    <th class="table-th child-td">Item description</th>
+                                    <th class="table-th child-td">Brand</th>
+                                    <th class="table-th child-td">Batch#/ Serial#</th>
+                                    <th class="table-th child-td">Pkt size</th>
+                                    <th class="table-th child-td">Withdraw Qty</th>
+                                    <th class="table-th child-td">Remarks</th>
+                                    <th class="table-th child-td"> <i class="text-danger bi bi-trash3-fill"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(index,row) in directDeduct">
+                                    <td>
+                                        <span>
+                                            @{{ row.item_description }}
+                                        </span>
+                                        <input type="hidden" name="id[]"  value="@{{ row.id }}">
+                                        <input type="hidden" name="category_selection[]"  value="@{{ row.category_selection }}">
                                     </td>
-                                </tr> 
-                                @endif 
-                            @endfor
-                        </tbody>
-                    </table>
-                    <div class="text-end ">
-                        <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
-                    </div>
+                                    <td>@{{ row.brand }}</td>
+                                    <td>@{{ row.batch }} / @{{ row.serial }}</td>
+                                    <td>@{{ row.unit_packing_value }}</td>
+                                    <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center"  required></td>
+                                    <td><input name="remarks[]" type="text" class="form-control w-auto p-0 form-control-sm text-center" required></td>
+                                    <td>
+                                        <i ng-click="removeDirectDetectRow(index)" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-end ">
+                            <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
+                        </div>
+                    </form>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_USAGE'">
                     <table class="table bg-white table-bordered table-hover">
