@@ -120,13 +120,11 @@
             <div class="col-8 ">
                 @if($batch->coc_coa_mill_cert ==null)
                     <div class="d-flex y-center border rounded p-0"> 
-                        
                             {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
                                 $batch->coc_coa_mill_cert_status != "on" ? 'required' : '',
                                 'multiple',
                                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                             ]) !!}
-
                             @if (wizard_mode() == 'duplicate')
                                 <span class="btn btn-light btn-sm border-start"> 
                                     <input type="checkbox" 
@@ -167,32 +165,32 @@
                     @endif
                     @else
                         <div class="d-flex y-center border rounded p-0"> 
-                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
-                                'multiple',
-                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
-                            ]) !!}
+                                {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
+                                    'multiple',
+                                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
+                                ]) !!}
 
-                            <span class="btn btn-light btn-sm border-start"> 
-                                <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                                    class="form-check-input"  
-                                    {{-- {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }} --}}
-                                onclick="change_coc_coa_status()">
-                            </span>
-                    </div>
-                    @if ($batch->coc_coa_mill_cert)
-                        @if($batch->coc_coa_mill_cert !== null) 
-                            <div class="d-flex flex-wrap">
-                                @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
-                                    <div class="me-1">
-                                        <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
-                                            <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif 
+                                <span class="btn btn-light btn-sm border-start"> 
+                                    <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                                        class="form-check-input"  
+                                        {{-- {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }} --}}
+                                    onclick="change_coc_coa_status()">
+                                </span>
+                        </div>
+                        @if ($batch->coc_coa_mill_cert)
+                            @if($batch->coc_coa_mill_cert !== null) 
+                                <div class="d-flex flex-wrap">
+                                    @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
+                                        <div class="me-1">
+                                            <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
+                                                <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif 
+                        @endif
                     @endif
-                @endif
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>
         </div>
@@ -208,46 +206,23 @@
             <label for="" class="col-4">IQC result<sup class="text-danger">*</sup></label>
             <div class="col-8 ">
                 <div class="d-flex y-center border rounded p-0">
-                    @if ($batch->iqc_result != null)
-                        {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
-                            $batch->iqc_result_status != "on" ? 'required' : null,
-                            config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
-                        ]) !!}
-                        <span class="btn btn-light btn-sm border-start"> 
-                            <input type="checkbox" 
-                                @if ($material_product->Batches[0]->iqc_result == null)
-                                    @if (wizard_mode() !== 'duplicate')
-                                        {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
-                                    @endif
+                    {!! Form::file('iqc_result',  [
+                        'class'       => 'form-control form-control-sm border-0',
+                        'placeholder' => 'Type here...',
+                        $batch->iqc_result == null ? $batch->iqc_result_status != "on" ? 'required' : null : '',
+                        config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
+                    ]) !!}
+                    <span class="btn btn-light btn-sm border-start"> 
+                        <input type="checkbox" name="iqc_result_status" id="iqc_result_check_box"
+                            class="form-check-input"
+                                @if ($material_product->Batches[0]->iqc_result == null && wizard_mode() !== 'duplicate')
+                                    {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
                                 @endif
-                                {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
-                                name="iqc_result_status" id="iqc_result_check_box"
-                                class="form-check-input" 
+                                {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}} 
                                 {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
-                                onclick="change_iqc_result_status()" 
-                            />
-                        </span>  
-                        @else
-                            {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
-                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
-                                "id" => "iqc_status_input"
-                            ]) !!}
-                            <span class="btn btn-light btn-sm border-start"> 
-                                <input type="checkbox" 
-                                    @if ($material_product->Batches[0]->iqc_result == null)
-                                        @if (wizard_mode() !== 'duplicate')
-                                            {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
-                                        @endif
-                                    @endif
-                                    {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
-                                    name="iqc_result_status" id="iqc_result_check_box"
-                                    class="form-check-input" 
-                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
-                                    onclick="change_iqc_result_status()" 
-                                />
-                            </span>  
-                    @endif
-                    
+                            onclick="change_iqc_result_status()" 
+                        />
+                    </span>
                 </div>
                 @if ($batch->iqc_result)
                     <a href="{{ storageGet($batch->iqc_result) }}" download="{{ storageGet($batch->iqc_result) }}">
