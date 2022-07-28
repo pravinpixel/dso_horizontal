@@ -33,7 +33,7 @@ function deleteModal() {
                 closeModal: true,
             },
             confirm: {
-                text: "Yes! Delete",
+                text: "Yes Delete",
                 value: true,
                 visible: true,
                 className: "btn btn-danger rounded-pill",
@@ -76,7 +76,7 @@ $(document).on('click' ,'#confirmDelete',function (event) {
                 closeModal: true,
             },
             confirm: {
-                text: "Yes! Delete",
+                text: "Yes Delete",
                 value: true,
                 visible: true,
                 className: "btn btn-danger rounded-pill",

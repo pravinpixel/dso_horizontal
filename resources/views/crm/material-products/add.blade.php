@@ -90,7 +90,7 @@
             closeOnClickOutside: false,
             buttons: {
                 cancel: {
-                    text: "No!, Cancel",
+                    text: "No, Cancel",
                     value: null,
                     visible: true,
                     className: "btn-light rounded-pill btn",

@@ -42,7 +42,7 @@
                         visible: true,
                         className: "btn btn-light rounded-pill",
                         closeModal: true,
-                        value: "No! cancel it",
+                        value: "No cancel it",
                     },
                     save: {
                         text: "Yes !, Leave",

@@ -432,19 +432,20 @@ class MaterialProductsController extends Controller
     }
     public function duplicate_batch($id)
     {
-        
         $current_batch                  =   Batches::find($id);
         $created_batch                  =   $current_batch->replicate();
         $created_batch->created_at      =   Carbon::now();
         $created_batch->is_draft        =   1;
-        $batch_parent_category           =   MaterialProducts::find($created_batch->material_product_id)->category_selection;
+        $batch_parent_category          =   MaterialProducts::find($created_batch->material_product_id)->category_selection;
         $created_batch->barcode_number  =   generateBarcode($batch_parent_category); 
+        
         foreach($created_batch->toArray() as $column => $value) {
             $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
             if($rest == 1) {
                 $created_batch->$column = NULL;
             }
         }
+        
         $created_batch->save(); 
         request()->session()->put('material_product_id', $created_batch->material_product_id);
         request()->session()->put('batch_id', $created_batch->id);

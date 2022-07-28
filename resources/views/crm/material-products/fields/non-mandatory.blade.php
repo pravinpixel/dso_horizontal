@@ -28,7 +28,7 @@
             <div class="col-8">
                 <div class="form-control form-control-sm">  
                     <input type="checkbox" {{ $batch->fm_1202 == 'on' ? 'checked' : '' }} name="fm_1202" value="{{ $batch->fm_1202 ?? null }}" class="form-check-input me-2" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") }}>               
-                    <small>Yes! Included</small>
+                    <small>Yes Included</small>
                 </div>
             </div>
         </div>

@@ -197,7 +197,7 @@ app.controller('MasterController', function($scope, $http) {
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes! Delete",
+                    text: "Yes Delete",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",
