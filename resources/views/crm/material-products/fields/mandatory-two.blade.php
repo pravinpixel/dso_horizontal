@@ -212,7 +212,6 @@
                         {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
                             $batch->iqc_result_status != "on" ? 'required' : null,
                             config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
-                            "id" => "iqc_status_input"
                         ]) !!}
                         <span class="btn btn-light btn-sm border-start"> 
                             <input type="checkbox" 
@@ -231,6 +230,7 @@
                         @else
                             {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
                                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
+                                "id" => "iqc_status_input"
                             ]) !!}
                             <span class="btn btn-light btn-sm border-start"> 
                                 <input type="checkbox" 
