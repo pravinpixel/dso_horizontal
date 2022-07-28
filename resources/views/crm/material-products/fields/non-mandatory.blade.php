@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Alert Threshold Qty <br><small>(Upper limit)</small></label>
+            <label for="" class="col-4">Alert threshold Qty <br><small>(upper limit)</small></label>
             <div class="col-8">
                {!! Form::number('alert_threshold_qty_upper_limit', $material_product->alert_threshold_qty_upper_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_threshold_qty_upper_limit.status")
@@ -65,7 +65,7 @@
     </div>
     <div class="col-md-6">
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Alert Threshold Qty <br><small>(Lower limit)</small></label>
+            <label for="" class="col-4">Alert threshold Qty <br><small>(lower limit)</small></label>
             <div class="col-8">
             {!! Form::number('alert_threshold_qty_lower_limit', $material_product->alert_threshold_qty_lower_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_threshold_qty_lower_limit.status")
