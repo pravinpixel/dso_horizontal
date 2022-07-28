@@ -43,12 +43,25 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     public function storeFiles($request, $batch)
     {
         if($request->has('coc_coa_mill_cert')) {
-            if(Storage::exists($batch->coc_coa_mill_cert)){
-                Storage::delete($batch->coc_coa_mill_cert);
-            }
-            $coc_coa_mill_cert              =  storeFiles('coc_coa_mill_cert');
+            $multi_name = [];
             
-            $batch  ->  coc_coa_mill_cert   =   $coc_coa_mill_cert;
+            foreach ($request->coc_coa_mill_cert as $key => $files) {
+                $OriginalName       =   $files->getClientOriginalName();
+                $OriginalExtension  =   $files->getClientOriginalExtension();
+                $baseName           =   basename($OriginalName, '.'.$OriginalExtension);
+                $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
+                $multi_name[$key]   =   $files->storeAs('public/files/coc_coa_mill_cert', str_replace(' ','_',$newFileName) );
+            }  
+            // $multi_name
+            if($batch->coc_coa_mill_cert !== null) {
+                foreach (json_decode($batch->coc_coa_mill_cert) as $key => $files) {
+                    if(Storage::exists($files)){
+                        Storage::delete($files);
+                    }
+                }
+            }
+            
+            $batch  ->  coc_coa_mill_cert = json_encode($multi_name);
             $batch  ->  save();
         }
         if($request->has('iqc_result')) {

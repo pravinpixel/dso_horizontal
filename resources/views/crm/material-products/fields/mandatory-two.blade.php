@@ -118,41 +118,80 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
             <div class="col-8 ">
-                <div class="d-flex y-center border rounded p-0">
-                    {!! Form::file('coc_coa_mill_cert', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
-                        $batch->coc_coa_mill_cert_status != "on" ? 'required' : null ,
-                        config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
-                    ]) !!}
+                @if($batch->coc_coa_mill_cert ==null)
+                    <div class="d-flex y-center border rounded p-0"> 
+                        
+                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
+                                $batch->coc_coa_mill_cert_status != "on" ? 'required' : '',
+                                'multiple',
+                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
+                            ]) !!}
 
-                    @if (wizard_mode() == 'duplicate')
-                        <span class="btn btn-light btn-sm border-start"> 
-                            <input type="checkbox" 
-                                @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
-                                    {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
-                                @endif
-                                name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                                class="form-check-input"  
-                                {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
-                            onclick="change_coc_coa_status()">
-                        </span>
-                        @else
-                        <span class="btn btn-light btn-sm border-start"> 
-                            <input type="checkbox" 
-                            @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
-                                {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
-                            @endif
-                            name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                            class="form-check-input" 
-                            {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
-                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
-                            onclick="change_coc_coa_status()">
-                        </span>
-                    @endif 
-                </div>
-                @if ($batch->coc_coa_mill_cert)
-                    <a href="{{ storageGet($batch->coc_coa_mill_cert) }}" download="{{ storageGet($batch->coc_coa_mill_cert) }}">
-                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$batch->coc_coa_mill_cert),0,20) }}</small>
-                    </a>
+                            @if (wizard_mode() == 'duplicate')
+                                <span class="btn btn-light btn-sm border-start"> 
+                                    <input type="checkbox" 
+                                        @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
+                                            {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
+                                        @endif
+                                        name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                                        class="form-check-input"  
+                                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                                    onclick="change_coc_coa_status()">
+                                </span>
+                                @else
+                                <span class="btn btn-light btn-sm border-start"> 
+                                    <input type="checkbox" 
+                                    @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
+                                        {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
+                                    @endif
+                                    name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                                    class="form-check-input" 
+                                    {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
+                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                                    onclick="change_coc_coa_status()">
+                                </span>
+                            @endif 
+                    </div>
+                    @if ($batch->coc_coa_mill_cert)
+                        @if($batch->coc_coa_mill_cert !== null) 
+                            <div class="d-flex flex-wrap">
+                                @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
+                                    <div class="me-1">
+                                        <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
+                                            <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif 
+                    @endif
+                    @else
+                        <div class="d-flex y-center border rounded p-0"> 
+                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
+                                'multiple',
+                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
+                            ]) !!}
+
+                            <span class="btn btn-light btn-sm border-start"> 
+                                <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
+                                    class="form-check-input"  
+                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                                onclick="change_coc_coa_status()">
+                            </span>
+                    </div>
+                    @if ($batch->coc_coa_mill_cert)
+                        @if($batch->coc_coa_mill_cert !== null) 
+                            <div class="d-flex flex-wrap">
+                                @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
+                                    <div class="me-1">
+                                        <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
+                                            <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif 
+                    @endif
                 @endif
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>
@@ -259,13 +298,24 @@
         }
 
         const checkBox      =    $('#coc_coa_mill_cert_check_box')
-            const formInput     =    $('#coc_coa_mill_cert_input')
-            if( checkBox.is(":checked") == true ){
-                formInput.prop('required', false)
-                formInput.prop('disabled', true)
-            } else {
-                formInput.prop('required', true)
-                formInput.prop('disabled', false)
+        const formInput     =    $('#coc_coa_mill_cert_input')
+        if( checkBox.is(":checked") == true ){
+            formInput.prop('required', false)
+            formInput.prop('disabled', true)
+        } else {
+            formInput.prop('required', true)
+            formInput.prop('disabled', false)
+        }
+ 
+        document.querySelector('#coc_coa_mill_cert_input').addEventListener('change', () => {
+            const input       = document.getElementById("coc_coa_mill_cert_input");
+            const fileListArr = Array.from(input.files);
+            if(input.files.length > 3) {
+                fileListArr.map((file, index) => {
+                    alert("More then 3 files not allowd !")
+                    fileListArr.splice(index, 1); 
+                }) 
             }
+        })
     </script>
 @endsection
