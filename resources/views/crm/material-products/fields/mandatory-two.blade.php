@@ -208,25 +208,47 @@
             <label for="" class="col-4">IQC result<sup class="text-danger">*</sup></label>
             <div class="col-8 ">
                 <div class="d-flex y-center border rounded p-0">
-                    {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
-                        $batch->iqc_result_status != "on" ? 'required' : null,
-                        config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
-                        "id" => "iqc_status_input"
-                    ]) !!}
-                    <span class="btn btn-light btn-sm border-start"> 
-                        <input type="checkbox" 
-                            @if ($material_product->Batches[0]->iqc_result == null)
-                                @if (wizard_mode() !== 'duplicate')
-                                    {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                    @if ($batch->iqc_result != null)
+                        {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
+                            $batch->iqc_result_status != "on" ? 'required' : null,
+                            config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
+                            "id" => "iqc_status_input"
+                        ]) !!}
+                        <span class="btn btn-light btn-sm border-start"> 
+                            <input type="checkbox" 
+                                @if ($material_product->Batches[0]->iqc_result == null)
+                                    @if (wizard_mode() !== 'duplicate')
+                                        {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                                    @endif
                                 @endif
-                            @endif
-                            {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
-                            name="iqc_result_status" id="iqc_result_check_box"
-                            class="form-check-input" 
-                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
-                            onclick="change_iqc_result_status()" 
-                        />
-                    </span>  
+                                {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
+                                name="iqc_result_status" id="iqc_result_check_box"
+                                class="form-check-input" 
+                                {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
+                                onclick="change_iqc_result_status()" 
+                            />
+                        </span>  
+                        @else
+                            {!! Form::file('iqc_result',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
+                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
+                                "id" => "iqc_status_input"
+                            ]) !!}
+                            <span class="btn btn-light btn-sm border-start"> 
+                                <input type="checkbox" 
+                                    @if ($material_product->Batches[0]->iqc_result == null)
+                                        @if (wizard_mode() !== 'duplicate')
+                                            {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
+                                        @endif
+                                    @endif
+                                    {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}}
+                                    name="iqc_result_status" id="iqc_result_check_box"
+                                    class="form-check-input" 
+                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
+                                    onclick="change_iqc_result_status()" 
+                                />
+                            </span>  
+                    @endif
+                    
                 </div>
                 @if ($batch->iqc_result)
                     <a href="{{ storageGet($batch->iqc_result) }}" download="{{ storageGet($batch->iqc_result) }}">
