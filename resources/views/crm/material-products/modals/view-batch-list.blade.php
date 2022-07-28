@@ -136,9 +136,11 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" >
                         <div class="w-100  d-flex justify-content-between align-items-center">
                             <div class="fw-bold">COC/COA/Mill Cert</div>
-                            <div class="btn-group mt-1" ng-if="batchOverview.coc_coa_mill_cert != null">
-                                <a class="btn btn-sm btn-outline-primary" href="@{{ batchOverview.coc_coa_mill_cert }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                                <a class="btn btn-sm btn-primary" href="@{{ batchOverview.coc_coa_mill_cert }}" download><i class="fa fa-download me-1"></i>Download</a>
+                            <div class="mt-1 text-end" ng-if="batchOverview.coc_coa_mill_cert != null">
+                                <span class="btn-group mb-1" ng-repeat="row in batchOverview.coc_coa_mill_cert">
+                                    <a class="btn btn-sm btn-outline-primary" href="@{{ row }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
+                                    <a class="btn btn-sm btn-primary" href="@{{ row }}" download><i class="fa fa-download me-1"></i>Download</a>
+                                </span> 
                             </div>
                         </div>
                     </li>

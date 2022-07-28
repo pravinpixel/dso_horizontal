@@ -295,6 +295,15 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.view_batch_details = function (row, batch) {
         $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
             $('#View_Batch_Details').modal('show');
+      
+            
+            if(batch.coc_coa_mill_cert != null){
+                var coc_files =  []
+                JSON.parse(batch.coc_coa_mill_cert).map((file) => {
+                    coc_files.push(file.replace('public/files/', 'public/storage/files/'))
+                })
+            }
+             
             $scope.batchOverview = {
                 category_selection          : row.category_selection == 'in_house' ? 'In-house Product'                                                                      : 'Material',
                 item_description            : row.item_description,
@@ -318,7 +327,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 date_of_expiry              : batch.date_of_expiry,
                 sds                         : batch.sds != null ? batch.sds.replace('public/files/', 'public/storage/files/') : null,
                 date_of_expiry              : batch.date_of_expiry,
-                coc_coa_mill_cert           : batch.coc_coa_mill_cert !=null ? batch.coc_coa_mill_cert.replace('public/files/', 'public/storage/files/') : null, 
+                coc_coa_mill_cert           : coc_files ?? null, 
                 iqc_status                  : batch.iqc_status == 0 ? "Fail" : "Pass",
                 iqc_result                  : batch.iqc_result != null ? batch.iqc_result.replace('public/files/', 'public/storage/files/') : null,
                 cas                         : batch.cas,
