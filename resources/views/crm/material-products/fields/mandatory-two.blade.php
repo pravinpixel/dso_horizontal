@@ -146,6 +146,7 @@
                                     @endif
                                     name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
                                     class="form-check-input" 
+                                    {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
                                     {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
                                     onclick="change_coc_coa_status()">
                                 </span>
@@ -174,7 +175,7 @@
                             <span class="btn btn-light btn-sm border-start"> 
                                 <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
                                     class="form-check-input"  
-                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                                    {{-- {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }} --}}
                                 onclick="change_coc_coa_status()">
                             </span>
                     </div>
