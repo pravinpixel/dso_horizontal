@@ -533,7 +533,9 @@ app.controller('SearchAddController', function($scope, $http) {
             Message('danger', response.data.message);
         });
     }
-  
+    $scope.resetBarCode = () => {
+        $scope.barcode_number = ''
+    }
     $scope.reset_bulk_search = function () {
         $scope.get_material_products();
         $scope.filter_status            =   false;

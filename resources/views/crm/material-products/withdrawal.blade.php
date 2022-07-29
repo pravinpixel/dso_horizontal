@@ -1,15 +1,18 @@
 @extends('layouts.app')
 @section('content') 
     <div ng-app="SearchAddApp" ng-controller="SearchAddController">
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex align-items-center mb-3 justify-content-between">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
                     <input type="number" min="1"  ng-model="barcode_number" min="1" ng-change="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                    <i ng-click="resetBarCode()" class="bi bi-x-circle-fill font-20 text-danger position-absolute right-0 me-2" style="cursor: pointer;z-index:111"></i>
                 </div>
             </div> 
-            <div class="col text-end">
-                @include('crm.partials.table-column-filter') 
+            <div class="col-1 text-end">
+                <div ng-show="withdrawalType">
+                    @include('crm.partials.table-column-filter') 
+                </div>
             </div>
         </div>
         <div class="card" ng-if="withdrawalType">
@@ -44,7 +47,7 @@
                         <table class="table bg-white table-bordered table-hover table-striped">
                             <thead>
                                 <tr class="bg text-white">
-                                    <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7">
+                                    <th class="bg-dark text-center text-white" style="padding: 5px !important;" colspan="7">
                                         <span class="text-center">Withdrawal Cart</span>
                                     </th>
                                 </tr>
