@@ -14598,9 +14598,10 @@ body[data-layout=detached] .footer .container-xxl {
 
 .topnav .navbar-nav .nav-link {
     font-size: .9375rem;
-    position: relative;
+    position: relative; 
+    height: 100%;
     padding: 1rem 1.3rem
-}
+} 
 
 .topnav .nav-item.active>a {
     color: #3688fc
