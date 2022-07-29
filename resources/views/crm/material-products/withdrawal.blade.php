@@ -37,7 +37,6 @@
                 </li> 
             </ul>
             <section class="border border-top-0 card-body"> 
-
                 <div class="mb-3">
                     @include('crm.partials.data-table')
                 </div>
@@ -87,47 +86,63 @@
                     </form>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_USAGE'">
-                    <table class="table bg-white table-bordered table-hover">
-                        <thead>
-                            <tr class="bg-primary text-white">
-                                <th class="bg-dark text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
-                            </tr>
-                            <tr>
-                                <th class="table-th child-td-lg"> Item Description</th>                    
-                                <th class="table-th child-td">Batch/Serial#</th>
-                                <th class="table-th child-td">Last accessed</th>
-                                <th class="table-th">Date&time stamp</th> 
-                                <th class="table-th">Used Amt (kg)</th>
-                                <th class="table-th">Remain Amt (kg)</th>
-                                <th class="table-th">Remarks</th>
-                                <th class="table-th"> <i class="text-danger bi bi-trash3-fill"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="child-td"> Acetone IND</td>
-                                <td class="child-td">XOX</td>
-                                <td class="child-td">Tan Ng Hui Beng</td>
-                                <td class="child-td">5</td>
-                                <td class="child-td"><input type="number" name="" id="" class="form-control w-50 text-center mx-auto p-0" value="10"></td>
-                                <td class="child-td">40</td>
-                                <td class="child-td"><input type="text" name="" id="" class="form-control w-50 text-center mx-auto p-0"  ></td>
-                                <td class="child-td">
-                                    <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="d-flex align-items-center">
-                        <div class="shadow-sm border col-3">
-                            <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of material/product</label>
+                    <form action="{{ route('withdrawal.deduct-track-usage') }}" method="POST" style="border: 0 !important">
+                        @csrf
+                        <table class="table bg-white table-bordered table-hover table-centered">
+                            <thead>
+                                <tr class="bg-primary text-white">
+                                    <th class="bg-dark text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                                </tr>
+                                <tr>
+                                    <th class="table-th child-td-lg"> Item Description</th>                    
+                                    <th class="table-th child-td">Batch/Serial#</th>
+                                    <th class="table-th child-td">Last accessed</th>
+                                    <th class="table-th">Date&time stamp</th> 
+                                    <th class="table-th">Used Amt (@{{ deductTrackUsage[0].material.unit_of_measure.name }})</th>
+                                    <th class="table-th">Remain Amt (@{{ deductTrackUsage[0].material.unit_of_measure.name }})</th>
+                                    <th class="table-th">Remarks</th>
+                                    <th class="table-th"> <i class="text-danger bi bi-trash3-fill"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(i,row) in deductTrackUsage">
+                                    <td>
+                                        <span>
+                                            @{{ row.material.item_description }}
+                                        </span>
+                                        <input type="hidden" name="id"  value="@{{ row.id }}">
+                                        <input type="hidden" name="category_selection"  value="@{{ row.material.category_selection }}">
+                                    </td>
+                                    <td>@{{ row.batch }} / @{{ row.serial }}</td>
+                                    <td class="child-td"> Tan Ng Hui Beng </td>
+                                    <td class="child-td">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                                    <td class="child-td">
+                                        <input name="used_value" type="number" ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
+                                    </td>
+                                    <td class="child-td">@{{ row.material.unit_packing_value - used_value }}</td>
+                                    <td class="child-td">
+                                        <textarea name="remarks" class="form-control h-100 w-100"></textarea>
+                                    </td>
+                                    <td class="child-td">
+                                        <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="d-flex align-items-center border-top pt-3"> 
+                            <div class="col-6 ms-auto text-end"> 
+                                <label for="end_of_material_products" class="p-2">
+                                    <input type="checkbox" name="end_of_material_products" value="1" class="form-check-input me-2" id="end_of_material_products"> 
+                                    End of material/product
+                                </label>
+                                <label for="export_logsheet" class="p-2">
+                                    <input type="checkbox" name="export_logsheet" value="1" class="form-check-input me-2" id="export_logsheet"> 
+                                    Export Logsheet
+                                </label>
+                                <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
+                            </div>
                         </div>
-                        <div class="col-6 ms-auto text-end">
-                            {{-- <button class="btn btn-success h-100 rounded-pill">Print Barcode</button> --}}
-                            <button class="btn btn-info h-100 rounded-pill">Export Logsheet</button>
-                            <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'">
                     <table class="table bg-white table-bordered">

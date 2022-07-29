@@ -23,9 +23,17 @@ class WithdrawalController extends Controller
             $current_batch->update([
                 'quantity' =>   $current_batch->quantity -  $request->quantity[$key]
             ]);
-        }
-        
-
+        } 
         return redirect()->back()->with("success","Direct Deduct Success !");
+    }
+    public function deduct_track_usage(Request $request)
+    {
+        $batch              = Batches::findOrFail($request->id);
+        $material_product   = MaterialProducts::findOrFail($batch->material_product_id);
+
+        $material_product->update([
+            "unit_packing_value"    =>  $material_product->unit_packing_value - $request->used_value
+        ]);
+        return redirect()->back()->with("success","Deduct Track Usage Success !");
     }
 }

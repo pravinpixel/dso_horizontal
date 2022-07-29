@@ -451,15 +451,34 @@ app.controller('SearchAddController', function($scope, $http) {
                         if($scope.directDeduct === undefined) {
                             $scope.directDeduct = []
                         }
+                        if($scope.deductTrackUsage === undefined) {
+                            $scope.deductTrackUsage = []
+                        }
+                        if($scope.deductTrackOutlife === undefined) {
+                            $scope.deductTrackOutlife = []
+                        }
                         $scope.material_products.data.map((material) => {
                             material.batches.map((batch) => { 
                                 if(batch.barcode_number == $scope.barcode_number) {
-                                    if(batch.withdrawal_type == "DIRECT_DEDUCT") {
-                                        $scope.directDeduct.push({...batch,item_description :material.item_description , unit_packing_value : material.unit_packing_value,category_selection : material.category_selection })
+                                    switch (batch.withdrawal_type) {
+                                        case 'DIRECT_DEDUCT':
+                                            $scope.directDeduct.push({...batch,item_description :material.item_description , unit_packing_value : material.unit_packing_value,category_selection : material.category_selection })
+                                        break;
+                                        case 'DEDUCT_TRACK_USAGE':
+                                            $scope.deductTrackUsage = []; 
+                                            $scope.deductTrackUsage.push({...batch, material : material, })
+                                        break;
+                                        case 'DEDUCT_TRACK_OUTLIFE':
+                                            $scope.deductTrackOutlife = [];
+                                            $scope.deductTrackOutlife.push({...batch,item_description :material.item_description , unit_packing_value : material.unit_packing_value,category_selection : material.category_selection })
+                                        break;
+                                        default:
+                                            break;
                                     }
                                 } 
                             })
                         }); 
+                        console.log($scope.deductTrackUsage)
                     break;
                 default:
                     $scope.withdrawalStatus = false 

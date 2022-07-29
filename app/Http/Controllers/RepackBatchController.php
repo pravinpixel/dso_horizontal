@@ -30,11 +30,11 @@ class RepackBatchController extends Controller
         $current_batch->update([
             'quantity' =>   $current_batch->quantity -  $request->quantity ,
             'action' => json_encode([
-                    "repack_code"    =>  null,
-                    "packing_value"  =>  $material_product->unit_packing_value,
-                    "packing_size"   =>  $request->PackingSize,
-                    "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
-                ])
+                "repack_code"    =>  null,
+                "packing_value"  =>  $material_product->unit_packing_value,
+                "packing_size"   =>  $request->PackingSize,
+                "remain_amount"  =>  $material_product->unit_packing_value - $request->PackingSize,
+            ])
         ]);
 
         return response()->json([
