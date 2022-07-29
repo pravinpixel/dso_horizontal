@@ -572,3 +572,14 @@ input[type=number] {
     top: 0;
     left: 0;
 }
+.MultiFile-wrap {
+    width: 100% !important;
+}
+.MultiFile-label {
+    margin-top: 5px ;
+}
+.MultiFile-remove {
+    font-weight: bold;
+    color: red;
+    margin-right: 3px;
+}

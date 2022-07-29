@@ -315,7 +315,7 @@ class MaterialProductsController extends Controller
         return view($view, compact($params));
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
-    {
+    { 
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,

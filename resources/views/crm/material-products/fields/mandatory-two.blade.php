@@ -118,11 +118,13 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
             <div class="col-8 ">
-                @if($batch->coc_coa_mill_cert ==null)
+                
+                @if($batch->coc_coa_mill_cert == null)
                     <div class="d-flex y-center border rounded p-0"> 
-                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
+                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0 coc_coa_mill_cert_input', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
                                 $batch->coc_coa_mill_cert_status != "on" ? 'required' : '',
                                 'multiple',
+                                "maxlength" => "3",
                                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                             ]) !!}
                             @if (wizard_mode() == 'duplicate')
@@ -150,20 +152,20 @@
                                 </span>
                             @endif 
                     </div>
-                    @if ($batch->coc_coa_mill_cert)
-                        @if($batch->coc_coa_mill_cert !== null) 
-                            <div class="d-flex flex-wrap">
-                                @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
-                                    <div class="me-1">
-                                        <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
-                                            <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif 
-                    @endif
-                    @else
+                        @if ($batch->coc_coa_mill_cert)
+                            @if($batch->coc_coa_mill_cert !== null) 
+                                <div class="d-flex flex-wrap">
+                                    @foreach (json_decode($batch->coc_coa_mill_cert) as $cocfile)
+                                        <div class="me-1">
+                                            <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
+                                                <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif 
+                        @endif
+                        @else
                         <div class="d-flex y-center border rounded p-0"> 
                                 {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
                                     'multiple',
@@ -191,6 +193,7 @@
                             @endif 
                         @endif
                     @endif
+                    <small id="coc_coa_myList"></small>
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>
         </div>
@@ -209,6 +212,7 @@
                     {!! Form::file('iqc_result',  [
                         'class'       => 'form-control form-control-sm border-0',
                         'placeholder' => 'Type here...',
+                        'id' => "iqc_status_input",
                         $batch->iqc_result == null ? $batch->iqc_result_status != "on" ? 'required' : null : '',
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
                     ]) !!}
@@ -245,9 +249,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://www.jqueryscript.net/demo/multiple-file-upload-validation/jquery.MultiFile.js"></script>
  
     <script>
         $('.ownner_select').select2();
+
+        $('.coc_coa_mill_cert_input').MultiFile({
+            list: '#coc_coa_myList',
+            max  : 3,
+            error: function (err) {
+                if(typeof console != 'undefined')   console.log(err);
+                swal({
+                    text: err,
+                    icon: "error",
+                    buttons: { 
+                        confirm: {
+                            text: "Okay ",
+                            value: true,
+                            visible: true,
+                            className: "btn btn-primary rounded-pill",
+                            closeModal: true
+                        }
+                    },
+                }) 
+            },
+            onFileSelect: function(element, value, master_element) {
+                master_element.clone.attr('required', false)
+            }
+        });
 
         $('#multiple_access').multiselect({
             placeholder :   '-- Select --',
@@ -265,6 +294,7 @@
                 }
             }
         });
+
         if($("#multiple_access").val() === null) {
             $('#access_flag').attr('required', true)
         }
@@ -272,7 +302,7 @@
         // multiple_access
         change_coc_coa_status = () => {
             const checkBox      =    $('#coc_coa_mill_cert_check_box')
-            const formInput     =    $('#coc_coa_mill_cert_input')
+            const formInput     =    $('.coc_coa_mill_cert_input')
             if( checkBox.is(":checked") == true ){
                 formInput.prop('required', false)
                 formInput.prop('disabled', true)
@@ -299,17 +329,6 @@
         } else {
             formInput.prop('required', true)
             formInput.prop('disabled', false)
-        }
- 
-        document.querySelector('#coc_coa_mill_cert_input').addEventListener('change', () => {
-            const input       = document.getElementById("coc_coa_mill_cert_input");
-            const fileListArr = Array.from(input.files);
-            if(input.files.length > 3) {
-                fileListArr.map((file, index) => {
-                    alert("More then 3 files not allowd !")
-                    fileListArr.splice(index, 1); 
-                }) 
-            }
-        })
+        } 
     </script>
 @endsection
