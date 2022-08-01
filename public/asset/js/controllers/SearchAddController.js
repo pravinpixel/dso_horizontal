@@ -172,7 +172,10 @@ app.controller('SearchAddController', function($scope, $http) {
 
                 row.batches.map((batch, bIndex) => {
                     if (batch.is_draft == 1 ) draftBatchCount += 1 
-                    batch.quantity = batch.quantity.replace('.00', '');
+
+                    if(batch.quantity  !== null) {
+                        batch.quantity = batch.quantity.replace('.00', '');
+                    }
                     return  QtyCount += Number(batch.quantity)
                 }) 
                  
@@ -183,7 +186,7 @@ app.controller('SearchAddController', function($scope, $http) {
             })
 
             $scope.material_products.data = $scope.material_products_data?.map((row, index) => {
-                var qtyColor
+                var qtyColor = 'text-danger'
                 if(row.totalQuantity < row.alert_threshold_qty_lower_limit) {
                     qtyColor = 'text-danger'
                 } 
@@ -196,7 +199,7 @@ app.controller('SearchAddController', function($scope, $http) {
                         } else {
                             qtyColor = 'text-warning'
                         }
-                    }
+                    } 
                 }
 
                 return {...row , ...{ 
