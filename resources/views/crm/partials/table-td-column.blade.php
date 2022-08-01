@@ -22,8 +22,9 @@
                 @break
                 @case('quantity')
                    
-                    @{{ row.totalQuantity }}     
-                    <span><i class="ms-1 @{{ row.totalQuantity < row.alert_threshold_qty_lower_limit == true ? 'text-danger' : (row.alert_threshold_qty_lower_limit < row.totalQuantity < row.alert_threshold_qty_upper_limit) == true ? 'text-warning' : row.totalQuantity > row.alert_threshold_qty_upper_limit == true ? 'text-success' : null }} dot-sm bi bi-circle-fill"></i></span>
+                    @{{ row.totalQuantity }}
+                    
+                    <span><i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i></span>
 
                     {{-- <div class="ms-1">
                         <span ng-if="row.totalQuantity < row.alert_threshold_qty_lower_limit">
