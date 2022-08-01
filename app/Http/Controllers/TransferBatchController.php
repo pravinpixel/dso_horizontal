@@ -10,6 +10,7 @@ class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
     {
+        
         $current_batch                 = Batches::find($request->id);
         $created_batch                 = $current_batch->replicate();
         $created_batch->created_at     = Carbon::now();
@@ -21,9 +22,9 @@ class TransferBatchController extends Controller
         $created_batch->owner_one      = $request->owner_one;
         $created_batch->owner_two      = $request->owner_two;
         $created_batch->save();
-
+         
         $current_batch->update([
-            'quantity' =>   $current_batch->quantity -  $request->quantity
+            'quantity' =>   $current_batch->quantity - $request->quantity
         ]);
 
         return response()->json([

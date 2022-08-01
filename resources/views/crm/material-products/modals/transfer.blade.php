@@ -23,7 +23,7 @@
                     <tbody>
                         <tr>
                             <td width="200px" class="text-center">
-                                <input type="number" min="1" max="@{{ TransfersBatchMaxQuantity }}" placeholder="@{{ TransfersBatchMaxQuantity }}" ng-model="TransfersBatch.quantity" ng-value="TransfersBatch.quantity" class="text-center form-control form-control-sm">
+                                <input type="number" min="0" max="@{{ TransfersBatchMaxQuantity }}" placeholder="@{{ TransfersBatchMaxQuantity }}" ng-model="TransfersBatch.quantity" ng-value="TransfersBatch.quantity" class="text-center form-control form-control-sm">
                             </td>
                             <td>
                                 <select  class="form-select form-select-sm" ng-model="TransfersBatch.storage_area">

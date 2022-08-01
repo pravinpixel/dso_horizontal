@@ -172,6 +172,7 @@ app.controller('SearchAddController', function($scope, $http) {
 
                 row.batches.map((batch, bIndex) => {
                     if (batch.is_draft == 1 ) draftBatchCount += 1 
+                    batch.quantity = batch.quantity.replace('.00', '');
                     return  QtyCount += Number(batch.quantity)
                 }) 
                  
@@ -685,7 +686,7 @@ app.controller('SearchAddController', function($scope, $http) {
         if($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing   == null || $scope.TransfersBatch.owner_one == null || $scope.TransfersBatch.owner_two == null) {
             Message('danger', "All fields is Required !");
             return false
-        } 
+        }
         $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
             $scope.get_material_products();
             Message('success', response.data.message);
