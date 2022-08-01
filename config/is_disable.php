@@ -149,7 +149,7 @@
             "in_house" => [
                 "category_selection"                => ['status' => 'disabled' , "reset" => false],
                 "item_description"                  => ['status' => 'disabled' , "reset" => false],
-                "brand"                             => ['status' => 'disabled' , "reset" => true],
+                "brand"                             => ['status' => 'readonly' , "reset" => true],
                 "supplier"                          => ['status' => 'disabled' , "reset" => false],
                 "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                 "unit_packing_value"                => ['status' => null , "reset" => false],
@@ -199,7 +199,7 @@
                 "material" => [
                     "category_selection"                => ['status' => null , "reset" => false],
                     "item_description"                  => ['status' => null , "reset" => false],
-                    "brand"                             => ['status' => 'disabled' , "reset" => false],
+                    "brand"                             => ['status' => 'readonly' , "reset" => false],
                     "supplier"                          => ['status' => 'disabled' , "reset" => false],
                     "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                     "unit_packing_value"                => ['status' => null , "reset" => false],
@@ -246,7 +246,7 @@
                 "in_house" => [
                     "category_selection"                => ['status' => null , "reset" => false],
                     "item_description"                  => ['status' => null , "reset" => false],
-                    "brand"                             => ['status' => 'disabled' , "reset" => false],
+                    "brand"                             => ['status' => 'readonly' , "reset" => false],
                     "supplier"                          => ['status' => 'disabled' , "reset" => false],
                     "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                     "unit_packing_value"                => ['status' => null , "reset" => false],
@@ -342,7 +342,7 @@
                 "in_house" => [
                     "category_selection"                => ['status' => 'disabled' , "reset" => false],
                     "item_description"                  => ['status' => 'disabled' , "reset" => false],
-                    "brand"                             => ['status' => 'disabled' , "reset" => false],
+                    "brand"                             => ['status' => 'readonly' , "reset" => false],
                     "supplier"                          => ['status' => 'disabled' , "reset" => false],
                     "unit_of_measure"                   => ['status' => 'disabled' , "reset" => false],
                     "unit_packing_value"                => ['status' => null , "reset" => false],
