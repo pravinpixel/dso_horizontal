@@ -128,7 +128,7 @@
                                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                             ]) !!}
                         @if (wizard_mode() == 'duplicate')
-                            <span class="btn btn-light btn-sm border-start"> 
+                            <span class="btn btn-light btn-sm border-start  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
                                 <input type="checkbox" 
                                     @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
                                         {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
@@ -139,7 +139,7 @@
                                 onclick="change_coc_coa_status()">
                             </span>
                             @else
-                                <span class="btn btn-light btn-sm border-start"> 
+                                <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
                                     <input type="checkbox" 
                                     @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
                                         {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
@@ -172,7 +172,7 @@
                                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
                                 ]) !!}
 
-                                <span class="btn btn-light btn-sm border-start"> 
+                                <span class="btn btn-light btn-sm border-start  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
                                     <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
                                         class="form-check-input"  
                                         {{-- {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }} --}}
