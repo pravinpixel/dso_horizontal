@@ -69,7 +69,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Quantity  <sup class="text-danger">*</sup></label>
             <div class="col-8">
-                {!! Form::number('quantity', $batch->quantity?? null, ['class' => 'form-control form-select-sm three-digits', 'placeholder' => 'Type here...','required', 'min'=> 1, "step" => "any",
+                {!! Form::number('quantity', $batch->quantity ?? null, ['class' => 'form-control form-select-sm three-digits', 'placeholder' => 'Type here...','required', 'min'=> 1, "step" => "any",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."quantity.status")
                 ]) !!}
             </div>

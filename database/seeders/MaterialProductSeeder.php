@@ -23,7 +23,6 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "100",
             "alert_threshold_qty_lower_limit" => "10",
             "alert_before_expiry"             => "704",
-            "quantity"                        => 175,
         ];
         $data = [
             "is_draft"                        => "0",
@@ -86,7 +85,6 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
-            "quantity"                        => 250,
         ];
         $data_two = [
             "is_draft"                      => "0",
@@ -149,7 +147,6 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
-            "quantity"                        => 250,
         ];
         $data_three = [
             "is_draft"                      => "0",

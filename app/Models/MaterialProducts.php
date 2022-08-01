@@ -18,7 +18,6 @@ class MaterialProducts extends Model
     ];
 
     protected $fillable = [
-        'quantity',
         'category_selection',
         'item_description',
         'unit_of_measure',
