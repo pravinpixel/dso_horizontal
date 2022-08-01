@@ -22,7 +22,7 @@ class CreateBatchesTable extends Migration
             $table->string('barcode_number')->nullable();
             $table->string('supplier')->nullable();
             $table->string('packing_size')->nullable();
-            $table->decimal('quantity',5,2)->nullable();
+            $table->decimal('quantity',10,2)->nullable();
             $table->string('batch')->nullable();
             $table->string('serial')->nullable();
             $table->string('po_number')->nullable();
