@@ -583,3 +583,21 @@ input[type=number] {
     color: red;
     margin-right: 3px;
 }
+.sgd {
+    position: relative;
+    height: 20px !important;    
+    min-height: 20px !important;
+    width: 20px !important;   
+    min-width: 20px !important;
+    border-radius: 50%;
+    border: 1px solid #163269;
+    background: white;
+    color: #163269;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    font-weight: 800 !important;
+    letter-spacing: 1px;
+    font-size: 10px;
+}

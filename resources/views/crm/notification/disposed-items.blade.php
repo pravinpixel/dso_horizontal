@@ -39,7 +39,7 @@
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Material/In-house product type</label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date of manufacture </label>
                             <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Date of shipment</label>
-                            <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Cost per unit </label>
+                            <label class="dropdown-item"><input type="checkbox"class="form-check-input me-1">Cost per unit <small class="sgd"> S$ </small></label>
                         </div>
                     </div> 
                     <div>
