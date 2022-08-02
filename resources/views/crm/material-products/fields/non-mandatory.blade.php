@@ -82,6 +82,7 @@
             <label for="" class="col-4">Date of manufacture</label>
             <div class="col-8">
                 {!! Form::date('date_of_manufacture', $batch->date_of_manufacture ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
+                    "onchange" => "validateDate('date_of_shipment', this)",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."date_of_manufacture.status")
                 ]) !!}
             </div>

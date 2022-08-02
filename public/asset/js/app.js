@@ -166,3 +166,9 @@ $('.need-word-match').keyup((element) => {
         }
     }); 
 })  
+
+
+validateDate = (endInput, element) => {
+    var dateInput = document.querySelector(`input[name=${endInput}]`)
+    dateInput.setAttribute('min',element.value)
+}
