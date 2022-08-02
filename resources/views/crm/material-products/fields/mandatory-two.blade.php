@@ -103,6 +103,7 @@
             <label for="" class="col-4">Date in <sup class="text-danger">*</sup></label>
             <div class="col-8">
                 {!! Form::date('date_in', $batch->date_in ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', 'required', 
+                    "onchange" => "validateDate('date_of_expiry', this)",
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."date_in.status")
                 ]) !!}
             </div>
