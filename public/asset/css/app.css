@@ -4114,7 +4114,7 @@ fieldset:disabled .btn {
 }
 
 .btn-sort i:nth-child(1) {
-    transform: translateX(5px);
+    transform: translateX(1px);
 }
 .cur_ponit ,
 .btn-sort i {
