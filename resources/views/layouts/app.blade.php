@@ -7,6 +7,7 @@
     <link href="https://www.dso.org.sg/media/default/theme/favicon.png" rel="shortcut icon" type="image/png" />
     <title>DSO</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="app-url" content="{{ url('') }}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     {{--  ===== STYLES ======= --}}

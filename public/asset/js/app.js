@@ -145,7 +145,8 @@ $('.need-word-match').keyup((element) => {
         element.target.parentNode.append(dataList)
     } 
 
-    fetch('/dso_horizontal/get-suggestion', {
+    
+    fetch($('meta[name="app-url"]').attr('content') + '/get-suggestion', {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
