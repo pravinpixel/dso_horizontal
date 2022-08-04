@@ -112,16 +112,16 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.on_alert_threshold_qty_upper_limit = false
             $scope.on_barcode_number = false
             $scope.on_batch = false
-            $scope.on_brand = false
+            $scope.on_brand = true
             $scope.on_cas = false
             $scope.on_category_selection = false
             $scope.on_coc_coa_mill_cert = false
             $scope.on_cost_per_unit = false
             $scope.on_date_in = false
-            $scope.on_date_of_expiry = false
+            $scope.on_date_of_expiry = true
             $scope.on_date_of_manufacture = false
             $scope.on_date_of_shipment = false
-            $scope.on_department = false
+            $scope.on_department = true
             $scope.on_disposal_certificate = false
             $scope.on_euc_material = false
             $scope.on_extended_expiry = false
@@ -129,18 +129,18 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.on_extended_qc_status = false
             $scope.on_fm_1202 = false
             $scope.on_housing = false
-            $scope.on_housing_type = false
+            $scope.on_housing_type = true
             $scope.on_iqc_result = false
             $scope.on_iqc_status = false
             $scope.on_material_product_id = false
             $scope.on_material_product_type = false
             $scope.on_outlife = false
             $scope.on_owner_one = false
-            $scope.on_owner_two = false
+            $scope.on_owner_two = true
             $scope.on_packing_size = false
             $scope.on_po_number = false
             $scope.on_project_name = false
-            $scope.on_quantity = false
+            $scope.on_quantity = true
             $scope.on_remarks = false
             $scope.on_repack_size = false
             $scope.on_require_bulk_volume_tracking = false
@@ -148,11 +148,11 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.on_sds = false
             $scope.on_serial = false
             $scope.on_statutory_body = false
-            $scope.on_storage_area = false
+            $scope.on_storage_area = true
             $scope.on_supplier = false
             $scope.on_unit_of_measure = false
-            $scope.on_unit_packing_value = false
-            $scope.on_used_for_td_expt_only = false
+            $scope.on_unit_packing_value = true
+            $scope.on_used_for_td_expt_only = true
         }
     }
 

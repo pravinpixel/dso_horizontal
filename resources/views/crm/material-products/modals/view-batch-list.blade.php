@@ -197,7 +197,7 @@
                     </li>
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" >
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">Cost per unit <small class="sgd"> S$ </small></div>
+                            <div class="fw-bold d-flex">Cost per unit <small class="sgd"> S$ </small></div>
                            @{{ batchOverview.cost_per_unit }}
                         </div>
                     </li>
