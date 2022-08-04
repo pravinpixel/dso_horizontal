@@ -236,7 +236,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes Delete",
+                    text: "Yes, Delete",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",
@@ -272,7 +272,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes Delete",
+                    text: "Yes, Delete",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",
@@ -644,7 +644,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes Delete",
+                    text: "Yes, Delete",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",
@@ -709,7 +709,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes Delete",
+                    text: "Yes, Delete",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",
@@ -776,7 +776,7 @@ app.controller('SearchAddController', function($scope, $http) {
                             closeModal: true,
                         },
                         confirm: {
-                            text: "Yes Delete",
+                            text: "Yes, Delete",
                             value: true,
                             visible: true,
                             className: "btn btn-danger rounded-pill",
