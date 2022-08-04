@@ -2,8 +2,8 @@
     <div class="box position-relative h-100 th box-lg">
         Item Description
         <div class="btn-sort">
-            <i class="bi bi-arrow-up" ng-click="sort_by('item_description', 'ASC')" ></i>
-            <i class="bi bi-arrow-down" ng-click="sort_by('item_description', 'DESC')"></i>
+            <i class="bi bi-arrow-up" ng-click="sort_by('item_description', 'DESC')" ></i>
+            <i class="bi bi-arrow-down" ng-click="sort_by('item_description', 'ASC')"></i>
         </div>
     </div>
 </div>
