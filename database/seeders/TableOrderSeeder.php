@@ -40,6 +40,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['extended_qc_result'],
             $tableColumns['disposal_certificate'],
             $tableColumns['iqc_result_status'],
+            $tableColumns['barcode_number'],
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {
@@ -151,11 +152,8 @@ class TableOrderSeeder extends Seeder
             }elseif($value == 'used_for_td_expt_only') {
                 $data = 36;
                 $status = true;
-            }elseif($value == 'barcode_number') {
-                $data = 37;
-                $status = true;
-            }elseif($value == 'is_draft') {
-                $data   = 38;
+            } elseif($value == 'is_draft') {
+                $data   = 37;
                 $status = true;
             } 
             tableOrder::create([

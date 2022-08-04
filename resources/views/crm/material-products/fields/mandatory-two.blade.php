@@ -220,10 +220,9 @@
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" name="iqc_result_status" id="iqc_result_check_box"
                             class="form-check-input"
-                                @if ($material_product->Batches[0]->iqc_result == null && wizard_mode() !== 'duplicate')
+                                @if ($material_product->Batches[0]->iqc_result == null)
                                     {{ $batch->iqc_result_status == "on" ? 'checked' : null }} 
-                                @endif
-                                {{ isset($material_product->Batches[0]->iqc_result) ? 'disabled' : null}} 
+                                @endif 
                                 {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") }}
                             onclick="change_iqc_result_status()" 
                         />
