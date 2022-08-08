@@ -860,6 +860,7 @@ app.controller('SearchAddController', function($scope, $http) {
                     repack_size     : null,
                     qty_cut         : null,
                     remaining_days  : null,
+                    barcode_number : RepackData.barcode_number
                 });
             }
             if(RepackData.repack_outlife.length !== 0) { 
@@ -885,6 +886,7 @@ app.controller('SearchAddController', function($scope, $http) {
                             repack_size     : element.repack_size,
                             qty_cut         : element.qty_cut,
                             remaining_days  : element.remain_days,
+                            barcode_number : element.barcode_number
                         }
                     );
                 })
@@ -942,6 +944,8 @@ app.controller('SearchAddController', function($scope, $http) {
                                 repack_size     : element.repack_size,
                                 qty_cut         : element.qty_cut,
                                 remaining_days  : element.remain_days,
+                                barcode_number : element.barcode_number
+
                             }
                         );
                     })
@@ -963,6 +967,7 @@ app.controller('SearchAddController', function($scope, $http) {
                         repack_size     : null,
                         qty_cut         : null,
                         remaining_days  : null,
+                        barcode_number : element.barcode_number
                     });
                 }
                 if($scope.next_draw == true) { 
@@ -993,6 +998,7 @@ app.controller('SearchAddController', function($scope, $http) {
                         repack_size     : null,
                         qty_cut         : null,
                         remaining_days  : null,
+                        barcode_number : element.element
                     });
                 } 
                 Message('success',"Repack Outlife Saved !")

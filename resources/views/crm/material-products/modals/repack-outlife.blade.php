@@ -49,7 +49,7 @@
                             <td class="text-center">
                                 <input type="number" disabled class="form-control form-control-sm custom-input" ng-model='repack.balance_amount'>
                             </td>
-                            <td>XXX / 1</td>
+                            <td>@{{ repack.barcode_number }}</td>
                             <td class="text-center">
                                 <input type="number" ng-disabled="repack.draw_in.status === false" required class="form-control form-control-sm custom-input" ng-model='repack.repack_size'>
                             </td>
