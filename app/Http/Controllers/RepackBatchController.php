@@ -100,7 +100,7 @@ class RepackBatchController extends Controller
 
     public function store_repack_outlife(Request $request , $id)
     {
-        $repack_data    =   $request->all();
+        $repack_data    =   $request->all(); 
         $newestRepack   =   RepackOutlife::where("batch_id", $id)->get()->last();
          
         foreach($repack_data as $key => $repack)  {
@@ -137,7 +137,7 @@ class RepackBatchController extends Controller
                 'qty_cut'               => $repack['qty_cut'],
                 'remain_days'           => $repack['remaining_days'] ?? null,
             ]);
-        }
+        }  
         return response()->json([
             "status"         => true,
             "new_draw_in"    => $stop_next_draw_in,

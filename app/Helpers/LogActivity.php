@@ -47,8 +47,8 @@ class LogActivity
                 break;
             case 'transfer':
                 $action_type  = 'TRANSFER';
-                $module_name  = 'TRANSFER';
-                break;
+                $module_name  = 'Batches';
+                break; 
         }
 
         LogSheet::updateOrCreate([
@@ -73,6 +73,10 @@ class LogActivity
                 $action_type = 'REPACK_TRANSFER';
                 $module_name = "Batches";
                 break;
+            case 'store_repack_outlife' :
+                $action_type  = 'REPACK_OUTLIFE';
+                $module_name  = 'Batches';
+                break;
         }
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),
@@ -83,7 +87,7 @@ class LogActivity
             'action_type' => $action_type,
             'old'         => json_encode($old),
             'new'         => json_encode($new),
-            'module_id'   => $old->id
+            'module_id'   => $old->id ?? ''
         ]);
     }
 
