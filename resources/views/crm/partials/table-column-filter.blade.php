@@ -3,15 +3,17 @@
         <i class="bi bi-caret-down-square-fill"></i>  
     </button>
     <div class="tableColumns-menu"> 
-        <div class="menu-list" ng-init="@foreach ($tableAllColumns as $column)@if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing') on_{{ $column['name'] }} = {{ $column['status'] == 1 ? 'true' : 'false' }};  @endif @endforeach "> 
+        <div class="menu-list" ng-init="@foreach ($tableAllColumns as $column)@if ($column['name'] != 'unit_of_measure' && $column['name'] != 'barcode_number' && $column['name'] != 'housing') on_{{ $column['name'] }} = {{ $column['status'] == 1 ? 'true' : 'false' }}; @endif @endforeach "> 
             <label>
                 <input type="checkbox" ng-model="on_all_check_box" ng-change="select_all_check_box()" class="form-check-input me-1">
                 <span>All</span>
             </label> 
             @foreach ($tableAllColumns as $column)  
-                @if ($column['name'] != 'unit_of_measure' && $column['name'] != 'housing' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id' && $column['name'] != 'packing_size')
+                @if ($column['name'] != 'unit_of_measure' &&  $column['name'] != 'housing' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id' && $column['name'] != 'packing_size')
                     <label> 
-                        <input type="checkbox" ng-checked="{{ $column['status'] == 1 ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
+                        
+                            <input type="checkbox" ng-checked="{{ $column['status'] == 1  && $column['name'] != 'barcode_number' ? true : false }}" ng-model="on_{{ $column['name'] }}" id="on_{{ $column['name'] }}" class="form-check-input me-1">
+                        
                         <small>
                             @if ($column['name'] == 'iqc_status')
                                 IQC Status 

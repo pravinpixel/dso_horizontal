@@ -55,7 +55,7 @@ app.controller('SearchAddController', function($scope, $http) {
             }
         }
     }
-    
+    $scope.on_barcode_number = false
     $scope.select_all_check_box = () => {
         if($scope.on_all_check_box === true) {
             $scope.on_access = true
