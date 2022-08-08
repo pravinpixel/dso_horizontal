@@ -1,7 +1,9 @@
 <div class="box box-lg" ng-show="on_item_description"></div>   
+ 
 @foreach ($tableAllColumns as $column) 
+    
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
-        <div ng-if="on_{{ $column['name'] }}" class="box text-center">
+        <div ng-if="on_{{ $column['name'] }}" class="box text-center"> 
             @switch($column['name'])
                 @case('iqc_status')
                     <span ng-if="batch.iqc_status != 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
@@ -25,7 +27,7 @@
                 @break
                 @case('date_of_expiry')
                     {{ $column['batch'] }} <span><i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i></span>
-                @break
+                @break 
                 @default {!! $column['batch'] !!}
             @endswitch 
         </div>

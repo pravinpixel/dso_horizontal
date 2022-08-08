@@ -16,7 +16,7 @@ class Batches extends Model
         'material_product_id',
         'brand',
         'supplier',
-        'packing_size',
+        'unit_packing_value',
         'quantity',
         'batch',
         'serial',

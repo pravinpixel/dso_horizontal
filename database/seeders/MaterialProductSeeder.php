@@ -25,7 +25,8 @@ class MaterialProductSeeder extends Seeder
             "alert_before_expiry"             => "704",
         ];
         $data = [
-            "is_draft"                        => "0",
+            "unit_packing_value"        => "100",
+            "is_draft"                      => "0",
             "quantity"                     => 175,
             "brand"                        => "Hexcel",
             "supplier"                     => "Peter Parker",
@@ -81,12 +82,13 @@ class MaterialProductSeeder extends Seeder
             "category_selection"              => "in_house",
             "item_description"                => "Acetone 90% Ind grade",
             "unit_of_measure"                 => "8",
-            "unit_packing_value"              => "175",
+            "unit_packing_value"              => "575",
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
         ];
         $data_two = [
+            "unit_packing_value"            => "575",
             "is_draft"                      => "0",
             "quantity"                     => 155,
             "brand"                        => "In-House",
@@ -149,6 +151,7 @@ class MaterialProductSeeder extends Seeder
             "alert_before_expiry"             => "850",
         ];
         $data_three = [
+            "unit_packing_value"              => "175",
             "is_draft"                      => "0",
             "quantity"                     => 155,
             "brand"                        => "In-House",
