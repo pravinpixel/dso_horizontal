@@ -22,6 +22,8 @@ class CreateLogSheetsTable extends Migration
             $table->string('module_name');
             $table->string('module_id')->nullable();
             $table->string('agent');
+            $table->longText('old')->nullable();
+            $table->longText('new')->nullable();
             $table->timestamps();
         });
     }

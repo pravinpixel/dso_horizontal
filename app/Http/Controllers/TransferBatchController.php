@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
-    {
-        
+    { 
         $current_batch                 = Batches::find($request->id);
         $created_batch                 = $current_batch->replicate();
         $created_batch->created_at     = Carbon::now();
@@ -22,11 +24,16 @@ class TransferBatchController extends Controller
         $created_batch->owner_one      = $request->owner_one;
         $created_batch->owner_two      = $request->owner_two;
         $created_batch->save();
-         
+
+        $old_value           = $current_batch;
+        $new_value           = clone $current_batch;
+        $new_value->quantity = $new_value->quantity  - $request->quantity;
+        LogActivity::dataLog($old_value, $new_value);
+ 
         $current_batch->update([
             'quantity' =>   $current_batch->quantity - $request->quantity
-        ]);
-
+        ]); 
+       
         return response()->json([
             "status" => true,
             "message" => "Transfer Success !"

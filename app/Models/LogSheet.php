@@ -16,6 +16,8 @@ class LogSheet extends Model
         'action_type' ,
         'module_name',
         'module_id',
-        'user_name'
+        'user_name',
+        'old',
+        'new'
     ];
 }
