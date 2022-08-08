@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RepackOutlifeExport;
+use App\Helpers\LogActivity;
 use App\Models\BarcodeFormat;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
@@ -19,28 +20,36 @@ class RepackBatchController extends Controller
 {
 
     public function repack(Request $request)
-    {
-        
-        $current_batch                 = Batches::find($request->id);
-        $created_batch                 = $current_batch->replicate();
-        $created_batch->created_at     = Carbon::now();
-        $created_batch->quantity       = $request->quantity;
-        $created_batch->unit_packing_value  = $request->PackingSize;
-        $created_batch->barcode_number = generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
-        $created_batch->storage_area   = $request->storage_area;
-        $created_batch->housing_type   = $request->housing_type;
-        $created_batch->housing        = $request->housing;
-        $created_batch->owner_one      = $request->owner_one;
-        $created_batch->owner_two      = $request->owner_two;
+    { 
+        $current_batch                     = Batches::find($request->id);
+        $created_batch                     = $current_batch->replicate();
+        $created_batch->created_at         = Carbon::now();
+        $created_batch->barcode_number     = generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
+        $created_batch->quantity           = $request->quantity;
+        $created_batch->unit_packing_value = $request->PackingSize;
+        $created_batch->storage_area       = $request->storage_area['id'] ?? $request->storage_area;
+        $created_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
+        $created_batch->housing            = $request->housing;
+        $created_batch->owner_one          = $request->owner_one;
+        $created_batch->owner_two          = $request->owner_two;
+        $created_batch->repack_size        = $request->repack_size;
         $created_batch->save();
-         
+
+
+        $old_value                     = $current_batch;
+        $new_value                     = clone $current_batch;
+        $new_value->quantity           = $new_value->quantity  - $request->quantity;
+        $new_value->unit_packing_value = $new_value->unit_packing_value  - $request->PackingSize;
+
+        LogActivity::dataLog($old_value, $new_value);
+
         $current_batch->update([
-            'quantity'              =>   $current_batch->quantity   - $request->quantity,
-            'unit_packing_value'    =>   $current_batch->unit_packing_value   - $request->PackingSize,
+            'quantity'           => $current_batch->quantity - $request->quantity,
+            'unit_packing_value' => $current_batch->unit_packing_value  - $request->PackingSize,
         ]);
 
         return response()->json([
-            "status" => true,
+            "status"  => true,
             "message" => "Repack / Transfer Success !"
         ]); 
     }

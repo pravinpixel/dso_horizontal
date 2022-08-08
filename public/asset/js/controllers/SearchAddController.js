@@ -739,6 +739,7 @@ app.controller('SearchAddController', function($scope, $http) {
                 // console.log(row.unit_of_measure.name)
                 $scope.RepackTransfer           =   batch;
                 $scope.RepackTransferPackSize   =   row.unit_packing_value
+                $scope.RepackTransferQty        =   batch.quantity
                 $scope.RepackTransferMeasure    =   row.unit_of_measure.name
                 const CurrentAccessed           =   JSON.parse($scope.RepackTransfer.access);
                 $scope.CurrentAccessed          =   CurrentAccessed.join() 

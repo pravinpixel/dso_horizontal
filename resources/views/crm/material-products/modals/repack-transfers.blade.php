@@ -16,7 +16,7 @@
                                     <th>Current accessed</th>
                                     <th>Input Used amt (@{{ RepackTransferMeasure }})</th>
                                     <th>
-                                        <span>Current Pkt Size : <span class="lead"><b>@{{ RepackTransferPackSize }}</b></span></span>
+                                        <span>Current Pkt Size : <span class="lead"><b>@{{ RepackTransfer.unit_packing_value }}</b></span></span>
                                         <hr class="bg-secondary">
                                         Remain Amt (@{{ RepackTransferMeasure }})
                                     </th>
@@ -30,7 +30,7 @@
                                         <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransfer.PackingSize" class="text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
-                                        @{{ RepackTransferPackSize - RepackTransfer.PackingSize}}
+                                        @{{ RepackTransfer.unit_packing_value - RepackTransfer.PackingSize}}
                                     </td>
                                 </tr> 
                             </tbody>
@@ -38,6 +38,7 @@
                     </div>
                     <div class="col-lg-12">
                         <h5 class="h5 text-primary text-center">Repacked mat/product tracking logsheet (Repack)</h5>
+                         
                         <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
                             <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                                 <tr>
@@ -59,7 +60,7 @@
                                         <input type="number" min="1" ng-model="RepackTransfer.repack_size" ng-value="RepackTransfer.repack_size"class="border-0 rounded-0 text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
-                                        <input type="number" min="1" ng-model="RepackTransfer.quantity" ng-value="RepackTransfer.quantity" class="border-0 rounded-0 text-center form-control form-control-sm">
+                                        <input type="number" min="1" max="@{{ RepackTransferQty }}" ng-model="RepackTransfer.quantity" ng-value="RepackTransfer.quantity" class="border-0 rounded-0 text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
                                         <select  class="border-0 rounded-0 form-select form-select-sm" ng-model="RepackTransfer.storage_area">

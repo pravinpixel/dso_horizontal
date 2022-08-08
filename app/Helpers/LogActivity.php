@@ -66,7 +66,12 @@ class LogActivity
     {
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
-                $module_name = 'TRANSFER';
+                $action_type = 'TRANSFER';
+                $module_name = "Batches";
+                break;
+            case 'repack':
+                $action_type = 'REPACK_TRANSFER';
+                $module_name = "Batches";
                 break;
         }
         LogSheet::updateOrCreate([
@@ -75,7 +80,7 @@ class LogActivity
             'user_id'     => auth_user()->id,
             'user_name'   => auth_user()->alias_name,
             'module_name' => $module_name,
-            'action_type' => $module_name,
+            'action_type' => $action_type,
             'old'         => json_encode($old),
             'new'         => json_encode($new),
             'module_id'   => $old->id
