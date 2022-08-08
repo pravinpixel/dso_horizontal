@@ -14,5 +14,8 @@ class LogSheet extends Model
         'agent',
         'user_id',
         'action_type' ,
+        'module_name',
+        'module_id',
+        'user_name'
     ];
 }

@@ -17,7 +17,10 @@ class CreateLogSheetsTable extends Migration
             $table->id();
             $table->string('ip');
             $table->integer('user_id');
-            $table->string('action_type'); 
+            $table->string('user_name');
+            $table->string('action_type');
+            $table->string('module_name');
+            $table->string('module_id')->nullable();
             $table->string('agent');
             $table->timestamps();
         });

@@ -116,22 +116,21 @@ class MaterialProductsController extends Controller
 
     public function save_search_history(Request $request)
     { 
-        $validated = $request->validate([
+        $request->validate([
             'search_title' => 'required|unique:save_my_searches',
+        ]); 
+        $data = SaveMySearch::create([
+            'user_id'      => auth_user()->id,
+            'search_title' => $request->search_title,
+            'search_data'  => json_encode($request->data),
         ]);
-
-        $data   =   User::findOrFail(auth_user()->id);
-        $data->SaveMySearch()->create([
-            'search_title'  => $request->search_title,
-            'search_data'   => json_encode($request->data),
-        ]);
-        LogActivity::log();
+        LogActivity::log($data->id);
         return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);
     }
     public function delete_search_history($id)
     {
         SaveMySearch::findOrFail($id)->delete(); 
-        LogActivity::log();
+        LogActivity::log($id);
         return response(['status' => true, "message" => "Delete Success !"], Response::HTTP_OK);
     }
 
@@ -156,10 +155,11 @@ class MaterialProductsController extends Controller
                         'alert_threshold_qty_lower_limit'   =>   $row['alert_threshold_qty_lower_limit'] ?? null,
                         'alert_before_expiry'               =>   $row['alert_before_expiry_weeks'] ?? null,
                     ]);
+                    LogActivity::log($material->id);
                     $batch = $material->Batches()->updateOrCreate([
                         'brand'                         =>  $row['brand'] ?? null,
                         'supplier'                      =>  $row['supplier'] ?? null,
-                        'packing_size'                  =>  $row['unit_packing_value'] ?? null,
+                        'unit_packing_value'            =>  $row['unit_packing_value'] ?? null,
                         'quantity'                      =>  $row['quantity'] ?? null,
                         'batch'                         =>  $row['batch'] ?? null,
                         'serial'                        =>  $row['serial'] ?? null,
@@ -318,12 +318,13 @@ class MaterialProductsController extends Controller
         return view($view, compact($params));
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
-    { 
+    {
         $result =   $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
         );
+      
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id); 
             if($current_batch->require_bulk_volume_tracking == 0 || $current_batch->require_outlife_tracking == 0) {
@@ -337,8 +338,13 @@ class MaterialProductsController extends Controller
             $current_batch->update([
                 'withdrawal_type' => $withdrawal_type
             ]);
-           
+
+            if(wizard_mode() == 'edit') {
+                LogActivity::log(material_product() ?? $id);
+            }
+            
             if (wizard_mode() == 'create') {
+                LogActivity::log(material_product() ?? $id);
                 $request->session()->put('form-one', 'completed');
             }
             $view  = 'form-two';
@@ -358,7 +364,6 @@ class MaterialProductsController extends Controller
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
             forgot_session();  
-            LogActivity::log();
             if($request->is_print == 1) { 
                 return redirect()->route('print-barcode', ["id" => $this_batch_id]);
             } else {
@@ -398,13 +403,12 @@ class MaterialProductsController extends Controller
     public function destroy($id)
     { 
         MaterialProducts::find($id)->delete();
-        LogActivity::log();
+        LogActivity::log($id);
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function batch_destroy($id)
     {
         $data   =   Batches::find($id);
-
         if (Storage::exists($data->sds_mill_cert_document)) {
             Storage::delete($data->sds_mill_cert_document);
         }
@@ -421,7 +425,7 @@ class MaterialProductsController extends Controller
             Storage::delete($data->extended_qc_result);
         }
         $data->delete();
-        LogActivity::log();
+        LogActivity::log($id);
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function suggestion(Request $request)
@@ -452,7 +456,7 @@ class MaterialProductsController extends Controller
         $created_batch->save(); 
         request()->session()->put('material_product_id', $created_batch->material_product_id);
         request()->session()->put('batch_id', $created_batch->id);
-        LogActivity::log();
+        LogActivity::log($created_batch->id);
         return response()->json([
             "status"                =>  true,
             "wizard_mode"           =>  "duplicate",
