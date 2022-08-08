@@ -1,6 +1,8 @@
 <?php
 include('auth.php');
 include('master.php');
+
+use App\Helpers\LogActivity;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
 use App\Http\Controllers\WithdrawalController;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +20,11 @@ use App\Http\Controllers\WithdrawalController;
 */
 
 Route::middleware(['auth_users'])->group(function () {
-    
-    Route::get('/dashboard', function () {   
+ 
+    Route::get('/dashboard', function () {
         return view('crm.dashboard.index');  
-    })->name('dashboard');
-       
+    })->name('dashboard'); 
+     
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
@@ -78,7 +81,7 @@ Route::middleware(['auth_users'])->group(function () {
     // Advanced Search
     Route::get('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
     Route::post('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
-
+ 
 
     Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
     Route::post('/delete-material-products-batch/{id?}', [MaterialProductsController::class, 'batch_destroy'])->name('delete-material-products-batch');
@@ -141,3 +144,4 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
     Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
 });
+

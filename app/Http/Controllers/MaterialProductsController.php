@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use Illuminate\Http\Request;
 use App\Models\Masters\MasterCategories;
 use App\Models\Masters\StatutoryBody;
@@ -114,8 +115,7 @@ class MaterialProductsController extends Controller
     }
 
     public function save_search_history(Request $request)
-    {
-        // search_history
+    { 
         $validated = $request->validate([
             'search_title' => 'required|unique:save_my_searches',
         ]);
@@ -125,11 +125,13 @@ class MaterialProductsController extends Controller
             'search_title'  => $request->search_title,
             'search_data'   => json_encode($request->data),
         ]);
+        LogActivity::log();
         return response(['status' => true, "message" => "Saved Success !"], Response::HTTP_OK);
     }
     public function delete_search_history($id)
     {
-        SaveMySearch::findOrFail($id)->delete();
+        SaveMySearch::findOrFail($id)->delete(); 
+        LogActivity::log();
         return response(['status' => true, "message" => "Delete Success !"], Response::HTTP_OK);
     }
 
@@ -195,6 +197,7 @@ class MaterialProductsController extends Controller
                 }
             }
         }
+
         return back();
     }
 
@@ -322,8 +325,7 @@ class MaterialProductsController extends Controller
             $request
         );
         if ($type == 'form-one') {
-            $current_batch = Batches::find(batch_id() ?? $batch_id);
-            
+            $current_batch = Batches::find(batch_id() ?? $batch_id); 
             if($current_batch->require_bulk_volume_tracking == 0 || $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DIRECT_DEDUCT';
             } elseif($current_batch->require_bulk_volume_tracking == 1 || $current_batch->require_outlife_tracking == 0) {
@@ -356,6 +358,7 @@ class MaterialProductsController extends Controller
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
             forgot_session();  
+            LogActivity::log();
             if($request->is_print == 1) { 
                 return redirect()->route('print-barcode', ["id" => $this_batch_id]);
             } else {
@@ -393,8 +396,9 @@ class MaterialProductsController extends Controller
         ];
     }
     public function destroy($id)
-    {
+    { 
         MaterialProducts::find($id)->delete();
+        LogActivity::log();
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function batch_destroy($id)
@@ -417,6 +421,7 @@ class MaterialProductsController extends Controller
             Storage::delete($data->extended_qc_result);
         }
         $data->delete();
+        LogActivity::log();
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function suggestion(Request $request)
@@ -447,6 +452,7 @@ class MaterialProductsController extends Controller
         $created_batch->save(); 
         request()->session()->put('material_product_id', $created_batch->material_product_id);
         request()->session()->put('batch_id', $created_batch->id);
+        LogActivity::log();
         return response()->json([
             "status"                =>  true,
             "wizard_mode"           =>  "duplicate",
