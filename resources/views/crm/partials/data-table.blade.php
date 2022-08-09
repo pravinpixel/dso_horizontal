@@ -1,4 +1,5 @@
-<div class="table-responsive shadow-lg bg-white">
+<div class="table-responsive shadow-lg bg-white card">
+    <div class="loader"></div>
     <div class="custom-table" style=" min-height: {{ $page_name != 'MATERIAL_WITHDRAWAL' ? '460px' : 'auto'}} !important;" >
         <div class="custom-table-head">
             {{-- ======= Table Header  ====== --}}
