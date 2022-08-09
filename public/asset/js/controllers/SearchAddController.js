@@ -1,18 +1,4 @@
 app.controller('SearchAddController', function ($scope, $http) {
-    // ====For Check Box column Filters ===
-    // $scope.on_item_description          =   true;
-    // $scope.on_barcode_number            =   true;
-    // $scope.on_brand                     =   true;
-    // $scope.on_batch                     =   true;
-    // $scope.on_serial                    =   true;
-    // $scope.on_quantity                  =   true; 
-    // // $scope.on_unit_packing_value     =   true; 
-    // $scope.storage_area                 =   true; 
-    // $scope.housing_type                 =   true; 
-    // $scope.on_date_of_expiry            =   true; 
-    // $scope.on_iqc_status                =   true; 
-    // $scope.on_used_for_td_expt_only     =   true; 
-    // ==== END :For Check Box column Filters ===
 
     $scope.withdrawalStatus = false
     $scope.filter_status = false;
@@ -166,7 +152,9 @@ app.controller('SearchAddController', function ($scope, $http) {
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
             $scope.material_products_data = $scope.material_products.data;
-            $(".loader").hide()
+            setTimeout(() => {
+                $(".loader").hide()
+            }, 100);
         }, function (response) {
             Message('danger', response.data.message);
         });

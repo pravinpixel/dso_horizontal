@@ -131,13 +131,13 @@
                                     <td class="child-td">  {{ auth_user()->alias_name }} </td>
                                     <td class="child-td">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
                                     <td class="child-td">
-                                        <input name="used_value" type="number" ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
+                                        <input name="used_value" type="number" required ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
                                     </td>
                                     <td class="child-td">
                                         @{{ row.unit_packing_value - used_value }}
                                     </td>
-                                    <td class="child-td">
-                                        <textarea name="remarks" class="form-control h-100 w-100"></textarea>
+                                    <td class="child-td py-0 px-1">
+                                        <textarea name="remarks" required class="form-control h-100 w-100"></textarea>
                                     </td>
                                     <td class="child-td">
                                         <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
