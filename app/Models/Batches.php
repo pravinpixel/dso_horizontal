@@ -100,4 +100,9 @@ class Batches extends Model
     {
         return  $this->hasOne(StatutoryBody::class, 'id', 'statutory_body'); 
     }
+
+    public function DeductTrackUsage()
+    {
+        return $this->hasMany(DeductTrackUsage::class, 'batch_id', 'id');
+    }
 }

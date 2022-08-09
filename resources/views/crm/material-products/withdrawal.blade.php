@@ -105,6 +105,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr ng-repeat="batch in  deductTrackUsage[0].deduct_track_usage">
+                                    <td>
+                                        <span>
+                                            @{{ batch.item_description }}
+                                        </span> 
+                                    </td>
+                                    <td>@{{ batch.batch_serial }}</td>
+                                    <td class="child-td">@{{ batch.last_accessed }}</td>
+                                    <td class="child-td">@{{ batch.created_at }}</td>
+                                    <td class="child-td">@{{ batch.used_amount }}</td>
+                                    <td class="child-td">@{{ batch.remain_amount }}</td>
+                                    <td class="child-td">@{{ batch.remarks }}</td>
+                                    <td class="child-td"></td>
+                                </tr>
                                 <tr ng-repeat="(i,row) in deductTrackUsage">
                                     <td>
                                         <span>
@@ -114,12 +128,14 @@
                                         <input type="hidden" name="category_selection"  value="@{{ row.material.category_selection }}">
                                     </td>
                                     <td>@{{ row.batch }} / @{{ row.serial }}</td>
-                                    <td class="child-td"> Tan Ng Hui Beng </td>
+                                    <td class="child-td">  {{ auth_user()->alias_name }} </td>
                                     <td class="child-td">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
                                     <td class="child-td">
                                         <input name="used_value" type="number" ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
                                     </td>
-                                    <td class="child-td">@{{ row.material.unit_packing_value - used_value }}</td>
+                                    <td class="child-td">
+                                        @{{ row.unit_packing_value - used_value }}
+                                    </td>
                                     <td class="child-td">
                                         <textarea name="remarks" class="form-control h-100 w-100"></textarea>
                                     </td>
