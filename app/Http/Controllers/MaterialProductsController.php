@@ -21,12 +21,10 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
-use Carbon\Carbon;
-use Illuminate\Bus\Batch;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;  
+use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Storage;
+
 
 class MaterialProductsController extends Controller
 {
@@ -37,9 +35,9 @@ class MaterialProductsController extends Controller
         SearchRepositoryInterface   $SearchRepository,
         DsoRepositoryInterface $dsoRepositoryInterface
     ) {
-        $this->MartialProductRepository     =   $MartialProductRepository;
-        $this->SearchRepository   =   $SearchRepository;
-        $this->dsoRepository                =   $dsoRepositoryInterface;
+        $this->MartialProductRepository = $MartialProductRepository;
+        $this->SearchRepository         = $SearchRepository;
+        $this->dsoRepository            = $dsoRepositoryInterface;
     }
 
     public function index(Request $request)
@@ -67,7 +65,7 @@ class MaterialProductsController extends Controller
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
        
-        $material_product   =   MaterialProducts::with([
+        $material_product_data   =   MaterialProducts::with([
             'Batches', 
             'Batches.RepackOutlife',
             'Batches.HousingType', 
@@ -75,8 +73,11 @@ class MaterialProductsController extends Controller
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
-        ])->latest()->paginate(config('app.paginate'));
-        return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
+        ])->get();
+        
+        $material_product = $this->dsoRepository->renderTableData($material_product_data); 
+
+        return response(['status'   =>  true, 'data' => $material_product ], Response::HTTP_OK);
     }
 
     public function advanced_search(Request $request)
@@ -463,5 +464,5 @@ class MaterialProductsController extends Controller
             "batch_id"              =>  $created_batch->id,
             "material_product_id"   =>  $created_batch->material_product_id,
         ]);
-    }
+    } 
 }

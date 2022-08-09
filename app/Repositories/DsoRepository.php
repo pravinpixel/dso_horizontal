@@ -10,8 +10,10 @@ use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use App\Models\tableOrder;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Arr;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DsoRepository implements DsoRepositoryInterface
 {
@@ -75,4 +77,53 @@ class DsoRepository implements DsoRepositoryInterface
             'page_name'
         ));
     }
+    public function renderTableData($material_product)
+    {
+        foreach ($material_product as $key => $parent) {
+            $quantityColor       = 'text-danger';
+            $QtyCount            = 0;
+            $draftBatchCount     = 0;
+            $UnitPackingCount    = 0; 
+
+            
+            foreach ($parent->Batches as  $batch) {
+                if ($batch->is_draft == 1 ) {
+                    $draftBatchCount += 1 ;
+                }
+                if($batch->quantity  !== null) {
+                    $batch->quantity = str_replace('.00', '' , $batch->quantity);
+                }
+                $QtyCount         += $batch->quantity;
+                $UnitPackingCount += $batch->unit_packing_value;
+            }
+            $parent['totalQuantity']      = $QtyCount;
+            $parent['totalUnitPackValue'] = $UnitPackingCount;
+            $parent['hideParentRow']      = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
+
+            if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
+                $quantityColor = 'text-danger';
+            } else {
+                if($parent->alert_threshold_qty_lower_limit < ($parent->quantity) &&  ($parent->alert_threshold_qty_upper_limit) > ($parent->quantity)) {
+                    $quantityColor = 'text-warning';
+                } else {
+                    if($parent->totalQuantity > $parent->alert_threshold_qty_upper_limit) {
+                        $quantityColor = 'text-success';
+                    } else {
+                        $quantityColor = 'text-warning';
+                    }
+                } 
+            }
+            $parent['quantityColor']      = $quantityColor;
+        } 
+        $collection     = Arr::flatten($material_product);
+        $items          = collect($collection);
+        $perPage = 5;
+        $page    = null;
+        $page    = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items   = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
+            'path'     => LengthAwarePaginator::resolveCurrentPath(),
+            'pageName' => "page",
+        ]);
+    } 
 }

@@ -38,7 +38,6 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.auth_role                        =   $('#auth-role').val(); 
     $scope.current_date                     =   moment(new Date()).format('YYYY-MM-DD')
     $scope.on_all_check_box                 =   false
-      
  
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given   =  moment(date_of_expiry, "YYYY-MM-DD");
@@ -55,6 +54,7 @@ app.controller('SearchAddController', function($scope, $http) {
             }
         }
     }
+    
     $scope.on_barcode_number = false
     $scope.select_all_check_box = () => {
         if($scope.on_all_check_box === true) {
@@ -165,49 +165,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
-            
-            $scope.material_products_data = $scope.material_products.data?.map((row, index) => {
-                var QtyCount = 0
-                var draftBatchCount = 0 
-
-                row.batches.map((batch, bIndex) => {
-                    if (batch.is_draft == 1 ) draftBatchCount += 1 
-
-                    if(batch.quantity  !== null) {
-                        batch.quantity = batch.quantity.replace('.00', '');
-                    }
-                    return  QtyCount += Number(batch.quantity)
-                }) 
-                 
-                return {...row , ...{ 
-                    totalQuantity : QtyCount,
-                    hideParentRow : row.batches.length == draftBatchCount ?  1 : 0
-                }} 
-            })
-
-            $scope.material_products.data = $scope.material_products_data?.map((row, index) => {
-                var qtyColor = 'text-danger'
-                if(row.totalQuantity < row.alert_threshold_qty_lower_limit) {
-                    qtyColor = 'text-danger'
-                } 
-                else {
-                    if(Number(row.alert_threshold_qty_lower_limit) < Number(row.quantity) &&  Number(row.alert_threshold_qty_upper_limit) > Number(row.quantity)) {
-                        qtyColor = 'text-warning'
-                    } else {
-                        if(row.totalQuantity > row.alert_threshold_qty_upper_limit) {
-                            qtyColor = 'text-success'
-                        } else {
-                            qtyColor = 'text-warning'
-                        }
-                    } 
-                }
-
-                return {...row , ...{ 
-                    quantityColor : qtyColor
-                }} 
-            });
-
-         
+            $scope.material_products_data = $scope.material_products.data;
             $(".custom-table").removeClass('d-none')
         }, function(response) {
             Message('danger', response.data.message);
@@ -297,8 +255,6 @@ app.controller('SearchAddController', function($scope, $http) {
 
     $scope.view_material_product = function (row) {
         $('#View_Material_Product_Details').modal('show');
-        
-        
         $scope.view_material_product_data  = [
             {name: "Category Selection", item:row.category_selection == 'in_house' ? 'In-house Product' : 'Material'},
             {name: 'Item description' , item : row.item_description},
@@ -314,15 +270,12 @@ app.controller('SearchAddController', function($scope, $http) {
     $scope.view_batch_details = function (row, batch) {
         $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
             $('#View_Batch_Details').modal('show');
-      
-            
             if(batch.coc_coa_mill_cert != null){
                 var coc_files =  []
                 JSON.parse(batch.coc_coa_mill_cert).map((file) => {
                     coc_files.push(file.replace('public/files/', 'public/storage/files/'))
                 })
             }
-             
             $scope.batchOverview = {
                 category_selection          : row.category_selection == 'in_house' ? 'In-house Product'                                                                      : 'Material',
                 item_description            : row.item_description,
@@ -390,13 +343,6 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
-            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
-                var QtyCount = 0
-                item.batches.map((batch, bIndex) => {
-                   return  QtyCount += Number(batch.quantity)
-                }) 
-                return {...item , ...{ totalQuantity : QtyCount}};
-            })
         }, function(response) {
             Message('danger', response.data.message);
         });  
@@ -420,13 +366,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
-            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
-                var QtyCount = 0
-                item.batches.map((batch, bIndex) => {
-                   return  QtyCount += Number(batch.quantity)
-                }) 
-                return {...item , ...{ totalQuantity : QtyCount}};
-            })
+           
         }, function(response) {
             Message('danger', response.data.message);
         });
@@ -450,14 +390,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
-            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
-                var QtyCount = 0
-                item.batches.map((batch, bIndex) => {
-                   return  QtyCount += Number(batch.quantity)
-                }) 
-                return {...item , ...{ totalQuantity : QtyCount}};
-            })
-
+         
             switch (pageName) {
                 case 'MATERIAL_WITHDRAWAL':
                         $scope.withdrawalStatus = true
@@ -556,13 +489,7 @@ app.controller('SearchAddController', function($scope, $http) {
             $scope.material_products    =   response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
-            $scope.material_products.data = $scope.material_products.data?.map((item, index) => {
-                var QtyCount = 0
-                item.batches.map((batch, bIndex) => {
-                   return  QtyCount += Number(batch.quantity)
-                }) 
-                return {...item , ...{ totalQuantity : QtyCount}};
-            })
+         
             $('#advance-search-ng-modal').modal('hide');
             if ($scope.view_my_saved_search_model  ==  true) {
                 $('#saved-search-ng-modal').modal('hide');
@@ -1010,16 +937,9 @@ app.controller('SearchAddController', function($scope, $http) {
             $('#RepackOutlife').modal('hide');
         })
     }
-
     $scope.duplicateThisBatch = (id) => {
         $http.get('duplicate-batch/' + id).then((res) => {
             window.location.replace(`material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
         })
-    }
-
-    // =========================   WITHDRAWAL MODULE   ====================
-
-        
-        
-    // =========================   END : WITHDRAWAL MODULE   ==============
+    } 
 });
