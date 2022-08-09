@@ -77,6 +77,10 @@ class LogActivity
                 $action_type  = 'REPACK_OUTLIFE';
                 $module_name  = 'Batches';
                 break;
+            case 'direct_deduct':
+                $action_type  = 'DIRECT_DEDUCT';
+                $module_name  = 'Batches';
+                break;
         }
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),

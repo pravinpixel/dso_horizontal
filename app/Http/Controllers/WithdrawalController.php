@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
@@ -19,6 +20,12 @@ class WithdrawalController extends Controller
             $created_batch->barcode_number  = generateBarcode(MaterialProducts::find($request->category_selection[$key]));
             $created_batch->remarks         = $request->remarks[$key]; 
             $created_batch->save();
+
+
+            $old_value           = $current_batch;
+            $new_value           = clone $current_batch;
+            $new_value->quantity = $new_value->quantity  - $request->quantity[$key];
+            LogActivity::dataLog($old_value, $new_value);
 
             $current_batch->update([
                 'quantity' =>   $current_batch->quantity -  $request->quantity[$key]
