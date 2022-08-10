@@ -29,6 +29,7 @@ class RepackOutlife extends Model
         'remaining_days_seconds',
         'updated_outlife',
         'updated_outlife_seconds',
-        'current_outlife_expiry'
+        'current_outlife_expiry',
+        'remarks',
     ];
 }

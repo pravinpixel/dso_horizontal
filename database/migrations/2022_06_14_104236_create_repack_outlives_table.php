@@ -35,6 +35,7 @@ class CreateRepackOutlivesTable extends Migration
             $table->string('updated_outlife')->nullable();
             $table->integer('updated_outlife_seconds')->nullable();
             $table->string('current_outlife_expiry')->nullable();
+            $table->longText('remarks')->nullable();
             $table->timestamps();
         });
     }

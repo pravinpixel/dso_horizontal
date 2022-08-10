@@ -161,7 +161,7 @@
                     </form>
                 </div>
                 <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'"> 
-                    <form action="" method="POST">
+                    <form action="{{ route('withdrawal.deduct-track-outlife') }}" method="POST">
                         @csrf 
                         <table class="table bg-white table-bordered table-centered text-center">
                             <thead>
@@ -193,8 +193,8 @@
                                     <td class="p-0">@{{ deductTrackOutlife[0].unit_packing_value }}</td>
                                     <td class="p-0">@{{ deductTrackOutlife[0].quantity }}</td>
                                     <td class="p-0 py-0 px-1">
-                                        <input type="text" name="id[]" value="@{{ row.id }}">
-                                        <textarea name="remarks[]" required class="form-control h-100 w-100"></textarea>
+                                        <input type="hidden" name="id[]" value="@{{ row.id }}">
+                                        <textarea name="remarks[]" required class="form-control h-100 w-100">@{{ row.remarks }}</textarea>
                                     </td>
                                     <td class="child-td">
                                         @{{ row.updated_outlife }}
@@ -203,11 +203,14 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="text-end ">
+                            <label for="print_outlife_expiry" class="p-2">
+                                <input type="checkbox" name="print_outlife_expiry" value="1" class="form-check-input me-2" id="print_outlife_expiry"> 
+                                Print outlife expiry
+                            </label>
+                            <button class="btn btn-info rounded-pill">Confirm Deduction</button> 
+                        </div>
                     </form>
-                    <div class="text-end ">
-                        <button class="btn btn-info rounded-pill">Confirm Deduction</button>
-                        <button class="btn btn-primary rounded-pill">Print outlife expiry</button>
-                    </div>
                 </div>
             </section>
         </div>

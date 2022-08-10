@@ -15,7 +15,7 @@ class LogActivity
                 break;
             case 'destroy':
                 $action_type  = 'DELETE';
-                $module_name  = 'Material Products';
+                $module_name  = 'MaterialProducts';
                 break;
             case 'duplicate_batch':
                 $action_type  = 'DUPLICATE';
@@ -23,25 +23,25 @@ class LogActivity
                 break;
             case 'save_search_history':
                 $action_type  = 'CREATE';
-                $module_name  = 'Search History';
+                $module_name  = 'SaveMySearch';
                 break;
             case 'delete_search_history':
                 $action_type  = 'DELETE';
-                $module_name  = 'Search History';
+                $module_name  = 'SaveMySearch';
                 break;
             case 'import_excel':
                 $action_type  = 'IMPORT';
-                $module_name  = 'Material Products';
+                $module_name  = 'MaterialProducts';
                 break;
             case 'storeWizardForm':
                 switch (request()->route()->getName()) {
                     case 'create.material-product':
                         $action_type  = 'CREATE';
-                        $module_name  = 'Material Products';
+                        $module_name  = 'MaterialProducts';
                         break;
                     case 'edit_or_duplicate.material-product':
                         $action_type  = 'UPDATE';
-                        $module_name  = 'Material Products';
+                        $module_name  = 'MaterialProducts';
                         break;
                 }
                 break;
@@ -80,6 +80,10 @@ class LogActivity
             case 'direct_deduct':
                 $action_type  = 'DIRECT_DEDUCT';
                 $module_name  = 'Batches';
+                break;
+            case 'deduct_track_outlife':
+                $action_type  = 'DEDUCT_TRACK_OUTLIFE';
+                $module_name  = 'RepackOutlife';
                 break;
         }
         LogSheet::updateOrCreate([

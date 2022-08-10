@@ -143,5 +143,5 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
     Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
+    Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('withdrawal.deduct-track-outlife');
 });
-

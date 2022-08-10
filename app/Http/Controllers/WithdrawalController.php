@@ -6,6 +6,7 @@ use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
+use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -54,5 +55,21 @@ class WithdrawalController extends Controller
         ]);
 
         return redirect()->back()->with("success", "Deduct Track Usage Success !");
+    }
+    public function deduct_track_outlife(Request $request)
+    {
+        foreach ($request->id as $key => $row) {
+            $repackOutlife = RepackOutlife::find($request->id[$key]);
+            $old_value     = clone $repackOutlife;
+            $new_value     = $repackOutlife;
+            $repackOutlife->update([
+                'remarks' => $request->remarks[$key],
+            ]);
+            LogActivity::dataLog($old_value, $new_value);
+        }
+        if($request->print_outlife_expiry == 1) {
+            return redirect(route('print-barcode', RepackOutlife::find($request->id[0])->batch_id));
+        }
+        return redirect()->back();
     }
 }
