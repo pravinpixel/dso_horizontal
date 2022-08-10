@@ -29,6 +29,12 @@ class CreateRepackOutlivesTable extends Migration
             $table->integer('repack_size')->nullable();
             $table->integer('qty_cut')->nullable();
             $table->string('remain_days')->nullable();
+            $table->string('last_date_time')->nullable();
+            $table->string('current_date_time')->nullable(); 
+            $table->integer('remaining_days_seconds')->nullable(); 
+            $table->string('updated_outlife')->nullable();
+            $table->integer('updated_outlife_seconds')->nullable();
+            $table->string('current_outlife_expiry')->nullable();
             $table->timestamps();
         });
     }

@@ -47,7 +47,8 @@
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
 
                     {{--  ==== REPACK OUTLIFE ====  --}}
-                        <button ng-disabled="batch.require_outlife_tracking ==  1 || batch.is_draft == 1" class="dropdown-item text-secondary" 
+                    {{-- ng-disabled="batch.require_outlife_tracking ==  1 || batch.is_draft == 1" --}}
+                        <button  class="dropdown-item text-secondary" 
                             ng-click="RepackTransfers('view',batch , row)">
                             <i class="bi bi-box-seam me-1"></i>
                             Repack/Transfer 
@@ -55,7 +56,7 @@
                     {{--  ==== REPACK OUTLIFE ====  --}}
 
                     {{--  ==== REPACK OUTLIFE ====  --}}
-                        <button ng-disabled="batch.require_outlife_tracking ==  1 || batch.is_draft == 1" class="dropdown-item text-secondary"  ng-click="RepackOutlife(batch, row.unit_of_measure)">
+                        <button class="dropdown-item text-secondary"  ng-click="RepackOutlife(batch, row.unit_of_measure)">
                             <i class="bi bi-box2-fill me-1"></i>Repack/outlife
                         </button> 
                     {{--  ==== REPACK OUTLIFE ====  --}}

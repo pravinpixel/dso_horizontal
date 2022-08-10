@@ -773,11 +773,13 @@ app.controller('SearchAddController', function ($scope, $http) {
                     },
                     last_access: JSON.parse(RepackData.access),
                     initial_amount: RepackData.quantity,
+                    initial_count: RepackData.outlife,
                     repack_amount: null,
                     balance_amount: null,
                     repack_size: null,
                     qty_cut: null,
                     remaining_days: null,
+                    remaining_days_seconds : null, 
                     barcode_number: RepackData.barcode_number
                 });
             }
@@ -799,11 +801,13 @@ app.controller('SearchAddController', function ($scope, $http) {
                             },
                             last_access: JSON.parse(RepackData.access),
                             initial_amount: element.quantity,
+                            initial_count: RepackData.outlife,
                             repack_amount: element.input_repack_amount,
                             balance_amount: element.remain_amount,
                             repack_size: element.repack_size,
                             qty_cut: element.qty_cut,
                             remaining_days: element.remain_days,
+                            remaining_days_seconds : element.remaining_days_seconds,
                             barcode_number: element.barcode_number
                         }
                     );
@@ -857,11 +861,13 @@ app.controller('SearchAddController', function ($scope, $http) {
                                     },
                                     last_access: JSON.parse(RepackData.access),
                                     initial_amount: element.quantity,
+                                    initial_count: RepackData.outlife,
                                     repack_amount: element.input_repack_amount,
                                     balance_amount: element.remain_amount,
                                     repack_size: element.repack_size,
                                     qty_cut: element.qty_cut,
                                     remaining_days: element.remain_days,
+                                    remaining_days_seconds : element.remaining_days_seconds,
                                     barcode_number: element.barcode_number
 
                                 }
@@ -880,11 +886,13 @@ app.controller('SearchAddController', function ($scope, $http) {
                             },
                             last_access: JSON.parse(RepackData.access),
                             initial_amount: RepackData.quantity,
+                            initial_count: RepackData.outlife,
                             repack_amount: null,
                             balance_amount: null,
                             repack_size: null,
                             qty_cut: null,
                             remaining_days: null,
+                            remaining_days_seconds : null,
                             barcode_number: element.barcode_number
                         });
                     }
@@ -911,11 +919,13 @@ app.controller('SearchAddController', function ($scope, $http) {
                             },
                             last_access: JSON.parse(RepackData.access),
                             initial_amount: RepackData.quantity,
+                            initial_count: RepackData.outlife,
                             repack_amount: null,
                             balance_amount: null,
                             repack_size: null,
                             qty_cut: null,
                             remaining_days: null,
+                            remaining_days_seconds : null,
                             barcode_number: element.element
                         });
                     }

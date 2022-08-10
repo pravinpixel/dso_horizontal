@@ -20,8 +20,9 @@ app.directive('repackTable', () => {
                     const seconds   =   duration._data.seconds != 0 ? duration._data.seconds + ' seconds' : ''
 
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
+                    scope.repack.remaining_days_seconds = diff
 
-                    scope.$apply();
+                    scope.$apply(); 
                 }
             })
             element.on('keyup', () => { 

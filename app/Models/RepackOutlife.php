@@ -24,5 +24,11 @@ class RepackOutlife extends Model
         'repack_size',
         'qty_cut',
         'remain_days',
+        'last_date_time',
+        'current _date_time',
+        'remaining_days_seconds',
+        'updated_outlife',
+        'updated_outlife_seconds',
+        'current_outlife_expiry'
     ];
 }

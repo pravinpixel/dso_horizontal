@@ -91,7 +91,7 @@
                         <table class="table bg-white table-bordered table-hover table-centered">
                             <thead>
                                 <tr class="bg-primary text-white">
-                                    <th class="bg-dark text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                                    <th class="bg-dark text-center text-white" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
                                 </tr>
                                 <tr>
                                     <th class="table-th child-td-lg"> Item Description</th>                    
@@ -160,42 +160,50 @@
                         </div>
                     </form>
                 </div>
-                <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'">
-                    <table class="table bg-white table-bordered">
-                        <thead>
-                            <tr class="bg text-white">
-                                <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="11"><span class="text-center">Withdrawal Cart</span></th>
-                            </tr>
-                            <tr>
-                                <th class="table-th child-td">Item description</th>
-                                <th class="table-th child-td">Brand</th>
-                                <th class="table-th child-td">Batch#/ Serial#</th>
-                                <th class="table-th child-td">Last accessed</th>
-                                <th class="table-th child-td">Date & time stamp</th>
-                                <th class="table-th child-td">Unique Barcode Label</th>
-                                <th class="table-th child-td">Pkt size</th>
-                                <th class="table-th child-td">Qty</th>
-                                <th class="table-th child-td">Remarks</th>
-                                <th class="table-th child-td">Outlife expiry from last date/time</th>
-                                <th class="table-th child-td">Outlife expiry from current date/time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="child-td">Prepreg C3K</td>
-                                <td class="child-td">Brand 1</td>
-                                <td class="child-td">Roll2/1</td>
-                                <td class="child-td">4</td>
-                                <td class="child-td">22-12-2022 1:05</td>
-                                <td class="child-td">369854</td>
-                                <td class="child-td">10</td>
-                                <td class="child-td">2</td>
-                                <td class="child-td"><input type="text"  name="" class="form-control  p-0 form-control-sm text-center"></td>
-                                <td class="child-td">25 days 16 hour</td>
-                                <td class="child-td">22-12-2022 1:05</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'"> 
+                    <form action="" method="POST">
+                        @csrf 
+                        <table class="table bg-white table-bordered table-centered text-center">
+                            <thead>
+                                <tr class="bg text-white">
+                                    <th class="bg-dark text-center text-white" style="padding: 5px !important;" colspan="11"><span class="text-center">Withdrawal Cart</span></th>
+                                </tr>
+                                <tr class="bg-primary text-white">
+                                    <th class="table-th child-td">Item description</th>
+                                    <th class="table-th child-td">Brand</th>
+                                    <th class="table-th child-td">Batch#/ Serial#</th>
+                                    <th class="table-th child-td">Last accessed</th>
+                                    <th class="table-th child-td">Date & time stamp</th>
+                                    <th class="table-th child-td">Unique Barcode Label</th>
+                                    <th class="table-th child-td">Pkt size</th>
+                                    <th class="table-th child-td">Qty</th>
+                                    <th class="table-th child-td">Remarks</th>
+                                    <th class="table-th child-td">Outlife expiry from last date/time</th>
+                                    <th class="table-th child-td">Outlife expiry from current date/time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in deductTrackOutlife[0].repack_outlife | orderBy:'$index':true">
+                                    <td class="p-0">@{{ deductTrackOutlife[0].item_description }}</td>
+                                    <td class="p-0">@{{ deductTrackOutlife[0].brand }}</td>
+                                    <td class="p-0">@{{ deductTrackOutlife[0].batch }} / @{{ deductTrackOutlife[0].serial }}</td>
+                                    <td class="p-0"> {{ auth_user()->alias_name }} </td>
+                                    <td class="p-0">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                                    <td class="p-0">@{{ deductTrackOutlife[0].barcode_number }}</td>
+                                    <td class="p-0">@{{ deductTrackOutlife[0].unit_packing_value }}</td>
+                                    <td class="p-0">@{{ deductTrackOutlife[0].quantity }}</td>
+                                    <td class="p-0 py-0 px-1">
+                                        <input type="text" name="id[]" value="@{{ row.id }}">
+                                        <textarea name="remarks[]" required class="form-control h-100 w-100"></textarea>
+                                    </td>
+                                    <td class="child-td">
+                                        @{{ row.updated_outlife }}
+                                    </td>
+                                    <td class="child-td">@{{ row.current_outlife_expiry }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                     <div class="text-end ">
                         <button class="btn btn-info rounded-pill">Confirm Deduction</button>
                         <button class="btn btn-primary rounded-pill">Print outlife expiry</button>

@@ -28,12 +28,12 @@ class SearchRepository implements SearchRepositoryInterface
                 'UnitOfMeasure',
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
-                'Batches.DeductTrackUsage'
+                'Batches.DeductTrackUsage',
             ])
-                ->WhereHas('Batches', function ($q) use ($parent_id) {
-                    $q->where('material_product_id', $parent_id);
-                })
-                ->get();
+            ->WhereHas('Batches', function ($q) use ($parent_id) {
+                $q->where('material_product_id', $parent_id);
+            })
+            ->get();
             return $this->dsoRepository->renderTableData($material_product_data);
         } catch (\Throwable $th) {
             log::info($th->getMessage());

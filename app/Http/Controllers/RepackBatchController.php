@@ -10,6 +10,8 @@ use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use DateTime;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -76,6 +78,7 @@ class RepackBatchController extends Controller
                 "message"   => "Success !"
             ]);
         }
+ 
 
         RepackOutlife::create([
             'batch_id'              => $id, 
@@ -102,15 +105,13 @@ class RepackBatchController extends Controller
     {
         $repack_data    =   $request->all(); 
         $newestRepack   =   RepackOutlife::where("batch_id", $id)->get()->last();
-         
         foreach($repack_data as $key => $repack)  {
             if($repack['draw_out']['time_stamp'] == null) {
                 $repack_data[$key]['draw_in']['status']  = false;
                 $repack_data[$key]['draw_out']['status'] = true;
             } else {
-                $repack_data[$key]['draw_out']['status'] = false; 
+                $repack_data[$key]['draw_out']['status'] = false;
             }
-
             if(!empty($newestRepack)) {
                 if($newestRepack->draw_in == 0 && $newestRepack->draw_out == 0) {
                     $stop_next_draw_in = false;
@@ -120,22 +121,45 @@ class RepackBatchController extends Controller
             } else {
                 $stop_next_draw_in = false;
             }
-            
-            Batches::find($id)->update(['quantity' => $repack['balance_amount']]);
+            $Batches    =   Batches::find($id); 
+            if($repack['remaining_days_seconds'] !== null) {
+                // ONE DAY to SECONDS = 86400
+                $repackData = RepackOutlife::find($repack['id']);
+                if($repackData->updated_outlife_seconds === null) {
+                    $outlife          = (int) $Batches->outlife * 86400;
+                    $outlife_deducted = $outlife - (int) substr_replace($repack['remaining_days_seconds'] ,"", -3);
+                } else {
+                    $outlife          = $repackData->updated_outlife_seconds;
+                    $outlife_deducted = $outlife - (int) $repack['remaining_days_seconds'];
+                }
+                $dt1               = new DateTime("@0");
+                $dt2               = new DateTime("@$outlife_deducted");
+                $converted_outlife = $dt1->diff($dt2)->format('%a days, %h hours, %i minutes and %s seconds'); 
+
+                $current_outlife_expiry = CarbonImmutable::now()->add($outlife_deducted, 'second')->toDateTimeString();
+                // dd($current_outlife_expiry);
+            }
+            $Batches->update([
+                'quantity' => $repack['balance_amount']
+            ]);
             RepackOutlife::updateOrCreate(["id" => $repack['id']],[
-                'batch_id'              => $id, 
-                'quantity'              => $repack['balance_amount'] ,
-                'draw_in'               => $repack_data[$key]['draw_in']['status'], 
-                'draw_out'              => $repack_data[$key]['draw_out']['status'], 
-                'draw_in_time_stamp'    => $repack_data[$key]['draw_in']['time_stamp'],
-                'draw_out_time_stamp'   => $repack_data[$key]['draw_out']['time_stamp'],
-                'draw_in_last_access'   => $repack['last_access'],
-                'draw_out_last_access'  => $repack['last_access'],
-                'input_repack_amount'   => $repack['repack_amount'],
-                'remain_amount'         => $repack['balance_amount'],
-                'repack_size'           => $repack['repack_size'],
-                'qty_cut'               => $repack['qty_cut'],
-                'remain_days'           => $repack['remaining_days'] ?? null,
+                'batch_id'                => $id,
+                'quantity'                => $repack['balance_amount'],
+                'draw_in'                 => $repack_data[$key]['draw_in']['status'],
+                'draw_out'                => $repack_data[$key]['draw_out']['status'],
+                'draw_in_time_stamp'      => $repack_data[$key]['draw_in']['time_stamp'],
+                'draw_out_time_stamp'     => $repack_data[$key]['draw_out']['time_stamp'],
+                'draw_in_last_access'     => $repack['last_access'],
+                'draw_out_last_access'    => $repack['last_access'],
+                'input_repack_amount'     => $repack['repack_amount'],
+                'remain_amount'           => $repack['balance_amount'],
+                'repack_size'             => $repack['repack_size'],
+                'qty_cut'                 => $repack['qty_cut'],
+                'remain_days'             => $repack['remaining_days'] ?? null,
+                'remaining_days_seconds'  => $repack['remaining_days_seconds'] ?? null,
+                'updated_outlife_seconds' => $outlife_deducted ?? null,
+                'updated_outlife'         => $converted_outlife ?? "",
+                'current_outlife_expiry'  =>  $current_outlife_expiry ?? null
             ]);
         }  
         return response()->json([
