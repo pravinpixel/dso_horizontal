@@ -131,13 +131,13 @@
                                     <td class="child-td">  {{ auth_user()->alias_name }} </td>
                                     <td class="child-td">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
                                     <td class="child-td">
-                                        <input name="used_value" type="number" required ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
+                                        <input ng-disabled="row.material.end_of_material_product == 1" name="used_value" type="number" required ng-model="used_value" ng-max="row.material.unit_packing_value" max="@{{ row.material.unit_packing_value }}" class="form-control w-50 text-center mx-auto p-0">
                                     </td>
                                     <td class="child-td">
                                         @{{ row.unit_packing_value - used_value }}
                                     </td>
                                     <td class="child-td py-0 px-1">
-                                        <textarea name="remarks" required class="form-control h-100 w-100"></textarea>
+                                        <textarea ng-disabled="row.material.end_of_material_product == 1" name="remarks" required class="form-control h-100 w-100"></textarea>
                                     </td>
                                     <td class="child-td">
                                         <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
@@ -146,16 +146,17 @@
                             </tbody>
                         </table>
                         <div class="d-flex align-items-center border-top pt-3"> 
+                           
                             <div class="col-6 ms-auto text-end"> 
-                                <label for="end_of_material_products" class="p-2">
-                                    <input type="checkbox" name="end_of_material_products" value="1" class="form-check-input me-2" id="end_of_material_products"> 
+                                <label for="end_of_material_product" class="p-2">
+                                    <input type="checkbox" ng-checked="deductTrackUsage[0].material.end_of_material_product == 1" name="end_of_material_product" value="1" class="form-check-input me-2" id="end_of_material_product"> 
                                     End of material/product
                                 </label>
-                                <label for="export_logsheet" class="p-2">
+                                {{-- <label for="export_logsheet" class="p-2">
                                     <input type="checkbox" name="export_logsheet" value="1" class="form-check-input me-2" id="export_logsheet"> 
                                     Export Logsheet
-                                </label>
-                                <button class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
+                                </label> --}}
+                                <button type="submit" ng-disabled="deductTrackUsage[0].material.end_of_material_product == 1" class="btn btn-primary h-100 rounded-pill">Click to Confirm deduction</button>
                             </div>
                         </div>
                     </form>

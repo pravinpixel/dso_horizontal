@@ -37,22 +37,31 @@ class WithdrawalController extends Controller
     }
     public function deduct_track_usage(Request $request)
     {
-        $batch = Batches::findOrFail($request->id);
-        $material = MaterialProducts::find($batch->material_product_id);
-       
-        DeductTrackUsage::create([
-            'batch_id'         => $request->id,
-            'item_description' => $material->item_description,
-            'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
-            'last_accessed'    => auth_user()->alias_name,
-            'used_amount'      => $request->used_value,
-            'remain_amount'    => $batch->unit_packing_value - $request->used_value,
-            'remarks'          => $request->remarks
-        ]);
+        // dd($request->all());
+        $batch      = Batches::findOrFail($request->id);
+        $material   = MaterialProducts::find($batch->material_product_id);
+         
+        if($request->used_value && $request->remarks) {
+            DeductTrackUsage::create([
+                'batch_id'         => $request->id,
+                'item_description' => $material->item_description,
+                'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
+                'last_accessed'    => auth_user()->alias_name,
+                'used_amount'      => $request->used_value,
+                'remain_amount'    => $batch->unit_packing_value - $request->used_value,
+                'remarks'          => $request->remarks
+            ]);
 
-        $batch->update([
-            "unit_packing_value" => $batch->unit_packing_value - $request->used_value
+            $batch->update([
+                "unit_packing_value" => $batch->unit_packing_value - $request->used_value
+            ]);
+        }
+        
+
+        $material->update([
+            "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
         ]);
+ 
 
         return redirect()->back()->with("success", "Deduct Track Usage Success !");
     }

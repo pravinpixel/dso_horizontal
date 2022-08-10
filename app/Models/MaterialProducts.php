@@ -26,6 +26,7 @@ class MaterialProducts extends Model
         'alert_threshold_qty_upper_limit',
         'alert_threshold_qty_lower_limit',
         'alert_before_expiry',
+        'end_of_material_product'
     ];
 
     public function Batches()
