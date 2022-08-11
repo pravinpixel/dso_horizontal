@@ -32,8 +32,8 @@
     <script>
         function clearEntryData ()  {
             swal({
-                title:'Cancel Entry ?',
-                text: "Changes you made may not be saved.",
+                title:'Are you sure ?',
+                text: "want to cancel this entry.",
                 icon: "info",
                 closeOnClickOutside: false,
                 buttons: {
@@ -45,30 +45,20 @@
                         value: "No cancel it",
                     },
                     save: {
-                        text: "Yes , Leave",
+                        text: "Yes , cancel",
                         value: "save",
                         visible: true,
-                        className: "btn btn-success rounded-pill",
+                        className: "btn btn-primary rounded-pill",
                         closeModal: true,
                     },
                 },
             }).then((value) => { 
                 switch (value) {
-                    case "cancel":
+                    case "cancel": 
                         swal("cancel");
-                            break; 
-                            case "save":
-                            $.ajax({
-                                type    :   'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                url     :   "{{ route('delete-material-products-batch', request()->route()->batch_id) }}",
-                                success:function(response){
-                                    window.location.replace('{{ route("list-material-products") }}');
-                                }
-                            });
+                        break; 
+                    case "save": 
+                        window.location.replace('{{ route("list-material-products") }}');
                     break; 
                 }
             });
