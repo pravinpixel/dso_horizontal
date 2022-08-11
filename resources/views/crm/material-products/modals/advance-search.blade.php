@@ -101,7 +101,11 @@
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">FM 1202</small>
-                            <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.fm_1202" name="fm_1202">
+                            <select class="form-select" ng-model="advanced_filter.fm_1202">
+                                <option value="">-- select --</option>
+                                <option value="on">Yes</option>
+                                <option value="no">No</option> 
+                            </select>
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Project name </small>
