@@ -400,14 +400,17 @@ app.controller('SearchAddController', function ($scope, $http) {
                     if ($scope.deductTrackOutlife === undefined) {
                         $scope.deductTrackOutlife = []
                     }
+                    
                     $scope.material_products.data.map((material) => {
                         material.batches.map((batch) => {
                             if (batch.barcode_number == $scope.barcode_number) {
                                 switch (batch.withdrawal_type) {
                                     case 'DIRECT_DEDUCT':
-                                        var pushStatus = true
+                                        var pushStatus               = true 
+                                        batch.direct_detect_quantity = 1
                                         $scope.directDeduct.length !== 0 && $scope.directDeduct.map((batch) => {
-                                            if(batch.barcode_number == $scope.barcode_number ) {
+                                            if(batch.barcode_number == $scope.barcode_number ) { 
+                                                batch.direct_detect_quantity += 1  
                                                 pushStatus = false
                                             }
                                         });
