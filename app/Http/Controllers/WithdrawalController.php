@@ -19,8 +19,8 @@ class WithdrawalController extends Controller
             $new_value     = $current_batch; 
 
             $current_batch->update([
-                'quantity' =>   $current_batch->quantity -  $request->quantity[$key],
-                'remarks' =>  $request->remarks[$key]
+                'quantity'  =>  $current_batch->quantity -  $request->quantity[$key],
+                'remarks'   =>  $request->remarks[$key] ?? ""
             ]);
 
             LogActivity::dataLog($old_value, $new_value);
