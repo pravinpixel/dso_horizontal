@@ -142,7 +142,7 @@
                                         <textarea ng-disabled="row.material.end_of_material_product == 1" name="remarks" required class="form-control h-100 w-100"></textarea>
                                     </td>
                                     <td class="child-td">
-                                        <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                        <i ng-click="removeDeductTrackUsageRow(i)" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                                     </td>
                                 </tr>
                             </tbody>

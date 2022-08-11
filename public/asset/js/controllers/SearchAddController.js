@@ -445,6 +445,9 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.removeDirectDetectRow = (index) => {
         $scope.directDeduct.splice(index, 1)
     }
+    $scope.removeDeductTrackUsageRow = (index) => {
+        $scope.deductTrackUsage.splice(index, 1)
+    }
 
 
     $scope.clear_advanced_filter = () => {
