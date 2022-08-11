@@ -81,10 +81,10 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Housing #</label>
                             <select name="advanced_filter.housing" class="form-select form-select-sm" ng-model="advanced_filter.housing">
-                                <option value=""> -</option>
                                 @for ($key=0;$key<20;$key++)
                                     <option value="{{ $key+1 }}">{{ $key+1 }}</option>
                                 @endfor
+                                <option value="nill"> Nill </option>
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
