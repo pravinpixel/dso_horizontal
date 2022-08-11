@@ -72,8 +72,10 @@
                                     <td>@{{ row.brand }}</td>
                                     <td>@{{ row.batch }} / @{{ row.serial }}</td>
                                     <td>@{{ row.unit_packing_value }}</td>
-                                    <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center"  required></td>
-                                    <td><input name="remarks[]" type="text" class="form-control w-auto p-0 form-control-sm text-center" required></td>
+                                    <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center" readonly value="1" required></td>
+                                    <td class="child-td py-0 px-1">
+                                        <textarea name="remarks[]" required class="form-control h-100 w-100">@{{ row.remarks }}</textarea>
+                                    </td>
                                     <td>
                                         <i ng-click="removeDirectDetectRow(index)" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                                     </td>

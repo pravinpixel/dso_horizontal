@@ -405,7 +405,15 @@ app.controller('SearchAddController', function ($scope, $http) {
                             if (batch.barcode_number == $scope.barcode_number) {
                                 switch (batch.withdrawal_type) {
                                     case 'DIRECT_DEDUCT':
-                                        $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
+                                        var pushStatus = true
+                                        $scope.directDeduct.length !== 0 && $scope.directDeduct.map((batch) => {
+                                            if(batch.barcode_number == $scope.barcode_number ) {
+                                                pushStatus = false
+                                            }
+                                        });
+                                        if(pushStatus === true) {
+                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
+                                        }
                                         break;
                                     case 'DEDUCT_TRACK_USAGE':
                                         $scope.deductTrackUsage = [];

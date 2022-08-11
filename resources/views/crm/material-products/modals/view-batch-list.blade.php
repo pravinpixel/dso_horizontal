@@ -90,7 +90,7 @@
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" >
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">Housing type and #</div>
-                           @{{ batchOverview.housing_type }}
+                           @{{ batchOverview.housing }}
                         </div>
                     </li>
                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" >

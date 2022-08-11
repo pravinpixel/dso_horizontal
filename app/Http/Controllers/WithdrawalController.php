@@ -7,37 +7,28 @@ use App\Models\Batches;
 use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WithdrawalController extends Controller
 {
     public function direct_deduct(Request $request)
-    {
+    { 
         foreach ($request->id as $key => $column) {
-            $current_batch                  = Batches::find($request->id[$key]);
-            $created_batch                  = $current_batch->replicate();
-            $created_batch->created_at      = Carbon::now();
-            $created_batch->quantity        = $request->quantity[$key];
-            $created_batch->barcode_number  = generateBarcode(MaterialProducts::find($request->category_selection[$key]));
-            $created_batch->remarks         = $request->remarks[$key];
-            $created_batch->save();
-
-
-            $old_value           = $current_batch;
-            $new_value           = clone $current_batch;
-            $new_value->quantity = $new_value->quantity  - $request->quantity[$key];
-            LogActivity::dataLog($old_value, $new_value);
+            $current_batch = Batches::find($request->id[$key]);
+            $old_value     = clone $current_batch;
+            $new_value     = $current_batch; 
 
             $current_batch->update([
-                'quantity' =>   $current_batch->quantity -  $request->quantity[$key]
+                'quantity' =>   $current_batch->quantity -  $request->quantity[$key],
+                'remarks' =>  $request->remarks[$key]
             ]);
+
+            LogActivity::dataLog($old_value, $new_value);
         }
         return redirect()->back()->with("success", "Direct Deduct Success !");
     }
     public function deduct_track_usage(Request $request)
     {
-        // dd($request->all());
         $batch      = Batches::findOrFail($request->id);
         $material   = MaterialProducts::find($batch->material_product_id);
          
@@ -56,13 +47,9 @@ class WithdrawalController extends Controller
                 "unit_packing_value" => $batch->unit_packing_value - $request->used_value
             ]);
         }
-        
-
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
         ]);
- 
-
         return redirect()->back()->with("success", "Deduct Track Usage Success !");
     }
     public function deduct_track_outlife(Request $request)
