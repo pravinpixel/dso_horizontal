@@ -82,7 +82,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="text-end ">
+                        <div class="text-end">
                             <button class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
                         </div>
                     </form>
