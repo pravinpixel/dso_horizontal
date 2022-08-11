@@ -1,5 +1,5 @@
 <div class="table-responsive shadow-lg bg-white position-relative">
-    <div class="loader"></div>
+    <div class="loader"></div> 
     <div class="custom-table" style=" min-height: {{ $page_name != 'MATERIAL_WITHDRAWAL' ? '460px' : 'auto'}} !important;" >
         <div class="custom-table-head">
             {{-- ======= Table Header  ====== --}}
@@ -30,7 +30,8 @@
                                 @break
                                 
                                 @default
-                                <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                {{-- ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'" --}}
+                                <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="barcode_number == batch.barcode_number ? 'selected-batch' : ''" >
                                     {!! $batch_table_td_columns !!} 
                                 </div>
                             @endswitch

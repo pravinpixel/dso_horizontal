@@ -1,4 +1,4 @@
-<div class="box box-lg" ng-show="on_item_description"></div>   
+<div class="box box-lg" ng-show="on_item_description"> </div>   
  
 @foreach ($tableAllColumns as $column) 
     

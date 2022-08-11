@@ -57,7 +57,7 @@ class MaterialProductSeeder extends Seeder
             "date_of_manufacture"          => "2022-07-06",
             "date_of_shipment"             => "2002-12-20",
             "cost_per_unit"                => "465",
-            "remarks"                      => "Kimberly Snider",
+            "remarks"                      => "",
             "used_for_td_expt_only"        => "1",
             "barcode_number"               => '114220115600'
         ];
@@ -120,7 +120,7 @@ class MaterialProductSeeder extends Seeder
             "date_of_manufacture"          => "2022-05-06",
             "date_of_shipment"             => "2002-12-20",
             "cost_per_unit"                => "465",
-            "remarks"                      => "Kimberly Snider",
+            "remarks"                      => "",
             "used_for_td_expt_only"        => "1",
             "barcode_number"               => '214820155609'
         ];
@@ -183,7 +183,7 @@ class MaterialProductSeeder extends Seeder
             "date_of_manufacture"          => "2022-05-06",
             "date_of_shipment"             => "2002-12-20",
             "cost_per_unit"                => "465",
-            "remarks"                      => "Kimberly Snider",
+            "remarks"                      => "",
             "used_for_td_expt_only"        => "1",
             "barcode_number"               => '214820155601'
         ];

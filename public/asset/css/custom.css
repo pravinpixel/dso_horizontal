@@ -444,6 +444,10 @@ a {
     background-color: #E6F1F9 !important;
     color: #4087F8 !important;
 }
+.selected-batch .box {
+    background-color: #E6F1F9 !important;
+    color: #4087F8 !important;
+}
 .custom-table-head:hover .box {
     background-color: #163269 !important;
     color: white !important;
