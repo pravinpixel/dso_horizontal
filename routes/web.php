@@ -1,16 +1,13 @@
 <?php
 include('auth.php');
-include('master.php');
-
-use App\Helpers\LogActivity;
+include('master.php'); 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\TransferBatchController;
-use App\Http\Controllers\WithdrawalController;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use App\Http\Controllers\WithdrawalController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -47,11 +44,7 @@ Route::middleware(['auth_users'])->group(function () {
     
     Route::get('/extend-expiry', function () {   
         return view('crm.extend-expiry.index');  
-    })->name('extend-expiry');
-    
-    Route::get('/threshold-qty', function () {   
-        return view('crm.notification.threshold-qty');  
-    })->name('threshold-qty');
+    })->name('extend-expiry'); 
     
     Route::get('/near-expiry-expired', function () {   
         return view('crm.notification.near-expiry-expired');  
@@ -144,4 +137,8 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
     Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
     Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('withdrawal.deduct-track-outlife');
+
+    Route::get('/threshold-qty', function () {   
+        return view('crm.notification.threshold-qty');  
+    })->name('threshold-qty');
 });

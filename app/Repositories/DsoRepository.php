@@ -84,18 +84,19 @@ class DsoRepository implements DsoRepositoryInterface
             $QtyCount            = 0;
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
-
             
             foreach ($parent->Batches as  $batch) {
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ;
+                } else {
+                    $QtyCount         += $batch->quantity;
+                    $UnitPackingCount += $batch->unit_packing_value;
                 }
                 if($batch->quantity  !== null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
                 }
-                $QtyCount         += $batch->quantity;
-                $UnitPackingCount += $batch->unit_packing_value;
             }
+            
             $parent['totalQuantity']      = $QtyCount;
             $parent['totalUnitPackValue'] = $UnitPackingCount;
             $parent['hideParentRow']      = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
@@ -115,12 +116,12 @@ class DsoRepository implements DsoRepositoryInterface
             }
             $parent['quantityColor']      = $quantityColor;
         } 
-        $collection     = Arr::flatten($material_product);
-        $items          = collect($collection);
-        $perPage = 5;
-        $page    = null;
-        $page    = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items   = $items instanceof Collection ? $items : Collection::make($items);
+        $collection = Arr::flatten($material_product);
+        $items      = collect($collection);
+        $perPage    = 5;
+        $page       = null;
+        $page       = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items      = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
             'path'     => LengthAwarePaginator::resolveCurrentPath(),
             'pageName' => "page",
