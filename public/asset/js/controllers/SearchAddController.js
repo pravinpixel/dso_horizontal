@@ -374,6 +374,11 @@ app.controller('SearchAddController', function ($scope, $http) {
                 filters: $scope.barcode_number
             }
         }).then(function (response) {
+            if(response.data.data === null) {
+                var barCodeInput = document.querySelector("#barcode_number")
+                barCodeInput.value = ''
+                return false
+            }
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
@@ -417,6 +422,8 @@ app.controller('SearchAddController', function ($scope, $http) {
                                         if(pushStatus === true) {
                                             $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
                                         }
+                                            var barCodeInput = document.querySelector("#barcode_number")
+                                            barCodeInput.value = ''
                                         break;
                                     case 'DEDUCT_TRACK_USAGE':
                                         $scope.deductTrackUsage = [];

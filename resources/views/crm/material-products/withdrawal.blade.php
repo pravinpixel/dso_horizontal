@@ -5,7 +5,7 @@
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" min="1"  ng-model="barcode_number" min="1" ng-change="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                    <input type="number" min="1" id="barcode_number" ng-model="barcode_number" min="1" ng-change="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                     <i ng-click="resetBarCode()" class="bi bi-x-circle-fill font-20 text-danger position-absolute right-0 me-2" style="cursor: pointer;z-index:111"></i>
                 </div>
             </div> 
@@ -115,7 +115,7 @@
                                     </td>
                                     <td>@{{ batch.batch_serial }}</td>
                                     <td class="child-td">@{{ batch.last_accessed }}</td>
-                                    <td class="child-td">@{{ batch.created_at }}</td>
+                                    <td class="child-td">@{{ batch.created_at  | date:'yyyy-MM-dd HH:mm:ss' }}</td>
                                     <td class="child-td">@{{ batch.used_amount }}</td>
                                     <td class="child-td">@{{ batch.remain_amount }}</td>
                                     <td class="child-td">@{{ batch.remarks }}</td>
