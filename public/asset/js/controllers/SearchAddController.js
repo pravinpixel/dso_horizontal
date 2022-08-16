@@ -29,7 +29,7 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given = moment(date_of_expiry, "YYYY-MM-DD");
         var day = moment.duration(given.diff(current_date)).asDays();
-
+        console.log(day)
         if (current_date >= date_of_expiry) {
             return 'text-danger'
         } else {

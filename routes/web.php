@@ -45,11 +45,7 @@ Route::middleware(['auth_users'])->group(function () {
     
     Route::get('/extend-expiry', function () {   
         return view('crm.extend-expiry.index');  
-    })->name('extend-expiry'); 
-    
-    Route::get('/near-expiry-expired', function () {   
-        return view('crm.notification.near-expiry-expired');  
-    })->name('near-expiry-expired');
+    })->name('extend-expiry');  
 
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
@@ -142,4 +138,5 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
     Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
+    Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired'])->name('near-expiry-expired'); 
 });

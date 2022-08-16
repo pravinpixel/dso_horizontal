@@ -7,6 +7,7 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
+use Carbon\Carbon;
 use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -48,5 +49,29 @@ class NotificationController extends Controller
             'data'   => $data,
             'count'  => count($data),
         ]);
+    }
+    public function near_expiry_expired()
+    {
+        $data        = Batches::latest()->get();
+        $near_expiry = [];
+        $expired     = [];
+        $failed_iqc  = [];
+
+        foreach ($data as $key => $row) {
+            $now            = Carbon::now();
+            $date_of_expiry = Carbon::parse($row->date_of_expiry);
+            if ($now >= $date_of_expiry) {
+                $expired[] = $row;
+            } else {
+                $near_expiry[] = $row;
+            }
+            if($row->iqc_status == 1) {
+                $failed_iqc[] = $row;
+            }
+        }
+        // dd($near_expiry);
+        // dd($expired);
+        // dd($failed_iqc);
+        return view('crm.notification.near-expiry-expired');
     }
 }
