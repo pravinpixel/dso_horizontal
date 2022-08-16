@@ -1,81 +1,88 @@
 @extends('layouts.app')
-@section('content')
-    <div>
-	 
-        <table class="table table-bordered table-hover bg-white">
-            <thead>
-                <tr>
-                    <th class="table-th child-td-lg"> Item Description</th>
-                    <th class="table-th child-td">Brand</th>
-                    <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt Size</th>
-                    <th class="table-th child-td">Qty</th>
-                    <th class="table-th child-td-lg">Owner1/2</th>
-                    <th class="table-th child-td">storage area</th>
-                    <th class="table-th child-td">Housing type</th>
-                    <th class="table-th child-td">Threshold limit</th>
-                    <th class="table-th child-td">DOE</th>
-                    <th class="table-th child-td">Read Status</th>
-					 <th class="table-th child-td">Actions</th>
-                </tr> 
-            </thead>
-			
-            <tr class="table-tr">
-                <td colspan="12" class="p-0 border-bottom">
-                    <table class="table m-0">
-                        <tr>
-                            <td class="child-td-lg"><i class="bi bi-caret-right-fill collapsed table-toggle-icon" data-bs-toggle="collapse" href="#row1" role="button" aria-expanded="false" aria-controls="row1"></i> Acetone IND</td>
-                            <td class="child-td">XOX</td>
-                            <td class="child-td">- Batch1/001</td>
-                            <td class="child-td"> 5</td>
-                            <td class="child-td-lg"></td>
-                            <td class="child-td"></td>
-                            <td class="child-td"></td>
-                            <td class="child-td text-center">10</td>
-                            <td class="child-td"></td>
-                            <td class="child-td"></td>
-                            <td class="child-td">/-</td>
-							<td class="child-td">
-                                <div class="dropdown">
-                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </a> 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View batch details
-                                        </a>                                        
-                                    </div>
-                                </div>
-                            </td> 
-                        </tr> 
-                        <tr class="collapse show" id="row1">
-                            <td colspan="12" class="p-0">
-                                <table class="table bg-white m-0">
-                                    @for ($i=0;$i<6;$i++)
-                                        <tr>
-                                            <td class="child-td-lg"></td>
-                                            <td class="child-td"></td>
-                                            <td class="child-td">Batch1/-</td>
-                                            <td class="child-td">{{ $i+1 }}</td>
-                                            <td class="child-td">8</td>
-                                            <td class="child-td-lg">Keith/HuiBeng</td>
-                                            <td class="child-td">CW</td>
-                                            <td class="child-td">FC1</td>
-                                            <td class="child-td"></td>
-                                            <td class="child-td">10/02/2020</td>                                           
-                                            <td class="child-td-lg">To replenish</td>
-                                            <td class="child-td">
-                                                <input type="checkbox" id="switch0_{{ $i+1 }}" data-switch="none"/>
-                                                <label for="switch0_{{ $i+1 }}" data-on-label="" data-off-label=""></label>
-                                            </td>
-                                        </tr> 
-                                    @endfor
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-           
-        </table> 
-    </div>         
-@endsection 
+@section('content') 
+    <div ng-app="SearchAddApp" ng-controller="SearchAddController">
+        <div class="d-flex align-items-center mb-3">
+            <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
+                <div class="input-group align-items-center" title="Scan Barcode">
+                    <i class="bi bi-upc-scan font-20 mx-2"></i>
+                    <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                </div>
+            </div>
+            @if ($page_name !== 'THRESHOLD_QTY')
+                <div class="col-6 d-flex justify-content-end ms-auto text-end">
+                    <button data-bs-toggle="modal" data-bs-target="#ImportFromExcel" class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
+                    <a href="{{ route('create.material-product',['type'=>'form-one']) }}" class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</a>
+                </div>
+            @endif 
+        </div>
+
+        {{-- = ==== Filletrs ====--}}
+            @include('crm.partials.table-filter')
+        {{-- ====== Filletrs ===--}}
+         
+        <section>
+            @include('crm.partials.data-table')
+        </section>
+
+        {{-- ======= START : App Models ==== --}}
+            @include('crm.material-products.modals.view-batch-list')
+            @include('crm.material-products.modals.view-list')
+            @include('crm.material-products.modals.advance-search')
+            @include('crm.material-products.modals.saved-search')
+            @include('crm.material-products.modals.transfer')
+            @include('crm.material-products.modals.repack-transfers')
+            @include('crm.material-products.modals.repack-outlife')
+            @include('crm.material-products.modals.import-from-excel')
+        {{-- ======= END : App Models ==== --}}
+    </div>
+@endsection
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
+@endsection
+@section('scripts')
+    <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
+    <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
+    <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
+    <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
+    <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
+    <input type="hidden" id="get-batch" value="{{ route("get-batch") }}">
+    <input type="hidden" id="get_masters" value="{{ route("get_masters") }}">
+    <input type="hidden" id="transfer_batch" value="{{ route("transfer-batch") }}"> 
+    <input type="hidden" id="repack_batch" value="{{ route("repack-batch") }}"> 
+    <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
+    <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}"> 
+    <input type="hidden" id="change_batch_read_status" value="{{ route('change-read-status') }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('public/asset/js/vendors/daterangepicker.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://code.angularjs.org/snapshot/angular-sanitize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.4/angular-messages.js"></script>    
+    <script src="{{ asset('public/asset/js/vendors/date-picker.js') }}"></script>
+    <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
+    <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
+    <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
+    <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
+    <script>
+        wordMatchSuggest = (element) => {
+            $.ajax({
+                type    :   'GET',
+                url     :   "{{ route('suggestion') }}",
+                data    :  {
+                    "name"  : element.name,
+                    "value" : element.value,
+                } ,
+                success:function(response){
+                    $(`#${element.list.id}`).html('')
+                    if(response.data != undefined || response.data != null) {
+                        Object.values(response.data).map((item) => { 
+                            if(element.value !== item) {
+                                $(`#${element.list.id}`).append(`<option value="${item}">`)
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    </script>
+@endsection
