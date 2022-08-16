@@ -16157,7 +16157,7 @@ input[data-switch]+label:after {
     border-radius: 2rem;
     height: 18px;
     width: 18px;
-    top: 3px;
+    top: 2px;
     -webkit-transition: all .1s ease-in-out;
     transition: all .1s ease-in-out
 }

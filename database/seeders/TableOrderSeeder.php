@@ -40,7 +40,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['extended_qc_result'],
             $tableColumns['disposal_certificate'],
             $tableColumns['iqc_result_status'],
-            // $tableColumns['barcode_number'],
+            $tableColumns['is_read'],
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {

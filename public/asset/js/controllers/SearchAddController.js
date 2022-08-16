@@ -8,22 +8,23 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.sort_by_payload = false;
 
     // === Route Lists ===
-    var material_products_url = $('#get-material-products').val();
-    var get_batch_material_products = $('#get-batch-material-products').val();
-    var get_batch = $('#get-batch').val();
-    var get_masters = $('#get_masters').val();
-    var pageName = $('#page-name').val();
-    var duplicate_material_products_url = $('#duplicate-material-products').val();
-    var delete_material_products_url = $('#delete-material-products').val();
+    var material_products_url              = $('#get-material-products').val();
+    var change_batch_read_status           = $('#change_batch_read_status').val(); 
+    var get_batch_material_products        = $('#get-batch-material-products').val();
+    var get_batch                          = $('#get-batch').val();
+    var get_masters                        = $('#get_masters').val();
+    var pageName                           = $('#page-name').val();
+    var duplicate_material_products_url    = $('#duplicate-material-products').val();
+    var delete_material_products_url       = $('#delete-material-products').val();
     var delete_material_products_batch_url = $('#delete-material-products-batch').val();
-    var get_save_search_url = $('#get-save-search').val();
-    var transfer_batch = $('#transfer_batch').val();
-    var repack_batch = $('#repack_batch').val();
-    var app_URL = $('#app_URL').val();
-    $scope.auth_id = $('#auth-id').val();
-    $scope.auth_role = $('#auth-role').val();
-    $scope.current_date = moment(new Date()).format('YYYY-MM-DD')
-    $scope.on_all_check_box = false
+    var get_save_search_url                = $('#get-save-search').val();
+    var transfer_batch                     = $('#transfer_batch').val();
+    var repack_batch                       = $('#repack_batch').val();
+    var app_URL                            = $('#app_URL').val();
+        $scope.auth_id                     = $('#auth-id').val();
+        $scope.auth_role                   = $('#auth-role').val();
+        $scope.current_date                = moment(new Date()).format('YYYY-MM-DD')
+        $scope.on_all_check_box            = false
 
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given = moment(date_of_expiry, "YYYY-MM-DD");
@@ -962,6 +963,12 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.duplicateThisBatch = (id) => {
         $http.get('duplicate-batch/' + id).then((res) => {
             window.location.replace(`material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
+        })
+    }
+    $scope.changeReadStatus = (id) => {
+        console.log(change_batch_read_status)
+        $http.post(change_batch_read_status + "/" + id).then((res) => {
+            $scope.get_material_products()
         })
     }
 });

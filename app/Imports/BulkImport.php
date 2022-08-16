@@ -1,12 +1,7 @@
 <?php
-
 namespace App\Imports;
-
-use App\Models\MaterialProducts;
 use Maatwebsite\Excel\Concerns\ToModel;
-
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-
 class BulkImport implements ToModel, WithHeadingRow
 {
     /**
@@ -19,5 +14,3 @@ class BulkImport implements ToModel, WithHeadingRow
        return true;
     }
 }
-
-
