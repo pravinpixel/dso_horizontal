@@ -7,6 +7,7 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
+use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -32,6 +33,20 @@ class NotificationController extends Controller
         return response()->json([
             'status'  => 200,
             'message' => 'Success'
+        ]);
+    }
+    public function notification_count()
+    {
+        $data = Batches::where('is_read',0)->get();
+
+        foreach ($data as $key => $row) {
+            $row['material_product'] = MaterialProducts::find($row->material_product_id);
+        }
+        
+        return response()->json([
+            'status' => 200,
+            'data'   => $data,
+            'count'  => count($data),
         ]);
     }
 }

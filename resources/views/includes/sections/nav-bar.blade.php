@@ -21,7 +21,7 @@
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">
                     <i  class="bi bi-bell-fill noti-icon text-white"></i>
-                    <span class="badge rounded-pill bg-danger" style="transform: translate(-10px, -12px);">5</span> 
+                    <span id="NotificationCount" class="badge rounded-pill bg-danger" style="transform: translate(-10px, -12px);">0</span> 
                 </a> 
             </li>            
             <li class="dropdown notification-list">

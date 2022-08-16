@@ -87,7 +87,14 @@ class DsoRepository implements DsoRepositoryInterface
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
             
-            foreach ($parent->Batches as  $batch) {
+            foreach ($parent->Batches as $batch_key => $batch) {
+
+                if($page_name === 'THRESHOLD_QTY') {
+                    if($batch->is_read !== 0) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                }
+
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ;
                 } else {
@@ -96,10 +103,7 @@ class DsoRepository implements DsoRepositoryInterface
                 }
                 if($batch->quantity  !== null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
-                }
-                if($batch->is_read == 0) {
-                    $readCount += 1;
-                }
+                } 
             }
             // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;

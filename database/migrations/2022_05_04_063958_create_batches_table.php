@@ -17,6 +17,7 @@ class CreateBatchesTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->integer('is_draft')->nullable()->default(1);
+            $table->integer('is_read')->nullable()->default(0);
             $table->integer('material_product_id');
             $table->string('brand')->nullable();
             $table->string('barcode_number')->nullable();
@@ -62,7 +63,6 @@ class CreateBatchesTable extends Migration
             $table->longText('repack_size')->nullable();
             $table->integer('end_of_batch')->nullable()->default(0);
             $table->string('withdrawal_type')->nullable();
-            $table->boolean('is_read')->nullable()->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

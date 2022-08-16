@@ -7,11 +7,8 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
-            @if ($page_name == 'THRESHOLD_QTY')
-                <div class="custom-table-row" ng-if="row.hideParentRowReadStatus == 0"  ng-repeat="(index,row) in material_products.data">
-                @else
-                <div class="custom-table-row" ng-if="row.hideParentRow == 0"  ng-repeat="(index,row) in material_products.data">
-            @endif
+           
+            <div class="custom-table-row" ng-if="row.hideParentRow == 0"  ng-repeat="(index,row) in material_products.data">
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">
                     <div class="custom-table-head parent-row"> 
@@ -33,7 +30,7 @@
                                     </div>
                                 @break
                                 @case('THRESHOLD_QTY')
-                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-if="batch.is_read == 0" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break 
