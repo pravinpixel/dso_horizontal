@@ -61,7 +61,7 @@
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
     <script>
-            wordMatchSuggest = (element) => {
+        wordMatchSuggest = (element) => {
             $.ajax({
                 type    :   'GET',
                 url     :   "{{ route('suggestion') }}",

@@ -48,8 +48,13 @@
             Actions / Qty to print
         </div>
     @break
+    @case($page_name == 'THRESHOLD_QTY')
+        <div class="box th border-start">
+            Read Status
+        </div>
+    @break
     @default
-    <div class="box th border-start box-sm">
-        Actions
+    <div class="box th border-start">
+        Actions 
     </div>
 @endswitch

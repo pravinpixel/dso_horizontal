@@ -7,16 +7,20 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
-            <div class="custom-table-row" ng-if="{{ $page_name === 'PRINT_BARCODE_LABEL' ? 'row.hideParentRow == 0' : true}}"  ng-repeat="(index,row) in material_products.data">
+            @if ($page_name == 'THRESHOLD_QTY')
+                <div class="custom-table-row" ng-if="row.hideParentRowReadStatus == 0"  ng-repeat="(index,row) in material_products.data">
+                @else
+                <div class="custom-table-row" ng-if="row.hideParentRow == 0"  ng-repeat="(index,row) in material_products.data">
+            @endif
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">
-                    <div class="custom-table-head parent-row">
+                    <div class="custom-table-head parent-row"> 
                         {{-- ======= Matrial Product Data  ====== --}}
                             {!! $table_td_columns !!} 
                         {{-- ======= Matrial Product Data  ====== --}}
                     </div>
                     <div class="custom-table collapse show batch-table" id="row_@{{ index+1 }}">
-                        {{-- ======= Matrial Product Batches Data  ====== --}}
+                        {{-- ======= Matrial Product Batches Data  ====== --}} 
                             @switch($page_name)
                                 @case('MATERIAL_SEARCH_OR_ADD')
                                     <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
@@ -28,7 +32,11 @@
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
-                                
+                                @case('THRESHOLD_QTY')
+                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-if="batch.is_read == 0" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                        {!! $batch_table_td_columns !!} 
+                                    </div>
+                                @break 
                                 @default
                                 {{-- ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'" --}}
                                 <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="barcode_number == batch.barcode_number ? 'selected-batch' : ''" >

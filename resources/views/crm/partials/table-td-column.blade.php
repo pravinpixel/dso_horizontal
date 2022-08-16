@@ -21,28 +21,10 @@
                     @{{ row.category_selection == 'material' ? 'Material' : ''}} @{{ row.category_selection == 'in_house' ? 'In-house Product' : ''}}
                 @break
                 @case('quantity')
-                    @{{ row.totalQuantity }}
-                    
-                    <span><i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i></span>
-
-                    {{-- <div class="ms-1">
-                        <span ng-if="row.totalQuantity < row.alert_threshold_qty_lower_limit">
-                            RED
-                       </span>
-                        <span ng-else="row.totalQuantity < row.alert_threshold_qty_lower_limit">
-                            <span ng-if="row.totalQuantity > row.alert_threshold_qty_upper_limit">
-                                GREEN
-                                
-                            </span>
-                          
-                        </span>
-                    </div> --}}
-
-
-                    {{-- @{{ row.totalQuantity < row.alert_threshold_qty_lower_limit ? 'RED' : '' }}
-                    @{{ (row.alert_threshold_qty_lower_limit < row.totalQuantity) (row.totalQuantity < row.alert_threshold_qty_upper_limit ) ? 'YELLOW' : '' }}
-                    @{{ row.totalQuantity > row.alert_threshold_qty_upper_limit ? 'GREEN' : '' }}  --}}
-                    
+                    <span>
+                        @{{ row.totalQuantity }}    
+                        <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
+                    </span>
                 @break
                 @default
                 {!! $column['row'] !!}
@@ -50,27 +32,57 @@
         </div>
     @endif
 @endforeach
-<div class="box border-start {{ $page_name !== 'PRINT_BARCODE_LABEL'  ? "box-sm" : null}}">
-    @if ($page_name === 'MATERIAL_SEARCH_OR_ADD')
-        <div class="dropdown">
-            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-            </a> 
-            <div class="dropdown-menu" >
-                <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
-                <a ng-click="editOrDuplicate('edit', row.id, row.batches[0].id , 1) " class="dropdown-item" href="javascript:void(0)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
-                <a ng-click="delete_material_product(row.id)"  class="dropdown-item text-danger" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete</a>  
+@switch($page_name)
+    @case('MATERIAL_SEARCH_OR_ADD')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu" >
+                    <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+                    <a ng-click="editOrDuplicate('edit', row.id, row.batches[0].id , 1) " class="dropdown-item" href="javascript:void(0)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                    <a ng-click="delete_material_product(row.id)"  class="dropdown-item text-danger" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete</a>  
+                </div>
             </div>
         </div>
-    @endif
-    @if ($page_name === 'MATERIAL_WITHDRAWAL')
-        <div class="dropdown">
-            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-            </a> 
-            <div class="dropdown-menu" >
-                <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+    @break
+    @case('PRINT_BARCODE_LABEL')
+        <div class="box border-start">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu" >
+                    <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+                    <a ng-click="editOrDuplicate('edit', row.id, row.batches[0].id , 1) " class="dropdown-item" href="javascript:void(0)"><i class="bi bi-pencil-square me-1"></i> Edit </a>
+                    <a ng-click="delete_material_product(row.id)"  class="dropdown-item text-danger" href="javascript:void(0)"><i class="bi bi-trash3-fill me-1"></i> Delete</a>  
+                </div>
             </div>
         </div>
-    @endif
-</div>
+    @break 
+    @case('MATERIAL_WITHDRAWAL')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu" >
+                    <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+                </div>
+            </div>
+        </div>
+    @break
+    @case('THRESHOLD_QTY')
+        <div class="box border-start text-center">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu" >
+                    <a ng-click="view_material_product(row)" class="dropdown-item" href="javascript:void(0)"><i class="bi bi-eye-fill me-1"></i>View </a>
+                </div>
+            </div>
+        </div>
+    @break
+@endswitch

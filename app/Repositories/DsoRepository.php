@@ -16,7 +16,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DsoRepository implements DsoRepositoryInterface
-{
+{ 
     public function renderPage($page_name, $view)
     { 
         $storage_room_db        =   StorageRoom::all();
@@ -27,7 +27,7 @@ class DsoRepository implements DsoRepositoryInterface
         $owners                 =   User::all();
         $tableColumns           =   tableOrder::getTableColumn();
         $tableAllColumns        =   []; 
-        request()->session()->put('page_name', $page_name);
+        request()->session()->put('page_name', $page_name); 
  
         foreach ($tableColumns as $key => $value) {
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
@@ -78,9 +78,12 @@ class DsoRepository implements DsoRepositoryInterface
     }
     public function renderTableData($material_product)
     {
+        $page_name = session()->get('page_name');
+
         foreach ($material_product as $key => $parent) {
             $quantityColor       = 'text-danger';
             $QtyCount            = 0;
+            $readCount           = 0;
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
             
@@ -94,12 +97,16 @@ class DsoRepository implements DsoRepositoryInterface
                 if($batch->quantity  !== null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
                 }
+                if($batch->is_read == 0) {
+                    $readCount += 1;
+                }
             }
-            
-            $parent['totalQuantity']      = $QtyCount;
-            $parent['totalUnitPackValue'] = $UnitPackingCount;
-            $parent['hideParentRow']      = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
-
+            // dd($readCount);
+            $parent['totalQuantity']           = $QtyCount;
+            $parent['totalUnitPackValue']      = $UnitPackingCount;
+            $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
+            $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
+          
             if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
             } else {
@@ -115,15 +122,17 @@ class DsoRepository implements DsoRepositoryInterface
             }
             $parent['quantityColor']      = $quantityColor;
         } 
+
+       
         $collection = Arr::flatten($material_product);
         $items      = collect($collection);
         $perPage    = 5;
         $page       = null;
         $page       = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items      = $items instanceof Collection ? $items : Collection::make($items);
+        $items      = $items instanceof Collection ? $items : Collection::make($items); 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
             'path'     => LengthAwarePaginator::resolveCurrentPath(),
             'pageName' => "page",
         ]);
-    } 
+    }
 }
