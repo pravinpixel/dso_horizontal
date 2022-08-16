@@ -1,3 +1,4 @@
+var APP_URL = $('meta[name="app-url"]').attr('content') ;
 function printModal() {
     swal({
         text: "Do you want to print?",
@@ -146,7 +147,7 @@ $('.need-word-match').keyup((element) => {
     } 
 
     
-    fetch($('meta[name="app-url"]').attr('content') + '/get-suggestion', {
+    fetch(APP_URL + '/get-suggestion', {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',
@@ -173,3 +174,22 @@ validateDate = (endInput, element) => {
     var dateInput = document.querySelector(`input[name=${endInput}]`)
     dateInput.setAttribute('min',element.value)
 }
+getNotificationCount = () => {
+    fetch(APP_URL + '/NotificationCount').then(response => response.json()).then(response => {
+        var NotificationData            = response.data;
+        var NotificationCount           = document.getElementById('NotificationCount')
+        var NotificationList            = document.getElementById('NotificationList')
+            NotificationCount.innerHTML = response.count
+
+        NotificationData.map((item) => {
+            NotificationList.innerHTML += `
+                <li class="list-group-item list-group-item-action btn">
+                    <div>${item.material_product.item_description}</div>
+                    <small>${item.batch}</small>
+                    <small class="float-end text-secondary">${ moment(item.created_at).format('YYYY-MM-DD h:m:s A')}</small>
+                </li> 
+            `
+        });
+    }); 
+}
+getNotificationCount()

@@ -968,26 +968,7 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.changeReadStatus = (id) => {
         $http.post(change_batch_read_status + "/" + id).then((res) => {
             $scope.get_material_products()
-            $scope.getNotificationCount()
+            getNotificationCount()
         })
-    }
-    $scope.getNotificationCount = () => {
-        $http.get('NotificationCount').then((response) => {
-            var NotificationData            = response.data.data;
-            var NotificationCount           = document.getElementById('NotificationCount')
-            var NotificationList            = document.getElementById('NotificationList')
-                NotificationCount.innerHTML = response.data.count
-
-            NotificationData.map((item) => {
-                NotificationList.innerHTML += `
-                    <li class="list-group-item list-group-item-action btn">
-                        <div>${item.material_product.item_description}</div>
-                        <small>${item.batch}</small>
-                        <small class="float-end text-secondary">${ moment(item.created_at).format('YYYY-MM-DD h:m:s A')}</small>
-                    </li> 
-                `
-            });
-        })
-    }
-    $scope.getNotificationCount()
+    } 
 });
