@@ -374,12 +374,8 @@ app.controller('SearchAddController', function ($scope, $http) {
             data: {
                 filters: $scope.barcode_number
             }
-        }).then(function (response) {
-            if(response.data.data === null) {
-                var barCodeInput = document.querySelector("#barcode_number")
-                barCodeInput.value = ''
-                return false
-            }
+        }).then(function (response) { 
+    
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
@@ -971,4 +967,4 @@ app.controller('SearchAddController', function ($scope, $http) {
             getNotificationCount()
         })
     } 
-});
+}); 
