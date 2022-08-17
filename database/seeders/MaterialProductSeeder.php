@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Batches;
 use App\Models\MaterialProducts;
+use App\Models\RepackOutlife;
 use Illuminate\Database\Seeder;
 
 class MaterialProductSeeder extends Seeder
@@ -202,5 +203,9 @@ class MaterialProductSeeder extends Seeder
         $current_batch_three->update([
             'withdrawal_type' => $withdrawal_type
         ]);
-    } 
+
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id],['batch_id' => $batch_one->id]);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id],['batch_id' => $batch_two->id]);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id],['batch_id' => $batch_three->id]);
+    }
 }

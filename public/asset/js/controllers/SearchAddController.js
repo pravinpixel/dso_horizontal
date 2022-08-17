@@ -29,7 +29,6 @@ app.controller('SearchAddController', function ($scope, $http) {
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given = moment(date_of_expiry, "YYYY-MM-DD");
         var day = moment.duration(given.diff(current_date)).asDays();
-        console.log(day)
         if (current_date >= date_of_expiry) {
             return 'text-danger'
         } else {
@@ -338,7 +337,6 @@ app.controller('SearchAddController', function ($scope, $http) {
     }
 
     $scope.sort_by = function (name, type) {
-        // console.log(type)
         $scope.sort_by_payload = true;
         $scope.sort_by_payload_data = {
             sort_by: {
@@ -436,7 +434,6 @@ app.controller('SearchAddController', function ($scope, $http) {
                             }
                         })
                     });
-                    console.log($scope.deductTrackUsage)
                     break;
                 default:
                     $scope.withdrawalStatus = false
@@ -672,7 +669,6 @@ app.controller('SearchAddController', function ($scope, $http) {
         switch (type) {
             case "view":
                 $("#RepackTransfers").modal("show");
-                // console.log(row.unit_of_measure.name)
                 $scope.RepackTransfer = batch;
                 $scope.RepackTransferPackSize = row.unit_packing_value
                 $scope.RepackTransferQty = batch.quantity
@@ -771,94 +767,46 @@ app.controller('SearchAddController', function ($scope, $http) {
 
     $scope.RepackOutlife = (batch, unit_of_measure) => {
         $scope.repack_outlife_unit_of_measure = unit_of_measure.name
-        $scope.repack_outlife_days = batch.outlife
-        $scope.currentBatchId = batch.id
-        $scope.currentBatch = batch
+        $scope.repack_outlife_days            = batch.outlife
+        $scope.currentBatchId                 = batch.id
+        $scope.currentBatch                   = batch
         $http.get(`repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
-
-            addNewRepackOutlife = () => {
-                $scope.repack_outlife_table.push({
-                    id: null,
-                    draw_in: {
-                        status: 1 == 1 ? true : false,
-                        time_stamp: null
-                    },
-                    draw_out: {
-                        status: 0 == 1 ? true : false,
-                        time_stamp: null
-                    },
-                    last_access: JSON.parse(RepackData.access),
-                    initial_amount: RepackData.quantity,
-                    initial_count: RepackData.outlife,
-                    repack_amount: null,
-                    balance_amount: null,
-                    repack_size: null,
-                    qty_cut: null,
-                    remaining_days: null,
-                    remaining_days_seconds : null, 
-                    barcode_number: RepackData.barcode_number
-                });
-            }
             if (RepackData.repack_outlife.length !== 0) {
-                if (RepackData.repack_outlife.at(-1).draw_out == 0 && RepackData.repack_outlife.at(-1).draw_in == 0 && RepackData.repack_outlife.at(-1).quantity == 0) {
-                    $scope.disable_repack_outlife = true
-                }
                 RepackData.repack_outlife.forEach(element => {
                     $scope.repack_outlife_table.push(
                         {
-                            id: element.id,
+                            id     : element.id,
                             draw_in: {
-                                status: element.draw_in == 1 ? true : false,
+                                status    : element.draw_in,
                                 time_stamp: element.draw_in_time_stamp
                             },
                             draw_out: {
-                                status: element.draw_out == 1 ? true : false,
+                                status    : element.draw_out,
                                 time_stamp: element.draw_out_time_stamp
                             },
-                            last_access: JSON.parse(RepackData.access),
-                            initial_amount: element.quantity,
-                            initial_count: RepackData.outlife,
-                            repack_amount: element.input_repack_amount,
-                            balance_amount: element.remain_amount,
-                            repack_size: element.repack_size,
-                            qty_cut: element.qty_cut,
-                            remaining_days: element.remain_days,
-                            remaining_days_seconds : element.remaining_days_seconds,
-                            barcode_number: element.barcode_number
+                            last_access           : JSON.parse(RepackData.access),
+                            initial_amount        : RepackData.quantity,
+                            initial_count         : RepackData.outlife,
+                            repack_amount         : element.input_repack_amount,
+                            balance_amount        : element.remain_amount,
+                            repack_size           : element.repack_size,
+                            qty_cut               : element.qty_cut,
+                            remaining_days        : element.remain_days,
+                            remaining_days_seconds: element.remaining_days_seconds,
+                            barcode_number        : RepackData.barcode_number
                         }
                     );
-                })
-                if (RepackData.repack_outlife.at(-1).draw_in != 0
-                    && RepackData.repack_outlife.at(-1).draw_out != 0) {
-                    if (RepackData.repack_outlife.at(-1).quantity != 0) {
-                        addNewRepackOutlife()
-                    } else {
-                        $scope.disable_repack_outlife = true
-                    }
-                } else {
-                    if (RepackData.repack_outlife.at(-1).draw_out == 0) {
-                        if (RepackData.repack_outlife.at(-1).quantity != 0) {
-                            addNewRepackOutlife()
-                        }
-                    }
-                }
-
-            } else {
-                addNewRepackOutlife()
-            }
+                }) 
+            }  
             $('#RepackOutlife').modal('show');
         })
     }
 
     $scope.next_draw = false
     $scope.saveRepackOutlife = () => {
-        if ($scope.repackOutlifeForm.$invalid) {
-            Message('danger', "Input value is Required!")
-            return false
-        }
-        $http.post(`store-repack-batch/${$scope.currentBatchId}`, $scope.repack_outlife_table)
+        $http.post(`store-repack-batch/${$scope.currentBatchId}`, { repack_id : localStorage.getItem('repack_outlife_id') , data : $scope.repack_outlife_table})
             .then((response) => {
                 $scope.next_draw = response.data.new_draw_in
                 $http.get(`repack-batch/${$scope.currentBatchId}`).then((response) => {
@@ -868,85 +816,29 @@ app.controller('SearchAddController', function ($scope, $http) {
                         RepackData.repack_outlife.forEach(element => {
                             $scope.repack_outlife_table.push(
                                 {
-                                    id: element.id,
+                                    id     : element.id,
                                     draw_in: {
-                                        status: element.draw_in == 1 ? true : false,
+                                        status    : element.draw_in,
                                         time_stamp: element.draw_in_time_stamp
                                     },
                                     draw_out: {
-                                        status: element.draw_out == 1 ? true : false,
+                                        status    : element.draw_out,
                                         time_stamp: element.draw_out_time_stamp
                                     },
-                                    last_access: JSON.parse(RepackData.access),
-                                    initial_amount: element.quantity,
-                                    initial_count: RepackData.outlife,
-                                    repack_amount: element.input_repack_amount,
-                                    balance_amount: element.remain_amount,
-                                    repack_size: element.repack_size,
-                                    qty_cut: element.qty_cut,
-                                    remaining_days: element.remain_days,
-                                    remaining_days_seconds : element.remaining_days_seconds,
-                                    barcode_number: element.barcode_number
-
+                                    last_access           : JSON.parse(RepackData.access),
+                                    initial_amount        : RepackData.quantity,
+                                    initial_count         : RepackData.outlife,
+                                    repack_amount         : element.input_repack_amount,
+                                    balance_amount        : element.remain_amount,
+                                    repack_size           : element.repack_size,
+                                    qty_cut               : element.qty_cut,
+                                    remaining_days        : element.remain_days,
+                                    remaining_days_seconds: element.remaining_days_seconds,
+                                    barcode_number        : RepackData.barcode_number
                                 }
                             );
-                        })
-                    } else {
-                        $scope.repack_outlife_table.push({
-                            id: null,
-                            draw_in: {
-                                status: true,
-                                time_stamp: null
-                            },
-                            draw_out: {
-                                status: false,
-                                time_stamp: null
-                            },
-                            last_access: JSON.parse(RepackData.access),
-                            initial_amount: RepackData.quantity,
-                            initial_count: RepackData.outlife,
-                            repack_amount: null,
-                            balance_amount: null,
-                            repack_size: null,
-                            qty_cut: null,
-                            remaining_days: null,
-                            remaining_days_seconds : null,
-                            barcode_number: element.barcode_number
-                        });
-                    }
-                    if ($scope.next_draw == true) {
-
-                        var newRow = true
-
-                        $scope.repack_outlife_table.forEach(element => {
-                            // console.log(element.balance_amount)
-                            if (element.balance_amount == 0) {
-                                newRow = false
-                            }
-                        })
-
-                        newRow === true && $scope.repack_outlife_table.push({
-                            id: null,
-                            draw_in: {
-                                status: true,
-                                time_stamp: null
-                            },
-                            draw_out: {
-                                status: false,
-                                time_stamp: null
-                            },
-                            last_access: JSON.parse(RepackData.access),
-                            initial_amount: RepackData.quantity,
-                            initial_count: RepackData.outlife,
-                            repack_amount: null,
-                            balance_amount: null,
-                            repack_size: null,
-                            qty_cut: null,
-                            remaining_days: null,
-                            remaining_days_seconds : null,
-                            barcode_number: element.element
-                        });
-                    }
+                        }) 
+                    }  
                     Message('success', "Repack Outlife Saved !")
                 })
                 if ($('#exportLogCheckBox').is(':checked')) {

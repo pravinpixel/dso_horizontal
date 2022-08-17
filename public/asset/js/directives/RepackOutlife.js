@@ -3,11 +3,11 @@ app.directive('repackTable', () => {
         restrict : 'A',
         link: function(scope, element, attribute) {
             element.on('click', () => {
-                if(attribute.repackTable == "IN") {
+                if(attribute.repackTable == "IN") { 
                     scope.repack.draw_in.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
                     scope.$apply()
                 }
-                if(attribute.repackTable == "OUT") {
+                if(attribute.repackTable == "OUT") { 
                     scope.repack.draw_out.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
                     var startDate   =   moment(scope.repack.draw_in.time_stamp, "MMMM Do YYYY, h:mm:ss a");
                     var endDate     =   moment(scope.repack.draw_out.time_stamp, "MMMM Do YYYY, h:mm:ss a"); 
@@ -19,19 +19,24 @@ app.directive('repackTable', () => {
                     const minutes   =   duration._data.minutes != 0 ? duration._data.minutes + ' minutes' : ''
                     const seconds   =   duration._data.seconds != 0 ? duration._data.seconds + ' seconds' : ''
 
+                    localStorage.setItem('repack_outlife_id', scope.repack.id) 
+
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
                     scope.repack.remaining_days_seconds = diff
-
+                    console.log(scope.repack.remaining_days)
                     scope.$apply(); 
-                }
+                }  
             })
             element.on('keyup', () => { 
+                
                 if(attribute.repackTable == "REPACK_INPUT") {
+                    localStorage.setItem('repack_outlife_id', scope.repack.id) 
+
                     scope.repack.repack_amount === null ? scope.repack.balance_amount = null :
                     scope.repack.balance_amount = (scope.repack.initial_amount - scope.repack.repack_amount)
                     scope.$apply()
-                }
+                }  
             })
         }
     };
-});
+}); 

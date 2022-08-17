@@ -32,6 +32,7 @@ class CreateBatchesTable extends Migration
             $table->string('require_bulk_volume_tracking')->nullable();
             $table->string('require_outlife_tracking')->nullable();
             $table->string('outlife')->nullable();
+            $table->integer('outlife_seconds')->nullable();
             $table->string('storage_area')->nullable();
             $table->string('housing_type')->nullable();
             $table->string('housing')->nullable();
@@ -59,7 +60,7 @@ class CreateBatchesTable extends Migration
             $table->string('extended_qc_status')->nullable();
             $table->string('extended_qc_result')->nullable();
             $table->string('disposal_certificate')->nullable();
-            $table->string('used_for_td_expt_only')->nullable(); 
+            $table->string('used_for_td_expt_only')->nullable();
             $table->longText('repack_size')->nullable();
             $table->integer('end_of_batch')->nullable()->default(0);
             $table->string('withdrawal_type')->nullable();
