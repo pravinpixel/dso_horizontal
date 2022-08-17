@@ -31,5 +31,6 @@ class RepackOutlife extends Model
         'updated_outlife_seconds',
         'current_outlife_expiry',
         'remarks',
+        'current_date_time'
     ];
 }

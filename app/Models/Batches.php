@@ -59,7 +59,8 @@ class Batches extends Model
         'repack_size',
         'barcode_number',
         'iqc_result_status',
-        'withdrawal_type'
+        'withdrawal_type',
+        'outlife_seconds'
     ];
 
     public function BarCodeGenOne()

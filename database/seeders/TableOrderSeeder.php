@@ -41,6 +41,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['disposal_certificate'],
             $tableColumns['iqc_result_status'],
             $tableColumns['is_read'],
+            $tableColumns['outlife_seconds'],
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {

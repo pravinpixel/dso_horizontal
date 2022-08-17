@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\BarCodeFormat;
 use App\Models\MaterialProducts;
+use App\Models\RepackOutlife;
 use Faker\Provider\Barcode;
 use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
@@ -28,9 +29,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         }
          
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $fillable);
-        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
+        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_id],['batch_id' => $batch_id]);
         $this->storeFiles($request, $batch);
-
    
         
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {

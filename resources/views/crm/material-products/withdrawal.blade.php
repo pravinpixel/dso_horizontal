@@ -191,7 +191,7 @@
                                     <td class="p-0">@{{ deductTrackOutlife[0].brand }}</td>
                                     <td class="p-0">@{{ deductTrackOutlife[0].batch }} / @{{ deductTrackOutlife[0].serial }}</td>
                                     <td class="p-0"> {{ auth_user()->alias_name }} </td>
-                                    <td class="p-0">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                                    <td class="p-0">@{{ row.current_date_time }}</td>
                                     <td class="p-0">@{{ deductTrackOutlife[0].barcode_number }}</td>
                                     <td class="p-0">@{{ deductTrackOutlife[0].unit_packing_value }}</td>
                                     <td class="p-0">@{{ deductTrackOutlife[0].quantity }}</td>
