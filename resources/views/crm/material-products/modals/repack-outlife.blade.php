@@ -43,23 +43,21 @@
                                 <small>@{{ repack.last_access }}</small>
                             </td>
                             <td class="text-center"> 
-                                <span ng-if="repack.draw_in.status == 0">@{{ repack.repack_amount }}</span>
+                                <span ng-if="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1">@{{ repack.repack_amount }}</span>
                                 <input type="number" ng-disabled="repack.draw_in.status == 1 && repack.draw_out.status == 1" ng-if="repack.draw_in.status == 1" required  ng-min="1" ng-max="repack.initial_amount" repack-table="REPACK_INPUT" class="form-control form-control-sm custom-input" ng-model='repack.repack_amount'>
                             </td>
                             <td class="text-center">
-                                <textarea>@{{ repack }}</textarea>
-                                <textarea>@{{ repack.balance_amount }}</textarea>
                                 @{{ repack.balance_amount }}
-                                <span ng-if="repack.draw_in.status == 0">@{{ repack.balance_amount }}</span>
+                                <span ng-if="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1">@{{ repack.balance_amount }}</span>
                                 <input type="number" ng-if="repack.draw_in.status == 1" disabled class="form-control form-control-sm custom-input" ng-model='repack.balance_amount'>
                             </td>
                             <td>@{{ repack.barcode_number }}</td>
                             <td class="text-center">
-                                <span ng-if="repack.draw_in.status == 0">@{{ repack.repack_size }}</span>
+                                <span ng-if="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1">@{{ repack.repack_size }}</span>
                                 <input type="number" ng-disabled="repack.draw_in.status == 1 && repack.draw_out.status == 1" ng-if="repack.draw_in.status == 1" ng-disabled="repack.draw_in.status === false" required class="form-control form-control-sm custom-input" ng-model='repack.repack_size'>
                             </td>
                             <td class="text-center">
-                                <span ng-if="repack.draw_in.status == 0">@{{ repack.qty_cut }}</span>
+                                <span ng-if="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1">@{{ repack.qty_cut }}</span>
                                 <input type="number" ng-disabled="repack.draw_in.status == 1 && repack.draw_out.status == 1" ng-if="repack.draw_in.status == 1" ng-disabled="repack.draw_in.status === false" required class="form-control form-control-sm custom-input" ng-model='repack.qty_cut'>
                             </td> 
                             <td>@{{ repack.remaining_days }}</td>
