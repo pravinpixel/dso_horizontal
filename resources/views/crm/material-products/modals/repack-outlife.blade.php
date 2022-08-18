@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <small>@{{ repack.last_access }}</small>
-                            </td> 
+                            </td>
                             <td class="text-center"> 
                                 <span ng-if="repack.draw_in.status == 0">@{{ repack.repack_amount }}</span>
                                 <input type="number" ng-disabled="repack.draw_in.status == 1 && repack.draw_out.status == 1" ng-if="repack.draw_in.status == 1" required  ng-min="1" ng-max="repack.initial_amount" repack-table="REPACK_INPUT" class="form-control form-control-sm custom-input" ng-model='repack.repack_amount'>
