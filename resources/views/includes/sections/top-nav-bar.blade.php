@@ -21,8 +21,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
                             <a href="{{ route('threshold-qty') }}" class="dropdown-item {{ Route::is(['threshold-qty']) ? "active" : "" }}"><i class="bi bi-subtract me-1"></i><span>Threshold Qty</span></a>
-                            <a href="{{ route('near-expiry-expired') }}" class="dropdown-item {{ Route::is(['near-expiry-expired']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Near Expiry/Expired </span></a>
-                            <a href="{{ route('disposed-items') }}" class="dropdown-item {{ Route::is(['disposed-items']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Disposed items</span></a>
+                            <a href="{{ route('near-expiry-expired') }}" class="dropdown-item {{ Route::is(['near-expiry-expired']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Near Expiry/Expired </span></a> 
                         </div>
                     </li>
                     <li class="nav-item dropdown">
