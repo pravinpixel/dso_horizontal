@@ -193,8 +193,8 @@
                                     <td class="p-0"><small> {{ auth_user()->alias_name }}  </small></td>
                                     <td class="p-0"><small> @{{ row.current_date_time }} </small></td>
                                     <td class="p-0"><small> @{{ deductTrackOutlife[0].barcode_number }} </small></td>
-                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].unit_packing_value }} </small></td>
-                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].quantity }} </small></td>
+                                    <td class="p-0"><small> @{{ row.repack_size }} </small></td>
+                                    <td class="p-0"><small> @{{ row.qty_cut }} </small></td>
                                     <td class="p-0 py-0 px-1">
                                         <input type="hidden" name="id[]" value="@{{ row.id }}">
                                         <textarea name="remarks[]" required class="form-control h-100 w-100">@{{ row.remarks }}</textarea>

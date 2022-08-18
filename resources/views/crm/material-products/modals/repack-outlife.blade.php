@@ -35,13 +35,11 @@
                                 <input type="button" repack-table="IN" ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" value="Draw In" class="btn-draw draw-in"> <br> <br>
                                 <input type="button" repack-table="OUT" ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" value="Draw Out" class="btn-draw draw-out">
                             </td>
-                            <td style="padding: 0">
-                                <textarea class="draw_time" readonly ng-model='repack.draw_out.time_stamp'  ng-required="repack.draw_out.status != false" cols="25" rows="1"></textarea>
-                                <textarea class="draw_time" readonly ng-model='repack.draw_in.time_stamp' ng-required="repack.draw_in.status != false" cols="25" rows="1"></textarea>
+                            <td style="padding: 0" width="300px">
+                                <div><small>@{{ repack.draw_out.time_stamp}}</small></div><br>
+                                <div><small>@{{ repack.draw_in.time_stamp }}</small></div>
                             </td>
-                            <td>
-                                <small>@{{ repack.last_access }}</small>
-                            </td>
+                            <td><small>@{{ repack.last_access }}</small></td>
                             <td class="text-center"> 
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
                                     <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.initial_amount" class="form-control form-control-sm" required>

@@ -54,7 +54,7 @@
         </div>
     @break
     @default
-    <div class="box th border-start">
+    <div class="box box-sm th border-start">
         Actions 
     </div>
 @endswitch

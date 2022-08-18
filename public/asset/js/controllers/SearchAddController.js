@@ -429,9 +429,10 @@ app.controller('SearchAddController', function ($scope, $http) {
                                         $scope.deductTrackOutlife = [];
                                         $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
                                     
-                                        $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
-                                            row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
-                                        })
+                                            $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
+                                                row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
+                                                console.log(row)
+                                            })
                                         break;
                                     default:
                                         break;
