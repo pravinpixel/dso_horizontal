@@ -40,7 +40,7 @@
                     '18' =>'18',
                     '19' =>'19',
                     '20' =>'20',
-                    'Nil' =>'Nil',
+                    'nill' =>'nill',
                 ] , $batch->housing ?? null, ['class' =>'form-select form-select-sm', 'placeholder' => '-- Select --' , 'required', 
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."housing.status")
                 ])  !!}
