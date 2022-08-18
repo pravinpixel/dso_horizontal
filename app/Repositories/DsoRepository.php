@@ -91,7 +91,7 @@ class DsoRepository implements DsoRepositoryInterface
 
                 if($page_name === 'THRESHOLD_QTY') {
                     if($batch->is_read !== 0) {
-                        unset($parent->Batches[$batch_key]);
+                        // unset($parent->Batches[$batch_key]);
                     }
                 }
 
