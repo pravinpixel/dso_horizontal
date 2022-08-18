@@ -186,23 +186,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="row in deductTrackOutlife[0].repack_outlife | orderBy:'$index':true">
-                                    <td class="p-0">@{{ deductTrackOutlife[0].item_description }}</td>
-                                    <td class="p-0">@{{ deductTrackOutlife[0].brand }}</td>
-                                    <td class="p-0">@{{ deductTrackOutlife[0].batch }} / @{{ deductTrackOutlife[0].serial }}</td>
-                                    <td class="p-0"> {{ auth_user()->alias_name }} </td>
-                                    <td class="p-0">@{{ row.current_date_time }}</td>
-                                    <td class="p-0">@{{ deductTrackOutlife[0].barcode_number }}</td>
-                                    <td class="p-0">@{{ deductTrackOutlife[0].unit_packing_value }}</td>
-                                    <td class="p-0">@{{ deductTrackOutlife[0].quantity }}</td>
+                                <tr ng-repeat="row in deductTrackOutlife[0].repack_outlife | orderBy:'$index':true" ng-if="row.draw_in == 1 && row.draw_out == 1">
+                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].item_description }} </small></td>
+                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].brand }} </small></td>
+                                    <td class="p-0"><small> <small class="text-primary">@{{ deductTrackOutlife[0].batch }}</small> / <small class="text-info">@{{ deductTrackOutlife[0].serial }}</small> </small></td>
+                                    <td class="p-0"><small> {{ auth_user()->alias_name }}  </small></td>
+                                    <td class="p-0"><small> @{{ row.current_date_time }} </small></td>
+                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].barcode_number }} </small></td>
+                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].unit_packing_value }} </small></td>
+                                    <td class="p-0"><small> @{{ deductTrackOutlife[0].quantity }} </small></td>
                                     <td class="p-0 py-0 px-1">
                                         <input type="hidden" name="id[]" value="@{{ row.id }}">
                                         <textarea name="remarks[]" required class="form-control h-100 w-100">@{{ row.remarks }}</textarea>
                                     </td>
-                                    <td class="child-td">
-                                        @{{ row.updated_outlife }}
-                                    </td>
-                                    <td class="child-td">@{{ row.current_outlife_expiry }}</td>
+                                    <td class="child-td"><small class="text-dark">@{{ row.updated_outlife }}</small></td>
+                                    <td class="child-td"><small class="text-dark">@{{ row.current_outlife_expiry }}</small></td>
                                 </tr>
                             </tbody>
                         </table>
