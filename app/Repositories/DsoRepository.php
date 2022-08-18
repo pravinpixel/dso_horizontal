@@ -90,8 +90,8 @@ class DsoRepository implements DsoRepositoryInterface
             foreach ($parent->Batches as $batch_key => $batch) {
 
                 if($page_name === 'THRESHOLD_QTY') {
-                    if($batch->is_read !== 0) {
-                        // unset($parent->Batches[$batch_key]);
+                    if($batch->is_read != 0) {
+                        unset($parent->Batches[$batch_key]);
                     }
                 }
 
@@ -101,7 +101,7 @@ class DsoRepository implements DsoRepositoryInterface
                     $QtyCount         += $batch->quantity;
                     $UnitPackingCount += $batch->unit_packing_value;
                 }
-                if($batch->quantity  !== null) {
+                if($batch->quantity  != null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
                 } 
             }
