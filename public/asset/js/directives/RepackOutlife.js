@@ -23,7 +23,6 @@ app.directive('repackTable', () => {
 
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
                     scope.repack.remaining_days_seconds = diff
-                    console.log(scope.repack.remaining_days)
                     scope.$apply(); 
                 }  
             })
@@ -31,7 +30,6 @@ app.directive('repackTable', () => {
                 
                 if(attribute.repackTable == "REPACK_INPUT") {
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
-
                     scope.repack.repack_amount === null ? scope.repack.balance_amount = null :
                     scope.repack.balance_amount = (scope.repack.initial_amount - scope.repack.repack_amount)
                     scope.$apply()
