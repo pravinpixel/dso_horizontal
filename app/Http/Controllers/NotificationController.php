@@ -64,14 +64,23 @@ class NotificationController extends Controller
                 $expired[] = $row;
             } else {
                 $near_expiry[] = $row;
-            }
-            if($row->iqc_status == 1) {
+                $expired[] = $row;
+
+            } 
+
+            if($row->iqc_status == "1") {
                 $failed_iqc[] = $row;
             }
         }
+
         // dd($near_expiry);
         // dd($expired);
-        // dd($failed_iqc);
-        return view('crm.notification.near-expiry-expired');
+        // dd($failed_iqc); 
+      
+        return view('crm.notification.near-expiry-expired', compact([
+            'near_expiry',
+            'expired',
+            'failed_iqc'
+        ]));
     }
 }
