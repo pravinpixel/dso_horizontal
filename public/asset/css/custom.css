@@ -545,6 +545,10 @@ a {
     border: none !important;
     outline: none;
     text-align: center !important;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
 }
 .btn-draw:disabled {
     font-weight: normal;
