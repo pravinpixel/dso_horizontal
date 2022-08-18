@@ -48,6 +48,8 @@
                             </td>
                             <td class="text-center">
                                 <textarea>@{{ repack }}</textarea>
+                                <textarea>@{{ repack.balance_amount }}</textarea>
+                                @{{ repack.balance_amount }}
                                 <span ng-if="repack.draw_in.status == 0">@{{ repack.balance_amount }}</span>
                                 <input type="number" ng-if="repack.draw_in.status == 1" disabled class="form-control form-control-sm custom-input" ng-model='repack.balance_amount'>
                             </td>
