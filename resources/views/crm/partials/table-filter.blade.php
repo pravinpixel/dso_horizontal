@@ -6,7 +6,7 @@
     <div class="col">
         <label for="" class="form-label">Category selection</label>
         <select ng-model="advanced_filter.category_selection" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             <option value="in_house">In House</option>
             <option value="material">Material</option>
         </select>
@@ -22,7 +22,7 @@
     <div class="col">
         <label for=""  class="form-label">Owner 1</label>
         <select name="owner_one" ng-model="advanced_filter.owner_one" class="form-select custom" >
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             @foreach ($owners as $row)
                 <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
             @endforeach 
@@ -31,7 +31,7 @@
     <div class="col">
         <label for=""  class="form-label">Owner 2</label>
         <select name="owner_two" ng-model="advanced_filter.owner_two" class="form-select custom" >
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             @foreach ($owners as $row)
                 <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
             @endforeach 
@@ -40,7 +40,7 @@
     <div class="col">
         <label for="" class="form-label">Department</label>
         <select name="department" ng-model="advanced_filter.department" id="" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             @foreach ($departments_db as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach 
@@ -49,7 +49,7 @@
     <div class="col">
         <label for="" class="form-label">Storage area</label>
         <select name="storage_area" ng-model="advanced_filter.storage_area" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             @foreach ($storage_room_db as $row)
                 <option value="{{ $row->id }}">{{ $row->name }}</option>
             @endforeach 

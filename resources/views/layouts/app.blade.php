@@ -56,7 +56,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">EUC Material</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">Yes</option>
                                     <option value="4">No</option>
                                 </select>
@@ -80,7 +80,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Statutory board</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">SCDF</option>
                                     <option value="2">NEA</option>
                                     <option value="3">HSA</option>
@@ -92,7 +92,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Housing type</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">Flammable Cabinet</option>
                                     <option value="2">Acid Cabinet</option>
                                     <option value="3">Base Cabinet</option>
@@ -114,7 +114,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Unit Packing size</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">kg</option>
                                     <option value="2">L</option>
                                     <option value="3">m</option>									
@@ -132,7 +132,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">IQC status </label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">Pass</option>
                                     <option value="2">Fail</option> 
                                 </select>
@@ -148,7 +148,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Extended QC status</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">Pass</option>
                                     <option value="2">Fail</option> 
                                 </select>
@@ -156,7 +156,7 @@
                             <div class="col-6 text-start mb-2 px-1">
                                 <label for="" class="form-label">Disposed</label>
                                 <select name="" id="" class="form-select">
-                                    <option value="">-- select --</option>
+                                    <option value="">-- Select --</option>
                                     <option value="1">Yes</option>
                                     <option value="2">No but used for TD/Expt</option> 
                                 </select>

@@ -80,7 +80,7 @@
                 <div class="col-6 d-flex align-items-center">
                     <label for="" class="col-3">Choose Department</label>
                     <select name="" id="" class="form-select">
-                        <option value="">-- select --</option>
+                        <option value="">-- Select --</option>
                         <option value="">Department A</option>
                         <option value="">Department B</option>
                         <option value="">Department C</option>

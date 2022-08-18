@@ -30,7 +30,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Statutory board</label>
                             <select name="advanced_filter.statutory_body" class="form-select" ng-model="advanced_filter.statutory_body">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 @foreach ($statutory_body_db as $row)
                                     <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
@@ -39,7 +39,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">EUC Material</label>
                             <select class="form-select" ng-model="advanced_filter.euc_material">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -47,7 +47,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Require Bulk volume tracking</label>
                             <select class="form-select" ng-model="advanced_filter.require_bulk_volume_tracking">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -55,7 +55,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Required Outlife Tracking</label>
                             <select name="advanced_filter.require_outlife_tracking" class="form-select" ng-model="advanced_filter.require_outlife_tracking">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="0">No</option>
                                 <option value="1">Yes</option> 
                             </select>
@@ -63,7 +63,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Storage area</label>
                             <select name="storage_area" ng-model="advanced_filter.storage_area" class="form-select">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 @foreach ($storage_room_db as $row)
                                     <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach 
@@ -72,7 +72,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Housing type</label>
                             <select name="advanced_filter.housing_type" class="form-select" ng-model="advanced_filter.housing_type">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 @foreach ($house_type_db as $row)
                                     <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
@@ -81,7 +81,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Housing #</label>
                             <select name="advanced_filter.housing" class="form-select form-select-sm" ng-model="advanced_filter.housing">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="nill"> - </option>
 
                                 @for ($key=0;$key<20;$key++)
@@ -92,7 +92,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">IQC status </label>
                             <select name="advanced_filter.iqc_status" class="form-select" ng-model="advanced_filter.iqc_status">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="1">Pass</option>
                                 <option value="2">Fail</option> 
                             </select>
@@ -104,7 +104,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">FM 1202</small>
                             <select class="form-select" ng-model="advanced_filter.fm_1202">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="on">Yes</option>
                                 <option value="no">No</option> 
                             </select>
@@ -128,7 +128,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Used for TD/EXPT only</label>
                             <select class="form-select" ng-model="advanced_filter.used_for_td_expt_only">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="1">Yes</option>
                                 <option value="2">No</option> 
                             </select>
@@ -136,7 +136,7 @@
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Status</label>
                             <select class="form-select" ng-model="advanced_filter.is_draft">
-                                <option value="">-- select --</option>
+                                <option value="">-- Select --</option>
                                 <option value="1">Draft</option>
                                 <option value="0">Active</option> 
                             </select>

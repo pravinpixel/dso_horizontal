@@ -30,7 +30,7 @@
     <div class="col">
         <label for="" class="form-label">Owner 1/2</label>
         <select name="" id="" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             <option value="1">Vetri maran</option>
             <option value="2">Alan walker</option>
             <option value="3">Alex</option>
@@ -40,7 +40,7 @@
     <div class="col">
         <label for="" class="form-label">department</label>
         <select name="" id="" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             <option value="1">EGP1</option>
             <option value="2">EGP4</option>
             <option value="3">EGP7</option>
@@ -51,7 +51,7 @@
     <div class="col">
         <label for="" class="form-label">storage area</label>
         <select name="" id="" class="form-select custom">
-            <option value="">-- select --</option>
+            <option value="">-- Select --</option>
             <option value="1">AR</option>
             <option value="2">CW</option>
             <option value="3">MA</option>

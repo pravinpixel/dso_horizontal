@@ -9,7 +9,7 @@
                             $category = category_type() ?? $material_product->category_selection ?? null
                         @endphp
                         <select required onchange="change_product_type()" class="form-select" id="category_type" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."category_selection.status") }}>
-                            <option value=""> -- select -- </option>
+                            <option value=""> -- Select -- </option>
                             <option {{ $category == 'material' ? 'selected' : '' }} value="material">Material</option>
                             <option {{ $category == 'in_house' ? 'selected' : '' }} value="in_house">In-House Products</option>
                         </select>
