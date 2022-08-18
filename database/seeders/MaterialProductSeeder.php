@@ -204,8 +204,17 @@ class MaterialProductSeeder extends Seeder
             'withdrawal_type' => $withdrawal_type
         ]);
 
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id],['batch_id' => $batch_one->id]);
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id],['batch_id' => $batch_two->id]);
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id],['batch_id' => $batch_three->id]);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id],[
+            'batch_id' => $batch_one->id,
+            'input_repack_amount' => $batch_one->unit_packing_value
+        ]);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id],[
+            'batch_id' => $batch_two->id,
+            'input_repack_amount' => $batch_two->unit_packing_value
+        ]);
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id],[
+            'batch_id' => $batch_three->id,
+            'input_repack_amount' => $batch_three->unit_packing_value
+        ]);
     }
 }

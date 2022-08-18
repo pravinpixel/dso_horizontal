@@ -792,7 +792,7 @@ app.controller('SearchAddController', function ($scope, $http) {
                                 time_stamp: element.draw_out_time_stamp
                             },
                             last_access           : JSON.parse(RepackData.access),
-                            initial_amount        : RepackData.quantity,
+                            initial_amount        : element.input_repack_amount,
                             initial_count         : RepackData.outlife,
                             repack_amount         : element.input_repack_amount,
                             balance_amount        : element.remain_amount,
@@ -831,7 +831,7 @@ app.controller('SearchAddController', function ($scope, $http) {
                                         time_stamp: element.draw_out_time_stamp
                                     },
                                     last_access           : JSON.parse(RepackData.access),
-                                    initial_amount        : RepackData.quantity,
+                                    initial_amount        : RepackData.unit_packing_value,
                                     initial_count         : RepackData.outlife,
                                     repack_amount         : element.input_repack_amount,
                                     balance_amount        : element.remain_amount,
@@ -850,6 +850,7 @@ app.controller('SearchAddController', function ($scope, $http) {
                     location.replace(`export-repack-batch/${$scope.currentBatchId}`);
                     $('#exportLogCheckBox').prop('checked', false)
                 }
+                $scope.get_material_products();
                 $('#RepackOutlife').modal('hide');
             })
     }

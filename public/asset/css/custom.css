@@ -539,6 +539,17 @@ a {
     background: #63736d;
     color: #f1f1f1;
 }
+.custom-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+.custom-input {
+    z-index: 111 !important;
+    position: relative;
+}
 .custom-input:disabled {
     font-weight: normal;
     background: none;

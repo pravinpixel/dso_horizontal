@@ -3,11 +3,11 @@ app.directive('repackTable', () => {
         restrict : 'A',
         link: function(scope, element, attribute) {
             element.on('click', () => {
-                if(attribute.repackTable == "IN") { 
+                if(attribute.repackTable == "OUT") { 
                     scope.repack.draw_in.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
                     scope.$apply()
                 }
-                if(attribute.repackTable == "OUT") { 
+                if(attribute.repackTable == "IN") { 
                     scope.repack.draw_out.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
                     var startDate   =   moment(scope.repack.draw_in.time_stamp, "MMMM Do YYYY, h:mm:ss a");
                     var endDate     =   moment(scope.repack.draw_out.time_stamp, "MMMM Do YYYY, h:mm:ss a"); 
@@ -27,7 +27,6 @@ app.directive('repackTable', () => {
                 }  
             })
             element.on('keyup', () => { 
-                
                 if(attribute.repackTable == "REPACK_INPUT") {
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
                     scope.repack.repack_amount === null ? scope.repack.balance_amount = null :
