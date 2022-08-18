@@ -417,8 +417,9 @@ app.controller('SearchAddController', function ($scope, $http) {
                                         if(pushStatus === true) {
                                             $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
                                         }
-                                            var barCodeInput = document.querySelector("#barcode_number")
-                                            barCodeInput.value = ''
+                                       
+                                        $scope.resetBarCode()
+                                        console.log("first")
                                         break;
                                     case 'DEDUCT_TRACK_USAGE':
                                         $scope.deductTrackUsage = [];

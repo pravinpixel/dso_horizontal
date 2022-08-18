@@ -542,7 +542,7 @@ a {
 .custom-input:disabled {
     font-weight: normal;
     background: none;
-    border: none;
+    border: none !important;
     outline: none;
     text-align: center !important;
 }
