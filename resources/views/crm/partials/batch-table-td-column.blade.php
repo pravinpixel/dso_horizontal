@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>  
-    @break
+    @break 
     @case('PRINT_BARCODE_LABEL')
         <div class="box border-start d-flex align-items-center" >
             <div class="d-flex align-items-center justify-content-between">
@@ -94,6 +94,19 @@
         <div class="box border-start"> 
             <input ng-click="changeReadStatus(batch.id)" type="checkbox" id="switch@{{ batch.id }}" data-switch="none"/>
             <label class="border shadow-sm" for="switch@{{ batch.id }}"></label>
+        </div>
+    @break
+    @case('EXTEND_EXPIRY')
+        <div class="box border-start box-sm">
+            <div class="dropdown mx-1">
+                <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots text-dark"></i> 
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
+                    <button class="dropdown-item text-secondary" ng-click="extension(batch)"><i class="bi bi-arrow-up-right-square me-1"></i>Extension</button>
+                </div>
+            </div>
         </div>
     @break
 @endswitch

@@ -142,7 +142,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                                     <a class="dropdown-item" href="#"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                                    <a class="dropdown-item"  ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details
+                                    <a class="dropdown-item" ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details
                                     </a> 
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
             </table> 
         </div>
     </div>
-    @include('crm.material-products.modals.view-batch-list')
+    @include('crm.material-products.modals.view-batch-list') 
 </div>
 @endsection
 @section('scripts') 
