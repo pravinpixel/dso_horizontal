@@ -3,15 +3,11 @@
 <div ng-app="NotificationAPP" ng-controller="NotificationController">
     <section>
         <div class="card shadow-sm border" ng-if="notifications.near_expiry.length"> 
+            <div class="card-header bg-near-expiry text-white text-center">
+                <h5 class="m-0">Near Expiry Material/In-house Product</h5>
+            </div>
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="9" class="bg-near-expiry text-white text-center">
-                                <h5 class="m-0">Near Expiry Material/In-house Product</h5>
-                            </th>
-                        </tr> 
-                    </thead>
+                <table class="table m-0 table-hover"> 
                     <tbody> 
                         <tr class="bg-light">
                             <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
@@ -51,15 +47,11 @@
             </div>
         </div>
         <div class="card shadow-sm border" ng-if="notifications.expired.length"> 
+            <div class="card-header bg-expired text-white text-center">
+                <h5 class="m-0">Expired Material/In-house Product</h5>
+            </div>
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="9" class="bg-expired text-white text-center">
-                                <h5 class="m-0">Expired Material/In-house Product</h5>
-                            </th>
-                        </tr> 
-                    </thead>
+                <table class="table m-0 table-hover"> 
                     <tbody> 
                         <tr class="bg-light">
                             <td class="text-expired"><b><small>Material / Product  Description</small></b></td>
@@ -99,15 +91,11 @@
             </div>
         </div>
         <div class="card shadow-sm border" ng-if="notifications.failed_iqc.length"> 
+            <div class="card-header bg-failed text-white text-center">
+                <h5 class="m-0">Failed IQC Material/In-house Product</h5>
+            </div>
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="9" class="bg-failed text-white text-center">
-                                <h5 class="m-0">Failed IQC Material/In-house Product</h5>
-                            </th>
-                        </tr>
-                    </thead>
+                <table class="table m-0 table-hover"> 
                     <tbody> 
                         <tr class="bg-light">
                             <td class="text-failed"><b><small>Material / Product  Description</small></b></td>
