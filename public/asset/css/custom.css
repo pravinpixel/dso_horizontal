@@ -535,6 +535,7 @@ a {
     background: #f1f1f1;
     color: #63736d;
 }
+
 .draw-in:hover {
     background: #63736d;
     color: #f1f1f1;
@@ -652,4 +653,31 @@ input[type=number] {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+.bg-near-expiry {
+    background: #FFB200 !important;
+}
+.text-near-expiry {
+    color: black !important;
+    background-color: #fff9ea !important;
+    letter-spacing: 1px;
+}
+.bg-expired {
+    background: #D36B00 !important;
+}
+.text-expired {
+    color: black !important;
+    background-color: #fff4e9 !important;
+    letter-spacing: 1px;
+}
+ 
+.bg-failed {
+    background: #C21010 !important;
+}
+.text-failed {
+    color: black !important;
+    background-color: #fdecec !important;
+    letter-spacing: 1px;
 }

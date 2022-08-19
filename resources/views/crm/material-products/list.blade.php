@@ -5,7 +5,7 @@
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                    <input type="number" min="1" ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-end ms-auto text-end">

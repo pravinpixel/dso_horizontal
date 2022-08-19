@@ -138,5 +138,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
     Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
-    Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired'])->name('near-expiry-expired'); 
+    Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
+    Route::get('/near-expiry-expired-ajax',[NotificationController::class,'near_expiry_expired_ajax']); 
 });

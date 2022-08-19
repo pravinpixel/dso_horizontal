@@ -3,15 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\DsoRepositoryInterface;
-use App\Interfaces\MartialProductRepositoryInterface;
-use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
-use Illuminate\Bus\Batch;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 class NotificationController extends Controller
 {
     public function __construct(
@@ -50,9 +45,13 @@ class NotificationController extends Controller
             'count'  => count($data),
         ]);
     }
-    public function near_expiry_expired()
+    public function near_expiry_expired_index()
     {
-        $data        = Batches::latest()->get();
+        return view('crm.notification.near-expiry-expired');
+    }
+    public function near_expiry_expired_ajax()
+    {
+        $data        = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->latest()->get();
         $near_expiry = [];
         $expired     = [];
         $failed_iqc  = [];
@@ -73,14 +72,10 @@ class NotificationController extends Controller
             }
         }
 
-        // dd($near_expiry);
-        // dd($expired);
-        // dd($failed_iqc); 
-      
-        return view('crm.notification.near-expiry-expired', compact([
-            'near_expiry',
-            'expired',
-            'failed_iqc'
-        ]));
+        return response()->json([
+            'near_expiry' => $near_expiry,
+            'expired'     => $expired,
+            'failed_iqc'  => $failed_iqc,
+        ]);
     }
 }
