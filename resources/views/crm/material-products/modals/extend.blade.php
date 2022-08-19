@@ -3,7 +3,7 @@
         <div class="modal-content rounded-0 border-bottom shadow">
             <div class="card-header text-center rounded-0 bg-primary text-white">
                 <div>
-                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry</h4>
+                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry @{{ batch.id }}</h4>
                 </div>
                 <button type="button" class="top-0 right-0 m-2 position-absolute rounded-pill btn btn-light btn-sm  shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
             </div>
@@ -13,11 +13,11 @@
                         <h1 class="h5">Extended QC Results Status :</h1>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <label for="Pass_label" class="nav-link active show form-radio-success">
-                                <input ng-model="batch.extended_qc_result" ng-checked="batch.extended_qc_result == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label"> 
+                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label"> 
                                 <span class="text-success"> Pass</span>
                             </label>
                             <label for="Fail_label" class="nav-link form-radio-danger ">
-                                <input ng-model="batch.extended_qc_result" ng-checked="batch.extended_qc_result == 'FAIL'" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label"> 
+                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'FAIL'" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label"> 
                                 <span class="text-danger">Fail</span>
                             </label> 
                         </div>
@@ -31,27 +31,30 @@
                         </div>
                     </div>
                     <div class="col-sm-8"> 
-                        <div ng-if="batch.extended_qc_result != null">
+                        <div ng-if="batch.extended_qc_status != null">
                             <p class="text-muted" style="text-transform: none !important">
                                 Please fill in the information below for <b class="text-dark">expiry extension</b>. The field labels marked with * are required input fields.
                             </p>
                             <div class="row m-0">
-                                <div class="col-12 text-start mb-2 px-1">
-                                    <small class="mb-1">Extended QC Documents*</small>
-                                    <input type="file" ng-disabled="batch.extended_qc_result == 'FAIL'" class="form-control" placeholder="Type here">
-                                </div>
-                                <div class="col-12 text-start mb-2 px-1">
-                                    <small class="mb-1">Extended Expiry Date *</small>
-                                    <input type="date" ng-disabled="batch.extended_qc_result == 'FAIL'" class="form-control" placeholder="Type here">
-                                </div>
-                                <div class="col-12 text-start mb-2 px-1">
-                                    <small class="mb-1">Remark</small>
-                                    <input type="text" ng-disabled="batch.extended_qc_result == 'FAIL'" class="form-control" placeholder="Type here">
-                                </div>
-                                <div class="col-12 text-center mb-2 px-1">
-                                    <button ng-if="batch.extended_qc_result == 'PASS'" class="btn btn-success rounded-pill">Submit</button>
-                                    <button ng-if="batch.extended_qc_result == 'FAIL'" class="btn btn-outline-danger rounded-pill">Please proceed for disposal</button>
-                                </div>
+                                <form  action="{{ route('update.extend-expiry', request()->route()->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="col-12 text-start mb-2 px-1">
+                                        <small class="mb-1">Extended QC Documents*</small>
+                                        <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
+                                    </div>
+                                    <div class="col-12 text-start mb-2 px-1">
+                                        <small class="mb-1">Extended Expiry Date *</small>
+                                        <input type="date"  value="@{{ batch.extended_expiry }}" name="extended_expiry" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
+                                    </div>
+                                    <div class="col-12 text-start mb-2 px-1">
+                                        <small class="mb-1">Remark</small>
+                                        <input type="text"  ng-model="batch.remarks" name="remarks" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
+                                    </div>
+                                    <div class="col-12 text-center mb-2 px-1">
+                                        <button type="submit" ng-if="batch.extended_qc_status == 'PASS'" class="btn btn-success rounded-pill">Submit</button>
+                                        <button ng-if="batch.extended_qc_status == 'FAIL'" class="btn btn-outline-danger rounded-pill">Please proceed for disposal</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>  
                     </div>

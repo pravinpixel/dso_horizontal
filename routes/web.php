@@ -141,4 +141,5 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
     Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show']);
+    Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
 });
