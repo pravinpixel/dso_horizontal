@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\DsoRepositoryInterface;
+use App\Models\Batches;
 use Illuminate\Http\Request;
 
 class ExtendExpiryController extends Controller
@@ -16,5 +17,13 @@ class ExtendExpiryController extends Controller
         $page_name  = "EXTEND_EXPIRY";
         $view       = "crm.extend-expiry.index";
         return $this->dsoRepository->renderPage($page_name, $view);
+    }
+    public function show($id)
+    {
+        try {
+            return Batches::findOrFail($id);
+        } catch (\Throwable $th) {
+            return 404;
+        }
     }
 }

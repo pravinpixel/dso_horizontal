@@ -870,4 +870,14 @@ app.controller('SearchAddController', function ($scope, $http) {
         $scope.batch = batch
         $('#Extensionmodal').modal('show');
     }
+    setTimeout(() => {
+        if ($scope.extend_status_batch_id !== 'null') {
+            $http.get(APP_URL + '/get-extend-expiry' + "/" + $scope.extend_status_batch_id).then((res) => {
+                if(res.data != 404) {
+                    $scope.batch = res.data
+                    $('#Extensionmodal').modal('show');
+                }
+            })
+        }
+    }, 500);
 });

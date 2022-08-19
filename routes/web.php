@@ -139,5 +139,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
     Route::get('/near-expiry-expired-ajax',[NotificationController::class,'near_expiry_expired_ajax']); 
 
-    Route::get('extend-expiry', [ExtendExpiryController::class,'index'])->name('extend-expiry');
+    Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
+    Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show']);
 });

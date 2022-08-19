@@ -9,7 +9,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Extended QC status</label>
             <div class="col-8">
-                {!! Form::select('extended_qc_status', ['Fail', 'Pass'], $batch->extended_qc_status ?? null, ['class' => 'form-select form-select-sm', 'placeholder' => '-- Select --', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_qc_status.status')]) !!}
+                {!! Form::select('extended_qc_status', ['FAIL' => 'Fail', 'PASS' => 'Pass'], $batch->extended_qc_status ?? null, ['class' => 'form-select form-select-sm', 'placeholder' => '-- Select --', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_qc_status.status')]) !!}
             </div>
         </div>
         <div class="row m-0 y-center my-2">

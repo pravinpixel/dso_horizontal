@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('content') 
-    <div ng-app="SearchAddApp" ng-controller="SearchAddController">
+@section('content')  
+    <div ng-app="SearchAddApp" ng-controller="SearchAddController" ng-init="extend_status_batch_id = '{{ request()->route()->id ?? 'null' }}'">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
@@ -17,6 +17,7 @@
         <section>
             @include('crm.partials.data-table')
         </section>
+ 
 
         {{-- ======= START : App Models ==== --}}
             @include('crm.material-products.modals.view-batch-list')

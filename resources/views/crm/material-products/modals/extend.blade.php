@@ -3,7 +3,7 @@
         <div class="modal-content rounded-0 border-bottom shadow">
             <div class="card-header text-center rounded-0 bg-primary text-white">
                 <div>
-                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry </h4>
+                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry</h4>
                 </div>
                 <button type="button" class="top-0 right-0 m-2 position-absolute rounded-pill btn btn-light btn-sm  shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
             </div>
@@ -13,11 +13,11 @@
                         <h1 class="h5">Extended QC Results Status :</h1>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <label for="Pass_label" class="nav-link active show form-radio-success">
-                                <input ng-model="batch.extended_qc_result" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label"> 
+                                <input ng-model="batch.extended_qc_result" ng-checked="batch.extended_qc_result == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label"> 
                                 <span class="text-success"> Pass</span>
                             </label>
                             <label for="Fail_label" class="nav-link form-radio-danger ">
-                                <input ng-model="batch.extended_qc_result" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label"> 
+                                <input ng-model="batch.extended_qc_result" ng-checked="batch.extended_qc_result == 'FAIL'" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label"> 
                                 <span class="text-danger">Fail</span>
                             </label> 
                         </div>
