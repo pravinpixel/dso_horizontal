@@ -51,7 +51,7 @@ class NotificationController extends Controller
     }
     public function near_expiry_expired_ajax()
     {
-        $data        = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->latest()->get();
+        $data        = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
         $near_expiry = [];
         $expired     = [];
         $failed_iqc  = [];
@@ -63,9 +63,7 @@ class NotificationController extends Controller
                 $expired[] = $row;
             } else {
                 $near_expiry[] = $row;
-                $expired[] = $row;
-
-            } 
+            }
 
             if($row->iqc_status == "1") {
                 $failed_iqc[] = $row;

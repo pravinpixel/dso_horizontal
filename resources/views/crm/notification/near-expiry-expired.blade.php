@@ -3,7 +3,7 @@
 <div ng-app="NotificationAPP" ng-controller="NotificationController">
     <section>
         <div class="card shadow-sm border" ng-if="notifications.near_expiry.length"> 
-            <div class="card-body p-0">
+            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover">
                     <thead>
                         <tr>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="card shadow-sm border" ng-if="notifications.expired.length"> 
-            <div class="card-body p-0">
+            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover">
                     <thead>
                         <tr>
@@ -99,7 +99,7 @@
             </div>
         </div>
         <div class="card shadow-sm border" ng-if="notifications.failed_iqc.length"> 
-            <div class="card-body p-0">
+            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover">
                     <thead>
                         <tr>
