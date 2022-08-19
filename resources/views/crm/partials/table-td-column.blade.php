@@ -85,4 +85,6 @@
             </div>
         </div>
     @break
+    @default
+    <div class="box border-start box-sm"></div>     
 @endswitch

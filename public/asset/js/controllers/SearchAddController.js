@@ -865,5 +865,9 @@ app.controller('SearchAddController', function ($scope, $http) {
             $scope.get_material_products()
             getNotificationCount()
         })
-    } 
-}); 
+    }  
+    $scope.extension = (batch) => {
+        $scope.batch = batch
+        $('#Extensionmodal').modal('show');
+    }
+});

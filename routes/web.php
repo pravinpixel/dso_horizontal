@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
@@ -42,10 +43,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/reports', function () {   
         return view('crm.reports.index');  
     })->name('reports');
-    
-    Route::get('/extend-expiry', function () {   
-        return view('crm.extend-expiry.index');  
-    })->name('extend-expiry');  
+     
 
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
@@ -140,4 +138,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
     Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
     Route::get('/near-expiry-expired-ajax',[NotificationController::class,'near_expiry_expired_ajax']); 
+
+    Route::get('extend-expiry', [ExtendExpiryController::class,'index'])->name('extend-expiry');
 });
