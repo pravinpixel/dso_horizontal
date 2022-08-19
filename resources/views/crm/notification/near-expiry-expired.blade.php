@@ -9,7 +9,7 @@
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover"> 
                     <tbody> 
-                        <tr class="bg-light">
+                        <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
                             <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
@@ -53,7 +53,7 @@
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover"> 
                     <tbody> 
-                        <tr class="bg-light">
+                        <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
                             <td class="text-expired"><b><small>Material / Product  Description</small></b></td>
                             <td class="text-expired"><b><small>Brand</small></b></td>
                             <td class="text-expired"><b><small>#Batch/Serial/PO No</small></b></td>
@@ -97,7 +97,7 @@
             <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
                 <table class="table m-0 table-hover"> 
                     <tbody> 
-                        <tr class="bg-light">
+                        <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
                             <td class="text-failed"><b><small>Material / Product  Description</small></b></td>
                             <td class="text-failed"><b><small>Brand</small></b></td>
                             <td class="text-failed"><b><small>#Batch/Serial/PO No</small></b></td>
