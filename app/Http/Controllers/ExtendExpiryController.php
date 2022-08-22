@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Repositories\MartialProductRepository;
@@ -32,10 +33,13 @@ class ExtendExpiryController extends Controller
     {
         $batch = Batches::findOrFail($id);
         $this->MartialProduct->storeFiles($request, $batch);
+        $old_value  =   clone $batch;
+        $new_value  =   $batch;
         $batch->update([
             'extended_expiry' => $request->extended_expiry,
             'remarks'         => $request->remarks
         ]);
+        LogActivity::dataLog($old_value, $new_value);
         return redirect()->route('extend-expiry')->with('success',"Extension Success !");
     }
 }

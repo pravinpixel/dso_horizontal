@@ -48,7 +48,7 @@ class LogActivity
             case 'transfer':
                 $action_type  = 'TRANSFER';
                 $module_name  = 'Batches';
-                break; 
+                break;  
         }
 
         LogSheet::updateOrCreate([
@@ -84,6 +84,10 @@ class LogActivity
             case 'deduct_track_outlife':
                 $action_type  = 'DEDUCT_TRACK_OUTLIFE';
                 $module_name  = 'RepackOutlife';
+                break;
+            case 'disposal_update':
+                $action_type  = 'EARLY DISPOSAL';
+                $module_name  = 'Batches';
                 break;
         }
         LogSheet::updateOrCreate([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Repositories\MartialProductRepository;
@@ -30,10 +31,12 @@ class EarlyDisposalController extends Controller
             return 404;
         }
     }
-    public function update(Request $request, $id)
+    public function disposal_update(Request $request, $id)
     {
         $batch = Batches::findOrFail($id);
         $this->MartialProduct->storeFiles($request, $batch);
+        $old_value  =   clone $batch;
+        $new_value  =   $batch;
 
         $batch->update([
             'used_for_td_expt_only' => $request->used_for_td_expt_only,
@@ -41,6 +44,7 @@ class EarlyDisposalController extends Controller
             'disposed_after'        => $request->disposed_after ?? null,
             'disposed_status'       => true
         ]);
+        LogActivity::dataLog($old_value, $new_value);
         return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
 }
