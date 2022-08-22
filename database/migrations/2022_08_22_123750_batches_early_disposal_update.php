@@ -14,6 +14,7 @@ class BatchesEarlyDisposalUpdate extends Migration
     public function up()
     {
         Schema::table('batches', function (Blueprint $table) {
+            $table->string('disposed_after')->nullable();
             $table->boolean('disposed_status')->default(false);
             $table->boolean('extended_status')->default(false); 
             $table->boolean('reconciliation_status')->default(false);

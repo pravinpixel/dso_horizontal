@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 
 class EarlyDisposalController extends Controller
 {
-    public function __construct(DsoRepositoryInterface $dsoRepositoryInterface,MartialProductRepository $MartialProductRepository){
+    public function __construct(
+        DsoRepositoryInterface $dsoRepositoryInterface,
+        MartialProductRepository $MartialProductRepository
+    ){
         $this->dsoRepository    =   $dsoRepositoryInterface;
         $this->MartialProduct   =   $MartialProductRepository;
     }
-
     public function index()
     {
         $page_name  = "EARLY_DISPOSAL";
@@ -27,5 +29,18 @@ class EarlyDisposalController extends Controller
         } catch (\Throwable $th) {
             return 404;
         }
+    }
+    public function update(Request $request, $id)
+    {
+        $batch = Batches::findOrFail($id);
+        $this->MartialProduct->storeFiles($request, $batch);
+
+        $batch->update([
+            'used_for_td_expt_only' => $request->used_for_td_expt_only,
+            'quantity'              => $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity,
+            'disposed_after'        => $request->disposed_after ?? null,
+            'disposed_status'       => true
+        ]);
+        return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
 }

@@ -61,6 +61,7 @@ class Batches extends Model
         'iqc_result_status',
         'withdrawal_type',
         'outlife_seconds',
+        'disposed_after',
         'disposed_status',
         'extended_status',
         'reconciliation_status',

@@ -143,4 +143,5 @@ Route::middleware(['auth_users'])->group(function () {
     
     Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
     Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show']); 
+    Route::post('/disposal/{id?}', [EarlyDisposalController::class,'update'])->name('update.disposal'); 
 });
