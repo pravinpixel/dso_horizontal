@@ -3,7 +3,7 @@
         <div class="modal-content rounded-0 border-bottom shadow">
             <div class="card-header text-center rounded-0 bg-primary text-white">
                 <div>
-                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry @{{ batch.id }}</h4>
+                    <h4 class="modal-title mb-1" id="topModalLabel">Extend Expiry</h4>
                 </div>
                 <button type="button" class="top-0 right-0 m-2 position-absolute rounded-pill btn btn-light btn-sm  shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
             </div>
