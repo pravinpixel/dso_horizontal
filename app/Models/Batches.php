@@ -60,7 +60,12 @@ class Batches extends Model
         'barcode_number',
         'iqc_result_status',
         'withdrawal_type',
-        'outlife_seconds'
+        'outlife_seconds',
+        'disposed_status',
+        'extended_status',
+        'reconciliation_status',
+        'system_stock',
+        'physical_stock',
     ];
 
     public function BarCodeGenOne()

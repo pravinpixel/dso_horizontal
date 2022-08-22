@@ -32,16 +32,17 @@
                             <input type="file" name="" id="" class="form-control"> 
                         </div>
                         <div class="mb-3">
-                            <span><strong>* To be Disposed after</span>
+                            <span><strong>* To be Disposed after</strong></span>
                             <input type="date" name="" id="" class="form-control"> 
                         </div>
-                        <strong>Accordance to EG1 Chemical UIMS 2021</strong>
-                        <ul>
-                            <li>2 years OEM unstated (liquids , others)</li>
-                            <li>5 years OEM unstated (dry , others)</li>
-                            <li>5 years OEM declare does not expire</li>
-                            <li>DSO in house (ask Domain PMTS)</li>
-                        </ul>
+                        <br>
+                        <h1 class="h5 mb-3">Accordance to EG1 Chemical UIMS 2021</h1>
+                        <div>
+                            <div class="my-1"><span class="me-2">-</span> 2 years OEM unstated (liquids , others)</div>
+                            <div class="my-1"><span class="me-2">-</span> 5 years OEM unstated (dry , others)</div>
+                            <div class="my-1"><span class="me-2">-</span> 5 years OEM declare does not expire</div>
+                            <div class="my-1"><span class="me-2">-</span> DSO in house (ask Domain PMTS)</div> 
+                        </div>
                     </div>
                     <div class="col-12 text-center mt-4">
                         <button type="submit" class="px-3 rounded-pill btn btn-primary">Submit</button>
