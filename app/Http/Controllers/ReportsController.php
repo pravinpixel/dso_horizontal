@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Repositories\MartialProductRepository;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ReportsController extends Controller
     }
     public function history()
     {
-        return view('crm.reports.history');
+        $product_batches    =   LogActivity::all();
+        return view('crm.reports.history', compact('product_batches'));
     }
     public function disposed_items()
     {

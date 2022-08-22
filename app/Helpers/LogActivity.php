@@ -6,7 +6,7 @@ use App\Models\LogSheet;
 
 class LogActivity
 {
-    public static function log($id)
+    public static function log($id, $remarks = null)
     {
         switch (request()->route()->getActionMethod()) {
             case 'batch_destroy':
@@ -58,11 +58,12 @@ class LogActivity
             'user_name'   => auth_user()->alias_name,
             'module_name' => $module_name,
             'action_type' => $action_type ?? "",
-            "module_id"   => $id
+            "module_id"   => $id,
+            'remarks'     => $remarks ?? ''
         ]);
     }
 
-    public static function dataLog($old, $new)
+    public static function dataLog($old, $new , $remarks = null)
     {
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
@@ -99,12 +100,13 @@ class LogActivity
             'action_type' => $action_type,
             'old'         => json_encode($old),
             'new'         => json_encode($new),
-            'module_id'   => $old->id ?? ''
+            'module_id'   => $old->id ?? '',
+            'remarks'    => $remarks ?? ''
         ]);
     }
 
     public static function all()
     {
-        return LogSheet::latest()->get();
+        return LogSheet::with('User')->latest()->paginate(15);
     }
 }

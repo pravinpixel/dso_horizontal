@@ -18,6 +18,12 @@ class LogSheet extends Model
         'module_id',
         'user_name',
         'old',
-        'new'
+        'new',
+        'remarks'
     ];
+
+    public function User()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

@@ -45,9 +45,7 @@
                 </div>
             </div> 
             <div ng-show="material_products.data.length == 0">
-                <div class="text-center" >
-                    No data found
-                </div>
+                {!! no_data_found() !!}
             </div>
         </div>
     </div>
