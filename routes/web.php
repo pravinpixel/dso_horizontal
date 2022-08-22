@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\EarlyDisposalController;
 use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrintBarcodeController;
@@ -27,10 +28,7 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
-    
-    Route::get('/disposal', function () {   
-        return view('crm.disposal.index');  
-    })->name('disposal');
+     
      
     Route::get('/reconciliation', function () {   
         return view('crm.reconsolidation.index');  
@@ -142,4 +140,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
     Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show']);
     Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
+    
+    Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
+    Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show']); 
 });

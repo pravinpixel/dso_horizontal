@@ -866,11 +866,12 @@ app.controller('SearchAddController', function ($scope, $http) {
             getNotificationCount()
         })
     }  
+
+
     $scope.extension = (batch) => {
         $scope.batch = batch
         $('#Extensionmodal').modal('show');
-    }
-
+    } 
     setTimeout(() => {
         if ($scope.extend_status_batch_id !== 'null') {
             $http.get(APP_URL + '/get-extend-expiry' + "/" + $scope.extend_status_batch_id).then((res) => {
@@ -880,5 +881,16 @@ app.controller('SearchAddController', function ($scope, $http) {
                 }
             })
         }
-    }, 500); 
+    }, 500);
+
+    setTimeout(() => {
+        if ($scope.disposal_status_batch_id !== 'null') {
+            $http.get(APP_URL + '/get-disposal-expiry' + "/" + $scope.disposal_status_batch_id).then((res) => {
+                if(res.data != 404) {
+                    $scope.batch = res.data
+                    $('#disposalModal').modal('show');
+                }
+            })
+        }
+    }, 500);
 });
