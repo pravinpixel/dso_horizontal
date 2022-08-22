@@ -32,8 +32,8 @@
         <div class="row m-0">
             <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel"> 
                 <div class="border card text-center rounded-5 p-3 print-card" > 
-                    <div class="barcode_label" ng-if="Barcode" >
-                        {{ $batch->barcode_number }}
+                    <div ng-if="Barcode" style="padding: 15px 0"> 
+                        <img width="150px" src='https://barcode.tec-it.com/barcode.ashx?data={{ $batch->barcode_number }}%0A&code=Code128&multiplebarcodes=true&translate-esc=true'/>
                     </div>
                     <div>
                         <small  ng-if="batch_id">
