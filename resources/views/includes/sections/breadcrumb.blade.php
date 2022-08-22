@@ -22,7 +22,8 @@
                             {{ Route::is('disposal') ? "Early Disposal" : null }}
                             {{ Route::is('print-barcode') ? "Print Label" : null }}
                             {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : null }}
-                            {{ Route::is('reports') ? "Reports" : null }}
+                            {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? "Reports" : null }}
+
                             {{ Route::is('list-search') ? "List Search" : null }}
                             {{ Route::is('extend-expiry') ? "Extend Expiry" : null }}
                             {{ Route::is('threshold-qty') ? "Threshold Qty" : null }}
@@ -60,7 +61,8 @@
                     {{ Route::is('disposal') ? "Early Disposal" : null }}
                     {{ Route::is('print-barcode') ? "Print Label  " : null }}
                     {{ Route::is(['reconsolidation','view-reconsolidation']) ? "Reconciliation" : null }}
-                    {{ Route::is('reports') ? "Reports" : null }}
+                    {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? "Reports" : null }}
+
                     {{ Route::is('list-search') ? "List Search" : null }}
                     {{ Route::is('extend-expiry') ? "Extend Expiry" : null }}
                     {{ Route::is('threshold-qty') ? "Threshold Qty" : null }}

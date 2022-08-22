@@ -99,6 +99,42 @@
             </div>
         </div>
     @break
+    @case('REPORT_UTILISATION_CART')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    @break
+    @case('REPORT_EXPORT_CART')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    @break
+    @case('REPORT_DISPOSED_ITEMS')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    @break
     @default
     <div class="box border-start box-sm"></div>     
 @endswitch

@@ -1,4 +1,4 @@
-app.controller('SearchAddController', function ($scope, $http) {
+app.controller('RootController', function ($scope, $http) {
 
     $scope.withdrawalStatus = false
     $scope.filter_status = false;

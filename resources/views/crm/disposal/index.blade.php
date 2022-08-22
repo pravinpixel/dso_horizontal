@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')  
-    <div ng-app="SearchAddApp" ng-controller="SearchAddController" ng-init="disposal_status_batch_id = '{{ request()->route()->id ?? 'null' }}'">
+    <div ng-app="RootApp" ng-controller="RootController" ng-init="disposal_status_batch_id = '{{ request()->route()->id ?? 'null' }}'">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
@@ -53,8 +53,8 @@
     <script src="https://code.angularjs.org/snapshot/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.4/angular-messages.js"></script>    
     <script src="{{ asset('public/asset/js/vendors/date-picker.js') }}"></script>
-    <script src="{{ asset('public/asset/js/modules/SearchAddApp.js') }}"></script>
-    <script src="{{ asset('public/asset/js/controllers/SearchAddController.js') }}"></script>
+    <script src="{{ asset('public/asset/js/modules/RootApp.js') }}"></script>
+    <script src="{{ asset('public/asset/js/controllers/RootController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
     <script>

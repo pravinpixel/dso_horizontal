@@ -9,6 +9,7 @@ use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\RepackBatchController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransferBatchController;
 use App\Http\Controllers\WithdrawalController; 
 
@@ -37,12 +38,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/view-reconciliation', function () {   
         return view('crm.reconsolidation.view');  
     })->name('view-reconsolidation');
-    
-    Route::get('/reports', function () {   
-        return view('crm.reports.index');  
-    })->name('reports');
-     
-
+      
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
     })->name('disposed-items');
@@ -144,4 +140,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
     Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show']); 
     Route::post('/disposal/{id?}', [EarlyDisposalController::class,'disposal_update'])->name('update.disposal'); 
+
+    Route::get('reports', [ReportsController::class,'utilisation_cart'])->name('reports'); 
+    Route::get('reports/utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
+    Route::get('reports/export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
+    Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history'); 
+    Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
+    
 });

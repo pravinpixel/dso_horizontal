@@ -31,7 +31,7 @@
                         <a href="{{ route('extend-expiry') }}" class="nav-link {{ Route::is('extend-expiry') ? 'active' : '' }}"><i class="bi bi-arrow-up-right-square me-1"></i>Extended Expiry</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="{{ route('reports') }}" class="nav-link {{ Route::is('reports') ? 'active' : '' }}"><i class="bi bi-file-earmark-bar-graph me-1"></i>Report  </a>
+                        <a href="{{ route('reports') }}" class="nav-link {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? 'active' : '' }}"><i class="bi bi-file-earmark-bar-graph me-1"></i>Report  </a>
                     </li> 
                     <li class="nav-item dropdown">
                         <a href="{{ route('print-barcode') }}" class="nav-link {{ Route::is('print-barcode') ? 'active' : '' }}"><i class="bi bi-upc-scan me-1"></i>Print Label </a>
