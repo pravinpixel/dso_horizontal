@@ -116,6 +116,10 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu"> 
+                    <a class="dropdown-item d-flex align-items-start" ng-click="dispose(batch)">
+                        <i class="bi bi-trash2 me-1"></i>
+                      To Dispose /  <br>  Used for TD / Expt Project 
+                    </a>
                     <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
                     <button class="dropdown-item text-secondary"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
                     <button class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>

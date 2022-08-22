@@ -18,7 +18,7 @@
                         </label>
                         <div class="d-flex align-items-center mb-3">
                             <label for="" class="me-2">Qty : </label>
-                            <input type="number" min="1"  class="form-control text-center my-2" name="" id="" value="10" style="width: 100px">
+                            <input type="number" min="1"  class="form-control text-center my-2" name="" id="" value="@{{ batch.quantity }}" style="width: 100px">
                         </div>
                         <span><strong>Supporting Documents (If any)</strong></span>
                         <input type="file" name="" id="" class="form-control"> 
