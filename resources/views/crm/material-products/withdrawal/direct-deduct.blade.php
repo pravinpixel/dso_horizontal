@@ -31,7 +31,7 @@
                 <td>@{{ row.unit_packing_value }} @{{ row.unit_of_measure }}</td>
                 <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center" readonly value="@{{ row.direct_detect_quantity }}" required></td>
                 <td class="child-td py-0 px-1">
-                    <textarea name="remarks[]" class="form-control h-100 w-100" required></textarea>
+                    <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
                 </td>
                 <td class="text-center">
                     <i ng-click="removeDirectDetectRow(index)" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>

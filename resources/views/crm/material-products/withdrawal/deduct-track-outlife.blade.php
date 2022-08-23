@@ -31,7 +31,7 @@
                 <td class="p-0"><small> @{{ row.qty_cut }} </small></td>
                 <td class="p-0 py-0 px-1">
                     <input type="hidden" name="id[]" value="@{{ row.id }}">
-                    <textarea name="remarks[]" required class="form-control h-100 w-100">@{{ row.remarks }}</textarea>
+                    <textarea name="remarks[]" class="form-control h-100 w-100">@{{ row.remarks }}</textarea>
                 </td>
                 <td class="child-td"><small class="text-dark">@{{ row.updated_outlife }}</small></td>
                 <td class="child-td"><small class="text-dark">@{{ row.current_outlife_expiry }}</small></td>

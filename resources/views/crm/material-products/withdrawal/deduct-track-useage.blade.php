@@ -52,7 +52,7 @@
                     @{{ (row.quantity * row.unit_packing_value) - used_value }} @{{ deductTrackUsage[0].material.unit_of_measure.name }}
                 </td>
                 <td class="child-td py-0 px-1">
-                    <textarea ng-disabled="row.material.end_of_material_product == 1" name="remarks" required class="form-control h-100 w-100"></textarea>
+                    <textarea ng-disabled="row.material.end_of_material_product == 1" name="remarks"  class="form-control h-100 w-100"></textarea>
                 </td>
                 <td class="child-td">
                     <i ng-click="removeDeductTrackUsageRow(i)" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
