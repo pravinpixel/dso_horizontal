@@ -415,11 +415,12 @@ app.controller('RootController', function ($scope, $http) {
                                             }
                                         });
                                         if(pushStatus === true) {
-                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
+                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value.name, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
                                         }
                                        
                                         $scope.resetBarCode()
-                                        console.log("first")
+                                        console.log(batch)
+                                        console.log(material)
                                         break;
                                     case 'DEDUCT_TRACK_USAGE':
                                         $scope.deductTrackUsage = [];
@@ -427,11 +428,11 @@ app.controller('RootController', function ($scope, $http) {
                                         break;
                                     case 'DEDUCT_TRACK_OUTLIFE':
                                         $scope.deductTrackOutlife = [];
-                                        $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, category_selection: material.category_selection })
+                                        $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name,category_selection: material.category_selection })
                                     
                                             $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
                                                 row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
-                                                console.log(row)
+                                           
                                             })
                                         break;
                                     default:

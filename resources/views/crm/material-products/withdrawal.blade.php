@@ -54,7 +54,7 @@
                                     <th class="table-th child-td">Item description</th>
                                     <th class="table-th child-td">Brand</th>
                                     <th class="table-th child-td">Batch#/ Serial#</th>
-                                    <th class="table-th child-td">Pkt size</th>
+                                    <th class="table-th child-td">Unit packing value</th>
                                     <th class="table-th child-td">Withdraw Qty</th>
                                     <th class="table-th child-td">Remarks</th>
                                     <th class="table-th child-td text-center"> <i class="text-danger bi bi-trash3-fill"></i></th>
@@ -71,7 +71,7 @@
                                     </td>
                                     <td>@{{ row.brand }}</td>
                                     <td>@{{ row.batch }} / @{{ row.serial }}</td>
-                                    <td>@{{ row.unit_packing_value }}</td>
+                                    <td>@{{ row.unit_packing_value }} @{{ row.unit_of_measure }}</td>
                                     <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center" readonly value="@{{ row.direct_detect_quantity }}" required></td>
                                     <td class="child-td py-0 px-1">
                                         <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
