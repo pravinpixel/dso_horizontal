@@ -19,8 +19,8 @@ class CreateDeductTrackUsagesTable extends Migration
             $table->string('item_description');
             $table->string('batch_serial');
             $table->string('last_accessed');
-            $table->integer('used_amount');
-            $table->integer('remain_amount');
+            $table->decimal('used_amount',10,3);
+            $table->decimal('remain_amount',10,3);
             $table->string('remarks');
             $table->timestamps();
         });

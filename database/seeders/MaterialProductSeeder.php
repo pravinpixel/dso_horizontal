@@ -83,17 +83,17 @@ class MaterialProductSeeder extends Seeder
         $parent_data_two = [
             "category_selection"              => "in_house",
             "item_description"                => "Acetone 90% Ind grade",
-            "unit_of_measure"                 => "8",
-            "unit_packing_value"              => "575",
+            "unit_of_measure"                 => "1",
+            "unit_packing_value"              => "10",
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
         ];
         $data_two = [
-            "unit_packing_value"            => "575",
+            "unit_packing_value"            => "10",
             "is_draft"                      => "0",
-            "quantity"                     => 155,
-            "system_stock"                 => 155,
+            "quantity"                     => 5,
+            "system_stock"                 => 5,
             "brand"                        => "In-House",
             "supplier"                     => "Peter Parker",
             "batch"                        => "19F482MBi64",

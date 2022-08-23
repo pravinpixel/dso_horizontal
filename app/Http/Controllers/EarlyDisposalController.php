@@ -44,7 +44,8 @@ class EarlyDisposalController extends Controller
             'disposed_after'        => $request->disposed_after ?? null,
             'disposed_status'       => true
         ]);
-        LogActivity::dataLog($old_value, $new_value);
+ 
+        LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
         return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
 }

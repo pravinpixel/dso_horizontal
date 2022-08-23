@@ -7,9 +7,7 @@
         <button class="btn btn-sm alert-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x text-white"></i></button>
     </div>
 @endif
-
-
-
+ 
 @if ($message = Session::get('error'))
 
     <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">

@@ -241,6 +241,11 @@ option {
     max-height: 95vh;
     overflow: auto;
 }
+.swal-button--confirm {
+    background-color: #3688fc !important;
+    padding: 10px 41px !important;
+    border-radius: 20px !important;
+}
 .swal-modal {
     border-radius: 25px !important;
 }

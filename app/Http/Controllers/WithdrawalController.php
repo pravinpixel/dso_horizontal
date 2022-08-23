@@ -19,19 +19,18 @@ class WithdrawalController extends Controller
             $new_value     = $current_batch; 
 
             $current_batch->update([
-                'quantity'  =>  $current_batch->quantity -  $request->quantity[$key],
-                'remarks'   =>  $request->remarks[$key] ?? ""
+                'quantity'  =>  $current_batch->quantity -  $request->quantity[$key]
             ]);
-
-            LogActivity::dataLog($old_value, $new_value);
+            
+            LogActivity::dataLog($old_value, $new_value,  $request->remarks[$key] ?? "");
         }
-        return redirect()->back()->with("success", "Direct Deduct Success !");
+        return redirect()->back()->with("success_message", __('global.direct_deduct_success'));
     }
     public function deduct_track_usage(Request $request)
     {
         $batch      = Batches::findOrFail($request->id);
         $material   = MaterialProducts::find($batch->material_product_id);
-         
+          
         if($request->used_value && $request->remarks) {
             DeductTrackUsage::create([
                 'batch_id'         => $request->id,
@@ -39,18 +38,20 @@ class WithdrawalController extends Controller
                 'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
                 'last_accessed'    => auth_user()->alias_name,
                 'used_amount'      => $request->used_value,
-                'remain_amount'    => $batch->unit_packing_value - $request->used_value,
+                'remain_amount'    => ($batch->quantity * $batch->unit_packing_value) - $request->used_value,
                 'remarks'          => $request->remarks
             ]);
 
+            $remain_amount = (float) ($batch->quantity * $batch->unit_packing_value) - $request->used_value;
+
             $batch->update([
-                "unit_packing_value" => $batch->unit_packing_value - $request->used_value
+                "unit_packing_value" => (float) $remain_amount / $batch->unit_packing_value
             ]);
         }
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
-        ]);
-        return redirect()->back()->with("success", "Deduct Track Usage Success !");
+        ]); 
+        return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
     public function deduct_track_outlife(Request $request)
     {
@@ -61,7 +62,8 @@ class WithdrawalController extends Controller
             $repackOutlife->update([
                 'remarks' => $request->remarks[$key],
             ]);
-            LogActivity::dataLog($old_value, $new_value);
+           
+            LogActivity::dataLog($old_value, $new_value,  $request->remarks[$key] ?? "");
         }
         if($request->print_outlife_expiry == 1) {
             return redirect(route('print-barcode', RepackOutlife::find($request->id[0])->batch_id));

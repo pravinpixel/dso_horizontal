@@ -9,8 +9,7 @@
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
 @yield('scripts')
-<script>
-     
+<script> 
     $(document).ajaxStart(function(){
         console.log("Start") 
     });
@@ -18,3 +17,4 @@
         console.log("End....")
     });
 </script>
+@if ($message = Session::get('success_message')) <script>swal({text: "{{ $message }}",icon: "success",})</script> @endif

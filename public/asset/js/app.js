@@ -193,3 +193,59 @@ getNotificationCount = () => {
     }); 
 }
 getNotificationCount()
+ 
+formConfirm = (event) => {  
+    event.preventDefault();
+    swal({
+        text: event.target.attributes['alert-text'].value,
+        icon: "info",
+        buttons: {
+            cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true,
+                className: "btn-light rounded-pill btn",
+                closeModal: true,
+            },
+            confirm: {
+                text: "Yes",
+                value: true,
+                visible: true,
+                className: "btn btn-primary rounded-pill",
+                closeModal: true
+            }
+        },
+    }).then((isConfirm) => {
+        if(isConfirm) {
+            event.target.submit()
+        }
+    }); 
+}
+checkboxConfirm = (event) => {
+    event.preventDefault();
+    swal({
+        text: event.target.attributes['alert-text'].value,
+        icon: "info",
+        buttons: {
+            cancel: {
+                text: "Cancel",
+                value: null,
+                visible: true,
+                className: "btn-light rounded-pill btn",
+                closeModal: true,
+            },
+            confirm: {
+                text: "Yes",
+                value: true,
+                visible: true,
+                className: "btn btn-primary rounded-pill",
+                closeModal: true
+            }
+        },
+    }).then((isConfirm) => {
+        if(isConfirm) {
+            event.target.checked =  true
+            return true
+        }
+    }); 
+}

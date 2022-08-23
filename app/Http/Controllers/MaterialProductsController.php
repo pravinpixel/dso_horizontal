@@ -212,7 +212,7 @@ class MaterialProductsController extends Controller
     public function withdrawal()
     {
         $page_name  =  "MATERIAL_WITHDRAWAL";
-        $view       =  "crm.material-products.withdrawal";
+        $view       =  "crm.material-products.withdrawal.index";
         return  $this->dsoRepository->renderPage($page_name, $view);
     }
 

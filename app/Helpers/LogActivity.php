@@ -101,7 +101,7 @@ class LogActivity
             'old'         => json_encode($old),
             'new'         => json_encode($new),
             'module_id'   => $old->id ?? '',
-            'remarks'    => $remarks ?? ''
+            'remarks'    =>  $new->remarks ?? ''
         ]);
     }
 
