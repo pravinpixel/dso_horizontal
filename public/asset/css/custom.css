@@ -11,6 +11,12 @@ option {
     text-transform: none !important ;
 
 }
+.dataTables_wrapper  {
+    position: relative;
+}
+.top-7 {
+    top: -2px !important;
+}
 
 .container-fluid {
     width: 95% !important;

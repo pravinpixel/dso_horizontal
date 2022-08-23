@@ -107,6 +107,6 @@ class LogActivity
 
     public static function all()
     {
-        return LogSheet::with('User')->latest()->paginate(15);
+        return LogSheet::with('User')->latest()->get();
     }
 }
