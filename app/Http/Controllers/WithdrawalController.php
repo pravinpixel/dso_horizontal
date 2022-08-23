@@ -31,26 +31,31 @@ class WithdrawalController extends Controller
         $batch      = Batches::findOrFail($request->id);
         $material   = MaterialProducts::find($batch->material_product_id);
           
-        if($request->used_value && $request->remarks) {
-            DeductTrackUsage::create([
-                'batch_id'         => $request->id,
-                'item_description' => $material->item_description,
-                'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
-                'last_accessed'    => auth_user()->alias_name,
-                'used_amount'      => $request->used_value,
-                'remain_amount'    => ($batch->quantity * $batch->unit_packing_value) - $request->used_value,
-                'remarks'          => $request->remarks
-            ]);
+        DeductTrackUsage::create([
+            'batch_id'         => $request->id,
+            'item_description' => $material->item_description,
+            'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
+            'last_accessed'    => auth_user()->alias_name,
+            'used_amount'      => $request->used_value,
+            'remain_amount'    => ($batch->quantity * $batch->unit_packing_value) - $request->used_value,
+            'remarks'          => $request->remarks
+        ]);
 
-            $remain_amount = (float) ($batch->quantity * $batch->unit_packing_value) - $request->used_value;
+        $remain_amount = (float) ($batch->quantity * $batch->unit_packing_value) - $request->used_value;
 
-            $batch->update([
-                "unit_packing_value" => (float) $remain_amount / $batch->unit_packing_value
-            ]);
-        }
+        $batch->update([
+            "unit_packing_value" => (float) $remain_amount / $batch->unit_packing_value
+        ]);
+       
+        $old_value     = clone $material;
+        $new_value     = $material; 
+
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
         ]); 
+
+        LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
+
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
     public function deduct_track_outlife(Request $request)

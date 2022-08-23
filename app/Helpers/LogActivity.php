@@ -49,6 +49,7 @@ class LogActivity
                 $action_type  = 'TRANSFER';
                 $module_name  = 'Batches';
                 break;  
+   
         }
 
         LogSheet::updateOrCreate([
@@ -89,6 +90,10 @@ class LogActivity
             case 'disposal_update':
                 $action_type  = 'EARLY DISPOSAL';
                 $module_name  = 'Batches';
+                break;
+            case 'deduct_track_usage' :
+                $action_type  = 'Deduct_Track_Usage';
+                $module_name  = 'Withdrawal';
                 break;
         }
         LogSheet::updateOrCreate([
