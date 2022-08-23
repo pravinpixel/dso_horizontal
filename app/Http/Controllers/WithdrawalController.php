@@ -38,7 +38,7 @@ class WithdrawalController extends Controller
             'last_accessed'    => auth_user()->alias_name,
             'used_amount'      => $request->used_value,
             'remain_amount'    => ($batch->quantity * $batch->unit_packing_value) - $request->used_value,
-            'remarks'          => $request->remarks
+            'remarks'          => $request->remarks ?? ""
         ]);
 
         $remain_amount = (float) ($batch->quantity * $batch->unit_packing_value) - $request->used_value;
