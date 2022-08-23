@@ -34,8 +34,9 @@
             <label for="" class="col-4">Brand <sup class="text-danger">*</sup></label>
             <div class="col-8">
                 @php
-                    $brand = category_type() ==  'material' ? null : "In-House"
+                    $brand = category_type() ==  'in_house' ? "In-House" : ""
                 @endphp
+    
                 {!! Form::text('brand', $batch->brand ?? $brand, 
                     ['class' => 'form-control form-select-sm need-word-match', 'placeholder' => 'Type here...','required',
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."brand.status")

@@ -388,8 +388,7 @@ app.controller('RootController', function ($scope, $http) {
 
                     if (response.data.data === null) {
                         $scope.withdrawalStatus = false
-                    }
-                    $scope.withdrawalType = response.data.data.data[0].batches[0].withdrawal_type
+                    } 
 
                     if ($scope.directDeduct === undefined) {
                         $scope.directDeduct = []
@@ -404,6 +403,7 @@ app.controller('RootController', function ($scope, $http) {
                     $scope.material_products.data.map((material) => {
                         material.batches.map((batch) => {
                             if (batch.barcode_number == $scope.barcode_number) {
+                                $scope.withdrawalType = batch.withdrawal_type
                                 switch (batch.withdrawal_type) {
                                     case 'DIRECT_DEDUCT':
                                         var pushStatus               = true 
