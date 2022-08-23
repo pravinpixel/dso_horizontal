@@ -415,7 +415,7 @@ app.controller('RootController', function ($scope, $http) {
                                             }
                                         });
                                         if(pushStatus === true) {
-                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value.name, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
+                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
                                         }
                                        
                                         $scope.resetBarCode()
