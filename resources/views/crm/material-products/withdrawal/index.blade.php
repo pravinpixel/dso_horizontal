@@ -5,7 +5,7 @@
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" min="1"  onkeyup="return this.value = ''" ng-model="barcode_number" min="1" ng-change="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
+                    <input type="number" onkeyup="withdrawal_search_barcode_number(this)" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                     <i ng-click="resetBarCode()" class="bi bi-x-circle-fill font-20 text-danger position-absolute right-0 me-2" style="cursor: pointer;z-index:111"></i>
                 </div>
             </div> 
@@ -15,8 +15,41 @@
                 </div>
             </div>
         </div>  
-        <div class="card" ng-if="withdrawalType">
-            <ul class="nav nav-tabs bg-light">
+        <div >
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#home" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                        <span>Direct Deduct</span>
+                        <span class="badge bg-primary ms-2">@{{ directDeduct.length }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#profile" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
+                        <span>Deduct & Track Usage</span>
+                        <span class="badge bg-primary ms-2">@{{ deductTrackUsage.length }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        <span>Deduct & Track Outlife</span>
+                        <span class="badge bg-primary ms-2">@{{ deductTrackOutlife.length }}</span>
+                    </a>
+                </li>
+            </ul>
+      
+            <div class="tab-content border border-top-0 p-3 m-0 bg-white">
+                <div class="tab-pane show active" id="home">
+                    @include('crm.material-products.withdrawal.direct-deduct')
+                </div>
+                <div class="tab-pane" id="profile">
+                    @include('crm.material-products.withdrawal.deduct-track-useage')
+                </div>
+                <div class="tab-pane" id="settings">
+                    @include('crm.material-products.withdrawal.deduct-track-outlife')
+                </div>
+            </div> 
+ 
+            {{-- <ul class="nav nav-tabs bg-light">
                 <li class="nav-item">
                     <a class="nav-link" ng-class="withdrawalType == 'DIRECT_DEDUCT' ? 'active' : ''">
                         <i class="mdi mdi-home-variant d-md-none d-block"></i>
@@ -37,21 +70,9 @@
                 </li> 
             </ul> 
             <section class="border border-top-0 card-body"> 
-                <div class="mb-3">
-                    @include('crm.partials.data-table')
+                <div>
                 </div>
-                <div> 
-                    <div ng-if="withdrawalType == 'DIRECT_DEDUCT'"> 
-                        @include('crm.material-products.withdrawal.direct-deduct')
-                    </div>
-                    <div ng-if="withdrawalType == 'DEDUCT_TRACK_USAGE'">
-                        @include('crm.material-products.withdrawal.deduct-track-useage')
-                    </div>
-                    <div ng-if="withdrawalType == 'DEDUCT_TRACK_OUTLIFE'"> 
-                        @include('crm.material-products.withdrawal.deduct-track-outlife')
-                    </div>
-                </div>
-            </section>
+            </section> --}}
         </div>
 
         {{-- ======= START : App Models ==== --}}

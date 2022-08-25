@@ -20,6 +20,7 @@ class Batches extends Model
         'supplier',
         'unit_packing_value',
         'quantity',
+        'quantity_color',
         'batch',
         'serial',
         'po_number',

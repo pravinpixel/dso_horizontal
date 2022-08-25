@@ -103,7 +103,7 @@ class DsoRepository implements DsoRepositoryInterface
                 }
                 if($batch->quantity  != null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
-                } 
+                }
             }
             // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;
@@ -125,7 +125,7 @@ class DsoRepository implements DsoRepositoryInterface
                 } 
             }
             $parent['quantityColor']      = $quantityColor;
-        } 
+        }
 
        
         $collection = Arr::flatten($material_product);
@@ -134,6 +134,7 @@ class DsoRepository implements DsoRepositoryInterface
         $page       = null;
         $page       = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items      = $items instanceof Collection ? $items : Collection::make($items); 
+
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
             'path'     => LengthAwarePaginator::resolveCurrentPath(),
             'pageName' => "page",

@@ -13,7 +13,6 @@ class CreateBatchesTable extends Migration
      */
     public function up()
     {
-         
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->integer('is_draft')->nullable()->default(1);
@@ -24,6 +23,7 @@ class CreateBatchesTable extends Migration
             $table->string('supplier')->nullable();
             $table->integer('unit_packing_value')->nullable();
             $table->decimal('quantity',10,2)->nullable();
+            $table->string('quantity_color')->nullable();
             $table->string('batch')->nullable();
             $table->string('serial')->nullable();
             $table->string('po_number')->nullable();

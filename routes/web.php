@@ -123,6 +123,9 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
     Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
 
+    
+
+    Route::get('/get-withdrawal-batches/{barcode}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal.withdrawal_indexing');
     Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
     Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
     Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('withdrawal.deduct-track-outlife');

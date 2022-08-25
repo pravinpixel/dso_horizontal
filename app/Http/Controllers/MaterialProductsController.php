@@ -21,7 +21,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
-use Carbon\Carbon;  
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route; 
 use Illuminate\Support\Facades\Storage;
 
@@ -320,12 +321,14 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
     {
-        $result =   $this->MartialProductRepository->save_material_product(
+        $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
         );
-      
+        
+        
+
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id); 
             if($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {
@@ -361,6 +364,7 @@ class MaterialProductsController extends Controller
                 $request->session()->put('form-three', 'completed');
             }
             $view  = 'form-four';
+            $this->getQuantityColor( batch_id() ?? $batch_id);
         }
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
@@ -377,6 +381,32 @@ class MaterialProductsController extends Controller
             if (wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'edit', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id , "is_parent" =>  is_parent()]);
             if (wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'duplicate', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id]);
         }
+    }
+
+    public function getQuantityColor($id)
+    {
+        $batch       = Batches::with('BatchMaterialProduct')->find($id);
+        $quantity    = $batch->quantity;
+        $lower_limit = $batch->BatchMaterialProduct->alert_threshold_qty_lower_limit;
+        $upper_limit = $batch->BatchMaterialProduct->alert_threshold_qty_upper_limit;
+
+        if($quantity < $lower_limit) {
+            $quantityColor = 'RED';
+        } else {
+            if($lower_limit < ($quantity) &&  ($upper_limit) > ($quantity)) {
+                $quantityColor = 'AMBER';
+            } else {
+                if($quantity > $upper_limit) {
+                    $quantityColor = 'GREEN';
+                } else {
+                    $quantityColor = 'AMBER';
+                }
+            }
+        }
+        Log::info($quantityColor);
+        return $batch->update([
+            'quantity_color' => $quantityColor
+        ]);
     }
 
     public function show_batch($id)

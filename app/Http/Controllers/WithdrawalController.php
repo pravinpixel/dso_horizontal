@@ -11,6 +11,28 @@ use Illuminate\Http\Request;
 
 class WithdrawalController extends Controller
 {
+    public function withdrawal_indexing($barcode)
+    {
+        try {
+            $batches = Batches::where('barcode_number', $barcode)->first();
+
+            $data = MaterialProducts::with(['Batches'=>function ($q) use ($barcode) {
+                $q->where('barcode_number', $barcode);
+            },'Batches.RepackOutlife', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea'])->find($batches->material_product_id);
+    
+            return response()->json([
+                "status"   => 200,
+                "message"  => "success",
+                "data"     => $data,
+                "type"     => $batches->withdrawal_type
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "status"   => 404,
+                "message"  => "No data",
+            ]);
+        }
+    }
     public function direct_deduct(Request $request)
     { 
         foreach ($request->id as $key => $column) {

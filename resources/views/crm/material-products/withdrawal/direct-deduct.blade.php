@@ -26,9 +26,9 @@
                     <input type="hidden" name="id[]"  value="@{{ row.id }}">
                     <input type="hidden" name="category_selection[]"  value="@{{ row.category_selection }}">
                 </td>
-                <td>@{{ row.brand }}</td>
-                <td>@{{ row.batch }} / @{{ row.serial }}</td>
-                <td>@{{ row.unit_packing_value }} @{{ row.unit_of_measure }}</td>
+                <td>@{{ row.batches[0].brand }}</td>
+                <td>@{{ row.batches[0].batch }} / @{{ row.batches[0].serial }}</td>
+                <td>@{{ row.unit_packing_value }} @{{ row.unit_of_measure.name }}</td>
                 <td><input name="quantity[]" type="number" class="form-control w-auto p-0 form-control-sm text-center" readonly value="@{{ row.direct_detect_quantity }}" required></td>
                 <td class="child-td py-0 px-1">
                     <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>

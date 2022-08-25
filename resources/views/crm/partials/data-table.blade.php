@@ -30,10 +30,10 @@
                                     </div>
                                 @break
                                 @case('THRESHOLD_QTY')
-                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                    <div class="custom-table-row" ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
                                         {!! $batch_table_td_columns !!} 
                                     </div>
-                                @break 
+                                @break  
                                 @default
                                 {{-- ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'" --}}
                                 <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="barcode_number == batch.barcode_number ? 'selected-batch' : ''" >

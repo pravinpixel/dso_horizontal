@@ -380,72 +380,71 @@ app.controller('RootController', function ($scope, $http) {
 
             setTimeout(() => {
                 $(".loader").hide()
-            }, 100);
+            }, 100); 
+            // switch (pageName) {
+            //     case 'MATERIAL_WITHDRAWAL':
+            //         $scope.withdrawalStatus = true
 
-            switch (pageName) {
-                case 'MATERIAL_WITHDRAWAL':
-                    $scope.withdrawalStatus = true
+            //         if (response.data.data === null) {
+            //             $scope.withdrawalStatus = false
+            //         } 
 
-                    if (response.data.data === null) {
-                        $scope.withdrawalStatus = false
-                    } 
-
-                    if ($scope.directDeduct === undefined) {
-                        $scope.directDeduct = []
-                    }
-                    if ($scope.deductTrackUsage === undefined) {
-                        $scope.deductTrackUsage = []
-                    }
-                    if ($scope.deductTrackOutlife === undefined) {
-                        $scope.deductTrackOutlife = []
-                    }
+            //         if ($scope.directDeduct === undefined) {
+            //             $scope.directDeduct = []
+            //         }
+            //         if ($scope.deductTrackUsage === undefined) {
+            //             $scope.deductTrackUsage = []
+            //         }
+            //         if ($scope.deductTrackOutlife === undefined) {
+            //             $scope.deductTrackOutlife = []
+            //         }
                     
-                    $scope.material_products.data.map((material) => {
-                        material.batches.map((batch) => {
-                            if (batch.barcode_number == $scope.barcode_number) {
-                                $scope.withdrawalType = batch.withdrawal_type
-                                switch (batch.withdrawal_type) {
-                                    case 'DIRECT_DEDUCT':
-                                        var pushStatus               = true 
-                                        batch.direct_detect_quantity = 1
-                                        $scope.directDeduct.length !== 0 && $scope.directDeduct.map((batch) => {
-                                            if(batch.barcode_number == $scope.barcode_number ) { 
-                                                batch.direct_detect_quantity += 1  
-                                                pushStatus = false
-                                            }
-                                        });
-                                        if(pushStatus === true) {
-                                            $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
-                                        }
+            //         $scope.material_products.data.map((material) => {
+            //             material.batches.map((batch) => {
+            //                 if (batch.barcode_number == $scope.barcode_number) {
+            //                     $scope.withdrawalType = batch.withdrawal_type
+            //                     switch (batch.withdrawal_type) {
+            //                         case 'DIRECT_DEDUCT':
+            //                             var pushStatus               = true 
+            //                             batch.direct_detect_quantity = 1
+            //                             $scope.directDeduct.length !== 0 && $scope.directDeduct.map((batch) => {
+            //                                 if(batch.barcode_number == $scope.barcode_number ) { 
+            //                                     batch.direct_detect_quantity += 1  
+            //                                     pushStatus = false
+            //                                 }
+            //                             });
+            //                             if(pushStatus === true) {
+            //                                 $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
+            //                             }
                                        
-                                        $scope.resetBarCode()
-                                        console.log(batch)
-                                        console.log(material)
-                                        break;
-                                    case 'DEDUCT_TRACK_USAGE':
-                                        $scope.deductTrackUsage = [];
-                                        $scope.deductTrackUsage.push({ ...batch, material: material, })
-                                        break;
-                                    case 'DEDUCT_TRACK_OUTLIFE':
-                                        $scope.deductTrackOutlife = [];
-                                        $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name,category_selection: material.category_selection })
+            //                             $scope.resetBarCode()
+            //                             console.log(batch)
+            //                             console.log(material)
+            //                             break;
+            //                         case 'DEDUCT_TRACK_USAGE':
+            //                             $scope.deductTrackUsage = [];
+            //                             $scope.deductTrackUsage.push({ ...batch, material: material, })
+            //                             break;
+            //                         case 'DEDUCT_TRACK_OUTLIFE':
+            //                             $scope.deductTrackOutlife = [];
+            //                             $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name,category_selection: material.category_selection })
                                     
-                                            $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
-                                                row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
+            //                                 $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
+            //                                     row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
                                            
-                                            })
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        })
-                    });
-                    break;
-                default:
-                    $scope.withdrawalStatus = false
-                    break;
-            }
+            //                                 })
+            //                             break;
+            //                         default:
+            //                             break;
+            //                     }
+            //                 }
+            //             })
+            //         });
+            //         break;
+            //     default:
+            //         $scope.withdrawalStatus = false
+            //         break;
+            // }
 
         }, function (response) {
             Message('danger', response.data.message);
@@ -899,4 +898,37 @@ app.controller('RootController', function ($scope, $http) {
             })
         }
     }, 500);
+
+    $scope.directDeduct       = []
+    $scope.deductTrackUsage   = []
+    $scope.deductTrackOutlife = []
+
+    withdrawal_search_barcode_number = (e) => {
+        if(e.value === undefined || e.value == '' || e.value === null)  {
+            return false
+        }
+
+        $http.get(APP_URL + '/get-withdrawal-batches' + "/" + e.value).then((response) => { 
+            switch (response.data.type) {
+                case "DIRECT_DEDUCT":
+                    $scope.directDeduct.length && $scope.directDeduct.map((row) => {
+                        if(row.batches[0].barcode_number == e.value ) { 
+                            row.direct_detect_quantity += 1
+                        } 
+                        if(row.batches[0].barcode_number != e.value ) { 
+                            $scope.directDeduct.push(response.data.data)
+                        } 
+                    })
+                    $scope.directDeduct.length == 0 && $scope.directDeduct.push(response.data.data)
+                break;
+                case "DEDUCT_TRACK_USAGE":   
+                    $scope.deductTrackUsage.push(response.data.data)    
+                break;
+                case "DEDUCT_TRACK_OUTLIFE":   
+                    $scope.deductTrackOutlife.push(response.data.data)    
+                break;
+            }
+            e.value = ''
+        })
+    }
 });
