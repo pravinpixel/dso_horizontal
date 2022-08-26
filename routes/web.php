@@ -48,7 +48,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
     Route::delete('/get-save-search/{id?}', [MaterialProductsController::class, 'delete_search_history'])->name('get-save-search');
     Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
-    Route::get('/withdrawal-material-products', [MaterialProductsController::class, 'withdrawal'])->name('withdrawal-material-products');
   
     Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
 
@@ -125,7 +124,15 @@ Route::middleware(['auth_users'])->group(function () {
 
     
 
-    Route::get('/get-withdrawal-batches/{barcode}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal.withdrawal_indexing');
+    Route::get('/withdrawal-material-products', [WithdrawalController::class, 'index'])->name('withdrawal-material-products');
+    Route::get('/decrease-quantity/{id}', [WithdrawalController::class, 'decrease_quantity'])->name('decrease-quantity');
+    Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get_withdrawal_data');
+    Route::get('/delete-withdraw-cart/{id}', [WithdrawalController::class, 'delete_withdraw_cart'])->name('delete_withdraw_cart');
+    Route::get('/get-withdraw-cart-count', [WithdrawalController::class, 'withdraw_cart_count'])->name('withdraw_cart_count');
+    
+    
+
+    Route::get('/get-withdrawal-batches/{barcode?}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal.withdrawal_indexing');
     Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
     Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
     Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('withdrawal.deduct-track-outlife');

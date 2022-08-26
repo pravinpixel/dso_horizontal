@@ -903,32 +903,5 @@ app.controller('RootController', function ($scope, $http) {
     $scope.deductTrackUsage   = []
     $scope.deductTrackOutlife = []
 
-    withdrawal_search_barcode_number = (e) => {
-        if(e.value === undefined || e.value == '' || e.value === null)  {
-            return false
-        }
-
-        $http.get(APP_URL + '/get-withdrawal-batches' + "/" + e.value).then((response) => { 
-            switch (response.data.type) {
-                case "DIRECT_DEDUCT":
-                    $scope.directDeduct.length && $scope.directDeduct.map((row) => {
-                        if(row.batches[0].barcode_number == e.value ) { 
-                            row.direct_detect_quantity += 1
-                        } 
-                        if(row.batches[0].barcode_number != e.value ) { 
-                            $scope.directDeduct.push(response.data.data)
-                        } 
-                    })
-                    $scope.directDeduct.length == 0 && $scope.directDeduct.push(response.data.data)
-                break;
-                case "DEDUCT_TRACK_USAGE":   
-                    $scope.deductTrackUsage.push(response.data.data)    
-                break;
-                case "DEDUCT_TRACK_OUTLIFE":   
-                    $scope.deductTrackOutlife.push(response.data.data)    
-                break;
-            }
-            e.value = ''
-        })
-    }
+    
 });
