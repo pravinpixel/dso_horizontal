@@ -676,7 +676,7 @@ input[type=number] {
     letter-spacing: 1px;
 }
 .bg-expired {
-    background: #D36B00 !important;
+    background: #FFB200 !important;
 }
 .text-expired {
     color: black !important;
@@ -685,10 +685,29 @@ input[type=number] {
 }
  
 .bg-failed {
-    background: #C21010 !important;
+    background: #C82121 !important;
 }
 .text-failed {
     color: black !important;
     background-color: #fdecec !important;
     letter-spacing: 1px;
+}
+
+.bg-green {
+    background : #019267
+}
+.bg-green-light {
+    background : #ecfff9
+}
+.bg-yellow {
+    background : #FFB200
+}
+.bg-yellow-light {
+    background : #fff9eb
+}
+.bg-red {
+    background : #C82121
+}
+.bg-red-light {
+    background : #ffeded
 }
