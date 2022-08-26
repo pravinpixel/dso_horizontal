@@ -3,46 +3,85 @@
     <table class="table bg-white table-hover table-centered">
         <thead >
             <tr class="text-white bg-primary-2">
-                <th class="text-center" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
+                <th class="text-center" style="padding: 5px !important" colspan="10"><span class="text-center">Bulk vol tracking logsheet</span></th>
             </tr>
             <tr class="bg-primary-light text-dark">
                 <th class="font-12">Item Description</th>                    
                 <th class="font-12">Batch/Serial#</th>
                 <th class="font-12">Last accessed</th>
                 <th class="font-12">Date&time stamp</th> 
-                <th class="font-12">Used Amt ()</th>
-                <th class="font-12">Remain Amt ()</th>
+                <th class="font-12">Unit Packing Value</th> 
+                <th class="font-12">Quantity</th> 
+                <th class="font-12">Used Amt ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name  : ''}})</th>
+                <th class="font-12">Remain Amt ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})</th>
                 <th class="font-12">Remarks</th>
                 <th class="font-12"> <i class="text-danger bi bi-trash3-fill"></i></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> 
+            @if (count($deduct_track_usage_history ?? []) != 0)
+                @foreach ($deduct_track_usage_history as $row)
+                    <tr>
+                        <td><small>{{ $row->item_description }}</small></td>
+                        <td><small>{{ $row->batch_serial }}</small></td>
+                        <td><small>{{ $row->last_accessed }}</small></td>
+                        <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
+                        <td><small>1</small></td>
+                        <td><small>1</small></td>
+                        <td><small>{{ $row->used_amount }}</small></td>
+                        <td><small>{{ $row->remain_amount }}</small></td>
+                        <td><small>{{ $row->remarks }}</small></td>
+                        <td>-</td>
+                    </tr>
+                @endforeach 
+            @endif
             @if (count($deduct_track_usage) != 0)
                 @foreach ($deduct_track_usage as $row)
-                    <tr ng-repeat="(i,row) in deductTrackUsage">
+                    <tr>
                         <td>
                             <span>
                                 <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
-                                <input type="hidden" name="batch_id[]"  value="{{ $row->Batch->id }}">
+                                <input type="hidden" name="batch_id"  value="{{ $row->Batch->id }}">
                             </span>
-                            <input type="hidden" name="id"  value="@{{ row.id }}">
-                            <input type="hidden" name="category_selection"  value="@{{ row.material.category_selection }}">
                         </td>
                         <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
-                        <td class="child-td">  {{ auth_user()->alias_name }} </td>
-                        <td class="child-td">{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
-                        <td><small>{{ $row->Batch->unit_packing_value }} {{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small></td>
-                        <td class="child-td">
-                             54
+                        <td> {{ auth_user()->alias_name }} </td>
+                        <td>{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                        <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
+                        <td><small>{{ $row->Batch->quantity }}</small></td>
+                        <td width="100px">
+                            <div class="d-flex align-items-center">
+                                <input id="used_amount" name="used_amount" step="any" onkeyup="startTrackUsage({{ $row->Batch->quantity * $row->Batch->unit_packing_value }},this.value)" type="number" style="width: 80px" value="0" class="me-2 form-control-sm form-control">
+                                <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
+                            </div>
+                        </td>
+                        <td> 
+                            <div class="d-flex align-items-center">
+                                <input id="remain_amount" name="remain_amount" step="any" readonly type="text" style="width: 80px" value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}" class="me-2 form-control-sm form-control">
+                                <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
+                            </div> 
                         </td>
                         <td class="child-td py-0 px-1">
-                            <textarea ng-disabled="row.material.end_of_material_product == 1" name="remarks"  class="form-control h-100 w-100"></textarea>
+                            <textarea name="remarks"  class="form-control h-100 w-100"></textarea>
                         </td>
-                        <td class="child-td">
+                        <td>
                             <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
                     </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
             @endif
         </tbody>
     </table>

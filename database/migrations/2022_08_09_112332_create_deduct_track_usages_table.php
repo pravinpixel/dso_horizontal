@@ -21,7 +21,7 @@ class CreateDeductTrackUsagesTable extends Migration
             $table->string('last_accessed');
             $table->decimal('used_amount',10,3);
             $table->decimal('remain_amount',10,3);
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Batches;
+use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use Illuminate\Database\Seeder;
@@ -219,5 +220,6 @@ class MaterialProductSeeder extends Seeder
             'batch_id' => $batch_three->id,
             'input_repack_amount' => $batch_three->unit_packing_value
         ]);
+
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\BarCodeFormat;
 use App\Models\Batches;
+use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use Faker\Provider\Barcode;
@@ -35,17 +36,15 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         if(wizard_mode() == 'create' || wizard_mode() == 'edit') {
             $batch->update(["system_stock"  => $batch->quantity]);
         }
-        
-
+         
         // $batch                  =   Batches::updateOrCreate(['material_product_id' => $material_product->id], $fillable);
  
         RepackOutlife::updateOrCreate(['batch_id' => $batch->id],[
             'batch_id'            => $batch->id,
             'input_repack_amount' => $batch->unit_packing_value
-        ]);
+        ]); 
 
         $this->storeFiles($request, $batch);
-   
         
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {
             $request->session()->put('material_product_id', $material_product->id);
