@@ -1,141 +1,113 @@
 @extends('layouts.app')
-@section('content') 
-    <div ng-app="RootApp" ng-controller="RootController">
+@section('content')
+    <div>
         <div class="d-flex align-items-center mb-3 justify-content-between">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" onkeyup="withdrawal_search_barcode_number(this)" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-                    <i ng-click="resetBarCode()" class="bi bi-x-circle-fill font-20 text-danger position-absolute right-0 me-2" style="cursor: pointer;z-index:111"></i>
-                </div>
-            </div> 
-            <div class="col-1 text-end">
-                <div ng-show="withdrawalType">
-                    @include('crm.partials.table-column-filter') 
+                    <input type="number" id="barcode_input" onkeyup="getWithDrawlCart(this.value)"
+                        class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill"
+                        placeholder="Click here to scan">
                 </div>
             </div>
-        </div>  
-        <div >
+        </div>
+        <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a href="#home" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
-                        <span>Direct Deduct</span>
-                        <span class="badge bg-primary ms-2">@{{ directDeduct.length }}</span>
+                    <a href="#DIRECT_DEDUCT" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                        <span class="font-16 fw-bold">Direct Deduct</span>
+                        <span class="badge ms-2 bg-yellow" id="DirectDeductCount">{{ count($direct_deducts) }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#profile" data-bs-toggle="tab" aria-expanded="true" class="nav-link">
-                        <span>Deduct & Track Usage</span>
-                        <span class="badge bg-primary ms-2">@{{ deductTrackUsage.length }}</span>
+                    <a href="#DEDUCT_TRACK_USAGE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        <span class="font-16 fw-bold">Deduct & Track Usage</span>
+                        <span class="badge ms-2 bg-green" id="DeductTrackUsageCount">{{ count($deduct_track_usage) }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        <span>Deduct & Track Outlife</span>
-                        <span class="badge bg-primary ms-2">@{{ deductTrackOutlife.length }}</span>
+                    <a href="#DEDUCT_TRACK_OUTLIFE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                        <span class="font-16 fw-bold">Deduct & Track Outlife</span>
+                        <span class="badge ms-2 bg-red"
+                            id="DeductTrackOutlifeCount">{{ count($deduct_track_outlife) }}</span>
                     </a>
                 </li>
             </ul>
-      
-            <div class="tab-content border border-top-0 p-3 m-0 bg-white">
-                <div class="tab-pane show active" id="home">
+
+            <div class="tab-content text-center border border-top-0 p-3 m-0 bg-white">
+                <div class="tab-pane show active" id="DIRECT_DEDUCT">
                     @include('crm.material-products.withdrawal.direct-deduct')
                 </div>
-                <div class="tab-pane" id="profile">
+                <div class="tab-pane" id="DEDUCT_TRACK_USAGE">
                     @include('crm.material-products.withdrawal.deduct-track-useage')
                 </div>
-                <div class="tab-pane" id="settings">
+                <div class="tab-pane" id="DEDUCT_TRACK_OUTLIFE">
                     @include('crm.material-products.withdrawal.deduct-track-outlife')
                 </div>
-            </div> 
- 
-            {{-- <ul class="nav nav-tabs bg-light">
-                <li class="nav-item">
-                    <a class="nav-link" ng-class="withdrawalType == 'DIRECT_DEDUCT' ? 'active' : ''">
-                        <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Direct Deduct</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" ng-class="withdrawalType == 'DEDUCT_TRACK_USAGE' ? 'active' : ''">
-                        <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Deduct & Track Usage</span>
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" ng-class="withdrawalType == 'DEDUCT_TRACK_OUTLIFE' ? 'active' : ''">
-                        <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Deduct & Track Outlife</span>
-                    </a>
-                </li> 
-            </ul> 
-            <section class="border border-top-0 card-body"> 
-                <div>
-                </div>
-            </section> --}}
+            </div>
         </div>
-
-        {{-- ======= START : App Models ==== --}}
-            @include('crm.material-products.modals.view-batch-list')
-            @include('crm.material-products.modals.view-list')
-            @include('crm.material-products.modals.advance-search')
-            @include('crm.material-products.modals.saved-search')
-            @include('crm.material-products.modals.transfer')
-            @include('crm.material-products.modals.repack-transfers')
-            @include('crm.material-products.modals.repack-outlife')
-            @include('crm.material-products.modals.import-from-excel')
-        {{-- ======= END : App Models ==== --}}
     </div>
 @endsection
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
-@endsection
+
 @section('scripts')
-    <input type="hidden" id="page-name" value="{{ $page_name }}">
-    <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
-    <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
-    <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
-    <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">
-    <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
-    <input type="hidden" id="get-batch" value="{{ route("get-batch") }}">
-    <input type="hidden" id="get_masters" value="{{ route("get_masters") }}">
-    <input type="hidden" id="transfer_batch" value="{{ route("transfer-batch") }}"> 
-    <input type="hidden" id="repack_batch" value="{{ route("repack-batch") }}"> 
-    <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
-    <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}"> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('public/asset/js/vendors/daterangepicker.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> --}}
-    <script src="https://code.angularjs.org/snapshot/angular-sanitize.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.4/angular-messages.js"></script>    
-    <script src="{{ asset('public/asset/js/vendors/date-picker.js') }}"></script>
-    <script src="{{ asset('public/asset/js/modules/RootApp.js') }}"></script>
-    <script src="{{ asset('public/asset/js/controllers/RootController.js') }}"></script>
-    <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
-    <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
     <script>
-            wordMatchSuggest = (element) => {
-            $.ajax({
-                type    :   'GET',
-                url     :   "{{ route('suggestion') }}",
-                data    :  {
-                    "name"  : element.name,
-                    "value" : element.value,
-                } ,
-                success:function(response){
-                    $(`#${element.list.id}`).html('')
-                    if(response.data != undefined || response.data != null) {
-                        Object.values(response.data).map((item) => { 
-                            if(element.value !== item) {
-                                $(`#${element.list.id}`).append(`<option value="${item}">`)
-                            }
-                        })
-                    }
-                }
+        getWithDrawlCart = async (barcode) => { // Scan Barcode
+            validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
+                render(data);
+            })
+        }
+        decreaseQuantity = (id, tabName) => { // Decresing Qty
+            fetch(`${APP_URL}/decrease-quantity/${id}`).then(response => response.json()).then((data) => {
+                activeMenu(data.withdraw_type)
+                renderAgain(tabName)
+            })
+        }
+        deleteRow = (id, tabName) => { // Delete Row
+            fetch(`${APP_URL}/delete-withdraw-cart/${id}`).then(response => response.json()).then((data) => {
+                activeMenu(data.withdraw_type)
+                renderAgain(tabName)
+            })
+        }
+        // Helpers
+        render = (response) => {
+            if (response.status == true) {
+                document.getElementById(response.withdraw_type).innerHTML = response.data;
+                activeMenu(response.withdraw_type)
+            }
+            document.getElementById("barcode_input").value = '';
+            fetch(`${APP_URL}/get-withdraw-cart-count`).then(response => response.json()).then((data) => {
+                document.getElementById("DirectDeductCount").innerHTML = data.direct_deduct;
+                document.getElementById("DeductTrackUsageCount").innerHTML = data.deduct_track_usage;
+                document.getElementById("DeductTrackOutlifeCount").innerHTML = data.deduct_track_outlife;
+            })
+        }
+        renderAgain = (tabName) => {
+            fetch(`${APP_URL}/get-withdrawal-data/${tabName}`).then(response => response.json()).then((data) => {
+                render(data);
             });
+        }
+        activeMenu = (tab_menu_name) => {
+            var tabLink = document.querySelectorAll('a[data-bs-toggle="tab"]');
+            var tabPane = document.querySelectorAll('div.tab-pane');
+            tabLink.forEach(element => {
+                element.classList.remove('active')
+            });
+            tabPane.forEach(element => {
+                element.classList.remove('show')
+                element.classList.remove('active')
+            });
+            var tabTable = document.getElementById(tab_menu_name);
+            var tabTableLink = document.querySelector(`a[href="#${tab_menu_name}"]`);
+            tabTable.classList.add("show")
+            tabTable.classList.add("active")
+            tabTableLink.classList.add('active')
+        }
+        validate = (barcode) => {
+            if (barcode === undefined || barcode == '' || barcode === null) {
+                return false
+            } else {
+                return true
+            }
         }
     </script>
 @endsection
- 

@@ -73,7 +73,7 @@ class Batches extends Model
     public function BarCodeGenOne()
     {
         return $this->hasMany(BarCodeGenOne::class, 'batch_id', 'id');
-    } 
+    }
 
     public function BatchMaterialProduct()
     {
