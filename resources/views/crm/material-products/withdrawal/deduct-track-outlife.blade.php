@@ -2,10 +2,10 @@
     @csrf 
     <table class="table bg-white  table-centered text-center">
         <thead>
-            <tr class="text-white bg-red">
+            <tr class="text-white bg-primary-2">
                 <th style="padding: 5px !important;" colspan="11"><span class="text-center">Withdrawal Cart</span></th>
             </tr>
-            <tr class="bg-red-light text-dark">
+            <tr class="bg-primary-light text-dark">
                 <th class="font-12">Item description</th>
                 <th class="font-12">Brand</th>
                 <th class="font-12">Batch#/ Serial#</th>
@@ -47,6 +47,6 @@
             <input type="checkbox" name="print_outlife_expiry" value="1" class="form-check-input me-2" id="print_outlife_expiry"> 
             Print outlife expiry
         </label>
-        <button type="submit" class="bg-red btn btn-dark rounded-pill">Click to Confirm deduction</button>
+        <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
     </div>
 </form>

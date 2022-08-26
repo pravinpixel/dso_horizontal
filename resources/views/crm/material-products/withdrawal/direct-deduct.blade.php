@@ -2,12 +2,12 @@
     @csrf
     <table class="table bg-white table-borderless border table-centered">
         <thead class="border-bottom">
-            <tr class="bg-yellow text-white">
+            <tr class="bg-primary-2 text-white">
                 <th class="text-center text-white" style="padding: 5px !important;" colspan="9">
                     <span class="text-center">Withdrawal Cart</span>
                 </th>
             </tr>
-            <tr class="bg-yellow-light text-dark"> 
+            <tr class="bg-primary-light text-dark"> 
                 <th class="font-12">Item description</th>
                 <th class="font-12">Barcode</th>
                 <th class="font-12">Brand</th>
@@ -62,6 +62,6 @@
         </tbody>
     </table>
     <div class="text-end"> 
-        <button type="submit" class="btn btn-dark rounded-pill bg-yellow">Click to Confirm deduction</button>
+        <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
     </div>
 </form>

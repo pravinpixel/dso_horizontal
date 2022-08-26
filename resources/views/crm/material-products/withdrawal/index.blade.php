@@ -16,20 +16,19 @@
                 <li class="nav-item">
                     <a href="#DIRECT_DEDUCT" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
                         <span class="font-16 fw-bold">Direct Deduct</span>
-                        <span class="badge ms-2 bg-yellow" id="DirectDeductCount">{{ count($direct_deducts) }}</span>
+                        <span class="badge ms-2 bg-primary" id="DirectDeductCount">{{ count($direct_deducts) }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#DEDUCT_TRACK_USAGE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                         <span class="font-16 fw-bold">Deduct & Track Usage</span>
-                        <span class="badge ms-2 bg-green" id="DeductTrackUsageCount">{{ count($deduct_track_usage) }}</span>
+                        <span class="badge ms-2 bg-primary" id="DeductTrackUsageCount">{{ count($deduct_track_usage) }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#DEDUCT_TRACK_OUTLIFE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                         <span class="font-16 fw-bold">Deduct & Track Outlife</span>
-                        <span class="badge ms-2 bg-red"
-                            id="DeductTrackOutlifeCount">{{ count($deduct_track_outlife) }}</span>
+                        <span class="badge ms-2 bg-primary" id="DeductTrackOutlifeCount">{{ count($deduct_track_outlife) }}</span>
                     </a>
                 </li>
             </ul>

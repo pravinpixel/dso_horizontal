@@ -2,10 +2,10 @@
     @csrf
     <table class="table bg-white table-hover table-centered">
         <thead >
-            <tr class="text-white bg-green">
+            <tr class="text-white bg-primary-2">
                 <th class="text-center" style="padding: 5px !important" colspan="8"><span class="text-center">Bulk vol tracking logsheet</span></th>
             </tr>
-            <tr class="bg-green-light text-dark">
+            <tr class="bg-primary-light text-dark">
                 <th class="font-12">Item Description</th>                    
                 <th class="font-12">Batch/Serial#</th>
                 <th class="font-12">Last accessed</th>
@@ -52,7 +52,7 @@
                 <input type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"   name="end_of_material_product" value="1" class="form-check-input me-2" id="end_of_material_product"> 
                 End of material/product
             </label>
-            <button type="submit" class="bg-green btn btn-dark rounded-pill">Click to Confirm deduction</button>
+            <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
         </div>
     </div>
 </form>
