@@ -21,7 +21,7 @@ class CreateMaterialProductsTable extends Migration
             $table->string('unit_packing_value')->nullable();
             $table->integer('alert_threshold_qty_upper_limit')->nullable();
             $table->integer('alert_threshold_qty_lower_limit')->nullable();
-            $table->integer('alert_before_expiry')->nullable(); 
+            $table->integer('alert_before_expiry')->nullable();
             $table->boolean('end_of_material_product')->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();

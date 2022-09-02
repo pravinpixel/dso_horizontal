@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <input type="file" name="select_file" class="form-control mb-2"> 
-                <a download="sample_formate.xlsx" href="sample_formate.xlsx"><i class="bi bi-download"></i> Download sample format</a>
+                <a download="DSO-sample-excel.xlsx" href="DSO-sample-excel.xlsx"><i class="bi bi-download"></i> Download sample format</a>
             </div>
             <div class="modal-footer border-top">
                 <button type="submit" class="btn btn-primary rounded-pill w-100"><i class="bi bi-box-arrow-in-down-left me-1"></i>Import</button>
