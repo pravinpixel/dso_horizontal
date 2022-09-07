@@ -1,7 +1,7 @@
 <div class="row mb-3">
     <label class="col-2 text-end col-form-label">User ID / Login ID</label>
     <div class="col-10">
-        {!! Form::number('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
     </div>
 </div>
 <div class="row mb-3">
