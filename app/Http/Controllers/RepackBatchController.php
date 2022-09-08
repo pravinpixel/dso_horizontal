@@ -118,10 +118,27 @@ class RepackBatchController extends Controller
                     $draw_out   = 1;
                     $draw_in    = 1;
 
-                    if($Batches->unit_packing_value != 0) {
+                    if($Batches->unit_packing_value != 0) { 
+                        $current_batch                      = Batches::find($repackData->batch_id);
+                        $created_batch                      = $current_batch->replicate();
+                        $created_batch->created_at          = Carbon::now();
+                        $created_batch->barcode_number      = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
+                        $created_batch->unit_packing_value  = $repackData->repack_size;
+                        $created_batch->total_quantity      = $repackData->repack_size * $Batches->quantity;
+                        $created_batch->save();
+
+                        RepackOutlife::create([
+                            'batch_id'             => $created_batch->id,
+                            'input_repack_amount'  => $created_batch->repack_size
+                        ]);
+
+                        $old_value           = $current_batch;
+                        $new_value           = clone $current_batch;
+                        LogActivity::dataLog($old_value, $new_value); 
+
                         RepackOutlife::create([
                             'batch_id'            => $id,
-                            'input_repack_amount' => $row['balance_amount']
+                            'input_repack_amount' => $row['repack_size']
                         ]);
                     }
 
@@ -140,11 +157,7 @@ class RepackBatchController extends Controller
                         'outlife_seconds'   => $updated_outlife_seconds,
                     ]); 
                 }
-                
-                $Batches->update([
-                    'unit_packing_value'    => $row['balance_amount']
-                ]);
- 
+                 
                 RepackOutlife::find($row['id'])->update([
                     'draw_in'                 => $draw_in,
                     'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],

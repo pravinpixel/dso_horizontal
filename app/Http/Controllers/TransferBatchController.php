@@ -23,6 +23,7 @@ class TransferBatchController extends Controller
         $created_batch->housing        = $request->housing;
         $created_batch->owner_one      = $request->owner_one;
         $created_batch->owner_two      = $request->owner_two;
+        $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
 
         $old_value           = $current_batch;
@@ -31,8 +32,9 @@ class TransferBatchController extends Controller
         LogActivity::dataLog($old_value, $new_value);
  
         $current_batch->update([
-            'quantity' =>   $current_batch->quantity - $request->quantity
-        ]); 
+            'quantity'      =>   $current_batch->quantity - $request->quantity,
+            'total_quantity' => $current_batch->unit_packing_value * ($current_batch->quantity - $request->quantity)
+        ]);
        
         return response()->json([
             "status" => true,

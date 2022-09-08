@@ -83,6 +83,7 @@ class DsoRepository implements DsoRepositoryInterface
         foreach ($material_product as $key => $parent) {
             $quantityColor       = 'text-danger';
             $QtyCount            = 0;
+            $totalQtyCount      = 0;
             $readCount           = 0;
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
@@ -98,8 +99,9 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ;
                 } else {
-                    $QtyCount         += $batch->quantity;
-                    $UnitPackingCount += $batch->unit_packing_value;
+                    $QtyCount         +=  $batch->quantity;
+                    $totalQtyCount    +=  $QtyCount * $batch->unit_packing_value;
+                    $UnitPackingCount = $parent->Batches[0]->unit_packing_value;
                 }
                 if($batch->quantity  != null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
@@ -107,6 +109,7 @@ class DsoRepository implements DsoRepositoryInterface
             }
             // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;
+            $parent['totalQuantityUnit']           = $totalQtyCount;
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;

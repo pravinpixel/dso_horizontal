@@ -784,6 +784,7 @@ app.controller('RootController', function ($scope, $http) {
                     $scope.repack_outlife_table.push(
                         {
                             id     : element.id,
+                            quantity : RepackData.quantity,
                             draw_in: {
                                 status    : element.draw_in,
                                 time_stamp: element.draw_in_time_stamp

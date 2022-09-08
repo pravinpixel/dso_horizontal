@@ -24,16 +24,18 @@ app.directive('repackTable', () => {
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
                     scope.repack.remaining_days_seconds = diff
                     scope.$apply(); 
-                }  
+                }
             })
             element.on('keyup', () => { 
                 if(attribute.repackTable == "REPACK_INPUT") {
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
                     scope.repack.repack_amount === null ? scope.repack.balance_amount = null :
-                    scope.repack.balance_amount = (scope.repack.initial_amount - scope.repack.repack_amount)
+                    scope.repack.total_quantity =  Number(scope.repack.initial_amount) * Number(scope.repack.quantity)
+                    scope.repack.balance_amount = scope.repack.total_quantity - scope.repack.repack_amount
+                    scope.repack.qty_cut = Number(scope.repack.balance_amount) / Number(scope.repack.initial_amount)
                     scope.$apply()
-                }  
+                }
             })
         }
     };
-}); 
+});
