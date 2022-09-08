@@ -802,7 +802,8 @@ app.controller('RootController', function ($scope, $http) {
                             qty_cut               : element.qty_cut,
                             remaining_days        : element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
-                            barcode_number        : RepackData.barcode_number
+                            barcode_number        : RepackData.barcode_number,
+                            total_quantity        : Number(RepackData.total_quantity),
                         }
                     );
                 }) 
@@ -841,7 +842,8 @@ app.controller('RootController', function ($scope, $http) {
                                     qty_cut               : element.qty_cut,
                                     remaining_days        : element.remain_days,
                                     remaining_days_seconds: element.remaining_days_seconds,
-                                    barcode_number        : RepackData.barcode_number
+                                    barcode_number        : RepackData.barcode_number,
+                                    total_quantity        : Number(RepackData.total_quantity),
                                 }
                             );
                         }) 

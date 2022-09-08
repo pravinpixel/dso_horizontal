@@ -21,7 +21,7 @@
                             <td>Remain Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                             <td>Auto-generate unique barcode label</td>
                             <td>Repack size <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
-                            <td>Qty cut</td>
+                            <td>Quantity</td>
                             <td>
                                 Remaining outlife (prepreg roll) <br>
                                 Intital count: @{{ repack_outlife_days }}  days
@@ -41,8 +41,9 @@
                             </td>
                             <td><small>@{{ repack.last_access }}</small></td>
                             <td class="text-center"> 
+                                @{{ repack.total_quantity }}
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
-                                    <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm" required>
+                                    <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " required>
                                 </span>
                                 <span ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                     @{{ repack.initial_amount }}
@@ -50,7 +51,7 @@
                             </td>
                             <td class="text-center">
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
-                                    <input type="number" disabled ng-model='repack.balance_amount' class="form-control form-control-sm" >
+                                    <input type="number" disabled ng-model='repack.balance_amount' class="form-control form-control-sm text-center " >
                                 </span>
                                 <span ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                     @{{ repack.balance_amount }}
@@ -59,7 +60,7 @@
                             <td>@{{ repack.barcode_number }}</td>
                             <td class="text-center position-relative">
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1 ">
-                                    <input type="number" ng-model='repack.repack_size' class="form-control form-control-sm" required>
+                                    <input type="number" ng-model='repack.repack_size' max="@{{ repack.repack_amount }}" repack-table="REPACK_SIZE" class="form-control form-control-sm text-center " required>
                                 </span>
                                 <span ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                     @{{ repack.repack_size }}
@@ -67,7 +68,7 @@
                             </td>
                             <td class="text-center position-relative p-1">
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1 ">
-                                    <input type="number" readonly ng-model='repack.qty_cut' class="px-0 form-control form-control-sm" required>
+                                    <input type="number" readonly ng-model='repack.qty_cut' class="px-0 text-center form-control form-control-sm text-center " required>
                                 </span>
                                 <span ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                     @{{ repack.qty_cut }}

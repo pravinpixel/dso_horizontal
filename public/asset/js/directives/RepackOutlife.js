@@ -30,9 +30,13 @@ app.directive('repackTable', () => {
                 if(attribute.repackTable == "REPACK_INPUT") {
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
                     scope.repack.repack_amount === null ? scope.repack.balance_amount = null :
-                    scope.repack.total_quantity =  Number(scope.repack.initial_amount) * Number(scope.repack.quantity)
-                    scope.repack.balance_amount = scope.repack.total_quantity - scope.repack.repack_amount
-                    scope.repack.qty_cut = Number(scope.repack.balance_amount) / Number(scope.repack.initial_amount)
+                    // scope.repack.total_quantity = Number(scope.repack.initial_amount) * Number(scope.repack.quantity)
+                    scope.repack.balance_amount = Number(scope.repack.total_quantity) - Number(scope.repack.repack_amount) 
+                    scope.$apply()
+                }
+                if(attribute.repackTable == "REPACK_SIZE") {
+                    var quantity            = Number(Number(scope.repack.repack_amount) / Number(scope.repack.repack_size)).toFixed(3)
+                    scope.repack.qty_cut    = Number(quantity);
                     scope.$apply()
                 }
             })

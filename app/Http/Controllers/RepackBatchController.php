@@ -104,7 +104,7 @@ class RepackBatchController extends Controller
     public function store_repack_outlife(Request $request , $id)
     {
         foreach ($request->data as $key => $row) {
- 
+
             if($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
                 $Batches    = Batches::find($repackData->batch_id); 
@@ -113,23 +113,38 @@ class RepackBatchController extends Controller
                     $draw_out   = 1;
                     $draw_in    = 0;
                 }
-
                 if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
                     $draw_out   = 1;
                     $draw_in    = 1;
 
-                    if($Batches->unit_packing_value != 0) { 
+                    // current Batch
+                    if($Batches->unit_packing_value != 0) {
                         $current_batch                      = Batches::find($repackData->batch_id);
-                        $created_batch                      = $current_batch->replicate();
-                        $created_batch->created_at          = Carbon::now();
-                        $created_batch->barcode_number      = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
-                        $created_batch->unit_packing_value  = $repackData->repack_size;
-                        $created_batch->total_quantity      = $repackData->repack_size * $Batches->quantity;
-                        $created_batch->save();
+
+                        //  New Batch
+                        $repackAmount           = $row['repack_amount'];
+                        $repackUnitPackingValue = $row['repack_size'];
+                        $repackQuantity         = $row['qty_cut'];
+                        $totalQuantity          = (float) $repackUnitPackingValue * (float) $repackQuantity;
+
+                        // dd($totalQuantity);
+
+                        $next_batch                     = $current_batch->replicate();
+                        $next_batch->created_at         = Carbon::now();
+                        $next_batch->barcode_number     = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
+                        $next_batch->unit_packing_value = $repackUnitPackingValue;
+                        $next_batch->total_quantity     = $totalQuantity;
+                        $next_batch->quantity           = $repackQuantity;
+                        $next_batch->save();
+
+                        // Current Batch 
+                        $current_batch->quantity       = $row['balance_amount'] /  $current_batch->unit_packing_value;
+                        $current_batch->total_quantity =  (float) $current_batch->unit_packing_value * (float) $current_batch->quantity;
+                        $current_batch->save();
 
                         RepackOutlife::create([
-                            'batch_id'             => $created_batch->id,
-                            'input_repack_amount'  => $created_batch->repack_size
+                            'batch_id'             => $next_batch->id,
+                            'input_repack_amount'  => $repackData->repack_amount 
                         ]);
 
                         $old_value           = $current_batch;

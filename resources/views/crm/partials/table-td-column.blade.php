@@ -26,9 +26,6 @@
                         <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
-                @case('total_quantity')
-                    @{{ row.totalQuantityUnit }}
-                @break
                 @default
                 {!! $column['row'] !!}
             @endswitch 

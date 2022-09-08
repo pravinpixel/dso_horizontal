@@ -79,14 +79,18 @@ class DsoRepository implements DsoRepositoryInterface
     public function renderTableData($material_product)
     {
         $page_name = session()->get('page_name');
+ 
 
         foreach ($material_product as $key => $parent) {
             $quantityColor       = 'text-danger';
             $QtyCount            = 0;
-            $totalQtyCount      = 0;
+            $totalQtyCount       = 0;
             $readCount           = 0;
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
+
+            
+            $TotalQuantityTotal = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) {
 
@@ -102,17 +106,20 @@ class DsoRepository implements DsoRepositoryInterface
                     $QtyCount         +=  $batch->quantity;
                     $totalQtyCount    +=  $QtyCount * $batch->unit_packing_value;
                     $UnitPackingCount = $parent->Batches[0]->unit_packing_value;
+                    $TotalQuantityTotal += $totalQtyCount;
                 }
                 if($batch->quantity  != null) {
                     $batch->quantity = str_replace('.00', '' , $batch->quantity);
                 }
             }
+
             // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;
-            $parent['totalQuantityUnit']           = $totalQtyCount;
+            $parent['totalQuantityUnit']       = $totalQtyCount;
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
+            $parent['TotalQuantityTotal']      = $TotalQuantityTotal;
           
             if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
