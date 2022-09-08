@@ -78,7 +78,6 @@ class RepackBatchController extends Controller
                 "message"   => "Success !"
             ]);
         }
- 
 
         RepackOutlife::create([
             'batch_id'              => $id, 
@@ -103,8 +102,8 @@ class RepackBatchController extends Controller
 
     public function store_repack_outlife(Request $request , $id)
     {
-        foreach ($request->data as $key => $row) {
-
+        // dd($request->all()); 
+        foreach ($request->data as $key => $row) { 
             if($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
                 $Batches    = Batches::find($repackData->batch_id); 
@@ -126,8 +125,6 @@ class RepackBatchController extends Controller
                         $repackUnitPackingValue = $row['repack_size'];
                         $repackQuantity         = $row['qty_cut'];
                         $totalQuantity          = (float) $repackUnitPackingValue * (float) $repackQuantity;
-
-                        // dd($totalQuantity);
 
                         $next_batch                     = $current_batch->replicate();
                         $next_batch->created_at         = Carbon::now();

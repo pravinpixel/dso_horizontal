@@ -21,8 +21,8 @@ class CreateBatchesTable extends Migration
             $table->string('brand')->nullable();
             $table->string('barcode_number')->nullable();
             $table->string('supplier')->nullable();
-            $table->integer('unit_packing_value')->nullable();
-            $table->decimal('quantity',10,2)->nullable();
+            $table->string('unit_packing_value')->nullable();
+            $table->string('quantity')->nullable();
             $table->string('total_quantity')->nullable(); 
             $table->string('quantity_color')->nullable();
             $table->string('batch')->nullable();
