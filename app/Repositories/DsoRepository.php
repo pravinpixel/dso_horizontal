@@ -103,9 +103,10 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ;
                 } else {
-                    $QtyCount         +=  $batch->quantity;
-                    $totalQtyCount    +=  $QtyCount * $batch->unit_packing_value;
-                    $UnitPackingCount = $parent->Batches[0]->unit_packing_value;
+                    $QtyCount   =  $parent->Batches[0]->quantity;
+                    $totalQtyCount =   $parent->Batches[0]->quantity *   $parent->Batches[0]->unit_packing_value;
+                    // $totalQtyCount  +=  $QtyCount * $batch->unit_packing_value;
+                    $UnitPackingCount   =  $parent->Batches[0]->unit_packing_value;
                     $TotalQuantityTotal += $totalQtyCount;
                 }
                 if($batch->quantity  != null) {
