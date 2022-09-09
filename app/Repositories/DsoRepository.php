@@ -93,13 +93,11 @@ class DsoRepository implements DsoRepositoryInterface
             $TotalQuantityTotal = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) {
-
                 if($page_name === 'THRESHOLD_QTY') {
                     if($batch->is_read != 0) {
                         unset($parent->Batches[$batch_key]);
                     }
                 }
-
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ;
                 } else {
@@ -137,7 +135,6 @@ class DsoRepository implements DsoRepositoryInterface
             }
             $parent['quantityColor']      = $quantityColor;
         }
-
        
         $collection = Arr::flatten($material_product);
         $items      = collect($collection);

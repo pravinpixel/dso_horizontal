@@ -47,6 +47,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['reconciliation_status'],
             $tableColumns['system_stock'],
             $tableColumns['physical_stock'],
+            $tableColumns['quantity_color'],
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {
