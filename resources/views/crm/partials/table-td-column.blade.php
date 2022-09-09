@@ -15,20 +15,21 @@
         <div ng-if="on_{{ $column['name'] }}" class="box justify-content-start" >
             @switch($column['name'])
                 @case('unit_packing_value')
-                    @{{ row.totalUnitPackValue }} {{ $tableAllColumns['unit_of_measure']['row']}} 
+                    @{{ row.unit_packing_value }} 
+                    {{ $tableAllColumns['unit_of_measure']['row']}}
                 @break
                 @case('category_selection')
                     @{{ row.category_selection == 'material' ? 'Material' : ''}} @{{ row.category_selection == 'in_house' ? 'In-house Product' : ''}}
-                @break
+                @break 
                 @case('quantity')
                     <span>
-                        @{{ row.totalQuantity }}    
+                        @{{ row.material_quantity }}    
                         <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
                 @case('total_quantity')
                     <span>
-                        @{{ row.totalQuantityUnit }}    
+                        @{{ row.material_total_quantity }}    
                     </span>
                 @break
                 @default

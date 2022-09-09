@@ -25,6 +25,8 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "100",
             "alert_threshold_qty_lower_limit" => "10",
             "alert_before_expiry"             => "704",
+            'material_quantity' => 175,
+            'material_total_quantity' =>  175 * 100
         ];
         $data = [
             "unit_packing_value"        => "100",
@@ -90,6 +92,8 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
+            'material_quantity' => 5,
+            'material_total_quantity' =>  5 * 10
         ];
         $data_two = [
             "unit_packing_value"            => "10",
@@ -155,6 +159,8 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
+            'material_quantity' => 155,
+            'material_total_quantity' =>  155 * 175
         ];
         $data_three = [
             "unit_packing_value"              => "175",
