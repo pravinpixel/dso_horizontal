@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             StorageRoomSeeder::class,
             PictogramSeeder::class,
             TableOrderSeeder::class,
-            MaterialProductSeeder::class
+            // MaterialProductSeeder::class
         ]);
     }
 }

@@ -2,8 +2,6 @@
 
 use App\Models\Batches;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Bus\Batch;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 if(! function_exists('category_type')) {
@@ -245,5 +243,15 @@ if(! function_exists('no_data_found')) {
                 </div>
             </div>
         ';
+    }
+}
+
+if(! function_exists('strExcelDate')) {
+    function strExcelDate($excel_date) { 
+        $excel_date = (int) $excel_date;
+        $unix_date  = ($excel_date - 25569) * 86400;
+        $excel_date = 25569 + ($unix_date / 86400);
+        $unix_date  = ($excel_date - 25569) * 86400;
+        return gmdate("Y-m-d", $unix_date);
     }
 }

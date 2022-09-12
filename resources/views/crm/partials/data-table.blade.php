@@ -7,8 +7,8 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
-           
-            <div class="custom-table-row" ng-if="row.hideParentRow == 0"  ng-repeat="(index,row) in material_products.data">
+            {{-- ng-if="row.hideParentRow == 0" --}}
+            <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">
                     <div class="custom-table-head parent-row"> 

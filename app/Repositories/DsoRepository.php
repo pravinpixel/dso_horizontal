@@ -138,7 +138,7 @@ class DsoRepository implements DsoRepositoryInterface
        
         $collection = Arr::flatten($material_product);
         $items      = collect($collection);
-        $perPage    = 5;
+        $perPage    = config('app.paginate');
         $page       = null;
         $page       = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items      = $items instanceof Collection ? $items : Collection::make($items); 
