@@ -44,20 +44,20 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
-                    <button class="dropdown-item text-secondary"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
-                    <button class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
+                    <button class="dropdown-item text-secondary" ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
         
                     {{--  ==== REPACK OUTLIFE ====  --}}
                     {{-- ng-disabled="batch.require_outlife_tracking ==  1 || batch.is_draft == 1" --}}
-                        <button  class="dropdown-item text-secondary" ng-click="RepackTransfers('view',batch , row)">
+                        <button  class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="RepackTransfers('view',batch , row)">
                             <i class="bi bi-box-seam me-1"></i> Repack/Transfer 
                         </button>
                     {{--  ==== REPACK OUTLIFE ====  --}}
         
                     {{--  ==== REPACK OUTLIFE ====  --}}
-                        <button class="dropdown-item text-secondary"  ng-click="RepackOutlife(batch, row.unit_of_measure)">
+                        <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="RepackOutlife(batch, row.unit_of_measure)">
                             <i class="bi bi-box2-fill me-1"></i> Repack/outlife
                         </button> 
                     {{--  ==== REPACK OUTLIFE ====  --}}
