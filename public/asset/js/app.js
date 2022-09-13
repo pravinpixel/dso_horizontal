@@ -184,7 +184,7 @@ getNotificationCount = () => {
         NotificationData.map((item) => {
             NotificationList.innerHTML += `
                 <li class="list-group-item list-group-item-action btn">
-                    <div><a href="${APP_URL}/near-expiry-expired">${item.material_product.item_description}</a></div>
+                    <div><a href="${APP_URL}/threshold-qty">${item.material_product.item_description}</a></div>
                     <small>${item.batch}</small>
                     <small class="float-end text-secondary">${ moment(item.created_at).format('YYYY-MM-DD h:m:s A')}</small>
                 </li> 

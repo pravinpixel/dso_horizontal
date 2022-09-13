@@ -1,11 +1,11 @@
 app.controller('RootController', function ($scope, $http) {
 
-    $scope.withdrawalStatus = false
-    $scope.filter_status = false;
-    $scope.advance_search_status = false;
-    $scope.advance_search_pre_saved = true;
-    $scope.view_my_saved_search_model = false;
-    $scope.sort_by_payload = false;
+    $scope.withdrawalStatus           = false
+    $scope.filter_status              = false
+    $scope.advance_search_status      = false
+    $scope.advance_search_pre_saved   = true
+    $scope.view_my_saved_search_model = false
+    $scope.sort_by_payload            = false
 
     // === Route Lists ===
     var material_products_url              = $('#get-material-products').val();
