@@ -247,9 +247,9 @@ class WithdrawalController extends Controller
             $repackOutlife->update([
                 'remarks' => $request->remarks[$key],
             ]);
-           
             LogActivity::dataLog($old_value, $new_value,  $request->remarks[$key] ?? "");
         }
+        withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
         if($request->print_outlife_expiry == 1) {
             return redirect(route('print-barcode', RepackOutlife::find($request->id[0])->batch_id));
         }

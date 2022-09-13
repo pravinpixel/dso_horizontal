@@ -22,21 +22,23 @@
         <tbody>
             @if (count($deduct_track_outlife) != 0)
                 @foreach ($deduct_track_outlife as $row)
-                    <tr ng-repeat="row in deductTrackOutlife[0].repack_outlife | orderBy:'$index':true" ng-if="row.draw_in == 1 && row.draw_out == 1">
-                        <td class="p-0"><small> tewtw </small></td>
-                        <td class="p-0"><small> ewt </small></td>
-                        <td class="p-0"><small> <small class="text-primary">ew</small> / <small class="text-info">dsd</small> </small></td>
-                        <td class="p-0"><small> s </small></td>
-                        <td class="p-0"><small> s </small></td>
-                        <td class="p-0"><small> sd</small></td>
-                        <td class="p-0"><small>sdg </small></td>
-                        <td class="p-0"><small> s </small></td>
-                        <td class="p-0 py-0 px-1">
-                            <input type="hidden" name="id[]" value="@{{ row.id }}">
-                            <textarea name="remarks[]" class="form-control h-100 w-100">ewtwet</textarea>
+                    <tr>
+                        <td>
+                            <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+                            <input type="hidden" name="id[]"  value="{{ $row->id }}">
                         </td>
-                        <td class="child-td"><small class="text-dark">we</small></td>
-                        <td class="child-td"><small class="text-dark">dfghdfg</small></td>
+                        <td><small>{{ $row->Batch->brand }}</small></td>
+                        <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
+                        <td class="p-0"><small>  {{ auth_user()->alias_name }} </small></td>
+                        <td>{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                        <td><small>{{ $row->Batch->barcode_number }}</small></td>
+                        <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
+                        <td><small>{{ $row->Batch->quantity }}</small></td>
+                        <td class="p-0 py-0 px-1">
+                            <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
+                        </td>
+                        <td class="child-td"><small class="text-dark">{{ $row->RepackOutlife->updated_outlife ?? "-" }}</small></td>
+                        <td class="child-td"><small class="text-dark">{{ $row->RepackOutlife->current_outlife_expiry ?? "-" }}</small></td>
                     </tr>   
                 @endforeach
             @endif

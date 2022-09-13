@@ -21,8 +21,8 @@ class withdrawCart extends Model
         return $this->hasOne(Batches::class, 'id', 'batch_id');
     }
 
-    // public function DeductTrackUsage()
-    // {
-    //     return $this->hasOne(DeductTrackUsage::class, 'id', 'batch_id');
-    // } 
+    public function RepackOutlife()
+    {
+        return $this->hasOne(RepackOutlife::class, 'batch_id', 'batch_id');
+    } 
 }
