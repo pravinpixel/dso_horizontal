@@ -70,6 +70,14 @@ option {
 .bg-primary-2 {
     background-color: #12326A !important;
 }
+.bg-primary-3 {
+    background-color: #1363DF !important;
+}
+
+.bg-blue-1 { background: #12326A ;}
+.bg-blue-2 { background: #0028FF ;}
+.bg-blue-3 { background: #4188F9 ;}
+
 .table-tr {
     --bs-table-accent-bg: var(--bs-table-hover-bg);
     color: var(--bs-table-hover-color)
