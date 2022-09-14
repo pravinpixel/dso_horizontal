@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
-<div ng-app="NotificationAPP" ng-controller="NotificationController">
+<div>
     <section>
-        <div class="card shadow-sm border" ng-if="notifications.near_expiry.length"> 
+        <div class="card shadow-sm border"> 
             <div class="card-header bg-near-expiry text-white text-center">
                 <h5 class="m-0">Near Expiry Material/In-house Product</h5>
             </div>
-            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover"> 
-                    <tbody> 
+            <div class="card-body">
+                <table class="table m-0 table-hover table-sm" id="NEAR_EXPIRY_TABLE"> 
+                    <thead>
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
                             <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
@@ -20,126 +20,90 @@
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
-                        <tr ng-repeat="row in notifications.near_expiry">
-                            <td>@{{ row.batch_material_product.item_description }}</td>
-                            <td>@{{ row.brand }}</td>
-                            <td>@{{ row.batch }} / @{{ row.serial }} / @{{ row.po_number }}</td>
-                            <td>@{{ row.quantity }}</td>
-                            <td>@{{ row.owner_one }} / @{{ row.owner_two }}</td>
-                            <td>@{{ row.storage_area.name }} </td>
-                            <td>@{{ row.housing_type.name }} </td>
-                            <td>@{{ row.date_of_expiry }} </td>
-                            <td>
-                                <div class="dropdown">
-                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </a> 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('disposal') }}/@{{ row.id }}"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                                        <a class="dropdown-item" href="{{ route('extend-expiry') }}/@{{ row.id }}"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                                        <a class="dropdown-item"  ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>  
-                    </tbody>
-                </table> 
+                    </thead>
+                    <tbody></tbody>
+                </table>  
             </div>
         </div>
-        <div class="card shadow-sm border" ng-if="notifications.expired.length"> 
+        <div class="card shadow-sm border"> 
             <div class="card-header bg-expired text-white text-center">
                 <h5 class="m-0">Expired Material/In-house Product</h5>
             </div>
-            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover"> 
-                    <tbody> 
+            <div class="card-body">
+                <table class="table m-0 table-hover table-sm" id="EXPIRY_TABLE"> 
+                    <thead> 
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
-                            <td class="text-expired"><b><small>Material / Product  Description</small></b></td>
-                            <td class="text-expired"><b><small>Brand</small></b></td>
-                            <td class="text-expired"><b><small>#Batch/Serial/PO No</small></b></td>
-                            <td class="text-expired"><b><small>Qty</small></b></td>
-                            <td class="text-expired"><b><small>Owner 1/2</small></b></td>
-                            <td class="text-expired"><b><small>Storage location</small></b></td>
-                            <td class="text-expired"><b><small>Housing Type</small></b></td>
-                            <td class="text-expired"><b><small>DOE</small></b></td>
-                            <td class="text-expired"><b><small>Action</small></b></td>
+                            <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
+                            <td class="text-near-expiry"><b><small>Brand</small></b></td>
+                            <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
+                            <td class="text-near-expiry"><b><small>Qty</small></b></td>
+                            <td class="text-near-expiry"><b><small>Owner 1/2</small></b></td>
+                            <td class="text-near-expiry"><b><small>Storage location</small></b></td>
+                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
+                            <td class="text-near-expiry"><b><small>DOE</small></b></td>
+                            <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
-                        <tr ng-repeat="row in notifications.near_expiry">
-                            <td>@{{ row.batch_material_product.item_description }}</td>
-                            <td>@{{ row.brand }}</td>
-                            <td>@{{ row.batch }} / @{{ row.serial }} / @{{ row.po_number }}</td>
-                            <td>@{{ row.quantity }}</td>
-                            <td>@{{ row.owner_one }} / @{{ row.owner_two }}</td>
-                            <td>@{{ row.storage_area.name }} </td>
-                            <td>@{{ row.housing_type.name }} </td>
-                            <td>@{{ row.date_of_expiry }} </td>
-                            <td>
-                                <div class="dropdown">
-                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </a> 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('disposal') }}/@{{ row.id }}"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                                        <a class="dropdown-item" href="{{ route('extend-expiry') }}/@{{ row.id }}"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                                        <a class="dropdown-item"  ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details</a> 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>  
-                    </tbody>
-                </table> 
-            </div>
+                    </thead>
+                    <tbody></tbody>
+                </table>  
+            </div> 
         </div>
-        <div class="card shadow-sm border" ng-if="notifications.failed_iqc.length"> 
+        <div class="card shadow-sm border"> 
             <div class="card-header bg-failed text-white text-center">
                 <h5 class="m-0">Failed IQC Material/In-house Product</h5>
             </div>
-            <div class="card-body p-0" style="max-height: 50vh;overflow:auto">
-                <table class="table m-0 table-hover"> 
-                    <tbody> 
+            <div class="card-body">
+                <table class="table m-0 table-hover table-sm" id="FAILED_IQC_TABLE"> 
+                    <thead> 
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
-                            <td class="text-failed"><b><small>Material / Product  Description</small></b></td>
-                            <td class="text-failed"><b><small>Brand</small></b></td>
-                            <td class="text-failed"><b><small>#Batch/Serial/PO No</small></b></td>
-                            <td class="text-failed"><b><small>Qty</small></b></td>
-                            <td class="text-failed"><b><small>Owner 1/2</small></b></td>
-                            <td class="text-failed"><b><small>Storage location</small></b></td>
-                            <td class="text-failed"><b><small>Housing Type</small></b></td>
-                            <td class="text-failed"><b><small>DOE</small></b></td>
-                            <td class="text-failed"><b><small>Action</small></b></td>
-                        </tr>
-                        <tr ng-repeat="row in notifications.near_expiry">
-                            <td>@{{ row.batch_material_product.item_description }}</td>
-                            <td>@{{ row.brand }}</td>
-                            <td>@{{ row.batch }} / @{{ row.serial }} / @{{ row.po_number }}</td>
-                            <td>@{{ row.quantity }}</td>
-                            <td>@{{ row.owner_one }} / @{{ row.owner_two }}</td>
-                            <td>@{{ row.storage_area.name }} </td>
-                            <td>@{{ row.housing_type.name }} </td>
-                            <td>@{{ row.date_of_expiry }} </td>
-                            <td>
-                                <div class="dropdown">
-                                    <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-three-dots-vertical"></i>
-                                    </a> 
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('disposal') }}/@{{ row.id }}"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                                        <a class="dropdown-item" href="{{ route('extend-expiry') }}/@{{ row.id }}"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                                        <a class="dropdown-item" ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details</a> 
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>  
-                    </tbody>
-                </table> 
+                            <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
+                            <td class="text-near-expiry"><b><small>Brand</small></b></td>
+                            <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
+                            <td class="text-near-expiry"><b><small>Qty</small></b></td>
+                            <td class="text-near-expiry"><b><small>Owner 1/2</small></b></td>
+                            <td class="text-near-expiry"><b><small>Storage location</small></b></td>
+                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
+                            <td class="text-near-expiry"><b><small>DOE</small></b></td>
+                            <td class="text-near-expiry"><b><small>Action</small></b></td>
+                        </tr> 
+                    </thead>
+                    <tbody></tbody>
+                </table>  
             </div>
         </div>
     </section>
     @include('crm.material-products.modals.view-batch-list') 
 </div>
-@endsection
+@endsection 
 @section('scripts') 
-    <input type="hidden" id="get-batch-material-products" value="{{ route("get-batch-material-products") }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>  
-    <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script> 
+    <script>
+        var tables = document.getElementsByClassName('table');
+
+        Object.entries(tables).forEach(element => {
+            if(element[1].id !== '' && element[1].id !== null) {
+                var API = `{{ route('near_expiry_expired_ajax') }}/${element[1].id}`;
+                $(`#${element[1].id}`).DataTable({
+                    stripeClasses: [],
+                    lengthMenu: [
+                        [5, 10, 25, 50, -1],
+                        [5, 10, 25, 50, 'All'],
+                    ],
+                    processing: true,
+                    serverSide: true,
+                    ajax: API,
+                    columns: [ 
+                        {data: 'item_description', name: 'item_description'},
+                        {data: 'brand', name: 'brand'},
+                        {data: 'batch_serial_po_number', name: 'batch_serial_po_number'},
+                        {data: 'quantity', name: 'quantity'},
+                        {data: 'owners', name: 'owners'},
+                        {data: 'storage_area', name: 'storage_area'},
+                        {data: 'housing_type', name: 'housing_type'},
+                        {data: 'date_of_expiry', name: 'date_of_expiry'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false},
+                    ]
+                });
+            }
+        });
+    </script>
 @endsection

@@ -7,6 +7,9 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\ElseIf_;
+use Yajra\DataTables\Facades\DataTables;
+
 class NotificationController extends Controller
 {
     public function __construct(
@@ -52,7 +55,7 @@ class NotificationController extends Controller
     {
         return view('crm.notification.near-expiry-expired');
     }
-    public function near_expiry_expired_ajax()
+    public function near_expiry_expired_ajax($type = null)
     {
         $data        = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
         $near_expiry = [];
@@ -73,10 +76,52 @@ class NotificationController extends Controller
             }
         }
 
-        return response()->json([
-            'near_expiry' => $near_expiry,
-            'expired'     => $expired,
-            'failed_iqc'  => $failed_iqc,
-        ]);
+        // return response()->json([
+        //     'near_expiry' => $near_expiry,
+        //     'expired'     => $expired,
+        //     'failed_iqc'  => $failed_iqc,
+        // ]);
+ 
+        if($type == 'NEAR_EXPIRY_TABLE') { 
+            $table = $near_expiry;
+        } elseif($type == 'EXPIRY_TABLE') {
+            $table = $expired;
+        } elseif($type == 'FAILED_IQC_TABLE') {
+            $table = $failed_iqc;
+        }
+
+        return DataTables::of($table)
+            ->addIndexColumn()
+            ->addColumn('item_description', function($table){
+                return $table->BatchMaterialProduct->item_description;
+            })
+            ->addColumn('batch_serial_po_number', function($table){
+                return $table->batch."/".$table->serial."/".$table->po_number;
+            })
+            ->addColumn('owners', function($table){
+                return $table->owner_one."/".$table->owner_two;
+            })
+            ->addColumn('storage_area', function($table){
+                return $table->StorageArea->name;
+            })
+            ->addColumn('housing_type', function($table){
+                return $table->HousingType->name;
+            })
+            ->addColumn('action', function($table){
+                return '
+                    <div class="dropdown">
+                        <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </a> 
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="'.route('disposal',$table->id).'"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
+                            <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
+                            <a class="dropdown-item"  ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
+                        </div>
+                    </div>
+                ';
+            })
+            ->rawColumns(['action','item_description','batch_serial_po_number','owners','housing_type','storage_area'])
+        ->make(true);
     }
 }

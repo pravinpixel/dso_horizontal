@@ -684,7 +684,7 @@ input[type=number] {
     letter-spacing: 1px;
 }
 .bg-expired {
-    background: #FFB200 !important;
+    background: #ff7b00 !important;
 }
 .text-expired {
     color: black !important;

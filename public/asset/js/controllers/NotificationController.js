@@ -1,11 +1,7 @@
 var app = angular.module('NotificationAPP',[]);
 app.controller('NotificationController', function ($scope, $http) {
     var get_batch_material_products        = $('#get-batch-material-products').val();
-    
-    $http.get('near-expiry-expired-ajax').then((res) => {
-        $scope.notifications = res.data
-    })
-
+     
     $scope.view_batch_details = function (row, batch) {
         $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
             $('#View_Batch_Details').modal('show');
