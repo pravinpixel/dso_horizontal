@@ -27,14 +27,15 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "100",
             "alert_threshold_qty_lower_limit" => "10",
             "alert_before_expiry"             => "704",
-            'material_quantity' => 175,
-            'material_total_quantity' =>  175 * 100
+            'material_quantity'               => 175,
+            'material_total_quantity'         => 175 * 100
         ];
         $data = [
-            "unit_packing_value"        => "100",
-            "is_draft"                      => "0",
+            "unit_packing_value"           => "100",
+            "is_draft"                     => "0",
             "quantity"                     => 175,
-            "total_quantity"   => 175 * 100,
+            "quantity_color"               => "GREEN",
+            "total_quantity"               => 175 * 100,
             "system_stock"                 => 175,
             "brand"                        => "Hexcel",
             "supplier"                     => "Peter Parker",
@@ -73,13 +74,13 @@ class MaterialProductSeeder extends Seeder
         $batch_one = $material_product->Batches()->create($data);
 
         $current_batch_one = Batches::find($batch_one->id);
-        if($current_batch_one->require_bulk_volume_tracking == 0 && $current_batch_one->require_outlife_tracking == 0) {
+        if ($current_batch_one->require_bulk_volume_tracking == 0 && $current_batch_one->require_outlife_tracking == 0) {
             $withdrawal_type = 'DIRECT_DEDUCT';
         }
-        if($current_batch_one->require_bulk_volume_tracking == 1 && $current_batch_one->require_outlife_tracking == 0) {
+        if ($current_batch_one->require_bulk_volume_tracking == 1 && $current_batch_one->require_outlife_tracking == 0) {
             $withdrawal_type = 'DEDUCT_TRACK_USAGE';
         }
-        if($current_batch_one->require_bulk_volume_tracking == 1 && $current_batch_one->require_outlife_tracking == 1) {
+        if ($current_batch_one->require_bulk_volume_tracking == 1 && $current_batch_one->require_outlife_tracking == 1) {
             $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
         }
         $current_batch_one->update([
@@ -94,14 +95,15 @@ class MaterialProductSeeder extends Seeder
             "alert_threshold_qty_upper_limit" => "150",
             "alert_threshold_qty_lower_limit" => "35",
             "alert_before_expiry"             => "850",
-            'material_quantity' => 5,
-            'material_total_quantity' =>  5 * 10
+            'material_quantity'               => 5,
+            'material_total_quantity'         => 5 * 10
         ];
         $data_two = [
-            "unit_packing_value"            => "10",
-            "is_draft"                      => "0",
+            "unit_packing_value"           => "10",
+            "is_draft"                     => "0",
             "quantity"                     => 5,
-            "total_quantity"   => 5 * 10,
+            "quantity_color"               => "RED",
+            "total_quantity"               => 5 * 10,
             "system_stock"                 => 5,
             "brand"                        => "In-House",
             "supplier"                     => "Peter Parker",
@@ -139,13 +141,13 @@ class MaterialProductSeeder extends Seeder
         $material_product_two = MaterialProducts::create($parent_data_two);
         $batch_two = $material_product_two->Batches()->create($data_two);
         $current_batch_two = Batches::find($batch_two->id);
-        if($current_batch_two->require_bulk_volume_tracking == 0 && $current_batch_two->require_outlife_tracking == 0) {
+        if ($current_batch_two->require_bulk_volume_tracking == 0 && $current_batch_two->require_outlife_tracking == 0) {
             $withdrawal_type = 'DIRECT_DEDUCT';
         }
-        if($current_batch_two->require_bulk_volume_tracking == 1 && $current_batch_two->require_outlife_tracking == 0) {
+        if ($current_batch_two->require_bulk_volume_tracking == 1 && $current_batch_two->require_outlife_tracking == 0) {
             $withdrawal_type = 'DEDUCT_TRACK_USAGE';
         }
-        if($current_batch_two->require_bulk_volume_tracking == 1 && $current_batch_two->require_outlife_tracking == 1) {
+        if ($current_batch_two->require_bulk_volume_tracking == 1 && $current_batch_two->require_outlife_tracking == 1) {
             $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
         }
         $current_batch_two->update([
@@ -165,10 +167,11 @@ class MaterialProductSeeder extends Seeder
             'material_total_quantity'         => 155 * 175
         ];
         $data_three = [
-            "unit_packing_value"              => "175",
-            "is_draft"                      => "0",
+            "unit_packing_value"           => "175",
+            "is_draft"                     => "0",
             "quantity"                     => 155,
-            "total_quantity"   => 155 * 175,
+            "quantity_color"               => "GREEN",
+            "total_quantity"               => 155 * 175,
             "system_stock"                 => 155,
             "brand"                        => "In-House",
             "supplier"                     => "Alan walker",
@@ -206,32 +209,32 @@ class MaterialProductSeeder extends Seeder
         $material_product_three = MaterialProducts::create($parent_data_three);
         $batch_three = $material_product_three->Batches()->create($data_three);
         $current_batch_three = Batches::find($batch_three->id);
-        if($current_batch_three->require_bulk_volume_tracking == 0 && $current_batch_three->require_outlife_tracking == 0) {
+        if ($current_batch_three->require_bulk_volume_tracking == 0 && $current_batch_three->require_outlife_tracking == 0) {
             $withdrawal_type = 'DIRECT_DEDUCT';
         }
-        if($current_batch_three->require_bulk_volume_tracking == 1 && $current_batch_three->require_outlife_tracking == 0) {
+        if ($current_batch_three->require_bulk_volume_tracking == 1 && $current_batch_three->require_outlife_tracking == 0) {
             $withdrawal_type = 'DEDUCT_TRACK_USAGE';
         }
-        if($current_batch_three->require_bulk_volume_tracking == 1 && $current_batch_three->require_outlife_tracking == 1) {
+        if ($current_batch_three->require_bulk_volume_tracking == 1 && $current_batch_three->require_outlife_tracking == 1) {
             $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
         }
         $current_batch_three->update([
             'withdrawal_type' => $withdrawal_type
         ]);
 
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id],[
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id], [
             'batch_id' => $batch_one->id,
             'input_repack_amount' => $batch_one->unit_packing_value
         ]);
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id],[
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id], [
             'batch_id' => $batch_two->id,
             'input_repack_amount' => $batch_two->unit_packing_value
         ]);
-        RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id],[
+        RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id], [
             'batch_id' => $batch_three->id,
             'input_repack_amount' => $batch_three->unit_packing_value
         ]);
-       
+
 
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),

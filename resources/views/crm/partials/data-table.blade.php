@@ -7,8 +7,16 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
+           <b class="jhfs"> @{{ row.hideParentRow }}</b>
             {{-- ng-if="row.hideParentRow == 0" --}}
-            <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
+            @switch($page_name)
+                @case('THRESHOLD_QTY')
+                    <div class="custom-table-row" ng-if="row.quantityColor == 'text-danger' || row.quantityColor == 'text-warning'" ng-repeat="(index,row) in material_products.data">
+                @break  
+                @default
+                <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
+            @endswitch
+            
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">
                     <div class="custom-table-head parent-row"> 
@@ -31,7 +39,7 @@
                                 @break
                                 @case('THRESHOLD_QTY')
                                     <div class="custom-table-row" ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
-                                        {!! $batch_table_td_columns !!} 
+                                        {!! $batch_table_td_columns !!}
                                     </div>
                                 @break  
                                 @default

@@ -33,7 +33,10 @@ class NotificationController extends Controller
     }
     public function notification_count()
     {
-        $data = Batches::where('is_read',0)->get();
+        $data = Batches::where([
+            'is_read'        => 0,
+            'quantity_color' => 'RED'
+        ])->orWhere('quantity_color','AMBER')->get();
 
         foreach ($data as $key => $row) {
             $row['material_product'] = MaterialProducts::find($row->material_product_id);
