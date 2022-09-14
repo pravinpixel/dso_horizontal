@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
+use App\Models\LogSheet;
 use App\Repositories\MartialProductRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
 {
@@ -28,10 +31,32 @@ class ReportsController extends Controller
         $view       = "crm.reports.export-cart";
         return $this->dsoRepository->renderPage($page_name, $view); 
     }
-    public function history()
+    public function history(Request $request)
     {
-        $product_batches    =   LogActivity::all();
-        return view('crm.reports.history', compact('product_batches'));
+        if ($request->ajax()) { 
+            if (!empty($request->get('action_type'))) {
+                $data = LogSheet::with('User')->where('action_type', $request->get('action_type'))->get();
+            } else {
+                $data = LogSheet::with('User')->get();
+            }
+            return DataTables::of($data)->addIndexColumn()
+                ->addColumn('TransactionDate', function($data){
+                    return Carbon::parse($data->created_at)->toFormattedDateString();
+                })
+                ->addColumn('TransactionTime', function($data){
+                    return Carbon::parse($data->created_at)->format('h:i:s A');
+                })
+                ->addColumn('TransactionBy', function($data){
+                    return $data->User->alias_name;
+                })
+                ->addColumn('Remarks', function($data){
+                    return $data->remarks != '' ? $data->remarks : "-";
+                }) 
+                ->rawColumns(['TransactionBy',"Remarks","TransactionDate","TransactionTime"])
+            ->make(true);
+        }
+        $actions = array_unique(LogSheet::pluck('action_type')->toArray());
+        return view('crm.reports.history', compact('actions'));
     }
     public function disposed_items()
     {
