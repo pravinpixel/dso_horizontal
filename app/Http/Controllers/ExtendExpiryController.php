@@ -29,9 +29,9 @@ class ExtendExpiryController extends Controller
             return 404;
         }
     }
-    public function update(Request $request, $id)
-    {
-        $batch = Batches::findOrFail($id);
+    public function update(Request $request)
+    { 
+        $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $old_value  =   clone $batch;
         $new_value  =   $batch;

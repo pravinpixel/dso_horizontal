@@ -36,8 +36,9 @@
                                 Please fill in the information below for <b class="text-dark">expiry extension</b>. The field labels marked with * are required input fields.
                             </p>
                             <div class="row m-0">
-                                <form  action="{{ route('update.extend-expiry', request()->route()->id) }}" method="POST" enctype="multipart/form-data">
+                                <form  action="{{ route('update.extend-expiry') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="id" value="@{{ batch.id }}">
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Extended QC Documents*</small>
                                         <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">

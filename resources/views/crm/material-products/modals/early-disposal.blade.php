@@ -11,8 +11,9 @@
             </div>
             <div class="modal-body p-4">
                 <small>Please indicate selection below for <b>Disposal/ used for TD or Expt project</b> </small>
-                <form action="{{ route('update.disposal', request()->route()->id) }}" method="POST" enctype="multipart/form-data" class="row m-0 pt-4" style="border: none !important;">
+                <form action="{{ route('update.disposal') }}" method="POST" enctype="multipart/form-data" class="row m-0 pt-4" style="border: none !important;">
                     @csrf
+                    <input type="hidden" name="id" value="@{{ batch.id }}">
                     <div class="col-md-6 border-end p-4">
                         <label for="Pass_label" class="form-radio-warning mb-3">
                             <input  type="radio" name="used_for_td_expt_only" class="me-2 form-check-input border-warning" value="0" ng-checked="batch.used_for_td_expt_only == 0"  ng-model="batch.used_for_td_expt_only" id="Pass_label" required /> 

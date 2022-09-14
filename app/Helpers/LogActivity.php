@@ -71,36 +71,44 @@ class LogActivity
             case 'transfer':
                 $action_type = 'TRANSFER';
                 $module_name = "Batches";
+                $remarks     = $new->remarks;
                 break;
             case 'repack':
                 $action_type = 'REPACK_TRANSFER';
                 $module_name = "Batches";
+                $remarks     = $new->remarks;
                 break;
             case 'store_repack_outlife' :
-                $action_type  = 'REPACK_OUTLIFE';
-                $module_name  = 'Batches';
+                $action_type = 'REPACK_OUTLIFE';
+                $module_name = 'Batches';
+                $remarks     = $new->remarks;
                 break;
             case 'direct_deduct':
-                $action_type  = 'DIRECT_DEDUCT';
-                $module_name  = 'Batches';
+                $action_type = 'DIRECT_DEDUCT';
+                $module_name = 'Batches';
+                $remarks     = $new->remarks;
                 break;
             case 'deduct_track_outlife':
-                $action_type  = 'DEDUCT_TRACK_OUTLIFE';
-                $module_name  = 'RepackOutlife';
+                $action_type = 'DEDUCT_TRACK_OUTLIFE';
+                $module_name = 'RepackOutlife';
+                $remarks     = $new->remarks;
                 break;
             case 'disposal_update':
-                $action_type  = 'EARLY_DISPOSAL';
-                $module_name  = 'Batches';
+                $action_type = 'EARLY_DISPOSAL';
+                $module_name = 'Batches';
+                $remarks     = '-';
                 break;
             case 'deduct_track_usage' :
-                $action_type  = 'DEDUCT_TRACK_USAGE';
-                $module_name  = 'Withdrawal';
+                $action_type = 'DEDUCT_TRACK_USAGE';
+                $module_name = 'Withdrawal';
+                $remarks     = $new->remarks;
                 break;
         }
         switch (request()->route()->getName()) {
             case 'update.extend-expiry':
-                $action_type  = 'NEAR_EXPIRY_EXPIRED';
-                $module_name  = 'Batches';
+                $action_type = 'EXTEND_EXPIRY';
+                $module_name = 'Batches';
+                $remarks     = $new->remarks;
             break; 
         }
         LogSheet::updateOrCreate([
@@ -113,7 +121,7 @@ class LogActivity
             'old'         => json_encode($old),
             'new'         => json_encode($new),
             'module_id'   => $old->id ?? '',
-            'remarks'    =>  $new->remarks ?? ''
+            'remarks'    =>  $remarks
         ]);
     }
 

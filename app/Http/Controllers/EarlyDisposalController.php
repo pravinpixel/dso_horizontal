@@ -31,9 +31,9 @@ class EarlyDisposalController extends Controller
             return 404;
         }
     }
-    public function disposal_update(Request $request, $id)
+    public function disposal_update(Request $request)
     {
-        $batch = Batches::findOrFail($id);
+        $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $old_value  =   clone $batch;
         $new_value  =   $batch;
