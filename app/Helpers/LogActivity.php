@@ -7,7 +7,7 @@ use App\Models\LogSheet;
 class LogActivity
 {
     public static function log($id, $remarks = null)
-    {
+    { 
         switch (request()->route()->getActionMethod()) {
             case 'batch_destroy':
                 $action_type  = 'DELETE';
@@ -66,6 +66,7 @@ class LogActivity
 
     public static function dataLog($old, $new , $remarks = null)
     {
+         
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
                 $action_type = 'TRANSFER';
@@ -88,13 +89,19 @@ class LogActivity
                 $module_name  = 'RepackOutlife';
                 break;
             case 'disposal_update':
-                $action_type  = 'EARLY DISPOSAL';
+                $action_type  = 'EARLY_DISPOSAL';
                 $module_name  = 'Batches';
                 break;
             case 'deduct_track_usage' :
-                $action_type  = 'Deduct_Track_Usage';
+                $action_type  = 'DEDUCT_TRACK_USAGE';
                 $module_name  = 'Withdrawal';
                 break;
+        }
+        switch (request()->route()->getName()) {
+            case 'update.extend-expiry':
+                $action_type  = 'NEAR_EXPIRY_EXPIRED';
+                $module_name  = 'Batches';
+            break; 
         }
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),
