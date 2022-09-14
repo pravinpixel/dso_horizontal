@@ -75,12 +75,6 @@ class NotificationController extends Controller
                 $failed_iqc[] = $row;
             }
         }
-
-        // return response()->json([
-        //     'near_expiry' => $near_expiry,
-        //     'expired'     => $expired,
-        //     'failed_iqc'  => $failed_iqc,
-        // ]);
  
         if($type == 'NEAR_EXPIRY_TABLE') { 
             $table = $near_expiry;
@@ -116,7 +110,7 @@ class NotificationController extends Controller
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="'.route('disposal',$table->id).'"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                             <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                            <a class="dropdown-item"  ng-click="view_batch_details(row.batch_material_product, row)"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
+                            <a class="dropdown-item"  onclick="viewBatch('.$table->id.')"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
                         </div>
                     </div>
                 ';

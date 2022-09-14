@@ -428,6 +428,51 @@ class MaterialProductsController extends Controller
     {
         return Batches::findOrFail($id);
     }
+    public function viewBatch($id)
+    {
+        $data = Batches::findOrFail($id);
+        return response()->json([
+            "category_selection"           => $data->BatchMaterialProduct->category_selection == 'in_house' ? 'In-house Product' : 'Material',
+            "item_description"             => $data->BatchMaterialProduct->item_description,
+            "brand"                        => $data->brand,
+            "supplier"                     => $data->supplier,
+            "unit_packing_value"           => $data->BatchMaterialProduct->unit_packing_value,
+            "quantity"                     => $data->quantity,
+            "batch"                        => $data->batch,
+            "serial"                       => $data->serial,
+            "po_number"                    => $data->po_number,
+            "statutory_body"               => $data->StatutoryBody->name,
+            "euc_material"                 => $data->euc_material == 1 ? "Yes" : $data->euc_material == 0 ? "No" : "-",
+            "require_bulk_volume_tracking" => $data->require_bulk_volume_tracking == 1 ? "Yes" : $data->require_bulk_volume_tracking == 0 ? "No" : "-",
+            "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : $data->require_outlife_tracking == 0 ? "No" : "-" .$data->outlife ?? "0",
+            "storage_area"                 => $data->StorageArea !== null ? $data->StorageArea->name : '-',
+            "housing"                      => $data->housing_type !== null ? $data->HousingType->name : '-'."/".$data->housing,
+            "owners"                       => $data->owner_one."/".$data->owner_two,
+            "department"                   => $data->Department->name,
+            "access"                       => $data->access,
+            "date_in"                      => $data->date_in,
+            "date_of_expiry"               => $data->date_of_expiry,
+            "sds"                          => $data->sds,
+            "date_of_expiry"               => $data->date_of_expiry,
+            "coc_coa_mill_cert"            => $data->coc_files ?? null,
+            "iqc_status"                   => $data->iqc_status == 0 ? "Fail" : "Pass",
+            "iqc_result"                   => $data->iqc_result,
+            "cas"                          => $data->cas,
+            "fm_1202"                      => $data->fm_1202 == 'on' ? "Yes" : "No",
+            "project_name"                 => $data->project_name,
+            "material_product_type"        => $data->material_product_type,
+            "date_of_manufacture"          => $data->date_of_manufacture,
+            "date_of_shipment"             => $data->date_of_shipment,
+            "cost_per_unit"                => $data->cost_per_unit,
+            "remarks"                      => $data->remarks,
+            "extended_expiry"              => $data->extended_expiry ?? ' - ',
+            "extended_qc_status"           => $data->extended_qc_status ?? ' - ',
+            "extended_qc_status"           => $data->extended_qc_status ?? ' - ',
+            "extended_qc_result"           => $data->extended_qc_result ?? ' - ',
+            "disposal_certificate"         => $data->disposal_certificate ?? ' - ',
+            "used_for_td_expt_only"        => $data->used_for_td_expt_only == 1 ? 'Yes' : $data->used_for_td_expt_only == 0 ? "No" : "-",
+        ]);
+    }
     public function view_batch($id)
     {
         $data       =   Batches::findOrFail($id);
