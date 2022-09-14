@@ -35,9 +35,9 @@ class ReportsController extends Controller
     {
         if ($request->ajax()) { 
             if (!empty($request->get('action_type'))) {
-                $data = LogSheet::with('User')->where('action_type', $request->get('action_type'))->get();
+                $data = LogSheet::with('User')->where('action_type', $request->get('action_type'))->latest();
             } else {
-                $data = LogSheet::with('User')->get();
+                $data = LogSheet::with('User')->latest();
             }
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('TransactionDate', function($data){
@@ -48,7 +48,7 @@ class ReportsController extends Controller
                 })
                 ->addColumn('TransactionBy', function($data){
                     return $data->User->alias_name;
-                })
+                }) 
                 ->addColumn('Remarks', function($data){
                     return $data->remarks != '' ? $data->remarks : "-";
                 }) 

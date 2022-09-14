@@ -37,7 +37,7 @@
                 }
             },
             columns: [
-                {data: 'id', name: 'id'},
+                {data: 'DT_RowIndex', name: 'id'},
                 {data: 'TransactionDate', name: 'TransactionDate'},
                 {data: 'TransactionTime', name: 'TransactionTime'},
                 {data: 'TransactionBy', name: 'TransactionBy'},
@@ -52,7 +52,7 @@
                 <select id="ActionType" class="form-select" style="display: inline-block;width:auto">
                     <option value="">--Select Status--</option>
                     @foreach($actions as $action)
-                        <option value="{{ $action }}">{{ $action }}</option>
+                        <option value="{{ $action }}">{{ ucwords(strtolower(str_replace('_', " " , $action))) }}</option>
                     @endforeach
                 </select>
             </label>
