@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\HistoryExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\LogSheet;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
@@ -57,6 +59,11 @@ class ReportsController extends Controller
         }
         $actions = array_unique(LogSheet::pluck('action_type')->toArray());
         return view('crm.reports.history', compact('actions'));
+    }
+    public function export()
+    {
+        return Excel::download(new HistoryExport, 'history.xlsx'); 
+
     }
     public function disposed_items()
     {

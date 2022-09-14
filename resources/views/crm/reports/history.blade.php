@@ -57,6 +57,10 @@
                 </select>
             </label>
         `);
+        $("#custom-data-table_length").prepend(`
+            <a href="{{ route('reports.export') }}" class="btn btn-info rounded-pill me-3" autocomplete="off"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export as CSV</a>
+        `);
+
         $('#ActionType').change(function(){
             table.draw();
         });

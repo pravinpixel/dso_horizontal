@@ -156,5 +156,5 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('reports/export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
     Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history'); 
     Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
-    
+    Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export'); 
 });
