@@ -93,7 +93,7 @@
     @case('THRESHOLD_QTY') 
         <div class="box border-start">
             @{{ batch.is_read }}
-            <input ng-checked="batch.is_read"  ng-click="changeReadStatus(batch.id)" type="checkbox" id="switch@{{ batch.id }}" data-switch="none"/>
+            <input ng-checked="batch.is_read == 1"  ng-click="changeReadStatus(batch.id)" type="checkbox" id="switch@{{ batch.id }}" data-switch="none"/>
             <label class="border shadow-sm" for="switch@{{ batch.id }}"></label>
         </div>
     @break
