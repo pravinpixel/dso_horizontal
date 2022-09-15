@@ -8,6 +8,7 @@ use App\Http\Controllers\EarlyDisposalController;
 use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrintBarcodeController;
+use App\Http\Controllers\ProductCartController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransferBatchController;
@@ -160,4 +161,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history'); 
     Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export'); 
+
+    Route::resource('/product-cart', ProductCartController::class); 
+    Route::get('/get-product-cart/{type?}',[ ProductCartController::class,'index']); 
 });
