@@ -22,7 +22,7 @@
             @include('crm.partials.data-table')
         </section>
 
-        <cart-table type="UTILISATION"></cart-table>
+        <cart-table type="{{ $page_name }}"></cart-table>
      
 
         {{-- ======= START : App Models ==== --}}

@@ -17,9 +17,12 @@ class ProductCartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($type)
+    public function index()
     {
-        return ProductCart::with('batches','batches.BatchMaterialProduct')->where('type',$type)->get();
+        return ProductCart::with('batches','batches.BatchMaterialProduct')
+                            ->where('type', session()->get('page_name'))
+                            ->where('user_id' ,auth_user()->id)
+                            ->get();
     }
 
     /**
@@ -46,7 +49,7 @@ class ProductCartController extends Controller
             return response([
                 "status"  => 200,
                 "message" => "Item Added successfully !",
-                "type"    => $request->type,
+                "type"    => session()->get('page_name')
             ]);
         }
     }
@@ -98,7 +101,8 @@ class ProductCartController extends Controller
         if($data) {
             return response([
                 "status"  => 200,
-                "message" => "Item Deleted successfully !"
+                "message" => "Item Deleted successfully !",
+                "type"    => session()->get('page_name')
             ]);
         } 
     }
