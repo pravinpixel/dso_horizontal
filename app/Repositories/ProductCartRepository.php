@@ -17,7 +17,7 @@ class ProductCartRepository implements ProductCartRepositoryInterface
             $this->ProductCart::updateOrCreate([
                 'batch_id' => $request->batch_id,
                 'user_id'  => auth_user()->id,
-                'type'     => $request->type,
+                'type'     => session()->get('page_name'),
             ]);
         } 
         if(!is_null($request->material_id)) {
@@ -26,7 +26,7 @@ class ProductCartRepository implements ProductCartRepositoryInterface
                 $this->ProductCart::updateOrCreate([
                     'batch_id' => $batch->id,
                     'user_id'  => auth_user()->id,
-                    'type'     => $request->type,
+                    'type'     => session()->get('page_name'),
                 ]);
             } 
         }

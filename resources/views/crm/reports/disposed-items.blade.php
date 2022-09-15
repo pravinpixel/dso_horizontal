@@ -22,48 +22,7 @@
             @include('crm.partials.data-table')
         </section>
 
-        <div>
-            <table class="table bg-white table-bordered table-hover custom-center">
-                <thead>
-                    <tr class="bg text-white">
-                        <th class="bg-dark  text-white" style="padding: 5px !important;" colspan="7"><span class="text-center">Utilisation Cart</span></th>
-                    </tr>
-                    <tr>
-                        <th class="table-th child-td">Item description</th>
-                         <th class="table-th child-td">Brand</th>
-                        <th class="table-th child-td">Batch#/ Serial#</th>
-                         <th class="table-th child-td">Pkt size</th>
-                        <th class="table-th child-td">Withdraw Qty</th>
-                        <th class="table-th child-td"> <i class="text-danger bi bi-trash3-fill"></i></th>
-                    </tr>
-                </thead>
-                <tbody> 											
-                    <tr>
-                        <td class="child-td">Prepreg C3K</td>
-                        <td class="child-td">Brand 1</td>
-                        <td class="child-td">Roll2/1</td>
-                        <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
-                        <td class="child-td">
-                            <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
-                        </td>
-                    </tr>  										 
-                    <tr class="bg-secondary text-white">
-                        <td class="child-td">Prepreg C3K</td>
-                        <td class="child-td">Brand 1</td>
-                        <td class="child-td">Roll2/1</td>
-                            <td class="child-td">0.5L</td>
-                        <td class="child-td text-center"><input type="number" min="1"  name="" class="border-0 bg-none form-control  p-0 form-control-sm text-center" value="10"></td>
-                        <td class="child-td">
-                            <i class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
-                        </td>
-                    </tr> 
-                </tbody>
-            </table>
-            <div class="text-end ">
-                <button class="btn btn-primary rounded-pill">Generate</button>
-            </div>
-        </div>
+        <cart-table type="{{ $page_name }}"></cart-table>
 
         {{-- ======= START : App Models ==== --}}
             @include('crm.material-products.modals.view-batch-list')

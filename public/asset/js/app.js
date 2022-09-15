@@ -254,7 +254,6 @@ addToCart = (element,type) => {
     var PayLoad = {
         batch_id    : element.getAttribute('batch-id'),
         material_id : element.getAttribute('material-id'),
-        type        : type
     }
     web.post(`${APP_URL}/product-cart`, PayLoad ).then((response) => {
         Message('success', response.data.message)
@@ -263,17 +262,17 @@ addToCart = (element,type) => {
         console.log(error.message)
     })
 }
-deleteToCart = (id,type) => { 
+deleteToCart = (id) => { 
     web.delete(`${APP_URL}/product-cart/${id}`).then((response) => {
         Message('success', response.data.message)
-        getToCart(type)
+        getToCart(response.data.type)
     }).catch((error) => {
         console.log(error.message)
     })
 }
 getToCart = (type) => { 
     var row = '';
-    web.get(`${APP_URL}/get-product-cart/${type}`).then((response) => {
+    web.get(`${APP_URL}/product-cart`).then((response) => {
         if(response.data) {
             response.data.map((item) => { 
                 row += `
@@ -284,35 +283,41 @@ getToCart = (type) => {
                         <td>${item.batches.unit_packing_value}</td>
                         <td>${item.batches.quantity}</td>
                         <td>
-                            <i onclick="deleteToCart(${item.id},'${type}')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                            <i onclick="deleteToCart(${item.id})" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                         </td>
                     </tr>
                 `;
             }) 
         }
-        document.querySelector(`cart-table[type=${type}]`).innerHTML = `
-            <table class="table bg-white table-bordered table-hover custom-center">
-                <thead>
-                    <tr class="bg text-white">
-                        <th class="bg-dark text-white" colspan="6">Utilisation Cart</th>
-                    </tr>
-                    <tr>
-                        <th class="table-th child-td">Item description</th>
-                        <th class="table-th child-td">Brand</th>
-                        <th class="table-th child-td">Batch#/ Serial#</th>
-                        <th class="table-th child-td">Pkt size</th>
-                        <th class="table-th child-td">Withdraw Qty</th>
-                        <th class="table-th child-td">
-                            <i class="text-danger bi bi-trash3-fill"></i>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>${row}</tbody>
-            </table>
-            <div class="text-end ">
-                <button class="btn btn-primary rounded-pill">Generate</button>
-            </div>
-        `;
+        try {
+            document.querySelector(`cart-table[type=${type}]`).innerHTML = `
+                <table class="table bg-white table-bordered table-hover custom-center">
+                    <thead>
+                        <tr class="bg text-white">
+                            <th class="bg-dark text-white" colspan="6">Cart List</th>
+                        </tr>
+                        <tr>
+                            <th class="table-th child-td">Item description</th>
+                            <th class="table-th child-td">Brand</th>
+                            <th class="table-th child-td">Batch#/ Serial#</th>
+                            <th class="table-th child-td">Pkt size</th>
+                            <th class="table-th child-td">Withdraw Qty</th>
+                            <th class="table-th child-td">
+                                <i class="text-danger bi bi-trash3-fill"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>${row}</tbody>
+                </table>
+                <div class="text-end ">
+                    <button class="btn btn-primary rounded-pill">Generate</button>
+                </div>
+            `;
+        } catch (error) {
+            console.log(error)
+        }
     }); 
 }
-getToCart('UTILISATION')
+getToCart('REPORT_UTILISATION_CART')
+getToCart('REPORT_EXPORT_CART')
+getToCart('REPORT_DISPOSED_ITEMS')

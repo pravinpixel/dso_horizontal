@@ -14,17 +14,17 @@
             </a>
         </li> 
         <li class="nav-item">
-            <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Material/Product History</span>
-            </a>
-        </li> 
-        <li class="nav-item">
             <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Disposed items</span>
             </a>
         </li> 
+        <li class="nav-item">
+            <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
+                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                <span class="d-none d-md-block">Material/Product History</span>
+            </a>
+        </li>  
     </ul> 
     <section ng-app="RootApp" ng-controller="RootController" class="pt-3">
         @yield('report_content')
