@@ -112,7 +112,7 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </a> 
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary" href="#"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                    <button class="dropdown-item text-secondary" material-id="@{{ row.id }}" onclick="addToCart(this,'UTILISATION')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
                 </div>
             </div>
         </div>

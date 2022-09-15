@@ -325,8 +325,7 @@
     </div>
 </div>
 @endsection 
-@section('scripts') 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+@section('scripts')  
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
         var tables = document.getElementsByClassName('table');

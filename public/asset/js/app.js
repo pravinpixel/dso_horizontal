@@ -1,4 +1,5 @@
 var APP_URL = $('meta[name="app-url"]').attr('content') ;
+const web = axios
 function printModal() {
     swal({
         text: "Do you want to print?",
@@ -42,8 +43,7 @@ function deleteModal() {
             }
         }, 
     });
-}
- 
+} 
 function Message(type, res) {
     $('body').append(`
         <div class="alert alert-primary alert-dismissible bg-${type} text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
@@ -249,3 +249,70 @@ checkboxConfirm = (event) => {
         }
     }); 
 }
+
+addToCart = (element,type) => { 
+    var PayLoad = {
+        batch_id    : element.getAttribute('batch-id'),
+        material_id : element.getAttribute('material-id'),
+        type        : type
+    }
+    web.post(`${APP_URL}/product-cart`, PayLoad ).then((response) => {
+        Message('success', response.data.message)
+        getToCart(type)
+    }).catch((error) => {
+        console.log(error.message)
+    })
+}
+deleteToCart = (id,type) => { 
+    web.delete(`${APP_URL}/product-cart/${id}`).then((response) => {
+        Message('success', response.data.message)
+        getToCart(type)
+    }).catch((error) => {
+        console.log(error.message)
+    })
+}
+getToCart = (type) => { 
+    var row = '';
+    web.get(`${APP_URL}/get-product-cart/${type}`).then((response) => {
+        if(response.data) {
+            response.data.map((item) => { 
+                row += `
+                    <tr>
+                        <td>${item.batches.batch_material_product.item_description}</td>
+                        <td>${item.batches.brand}</td>
+                        <td>${item.batches.batch} | ${item.batches.serial}</td>
+                        <td>${item.batches.unit_packing_value}</td>
+                        <td>${item.batches.quantity}</td>
+                        <td>
+                            <i onclick="deleteToCart(${item.id},'${type}')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                        </td>
+                    </tr>
+                `;
+            }) 
+        }
+        document.querySelector(`cart-table[type=${type}]`).innerHTML = `
+            <table class="table bg-white table-bordered table-hover custom-center">
+                <thead>
+                    <tr class="bg text-white">
+                        <th class="bg-dark text-white" colspan="6">Utilisation Cart</th>
+                    </tr>
+                    <tr>
+                        <th class="table-th child-td">Item description</th>
+                        <th class="table-th child-td">Brand</th>
+                        <th class="table-th child-td">Batch#/ Serial#</th>
+                        <th class="table-th child-td">Pkt size</th>
+                        <th class="table-th child-td">Withdraw Qty</th>
+                        <th class="table-th child-td">
+                            <i class="text-danger bi bi-trash3-fill"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>${row}</tbody>
+            </table>
+            <div class="text-end ">
+                <button class="btn btn-primary rounded-pill">Generate</button>
+            </div>
+        `;
+    }); 
+}
+getToCart('UTILISATION')
