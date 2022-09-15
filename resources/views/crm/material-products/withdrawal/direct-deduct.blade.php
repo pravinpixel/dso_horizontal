@@ -23,7 +23,7 @@
             @if(count($direct_deducts) != 0) 
                 @foreach ($direct_deducts as $row)
                     <tr>
-                        <td> 
+                        <td>
                             <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
                             <input type="hidden" name="batch_id[]"  value="{{ $row->Batch->id }}">
                         </td>
@@ -41,8 +41,9 @@
                         <td class="child-td py-0 px-1">
                             <textarea name="remarks[]" class="form-control font-12"></textarea>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center d-flex">
                             <i onclick="deleteRow({{ $row->id }},'DIRECT_DEDUCT')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                            <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
                         </td>
                     </tr>
                 @endforeach

@@ -32,7 +32,6 @@
                     </a>
                 </li>
             </ul>
-
             <div class="tab-content text-center border border-top-0 p-3 m-0 bg-white">
                 <div class="tab-pane show active" id="DIRECT_DEDUCT">
                     @include('crm.material-products.withdrawal.direct-deduct')
@@ -46,9 +45,24 @@
             </div>
         </div>
     </div>
+    <div id="View_Batch_Details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog w-100 modal-right h-100">
+            <div class="modal-content h-100 rounded-0">
+                <div class="modal-header bg-primary text-white border-0 rounded-0">
+                    <h4>View Batch Details</h4>
+                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                </div>
+                <div class="modal-body modal-scroll-2 p-0"> 
+                    <ol class="list-group list-group-numbered" style="overflow: hidden" id="Batch_Details"> </ol> 
+                </div> 
+            </div> 
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
         getWithDrawlCart = async (barcode) => { // Scan Barcode
             validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
