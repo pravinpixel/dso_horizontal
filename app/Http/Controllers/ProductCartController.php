@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductCart;
+use App\Repositories\ProductCartRepository;
 use Illuminate\Http\Request;
 
 class ProductCartController extends Controller
 {
+    public function __construct(ProductCartRepository $ProductCartRepository)
+    {
+        $this->ProductCartRepository = $ProductCartRepository;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
-        //
+        return ProductCart::with('batches','batches.BatchMaterialProduct')->where('type',$type)->get();
     }
 
     /**
@@ -34,8 +39,16 @@ class ProductCartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
+        $data =  $this->ProductCartRepository->add_to_cart($request);
+
+        if($data) {
+            return response([
+                "status"  => 200,
+                "message" => "Item Added successfully !",
+                "type"    => $request->type,
+            ]);
+        }
     }
 
     /**
@@ -78,8 +91,15 @@ class ProductCartController extends Controller
      * @param  \App\Models\ProductCart  $productCart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductCart $productCart)
+    public function destroy($id)
     {
-        //
+        $data =  $this->ProductCartRepository->remove_to_cart($id);
+        
+        if($data) {
+            return response([
+                "status"  => 200,
+                "message" => "Item Deleted successfully !"
+            ]);
+        } 
     }
 }
