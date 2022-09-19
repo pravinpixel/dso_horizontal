@@ -16,9 +16,9 @@
                         <tr>
                             <td>Date & time stamp	</td>
                             <td>Current accessed </td>
-                            <td>Input Used amt (@{{ RepackTransferMeasure }}) </td>
-                            <td>Remain Amt (@{{ RepackTransferMeasure }})</td>
-                            <td>Repack Size(@{{ RepackTransferMeasure}})	</td>
+                            <td>Repack Quantity</td>
+                            <td>Remain Quantity</td>
+                            <td>New unit packing value</td>
                             <td>Quantity </td>
                             <td>Storage Area</td>
                             <td>Housing type</td>
@@ -37,25 +37,25 @@
                                     type="number" 
                                     min="1" 
                                     ng-max="RepackTransfer.quantity"
-                                    ng-model="RepackTransfer.input_used_amount"
+                                    ng-model="RepackTransfer.RepackQuantity"
                                     class="custom-input"
-                                    repack-transfer-table="INPUT_USED_AMOUNT"
+                                    repack-transfer-table="REPACK_QUANTITY"
                                 />
                             </td>
-                            <td ng-bind="RepackTransfer.remain_amount"></td>
-                            <td ng-init="RepackTransfer.repack_size = 0">
-                                <input 
+                            <td ng-bind="RepackTransfer.RemainQuantity"></td>
+                            <td>
+                                <input
                                     type="number" 
                                     min="1" 
-                                    ng-model="RepackTransfer.repack_size" 
-                                    ng-value="RepackTransfer.repack_size"
+                                    ng-model="RepackTransfer.new_unit_packing_value" 
+                                    ng-value="RepackTransfer.new_unit_packing_value"
                                     class="custom-input"
-                                    repack-transfer-table="INPUT_REPACK_SIZE"
+                                    repack-transfer-table="NEW_UNIT_PACKING_VALUE"
                                 />
                             </td>
-                            <td  ng-bind="RepackTransfer.next_total_quantity">
+                            <td  ng-bind="RepackTransfer.AutoCalQty">
                                 {{-- ng-bind="RepackTransfer.quantity" --}}
-                                {{-- @{{ RepackTransfer.total_quantity / RepackTransfer.repack_size }}    --}}
+                                {{-- @{{ RepackTransfer.total_quantity / RepackTransfer.new_unit_packing_value	 }}    --}}
                             </td>
                             <td>
                                 <select class="custom-input" ng-model="RepackTransfer.storage_area">
@@ -145,7 +145,7 @@
                             <tbody>
                                 <tr>
                                     <td style="padding: 0" width="200px" class="text-center">
-                                        <input type="number" min="1" ng-model="RepackTransfer.repack_size" ng-value="RepackTransfer.repack_size"class="border-0 rounded-0 text-center form-control form-control-sm">
+                                        <input type="number" min="1" ng-model="RepackTransfer.new_unit_packing_value	" ng-value="RepackTransfer.new_unit_packing_value	"class="border-0 rounded-0 text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
                                         <input type="number" min="1" max="@{{ RepackTransferQty }}" ng-model="RepackTransfer.quantity" ng-value="RepackTransfer.quantity" class="border-0 rounded-0 text-center form-control form-control-sm">

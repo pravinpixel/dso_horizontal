@@ -104,7 +104,7 @@ class DsoRepository implements DsoRepositoryInterface
                     $TotalQuantityTotal += $totalQtyCount;
                 }
                 if($batch->quantity  != null) {
-                    $batch->quantity = str_replace('.00', '' , $batch->quantity);
+                    // $batch->quantity = str_replace('.00', '' , $batch->quantity);
                 }
             }
 

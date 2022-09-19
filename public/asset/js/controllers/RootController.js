@@ -683,15 +683,15 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.CurrentAccessed = CurrentAccessed.join()
                 break;
             case "store":
-                if ($scope.RepackTransfer.input_used_amount === null || $scope.RepackTransfer.input_used_amount === undefined) {
+                if ($scope.RepackTransfer.RepackQuantity === null || $scope.RepackTransfer.RepackQuantity === undefined) {
                     Message('danger', "Input Used amt (L) is Required !");
                     return false;
                 }
-                if ($scope.RepackTransfer.repack_size == '' || $scope.RepackTransfer.quantity == '' || $scope.RepackTransfer.storage_area == '' || $scope.RepackTransfer.housing_type == '' || $scope.RepackTransfer.housing == '' || $scope.RepackTransfer.owner_one == '' || $scope.RepackTransfer.owner_two == '') {
+                if ($scope.RepackTransfer.new_unit_packing_value == '' || $scope.RepackTransfer.quantity == '' || $scope.RepackTransfer.storage_area == '' || $scope.RepackTransfer.housing_type == '' || $scope.RepackTransfer.housing == '' || $scope.RepackTransfer.owner_one == '' || $scope.RepackTransfer.owner_two == '') {
                     Message('danger', "All fields is Required !");
                     return false
                 }
-                if ($scope.RepackTransfer.repack_size == null || $scope.RepackTransfer.quantity == null || $scope.RepackTransfer.storage_area == null || $scope.RepackTransfer.housing_type == null || $scope.RepackTransfer.housing == null || $scope.RepackTransfer.owner_one == null || $scope.RepackTransfer.owner_two == null) {
+                if ($scope.RepackTransfer.new_unit_packing_value == null || $scope.RepackTransfer.quantity == null || $scope.RepackTransfer.storage_area == null || $scope.RepackTransfer.housing_type == null || $scope.RepackTransfer.housing == null || $scope.RepackTransfer.owner_one == null || $scope.RepackTransfer.owner_two == null) {
                     Message('danger', "All fields is Required !");
                     return false
                 }
