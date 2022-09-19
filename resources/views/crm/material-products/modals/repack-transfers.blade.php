@@ -6,7 +6,95 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="modal-body">
-                <div class="row m-0">
+                <table class="table table-centered bg-white table-bordered custom-center m-0">
+                    <thead class="bg-primary-2 text-white"> 
+                        <tr>
+                            <th colspan="12">
+                                Repacked mat/product tracking logsheet (Repack)
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Date & time stamp	</td>
+                            <td>Current accessed </td>
+                            <td>Input Used amt (@{{ RepackTransferMeasure }}) </td>
+                            <td>Remain Amt (@{{ RepackTransferMeasure }})</td>
+                            <td>Repack Size(@{{ RepackTransferMeasure}})	</td>
+                            <td>Quantity </td>
+                            <td>Storage Area</td>
+                            <td>Housing type</td>
+                            <td>Housing No</td>
+                            <td>Owner 1</td>
+                            <td>Owner 2</td>
+                            <th><i class="text-danger bi bi-trash3-fill"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@{{ CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                            <td>{{ auth_user()->alias_name }}</td>
+                            <td>
+                                <input 
+                                    type="number" 
+                                    min="1" 
+                                    ng-max="RepackTransfer.quantity"
+                                    ng-model="RepackTransfer.input_used_amount"
+                                    class="custom-input"
+                                    repack-transfer-table="INPUT_USED_AMOUNT"
+                                />
+                            </td>
+                            <td ng-bind="RepackTransfer.remain_amount"></td>
+                            <td ng-init="RepackTransfer.repack_size = 0">
+                                <input 
+                                    type="number" 
+                                    min="1" 
+                                    ng-model="RepackTransfer.repack_size" 
+                                    ng-value="RepackTransfer.repack_size"
+                                    class="custom-input"
+                                    repack-transfer-table="INPUT_REPACK_SIZE"
+                                />
+                            </td>
+                            <td  ng-bind="RepackTransfer.next_total_quantity">
+                                {{-- ng-bind="RepackTransfer.quantity" --}}
+                                {{-- @{{ RepackTransfer.total_quantity / RepackTransfer.repack_size }}    --}}
+                            </td>
+                            <td>
+                                <select class="custom-input" ng-model="RepackTransfer.storage_area">
+                                    <option ng-selected="row.id == RepackTransfer.storage_area.id" ng-value="row.id" ng-repeat="row in MasterData.storage_room">@{{ row.name }}</option>
+                                </select>
+                            </td>
+                            <td width="150px">
+                                <select class="custom-input" ng-model="RepackTransfer.housing_type">
+                                    <option ng-selected="row.id == RepackTransfer.housing_type.id" ng-value="row.id" ng-repeat="row in MasterData.house_types">@{{ row.name }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="custom-input"  ng-model="RepackTransfer.housing">>
+                                    <option value="@{{ RepackTransfer.housing }}"> @{{ RepackTransfer.housing }} </option>
+                                    {!! $housing = "@{{ RepackTransfer.housing }}" !!}
+                                    @for ($key=0;$key<20;$key++)
+                                        <option value="{{ $key + 1 }}" {{ $key + 1 == $housing ? "selected" : "" }}>{{ $key + 1 }} </option>
+                                    @endfor
+                                </select>
+                            </td>
+                            <td width="130px">
+                                <select class="custom-input" ng-model="RepackTransfer.owner_one">
+                                    <option ng-selected="row.alias_name == RepackTransfer.owner_one" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
+                                </select>
+                            </td>
+                            <td width="130px">
+                                <select class="custom-input" ng-model="RepackTransfer.owner_two">
+                                    <option ng-selected="row.alias_name == RepackTransfer.owner_two" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <i  ng-click="RepackTransfers('clear')" 
+                                    class="btn btn-sm border shadow btn-light rounded-pill bi bi-x">
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{-- <div class="row m-0">
                     <div class="col-lg-12">
                         <h5 class="h5 text-primary text-center"> Bulk vol tracking logsheet (Drum)</h5>
                         <table class="table table-centered bg-white table-bordered table-hover custom-center mb-3">
@@ -24,13 +112,13 @@
                             </thead>
                             <tbody> 
                                 <tr>
-                                    <td style="padding: 0">@{{ CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                                    <td>@{{ CurrentDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
                                     <td style="padding: 0">@{{ CurrentAccessed }}</td>
                                     <td style="padding: 0">
-                                        <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransfer.PackingSize" class="text-center form-control form-control-sm">
+                                        <input type="number" min="1" max="@{{ RepackTransferPackSize }}" ng-model="RepackTransfer.input_used_amount" class="text-center form-control form-control-sm">
                                     </td>
                                     <td style="padding: 0">
-                                        @{{ RepackTransfer.unit_packing_value - RepackTransfer.PackingSize}}
+                                        @{{ RepackTransfer.unit_packing_value - RepackTransfer.input_used_amount}}
                                     </td>
                                 </tr> 
                             </tbody>
@@ -99,7 +187,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
             </div> 
             <div class="modal-footer text-end  border-top">
                 <button class="btn btn-primary rounded-pill"  ng-click="RepackTransfers('store')">Click to confirm and proceed to print label page</button>

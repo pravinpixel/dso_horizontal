@@ -21683,3 +21683,11 @@ div.dataTables_scrollBody>table>:not(:first-child) {
 table.tr-sm >:not(caption)>*>*{
     padding: 8px !important;
 }
+.custom-input {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    outline: none;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+}

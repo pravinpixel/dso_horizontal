@@ -683,7 +683,7 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.CurrentAccessed = CurrentAccessed.join()
                 break;
             case "store":
-                if ($scope.RepackTransfer.PackingSize === null || $scope.RepackTransfer.PackingSize === undefined) {
+                if ($scope.RepackTransfer.input_used_amount === null || $scope.RepackTransfer.input_used_amount === undefined) {
                     Message('danger', "Input Used amt (L) is Required !");
                     return false;
                 }

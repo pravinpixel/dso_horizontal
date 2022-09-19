@@ -59,6 +59,7 @@
     <script src="{{ asset('public/asset/js/controllers/RootController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
+    <script src="{{ asset('public/asset/js/directives/RepackAndTransfer.js') }}"></script>
     <script>
         wordMatchSuggest = (element) => {
             $.ajax({

@@ -1,5 +1,5 @@
-var APP_URL = $('meta[name="app-url"]').attr('content') ;
-const web = axios
+var   APP_URL = $('meta[name="app-url"]').attr('content') ;
+const web     = axios
 function printModal() {
     swal({
         text: "Do you want to print?",
@@ -289,34 +289,41 @@ getToCart = (type) => {
                 `;
             }) 
         }
-        try {
-            document.querySelector(`cart-table[type=${type}]`).innerHTML = `
-                <table class="table bg-white table-bordered table-hover custom-center">
-                    <thead>
-                        <tr class="bg text-white">
-                            <th class="bg-dark text-white" colspan="6">Cart List</th>
-                        </tr>
-                        <tr>
-                            <th class="table-th child-td">Item description</th>
-                            <th class="table-th child-td">Brand</th>
-                            <th class="table-th child-td">Batch#/ Serial#</th>
-                            <th class="table-th child-td">Pkt size</th>
-                            <th class="table-th child-td">Withdraw Qty</th>
-                            <th class="table-th child-td">
-                                <i class="text-danger bi bi-trash3-fill"></i>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>${row}</tbody>
-                </table>
-                <div class="text-end ">
-                    <button class="btn btn-primary rounded-pill">Generate</button>
-                </div>
-            `;
-        } catch (error) {
-            console.log(error)
-        }
-    }); 
+        var table = document.querySelector(`cart-table[type=${type}]`);
+        if(table != null) {
+            try {
+                table.innerHTML = `
+                    <div class="card shadow-sm border">
+                        <div class="card-header bg-success">
+                            <h5 class="card-title text-center text-white m-0">Material/ In-house Product Cart List</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-sm bg-white table-bordered table-hover custom-center m-0">
+                                <thead class="bg-light "> 
+                                    <tr>
+                                        <th class="text-dark">Item description</th>
+                                        <th class="text-dark">Brand</th>
+                                        <th class="text-dark">Batch#/ Serial#</th>
+                                        <th class="text-dark">Pkt size</th>
+                                        <th class="text-dark">Withdraw Qty</th>
+                                        <th class="text-dark">
+                                            <i class="text-danger bi bi-trash3-fill"></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>${row}</tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer text-end bg-light">
+                            <button class="btn btn-success rounded-pill"><i class="bi bi-arrow-repeat"></i> Generate</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+    });
 }
 getToCart('REPORT_UTILISATION_CART')
 getToCart('REPORT_EXPORT_CART')
