@@ -23,32 +23,34 @@ class RepackBatchController extends Controller
 
     public function repack(Request $request)
     { 
+        // dd($request->all());
        
         $previous_batch                = Batches::find($request->id);
 
         $new_batch                     = $previous_batch->replicate();
         $new_batch->created_at         = Carbon::now();
         $new_batch->barcode_number     = generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
-        $new_batch->quantity           = $request->next_total_quantity;
-        $new_batch->unit_packing_value = $request->repack_size;
+        $new_batch->quantity           = $request->AutoCalQty;
+        $new_batch->total_quantity     = $request->new_unit_packing_value * $request->AutoCalQty;
+        $new_batch->unit_packing_value = $request->new_unit_packing_value;
         $new_batch->storage_area       = $request->storage_area['id'] ?? $request->storage_area;
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
         $new_batch->owner_one          = $request->owner_one;
         $new_batch->owner_two          = $request->owner_two;
-        $new_batch->repack_size        = $request->repack_size;
+        // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
 
 
-        $old_value                     = $previous_batch;
-        $new_value                     = clone $previous_batch;
-        $new_value->quantity           = $new_value->quantity  - $request->quantity;
-        $new_value->unit_packing_value = $new_value->unit_packing_value  - $request->input_used_amount;
+        $old_value             = $previous_batch;
+        $new_value             = clone $previous_batch;
+        $new_value->quantity   = $request->RemainQuantity;
 
         LogActivity::dataLog($old_value, $new_value);
 
         $previous_batch->update([
-            'quantity'  => (int) $previous_batch->quantity - (int) $request->next_total_quantity,
+            'quantity'       => $request->RemainQuantity,
+            'total_quantity' => $previous_batch->unit_packing_value * $request->RemainQuantity,
             // 'unit_packing_value' => $previous_batch->unit_packing_value  - $request->input_used_amount,
         ]);
 

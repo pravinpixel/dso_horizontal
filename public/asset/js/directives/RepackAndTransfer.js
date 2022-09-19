@@ -3,16 +3,21 @@ app.directive('repackTransferTable', () => {
         restrict : 'A',
         link: function(scope, element, attribute) {
             element.on('keyup', () => { 
-                if(attribute.repackTransferTable == 'INPUT_USED_AMOUNT') {
-                    if(scope.RepackTransfer.input_used_amount != null) {
-                        var remain_amount                    =   scope.RepackTransfer.quantity - scope.RepackTransfer.input_used_amount
-                        scope.RepackTransfer.remain_amount   =   remain_amount.toFixed(3)
+                if(attribute.repackTransferTable == 'REPACK_QUANTITY') {
+                    if(scope.RepackTransfer.RepackQuantity != null) {
+                        var RemainQuantity                    =   scope.RepackTransfer.quantity - scope.RepackTransfer.RepackQuantity
+                        scope.RepackTransfer.RemainQuantity   =   RemainQuantity.toFixed(3)
                     } else {
-                        scope.RepackTransfer.remain_amount = ''
+                        scope.RepackTransfer.RemainQuantity = ''
                     }
                 }
-                if(attribute.repackTransferTable == 'INPUT_REPACK_SIZE') { 
-                    scope.RepackTransfer.next_total_quantity = scope.RepackTransfer.unit_packing_value * scope.RepackTransfer.input_used_amount / scope.RepackTransfer.repack_size
+                if(attribute.repackTransferTable == 'NEW_UNIT_PACKING_VALUE') {
+                    var AutoCalQty = scope.RepackTransfer.unit_packing_value * scope.RepackTransfer.RepackQuantity / scope.RepackTransfer.new_unit_packing_value
+                    if(AutoCalQty == NaN) {
+                        scope.RepackTransfer.AutoCalQty = ''
+                    } else {
+                        scope.RepackTransfer.AutoCalQty = AutoCalQty
+                    } 
                 }
                 scope.$apply()
             })
