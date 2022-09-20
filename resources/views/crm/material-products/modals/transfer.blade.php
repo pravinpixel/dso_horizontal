@@ -42,7 +42,7 @@
                                     @for ($key=0;$key<20;$key++)
                                         <option value="{{ $key + 1 }}" {{ $key + 1 == $housing ? "selected" : "" }}>{{ $key + 1 }} </option>
                                     @endfor
-                                    <option value="nill"> nill </option>
+                                    <option value="nil"> nil </option>
                                 </select>
                             </td>
                             <td>

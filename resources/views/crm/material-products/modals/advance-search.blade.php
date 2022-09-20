@@ -82,7 +82,7 @@
                             <label class="form-label text-dark">Housing #</label>
                             <select name="advanced_filter.housing" class="form-select form-select-sm" ng-model="advanced_filter.housing">
                                 <option value="">-- Select --</option>
-                                <option value="nill"> - </option>
+                                <option value="nil"> - </option>
 
                                 @for ($key=0;$key<20;$key++)
                                     <option value="{{ $key+1 }}">{{ $key+1 }}</option>

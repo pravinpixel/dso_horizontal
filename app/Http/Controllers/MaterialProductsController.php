@@ -196,7 +196,7 @@ class MaterialProductsController extends Controller
                         'outlife'                      => $row['outlife'] ?? null,
                         'storage_area'                 => $storage_area->id,
                         'housing_type'                 => $housing_type->id,
-                        'housing'                      => $row['housing'] == '-' ? 'nill' : $row['housing'],
+                        'housing'                      => $row['housing'] == '-' ? 'nil' : $row['housing'],
                         'owner_one'                    => $row['owner_one'] ?? null,
                         'owner_two'                    => $row['owner_two'] ?? null,
                         'department'                   => $department->id,
