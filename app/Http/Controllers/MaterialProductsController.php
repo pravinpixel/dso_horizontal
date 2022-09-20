@@ -212,7 +212,6 @@ class MaterialProductsController extends Controller
                         'material_product_type'        => $row['material_product_type'] ?? null,
                         'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
                         'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
-                        'extended_expiry'              => strExcelDate($row['extended_expiry']),
                         'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                         'remarks'                      => $row['remarks'] ?? null,
                     ]);
