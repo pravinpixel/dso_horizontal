@@ -5,8 +5,8 @@
         <div ng-if="on_{{ $column['name'] }}" class="box text-center"> 
             @switch($column['name'])
                 @case('iqc_status')
-                    <span ng-if="batch.iqc_status != 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
-                    <span ng-if="batch.iqc_status == 1" class="mx-auto badge bg-danger rounded-pill">FAIL</span> 
+                    <span ng-if="batch.iqc_status == 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
+                    <span ng-if="batch.iqc_status != 1" class="mx-auto badge bg-danger rounded-pill">FAIL</span> 
                 @break
                 @case('is_draft')
                     <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
