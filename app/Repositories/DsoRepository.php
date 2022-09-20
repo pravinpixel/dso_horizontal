@@ -47,6 +47,14 @@ class DsoRepository implements DsoRepositoryInterface
                         <span class="badge mx-auto badge-outline-danger rounded-pill" ng-if="batch.'.$value['name'].' == '."1".' != true">No</span>
                     ',
                 ];
+            } 
+            elseif($value['name'] == 'date_of_manufacture' || $value['name'] == 'date_of_expiry' || $value['name'] == 'date_of_shipment'  || $value['name'] == 'extended_expiry') {
+                $tableAllColumns[$key] = [
+                    "status"    => $value['status'],
+                    "name"      => $key,
+                    "row"       => '{{ row.'.$value['name'].' }}',
+                    "batch"     => '{{ batch.'.$value['name'].' | date:"MM/dd/yyyy" }}',
+                ]; 
             }
             else {
                 $tableAllColumns[$key] = [
