@@ -54,7 +54,7 @@ class DsoRepository implements DsoRepositoryInterface
                     "name"      => $key,
                     "row"       => '{{ row.'.$value['name'].' }}',
                     "batch"     => '{{ batch.'.$value['name'].' }}',
-                ];
+                ]; 
             }
         }
 
