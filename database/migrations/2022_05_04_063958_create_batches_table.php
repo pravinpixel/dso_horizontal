@@ -57,7 +57,7 @@ class CreateBatchesTable extends Migration
             $table->string('date_of_shipment')->nullable();
             $table->string('cost_per_unit')->nullable();
             $table->text('remarks')->nullable();
-            $table->string('extended_expiry')->nullable();
+            $table->string('no_of_extension')->nullable();
             $table->string('extended_qc_status')->nullable();
             $table->string('extended_qc_result')->nullable();
             $table->string('disposal_certificate')->nullable();

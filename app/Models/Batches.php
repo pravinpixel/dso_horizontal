@@ -53,7 +53,7 @@ class Batches extends Model
         'date_of_shipment',
         'cost_per_unit',
         'remarks',
-        'extended_expiry',
+        'no_of_extension',
         'extended_qc_status',
         'extended_qc_result',
         'disposal_certificate',

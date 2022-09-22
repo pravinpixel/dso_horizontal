@@ -1,9 +1,9 @@
 <div class="row m-0">
     <div class="col-md-6">
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Extended expiry</label>
+            <label for="" class="col-4">No.of extension</label>
             <div class="col-8">
-                {!! Form::date('extended_expiry', $batch->extended_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_expiry.status')]) !!}
+                {!! Form::number('no_of_extension', $batch->no_of_extension ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_expiry.status')]) !!}
             </div>
         </div>
         <div class="row m-0 y-center my-2">

@@ -214,6 +214,7 @@ class MaterialProductsController extends Controller
                         'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
                         'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                         'remarks'                      => $row['remarks'] ?? null,
+                        'no_of_extension'              => $row['no_of_extension'] ?? 0
                     ]);
                     Flash::success(__('global.imported'));
                 } catch (\Throwable $th) {
