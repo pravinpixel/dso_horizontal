@@ -11,7 +11,7 @@
             {{-- ng-if="row.hideParentRow == 0" --}}
             @switch($page_name)
                 @case('THRESHOLD_QTY')
-                    <div class="custom-table-row" ng-if="row.quantityColor == 'text-danger' || row.quantityColor == 'text-warning'" ng-repeat="(index,row) in material_products.data">
+                    <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
                 @break  
                 @default
                 <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">

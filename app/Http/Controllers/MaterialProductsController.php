@@ -350,9 +350,11 @@ class MaterialProductsController extends Controller
                 $withdrawal_type = 'DIRECT_DEDUCT';
             } elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DEDUCT_TRACK_USAGE';
-            } elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
+            } elseif($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 1) {
                 $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
-            } 
+            }  elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
+                $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
+            }
  
             $current_batch->update([
                 'withdrawal_type' => $withdrawal_type

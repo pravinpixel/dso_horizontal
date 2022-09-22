@@ -19,6 +19,7 @@ class DsoRepository implements DsoRepositoryInterface
 { 
     public function renderPage($page_name, $view)
     { 
+      
         $storage_room_db        =   StorageRoom::all();
         $departments_db         =   Departments::all();
         $statutory_body_db      =   StatutoryBody::all();
@@ -30,6 +31,7 @@ class DsoRepository implements DsoRepositoryInterface
         request()->session()->put('page_name', $page_name); 
  
         foreach ($tableColumns as $key => $value) {
+            
             if($value['name'] == "unit_of_measure" || $value['name'] == "housing_type" || $value['name'] == "department" || $value['name'] == "storage_area")  {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
@@ -86,10 +88,10 @@ class DsoRepository implements DsoRepositoryInterface
     }
     public function renderTableData($material_product)
     {
-        $page_name = session()->get('page_name');
+        $page_name = session()->get('page_name'); 
  
+        foreach ($material_product as $key => $parent) { 
 
-        foreach ($material_product as $key => $parent) {
             $quantityColor       = 'text-danger';
             $QtyCount            = 0;
             $totalQtyCount       = 0;
@@ -100,29 +102,38 @@ class DsoRepository implements DsoRepositoryInterface
             
             $TotalQuantityTotal = 0;
             
-            foreach ($parent->Batches as $batch_key => $batch) {
-             
+            foreach ($parent->Batches as $batch_key => $batch) {  
                 if ($batch->is_draft == 1 ) {
-                    $draftBatchCount += 1 ;
-                } else {
+                    $draftBatchCount += 1 ; 
+                } else { 
                     $QtyCount            = $parent->Batches[0]->quantity;
                     $totalQtyCount       = $parent->Batches[0]->quantity *   $parent->Batches[0]->unit_packing_value;
                     $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
                     $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
                     $TotalQuantityTotal += $totalQtyCount;
                 }
-                if($batch->quantity  != null) {
-                    // $batch->quantity = str_replace('.00', '' , $batch->quantity);
+                // if($batch->quantity  != null) {
+                //     // $batch->quantity = str_replace('.00', '' , $batch->quantity);
+                // }
+                if($page_name == 'THRESHOLD_QTY') { 
+                    if($batch->is_draft == 1) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                } elseif($page_name == 'PRINT_BARCODE_LABEL') {
+                    if($batch->is_draft == 1) {
+                        unset($parent->Batches[$batch_key]);
+                    }
                 }
             }
-
+            
             // dd($readCount);
-            $parent['totalQuantity']           = $QtyCount;
-            $parent['totalQuantityUnit']       = $totalQtyCount;
-            $parent['totalUnitPackValue']      = $UnitPackingCount;
-            $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
-            $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
-            $parent['TotalQuantityTotal']      = $TotalQuantityTotal;
+            $parent['totalQuantity']            = $QtyCount;
+            $parent['totalQuantityUnit']        = $totalQtyCount;
+            $parent['totalUnitPackValue']       = $UnitPackingCount;
+            $parent['hideParentRow']            = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
+            $parent['hideParentRowReadStatus']  = $readCount == 0 ? 1 : 0;
+            $parent['TotalQuantityTotal']       = $TotalQuantityTotal;
+            $parent['draftBatchCount']          = $draftBatchCount;
           
             if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
@@ -137,9 +148,23 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 } 
             }
-            $parent['quantityColor']      = $quantityColor;
+
+            $parent['quantityColor'] = $quantityColor;
+            
+            if($page_name == 'THRESHOLD_QTY') { 
+                if($parent['quantityColor'] == 'text-success') {
+                    unset($material_product[$key]);
+                }
+                if($draftBatchCount != 0) {
+                    unset($material_product[$key]);
+                }
+            } elseif($page_name == 'PRINT_BARCODE_LABEL') {
+                if($draftBatchCount != 0) {
+                    unset($material_product[$key]);
+                }
+            }
         }
-       
+ 
         $collection = Arr::flatten($material_product);
         $items      = collect($collection);
         $perPage    = config('app.paginate');
