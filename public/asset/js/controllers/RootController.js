@@ -772,8 +772,16 @@ app.controller('RootController', function ($scope, $http) {
     $scope.disable_repack_outlife = false
 
     $scope.RepackOutlife = (batch, unit_of_measure) => {
+
+        try {
+            var initial_day = batch.repack_outlife.at(-2).updated_outlife;
+            console.log(initial_day.split(','))
+        } catch (error) {
+            var initial_day = batch.outlife + " Days"
+        }
+         
         $scope.repack_outlife_unit_of_measure = unit_of_measure.name
-        $scope.repack_outlife_days            = batch.outlife
+        $scope.repack_outlife_days            = initial_day  
         $scope.currentBatchId                 = batch.id
         $scope.currentBatch                   = batch
         $http.get(`repack-batch/${batch.id}`).then((response) => {
