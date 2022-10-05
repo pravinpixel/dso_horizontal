@@ -21691,3 +21691,23 @@ table.tr-sm >:not(caption)>*>*{
     padding: 5px;
     width: 100%;
 }
+.btn-draw-in ,
+.btn-draw-out {
+    min-width: 100px;
+    margin: 5px 0;
+    color: #252525;
+    border: 1px solid #2525254d;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.btn-draw-in {
+    background: #EDF4F2; 
+}
+.btn-disabled {
+    cursor: not-allowed;
+    opacity: .5;
+}
+.btn-draw-out {
+    background: #16c79aad;
+}
