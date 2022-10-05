@@ -32,16 +32,20 @@
                     <tbody>
                         <tr ng-repeat="(i,repack) in repack_outlife_table">
                             <td> 
-                                <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : '' " >
-                                    <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
-                                   Draw In
-                                </label>
-                                <label for="DRAW_OUT_@{{ i }}" class="btn btn-sm btn-draw-out" ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : ''">
-                                    <input class="d-none" id="DRAW_OUT_@{{ i }}" repack-table="OUT" type="radio" ng-model="repack.draw_status" value="1" name="draw_status" required  ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" />
-                                    Draw Out
-                                </label>
-                                {{-- <input type="button" repack-table="IN" ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" value="" class="btn-draw draw-in"> <br> <br>
-                                <input type="button" repack-table="OUT" ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" value="Draw Out" class="btn-draw draw-out"> --}}
+                                <div ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 1">
+                                    <label class="btn btn-sm btn-draw-in btn-disabled">Draw In</label>
+                                    <label class="btn btn-sm btn-draw-out btn-disabled">Draw Out</label>
+                                </div>
+                                <div ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 0 || repack.draw_in.status == 0 && repack.draw_out.status == 1">
+                                    <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : '' " >
+                                        <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
+                                       Draw In
+                                    </label>
+                                    <label for="DRAW_OUT_@{{ i }}" class="btn btn-sm btn-draw-out" ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : ''">
+                                        <input class="d-none" id="DRAW_OUT_@{{ i }}" repack-table="OUT" type="radio" ng-model="repack.draw_status" value="1" name="draw_status" required  ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" />
+                                        Draw Out
+                                    </label>
+                                </div>
                             </td>
                             <td style="padding: 0" width="300px">
                                 <div><small>@{{ repack.draw_out.time_stamp}}</small></div><br>
@@ -94,7 +98,7 @@
                         <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                     </div>
                     <div class="col-6 ms-auto text-end"> 
-                        <label for="exportLogCheckBox" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="exportLogCheckBox"> Export logsheet</label>
+                        {{-- <label for="exportLogCheckBox" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="exportLogCheckBox"> Export logsheet</label> --}}
                         <button class="btn btn-primary rounded-pill h-100"  ng-if="repackOutlifeForm.$invalid != true" ng-click="saveRepackOutlife()">Save and Submit</button>
                         <button class="btn btn-secondary rounded-pill h-100" ng-if="repackOutlifeForm.$invalid">Save and Submit</button>
                         {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
