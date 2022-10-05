@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RepackBatchController extends Controller
@@ -107,27 +108,22 @@ class RepackBatchController extends Controller
                 if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
                     $draw_out      = 1;
                     $draw_in       = 0;
-
-                    $current_batch = Batches::find($repackData->batch_id);
-
-                        //  New Batch
-                    $repackAmount           = $row['repack_amount'];
-                    $repackUnitPackingValue = $row['repack_size'];
-                    $repackQuantity         = $row['qty_cut'];
-                    $totalQuantity          = (float) $repackUnitPackingValue * (float) $repackQuantity;
-
+                
+                  
+                    $current_batch = Batches::find($repackData->batch_id); 
+                   
+                    //  New Batch
+                    // $totalQuantity                  = (float) $repackUnitPackingValue * (float) $repackQuantity;
                     $next_batch                     = $current_batch->replicate();
                     $next_batch->created_at         = Carbon::now();
                     $next_batch->barcode_number     = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
-                    $next_batch->unit_packing_value = $repackUnitPackingValue;
-                    $next_batch->total_quantity     = $totalQuantity;
-                    $next_batch->quantity           = $repackQuantity;
+                    $next_batch->unit_packing_value = $row['repack_size'];
+                    $next_batch->total_quantity     = $row['repack_amount'];
+                    $next_batch->quantity           = $row['qty_cut'];
                     $next_batch->save();
 
-                    // Current Batch 
-                    $current_batch_qty             = $row['balance_amount'] /  $current_batch->unit_packing_value;
-                    $current_batch->quantity       = number_format($current_batch_qty,3);
-                    $current_batch->total_quantity = (float) $current_batch->unit_packing_value * (float) $current_batch->quantity;
+                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");
+                    $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
                     RepackOutlife::create([
                         'batch_id'             => $next_batch->id,

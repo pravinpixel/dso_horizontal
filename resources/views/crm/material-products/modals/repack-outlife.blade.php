@@ -17,6 +17,7 @@
                             <td>Material / Product Draw status</td>
                             <td>Date & time stamp</td>
                             <td>Last accessed</td>
+                            <td>Total Qty</td>
                             <td> Input repack Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                             <td>Remain Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                             <td>Auto-generate unique barcode label</td>
@@ -47,11 +48,12 @@
                                     </label>
                                 </div>
                             </td>
-                            <td style="padding: 0" width="300px">
+                            <td style="padding: 0" width="180px">
                                 <div><small>@{{ repack.draw_out.time_stamp}}</small></div><br>
                                 <div><small>@{{ repack.draw_in.time_stamp }}</small></div>
                             </td>
                             <td><small>@{{ repack.last_access }}</small></td>
+                            <td><small>@{{ repack.total_quantity }}</small></td>
                             <td class="text-center"> 
                                 {{-- @{{ repack.total_quantity }} --}}
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
