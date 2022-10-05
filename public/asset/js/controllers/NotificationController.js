@@ -10,6 +10,7 @@ viewBatch = (id) => {
                     </div>
                 </li>
             `
+            
         })
         $("#Batch_Details").html(li)
         $('#View_Batch_Details').modal('show')
