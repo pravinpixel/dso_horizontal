@@ -98,8 +98,6 @@ class DsoRepository implements DsoRepositoryInterface
             $readCount           = 0;
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0; 
-
-            
             $TotalQuantityTotal = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) {  
@@ -107,7 +105,7 @@ class DsoRepository implements DsoRepositoryInterface
                     $draftBatchCount += 1 ; 
                 } else { 
                     $QtyCount            = $parent->Batches[0]->quantity;
-                    $totalQtyCount       = $parent->Batches[0]->quantity *   $parent->Batches[0]->unit_packing_value;
+                    $totalQtyCount       = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
                     $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
                     $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
                     $TotalQuantityTotal += $totalQtyCount;
