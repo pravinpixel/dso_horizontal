@@ -20,9 +20,7 @@ class RepackBatchController extends Controller
     public function repack(Request $request)
     { 
         // dd($request->all());
-       
         $previous_batch                = Batches::find($request->id);
-
         $new_batch                     = $previous_batch->replicate();
         $new_batch->created_at         = Carbon::now();
         $new_batch->barcode_number     = generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
@@ -36,7 +34,6 @@ class RepackBatchController extends Controller
         $new_batch->owner_two          = $request->owner_two;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
-
 
         $old_value             = $previous_batch;
         $new_value             = clone $previous_batch;
@@ -102,7 +99,6 @@ class RepackBatchController extends Controller
 
     public function store_repack_outlife(Request $request , $id)
     {
-       
         foreach ($request->data as $key => $row) { 
             if($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
