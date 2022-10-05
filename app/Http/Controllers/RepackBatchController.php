@@ -130,7 +130,7 @@ class RepackBatchController extends Controller
 
                     // Current Batch 
                     $current_batch_qty             = $row['balance_amount'] /  $current_batch->unit_packing_value;
-                    $current_batch->quantity       = number_format($current_batch_qty,2);
+                    $current_batch->quantity       = number_format($current_batch_qty,3);
                     $current_batch->total_quantity = (float) $current_batch->unit_packing_value * (float) $current_batch->quantity;
                     $current_batch->save();
                     RepackOutlife::create([
