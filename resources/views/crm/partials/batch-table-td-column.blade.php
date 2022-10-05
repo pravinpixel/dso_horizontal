@@ -133,7 +133,7 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary" batch-id="@{{ row.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                    <button class="dropdown-item text-secondary" batch-id="@{{ batch.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
                     <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
                 </div>
             </div>
