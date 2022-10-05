@@ -1,7 +1,7 @@
 <div class="row mb-3">
     <label class="col-2 text-end col-form-label">User ID / Login ID</label>
     <div class="col-10">
-        {!! Form::text('email', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        <input type="password" name="email" class="form-control" value="{{ $user->email ?? '' }}">
     </div>
 </div>
 <div class="row mb-3">
