@@ -53,7 +53,7 @@ class RepackBatchController extends Controller
             "message" => "Repack / Transfer Success !"
         ]); 
     }
-    public function get_repack_outlife($id)
+    public static function get_repack_outlife($id)
     {
         $Batches    =    Batches::with('RepackOutlife')->find($id);
  
@@ -100,16 +100,17 @@ class RepackBatchController extends Controller
 
     public function store_repack_outlife(Request $request , $id)
     {
-        foreach ($request->data as $key => $row) { 
+        // dd($request);
+        foreach ($request->data as $key => $row) {
             if($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
-                $Batches    = Batches::find($repackData->batch_id); 
+                $Batches    = Batches::find($repackData->batch_id);
 
                 if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
+                    Log::info("Draw IN");
                     $draw_out      = 1;
                     $draw_in       = 0;
-                
-                  
+                 
                     $current_batch = Batches::find($repackData->batch_id); 
                    
                     //  New Batch
@@ -133,12 +134,14 @@ class RepackBatchController extends Controller
                     $new_value           = clone $current_batch;
                     LogActivity::dataLog($old_value, $new_value);
                 }
+
                 if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
+                    Log::info("Draw OUT");
+
                     $draw_out   = 1;
                     $draw_in    = 1;
 
                     if($Batches->unit_packing_value != 0) {
-
                         RepackOutlife::create([
                             'batch_id'            => $id,
                             'input_repack_amount' => $row['repack_size']
@@ -177,7 +180,8 @@ class RepackBatchController extends Controller
                     'updated_outlife'         => $updated_outlife ?? null,
                     'updated_outlife_seconds' => $updated_outlife_seconds ?? null,
                     'current_outlife_expiry'  => $current_outlife_expiry ?? null, 
-                ]); 
+                ]);
+
                 return response()->json([
                     "status"    => true,
                     "message"   => "Success !"

@@ -41,6 +41,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['iqc_result_status'],
             $tableColumns['is_read'],
             $tableColumns['outlife_seconds'],
+            $tableColumns['updated_outlife'],
             $tableColumns['disposed_after'],
             $tableColumns['disposed_status'],
             $tableColumns['extended_status'],
@@ -49,7 +50,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['physical_stock'],
             $tableColumns['quantity_color'],
             $tableColumns['material_quantity'],
-            $tableColumns['material_total_quantity'] 
+            $tableColumns['material_total_quantity'],
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {

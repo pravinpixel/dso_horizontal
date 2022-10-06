@@ -773,10 +773,9 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.RepackOutlife = (batch, unit_of_measure) => {
 
-        try {
-            var initial_day = batch.repack_outlife.at(-2).updated_outlife;
-            console.log(initial_day.split(','))
-        } catch (error) {
+        if(batch.updated_outlife != null) {
+            var initial_day = batch.updated_outlife
+        } else {
             var initial_day = batch.outlife + " Days"
         }
          

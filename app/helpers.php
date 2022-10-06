@@ -256,3 +256,20 @@ if(! function_exists('strExcelDate')) {
         return gmdate("Y-m-d", $unix_date);
     }
 }
+
+if(! function_exists('dateDifferStr')) {
+    function dateDifferStr($dt1,$dt2) { 
+ 
+        $updated_outlife_days      = $dt1->diff($dt2)->format('%a');
+        $updated_outlife_hours     = $dt1->diff($dt2)->format('%h');
+        $updated_outlife_minutes   = $dt1->diff($dt2)->format('%i');
+        $updated_outlife_inSeconds = $dt1->diff($dt2)->format('%s');
+
+        $days    = $updated_outlife_days != 0  ? $updated_outlife_days." days," : ' ' ;
+        $hours   = $updated_outlife_hours != 0  ? $updated_outlife_hours." hours," : ' ' ;
+        $minutes = $updated_outlife_minutes != 0  ? $updated_outlife_minutes." minutes," : ' ' ;
+        $seconds = $updated_outlife_inSeconds != 0  ? $updated_outlife_inSeconds." seconds," : ' ' ;
+
+        return $days.$hours.$minutes.$seconds;
+    }
+}

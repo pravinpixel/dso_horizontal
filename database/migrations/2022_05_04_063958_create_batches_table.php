@@ -33,6 +33,7 @@ class CreateBatchesTable extends Migration
             $table->string('require_bulk_volume_tracking')->nullable();
             $table->string('require_outlife_tracking')->nullable();
             $table->string('outlife')->nullable();
+            $table->string('updated_outlife')->nullable(); 
             $table->integer('outlife_seconds')->nullable();
             $table->string('storage_area')->nullable();
             $table->string('housing_type')->nullable();
