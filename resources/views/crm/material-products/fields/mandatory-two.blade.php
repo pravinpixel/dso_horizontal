@@ -85,8 +85,8 @@
                             <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
                                 @foreach ($row['list'] as $staff) 
                                     <option 
-                                        {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}} 
-                                        {{ in_array("All", $material_product_dropdown ?? []) ? "selected" : ""}}
+                                        {{ $material_product_dropdown == null ? 'selected' : '' }}
+                                        {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}}  
                                         value="{{ $staff->id }}">
                                         {{ $staff->alias_name }}
                                     </option>

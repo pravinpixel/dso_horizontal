@@ -913,6 +913,4 @@ app.controller('RootController', function ($scope, $http) {
     $scope.directDeduct       = []
     $scope.deductTrackUsage   = []
     $scope.deductTrackOutlife = []
-
-    
 });
