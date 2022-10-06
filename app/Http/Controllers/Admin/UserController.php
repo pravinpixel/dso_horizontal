@@ -22,10 +22,9 @@ class UserController extends Controller
         $roles  = Sentinel::getRoleRepository()->get();
 
         if ($request->ajax()) {
-            $data = Sentinel::getUserRepository()->with('roles', 'activations')
-                                                ->whereHas('roles',function($q){
-                                                    $q->whereNotIn('slug',['admin','superadmin']);
-                                                });
+            $data = Sentinel::getUserRepository()->with('roles', 'activations')->whereHas('roles',function($q){
+                        $q->whereNotIn('slug',['admin','superadmin']);
+                    });
             return FacadesDataTables::eloquent($data)
 
             ->addColumn('role', function ($data) {
