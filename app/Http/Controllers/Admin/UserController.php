@@ -82,6 +82,11 @@ class UserController extends Controller
             'role_id.required'  => trans('auth.role_name_required'),
         ];
 
+        if($request->confirm_email != $request->email) {
+            Flash::error('Confirm Login Does not Match !');
+            return back();
+        }
+
         $this->validate($request, $rules, $customMessages);
   
         try {
@@ -156,7 +161,10 @@ class UserController extends Controller
 
     public function update(Request $request , $id)
     {
-       
+        if($request->confirm_email != $request->email) {
+            Flash::error('Confirm Login Does not Match !');
+            return back();
+        }
         try {
         
             User::find($id)->update([
