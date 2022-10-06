@@ -885,7 +885,7 @@ app.controller('RootController', function ($scope, $http) {
     }
 
     setTimeout(() => {
-        if ($scope.extend_status_batch_id !== 'null') {
+        if ($scope.extend_status_batch_id !== 'null' && $scope.extend_status_batch_id != undefined) {
             $http.get(APP_URL + '/get-extend-expiry' + "/" + $scope.extend_status_batch_id).then((res) => {
                 if(res.data != 404) {
                     $scope.batch = res.data
@@ -900,7 +900,7 @@ app.controller('RootController', function ($scope, $http) {
         $('#disposalModal').modal('show');
     }
     setTimeout(() => {
-        if ($scope.disposal_status_batch_id !== 'null') {
+        if ($scope.disposal_status_batch_id !== 'null' && $scope.disposal_status_batch_id != undefined) {
             $http.get(APP_URL + '/get-disposal-expiry' + "/" + $scope.disposal_status_batch_id).then((res) => {
                 if(res.data != 404) {
                     $scope.batch = res.data

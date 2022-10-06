@@ -92,12 +92,12 @@ class DsoRepository implements DsoRepositoryInterface
  
         foreach ($material_product as $key => $parent) { 
 
-            $quantityColor       = 'text-danger';
-            $QtyCount            = 0;
-            $totalQtyCount       = 0;
-            $readCount           = 0;
-            $draftBatchCount     = 0;
-            $UnitPackingCount    = 0; 
+            $quantityColor      = 'text-danger';
+            $QtyCount           = 0;
+            $totalQtyCount      = 0;
+            $readCount          = 0;
+            $draftBatchCount    = 0;
+            $UnitPackingCount   = 0;
             $TotalQuantityTotal = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) {  
@@ -153,9 +153,9 @@ class DsoRepository implements DsoRepositoryInterface
                 if($parent['quantityColor'] == 'text-success') {
                     unset($material_product[$key]);
                 }
-                if($draftBatchCount != 0) {
-                    unset($material_product[$key]);
-                }
+                // if($draftBatchCount != 0) {
+                //     unset($material_product[$key]);
+                // }
             } elseif($page_name == 'PRINT_BARCODE_LABEL') {
                 if($draftBatchCount != 0) {
                     unset($material_product[$key]);
