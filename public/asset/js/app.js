@@ -1,5 +1,4 @@
 var   APP_URL = $('meta[name="app-url"]').attr('content') ;
-const web     = axios
 function printModal() {
     swal({
         text: "Do you want to print?",
@@ -255,7 +254,7 @@ addToCart = (element,type) => {
         batch_id    : element.getAttribute('batch-id'),
         material_id : element.getAttribute('material-id'),
     }
-    web.post(`${APP_URL}/product-cart`, PayLoad ).then((response) => {
+    axios.post(`${APP_URL}/product-cart`, PayLoad ).then((response) => {
         Message('success', response.data.message)
         getToCart(type)
     }).catch((error) => {
@@ -263,7 +262,7 @@ addToCart = (element,type) => {
     })
 }
 deleteToCart = (id) => { 
-    web.delete(`${APP_URL}/product-cart/${id}`).then((response) => {
+    axios.delete(`${APP_URL}/product-cart/${id}`).then((response) => {
         Message('success', response.data.message)
         getToCart(response.data.type)
     }).catch((error) => {
@@ -272,7 +271,7 @@ deleteToCart = (id) => {
 }
 getToCart = (type) => { 
     var row = '';
-    web.get(`${APP_URL}/product-cart`).then((response) => {
+    axios.get(`${APP_URL}/product-cart`).then((response) => {
         if(response.data) {
             response.data.map((item) => { 
                 row += `
@@ -325,6 +324,10 @@ getToCart = (type) => {
         } 
     });
 }
-getToCart('REPORT_UTILISATION_CART')
-getToCart('REPORT_EXPORT_CART')
-getToCart('REPORT_DISPOSED_ITEMS')
+try {
+    getToCart('REPORT_UTILISATION_CART')
+    getToCart('REPORT_EXPORT_CART')
+    getToCart('REPORT_DISPOSED_ITEMS')
+} catch (error) {
+    console.log(error)
+} 

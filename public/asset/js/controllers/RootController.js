@@ -264,6 +264,13 @@ app.controller('RootController', function ($scope, $http) {
                     coc_files.push(file.replace('public/files/', 'public/storage/files/'))
                 })
             }
+
+            if(batch.require_outlife_tracking == 1) {  
+                var require_outlife_tracking = `Yes / ${batch.outlife} Days`
+            } else {
+                var require_outlife_tracking = "No"
+            }
+
             $scope.batchOverview = {
                 category_selection: row.category_selection == 'in_house' ? 'In-house Product' : 'Material',
                 item_description: row.item_description,
@@ -277,7 +284,7 @@ app.controller('RootController', function ($scope, $http) {
                 statutory_body: batch.statutory_body !== null ? batch.statutory_body.name : '-',
                 euc_material: batch.euc_material == 1 ? "Yes" : batch.euc_material == 0 ? "No" : "-",
                 require_bulk_volume_tracking: batch.require_bulk_volume_tracking == 1 ? "Yes" : batch.require_bulk_volume_tracking == 0 ? "No" : "-",
-                require_outlife_tracking: `${batch.require_outlife_tracking == 1 ? "Yes" : batch.require_outlife_tracking == 0 ? "No" : "-"}  ( ${batch.outlife ?? "0"})`,
+                require_outlife_tracking: require_outlife_tracking,
                 storage_area: batch.storage_area !== null ? batch.storage_area.name : '-',
                 housing: `${batch.housing_type !== null ? batch.housing_type.name : '-'} / ${batch.housing}`,
                 owners: `${batch.owner_one} / ${batch.owner_two}`,
