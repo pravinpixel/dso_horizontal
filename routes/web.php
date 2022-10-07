@@ -34,7 +34,8 @@ Route::middleware(['auth_users'])->group(function () {
  
 
     Route::get('/reconciliation', [ReconciliationController::class,'index'])->name('reconciliation');
-    Route::get('/view-reconciliation', [ReconciliationController::class,'show'])->name('view-reconciliation');
+    Route::get('/reconciliation/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
+    Route::post('/reconciliation/download', [ReconciliationController::class,'download'])->name('reconciliation.download'); 
  
       
     Route::get('disposed-items', function () {
