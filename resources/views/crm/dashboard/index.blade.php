@@ -67,7 +67,7 @@
         </div> 
         <div class="col-md-2">
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
-                <a href="{{ route('reconsolidation') }}" class="card-body btn">
+                <a href="{{ route('reconciliation') }}" class="card-body btn">
                     <i class="text-warning bi bi-arrow-repeat fa-2x mb-2"></i>
                     <div class="text-primary"><b> Reconciliation</b></div>
                 </a>

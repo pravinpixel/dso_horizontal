@@ -1,19 +1,29 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row m-0">
-        <div class="col-md-8">
-            <div class="row m-0 align-items-center">
-                <div class="col-3 text-end"><strong>Select File</strong></div>
-                <div class="col-9">
-                    <input type="file" class="form-control">
-                </div>
-            </div>
+    <div class="card border shadow-sm col-md-6 mx-auto">
+        <div class="card-header bg-primary text-white">
+            <h4 class="card-title m-0">Select File</h4>
         </div>
-        <div class="col-md-4 text-start">
-            <button class="btn btn-secondary">Reconcile</button>
-            <a href="{{ route('view-reconsolidation') }}" class="btn btn-primary">View Reconciliation</a>
+        <div class="card-body pb-0">
+            <form action="" class="input-group rounded-pill" style="overflow: hidden">
+                <input type="file" class="form-control">
+                <input type="submit" class="btn btn-warning" value="Reconcile">
+            </form>
+            <form action="" class="text-end">
+                <button type="submit" class="btn btn-link btn-sm my-2">
+                    <i class="bi bi-download"></i>
+                    Download Sample
+                </button> 
+            </form>
+        </div>
+        <div class="card-footer">
+            <a href="{{ route('view-reconciliation') }}" class="btn btn-outline-primary rounded-pill btn-sm">
+                <i class="bi bi-eye"></i>
+                View Reconciliation
+            </a>
         </div>
     </div>
+    <hr>
     <div>
         <h3 class="h4">Past Reconciliations</h3>
         <table class="table custom table-bordered table-striped border">

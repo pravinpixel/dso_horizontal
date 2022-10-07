@@ -9,6 +9,7 @@ use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PrintBarcodeController;
 use App\Http\Controllers\ProductCartController;
+use App\Http\Controllers\ReconciliationController;
 use App\Http\Controllers\RepackBatchController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransferBatchController;
@@ -30,15 +31,11 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
-     
-     
-    Route::get('/reconciliation', function () {   
-        return view('crm.reconsolidation.index');  
-    })->name('reconsolidation');
-    
-    Route::get('/view-reconciliation', function () {   
-        return view('crm.reconsolidation.view');  
-    })->name('view-reconsolidation');
+ 
+
+    Route::get('/reconciliation', [ReconciliationController::class,'index'])->name('reconciliation');
+    Route::get('/view-reconciliation', [ReconciliationController::class,'show'])->name('view-reconciliation');
+ 
       
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
