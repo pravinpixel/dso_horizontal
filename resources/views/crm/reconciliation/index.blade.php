@@ -9,11 +9,11 @@
                 <input type="file" class="form-control">
                 <input type="submit" class="btn btn-warning" value="Reconcile">
             </form>
-            <form action="" class="text-end">
+            <form action="{{ route('reconciliation.download') }}" method="POST" class="text-end"> @csrf
                 <button type="submit" class="btn btn-link btn-sm my-2">
                     <i class="bi bi-download"></i>
                     Download Sample
-                </button> 
+                </button>
             </form>
         </div>
         <div class="card-footer">
