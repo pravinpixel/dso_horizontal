@@ -3721,6 +3721,16 @@ fieldset:disabled .btn {
     color: #3688fc;
     border-color: #3688fc
 }
+.btn-outline-dark-primary {
+    color: #12326A;
+    border-color: #12326A
+}
+
+.btn-outline-dark-primary:hover {
+    color: #fff;
+    background-color: #12326A;
+    border-color: #12326A
+}
 
 .btn-outline-primary:hover {
     color: #fff;

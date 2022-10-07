@@ -7,6 +7,7 @@ use App\Imports\ReconciliationImport;
 use App\Models\Batches;
 use App\Models\Reconciliation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Laracasts\Flash\Flash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -56,6 +57,17 @@ class ReconciliationController extends Controller
             Flash::error("Invalid Action !");
         }
         $ReconciliationHistory->save();
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $Reconciliation = Reconciliation::findOrFail($id);
+        if(Storage::exists($Reconciliation->file_name)) {
+            Storage::delete($Reconciliation->file_name);
+        }
+        $Reconciliation->delete();
+        Flash::success(__('global.deleted'));
         return back();
     }
 }
