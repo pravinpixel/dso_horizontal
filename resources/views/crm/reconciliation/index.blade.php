@@ -25,7 +25,7 @@
     @if(count($Reconciliation) > 0)
         <hr>
         <h3 class="h4 text-center my-3"><i class="bi bi-clock"></i> Past Reconciliations</h3>
-        <table class="table table-sm border border-light table-hover">
+        <table class="table table-sm border border-light table-hover shadow-sm">
             <thead>
                 <tr class="text-primary shadow-sm border">
                     <th>S.No </th>
