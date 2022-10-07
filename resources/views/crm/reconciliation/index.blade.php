@@ -5,9 +5,9 @@
             <h4 class="card-title m-0">Select File</h4>
         </div>
         <div class="card-body pb-0">
-            <form action="" class="input-group rounded-pill" style="overflow: hidden">
-                <input type="file" class="form-control">
-                <input type="submit" class="btn btn-warning" value="Reconcile">
+            <form action="{{ route('reconciliation.store') }}"  method="POST" class="input-group rounded-pill" style="overflow: hidden" enctype="multipart/form-data"> @csrf
+                <input type="file" name="ReconciliationFile" class="form-control" required />
+                <input type="submit" class="btn btn-success" value="Reconcile">
             </form>
             <form action="{{ route('reconciliation.download') }}" method="POST" class="text-end"> @csrf
                 <button type="submit" class="btn btn-link btn-sm my-2">
@@ -18,145 +18,52 @@
         </div>
         <div class="card-footer">
             <a href="{{ route('view-reconciliation') }}" class="btn btn-outline-primary rounded-pill btn-sm">
-                <i class="bi bi-eye"></i>
-                View Reconciliation
+                <i class="bi bi-eye"></i> View Reconciliation
             </a>
         </div>
     </div>
-    <hr>
-    <div>
-        <h3 class="h4">Past Reconciliations</h3>
-        <table class="table custom table-bordered table-striped border">
+    @if(count($Reconciliation) > 0)
+        <hr>
+        <h3 class="h4 text-center my-3"><i class="bi bi-clock"></i> Past Reconciliations</h3>
+        <table class="table table-sm border border-light table-hover">
             <thead>
-                <tr>
-                    <th width="200px" class="text-center table-th">File upload Date & Time </th>
-                    <th class="text-center table-th">Uploaded Filename </th>
-                    <th class="text-center table-th">Reconciliation Date & Time</th>
-                    <th width="100px" class="text-center table-th">Status</th>
-                    <th  class="text-center table-th">Action</th>
+                <tr class="text-primary shadow-sm border">
+                    <th>S.No </th>
+                    <th>Uploaded Filename </th>
+                    <th>Uploaded AT </th>
+                    <th>Reconciliation Date & Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                @foreach ($Reconciliation as $i => $row)
+                    <tr>
+                        <td>{{ $i +1 }}</td>
+                        <td>{{ str_replace("public/files/ReconciliationFile/", '' , $row->file_name) }}</td>
+                        <td>{{ $row->uploaded_at }}</td>
+                        <td>{{ $row->created_at }}</td>
+                        <td> 
+                            @if ($row->status)
+                                <span class="badge bg-success">Success</span>
+                                @else       
+                                <span class="badge bg-danger">Failed</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </a> 
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" download="File_{{ now() }}" href="{{ url('storage/app/'.$row->file_name) }}"><i class="bi bi-download me-1"></i>Download </a>
+                                    <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
+                                </div>
                             </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="text-center py-1">01/01/2021 10.30am</td>
-                    <td class="text-center py-1">File 001</td>
-                    <td class="text-center py-1">01/01/2021 11.30am</td>
-                    <td class="text-center py-1"><span class="badge bg-success">Active</span></td>
-                    <td class="text-center py-1">
-                        <div class="dropdown">
-                            <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </a> 
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#View_Batch_Material_Product_details"><i class="bi bi-eye-fill me-1"></i>View </a>
-                                <a class="dropdown-item text-danger"><i class="bi bi-trash  me-1"></i>Delete </a>
-                            </div>
-                        </div>
-                    </td> 
-                </tr>
+                        </td> 
+                    </tr>
+                @endforeach 
             </tbody>
         </table>
-    </div>
+    @endif
 @endsection
