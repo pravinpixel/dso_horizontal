@@ -87,7 +87,8 @@ class DrawIN extends Command
                             'updated_outlife'         => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds")),
                             'updated_outlife_seconds' => $updated_outlife_seconds,
                             'current_outlife_expiry'  => $current_outlife_expiry,
-                        ]); 
+                        ]);
+                        Log::info("Draw IN Success !");
                     }
                 }
             }
