@@ -49,7 +49,7 @@ class ReportsController extends Controller
                     return Carbon::parse($data->created_at)->format('h:i:s A');
                 })
                 ->addColumn('TransactionBy', function($data){
-                    return $data->User->alias_name;
+                    return $data->User->alias_name ?? "SYSTEM BOT";
                 }) 
                 ->addColumn('Remarks', function($data){
                     return $data->remarks != '' ? $data->remarks : "-";

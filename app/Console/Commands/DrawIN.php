@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\LogActivity;
 use App\Http\Controllers\RepackBatchController;
 use App\Models\Batches;
+use App\Models\LogSheet;
 use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -87,6 +89,17 @@ class DrawIN extends Command
                             'updated_outlife'         => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds")),
                             'updated_outlife_seconds' => $updated_outlife_seconds,
                             'current_outlife_expiry'  => $current_outlife_expiry,
+                        ]);
+
+                        LogSheet::updateOrCreate([
+                            'ip'          => request()->ip(),
+                            'agent'       => request()->header('user-agent'),
+                            'user_id'     => 0,
+                            'user_name'   => 'Server System',
+                            'module_name' => 'Batch',
+                            'action_type' => 'AUTO DRAW IN	',
+                            "module_id"   =>  $batch->id,
+                            'remarks'     =>  "New Auto Draw In"
                         ]);
                         Log::info("Draw IN Success !");
                     }

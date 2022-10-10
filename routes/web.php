@@ -36,8 +36,8 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/reconciliation', [ReconciliationController::class,'index'])->name('reconciliation');
     Route::get('/reconciliation/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
     Route::post('/reconciliation/download', [ReconciliationController::class,'download'])->name('reconciliation.download'); 
-    Route::post('/reconciliation/store', [ReconciliationController::class,'store'])->name('reconciliation.store'); 
-    Route::post('/reconciliation/update/{id}', [ReconciliationController::class,'update'])->name('reconciliation.update'); 
+    Route::post('/reconciliation/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store'); 
+    Route::post('/reconciliation/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update'); 
     Route::delete('/reconciliation/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy'); 
 
     

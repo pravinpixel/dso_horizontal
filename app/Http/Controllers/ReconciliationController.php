@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ReconciliationExport;
+use App\Helpers\LogActivity;
 use App\Imports\ReconciliationImport;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
@@ -32,7 +33,7 @@ class ReconciliationController extends Controller
     {
         return Excel::download(new ReconciliationExport, 'data.xlsx');
     }
-    public function store(Request $request)
+    public function ReconciliationImportUpdate(Request $request)
     { 
         $ReconciliationHistory              = new Reconciliation;
         $ReconciliationHistory->uploaded_at = auth_user()->alias_name;
@@ -49,6 +50,7 @@ class ReconciliationController extends Controller
                     $tempCount ++;
                     $Batches = Batches::where('barcode_number',$barcode_number)->first();
                     $Batches->update([ 'quantity' => $physical_stock ]);
+                    LogActivity::log($Batches->id);
                 }
             }
             if($tempCount == 0) {
@@ -65,11 +67,12 @@ class ReconciliationController extends Controller
         $ReconciliationHistory->save();
         return back();
     }
-    public function update(Request $request,$id)
+    public function ReconciliationUpdate(Request $request,$id)
     {
         Batches::findOrFail($id)->update([
             'quantity' => $request->PhysicalStock
         ]);
+        LogActivity::log($id);
         return response()->json([
             "message" => "Reconciliation Success !"
         ], 200);

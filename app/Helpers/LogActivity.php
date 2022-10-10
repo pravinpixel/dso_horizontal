@@ -7,7 +7,7 @@ use App\Models\LogSheet;
 class LogActivity
 {
     public static function log($id, $remarks = null)
-    { 
+    {   
         switch (request()->route()->getActionMethod()) {
             case 'batch_destroy':
                 $action_type  = 'DELETE';
@@ -49,7 +49,14 @@ class LogActivity
                 $action_type  = 'TRANSFER';
                 $module_name  = 'Batches';
                 break;  
-   
+            case 'ReconciliationUpdate' :
+                $action_type  = 'RECONCILIATION';
+                $module_name  = 'Batches';
+                break;
+            case 'ReconciliationImportUpdate':
+                    $action_type  = 'RECONCILIATION_FROM_IMPORT_EXCEL';
+                    $module_name  = 'Batches';
+                break;
         }
 
         LogSheet::updateOrCreate([
