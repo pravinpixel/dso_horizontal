@@ -918,5 +918,21 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.directDeduct       = []
     $scope.deductTrackUsage   = []
-    $scope.deductTrackOutlife = []
+    $scope.deductTrackOutlife = [];
+ 
+    // ============ TO Reconciliate PROCESS ========
+    $scope.toReconciliate = (batch) => {
+        $('#reconciliation-modal').modal('show')
+        $scope.ReconciliateId = batch.id
+        $scope.ReconciliateSystemStock = Number(batch.quantity) 
+    }
+    $scope.ReconciliateSave = () => {
+        $http.post(`${APP_URL}/reconciliation/update/${$scope.ReconciliateId}`, $scope.Reconciliate).then((res) => {
+            $scope.Reconciliate.PhysicalStock = '';
+            $scope.Reconciliate.Remarks       = '';
+            $('#reconciliation-modal').modal('hide');
+            Message('success', 'Reconciliation Success !');
+            $scope.get_material_products();
+        })
+    }
 });

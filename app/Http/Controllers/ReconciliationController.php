@@ -65,7 +65,15 @@ class ReconciliationController extends Controller
         $ReconciliationHistory->save();
         return back();
     }
-
+    public function update(Request $request,$id)
+    {
+        Batches::findOrFail($id)->update([
+            'quantity' => $request->PhysicalStock
+        ]);
+        return response()->json([
+            "message" => "Reconciliation Success !"
+        ], 200);
+    }
     public function destroy($id)
     {
         $Reconciliation = Reconciliation::findOrFail($id);

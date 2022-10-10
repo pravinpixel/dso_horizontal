@@ -196,7 +196,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
-                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="bi bi-arrow-repeat me-1"></i>To reconciliate</a>
+                    <button class="dropdown-item text-secondary"  ng-click="toReconciliate(batch)"><i class="bi bi-arrow-repeat"></i> To reconciliate</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>

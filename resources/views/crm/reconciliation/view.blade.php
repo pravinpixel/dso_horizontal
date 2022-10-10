@@ -1,16 +1,6 @@
 @extends('layouts.app')
 @section('content') 
     <div ng-app="RootApp" ng-controller="RootController">
-        <div class="d-flex align-items-center mb-3">
-            <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
-                <div class="input-group align-items-center" title="Scan Barcode">
-                    <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" min="1"  ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-                </div>
-            </div>
-            <div class="col-6 d-flex justify-content-end ms-auto text-end"></div>
-        </div>
-
         {{-- = ==== Filletrs ====--}}
             @include('crm.partials.table-filter')
         {{-- ====== Filletrs ===--}}
@@ -28,54 +18,9 @@
             @include('crm.material-products.modals.repack-transfers')
             @include('crm.material-products.modals.repack-outlife')
             @include('crm.material-products.modals.import-from-excel')
+            @include('crm.material-products.modals.reconciliation')
         {{-- ======= END : App Models ==== --}}
-    </div> 
-    <!-- Standard modal -->
-    <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header m-0 border-0 justify-content-end">
-                    <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button></div>
-                <div class="modal-body">
-                    <table class="table">
-                        <tr>
-                            <th>Item Description</th>
-                            <td>:</td>
-                            <td>Acetone IND</td>
-                        </tr>
-                        <tr>
-                            <th>Brand</th>
-                            <td>:</td>
-                            <td>XOX</td>
-                        </tr>
-                        <tr>
-                            <th>Batch/Serial#</th>
-                            <td>:</td>
-                            <td>Batch/1</td>
-                        </tr>
-                        <tr>
-                            <th>System Stock</th>
-                            <td>:</td>
-                            <td><input type="number" min="1"  class="bg-none form-control "  value="10"></td>
-                        </tr>
-                        <tr>
-                            <th>Physical Stock</th>
-                            <td>:</td>
-                            <td><input type="number" min="1"  class="bg-none form-control "  value="10"></td>
-                        </tr>
-                        <tr>
-                            <th>Remarks</th>
-                            <td>:</td>
-                            <td><input type="text" class="bg-none form-control "  value="10"></td>
-                        </tr>
-                    </table>
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-primary rounded-pill px-3" value="Submit">
-                    </div>
-                </div> 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>  
 @endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
