@@ -34,25 +34,25 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="(i,repack) in repack_outlife_table">
-                            <td> 
+                            <td>
                                 <div ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 1">
-                                    <label class="btn btn-sm btn-draw-in btn-disabled">Draw In</label>
                                     <label class="btn btn-sm btn-draw-out btn-disabled">Draw Out</label>
+                                    <label class="btn btn-sm btn-draw-in btn-disabled">Draw In</label> 
                                 </div>
                                 <div ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 0 || repack.draw_in.status == 0 && repack.draw_out.status == 1">
-                                    <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : '' " >
-                                        <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
-                                       Draw In
-                                    </label>
                                     <label for="DRAW_OUT_@{{ i }}" class="btn btn-sm btn-draw-out" ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : ''">
                                         <input class="d-none" id="DRAW_OUT_@{{ i }}" repack-table="OUT" type="radio" ng-model="repack.draw_status" value="1" name="draw_status" required  ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" />
                                         Draw Out
                                     </label>
+                                    <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : '' " >
+                                        <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
+                                       Draw In
+                                    </label>
                                 </div>
                             </td>
                             <td style="padding: 0" width="180px">
-                                <small ng-bind="repack.draw_out.time_stamp"></small><br>
-                                <small ng-bind="repack.draw_in.time_stamp"></small>
+                                <small ng-bind="repack.draw_in.time_stamp"></small><br>
+                                <small ng-bind="repack.draw_out.time_stamp"></small>
                             </td>
                             <td ng-bind="repack.last_access"></td>
                             <td ng-bind="repack.total_quantity"></td>
@@ -94,6 +94,6 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+    </div>
 </div>
