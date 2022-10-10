@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ReconciliationExport;
 use App\Imports\ReconciliationImport;
+use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Models\Reconciliation;
 use Illuminate\Http\Request;
@@ -13,6 +14,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReconciliationController extends Controller
 {
+    public function __construct(DsoRepositoryInterface $dsoRepositoryInterface){
+        $this->dsoRepository    =   $dsoRepositoryInterface;
+    }
     public function index()
     {
         $Reconciliation =  Reconciliation::latest()->get();
@@ -20,7 +24,9 @@ class ReconciliationController extends Controller
     }
     public function show()
     {
-        return view('crm.reconciliation.view');
+        $page_name  = "RECONCILIATION_LIST";
+        $view       = "crm.reconciliation.view";
+        return $this->dsoRepository->renderPage($page_name, $view); 
     }
     public function download()
     {

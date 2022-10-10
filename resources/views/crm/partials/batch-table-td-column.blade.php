@@ -188,4 +188,18 @@
             </div>
         </div>
     @break
+    @case('RECONCILIATION_LIST')
+        <div class="box border-start box-sm">
+            <div class="dropdown text-center">
+                <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
+                    <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="bi bi-arrow-repeat me-1"></i>To reconciliate</a>
+                    <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
+                </div>
+            </div>
+        </div>
+    @break
 @endswitch
