@@ -23,7 +23,7 @@
                 @break 
                 @case('quantity')
                     <span>
-                        @{{ row.material_quantity }}    
+                        @{{ row.total_bath_quantity }}
                         <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-    @break 
+    @break
     @default
-        <div class="box border-start box-sm"></div>     
+    <div class="box border-start box-sm"></div>     
 @endswitch

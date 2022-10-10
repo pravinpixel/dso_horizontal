@@ -99,6 +99,7 @@ class DsoRepository implements DsoRepositoryInterface
             $draftBatchCount    = 0;
             $UnitPackingCount   = 0;
             $TotalQuantityTotal = 0;
+            $total_bath_quantity = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) {  
                 if ($batch->is_draft == 1 ) {
@@ -109,6 +110,7 @@ class DsoRepository implements DsoRepositoryInterface
                     $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
                     $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
                     $TotalQuantityTotal += $totalQtyCount;
+                    $total_bath_quantity += (int) $batch->quantity;
                 }
                 // if($batch->quantity  != null) {
                 //     // $batch->quantity = str_replace('.00', '' , $batch->quantity);
@@ -130,8 +132,9 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['totalUnitPackValue']       = $UnitPackingCount;
             $parent['hideParentRow']            = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus']  = $readCount == 0 ? 1 : 0;
-            $parent['TotalQuantityTotal']       = $TotalQuantityTotal;
-            $parent['draftBatchCount']          = $draftBatchCount;
+            $parent['TotalQuantityTotal']  = $TotalQuantityTotal;
+            $parent['draftBatchCount']     = $draftBatchCount;
+            $parent['total_bath_quantity'] = $total_bath_quantity;
           
             if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
