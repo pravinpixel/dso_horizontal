@@ -331,3 +331,10 @@ try {
 } catch (error) {
     console.log(error)
 } 
+
+document.querySelectorAll(".btn-loader").forEach(button => {
+    button.addEventListener('click', (e) => {
+        console.log("object")
+        e.target.classList.add("start-loader")
+    })
+});

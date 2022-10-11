@@ -87,10 +87,8 @@
                         <label for="end_of_material_products" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="end_of_material_products"> End of batch</label>
                     </div>
                     <div class="col-6 ms-auto text-end"> 
-                        {{-- <label for="exportLogCheckBox" class="p-2"><input type="checkbox" class="form-check-input me-2" name="" id="exportLogCheckBox"> Export logsheet</label> --}}
-                        <button class="btn btn-primary rounded-pill h-100"  ng-if="repackOutlifeForm.$invalid != true" ng-click="saveRepackOutlife()">Save and Submit</button>
-                        <button class="btn btn-secondary rounded-pill h-100" ng-if="repackOutlifeForm.$invalid">Save and Submit</button>
-                        {{-- <button class="btn btn-primary rounded-pill h-100" ng-if="next_draw == true" ng-click="saveRepackOutlife()">Save and Submit 2</button> --}}
+                        <button class="btn btn-primary rounded-pill h-100 btn-loader" ng-show="repackOutlifeForm.$invalid != true" ng-click="saveRepackOutlife()">Save and Submit</button>
+                        <button class="btn btn-secondary rounded-pill h-100" ng-show="repackOutlifeForm.$invalid">Save and Submit</button>
                     </div>
                 </div>
             </div>

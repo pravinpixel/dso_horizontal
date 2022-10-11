@@ -32,6 +32,9 @@
     @endif --}}
 
     <main class="container-fluid" style="min-height: 80vh">
+        <button class="btn btn-primary rounded-pill h-100 btn-loader">Save and Submit</button>
+        <button class="btn btn-primary rounded-pill h-100 btn-loader">Save and Submit</button>
+        <button class="btn btn-primary rounded-pill h-100 btn-loader">Save and Submit</button>
         @yield('content')
     </main>
     
