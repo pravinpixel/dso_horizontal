@@ -142,7 +142,7 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000|mimes:xlsx,xls',
         ]);
-
+ 
         $array = Excel::toArray(new BulkImport, $request->file('select_file'));
 
         foreach ($array[0] as $key => $row) {
@@ -151,7 +151,6 @@ class MaterialProductsController extends Controller
                     $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
                         'name' => $row['unit_of_measure']
                     ]);
-
                     $material  = MaterialProducts::create([
                         'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
                         'item_description'                => $row['item_description'] ?? null,
@@ -219,7 +218,7 @@ class MaterialProductsController extends Controller
                     ]);
                     Flash::success(__('global.imported'));
                 } catch (\Throwable $th) {
-                    Flash::error($th->getMessage());
+                    Log::info($th->getMessage());
                 }
             }
         }
