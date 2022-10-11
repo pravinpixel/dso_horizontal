@@ -115,6 +115,7 @@ class RepackBatchController extends Controller
                    
                     //  New Batch
                     // $totalQuantity                  = (float) $repackUnitPackingValue * (float) $repackQuantity;
+                 
                     $next_batch                     = $current_batch->replicate();
                     $next_batch->created_at         = Carbon::now();
                     $next_batch->barcode_number     = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
@@ -122,6 +123,13 @@ class RepackBatchController extends Controller
                     $next_batch->total_quantity     = $row['repack_amount'];
                     $next_batch->quantity           = $row['qty_cut'];
                     $next_batch->save();
+
+                    LogActivity::tracker([
+                        "from"      => $current_batch->id,
+                        "to"        => $next_batch->id,
+                        "type"      => "REPACK_OUTLIFE",
+                        "action_by" => auth_user()->alias_name
+                    ]);
 
                     $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");
                     $current_batch->total_quantity =  $row['balance_amount'];

@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\BatchTracker;
 use App\Models\LogSheet;
 
 class LogActivity
@@ -135,5 +136,16 @@ class LogActivity
     public static function all()
     {
         return LogSheet::with('User')->latest()->get();
+    }
+
+    
+    public static function tracker($data)
+    {
+        return BatchTracker::create([
+            "from_batch_id" => $data['from'],
+            "to_batch_id"   => $data['to'],
+            "action_type"   => $data['type'],
+            "action_by"     => $data['action_by'],
+        ]);
     }
 }
