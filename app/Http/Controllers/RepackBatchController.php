@@ -125,10 +125,10 @@ class RepackBatchController extends Controller
                     $next_batch->save();
 
                     LogActivity::tracker([
-                        "from"      => $current_batch->id,
-                        "to"        => $next_batch->id,
-                        "type"      => "REPACK_OUTLIFE",
-                        "action_by" => auth_user()->alias_name
+                        "from"           => $current_batch->id,
+                        "to"             => $next_batch->id,
+                        "type"           => "REPACK_OUTLIFE",
+                        "action_by"      => auth_user()->alias_name,
                     ]);
 
                     $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");

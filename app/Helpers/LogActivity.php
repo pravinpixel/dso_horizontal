@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\LogSheet;
 
@@ -141,11 +142,15 @@ class LogActivity
     
     public static function tracker($data)
     {
+        $batch = Batches::find($data['from']);
+ 
         return BatchTracker::create([
-            "from_batch_id" => $data['from'],
-            "to_batch_id"   => $data['to'],
-            "action_type"   => $data['type'],
-            "action_by"     => $data['action_by'],
+            "from_batch_id"  => $data['from'],
+            "to_batch_id"    => $data['to'],
+            "action_type"    => $data['type'],
+            "action_by"      => $data['action_by'],
+            "quantity"       => $batch->quantity,
+            "total_quantity" => $batch->total_quantity
         ]);
     }
 }

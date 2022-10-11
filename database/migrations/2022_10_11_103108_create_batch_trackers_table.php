@@ -15,10 +15,13 @@ class CreateBatchTrackersTable extends Migration
     {
         Schema::create('batch_trackers', function (Blueprint $table) {
             $table->id();
-            $table->integer('from_batch_id');
+            $table->unsignedBigInteger('from_batch_id');
+            $table->foreign('from_batch_id')->references('id')->on('batches');//->onDelete('cascade');
             $table->integer('to_batch_id');
             $table->string('action_type');
             $table->string('action_by');
+            $table->string('quantity');
+            $table->string('total_quantity');
             $table->timestamps();
         });
     }

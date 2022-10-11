@@ -33,7 +33,7 @@ class TransferBatchController extends Controller
         LogActivity::dataLog($old_value, $new_value);
  
         $current_batch->update([
-            'quantity'      =>   $current_batch->quantity - $request->quantity,
+            'quantity'       => $current_batch->quantity - $request->quantity,
             'total_quantity' => $current_batch->unit_packing_value * ($current_batch->quantity - $request->quantity)
         ]);
        

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Batches;
+use App\Models\BatchTracker;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
 
@@ -271,5 +272,25 @@ if(! function_exists('dateDifferStr')) {
         $seconds = $updated_outlife_inSeconds != 0  ? $updated_outlife_inSeconds." seconds," : ' ' ;
 
         return $days.$hours.$minutes.$seconds;
+    }
+}
+
+if(!function_exists('BatchRestore')) {
+    function BatchRestore($id)
+    {
+        $result  =   BatchTracker::where('to_batch_id', $id)->first() ;
+
+        if(!is_null($result)) {
+            $fromBatch  = Batches::find($result->from_batch_id);
+            if(!is_null($fromBatch)){
+                if($result->action_type == 'REPACK_OUTLIFE') { 
+                    $fromBatch->quantity       = $result->quantity;
+                    $fromBatch->total_quantity = $result->total_quantity;
+                }
+                $fromBatch->save();
+                BatchTracker::where('to_batch_id', $result->to_batch_id)->first()->delete();
+            }
+        }
+        return true;
     }
 }

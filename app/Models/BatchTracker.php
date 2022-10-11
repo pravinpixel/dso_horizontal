@@ -14,5 +14,7 @@ class BatchTracker extends Model
         'to_batch_id',
         'action_type',
         'action_by',
+        'quantity',
+        'total_quantity'
     ];
 }

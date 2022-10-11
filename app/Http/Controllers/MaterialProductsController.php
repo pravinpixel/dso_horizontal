@@ -21,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use App\Models\BatchTracker;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route; 
@@ -500,26 +501,31 @@ class MaterialProductsController extends Controller
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function batch_destroy($id)
-    {
-        $data   =   Batches::find($id);
-        if (Storage::exists($data->sds_mill_cert_document)) {
-            Storage::delete($data->sds_mill_cert_document);
+    { 
+        if(BatchTracker::where('from_batch_id', $id)->count() == 0) {
+            $data   =   Batches::find($id); 
+            if (Storage::exists($data->sds_mill_cert_document)) {
+                Storage::delete($data->sds_mill_cert_document);
+            }
+            if (Storage::exists($data->coc_coa_mill_cert_document)) {
+                Storage::delete($data->coc_coa_mill_cert_document);
+            }
+            if (Storage::exists($data->iqc_result)) {
+                Storage::delete($data->iqc_result);
+            }
+            if (Storage::exists($data->upload_disposal_certificate)) {
+                Storage::delete($data->upload_disposal_certificate);
+            }
+            if (Storage::exists($data->extended_qc_result)) {
+                Storage::delete($data->extended_qc_result);
+            }
+            BatchRestore($id);
+            $data->delete();
+            LogActivity::log($id);
+            return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
+        } else {
+            return response(['status' => true,  'message' => "You Can't Delete Batch!"], Response::HTTP_OK);
         }
-        if (Storage::exists($data->coc_coa_mill_cert_document)) {
-            Storage::delete($data->coc_coa_mill_cert_document);
-        }
-        if (Storage::exists($data->iqc_result)) {
-            Storage::delete($data->iqc_result);
-        }
-        if (Storage::exists($data->upload_disposal_certificate)) {
-            Storage::delete($data->upload_disposal_certificate);
-        }
-        if (Storage::exists($data->extended_qc_result)) {
-            Storage::delete($data->extended_qc_result);
-        }
-        $data->delete();
-        LogActivity::log($id);
-        return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function suggestion(Request $request)
     {
