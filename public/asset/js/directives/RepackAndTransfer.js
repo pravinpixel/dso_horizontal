@@ -13,11 +13,13 @@ app.directive('repackTransferTable', () => {
                 }
                 if(attribute.repackTransferTable == 'NEW_UNIT_PACKING_VALUE') {
                     var AutoCalQty = scope.RepackTransfer.unit_packing_value * scope.RepackTransfer.RepackQuantity / scope.RepackTransfer.new_unit_packing_value
-                    if(AutoCalQty == NaN) {
+                    if(typeof(AutoCalQty) == NaN || typeof(AutoCalQty) == undefined || typeof(AutoCalQty) == Infinity) {
                         scope.RepackTransfer.AutoCalQty = ''
                     } else {
-                        scope.RepackTransfer.AutoCalQty = AutoCalQty
-                    } 
+                        if(typeof(AutoCalQty) != NaN) {
+                            scope.RepackTransfer.AutoCalQty = AutoCalQty.toFixed(3)
+                        } 
+                    }
                 }
                 scope.$apply()
             })
