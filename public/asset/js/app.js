@@ -54,6 +54,9 @@ function Message(type, res) {
     setTimeout(() => {
         $(".alert").fadeOut();
     }, 3000);
+    document.querySelectorAll(".btn-loader").forEach(button => {
+        button.classList.remove("start-loader")
+    });
 }
 setTimeout(() => {
     $(".alert").fadeOut();
@@ -334,7 +337,6 @@ try {
 
 document.querySelectorAll(".btn-loader").forEach(button => {
     button.addEventListener('click', (e) => {
-        console.log("object")
         e.target.classList.add("start-loader")
     })
 });
