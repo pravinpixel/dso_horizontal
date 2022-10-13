@@ -23,7 +23,7 @@
                 @break 
                 @case('quantity')
                     <span>
-                        @{{ row.total_bath_quantity }}
+                        @{{ row.totalQuantity }}
                         <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
