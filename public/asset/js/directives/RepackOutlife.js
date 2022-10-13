@@ -36,7 +36,7 @@ app.directive('repackTable', () => {
                 }
                 if(attribute.repackTable == "REPACK_SIZE") {
                     var quantity            = Number(Number(scope.repack.repack_amount) / Number(scope.repack.repack_size)).toFixed(3)
-                    scope.repack.qty_cut    = Number(quantity);
+                    scope.repack.quantity    = Number(quantity);
                     scope.$apply()
                 }
             })

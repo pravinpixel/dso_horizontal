@@ -16,7 +16,6 @@ class CreateRepackOutlivesTable extends Migration
         Schema::create('repack_outlives', function (Blueprint $table) {
             $table->id();
             $table->integer('batch_id');
-            $table->integer('quantity')->nullable();
             $table->boolean('draw_in')->nullable()->default(true);
             $table->boolean('draw_out')->nullable()->default(false);
             $table->string('draw_in_time_stamp')->nullable();
@@ -27,7 +26,8 @@ class CreateRepackOutlivesTable extends Migration
             $table->string('remain_amount')->nullable();
             $table->string('barcode_number')->nullable();
             $table->string('repack_size')->nullable();
-            $table->string('qty_cut')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->string('total_quantity')->nullable();
             $table->string('remain_days')->nullable();
             $table->string('last_date_time')->nullable();
             $table->string('current_date_time')->nullable(); 

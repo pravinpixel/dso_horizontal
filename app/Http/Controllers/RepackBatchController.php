@@ -107,21 +107,17 @@ class RepackBatchController extends Controller
                 $Batches    = Batches::find($repackData->batch_id);
 
                 if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                    Log::info("Draw IN");
+                    Log::info("Draw OUT");
                     $draw_out      = 1;
                     $draw_in       = 0;
                  
-                    $current_batch = Batches::find($repackData->batch_id); 
-                   
-                    //  New Batch
-                    // $totalQuantity                  = (float) $repackUnitPackingValue * (float) $repackQuantity;
-                 
+                    $current_batch                  = Batches::find($repackData->batch_id);
                     $next_batch                     = $current_batch->replicate();
                     $next_batch->created_at         = Carbon::now();
                     $next_batch->barcode_number     = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
                     $next_batch->unit_packing_value = $row['repack_size'];
                     $next_batch->total_quantity     = $row['repack_amount'];
-                    $next_batch->quantity           = $row['qty_cut'];
+                    $next_batch->quantity           = $row['quantity'];
                     $next_batch->save();
 
                     LogActivity::tracker([
@@ -134,17 +130,25 @@ class RepackBatchController extends Controller
                     $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");
                     $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
+
                     RepackOutlife::create([
-                        'batch_id'             => $next_batch->id,
-                        'input_repack_amount'  => $repackData->repack_amount 
+                        'batch_id'       => $next_batch->id,
+                        'total_quantity' => $row['repack_amount'],
                     ]);
+
+                    RepackOutlife::create([
+                        'batch_id'            => $id,
+                        'input_repack_amount' => $row['repack_size'],
+                        'total_quantity'      => $row['balance_amount'],
+                    ]);
+
                     $old_value           = $current_batch;
                     $new_value           = clone $current_batch;
                     LogActivity::dataLog($old_value, $new_value);
                 }
 
                 if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
-                    Log::info("Draw OUT");
+                    Log::info("Draw IN");
 
                     $draw_out   = 1;
                     $draw_in    = 1;
@@ -176,18 +180,16 @@ class RepackBatchController extends Controller
                     'draw_in'                 => $draw_in,
                     'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
                     'draw_out'                => $draw_out,
-                    'draw_out_time_stamp'     => $row['draw_out']['time_stamp'],
-                    'input_repack_amount'     => $row['repack_amount'],
+                    'draw_out_time_stamp'     => $row['draw_out']['time_stamp'], 
                     'remain_amount'           => $row['balance_amount'],
                     'repack_size'             => $row['repack_size'],
-                    'qty_cut'                 => $row['qty_cut'],
                     'barcode_number'          => $row['barcode_number'],
                     'remain_days'             => $row['remaining_days'],
                     'remaining_days_seconds'  => $row['remaining_days_seconds'] ?? null,
                     'current_date_time'       => Carbon::now()->toDateTimeLocalString(),
                     'updated_outlife'         => $updated_outlife ?? null,
                     'updated_outlife_seconds' => $updated_outlife_seconds ?? null,
-                    'current_outlife_expiry'  => $current_outlife_expiry ?? null, 
+                    'current_outlife_expiry'  => $current_outlife_expiry ?? null,
                 ]);
 
                 return response()->json([

@@ -12,6 +12,7 @@ class RepackOutlife extends Model
     protected $fillable = [
         'batch_id',
         'quantity',
+        'total_quantity',
         'draw_in',
         'draw_out',
         'draw_in_time_stamp',
@@ -22,7 +23,6 @@ class RepackOutlife extends Model
         'remain_amount',
         'barcode_number',
         'repack_size',
-        'qty_cut',
         'remain_days',
         'last_date_time',
         'current _date_time',

@@ -223,18 +223,25 @@ class MaterialProductSeeder extends Seeder
         ]);
 
         RepackOutlife::updateOrCreate(['batch_id' => $batch_one->id], [
-            'batch_id' => $batch_one->id,
+            'batch_id'            => $batch_one->id,
+            'quantity'            => $batch_one->quantity,
+            'total_quantity'      => $batch_one->quantity * $batch_one->unit_packing_value,
             'input_repack_amount' => $batch_one->unit_packing_value
         ]);
+
         RepackOutlife::updateOrCreate(['batch_id' => $batch_two->id], [
-            'batch_id' => $batch_two->id,
+            'batch_id'            => $batch_two->id,
+            'quantity'            => $batch_two->quantity,
+            'total_quantity'      => $batch_two->quantity * $batch_two->unit_packing_value,
             'input_repack_amount' => $batch_two->unit_packing_value
         ]);
+
         RepackOutlife::updateOrCreate(['batch_id' => $batch_three->id], [
-            'batch_id' => $batch_three->id,
+            'batch_id'            => $batch_three->id,
+            'quantity'            => $batch_three->quantity,
+            'total_quantity'      => $batch_three->quantity * $batch_three->unit_packing_value,
             'input_repack_amount' => $batch_three->unit_packing_value
         ]);
-
 
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),

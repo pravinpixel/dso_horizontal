@@ -74,7 +74,7 @@
                             </td>
                             <td ng-bind="repack.last_access"></td>
                             <td ng-bind="repack.total_quantity"></td>
-                            <td class="text-center"> 
+                            <td class="text-center">
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
                                     <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " required>
                                 </span>
@@ -93,7 +93,7 @@
                                     ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                 </span>
                             </td>
-                            <td ng-bind="repack.qty_cut"></td>
+                            <td ng-bind="repack.quantity"></td>
                             <td ng-bind="repack.remaining_days"></td>
                         </tr>
                     </tbody>

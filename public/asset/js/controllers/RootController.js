@@ -793,12 +793,12 @@ app.controller('RootController', function ($scope, $http) {
         $http.get(`repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
+            console.log(RepackData)
             if (RepackData.repack_outlife.length !== 0) {
                 RepackData.repack_outlife.forEach(element => {
                     $scope.repack_outlife_table.push(
                         {
                             id     : element.id,
-                            quantity : RepackData.quantity,
                             draw_in: {
                                 status    : element.draw_in,
                                 time_stamp: element.draw_in_time_stamp
@@ -813,11 +813,11 @@ app.controller('RootController', function ($scope, $http) {
                             repack_amount         : element.input_repack_amount,
                             balance_amount        : element.remain_amount,
                             repack_size           : element.repack_size,
-                            qty_cut               : element.qty_cut,
+                            quantity              : element.quantity,
                             remaining_days        : element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
                             barcode_number        : RepackData.barcode_number,
-                            total_quantity        : Number(RepackData.total_quantity),
+                            total_quantity        : Number(element.total_quantity),
                         }
                     );
                 }) 
