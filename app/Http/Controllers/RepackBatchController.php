@@ -201,7 +201,7 @@ class RepackBatchController extends Controller
     }
     public function export_repack_outlife($id)
     {
-        $excel_file_name =  "Repack-Outlife-".date("Y-M-d  h-i-s A").".xlsx";
+        $excel_file_name = "Repack-Outlife-".date("Y-M-d  h-i-s A").".xlsx";
         return Excel::download(new RepackOutlifeExport($id), $excel_file_name);
     }
 }

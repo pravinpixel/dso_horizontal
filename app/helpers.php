@@ -254,7 +254,7 @@ if(! function_exists('strExcelDate')) {
         $unix_date  = ($excel_date - 25569) * 86400;
         $excel_date = 25569 + ($unix_date / 86400);
         $unix_date  = ($excel_date - 25569) * 86400;
-        return gmdate("Y-m-d", $unix_date);
+        return gmdate("Y-m-d", $unix_date); //2023-12-16
     }
 }
 

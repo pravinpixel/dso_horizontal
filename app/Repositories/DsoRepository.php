@@ -10,6 +10,7 @@ use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use App\Models\tableOrder;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -101,7 +102,12 @@ class DsoRepository implements DsoRepositoryInterface
             $TotalQuantityTotal = 0;
             $total_bath_quantity = 0;
             
-            foreach ($parent->Batches as $batch_key => $batch) {  
+            foreach ($parent->Batches as $batch_key => $batch) { 
+                
+                $batch->date_in             = Carbon::parse($batch->date_in)->format('d/m/Y') ;
+                $batch->date_of_expiry      = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
+                $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
+
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1 ; 
                 } else { 
@@ -127,14 +133,14 @@ class DsoRepository implements DsoRepositoryInterface
             }
             
             // dd($readCount);
-            $parent['totalQuantity']            = $QtyCount;
-            $parent['totalQuantityUnit']        = $totalQtyCount;
-            $parent['totalUnitPackValue']       = $UnitPackingCount;
-            $parent['hideParentRow']            = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
-            $parent['hideParentRowReadStatus']  = $readCount == 0 ? 1 : 0;
-            $parent['TotalQuantityTotal']  = $TotalQuantityTotal;
-            $parent['draftBatchCount']     = $draftBatchCount;
-            $parent['total_bath_quantity'] = $total_bath_quantity;
+            $parent['totalQuantity']           = $QtyCount;
+            $parent['totalQuantityUnit']       = $totalQtyCount;
+            $parent['totalUnitPackValue']      = $UnitPackingCount;
+            $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
+            $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
+            $parent['TotalQuantityTotal']      = $TotalQuantityTotal;
+            $parent['draftBatchCount']         = $draftBatchCount;
+            $parent['total_bath_quantity']     = $total_bath_quantity;
           
             if($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
