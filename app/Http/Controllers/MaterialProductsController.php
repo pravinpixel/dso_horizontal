@@ -546,7 +546,7 @@ class MaterialProductsController extends Controller
         
         foreach($created_batch->toArray() as $column => $value) {
             $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
-            if($rest == 1) {
+            if($rest == 1 || $rest == true) {
                 $created_batch->$column = NULL;
             }
         }
