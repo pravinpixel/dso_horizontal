@@ -140,14 +140,14 @@ class MaterialProductsController extends Controller
     public function import_excel(Request $request)
     {
         $request->validate([
-            'select_file' => 'required|max:10000|mimes:xlsx,xls',
+            'select_file' => 'required|max:10000',
         ]);
  
         $array = Excel::toArray(new BulkImport, $request->file('select_file'));
 
         foreach ($array[0] as $key => $row) {
             if (!is_null($row['category_selection'])) {
-                // try {
+                try {
                     $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
                         'name' => $row['unit_of_measure']
                     ]);
@@ -217,9 +217,9 @@ class MaterialProductsController extends Controller
                         'no_of_extension'              => $row['no_of_extension'] ?? 0
                     ]);
                     Flash::success(__('global.imported'));
-                // } catch (\Throwable $th) {
-                //     Log::info($th->getMessage());
-                // }
+                } catch (\Throwable $th) {
+                    Log::info($th->getMessage());
+                }
             }
         }
         return back();
