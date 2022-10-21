@@ -143,84 +143,87 @@ class MaterialProductsController extends Controller
             'select_file' => 'required|max:10000',
         ]);
  
-        $array = Excel::toArray(new BulkImport, $request->file('select_file'));
-
-        foreach ($array[0] as $key => $row) {
-            if (!is_null($row['category_selection'])) {
-                try {
-                    $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
-                        'name' => $row['unit_of_measure']
-                    ]);
-                    $material  = MaterialProducts::create([
-                        'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
-                        'item_description'                => $row['item_description'] ?? null,
-                        'unit_of_measure'                 => $unit_of_measure->id,
-                        'unit_packing_value'              => $row['unit_packing_value'] ?? null,
-                        'alert_threshold_qty_upper_limit' => $row['alert_threshold_qty_upper_limit'] ?? null,
-                        'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
-                        'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
-                        'material_quantity'               => $row['quantity'],
-                        'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value']
-                    ]);
-
-                    LogActivity::log($material->id);
-                    
-                    $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body'] ],[
-                        'name' => $row['statutory_body']
-                    ]);
-                    $storage_area = StorageRoom::updateOrCreate(['name' => $row['storage_area'] ],[
-                        'name' => $row['storage_area']
-                    ]);
-                    $housing_type = HouseTypes::updateOrCreate(['name' => $row['housing_type'] ],[
-                        'name' => $row['housing_type']
-                    ]);
-                    $department = Departments::updateOrCreate(['name' => $row['department'] ],[
-                        'name' => $row['department']
-                    ]);
-   
-                    $batch = $material->Batches()->create([
-                        'is_draft'                     => 1,
-                        'barcode_number'               => generateBarcode($material->category_selection),
-                        'brand'                        => $row['brand'] ?? null,
-                        'supplier'                     => $row['supplier'] ?? null,
-                        'unit_packing_value'           => $row['unit_packing_value'] ?? null,
-                        'quantity'                     => $row['quantity'] ?? null,
-                        'total_quantity'               => $row['quantity'] * $row['unit_packing_value'],
-                        'batch'                        => $row['batch'] ?? null,
-                        'serial'                       => $row['serial'] ?? null,
-                        'po_number'                    => $row['po_number'] ?? null,
-                        'statutory_body'               => $statutory_body->id,
-                        'euc_material'                 => $row['euc_material'] ?? null,
-                        'require_bulk_volume_tracking' => $row['require_bulk_volume_tracking'] ?? null,
-                        'require_outlife_tracking'     => $row['require_outlife_tracking'] ?? null,
-                        'outlife'                      => $row['outlife'] ?? null,
-                        'storage_area'                 => $storage_area->id,
-                        'housing_type'                 => $housing_type->id,
-                        'housing'                      => $row['housing'] == '-' ? 'nil' : $row['housing'],
-                        'owner_one'                    => $row['owner_one'] ?? null,
-                        'owner_two'                    => $row['owner_two'] ?? null,
-                        'department'                   => $department->id,
-                        'access'                       => $row['access'] ?? null,
-                        'date_in'                      => strExcelDate($row['date_in']),
-                        'date_of_expiry'               => strExcelDate($row['date_of_expiry']),
-                        'iqc_status'                   => $row['iqc_status'] == 'Pass' ? 1 : 0,
-                        'iqc_result'                   => $row['iqc_result'] ?? null,
-                        'sds'                          => $row['sds'] ?? null,
-                        'cas'                          => $row['cas'] ?? null,
-                        'fm_1202'                      => $row['fm_1202'] ?? null,
-                        'project_name'                 => $row['project_name'] ?? null,
-                        'material_product_type'        => $row['material_product_type'] ?? null,
-                        'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
-                        'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
-                        'cost_per_unit'                => $row['cost_per_unit'] ?? null,
-                        'remarks'                      => $row['remarks'] ?? null,
-                        'no_of_extension'              => $row['no_of_extension'] ?? 0
-                    ]);
-                    Flash::success(__('global.imported'));
-                } catch (\Throwable $th) {
-                    Log::info($th->getMessage());
+        try {
+            $array = Excel::toArray(new BulkImport, $request->file('select_file'));
+            foreach ($array[0] as $key => $row) {
+                if (!is_null($row['category_selection'])) {
+                    try {
+                        $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
+                            'name' => $row['unit_of_measure']
+                        ]);
+                        $material  = MaterialProducts::create([
+                            'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
+                            'item_description'                => $row['item_description'] ?? null,
+                            'unit_of_measure'                 => $unit_of_measure->id,
+                            'unit_packing_value'              => $row['unit_packing_value'] ?? null,
+                            'alert_threshold_qty_upper_limit' => $row['alert_threshold_qty_upper_limit'] ?? null,
+                            'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
+                            'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
+                            'material_quantity'               => $row['quantity'],
+                            'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value']
+                        ]);
+    
+                        LogActivity::log($material->id);
+                        
+                        $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body'] ],[
+                            'name' => $row['statutory_body']
+                        ]);
+                        $storage_area = StorageRoom::updateOrCreate(['name' => $row['storage_area'] ],[
+                            'name' => $row['storage_area']
+                        ]);
+                        $housing_type = HouseTypes::updateOrCreate(['name' => $row['housing_type'] ],[
+                            'name' => $row['housing_type']
+                        ]);
+                        $department = Departments::updateOrCreate(['name' => $row['department'] ],[
+                            'name' => $row['department']
+                        ]);
+       
+                        $batch = $material->Batches()->create([
+                            'is_draft'                     => 1,
+                            'barcode_number'               => generateBarcode($material->category_selection),
+                            'brand'                        => $row['brand'] ?? null,
+                            'supplier'                     => $row['supplier'] ?? null,
+                            'unit_packing_value'           => $row['unit_packing_value'] ?? null,
+                            'quantity'                     => $row['quantity'] ?? null,
+                            'total_quantity'               => $row['quantity'] * $row['unit_packing_value'],
+                            'batch'                        => $row['batch'] ?? null,
+                            'serial'                       => $row['serial'] ?? null,
+                            'po_number'                    => $row['po_number'] ?? null,
+                            'statutory_body'               => $statutory_body->id,
+                            'euc_material'                 => $row['euc_material'] ?? null,
+                            'require_bulk_volume_tracking' => $row['require_bulk_volume_tracking'] ?? null,
+                            'require_outlife_tracking'     => $row['require_outlife_tracking'] ?? null,
+                            'outlife'                      => $row['outlife'] ?? null,
+                            'storage_area'                 => $storage_area->id,
+                            'housing_type'                 => $housing_type->id,
+                            'housing'                      => $row['housing'] == '-' ? 'nil' : $row['housing'],
+                            'owner_one'                    => $row['owner_one'] ?? null,
+                            'owner_two'                    => $row['owner_two'] ?? null,
+                            'department'                   => $department->id,
+                            'access'                       => $row['access'] ?? null,
+                            'date_in'                      => strExcelDate($row['date_in']),
+                            'date_of_expiry'               => strExcelDate($row['date_of_expiry']),
+                            'iqc_status'                   => $row['iqc_status'] == 'Pass' ? 1 : 0,
+                            'iqc_result'                   => $row['iqc_result'] ?? null,
+                            'sds'                          => $row['sds'] ?? null,
+                            'cas'                          => $row['cas'] ?? null,
+                            'fm_1202'                      => $row['fm_1202'] ?? null,
+                            'project_name'                 => $row['project_name'] ?? null,
+                            'material_product_type'        => $row['material_product_type'] ?? null,
+                            'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
+                            'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
+                            'cost_per_unit'                => $row['cost_per_unit'] ?? null,
+                            'remarks'                      => $row['remarks'] ?? null,
+                            'no_of_extension'              => $row['no_of_extension'] ?? 0
+                        ]);
+                        Flash::success(__('global.imported'));
+                    } catch (\Throwable $th) {
+                        Log::info($th->getMessage());
+                    }
                 }
             }
+        } catch (\Throwable $th) {
+            Log::info("Invalid Action !");
         }
         return back();
     }

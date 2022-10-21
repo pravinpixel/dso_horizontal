@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="modal-body">
-                <input type="file" name="select_file" class="form-control mb-2"> 
+                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="select_file" class="form-control mb-2"> 
                 <a download="sample-excel.xlsx" href="sample-excel.xlsx"><i class="bi bi-download"></i> Download sample format</a>
             </div>
             <div class="modal-footer border-top">
