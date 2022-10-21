@@ -25,6 +25,7 @@ class CreateMaterialProductsTable extends Migration
             $table->integer('alert_threshold_qty_lower_limit')->nullable();
             $table->integer('alert_before_expiry')->nullable();
             $table->boolean('end_of_material_product')->nullable()->default(0);
+            $table->boolean('is_draft')->nullable()->default(0); 
             $table->softDeletes();
             $table->timestamps();
         });

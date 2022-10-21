@@ -28,7 +28,7 @@
                     </span>
                 @break
                 @case('total_quantity')
-                    <span>
+                    <span ng-if="row.is_draft == 0">
                         @{{ row.material_total_quantity }}    
                     </span>
                 @break

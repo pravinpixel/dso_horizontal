@@ -28,7 +28,8 @@ class MaterialProducts extends Model
         'alert_before_expiry',
         'end_of_material_product',
         'material_quantity',
-        'material_total_quantity'
+        'material_total_quantity',
+        'is_draft'
     ];
 
     public function Batches()

@@ -160,7 +160,8 @@ class MaterialProductsController extends Controller
                             'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
                             'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
                             'material_quantity'               => $row['quantity'],
-                            'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value']
+                            'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
+                            'is_draft' => true
                         ]);
     
                         LogActivity::log($material->id);
