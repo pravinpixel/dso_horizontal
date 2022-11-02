@@ -323,6 +323,12 @@ if(!function_exists('format_text')) {
         return ucfirst(str_replace(['.','_','-'],' ',$text));
     }
 }
+if(!function_exists('format_route')) {
+    function format_route($text)
+    {
+        return str_replace(['.','-'],'_',$text);
+    }
+}
 
 if(!function_exists('getRoutes')) {
     function getRoutes() {
@@ -335,16 +341,22 @@ if(!function_exists('getRoutes')) {
             if($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '') {
                 $routeList[] =  [
                     0 => str_replace('/','',$prefix),
-                    1 => $name
+                    1 => [
+                        format_route($name) => false
+                    ]
                 ];
             }
         } 
         $groupBy = groupBy(0, $routeList);
  
-        $menu_list = [];
-        foreach($groupBy as $key => $menu) { 
-            $menu_list[$key] = array_values(array_unique($menu)) ;
-        } 
-        return $menu_list;
+        // $menu_list = [];
+        // foreach($groupBy as $key => $menu) { 
+        //     // dd($menu[0]['name']);
+        //     foreach($menu as $menu_key => $menu_value) {
+
+        //     }
+        //     // $menu_list[$key] = array_values(array_unique($menu[$key]['name'])) ;
+        // } 
+        return $groupBy;
     }
 }

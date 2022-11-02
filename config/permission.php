@@ -1,57 +1,42 @@
 <?php 
 return $permissions_default = [
-
-    // Withdrawal 
-    'user.view.withdrawal'    =>  false,
-    'user.add.withdrawal'     =>  false,
-    'user.edit.withdrawal'    =>  false,
-    'user.delete.withdrawal'  =>  false,
-
-    // Search or Add 
-    'user.view.search_or_add'    =>  false,
-    'user.add.search_or_add'     =>  false,
-    'user.edit.search_or_add'    =>  false,
-    'user.delete.search_or_add'  =>  false,
-
-    // Threshold Qty 
-    'user.view.threshold_qty'    =>  false,
-    'user.add.threshold_qty'     =>  false,
-    'user.edit.threshold_qty'    =>  false,
-    'user.delete.threshold_qty'  =>  false,
-
-    // Near Expiry/Expired
-    'user.view.near_expiry_and_expired'    =>  false,
-    'user.add.near_expiry_and_expired'     =>  false,
-    'user.edit.near_expiry_and_expired'    =>  false,
-    'user.delete.near_expiry_and_expired'  =>  false,
-
-    // Early Disposal
-    'user.view.early_disposal'    =>  false,
-    'user.add.early_disposal'     =>  false,
-    'user.edit.early_disposal'    =>  false,
-    'user.delete.early_disposal'  =>  false,
-
-    // Extend Expiry
-    'user.view.extend_expiry'    =>  false,
-    'user.add.extend_expiry'     =>  false,
-    'user.edit.extend_expiry'    =>  false,
-    'user.delete.extend_expiry'  =>  false,
-
-    // Report
-    'user.view.report'    =>  false,
-    'user.add.report'     =>  false,
-    'user.edit.report'    =>  false,
-    'user.delete.report'  =>  false,
-
-    // Print Barcode
-    'user.view.print_barcode'    =>  false,
-    'user.add.print_barcode'     =>  false,
-    'user.edit.print_barcode'    =>  false,
-    'user.delete.print_barcode'  =>  false,
-
-    // Reconciliation
-    'user.view.reconciliation'    =>  false,
-    'user.add.reconciliation'     =>  false,
-    'user.edit.reconciliation'    =>  false,
-    'user.delete.reconciliation'  =>  false,
+    "master_settings"         => false,
+    "master_item_description" => false,
+    "master_store_category"   => false,
+    "master_update_category"  => false,
+    "master_delete_category"  => false,
+    "master_edit_category"    => false,
+    "user_index"              => false,
+    "user_store"              => false,
+    "user_create"             => false,
+    "user_delete"             => false,
+    "user_edit"               => false,
+    "user_update"             => false,
+    "role_index"              => false,
+    "role_store"              => false,
+    "role_create"             => false,
+    "role_delete"             => false,
+    "role_edit"               => false,
+    "role_update"             => false,
+    "help_menu_index"         => false,
+    "help_menu_create"        => false,
+    "help_menu_store"         => false,
+    "help_menu_edit"          => false,
+    "help_menu_update"        => false,
+    "help_menu_delete"        => false,
+    "pictogram_index"         => false,
+    "pictogram_create"        => false,
+    "pictogram_store"         => false,
+    "pictogram_edit"          => false,
+    "pictogram_delete"        => false,
+    "pictogram_update"        => false,
+    "table_order_index"       => false,
+    "table_order_store"       => false,
+    "withdrawal_index"        => false,
+    "direct_deduct"           => false,
+    "deduct_track_usage"      => false,
+    "deduct_track_outlife"    => false,
+    "threshold_qty"           => false,
+    "change_read_status"      => false,
+    "near_expiry_expired"     => false
 ];

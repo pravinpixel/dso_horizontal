@@ -26,16 +26,15 @@ class AuthMiddleware
  
         if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
             foreach(auth_user_role()->permissions as $access => $val) {
-                if(request()->route()->getName() == $access) {
+                if(format_route(request()->route()->getName()) == format_route($access)) {
                     if($val == 1) {
                         return $next($request);
                     } else {
                         Flash::error('Permission Denied ! Contact your admin');
                         return back();
                     }
-                } 
+                }
             }
-            
         }
         return $next($request);
     }
