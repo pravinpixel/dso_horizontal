@@ -3,6 +3,8 @@
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 if(! function_exists('category_type')) {
@@ -297,5 +299,52 @@ if(!function_exists('BatchRestore')) {
             }
         }
         return true;
+    }
+}
+if(!function_exists('groupBy')) {
+    function groupBy($key,$data)
+    {
+        $result = array(); 
+        foreach($data as $val) {
+            $name = $val[1];
+             
+            if(array_key_exists($key, $val)){ 
+                $result[$val[$key]][] = $name;
+            }else{
+                $result[""][] = $name;
+            } 
+        }
+        return $result;
+    }
+}
+if(!function_exists('format_text')) {
+    function format_text($text)
+    {
+        return ucfirst(str_replace(['.','_','-'],' ',$text));
+    }
+}
+
+if(!function_exists('getRoutes')) {
+    function getRoutes() {
+        $routeCollection = Route::getRoutes();
+        $routeList       = (array) [];
+
+        foreach ($routeCollection as $value) {
+            $prefix = $value->getAction()['prefix'];
+            $name   = $value->getAction()['as'] ?? '';
+            if($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '') {
+                $routeList[] =  [
+                    0 => str_replace('/','',$prefix),
+                    1 => $name
+                ];
+            }
+        } 
+        $groupBy = groupBy(0, $routeList);
+ 
+        $menu_list = [];
+        foreach($groupBy as $key => $menu) { 
+            $menu_list[$key] = array_values(array_unique($menu)) ;
+        } 
+        return $menu_list;
     }
 }

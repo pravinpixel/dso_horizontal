@@ -35,7 +35,7 @@
             <div class="tab-content text-center border border-top-0 p-3 m-0 bg-white">
                 <div class="tab-pane show active" id="DIRECT_DEDUCT">
                     @include('crm.material-products.withdrawal.direct-deduct')
-                </div>
+                </div>  
                 <div class="tab-pane" id="DEDUCT_TRACK_USAGE">
                     @include('crm.material-products.withdrawal.deduct-track-useage')
                 </div>
@@ -65,18 +65,18 @@
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
         getWithDrawlCart = async (barcode) => { // Scan Barcode
-            validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
+            validate(barcode) && fetch(`${APP_URL}/withdrawal/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
                 render(data);
             })
         }
         decreaseQuantity = (id, tabName) => { // Decresing Qty
-            fetch(`${APP_URL}/decrease-quantity/${id}`).then(response => response.json()).then((data) => {
+            fetch(`${APP_URL}/withdrawal/decrease-quantity/${id}`).then(response => response.json()).then((data) => {
                 activeMenu(data.withdraw_type)
                 renderAgain(tabName)
             })
         }
         deleteRow = (id, tabName) => { // Delete Row
-            fetch(`${APP_URL}/delete-withdraw-cart/${id}`).then(response => response.json()).then((data) => {
+            fetch(`${APP_URL}/withdrawal/delete-withdraw-cart/${id}`).then(response => response.json()).then((data) => {
                 activeMenu(data.withdraw_type)
                 renderAgain(tabName)
             })
@@ -88,14 +88,14 @@
                 activeMenu(response.withdraw_type)
             }
             document.getElementById("barcode_input").value = '';
-            fetch(`${APP_URL}/get-withdraw-cart-count`).then(response => response.json()).then((data) => {
+            fetch(`${APP_URL}/withdrawal/get-withdraw-cart-count`).then(response => response.json()).then((data) => {
                 document.getElementById("DirectDeductCount").innerHTML = data.direct_deduct;
                 document.getElementById("DeductTrackUsageCount").innerHTML = data.deduct_track_usage;
                 document.getElementById("DeductTrackOutlifeCount").innerHTML = data.deduct_track_outlife;
             })
         }
         renderAgain = (tabName) => {
-            fetch(`${APP_URL}/get-withdrawal-data/${tabName}`).then(response => response.json()).then((data) => {
+            fetch(`${APP_URL}/withdrawal/get-withdrawal-data/${tabName}`).then(response => response.json()).then((data) => {
                 render(data);
             });
         }

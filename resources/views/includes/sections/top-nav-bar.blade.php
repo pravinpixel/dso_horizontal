@@ -7,11 +7,11 @@
                         <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? "active" : "" }}"><i class="bi bi-speedometer2 me-1"></i><span>Dashboard</span></a>
                     </li>  
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none {{ Route::is(['material-product.edit-form-one','material-product.edit-form-two','material-product.edit-form-three']) ? "active" : "" }} {{ Route::is(['withdrawal-material-products','list-material-products','mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "active" : "" }}" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle arrow-none {{ Route::is(['material-product.edit-form-one','material-product.edit-form-two','material-product.edit-form-three']) ? "active" : "" }} {{ Route::is(['withdrawal_index','list-material-products','mandatory-form-one','mandatory-form-two','non-mandatory-form']) ? "active" : "" }}" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-briefcase me-1"></i> Material / In-house Product <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
-                            <a href="{{ route('withdrawal-material-products') }}" class="dropdown-item {{ Route::is(['withdrawal-material-products']) ? "active" : "" }}"><i class="bi bi-aspect-ratio me-1"></i><span>Withdrawal</span></a>
+                            <a href="{{ route('withdrawal_index') }}" class="dropdown-item {{ Route::is(['withdrawal_index']) ? "active" : "" }}"><i class="bi bi-aspect-ratio me-1"></i><span>Withdrawal</span></a>
                             <a href="{{ route('list-material-products') }}" class="dropdown-item {{ Route::is(['list-material-products']) ? "active" : "" }}"><i class="bi bi-plus-circle-dotted me-1"></i><span>Search or Add</span></a>
                         </div>
                     </li> 

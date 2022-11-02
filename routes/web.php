@@ -25,7 +25,7 @@ use App\Http\Controllers\WithdrawalController;
 Route::middleware(['auth_users'])->group(function () {
  
     Route::get('/dashboard', function () {
-        return view('crm.dashboard.index');  
+        return view('crm.dashboard.index');
     })->name('dashboard'); 
      
 
@@ -128,24 +128,26 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
 
     
-
-    Route::get('/withdrawal-material-products', [WithdrawalController::class, 'index'])->name('withdrawal-material-products');
+    Route::prefix('withdrawal')->group(function() {
+        Route::get('/material-are-in-house-products', [WithdrawalController::class, 'index'])->name('withdrawal_index'); 
+        Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('direct-deduct');
+        Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('deduct-track-usage');
+        Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('deduct-track-outlife');
+    });
+    
     Route::get('/decrease-quantity/{id}', [WithdrawalController::class, 'decrease_quantity'])->name('decrease-quantity');
-    Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get_withdrawal_data');
-    Route::get('/delete-withdraw-cart/{id}', [WithdrawalController::class, 'delete_withdraw_cart'])->name('delete_withdraw_cart');
-    Route::get('/get-withdraw-cart-count', [WithdrawalController::class, 'withdraw_cart_count'])->name('withdraw_cart_count');
-    
-    
+    Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get-withdrawal_data');
+    Route::get('/delete-withdraw-cart/{id}', [WithdrawalController::class, 'delete_withdraw_cart'])->name('delete-withdraw_cart');
+    Route::get('/get-withdraw-cart-count', [WithdrawalController::class, 'withdraw_cart_count'])->name('withdraw-cart-count');
+    Route::get('/get-withdrawal-batches/{barcode?}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal-indexing');
 
-    Route::get('/get-withdrawal-batches/{barcode?}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal.withdrawal_indexing');
-    Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('withdrawal.direct-deduct');
-    Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('withdrawal.deduct-track-usage');
-    Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('withdrawal.deduct-track-outlife');
-
-    Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
-    Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
+    Route::prefix('notification')->group(function() {
+        Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
+        Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
+        Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
+    });
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
-    Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
+
 
     
     Route::get('/near-expiry-expired-ajax/{type?}',[NotificationController::class,'near_expiry_expired_ajax'])->name('near_expiry_expired_ajax'); 

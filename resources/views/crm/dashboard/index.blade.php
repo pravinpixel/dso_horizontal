@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
-                <a href="{{ route('withdrawal-material-products') }}" class="card-body btn">
+                <a href="{{ route('withdrawal.index') }}" class="card-body btn">
                     <i class="text-warning bi bi-aspect-ratio fa-2x mb-2"></i>
                     <div class="text-primary"><b>Withdrawal</b></div>
                 </a>

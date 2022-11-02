@@ -1,4 +1,4 @@
-<form action="{{ route('withdrawal.direct-deduct') }}" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
+<form action="{{ route('direct-deduct') }}" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
     @csrf
     <table class="table bg-white table-borderless border table-centered">
         <thead class="border-bottom">

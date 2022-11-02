@@ -1,4 +1,4 @@
-<form action="{{ route('withdrawal.deduct-track-outlife') }}" method="POST">
+<form action="{{ route('deduct-track-outlife') }}" method="POST">
     @csrf 
     <table class="table bg-white  table-centered text-center">
         <thead>

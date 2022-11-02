@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Log;
+use Laracasts\Flash\Flash;
 
 class AuthMiddleware
 {
@@ -21,21 +23,20 @@ class AuthMiddleware
         if (Sentinel::check()== FALSE) { 
             return redirect()->route('login'); 
         } 
-
-        // if (Sentinel::hasAccess('user.view.withdrawal') ) {
-        //     return $next($request);
-        // }  
-
+ 
+        if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
+            foreach(auth_user_role()->permissions as $access => $val) {
+                if(request()->route()->getName() == $access) {
+                    if($val == 1) {
+                        return $next($request);
+                    } else {
+                        Flash::error('Permission Denied ! Contact your admin');
+                        return back();
+                    }
+                } 
+            }
+            
+        }
         return $next($request);
-        // return redirect()->route('dashboard');
-
-        // if(Sentinel::check()) {
-        //     if (Sentinel::hasAccess('user.view.withdrawal') ) {
-        //         return $next($request);
-        //     }
-        //     return redirect()->route('dashboard');
-        // }
-        
-        // return redirect()->route('login');
     }
 }

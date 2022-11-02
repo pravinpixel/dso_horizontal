@@ -1,4 +1,4 @@
-<form action="{{ route('withdrawal.deduct-track-usage') }}" method="POST" style="border: 0 !important" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
+<form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
     @csrf
     <table class="table bg-white table-hover table-centered">
         <thead >
