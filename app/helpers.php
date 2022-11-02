@@ -88,6 +88,11 @@ if(! function_exists('auth_user')) {
         return Sentinel::getUser();
     }
 }
+if(! function_exists('auth_user_role')) {
+    function auth_user_role() {
+        return Sentinel::getUser()->roles[0];
+    }
+}
 if(! function_exists('storageGet')) {
     function storageGet($src) {
         if (Storage::exists($src)) { 

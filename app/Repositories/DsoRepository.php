@@ -93,7 +93,7 @@ class DsoRepository implements DsoRepositoryInterface
     {
         $page_name = session()->get('page_name'); 
  
-        foreach ($material_product as $key => $parent) { 
+        foreach ($material_product as $key => $parent) {
 
             $quantityColor       = 'text-danger';
             $readCount           = 0;
@@ -113,12 +113,9 @@ class DsoRepository implements DsoRepositoryInterface
                     $QtyCount            = $parent->Batches[0]->quantity;
                     $totalQtyCount       = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
                     $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
-                    // $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
                     $total_bath_quantity += (int) $batch->quantity;
                 }
-                // if($batch->quantity  != null) {
-                //     // $batch->quantity = str_replace('.00', '' , $batch->quantity);
-                // }
+ 
                 if($page_name == 'THRESHOLD_QTY') { 
                     if($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
@@ -129,9 +126,6 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
             }
-          
-            
-            // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;
             $parent['totalQuantityUnit']       = $totalQtyCount;
             $parent['totalUnitPackValue']      = $UnitPackingCount;
@@ -160,17 +154,30 @@ class DsoRepository implements DsoRepositoryInterface
                 if($parent['quantityColor'] == 'text-success') {
                     unset($material_product[$key]);
                 }
-                // if($draftBatchCount != 0) {
-                //     unset($material_product[$key]);
-                // }
             } elseif($page_name == 'PRINT_BARCODE_LABEL') {
                 if($draftBatchCount != 0) {
                     unset($material_product[$key]);
                 }
             }
         }
- 
-        $collection = Arr::flatten($material_product);
+
+       $access_material_product = $material_product;
+       
+        foreach ($access_material_product as $material_index => $material) {
+            foreach ($material->Batches as $batch_index => $batch) {
+                if(auth_user_role()->slug == 'staff') {
+                    $access = json_decode($batch->access);
+                    if(in_array(auth_user()->id,$access) == false) {
+                        unset($access_material_product[$material_index]->Batches[$batch_index]);
+                    }
+                }
+            }
+            if(count($material->Batches) == 0) {
+                unset($access_material_product[$material_index]);
+            }
+        }
+        
+        $collection = Arr::flatten($access_material_product);
         $items      = collect($collection);
         $perPage    = config('app.paginate');
         $page       = null;

@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         ]); 
 
         Sentinel::getRoleRepository()->createModel()->create([
-            'name'       => 'Benjamin',
+            'name'       => 'Admin',
             'slug'       => 'system-admin',
             'permissions'=> config('permission'),
         ]);
