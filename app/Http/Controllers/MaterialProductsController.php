@@ -344,10 +344,8 @@ class MaterialProductsController extends Controller
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
-        );
+        ); 
         
-        
-
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id); 
             if($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {

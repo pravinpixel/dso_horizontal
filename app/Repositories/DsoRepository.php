@@ -8,6 +8,7 @@ use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
+use App\Models\MaterialProducts;
 use App\Models\tableOrder;
 use App\Models\User;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class DsoRepository implements DsoRepositoryInterface
 { 
@@ -93,13 +95,10 @@ class DsoRepository implements DsoRepositoryInterface
  
         foreach ($material_product as $key => $parent) { 
 
-            $quantityColor      = 'text-danger';
-            $QtyCount           = 0;
-            $totalQtyCount      = 0;
-            $readCount          = 0;
-            $draftBatchCount    = 0;
-            $UnitPackingCount   = 0;
-            $TotalQuantityTotal = 0;
+            $quantityColor       = 'text-danger';
+            $readCount           = 0;
+            $draftBatchCount     = 0;
+            $UnitPackingCount    = 0;
             $total_bath_quantity = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) { 
@@ -109,13 +108,12 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
 
                 if ($batch->is_draft == 1 ) {
-                    $draftBatchCount += 1 ; 
+                    $draftBatchCount += 1; 
                 } else { 
                     $QtyCount            = $parent->Batches[0]->quantity;
                     $totalQtyCount       = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
                     $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
-                    $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
-                    $TotalQuantityTotal += $totalQtyCount;
+                    // $totalQtyCount      += $QtyCount * $batch->unit_packing_value;
                     $total_bath_quantity += (int) $batch->quantity;
                 }
                 // if($batch->quantity  != null) {
@@ -131,6 +129,7 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
             }
+          
             
             // dd($readCount);
             $parent['totalQuantity']           = $QtyCount;
@@ -138,7 +137,6 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
-            $parent['TotalQuantityTotal']      = $TotalQuantityTotal;
             $parent['draftBatchCount']         = $draftBatchCount;
             $parent['total_bath_quantity']     = $total_bath_quantity;
           

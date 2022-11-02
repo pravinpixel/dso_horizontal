@@ -1,6 +1,6 @@
 <div ng-show="on_item_description" class="box box-lg sticky-left justify-content-start">
     <div class="w-100 text-start d-flex">
-        <a class="bi bi-chevron-right table-toggle-icon me-auto text-white" 
+        <a class="bi bi-chevron-right table-toggle-icon me-auto text-white"
             data-bs-toggle="collapse"
             href="#row_@{{ index+1 }}"
             role="button" title="@{{ row.item_description}}">
@@ -23,15 +23,14 @@
                 @break 
                 @case('quantity')
                     <span>
-                        @{{ row.totalQuantity }}
+                        <span ng-bind="row.material_quantity"></span>
                         <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
                 @case('total_quantity')
-                    <span ng-if="row.is_draft == 0">
-                        @{{ row.material_total_quantity }}    
-                    </span>
+                    <span ng-if="row.is_draft == 0" ng-bind="row.material_total_quantity"></span>
                 @break
+                @case('is_draft') @break
                 @default
                 {!! $column['row'] !!}
             @endswitch 
@@ -120,9 +119,9 @@
     @case('REPORT_EXPORT_CART')
         <div class="box border-start box-sm">
             <div class="dropdown">
-                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="ropdown-toggle text-secondary" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
-                </a> 
+                </a>
                 <div class="dropdown-menu"> 
                     <button class="dropdown-item text-secondary" material-id="@{{ row.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
                 </div>

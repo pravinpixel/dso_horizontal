@@ -51,6 +51,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['quantity_color'],
             $tableColumns['material_quantity'],
             $tableColumns['material_total_quantity'],
+            $tableColumns['quantity_update_status'], 
         );
         $i = 0; 
         foreach($tableColumns as $key => $value) {
