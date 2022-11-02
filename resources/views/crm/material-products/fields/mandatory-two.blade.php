@@ -74,12 +74,9 @@
     <div class="col-md-6">
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
-            <div class="col-8">
+            <div class="col-8"> 
                 <input type="text" id="access_flag" class="position-absolute" style="opacity: 0" />
-                <select name="access[]" @if (config(is_disable(category_type() ?? $material_product->category_selection)."access.status") != 'disabled')
-                    multiple="multiple" id="multiple_access"
-                    @endif  
-                    class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
+                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
                     @foreach ($staff_by_department as $row)  
                         @if (count($row['list']) != 0)
                             <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
@@ -248,9 +245,15 @@
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://www.jqueryscript.net/demo/multiple-file-upload-validation/jquery.MultiFile.js"></script>
- 
-    <script>
-        $('.ownner_select').select2();
+    @if (config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") == 'disabled')
+        <script>
+            $(document).ready(()=>{
+                $('.ms-options-wrap button').attr('style', 'background-color: #EEF2F7 !important;pointer-events:none  !important');
+            })
+        </script>
+    @endif
+    <script> 
+        $('.ownner_select').select2(); 
 
         $('.coc_coa_mill_cert_input').MultiFile({
             list: '#coc_coa_myList',
@@ -278,12 +281,10 @@
 
         $('#multiple_access').multiselect({
             placeholder :   '-- Select --',
-            search      :   true,
+            search      :   false,
             selectAll   :   true,
             selectGroup :   true,
-            // onLoad  : function( element ) {  // fires at end of list initialization
-            //     element.hide()
-            // },
+            disabled:true,
             onOptionClick : function( element, option ){
                 if(element.value == '') {
                     $('#access_flag').attr('required', true)

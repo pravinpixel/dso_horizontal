@@ -34,7 +34,7 @@
             <label for="" class="col-4">Brand <sup class="text-danger">*</sup></label>
             <div class="col-8">
                 @php
-                    $brand = category_type() ?? $material_product->category_selection ==  'in_house' ? "In-House" : ""
+                    $brand = category_type() ?? $material_product->category_selection ?? null ==  'in_house' ? "In-House" : ""
                 @endphp
     
                 {!! Form::text('brand', $batch->brand ?? $brand, 
