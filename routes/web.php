@@ -24,22 +24,24 @@ use App\Http\Controllers\WithdrawalController;
 
 Route::middleware(['auth_users'])->group(function () {
  
-    Route::get('/dashboard', function () {
-        return view('crm.dashboard.index');
-    })->name('dashboard'); 
-     
+    Route::prefix('dashboard')->group(function() {
+        Route::get('/', function () {
+            return view('crm.dashboard.index');
+        })->name('dashboard'); 
+    });
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
  
 
-    Route::get('/reconciliation', [ReconciliationController::class,'index'])->name('reconciliation');
-    Route::get('/reconciliation/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
-    Route::post('/reconciliation/download', [ReconciliationController::class,'download'])->name('reconciliation.download'); 
-    Route::post('/reconciliation/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store'); 
-    Route::post('/reconciliation/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update'); 
-    Route::delete('/reconciliation/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy'); 
-
+    Route::prefix('reconciliation')->group(function() {
+        Route::get('/', [ReconciliationController::class,'index'])->name('reconciliation');
+        Route::get('/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
+        Route::post('/download', [ReconciliationController::class,'download'])->name('reconciliation.download'); 
+        Route::post('/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store'); 
+        Route::post('/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update'); 
+        Route::delete('/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy'); 
+    });
     
  
       
@@ -48,12 +50,24 @@ Route::middleware(['auth_users'])->group(function () {
     })->name('disposed-items');
 
     //  Listing Page
+    Route::prefix('search-or-add')->group(function() {
+        Route::get('/', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
+        Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
+        Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
+        Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
+        Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
+        Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
+        Route::post('/delete-material-products-batch/{id?}', [MaterialProductsController::class, 'batch_destroy'])->name('delete-material-products-batch');
+        Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
+        Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
+        Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife');
+    });
+
+    Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
+    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
     Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
     Route::delete('/get-save-search/{id?}', [MaterialProductsController::class, 'delete_search_history'])->name('get-save-search');
-    Route::get('/search-or-add', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
-  
-    Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
 
     //  Get Material OR Products  List
     Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
@@ -67,12 +81,7 @@ Route::middleware(['auth_users'])->group(function () {
     // Advanced Search
     Route::get('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
     Route::post('/get-material-products/advanced-search', [MaterialProductsController::class, 'advanced_search'])->name('get-material-products-advanced-search');
- 
-
-    Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
-    Route::post('/delete-material-products-batch/{id?}', [MaterialProductsController::class, 'batch_destroy'])->name('delete-material-products-batch');
-
-
+  
     // Change Product Category
     Route::post('/change-product-category', [MaterialProductsController::class, 'change_product_category'])->name('change-product-category');
 
@@ -94,27 +103,17 @@ Route::middleware(['auth_users'])->group(function () {
     
     //  ==================================
 
-    // Create MaterialProduct 
-    Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
-    Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
-
-    // Edit  MaterialProduct 
-    Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
-    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
-
-    // Transfer Batches
-    Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
-    Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
     
 
     // ===================== Print Label ===================== 
-        Route::get('/print-label', [PrintBarcodeController::class, 'index'])->name('print-barcode'); 
-        Route::get('/print-label/{id?}', [PrintBarcodeController::class, 'show'])->name('print-barcode'); 
-        Route::post('/print-label/{id?}', [PrintBarcodeController::class, 'print'])->name('print-barcode'); 
+        Route::prefix('print-label')->group(function() {
+            Route::get('/', [PrintBarcodeController::class, 'index'])->name('barcode.listing'); 
+            Route::get('/{id?}', [PrintBarcodeController::class, 'show'])->name('show.barcode'); 
+            Route::post('/{id?}', [PrintBarcodeController::class, 'print'])->name('print.barcode'); 
+        });
     // ===================== Print Label =====================
 
-    // ==================== Repack Draw IN / OUT Flow ===============
-        Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
+    // ==================== Repack Draw IN / OUT Flow ===============  
         Route::post('/repack-batch/{batch_id}', [RepackBatchController::class, 'repack_outlife'])->name('repack_outlife');
         // Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife'); 
 
@@ -125,7 +124,6 @@ Route::middleware(['auth_users'])->group(function () {
 
     // Word Suggestion 
     Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
-    Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
 
     
     Route::prefix('withdrawal')->group(function() {
@@ -147,25 +145,28 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired'); 
     });
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
-
-
-    
     Route::get('/near-expiry-expired-ajax/{type?}',[NotificationController::class,'near_expiry_expired_ajax'])->name('near_expiry_expired_ajax'); 
 
-    Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
-    Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show']);
-    Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
+    Route::prefix('extend-expiry')->group(function() {
+        Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
+        Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
+    });
+    Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show'])->name('view.extend-expiry');
     
-    Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
-    Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show']); 
-    Route::post('/disposal/{id?}', [EarlyDisposalController::class,'disposal_update'])->name('update.disposal'); 
+    Route::prefix('early-disposal')->group(function() {
+        Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
+        Route::post('/disposal/{id?}', [EarlyDisposalController::class,'disposal_update'])->name('update.disposal'); 
+    });
+    Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show'])->name('view.disposal'); 
 
-    Route::get('reports', [ReportsController::class,'utilisation_cart'])->name('reports'); 
-    Route::get('reports/utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
-    Route::get('reports/export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
-    Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history'); 
+    Route::prefix('reports')->group(function() {
+        Route::get('/', [ReportsController::class,'utilisation_cart'])->name('reports'); 
+        Route::get('reports/utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
+        Route::get('reports/export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
+        Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history');  
+    }); 
+    Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
-    Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export'); 
 
     Route::resource('/product-cart', ProductCartController::class); 
     Route::get('/get-product-cart',[ ProductCartController::class,'index']); 

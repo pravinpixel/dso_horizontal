@@ -307,7 +307,6 @@ if(!function_exists('groupBy')) {
         $result = array(); 
         foreach($data as $val) {
             $name = $val[1];
-             
             if(array_key_exists($key, $val)){ 
                 $result[$val[$key]][] = $name;
             }else{
@@ -349,14 +348,107 @@ if(!function_exists('getRoutes')) {
         } 
         $groupBy = groupBy(0, $routeList);
  
-        // $menu_list = [];
-        // foreach($groupBy as $key => $menu) { 
-        //     // dd($menu[0]['name']);
-        //     foreach($menu as $menu_key => $menu_value) {
-
-        //     }
-        //     // $menu_list[$key] = array_values(array_unique($menu[$key]['name'])) ;
-        // } 
-        return $groupBy;
+        $menu_list = [];
+        foreach($groupBy as $key => $menu) {
+            $menu_array = [];
+            foreach($menu as $menu_value) {
+                
+                $menu_array[key($menu_value)] = [
+                    'name'   => key($menu_value),
+                    'slug'   => page_format(key($menu_value)),
+                    'status' => $menu_value[key($menu_value)]
+                ];
+            }
+            
+            $menu_list[$key] = $menu_array;
+        }
+        // dd($menu_list);
+        return $menu_list;
+    }
+    if(!function_exists('page_format')) {
+        function page_format($menu_value) {
+            $view = [
+                'user_index',
+                'master_item_description',
+                'help_menu_index',
+                'pictogram_index',
+                'role_index',
+                'dashboard',
+                'reconciliation',
+                'list_material_products',
+                'withdrawal_index',
+                'extend_expiry',
+                'disposal',
+                'reports'
+            ];
+            $create = [
+                'user_store',
+                'master_store_category',
+                'help_menu_create',
+                'pictogram_create',
+                'role_create',
+                'create_material_product'
+            ];
+            $edit = [
+                'user_edit',
+                'master_edit_category',
+                'help_menu_edit',
+                'pictogram_edit',
+                'role_edit',
+                'edit_or_duplicate_material_product'
+            ];
+            $delete = [
+                'user_delete',
+                'master_delete_category',
+                'help_menu_delete',
+                'pictogram_delete',
+                'role_delete',
+                'reconciliation_destroy',
+            ];
+            if(in_array($menu_value,$view)) {
+                return 'view';
+            } elseif(in_array($menu_value,$edit)) {
+                return 'edit';
+            } elseif(in_array($menu_value,$create)) {
+                return 'create';
+            }elseif(in_array($menu_value,$delete)) {
+                return 'delete';
+            }elseif($menu_value == 'view_reconciliation') {
+                return 'listing view';
+            }elseif($menu_value == 'reconciliation_download') {
+                return 'download';
+            }elseif($menu_value == 'reconciliation_store') {
+                return 'Import Reconciliate';
+            }elseif($menu_value == 'reconciliation_update') {
+                return 'Manual Reconciliate';
+            }elseif($menu_value == 'delete_material_products') {
+                return 'Delete Parent';
+            }elseif($menu_value == 'delete_material_products_batch') {
+                return 'Delete Batch';
+            }elseif($menu_value == 'transfer_batch') {
+                return 'transfer';
+            }elseif($menu_value == 'repack_batch') {
+                return 'repack / transfer';
+            }elseif($menu_value == 'repack_outlife') {
+                return 'repack / outlife';
+            }elseif($menu_value == 'barcode_listing') {
+                return 'listing view';
+            }elseif($menu_value == 'show_barcode') {
+                return 'preview';
+            }elseif($menu_value == 'print_barcode') {
+                return 'print';
+            } elseif($menu_value == 'update_extend_expiry') {
+                return 'extend';
+            }elseif($menu_value == 'update_disposal') {
+                return 'dispose';
+            }elseif($menu_value == 'reports_utilisation_cart') {
+                return 'utilization cart';
+            }elseif($menu_value == 'reports_export_cart') {
+                return 'export cart';
+            }elseif($menu_value == 'reports_history') {
+                return 'history';
+            }
+            return  $menu_value;
+        }
     }
 }

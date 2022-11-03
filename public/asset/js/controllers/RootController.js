@@ -165,7 +165,7 @@ app.controller('RootController', function ($scope, $http) {
     // ====== Edit & Duplicate Data DB ====
 
     $scope.editOrDuplicate = function (wizard_mode, id, batch_id, is_parent) {
-        window.location.replace(`${app_URL}/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}/${is_parent != undefined ? is_parent : ''}`);
+        window.location.replace(`${app_URL}/search-or-add/material-product/form-one/${wizard_mode}/${id}/batch/${batch_id}/${is_parent != undefined ? is_parent : ''}`);
     }
 
     // ====== Delete Data DB ====
@@ -873,8 +873,8 @@ app.controller('RootController', function ($scope, $http) {
             })
     }
     $scope.duplicateThisBatch = (id) => {
-        $http.get('duplicate-batch/' + id).then((res) => {
-            window.location.replace(`material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
+        $http.get('search-or-add/duplicate-batch/' + id).then((res) => {
+            window.location.replace(`search-or-add/material-product/form-one/${res.data.wizard_mode}/${res.data.material_product_id}/batch/${res.data.batch_id}`);
         })
     }
     $scope.changeReadStatus = (id) => {

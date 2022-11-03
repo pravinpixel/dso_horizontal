@@ -138,9 +138,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataDb = Sentinel::findRoleById($id);
+        $role = Sentinel::findRoleById($id);
         
-        if (empty($dataDb)) {
+        if (empty($role)) {
             Flash::error( __('global.denied')); 
             return redirect()->back();
         }
@@ -157,8 +157,7 @@ class RoleController extends Controller
             $permissions[$key] = (boolean) $status;
         }
  
-
-        Sentinel::findRoleById($id)->update([
+        $role->update([
             'name'         =>  $request->name,
             'slug'         =>  Str::slug($request->name),
             'permissions'  =>  $permissions,

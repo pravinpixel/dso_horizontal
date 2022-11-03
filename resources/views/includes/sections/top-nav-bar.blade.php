@@ -34,7 +34,7 @@
                         <a href="{{ route('reports') }}" class="nav-link {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? 'active' : '' }}"><i class="bi bi-file-earmark-bar-graph me-1"></i>Report  </a>
                     </li> 
                     <li class="nav-item dropdown">
-                        <a href="{{ route('print-barcode') }}" class="nav-link {{ Route::is('print-barcode') ? 'active' : '' }}"><i class="bi bi-upc-scan me-1"></i>Print Label </a>
+                        <a href="{{ route('barcode.listing') }}" class="nav-link {{ Route::is('barcode.listing') ? 'active' : '' }}"><i class="bi bi-upc-scan me-1"></i>Print Label </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="{{ route('reconciliation') }}" class="nav-link {{ Route::is(['reconciliation','view-reconciliation']) ? "active" : "" }}"><i class="bi bi-arrow-repeat me-1"></i>Reconciliation</a>

@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="col-md-5 text-end p-0">
-                                <a href="{{ route('print-barcode') }}" class="btn btn-light border rounded-pill shadow-sm"><i class="fa fa-times me-1"></i>Cancel & back</a>
+                                <a href="{{ route('barcode.listing') }}" class="btn btn-light border rounded-pill shadow-sm"><i class="fa fa-times me-1"></i>Cancel & back</a>
                                 <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
                             </div>
                         </div>

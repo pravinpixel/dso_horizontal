@@ -59,12 +59,12 @@
         </div> 
         <div class="col-md-2">
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
-                <a href="{{ route('print-barcode') }}" class="card-body btn">
+                <a href="{{ route('barcode.listing') }}" class="card-body btn">
                     <i class="text-warning bi bi-upc-scan fa-2x mb-2"></i>
                     <div class="text-primary"><b> Print Label</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('reconciliation') }}" class="card-body btn">

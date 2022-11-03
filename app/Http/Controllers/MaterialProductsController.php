@@ -389,7 +389,7 @@ class MaterialProductsController extends Controller
             $this_batch_id =  batch_id() ?? $batch_id;
             forgot_session();  
             if($request->is_print == 1) { 
-                return redirect()->route('print-barcode', ["id" => $this_batch_id]);
+                return redirect()->route('barcode.listing', ["id" => $this_batch_id]);
             } else {
                 return redirect()->route('list-material-products');
             }

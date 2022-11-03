@@ -69,9 +69,7 @@ class MigrationCartalystSentinel extends Migration
             $table->string('name');
             $table->text('permissions')->nullable();
             $table->timestamps();
-
             $table->engine = 'InnoDB';
-            $table->unique('slug');
         });
 
         Schema::create('role_users', function (Blueprint $table) {

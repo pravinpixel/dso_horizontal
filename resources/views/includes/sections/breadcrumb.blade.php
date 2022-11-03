@@ -20,7 +20,7 @@
                             {{ Route::is('list-material-products') ? "Search or Add" : null }}
                             {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product" : null }}
                             {{ Route::is('disposal') ? "Early Disposal" : null }}
-                            {{ Route::is('print-barcode') ? "Print Label" : null }}
+                            {{ Route::is('barcode.listing') ? "Print Label" : null }}
                             {{ Route::is(['reconciliation','view-reconciliation']) ? "Reconciliation" : null }}
                             {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? "Reports" : null }}
 
@@ -59,7 +59,7 @@
                     {{ Route::is('list-material-products') ? "Search or Add" : null }}
                     {{ Route::is('withdrawal-material-products') ? "Withdraw Material/In-house Product " : null }}
                     {{ Route::is('disposal') ? "Early Disposal" : null }}
-                    {{ Route::is('print-barcode') ? "Print Label  " : null }}
+                    {{ Route::is('barcode.listing') ? "Print Label  " : null }}
                     {{ Route::is(['reconciliation','view-reconciliation']) ? "Reconciliation" : null }}
                     {{ Route::is(['reports','reports.utilisation_cart','reports.export_cart','reports.history','reports.disposed_items']) ? "Reports" : null }}
 
