@@ -39,6 +39,8 @@
                                 <form  action="{{ route('update.extend-expiry') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="@{{ batch.id }}">
+                                    <input type="hidden" ng-if="batch.extended_qc_status == 'FAIL'" name="iqc_status" value="1">
+                                    <input type="hidden" ng-if="batch.extended_qc_status != 'FAIL'" name="iqc_status" value="0">
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Extended QC Documents*</small>
                                         <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">

@@ -30,15 +30,20 @@ class ExtendExpiryController extends Controller
         }
     }
     public function update(Request $request)
-    { 
+    {  
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $old_value  =   clone $batch;
         $new_value  =   $batch;
+
         $batch->update([
             'extended_expiry' => $request->extended_expiry,
-            'remarks'         => $request->remarks
+            'remarks'         => $request->remarks,
+            'iqc_status' => $request->iqc_status
         ]);
+
+     
+        
         LogActivity::dataLog($old_value, $new_value);
         return redirect()->route('extend-expiry')->with('success',"Extension Success !");
     }

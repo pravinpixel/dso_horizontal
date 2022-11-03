@@ -64,10 +64,9 @@ class NotificationController extends Controller
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
             if ($now >= $date_of_expiry) {
                 $expired[] = $row;
-            } else {
+            } elseif($row->iqc_status != "1") {
                 $near_expiry[] = $row;
             }
-
             if($row->iqc_status == "1") {
                 $failed_iqc[] = $row;
             }
