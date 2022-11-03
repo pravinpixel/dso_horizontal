@@ -43,11 +43,15 @@ function deleteModal() {
         }, 
     });
 } 
-function Message(type, res) {
+function Message(type, message) {
+    if(message === undefined) {
+        type    = "danger"
+        message = "Permission Denied ! Contact your admin"
+    }
     $('body').append(`
         <div class="alert alert-primary alert-dismissible bg-${type} text-white border-0 fade show animate__animated animate__jackInTheBox" role="alert">
             <strong><i class="fa fa-check-circle fa-2x me-2"></i></strong>   
-            <strong>${res}</strong>
+            <strong>${message}</strong>
             <button class="btn btn-sm alert-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x text-white"></i></button>
         </div> 
     `);
