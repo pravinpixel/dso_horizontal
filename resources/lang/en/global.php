@@ -32,6 +32,6 @@ return [
     'direct_deduct_alert'               => "Do you want to continue Deduction ?",
     'direct_deduct_success'             => "Reduction is successful",
     'end_batch'                         => "Do you want End this Batch ?",
-    'deduct_track_usage_success'        => "Track Reduction is success!",
+    'deduct_track_usage_success'        => "Track deduction successful",
 ];
 ?>

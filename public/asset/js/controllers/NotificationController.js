@@ -1,5 +1,5 @@
 viewBatch = (id) => {
-    axios.get('view-batch/'+id).then(function (response) {  
+    axios.get(`${APP_URL}/view-batch/${id}`).then(function (response) {  
         var li = ''
         Object.entries(response.data).map((item) => {
             li += ` 
@@ -10,7 +10,6 @@ viewBatch = (id) => {
                     </div>
                 </li>
             `
-            
         })
         $("#Batch_Details").html(li)
         $('#View_Batch_Details').modal('show')
