@@ -89,6 +89,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_storage_area = true
             $scope.on_supplier = true
             // $scope.on_unit_of_measure = true
+            $scope.on_no_of_extension =  true
             $scope.on_unit_packing_value = true
             $scope.on_used_for_td_expt_only = true
         } else {
@@ -139,6 +140,8 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_unit_of_measure = false
             $scope.on_unit_packing_value = true
             $scope.on_used_for_td_expt_only = true
+            $scope.on_no_of_extension =  false
+
         }
     }
 
