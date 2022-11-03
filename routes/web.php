@@ -53,7 +53,6 @@ Route::middleware(['auth_users'])->group(function () {
     Route::prefix('search-or-add')->group(function() {
         Route::get('/', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
         Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
-        Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
         Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');
         Route::post('/import_excel', [MaterialProductsController::class, 'import_excel'])->name('import_data');
         Route::post('/delete-material-products/{id?}', [MaterialProductsController::class, 'destroy'])->name('delete-material-products');
@@ -61,10 +60,11 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
         Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
         Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife');
+        Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
+        Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
+        Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
     });
-
-    Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
-    Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
+    
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
     Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
     Route::delete('/get-save-search/{id?}', [MaterialProductsController::class, 'delete_search_history'])->name('get-save-search');

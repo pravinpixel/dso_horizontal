@@ -447,7 +447,7 @@ if(!function_exists('getRoutes')) {
                 return 'export cart';
             }elseif($menu_value == 'reports_history') {
                 return 'history';
-            }
+            } 
             return  $menu_value;
         }
     }

@@ -167,8 +167,10 @@ class DsoRepository implements DsoRepositoryInterface
             foreach ($material->Batches as $batch_index => $batch) {
                 if(auth_user_role()->slug == 'staff') {
                     $access = json_decode($batch->access);
-                    if(in_array(auth_user()->id,$access) == false) {
-                        unset($access_material_product[$material_index]->Batches[$batch_index]);
+                    if(isset($access)) {
+                        if(in_array(auth_user()->id,$access) == false) {
+                            unset($access_material_product[$material_index]->Batches[$batch_index]);
+                        }
                     }
                 }
             }
