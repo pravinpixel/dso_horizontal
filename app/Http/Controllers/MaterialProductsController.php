@@ -505,7 +505,7 @@ class MaterialProductsController extends Controller
     public function batch_destroy($id)
     { 
         if(BatchTracker::where('from_batch_id', $id)->count() == 0) {
-            $data   =   Batches::find($id); 
+            $data   =   Batches::find($id);
             if (Storage::exists($data->sds_mill_cert_document)) {
                 Storage::delete($data->sds_mill_cert_document);
             }

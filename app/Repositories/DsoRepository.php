@@ -108,20 +108,15 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_expiry      = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
                 $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
                 $batch->date_of_shipment    = Carbon::parse($batch->date_of_shipment)->format('d/m/Y') ;
-              
-                  
-                $diff = Carbon::parse($date_of_expiry)->diffInDays();
-
-                if($diff < 0) {
-                    $batch->date_of_expiry_color = "text-danger";
-                }
-
-                if ($diff < 21) { // 21 ---> 3 weeks
+                $diff                       = Carbon::parse($date_of_expiry)->diffInDays();
+                
+                if ($diff == 0) {
                     $batch->date_of_expiry_color = "text-warning";
-                }
-                if ($diff > 21) { // 21 ---> 3 weeks
+                } elseif($diff <= 21){
+                    $batch->date_of_expiry_color = "text-danger";
+                } else {
                     $batch->date_of_expiry_color = "text-success";
-                }
+                } 
 
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 
