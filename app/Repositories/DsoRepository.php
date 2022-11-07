@@ -103,10 +103,11 @@ class DsoRepository implements DsoRepositoryInterface
             
             foreach ($parent->Batches as $batch_key => $batch) { 
                
-                $date_of_expiry              = $batch->date_of_expiry;
-                $batch->date_in              = Carbon::parse($batch->date_in)->format('d/m/Y') ;
-                $batch->date_of_expiry       = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
-                $batch->date_of_manufacture  = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
+                $date_of_expiry             = $batch->date_of_expiry;
+                $batch->date_in             = Carbon::parse($batch->date_in)->format('d/m/Y') ;
+                $batch->date_of_expiry      = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
+                $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
+                $batch->date_of_shipment    = Carbon::parse($batch->date_of_shipment)->format('d/m/Y') ;
               
                   
                 $diff = Carbon::parse($date_of_expiry)->diffInDays();
