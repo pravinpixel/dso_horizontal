@@ -793,7 +793,7 @@ app.controller('RootController', function ($scope, $http) {
         $scope.repack_outlife_days            = initial_day  
         $scope.currentBatchId                 = batch.id
         $scope.currentBatch                   = batch
-        $http.get(`repack-batch/${batch.id}`).then((response) => {
+        $http.get(`search-or-add/repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
             console.log(RepackData)
@@ -834,7 +834,7 @@ app.controller('RootController', function ($scope, $http) {
         $http.post(`store-repack-batch/${$scope.currentBatchId}`, { repack_id : localStorage.getItem('repack_outlife_id') , data : $scope.repack_outlife_table})
             .then((response) => {
                 $scope.next_draw = response.data.new_draw_in
-                $http.get(`repack-batch/${$scope.currentBatchId}`).then((response) => {
+                $http.get(`search-or-add/repack-batch/${$scope.currentBatchId}`).then((response) => {
                     const RepackData = response.data
                     $scope.repack_outlife_table.length = 0;
                     if (RepackData.repack_outlife.length !== 0) {
