@@ -100,6 +100,7 @@ class DsoRepository implements DsoRepositoryInterface
             $draftBatchCount     = 0;
             $UnitPackingCount    = 0;
             $total_bath_quantity = 0;
+            $material_total_quantity = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) { 
                
@@ -121,10 +122,18 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 
                 } else { 
-                    $QtyCount            = $parent->Batches[0]->quantity;
-                    $totalQtyCount       = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
-                    $UnitPackingCount    = $parent->Batches[0]->unit_packing_value;
-                    $total_bath_quantity += (int) $batch->quantity;
+                    $QtyCount                 = $parent->Batches[0]->quantity;
+                    $totalQtyCount            = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
+                    $UnitPackingCount         = $parent->Batches[0]->unit_packing_value;
+                    $total_bath_quantity     += (int) $batch->quantity;
+                    $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
+                    $batch->total_quantity = $batch->quantity * $batch->unit_packing_value;
+                }
+
+                if($page_name != 'REPORT_DISPOSED_ITEMS') {
+                    if($batch->quantity == 0) {
+                        unset($parent->Batches[$batch_key]);
+                    }
                 }
  
                 if($page_name == 'THRESHOLD_QTY') { 
@@ -139,8 +148,16 @@ class DsoRepository implements DsoRepositoryInterface
                     if($batch->iqc_status == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
+                } elseif ($page_name == 'REPORT_DISPOSED_ITEMS') {
+                    if($batch->quantity != 0) {
+                        unset($parent->Batches[$batch_key]);
+                    }
                 }
             }
+
+            $parent['material_total_quantity'] = $material_total_quantity;
+            $parent['material_quantity']       = $material_total_quantity / $parent['unit_packing_value'];
+            
             $parent['totalQuantity']           = $QtyCount;
             $parent['totalQuantityUnit']       = $totalQtyCount;
             $parent['totalUnitPackValue']      = $UnitPackingCount;

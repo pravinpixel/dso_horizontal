@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
