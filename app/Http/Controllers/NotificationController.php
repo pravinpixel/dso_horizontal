@@ -79,7 +79,7 @@ class NotificationController extends Controller
         } elseif($type == 'FAILED_IQC_TABLE') {
             $table = $failed_iqc;
         }
-
+        
         return DataTables::of($table)
             ->addIndexColumn()
             ->addColumn('item_description', function($table){
