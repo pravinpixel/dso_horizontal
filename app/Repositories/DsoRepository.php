@@ -102,10 +102,25 @@ class DsoRepository implements DsoRepositoryInterface
             $total_bath_quantity = 0;
             
             foreach ($parent->Batches as $batch_key => $batch) { 
-                
-                $batch->date_in             = Carbon::parse($batch->date_in)->format('d/m/Y') ;
-                $batch->date_of_expiry      = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
-                $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
+               
+                $date_of_expiry              = $batch->date_of_expiry;
+                $batch->date_in              = Carbon::parse($batch->date_in)->format('d/m/Y') ;
+                $batch->date_of_expiry       = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
+                $batch->date_of_manufacture  = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
+              
+                  
+                $diff = Carbon::parse($date_of_expiry)->diffInDays();
+
+                if($diff < 0) {
+                    $batch->date_of_expiry_color = "text-danger";
+                }
+
+                if ($diff < 21) { // 21 ---> 3 weeks
+                    $batch->date_of_expiry_color = "text-warning";
+                }
+                if ($diff > 21) { // 21 ---> 3 weeks
+                    $batch->date_of_expiry_color = "text-success";
+                }
 
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 

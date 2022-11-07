@@ -28,7 +28,7 @@
                     @{{ batch.unit_packing_value }} {{ $tableAllColumns['unit_of_measure']['row']}} 
                 @break
                 @case('date_of_expiry')
-                    {{ $column['batch'] }} <span><i class="ms-1 @{{ getDateOfExpiryColor(current_date, batch.date_of_expiry) }} dot-sm bi bi-circle-fill"></i></span>
+                    {{ $column['batch'] }} <span><i class="ms-1 @{{ batch.date_of_expiry_color }} dot-sm bi bi-circle-fill"></i></span>
                 @break 
                 @default {!! $column['batch'] !!}
             @endswitch 

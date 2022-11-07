@@ -27,9 +27,9 @@ app.controller('RootController', function ($scope, $http) {
         $scope.on_all_check_box            = false
 
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
-        var given = moment(date_of_expiry, "YYYY-MM-DD");
-        var day = moment.duration(given.diff(current_date)).asDays();
-        if (current_date >= date_of_expiry) {
+        var given = moment(date_of_expiry.replaceAll('/','-'), "YYYY-MM-DD");
+        var day   = moment.duration(given.diff(current_date)).asDays();
+        if (current_date >= given) {
             return 'text-danger'
         } else {
             if (day < 21) { // 21 ---> 3 weeks
