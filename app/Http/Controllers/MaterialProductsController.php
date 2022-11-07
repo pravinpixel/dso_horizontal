@@ -546,6 +546,7 @@ class MaterialProductsController extends Controller
         $created_batch->is_draft        =   1;
         $batch_parent_category          =   MaterialProducts::find($created_batch->material_product_id)->category_selection;
         $created_batch->barcode_number  =   generateBarcode($batch_parent_category); 
+        $created_batch->iqc_status      =   0; 
         
         foreach($created_batch->toArray() as $column => $value) {
             $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');

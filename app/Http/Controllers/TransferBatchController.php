@@ -6,8 +6,7 @@ use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request; 
 
 class TransferBatchController extends Controller
 {
@@ -24,6 +23,7 @@ class TransferBatchController extends Controller
         $created_batch->owner_one      = $request->owner_one;
         $created_batch->owner_two      = $request->owner_two;
         $created_batch->is_read        = 0;
+        $created_batch->iqc_status      =   0;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
 

@@ -32,6 +32,7 @@ class RepackBatchController extends Controller
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
         $new_batch->owner_one          = $request->owner_one;
+        $new_batch->iqc_status         = 0;
         $new_batch->owner_two          = $request->owner_two;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
@@ -118,6 +119,7 @@ class RepackBatchController extends Controller
                     $next_batch->unit_packing_value = $row['repack_size'];
                     $next_batch->total_quantity     = $row['repack_amount'];
                     $next_batch->quantity           = $row['quantity'];
+                    $next_batch->iqc_status         = 0;
                     $next_batch->save();
 
                     LogActivity::tracker([
