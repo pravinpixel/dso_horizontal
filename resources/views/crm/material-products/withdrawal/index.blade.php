@@ -5,7 +5,7 @@
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
                 <div class="input-group align-items-center" title="Scan Barcode">
                     <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" id="barcode_input" onkeyup="getWithDrawlCart(this.value)"
+                    <input type="number" id="barcode_input" onkeyup="getWithDrawlCart(event,this.value)"
                         class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill"
                         placeholder="Click here to scan">
                 </div>
@@ -64,10 +64,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
-        getWithDrawlCart = async (barcode) => { // Scan Barcode
-            validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
-                render(data);
-            })
+        getWithDrawlCart = async (event,barcode) => { // Scan Barcode
+            if(event.keyCode == 17 || event.keyCode == 13 ) {
+                validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
+                    render(data);
+                });
+            } 
         }
         decreaseQuantity = (id, tabName) => { // Decresing Qty
             fetch(`${APP_URL}/decrease-quantity/${id}`).then(response => response.json()).then((data) => {
