@@ -19,7 +19,7 @@
                     <td>{{ $batch->BatchMaterialProduct->item_description }}</td>
                     <td>{{ $batch->brand }}</td>
                     <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
-                    <td>{{ $batch->owner_one }} , {{ $batch->owner_one }}</td>
+                    <td>{{ $batch->owner_one }} , {{ $batch->owner_two }}</td>
                     <td>{{  Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
                     <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
                     <td>{{ $batch->project_name }}</td>  
@@ -48,7 +48,7 @@
                                 <b class="text-dark">Project name</b> : 
                                 {{ $batch->project_name }}
                             </p>
-                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owner 1/2</b>  : {{ $batch->owner_one }} / {{ $batch->owner_one }}</p>
+                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owner 1/2</b>  : {{ $batch->owner_one }} / {{ $batch->owner_two }}</p>
                         </div> 
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">
