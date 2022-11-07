@@ -92,7 +92,7 @@ class DsoRepository implements DsoRepositoryInterface
     public function renderTableData($material_product)
     {
         $page_name = session()->get('page_name'); 
- 
+      
         foreach ($material_product as $key => $parent) {
 
             $quantityColor       = 'text-danger';
@@ -133,6 +133,10 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 } elseif($page_name == 'PRINT_BARCODE_LABEL') {
                     if($batch->is_draft == 1) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                } elseif ($page_name == 'EXTEND_EXPIRY') {
+                    if($batch->iqc_status == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
                 }
