@@ -122,9 +122,9 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 
                 } else { 
-                    $QtyCount                 = $parent->Batches[0]->quantity;
-                    $totalQtyCount            = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
-                    $UnitPackingCount         = $parent->Batches[0]->unit_packing_value;
+                    // $QtyCount                 = $parent->Batches[0]->quantity;
+                    // $totalQtyCount            = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
+                    // $UnitPackingCount         = $parent->Batches[0]->unit_packing_value;
                     $total_bath_quantity     += (int) $batch->quantity;
                     $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
                     $batch->total_quantity = $batch->quantity * $batch->unit_packing_value;
@@ -154,12 +154,10 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
             }
-
+           
             $parent['material_total_quantity'] = $material_total_quantity;
             $parent['material_quantity']       = $material_total_quantity / $parent['unit_packing_value'];
-            
-            $parent['totalQuantity']           = $QtyCount;
-            $parent['totalQuantityUnit']       = $totalQtyCount;
+     
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
