@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\BarCodeFormat;
 use App\Models\Batches;
+use App\Models\BatchFiles;
 use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
@@ -68,16 +69,19 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     public function storeFiles($request, $batch)
     {
         if($request->has('coc_coa_mill_cert')) {
-            $multi_name = [];
-            
+ 
             foreach ($request->coc_coa_mill_cert as $key => $files) {
-                $OriginalName       =   $files->getClientOriginalName();
-                $OriginalExtension  =   $files->getClientOriginalExtension();
-                $baseName           =   basename($OriginalName, '.'.$OriginalExtension);
-                $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
-                $multi_name[$key]   =   $files->storeAs('public/files/coc_coa_mill_cert', str_replace(' ','_',$newFileName) );
-            }  
-            // $multi_name
+                $newFileName = Storage::put('public',$files);
+                $batch->BatchFiles()->updateOrCreate([
+                    'batch_id'       => $batch->id,
+                    'column_name'    => 'coc_coa_mill_cert',
+                    'original_name'  => $files->getClientOriginalName(),
+                    'file_name'      => $newFileName,
+                    'file_extension' => $files->getClientOriginalExtension(),
+                    'file_path'      => asset('storage/app').'/'.$newFileName,
+                ]); 
+            }
+       
             if($batch->coc_coa_mill_cert !== null) {
                 foreach (json_decode($batch->coc_coa_mill_cert) as $key => $files) {
                     if(Storage::exists($files)){
@@ -85,9 +89,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                     }
                 }
             }
+
             
-            $batch  ->  coc_coa_mill_cert = json_encode($multi_name);
-            $batch  ->  save();
         }
         if($request->has('iqc_result')) {
             if(Storage::exists($batch->iqc_result)){

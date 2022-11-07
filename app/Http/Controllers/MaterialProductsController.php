@@ -21,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use App\Models\BatchFiles;
 use App\Models\BatchTracker;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
@@ -564,4 +565,13 @@ class MaterialProductsController extends Controller
             "material_product_id"   =>  $created_batch->material_product_id,
         ]);
     } 
+    public function delete_file($id)
+    {
+        $file = BatchFiles::findOrFail($id);
+        Storage::delete($file->file_name);
+        $file->delete();
+        return response()->json([
+            "Message" => "success"
+        ]);
+    }
 }

@@ -170,4 +170,7 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::resource('/product-cart', ProductCartController::class); 
     Route::get('/get-product-cart',[ ProductCartController::class,'index']); 
+
+    
+    Route::get('/delete-file/{id}', [MaterialProductsController::class, 'delete_file']);
 });

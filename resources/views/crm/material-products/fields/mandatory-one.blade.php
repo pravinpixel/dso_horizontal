@@ -37,8 +37,7 @@
                     $category = category_type() ?? $material_product->category_selection ?? null ;
                     if($category == 'in_house') {
                         $brand = "In-House";
-                    }
-                    if ($category == 'material') {
+                    } else {
                         $brand = "";
                     }
                 @endphp
