@@ -12,18 +12,34 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvents
 {
+    protected $start_date;
+    protected $end_date;
+
+    public function __construct( $start_date , $end_date)
+    {
+        $this->start_date = $start_date;
+        $this->end_date   = $end_date;
+    }
     public function styles(Worksheet $sheet)
     { 
         return [
             1    => ['font' => ['bold' => true]],
         ];
-
     }
     
     public function array():array
     {
-        $data = LogActivity::getDisposalItems();
-        return $data;
+        $rangeStart = strtotime($this->start_date);
+        $rangeEnd   = strtotime($this->end_date);
+   
+        $data       = LogActivity::getDisposalItems();
+
+        $filtered_events = array_filter($data, function($var) use ($rangeStart, $rangeEnd) {  
+            $evtime = strtotime($var['transaction_date']); 
+            return $evtime <= $rangeEnd && $evtime >= $rangeStart;  
+        }); 
+       
+        return $filtered_events;
     }
     public function headings() :array
     { 

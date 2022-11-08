@@ -11,6 +11,7 @@ use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
@@ -73,8 +74,8 @@ class ReportsController extends Controller
         }
         return  view('crm.reports.disposed-items',compact('disposed')); 
     }
-    public function export_disposed_items()
-    {
-        return Excel::download(new DisposalExport, 'disposal-items.xlsx');  
+    public function export_disposed_items(Request $request)
+    { 
+        return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
     }
 }

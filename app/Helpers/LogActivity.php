@@ -169,7 +169,7 @@ class LogActivity
                     "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
                     "batch_serial"     => $batch->batch.' / '.$batch->serial,
                     "unit_pack_value"  => $batch->unit_packing_value,
-                    "quantity"         => (string) $batch->quantity,
+                    "quantity"         => (string) $batch->quantity, 
                 ];
             }
         }
