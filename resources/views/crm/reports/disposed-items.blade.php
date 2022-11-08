@@ -1,38 +1,52 @@
 @extends('crm.reports.index')
  
-@section('report_content') 
-    <div>
-        <div class="d-flex align-items-center mb-3">
-            <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
-                <div class="input-group align-items-center" title="Scan Barcode">
-                    <i class="bi bi-upc-scan font-20 mx-2"></i>
-                    <input type="number" min="1" ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
-                </div>
-            </div>
-            <div class="col-6 d-flex justify-content-end ms-auto text-end">
-                <button class="btn btn-info rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export as CSV</button>
-            </div>
+@section('report_content')  
+    @if (count($disposed) != 0) 
+        <div class="card"> 
+            <div class="card-body">
+                <table class="table m-0 pt-2 table-sm text-center" id="custom-data-table">
+                    <thead>
+                        <tr>
+                            <th class="text-white bg-primary-2 text-center font-14">S.No</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Transaction date </th>
+                            <th class="text-white bg-primary-2 text-center font-14">Transaction time </th>
+                            <th class="text-white bg-primary-2 text-center font-14">Transaction By </th>
+                            <th class="text-white bg-primary-2 text-center font-14">Item Description</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Batch/Serial</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Unit packing value</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table> 
+            </div> 
         </div>
-
-        {{-- = ==== Filletrs ====--}}
-            @include('crm.partials.table-filter')
-        {{-- ====== Filletrs ===--}}
-         
-        <section>
-            @include('crm.partials.data-table')
-        </section>
-
-        <cart-table type="{{ $page_name }}"></cart-table>
-
-        {{-- ======= START : App Models ==== --}}
-            @include('crm.material-products.modals.view-batch-list')
-            @include('crm.material-products.modals.view-list')
-            @include('crm.material-products.modals.advance-search')
-            @include('crm.material-products.modals.saved-search')
-            @include('crm.material-products.modals.transfer')
-            @include('crm.material-products.modals.repack-transfers')
-            @include('crm.material-products.modals.repack-outlife')
-            @include('crm.material-products.modals.import-from-excel')
-        {{-- ======= END : App Models ==== --}}
-    </div>
+        @else
+       {!! no_data_found() !!}
+    @endif
+@endsection
+ 
+@section('scripts')
+    <script>
+        var table = $('#custom-data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('reports.disposed_items') }}", 
+            },
+            columns: [
+                {data: 'DT_RowIndex', name: 'id'},
+                {data: 'transaction_date', name: 'transaction_date'},
+                {data: 'transaction_time', name: 'transaction_time'},
+                {data: 'transaction_by', name: 'transaction_by'},
+                {data: 'item_description', name: 'item_description'},
+                {data: 'batch_serial', name: 'batch_serial'},
+                {data: 'unit_pack_value', name: 'unit_pack_value'},
+                {data: 'quantity', name: 'quantity'}
+            ]
+        }); 
+        $("#custom-data-table_length").prepend(`
+            <a href="{{ route('reports.export_disposed_items') }}" class="btn btn-info rounded-pill me-3" autocomplete="off"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export as CSV</a>
+        `);
+    </script>
 @endsection

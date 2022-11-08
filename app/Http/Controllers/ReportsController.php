@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DisposalExport;
 use App\Exports\HistoryExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
@@ -62,13 +63,18 @@ class ReportsController extends Controller
     }
     public function export()
     {
-        return Excel::download(new HistoryExport, 'history.xlsx'); 
-
+        return Excel::download(new HistoryExport, 'history.xlsx');  
     }
-    public function disposed_items()
+    public function disposed_items(Request $request)
+    {  
+        $disposed = LogActivity::getDisposalItems(); 
+        if ($request->ajax()) { 
+            return DataTables::of($disposed)->addIndexColumn()->make(true);
+        }
+        return  view('crm.reports.disposed-items',compact('disposed')); 
+    }
+    public function export_disposed_items()
     {
-        $page_name  = "REPORT_DISPOSED_ITEMS";
-        $view       = "crm.reports.disposed-items";
-        return $this->dsoRepository->renderPage($page_name, $view); 
+        return Excel::download(new DisposalExport, 'disposal-items.xlsx');  
     }
 }
