@@ -167,6 +167,7 @@ Route::middleware(['auth_users'])->group(function () {
     }); 
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
+    Route::get('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
 
     Route::resource('/product-cart', ProductCartController::class); 
     Route::get('/get-product-cart',[ ProductCartController::class,'index']); 

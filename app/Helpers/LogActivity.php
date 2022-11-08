@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\LogSheet;
+use App\Models\MaterialProducts;
 
 class LogActivity
 {
@@ -139,7 +140,6 @@ class LogActivity
         return LogSheet::with('User')->latest()->get();
     }
 
-    
     public static function tracker($data)
     {
         $batch = Batches::find($data['from']);
@@ -152,5 +152,27 @@ class LogActivity
             "quantity"       => $batch->quantity,
             "total_quantity" => $batch->total_quantity
         ]);
+    }
+
+    public static function getDisposalItems()
+    {
+        $logs =  LogSheet::where('action_type','EARLY_DISPOSAL')->latest()->get();
+ 
+        $disposal_items = [];
+        foreach ($logs as $key => $log) {
+            $batch = json_decode($log->new);
+            if($batch->quantity == 0) {
+                $disposal_items[] = [
+                    "transaction_date" => $log->created_at->format('d-m-Y'),
+                    "transaction_time" => $log->created_at->format('h:m:s A'),
+                    "transaction_by"   => $log->user_name,
+                    "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
+                    "batch_serial"     => $batch->batch.' / '.$batch->serial,
+                    "unit_pack_value"  => $batch->unit_packing_value,
+                    "quantity"         => (string) $batch->quantity,
+                ];
+            }
+        }
+        return  $disposal_items;
     }
 }
