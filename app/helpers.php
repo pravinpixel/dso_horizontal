@@ -473,8 +473,8 @@ if(!function_exists('getRoutes')) {
                         "date_of_expiry"        => $row->date_of_expiry,
                         "used_for_td_expt_only" => $row->used_for_td_expt_only,
                         "department"            => $row->Department->name,
+                        "department_id"         => $row->department,
                         "owners"                => $row->owner_one." / ".$row->owner_two,
-                        "created_at"            => $row->created_at,
                     ];
                 }
             }

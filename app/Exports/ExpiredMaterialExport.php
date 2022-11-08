@@ -12,13 +12,11 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, WithEvents
 {
-    protected $start_date;
-    protected $end_date;
+    protected $data;
 
-    public function __construct( $start_date , $end_date)
+    public function __construct($data)
     {
-        $this->start_date = $start_date;
-        $this->end_date   = $end_date;
+        $this->data = $data;
     }
     public function styles(Worksheet $sheet)
     { 
@@ -28,16 +26,8 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
     }
     
     public function array():array
-    {
-        $rangeStart = strtotime($this->start_date);
-        $rangeEnd   = strtotime($this->end_date);
-        $data       = getExpiredMaterials();
- 
-        $filtered_events = array_filter($data, function($var) use ($rangeStart, $rangeEnd) {  
-            $evtime = strtotime($var['created_at']->format('Y-m-d')); 
-            return $evtime <= $rangeEnd && $evtime >= $rangeStart;  
-        }); 
-        return $filtered_events;
+    { 
+        return $this->data;
     }
     public function headings() :array
     { 
@@ -52,8 +42,7 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
             "Date of expiry",
             "Used for td expt only",
             "Department",
-            "Owners",
-            "Created At"
+            "Owners"
         ];
     }
     public function registerEvents(): array
@@ -72,7 +61,6 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
                 $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20);  
                 $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);  
                 $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);  
-                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(20);  
             },
         ];
     }
