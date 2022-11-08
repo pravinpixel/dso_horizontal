@@ -169,6 +169,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
 
+    Route::get('reports/expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
+    Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material'); 
+
+    
+
     Route::resource('/product-cart', ProductCartController::class); 
     Route::get('/get-product-cart',[ ProductCartController::class,'index']); 
 

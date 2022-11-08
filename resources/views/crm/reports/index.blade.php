@@ -18,6 +18,12 @@
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Disposed items</span>
             </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('reports.expired_material') }}" class="bg-none nav-link {{ Route::is(['reports.expired_material']) ? "active" : "" }}">
+                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                <span class="d-none d-md-block">Expired Material Report</span>
+            </a>
         </li> 
         <li class="nav-item">
             <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
