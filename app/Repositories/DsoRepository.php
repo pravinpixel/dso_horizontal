@@ -105,19 +105,21 @@ class DsoRepository implements DsoRepositoryInterface
             foreach ($parent->Batches as $batch_key => $batch) { 
                
                 $date_of_expiry             = $batch->date_of_expiry;
-                $batch->date_in             = Carbon::parse($batch->date_in)->format('d/m/Y') ;
-                $batch->date_of_expiry      = Carbon::parse($batch->date_of_expiry)->format('d/m/Y') ;
-                $batch->date_of_manufacture = Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') ;
-                $batch->date_of_shipment    = Carbon::parse($batch->date_of_shipment)->format('d/m/Y') ;
-                $diff                       = Carbon::parse($date_of_expiry)->diffInDays();
+                $batch->date_in             = !is_null($batch->date_in) ? Carbon::parse($batch->date_in)->format('d/m/Y') : '';
+                $batch->date_of_expiry      = !is_null($batch->date_of_expiry) ? Carbon::parse($batch->date_of_expiry)->format('d/m/Y') : '';
+                $batch->date_of_manufacture = !is_null($batch->date_of_manufacture) ? Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') : '';
+                $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
                 
-                if ($diff == 0) {
-                    $batch->date_of_expiry_color = "text-warning";
-                } elseif($diff <= 21){
-                    $batch->date_of_expiry_color = "text-danger";
-                } else {
-                    $batch->date_of_expiry_color = "text-success";
-                } 
+                if(!is_null($date_of_expiry)) {
+                    $diff   = Carbon::parse($date_of_expiry)->diffInDays();
+                    if ($diff == 0) {
+                        $batch->date_of_expiry_color = "text-warning";
+                    } elseif($diff <= 21){
+                        $batch->date_of_expiry_color = "text-danger";
+                    } else {
+                        $batch->date_of_expiry_color = "text-success";
+                    } 
+                }
 
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 

@@ -253,9 +253,9 @@ if(! function_exists('no_data_found')) {
 }
 
 if(! function_exists('strExcelDate')) {
-    function strExcelDate($excel_date) { 
+    function strExcelDate($excel_date) {  
         if($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '' ) {
-            return null ;
+            return  null ;
         }
         $excel_date = (int) $excel_date;
         $unix_date  = ($excel_date - 25569) * 86400;
