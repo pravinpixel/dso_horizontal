@@ -37,17 +37,19 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
 
-        if($material_product->quantity_update_status == 1) {
+        if($material_product->quantity_update_status == 1) { 
+            $MaterialBatch = Batches::find($batch_id);
             $material_product->update([
                 "material_quantity"       => $batch->quantity,
-                "material_total_quantity" => $batch->quantity * $material_product->unit_packing_value,
+                "material_total_quantity" => $batch->quantity *  $MaterialBatch->unit_packing_value,
                 "id_draft"                => 0,
-                "quantity_update_status"  => 0
+                "quantity_update_status"  => 0,
+                "unit_packing_value" =>  $MaterialBatch->unit_packing_value
             ]);
         }
         
         $batch->update([
-            "total_quantity" =>  $batch->quantity * $material_product->unit_packing_value
+            "total_quantity" => $batch->quantity * $material_product->unit_packing_value
         ]);
         if(wizard_mode() == 'create' || wizard_mode() == 'edit') {
             $batch->update(["system_stock"  => $batch->quantity]);

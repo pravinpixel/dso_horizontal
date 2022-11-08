@@ -349,7 +349,7 @@ class MaterialProductsController extends Controller
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
-        ); 
+        );
         
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id); 
@@ -392,8 +392,8 @@ class MaterialProductsController extends Controller
         }
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
-            forgot_session();  
-            if($request->is_print == 1) { 
+            forgot_session();
+            if($request->is_print == 1) {
                 return redirect()->route('barcode.listing', ["id" => $this_batch_id]);
             } else {
                 return redirect()->route('list-material-products');
