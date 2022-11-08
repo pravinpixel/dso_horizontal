@@ -156,7 +156,7 @@ class DsoRepository implements DsoRepositoryInterface
             }
            
             $parent['material_total_quantity'] = $material_total_quantity;
-            $parent['material_quantity']       = $material_total_quantity / $parent['unit_packing_value'];
+            $parent['material_quantity']       = $material_total_quantity != 0 ? ( $material_total_quantity / $parent['unit_packing_value'] ): 0;
      
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
