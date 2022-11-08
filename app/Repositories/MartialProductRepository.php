@@ -28,6 +28,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
  
         $fillable   = []; 
         foreach($inputs as $column => $row) {
+        
             $fillable[$column] = $row;
         }
         $material_product_fillable = $fillable;

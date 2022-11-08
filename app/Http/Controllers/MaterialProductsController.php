@@ -341,6 +341,10 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
     {
+        if(is_null($request->coc_coa_mill_cert_status) && $type == 'form-two') {
+            $request['coc_coa_mill_cert_status'] = 'off';
+        }
+    
         $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,

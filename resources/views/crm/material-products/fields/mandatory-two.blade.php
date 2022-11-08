@@ -114,82 +114,42 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
             <div class="col-8"> 
-                @if($batch->BatchFiles == null)
-                    <div class="d-flex y-center border rounded p-0"> 
-                            {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0 coc_coa_mill_cert_input', 'placeholder' => 'Type here...', "id"=>"coc_coa_mill_cert_input",
-                                $batch->coc_coa_mill_cert_status != "on" ? 'required' : '',
-                                'multiple',
-                                "maxlength" => "3",
-                                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
-                            ]) !!}
-                        @if (wizard_mode() == 'duplicate')
-                            <span class="btn btn-light btn-sm border-start  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
-                                <input type="checkbox" 
-                                    @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
-                                        {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
-                                    @endif
-                                    name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                                    class="form-check-input"  
-                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
-                                onclick="change_coc_coa_status()">
-                            </span>
-                            @else
-                                <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
-                                    <input type="checkbox" 
-                                    @if ($material_product->Batches[0]->coc_coa_mill_cert == null)
-                                        {{ $batch->coc_coa_mill_cert_status == "on" ? 'checked' : null }} 
-                                    @endif
-                                    name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                                    class="form-check-input" 
-                                    {{ isset($material_product->Batches[0]->coc_coa_mill_cert) ? 'disabled' : null}}
-                                    {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
-                                    onclick="change_coc_coa_status()">
-                                </span>
-                        @endif 
-                    </div> 
-                        @if (!is_null($batch->BatchFiles))
-                            <div class="d-flex flex-wrap">
-                                @foreach ($batch->BatchFiles as $key => $cocfile)
-                                    {{ $key - 1 }}
-                                    <div class="d-flex align-items-center px-1 bg-light ms-0 m-1 border rounded shadow-sm">
-                                        <a href="{{ storageGet($cocfile) }}" download="{{ storageGet($cocfile) }}">
-                                            <i class="fa fa-download"></i>
-                                            <small>{{ substr(str_replace('public/files/coc_coa_mill_cert/','' ,$cocfile),0,20) }}</small>
-                                        </a>
-                                        <i class="fa fa-times ms-1 text-danger" onclick="deleteFile('{{ $batch->id }}', '{{ $key - 1 }}','coc_coa_mill_cert',this)" style="cursor: pointer"></i>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    @else
-                        <div class="d-flex y-center border rounded p-0"> 
-                                {!! Form::file('coc_coa_mill_cert[]', ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...',
-                                    'multiple',
-                                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")
-                                ]) !!}
-
-                                <span class="btn btn-light btn-sm border-start  {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
-                                    <input type="checkbox" name="coc_coa_mill_cert_status" id="coc_coa_mill_cert_check_box"
-                                        class="form-check-input"  
-                                        {{-- {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }} --}}
-                                    onclick="change_coc_coa_status()">
-                                </span>
-                        </div>
-                        @if (!is_null($batch->BatchFiles))
-                            <div class="d-flex flex-wrap">
-                                @foreach ($batch->BatchFiles as $key => $cocfile) 
-                                    <div class="d-flex align-items-center px-1 bg-light ms-0 m-1 border rounded shadow-sm">
-                                        <a href="{{ storageGet($cocfile->file_path) }}" download="{{ storageGet($cocfile->file_path) }}">
-                                            <i class="fa fa-download"></i>
-                                            <small>{{ $cocfile->original_name }}</small>
-                                        </a>
-                                        <i class="fa fa-times ms-1 text-danger" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                @endif
+                <div class="d-flex y-center border rounded p-0"> 
+                    <input 
+                        multiple
+                        type="file" 
+                        name="coc_coa_mill_cert[]" 
+                        id="coc_coa_mill_cert_input"
+                        class="form-control form-control-sm border-0 coc_coa_mill_cert_input"
+                        required
+                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")  }}
+                    />
+                    <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
+                        <input 
+                            type="checkbox" 
+                            class="form-check-input"
+                            name="coc_coa_mill_cert_status" 
+                            id="coc_coa_mill_cert_check_box" 
+                            onclick="change_coc_coa_status()" 
+                            {{ $batch->coc_coa_mill_cert_status == 'on' ? 'checked' : '' }}
+                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                        /> 
+                    </span>
+                </div>
                 <small id="coc_coa_myList"></small>
+                @if (!is_null($batch->BatchFiles))
+                    <div class="d-flex flex-wrap">
+                        @foreach ($batch->BatchFiles as $key => $cocfile) 
+                            <div class="d-flex align-items-center px-1 bg-light ms-0 m-1 border rounded shadow-sm">
+                                <a href="{{ storageGet($cocfile->file_path) }}" download="{{ storageGet($cocfile->file_path) }}">
+                                    <i class="fa fa-download"></i>
+                                    <small>{{ $cocfile->original_name }}</small>
+                                </a>
+                                <i class="fa fa-times ms-1 text-danger" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
                 <small class="float-end"><i>Used for TD/Expt only</i></small>
             </div>
         </div>
@@ -321,7 +281,8 @@
         }
 
         const checkBox      =    $('#coc_coa_mill_cert_check_box')
-        const formInput     =    $('#coc_coa_mill_cert_input')
+        const formInput     =    $('input#coc_coa_mill_cert_input')
+      
         if( checkBox.is(":checked") == true ){
             formInput.prop('required', false)
             formInput.prop('disabled', true)
@@ -334,6 +295,6 @@
             fetch(`${AppUrl}/delete-file/${batch_id}`).then((res) =>res.json()).then((data) => {
                 element.parentNode.classList.add('d-none')
             })
-        }
+        } 
     </script>
 @endsection
