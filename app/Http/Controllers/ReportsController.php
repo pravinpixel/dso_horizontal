@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DisposalExport;
+use App\Exports\ExpiredMaterialExport;
 use App\Exports\HistoryExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
+use App\Models\Batches;
 use App\Models\LogSheet;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
@@ -74,8 +76,22 @@ class ReportsController extends Controller
         }
         return  view('crm.reports.disposed-items',compact('disposed')); 
     }
+    public function expired_material(Request $request)
+    {
+        $expired_material = getExpiredMaterials();
+
+        if ($request->ajax()) { 
+            return DataTables::of($expired_material)->addIndexColumn()->make(true);
+        }
+         
+        return  view('crm.reports.expired-material',compact('expired_material')); 
+    }
     public function export_disposed_items(Request $request)
     { 
         return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
+    }
+    public function export_expired_material(Request $request)
+    { 
+        return Excel::download(new ExpiredMaterialExport($request->start_date,$request->end_date), 'expired-materials.xlsx');
     }
 }

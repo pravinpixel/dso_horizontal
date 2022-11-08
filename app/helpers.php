@@ -2,6 +2,8 @@
 
 use App\Models\Batches;
 use App\Models\BatchTracker;
+use App\Models\MaterialProducts;
+use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -449,6 +451,34 @@ if(!function_exists('getRoutes')) {
                 return 'history';
             } 
             return  $menu_value;
+        }
+    }
+    if(!function_exists('getExpiredMaterials')) {
+        function getExpiredMaterials()
+        {
+            $data             = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
+            $expired_material = [];
+            foreach ($data as $key => $row) {
+                $now            = Carbon::now();
+                $date_of_expiry = Carbon::parse($row->date_of_expiry);
+                if ($now >= $date_of_expiry) {
+                    $expired_material[] = [
+                        "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
+                        "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
+                        "batch_serial"          => $row->batch." / ".$row->serial,
+                        "unit_packing_value"    => $row->unit_packing_value,
+                        "quantity"              => $row->quantity,
+                        "storage_area"          => $row->StorageArea->name,
+                        "housing"               => $row->housing,
+                        "date_of_expiry"        => $row->date_of_expiry,
+                        "used_for_td_expt_only" => $row->used_for_td_expt_only,
+                        "department"            => $row->Department->name,
+                        "owners"                => $row->owner_one." / ".$row->owner_two,
+                        "created_at"            => $row->created_at,
+                    ];
+                }
+            }
+            return $expired_material;
         }
     }
 }
