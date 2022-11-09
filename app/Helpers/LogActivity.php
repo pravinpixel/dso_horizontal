@@ -6,6 +6,7 @@ use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\LogSheet;
 use App\Models\MaterialProducts;
+use App\Models\SecurityReport;
 
 class LogActivity
 {
@@ -174,5 +175,19 @@ class LogActivity
             }
         }
         return  $disposal_items;
+    }
+    public static function getSecurityReport()
+    {
+        $SecurityReport = SecurityReport::latest()->get();
+        $arr = [];
+        foreach ($SecurityReport as $key => $row) {
+            $arr[] = [
+                "transaction_date" => $row->created_at->format('d-m-Y'),
+                "transaction_time" => $row->created_at->format('h:m:s A'),
+                "transaction_by"   => $row->user_name,
+                "action"           => strtoupper($row->action),
+            ];
+        }
+        return $arr;
     }
 }

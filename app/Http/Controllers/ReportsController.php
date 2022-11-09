@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Exports\DisposalExport;
 use App\Exports\ExpiredMaterialExport;
 use App\Exports\HistoryExport;
+use App\Exports\SecurityReportExcel;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Models\LogSheet;
 use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
+use App\Models\SecurityReport;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
@@ -155,5 +158,17 @@ class ReportsController extends Controller
             ];
         }
         return Excel::download(new ExpiredMaterialExport($data), 'expired-materials.xlsx');
+    }
+    public function security(Request $request)
+    {
+        $security = LogActivity::getSecurityReport();
+        if ($request->ajax()) { 
+            return DataTables::of($security)->addIndexColumn()->make(true);
+        }
+        return view('crm.reports.security',compact('security'));
+    }
+    public function security_export(Request $request)
+    {
+        return Excel::download(new SecurityReportExcel($request->start_date,$request->end_date), 'SecurityReport.xlsx');
     }
 }
