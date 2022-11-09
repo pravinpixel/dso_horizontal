@@ -37,14 +37,15 @@ app.controller("PrintController", ($scope, $http) => {
                     font-weight: 400;
                     src: local('barcode font'), url('https://fonts.cdnfonts.com/s/10997/BarcodeFont.woff') format('woff');
                 }   
-                @media print, screen {
-                    
-                    #printableBarcodeLabel {
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                        min-height:100vh
+                @media print {
+                    html, body {
+                       border: 1px solid white;
+                       height: 99%;
+                       page-break-after: avoid;
+                       page-break-before: avoid;
                     }
+               }
+                @media print, screen {
                     .print-card{
                         border  :   1px solid gray !important;
                         background  :   white;
