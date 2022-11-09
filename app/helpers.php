@@ -245,7 +245,7 @@ if(! function_exists('no_data_found')) {
     function no_data_found() {
         return '
             <div class="my-5 text-center lead">
-                <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" width="150" />
+                <img src="'.asset('public/asset/images/no-data.png').'" width="150" />
                 <div class="text-secondary mt-3">
                    Oops ! there is no data.
                 </div>

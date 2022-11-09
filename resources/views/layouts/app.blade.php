@@ -8,7 +8,6 @@
     <title>DSO</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="app-url" content="{{ url('') }}" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     {{--  ===== STYLES ======= --}}
         @include('includes.styles')
@@ -25,11 +24,6 @@
 
     @include('includes.sections.breadcrumb')
 
-    {{-- @if (\Sentinel::hasAnyAccess(['user.view.withdrawal', 'user.add.withdrawal']))
-        True
-        @else
-        False
-    @endif --}}
 
     <main class="container-fluid" style="min-height: 80vh">
         @yield('content')

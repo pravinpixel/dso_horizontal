@@ -1,47 +1,3 @@
-@extends('layouts.app')
-@section('content') 
-    <ul class="nav nav-tabs">
-        {{-- <li class="nav-item">
-            <a href="{{ route('reports.utilisation_cart') }}" class="bg-none nav-link {{ Route::is(['reports','reports.utilisation_cart']) ? "active" : "" }}">
-                <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                <span class="d-none d-md-block">Generate Material/ In-house Product Utilisation rate </span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('reports.export_cart') }}" class="bg-none nav-link {{ Route::is(['reports.export_cart']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Generate list of Material/In-house Product</span>
-            </a>
-        </li>  --}}
-        <li class="nav-item">
-            <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items','reports']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Disposed items</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('reports.expired_material') }}" class="bg-none nav-link {{ Route::is(['reports.expired_material']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Expired Material Report</span>
-            </a>
-        </li> 
-        <li class="nav-item">
-            <a href="{{ route('reports.security') }}" class="bg-none nav-link {{ Route::is(['reports.security']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Security History</span>
-            </a>
-        </li>
-            {{-- <li class="nav-item">
-                <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
-                    <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Material/Product History</span>
-                </a>
-            </li>    --}}
-    </ul> 
-    <section ng-app="RootApp" ng-controller="RootController" class="pt-3">
-        @yield('report_content')
-    </section> 
-@endsection
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
 @endsection
@@ -56,6 +12,7 @@
     <input type="hidden" id="transfer_batch" value="{{ route("transfer-batch") }}"> 
     <input type="hidden" id="repack_batch" value="{{ route("repack-batch") }}"> 
     <input type="hidden" id="auth-id" value="{{ Sentinel::getUser()->id }}">
+    <input type="hidden" id="change_batch_read_status" value="{{ route('change-read-status') }}"/>
     <input type="hidden" id="auth-role" value="{{ Sentinel::getUser()->roles[0]->slug }}"> 
     <script src="{{ asset('public/asset/js/vendors/daterangepicker.js') }}"></script>
     <script src="{{ asset('public/asset/js/vendors/angular.min.js') }}"></script>
@@ -66,7 +23,7 @@
     <script src="{{ asset('public/asset/js/controllers/RootController.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
-    <script src="{{ asset('public/asset/js/directives/RepackAndTransfer.js') }}"></script>  
+    <script src="{{ asset('public/asset/js/directives/RepackAndTransfer.js') }}"></script>
     <script>
         wordMatchSuggest = (element) => {
             $.ajax({
