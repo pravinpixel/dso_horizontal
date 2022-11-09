@@ -1,7 +1,7 @@
 @extends('crm.reports.index')
 
 @section('report_content')
-    @if (count($expired_material) != 0)
+    @if (count($expired) != 0)
         <div class="card border shadow-sm col-md-8 mx-auto">
             <div class="card-body">
                 <form action="{{ route('reports.export_expired_material') }}" method="POST">

@@ -15,7 +15,6 @@ use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
@@ -80,19 +79,27 @@ class ReportsController extends Controller
     }
     public function expired_material(Request $request)
     {
-        $expired_material = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();;
+        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();;
+        $expired = [];
 
         if ($request->ajax()) { 
             if (!empty($request->get('department')) || !empty($request->get('department'))) { 
-                $data = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                     ->where( 'is_draft' , 0)
                     ->where( 'department',$request->department)
-                    ->where( 'department',$request->department)
+                    // ->where( 'department',$request->department)
                     ->latest()->get();
-            } else {
-                $data = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();;
+            }  
+            
+            foreach ($batches as $key => $row) {
+                $now            = Carbon::now();
+                $date_of_expiry = Carbon::parse($row->date_of_expiry);
+                if ($now >= $date_of_expiry) {
+                    $expired[] = $row;
+                }
             }
-            return DataTables::of($data)
+
+            return DataTables::of($expired)
                 ->addColumn('category_selection',function ($data){
                     return MaterialProducts::find($data->material_product_id)->category_selection;
                 })->addColumn('item_description',function ($data){
@@ -109,10 +116,17 @@ class ReportsController extends Controller
                 ->addIndexColumn()
             ->make(true);
         }
+        foreach ($batches as $key => $row) {
+            $now            = Carbon::now();
+            $date_of_expiry = Carbon::parse($row->date_of_expiry);
+            if ($now >= $date_of_expiry) {
+                $expired[] = $row;
+            }
+        }
 
         $departments = Departments::get();
          
-        return view('crm.reports.expired-material',compact('departments','expired_material'));
+        return view('crm.reports.expired-material',compact('departments','expired'));
     }
     public function export_disposed_items(Request $request)
     { 
