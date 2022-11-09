@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\EarlyDisposalController;
 use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
@@ -170,7 +171,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
     Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
-
+    
 
     Route::get('reports/expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
     Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material'); 
@@ -179,7 +180,10 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::resource('/product-cart', ProductCartController::class); 
     Route::get('/get-product-cart',[ ProductCartController::class,'index']); 
-
     
     Route::get('/delete-file/{id}', [MaterialProductsController::class, 'delete_file']);
+
+    Route::prefix('download-files')->group(function() {
+        Route::post('/{id}/{type}', [DownloadController::class,'download'])->name('download-files');
+    });
 });

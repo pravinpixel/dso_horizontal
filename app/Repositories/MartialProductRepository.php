@@ -3,14 +3,9 @@
 namespace App\Repositories;
 
 use App\Interfaces\MartialProductRepositoryInterface;
-use App\Models\BarCodeFormat;
 use App\Models\Batches;
-use App\Models\BatchFiles;
-use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
-use Faker\Provider\Barcode;
-use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,7 +69,6 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
     public function storeFiles($request, $batch)
     {
         if($request->has('coc_coa_mill_cert')) {
- 
             foreach ($request->coc_coa_mill_cert as $key => $files) {
                 $newFileName = Storage::put('public',$files);
                 $batch->BatchFiles()->updateOrCreate([
@@ -84,7 +78,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                     'file_name'      => $newFileName,
                     'file_extension' => $files->getClientOriginalExtension(),
                     'file_path'      => asset('storage/app').'/'.$newFileName,
-                ]); 
+                ]);
             }
        
             if($batch->coc_coa_mill_cert !== null) {
@@ -94,14 +88,12 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                     }
                 }
             }
-
-            
         }
-        if($request->has('iqc_result')) {
+        if($request->has('iqc_result')) { 
             if(Storage::exists($batch->iqc_result)){
                 Storage::delete($batch->iqc_result);
             }
-            $iqc_result              =   storeFiles('iqc_result');
+            $iqc_result              =   Storage::put('public',$request->iqc_result);
             $batch  ->  iqc_result   =   $iqc_result;
             $batch  ->  save();
         }
@@ -109,16 +101,15 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->sds)){
                 Storage::delete($batch->sds);
             }
-            $sds              =   storeFiles('sds');
+            $sds              =   Storage::put('public',$request->sds);
             $batch  ->  sds   =   $sds;
             $batch  ->  save();
-            // dd($batch);
         }
         if($request->has('extended_qc_result')) {
             if(Storage::exists($batch->extended_qc_result)){
                 Storage::delete($batch->extended_qc_result);
             }
-            $extended_qc_result              =   storeFiles('extended_qc_result');
+            $extended_qc_result              =   Storage::put('public',$request->extended_qc_result);
             $batch  ->  extended_qc_result   =   $extended_qc_result;
             $batch  ->  save();
         }
@@ -127,7 +118,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             if(Storage::exists($batch->disposal_certificate)){
                 Storage::delete($batch->disposal_certificate);
             }
-            $disposal_certificate              =    storeFiles('disposal_certificate');
+            $disposal_certificate              =    Storage::put('public',$request->disposal_certificate);
             $batch  ->  disposal_certificate   =    $disposal_certificate;
             $batch  ->  save();
         }

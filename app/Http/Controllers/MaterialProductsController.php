@@ -484,21 +484,23 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $data       =   Batches::findOrFail($id);
-        $user_name  =   [];
+        $batch   =   Batches::with(['BatchMaterialProduct','Department','StatutoryBody','StorageArea','HousingType'])->findOrFail($id);
+        return view('crm.partials.batch-preview',compact('batch'));
 
-        if ($data->access !== null || $data->access != 'Default') {
-            foreach (json_decode($data->access ?? '[]') as $users) {
-                $user_name[]  = User::find($users)->alias_name;
-            }
-        }
-        return [
-            "access"          => $user_name ?? null,
-            "department"      => Departments::find($data->department)->name ?? null,
-            "statutory_body"  => StatutoryBody::find($data->statutory_body)->name ?? null,
-            "storage_area"    => StorageRoom::find($data->storage_area)->name ?? null,
-            "housing_type"    => HouseTypes::find($data->housing_type)->name ?? null,
-        ];
+        // $user_name  =   [];
+
+        // if ($data->access !== null || $data->access != 'Default') {
+        //     foreach (json_decode($data->access ?? '[]') as $users) {
+        //         $user_name[]  = User::find($users)->alias_name;
+        //     }
+        // }
+        // return [
+        //     "access"          => $user_name ?? null,
+        //     "department"      => Departments::find($data->department)->name ?? null,
+        //     "statutory_body"  => StatutoryBody::find($data->statutory_body)->name ?? null,
+        //     "storage_area"    => StorageRoom::find($data->storage_area)->name ?? null,
+        //     "housing_type"    => HouseTypes::find($data->housing_type)->name ?? null,
+        // ];
     }
     public function destroy($id)
     { 

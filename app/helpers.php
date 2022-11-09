@@ -4,6 +4,7 @@ use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
+use App\Models\User;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
@@ -490,6 +491,12 @@ if(!function_exists('getRoutes')) {
                 'action'    => $action_name
             ]);
             return true;
+        }
+    }
+    if(!function_exists('getUserById')) {
+        function getUserById($id)
+        {
+            return User::find($id);
         }
     }
 }

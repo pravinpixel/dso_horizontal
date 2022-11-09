@@ -6122,6 +6122,7 @@ fieldset:disabled .btn {
     counter-increment: section;
     margin-right: 5px;
     font-weight: bold;
+    width: 35px;
 }
 
 .list-group-item-action {
