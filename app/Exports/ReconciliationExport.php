@@ -30,6 +30,7 @@ class ReconciliationExport implements FromArray, WithHeadings , ShouldAutoSize, 
                 'quantity'         => $batch->quantity,
             ];
         }
+        securityLog('Reconciliation Sample Data Download');
         return $ListOfBatches;
     }
     public function headings(): array

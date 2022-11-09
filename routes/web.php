@@ -160,14 +160,17 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show'])->name('view.disposal'); 
 
     Route::prefix('reports')->group(function() {
-        Route::get('/', [ReportsController::class,'utilisation_cart'])->name('reports'); 
-        Route::get('reports/utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
-        Route::get('reports/export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
-        Route::get('reports/history', [ReportsController::class,'history'])->name('reports.history');  
+        Route::get('/', [ReportsController::class,'disposed_items'])->name('reports'); 
+        Route::get('utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
+        Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
+        Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
+        Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
+        Route::get('security', [ReportsController::class,'security'])->name('reports.security');
     }); 
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
-    Route::get('reports/disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
+    Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
+
 
     Route::get('reports/expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
     Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material'); 

@@ -3,9 +3,9 @@
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\MaterialProducts;
+use App\Models\SecurityReport;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -479,6 +479,17 @@ if(!function_exists('getRoutes')) {
                 }
             }
             return $expired_material;
+        }
+    }
+    if(!function_exists('securityLog')) {
+        function securityLog($action_name)
+        {
+            SecurityReport::create([
+                'user_name' => auth_user()->alias_name,
+                'user_id'   => auth_user()->id,
+                'action'    => $action_name
+            ]);
+            return true;
         }
     }
 }

@@ -27,6 +27,7 @@ class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, W
     }
     public function collection()
     {
+        securityLog('Repack Outlife Export');
         return RepackOutlife::where('batch_id', $this->id)->select([
             'draw_in_time_stamp',
             'draw_out_time_stamp',

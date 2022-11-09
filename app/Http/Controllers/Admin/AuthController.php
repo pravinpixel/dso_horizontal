@@ -22,12 +22,10 @@ class AuthController extends Controller
     
     public function login(Request $request)
     {
-       
         $credentials = [
             'email'     => $request->user_login_id,
             'password'  => config('auth.password'),
         ];
-        
 
         try {
             if($user = Sentinel::authenticate($credentials , $request->get('remember', false))) {
@@ -37,6 +35,7 @@ class AuthController extends Controller
                 // } else if(Sentinel::inRole('employee')) {
                 //     return redirect(route('employee.dashboard'));
                 // }
+                securityLog('login');
                 return redirect(route('dashboard'));
             } else {
                 Flash::error( __('auth.incorrect_email_id_and_password'));
@@ -55,7 +54,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
+        securityLog('logout');
         Sentinel::logout(null, true);
         Flash::success(__('auth.logout_successful'));
         return redirect(route('login'));

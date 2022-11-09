@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content') 
     <ul class="nav nav-tabs">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('reports.utilisation_cart') }}" class="bg-none nav-link {{ Route::is(['reports','reports.utilisation_cart']) ? "active" : "" }}">
                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                 <span class="d-none d-md-block">Generate Material/ In-house Product Utilisation rate </span>
@@ -12,9 +12,9 @@
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Generate list of Material/In-house Product</span>
             </a>
-        </li> 
+        </li>  --}}
         <li class="nav-item">
-            <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items']) ? "active" : "" }}">
+            <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items','reports']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Disposed items</span>
             </a>
@@ -26,11 +26,17 @@
             </a>
         </li> 
         <li class="nav-item">
-            <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
+            <a href="{{ route('reports.security') }}" class="bg-none nav-link {{ Route::is(['reports.security']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Material/Product History</span>
+                <span class="d-none d-md-block">Security History</span>
             </a>
-        </li>  
+        </li>
+            {{-- <li class="nav-item">
+                <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
+                    <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                    <span class="d-none d-md-block">Material/Product History</span>
+                </a>
+            </li>    --}}
     </ul> 
     <section ng-app="RootApp" ng-controller="RootController" class="pt-3">
         @yield('report_content')
