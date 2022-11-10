@@ -120,8 +120,7 @@
                         type="file" 
                         name="coc_coa_mill_cert[]" 
                         id="coc_coa_mill_cert_input"
-                        class="form-control form-control-sm border-0 coc_coa_mill_cert_input"
-                        required
+                        class="form-control form-control-sm border-0 coc_coa_mill_cert_input" 
                         {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")  }}
                     />
                     <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
@@ -187,7 +186,6 @@
                         <i class="fa fa-download me-1"></i>Download
                     </button> 
                 @endif
-                
                 <small class="float-end"><i>Visual check done</i></small>
             </div>
         </div>
@@ -288,7 +286,7 @@
         } else {
             formInput.prop('required', true)
             formInput.prop('disabled', false)
-        } 
+        }  
         deleteFile = (batch_id, element) => {
             const AppUrl = "{{ url('/') }}"
             fetch(`${AppUrl}/delete-file/${batch_id}`).then((res) =>res.json()).then((data) => {
@@ -296,4 +294,9 @@
             })
         } 
     </script>
+    @if (!is_null($batch->BatchFiles)) 
+        <script>
+            $('input#coc_coa_mill_cert_input').prop('required', false)
+        </script>
+    @endif
 @endsection
