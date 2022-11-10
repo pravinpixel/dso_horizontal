@@ -693,7 +693,7 @@ app.controller('RootController', function ($scope, $http) {
 
     // Print Barcode
     $scope.view_print_barcode = (id) => {
-        window.location.href = `print-label/${id}`
+        window.location.href = `${APP_URL}/print-label/${id}`
     }
     $scope.printBatchLabel = (id) => {
         swal({
@@ -717,7 +717,7 @@ app.controller('RootController', function ($scope, $http) {
             },
         }).then((isConfirm) => {
             if (isConfirm) {
-                window.location.href = `print-label/${id}`
+                window.location.href = `${APP_URL}/print-label/${id}`
             }
         });
     }

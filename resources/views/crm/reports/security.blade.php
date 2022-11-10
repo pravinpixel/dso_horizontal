@@ -16,7 +16,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table class="table m-0 pt-2 table-sm text-center" id="custom-data-table">
+                <table class="table m-0 pt-2 table-sm" id="custom-data-table">
                     <thead>
                         <tr>
                             <th class="text-white bg-primary-2 text-center font-14">S.No</th>
