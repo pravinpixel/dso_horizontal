@@ -382,7 +382,8 @@ if(!function_exists('getRoutes')) {
                 'withdrawal_index',
                 'extend_expiry',
                 'disposal',
-                'reports'
+                'reports',
+                'table_order_index'
             ];
             $create = [
                 'user_store',
@@ -390,7 +391,8 @@ if(!function_exists('getRoutes')) {
                 'help_menu_create',
                 'pictogram_create',
                 'role_create',
-                'create_material_product'
+                'create_material_product',
+                'table_order_store'
             ];
             $edit = [
                 'user_edit',
@@ -450,7 +452,7 @@ if(!function_exists('getRoutes')) {
                 return 'export cart';
             }elseif($menu_value == 'reports_history') {
                 return 'history';
-            } 
+            }  
             return  $menu_value;
         }
     }

@@ -60,6 +60,8 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/create', [PictogramController::class, 'store'])->name('pictogram.store');
 
     // Table Order
-    Route::get('/table-order', [TableOrderController::class, 'index'])->name('table-order.index');
-    Route::post('/table-order', [TableOrderController::class, 'store'])->name('table-order.store');
+    Route::prefix('table-order')->group(function () {
+        Route::get('/', [TableOrderController::class, 'index'])->name('table-order.index');
+        Route::post('/', [TableOrderController::class, 'store'])->name('table-order.store');
+    });
 });
