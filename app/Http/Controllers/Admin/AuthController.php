@@ -1,18 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Cartalyst\Sentinel\Laravel\Facades\Activation;
-use Cartalyst\Sentinel\Activations\EloquentActivation;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Laracasts\Flash\Flash;
-
 class AuthController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         if(Sentinel::check()) {
             return redirect()->route('dashboard');
@@ -30,11 +26,6 @@ class AuthController extends Controller
         try {
             if($user = Sentinel::authenticate($credentials , $request->get('remember', false))) {
                 Flash::success( __('auth.login_successful'));
-                // if(Sentinel::inRole('manager')) {
-                //     return redirect(route('manager.dashboard'));
-                // } else if(Sentinel::inRole('employee')) {
-                //     return redirect(route('employee.dashboard'));
-                // }
                 securityLog('login');
                 return redirect(route('dashboard'));
             } else {
@@ -52,9 +43,13 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        securityLog('logout');
+        try {
+            securityLog('logout');
+        } catch (\Throwable $th) {
+             
+        }
         Sentinel::logout(null, true);
         Flash::success(__('auth.logout_successful'));
         return redirect(route('login'));

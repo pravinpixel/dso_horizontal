@@ -185,7 +185,7 @@ class LogActivity
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:m:s A'),
                 "transaction_by"   => $row->user_name,
-                "action"           => strtoupper($row->action),
+                "action"           => $row->action,
             ];
         }
         return $arr;

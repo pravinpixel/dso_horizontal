@@ -20,7 +20,7 @@ class DownloadController extends Controller
         }
         
         try {
-            securityLog('Download');
+            securityLog("Download ".strtoupper(str_replace('_',' ',$type))." Filename ".str_replace('public/','',$file_path));
             return Storage::download($file_path);
         } catch (\Throwable $th) {
             Flash::error('File not found');
