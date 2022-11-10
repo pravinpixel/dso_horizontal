@@ -72,7 +72,7 @@ class SearchRepository implements SearchRepositoryInterface
                     }
                 }
             },
-            'Batches.RepackOutlife', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea'
+            'Batches.RepackOutlife', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
         ])
             ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
                 foreach ($filter as $column => $value) {
