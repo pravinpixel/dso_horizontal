@@ -197,9 +197,9 @@
             <div class="w-100">
                 <div class="fw-bold mb-1">IQC status (P/F)</div>
                 @if ($batch->iqc_status)
-                        <span class="badge bg-success rounded-pill">YES</span>
+                        <span class="badge bg-success rounded-pill">PASS</span>
                     @else
-                    <span class="badge bg-danger rounded-pill">NO</span>
+                    <span class="badge bg-danger rounded-pill">FAIL</span>
                 @endif
             </div>
         </li>
