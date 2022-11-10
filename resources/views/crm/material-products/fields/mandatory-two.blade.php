@@ -140,12 +140,11 @@
                 @if (!is_null($batch->BatchFiles))
                     <div class="d-flex flex-wrap">
                         @foreach ($batch->BatchFiles as $key => $cocfile) 
-                            <div class="d-flex align-items-center px-1 bg-light ms-0 m-1 border rounded shadow-sm">
-                                <a href="{{ storageGet($cocfile->file_path) }}" download="{{ storageGet($cocfile->file_path) }}">
-                                    <i class="fa fa-download"></i>
-                                    <small>{{ $cocfile->original_name }}</small>
-                                </a>
-                                <i class="fa fa-times ms-1 text-danger" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
+                            <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                                <button onclick="download('{{ $cocfile->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                    <i class="fa fa-download me-1"></i>Download
+                                </button>
+                                <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
                             </div>
                         @endforeach
                     </div>
@@ -184,9 +183,9 @@
                     </span>
                 </div>
                 @if ($batch->iqc_result)
-                    <a href="{{ storageGet($batch->iqc_result) }}" download="{{ storageGet($batch->iqc_result) }}">
-                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/iqc_result/','' ,$batch->iqc_result),0,20) }}</small>
-                    </a>
+                    <button onclick="download('{{ $batch->id }}','iqc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                        <i class="fa fa-download me-1"></i>Download
+                    </button> 
                 @endif
                 
                 <small class="float-end"><i>Visual check done</i></small>

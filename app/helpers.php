@@ -499,4 +499,10 @@ if(!function_exists('getRoutes')) {
             return User::find($id);
         }
     }
+    if(!function_exists('SetDateFormat')) {
+        function SetDateFormat($date)
+        {
+            return Carbon::parse($date)->format('d/m/Y');
+        }
+    } 
 }

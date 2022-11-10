@@ -156,7 +156,7 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">Date in</div>
-                {{ $batch->date_in }}
+                {{ SetDateFormat($batch->date_in) }}
             </div>
         </li>
     @endif
@@ -164,7 +164,7 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">Date of expiry</div>
-                {{ $batch->date_of_expiry }}
+                {{ SetDateFormat($batch->date_of_expiry) }}
             </div>
         </li>
     @endif
@@ -172,13 +172,10 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100 " class="w-100">
                 <div class="fw-bold mb-1">SDS</div> 
-                <form action="{{ route('download-files',  [ "id" => $batch->id, "type" => 'sds' ] ) }}" method="POST">
-                    @csrf
-                    <div class="btn-group mt-1">
-                        <a class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->sds }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                        <button class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="submit" download><i class="fa fa-download me-1"></i>Download</button>
-                    </div>
-                </form>
+                <div class="btn-group mt-1">
+                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->sds }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
+                    <button onclick="download('{{ $batch->id }}','sds')" class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i class="fa fa-download me-1"></i>Download</button>
+                </div>
             </div>
         </li> 
     @endif
@@ -187,13 +184,10 @@
             <div class="w-100 " class="w-100">
                 <div class="fw-bold mb-1">COC/COA/Mill Cert</div> 
                 @foreach ($batch->BatchFiles as $coc)
-                    <form action="{{ route('download-files',  [ "id" => $coc->id, "type" => 'coc_coa_mill_cert' ] ) }}" method="POST">
-                        @csrf
-                        <div class="btn-group mt-1">
-                            <a class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->coc_coa_mill_cert }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                            <button class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="submit" download><i class="fa fa-download me-1"></i>Download</button>
-                        </div>
-                    </form> 
+                    <div class="btn-group mt-1">
+                        <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->coc_coa_mill_cert }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
+                        <button onclick="download('{{ $coc->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i class="fa fa-download me-1"></i>Download</button>
+                    </div>
                 @endforeach 
             </div>
         </li>
@@ -215,11 +209,8 @@
             <div class="w-100 " class="w-100">
                 <div class="fw-bold mb-1">IQC result</div>
                 <div>
-                    <form action="{{ route('download-files',  [ "id" => $batch->id, "type" => 'iqc_result' ] ) }}" method="POST" class="btn-group mt-1">
-                        @csrf 
-                        <a class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->iqc_result }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                        <button class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="submit" download><i class="fa fa-download me-1"></i>Download</button>
-                    </form>
+                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill" href="{{ asset("storage/app/").'/'.$batch->iqc_result }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
+                    <button onclick="download('{{ $batch->id }}','iqc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i class="fa fa-download me-1"></i>Download</button>
                 </div>
             </div>
         </li>
@@ -260,7 +251,7 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">Date of manufacture</div>
-                {{ $batch->date_of_manufacture }}
+                {{ SetDateFormat($batch->date_of_manufacture) }}
             </div>
         </li>
     @endif
@@ -268,7 +259,7 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">Date of shipment</div>
-                {{ $batch->date_of_shipment }}
+                {{ SetDateFormat($batch->date_of_shipment) }}
             </div>
         </li>
     @endif
@@ -327,8 +318,12 @@
     @if ($batch->used_for_td_expt_only)
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
-                <div class="fw-bold mb-1">Used for TD/Expt only</div>
-                {{ $batch->used_for_td_expt_only }}
+                <div class="fw-bold mb-1">Used for TD/Expt only</div> 
+                @if ($batch->used_for_td_expt_only)
+                        <span class="badge bg-success rounded-pill">YES</span>
+                    @else
+                    <span class="badge bg-danger rounded-pill">NO</span>
+                @endif
             </div>
         </li> 
     @endif

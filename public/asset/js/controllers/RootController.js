@@ -258,11 +258,8 @@ app.controller('RootController', function ($scope, $http) {
         ]
     }
 
-    $scope.view_batch_details = function (row, batch) {
-        $http.get(`${get_batch_material_products}/${batch.id}`).then((res) => {
-            $('#View_Batch_Details').modal('show');
-            document.getElementById('View_Batch_Details_Data').innerHTML = res.data
-        });
+    $scope.view_batch_details = function (id) {
+        viewBatch(id)
     }
 
     //  ===== Pagination & Filters ====

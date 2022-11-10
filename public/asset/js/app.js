@@ -344,3 +344,27 @@ document.querySelectorAll(".btn-loader").forEach(button => {
         e.target.classList.add("start-loader")
     })
 });
+
+viewBatch = (id) => {
+    axios.get(`${APP_URL}/get-material-batch/${id}`).then(function (response) {  
+        $('#View_Batch_Details').modal('show');
+        document.getElementById('View_Batch_Details_Data').innerHTML = response.data
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+ 
+download = (id,type) => { 
+    const FORM = `
+        <form id="downloadForm" action="${APP_URL}/download-files/${id}/${type}" method="POST">
+            <input type="hidden" value="${$('meta[name="csrf-token"]').attr('content')}" name="_token" />
+        </form>
+    `
+    $('body').append(FORM); 
+    setTimeout(() => {
+        $(`#downloadForm`).submit()
+    }, 500);
+    setTimeout(() => {
+        $(`#downloadForm`).remove()
+    }, 2000);
+}

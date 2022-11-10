@@ -44,7 +44,7 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu">  
-                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button>
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
                     <button class="dropdown-item text-secondary" ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
@@ -72,7 +72,7 @@
         <div class="box border-start d-flex align-items-center" >
             <div class="d-flex align-items-center justify-content-between">
                 <div class="btn-group mx-auto"> 
-                    <button title="View Batch Details" class="btn bg-light btn-sm border text-primary2" ng-click="view_batch_details(row, batch)"><i class="fa fa-eye"></i></button>
+                    <button title="View Batch Details" class="btn bg-light btn-sm border text-primary2" ng-click="view_batch_details(batch.id)"><i class="fa fa-eye"></i></button>
                     <button title="Print Batch Label" class="btn btn-light btn-sm border text-primary" ng-click="view_print_barcode(batch.id)"><i class="fa fa-print"></i></button>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
+                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
                     <button class="dropdown-item text-secondary" ng-click="extension(batch)"><i class="bi bi-arrow-up-right-square me-1"></i>Extension</button>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 </a> 
                 <div class="dropdown-menu"> 
                     <button class="dropdown-item text-secondary" batch-id="@{{ batch.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
-                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button> 
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
                         <i class="bi bi-trash2 me-1"></i>
                     To Dispose /  <br>  Used for TD / Expt Project 
                     </a>
-                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
+                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button>
                     <button class="dropdown-item text-secondary"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
                     <button class="dropdown-item text-secondary"  ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
@@ -195,7 +195,7 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(row, batch)"><i class="bi bi-eye"></i> View batch details</button>
+                    <button class="dropdown-item text-secondary"  ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button>
                     <button class="dropdown-item text-secondary"  ng-click="toReconciliate(batch)"><i class="bi bi-arrow-repeat"></i> To reconciliate</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>

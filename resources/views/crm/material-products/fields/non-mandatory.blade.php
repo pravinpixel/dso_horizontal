@@ -9,9 +9,9 @@
                     ]) !!}
                 </div>
                 @if ($batch->sds)
-                    <a href="{{ storageGet($batch->sds) }}" download="{{ storageGet($batch->sds) }}">
-                        <i class="fa fa-download"></i> <small>{{ substr(str_replace('public/files/sds/','' ,$batch->sds),0,20) }}</small>
-                    </a>
+                    <button onclick="download('{{ $batch->id }}','sds')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                        <i class="fa fa-download me-1"></i>Download
+                    </button>
                 @endif
             </div>
         </div>
