@@ -112,9 +112,12 @@ class DsoRepository implements DsoRepositoryInterface
                 
                 $owners = "";
                 $batch->owners_id = $batch->owners;
-                foreach (json_decode($batch->owners) as $key => $owner) { 
-                    $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.User::find($owner)->alias_name.'</small>';
+                if($batch->owners) {
+                    foreach (json_decode($batch->owners) as $key => $owner) { 
+                        $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.User::find($owner)->alias_name.'</small>';
+                    }
                 }
+                
                 $batch->owners = $owners; 
                 
                 if(!is_null($date_of_expiry)) {
