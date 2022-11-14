@@ -29,13 +29,13 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         $material_product_fillable = $fillable;
         unset($material_product_fillable['unit_packing_value']);
 
-        // if($fillable['owners']) {
-        //     // dd($fillable['owners']);
- 
-        //     dd(array_push($fillable['owners'], [
-        //         32
-        //     ]));
-        // }
+        if(isset($fillable['owners'])) {
+            if($fillable['owners']) {
+                $authUser = [...$fillable['owners'], ...[auth_user()->id]];
+                $fillable['owners'] = $authUser;
+            }
+        }
+      
  
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
