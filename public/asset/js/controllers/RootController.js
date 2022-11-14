@@ -1,34 +1,34 @@
 app.controller('RootController', function ($scope, $http) {
 
-    $scope.withdrawalStatus           = false
-    $scope.filter_status              = false
-    $scope.advance_search_status      = false
-    $scope.advance_search_pre_saved   = true
+    $scope.withdrawalStatus = false
+    $scope.filter_status = false
+    $scope.advance_search_status = false
+    $scope.advance_search_pre_saved = true
     $scope.view_my_saved_search_model = false
-    $scope.sort_by_payload            = false
+    $scope.sort_by_payload = false
 
     // === Route Lists ===
-    var material_products_url              = $('#get-material-products').val();
-    var change_batch_read_status           = $('#change_batch_read_status').val(); 
-    var get_batch_material_products        = $('#get-batch-material-products').val();
-    var get_batch                          = $('#get-batch').val();
-    var get_masters                        = $('#get_masters').val();
-    var pageName                           = $('#page-name').val();
-    var duplicate_material_products_url    = $('#duplicate-material-products').val();
-    var delete_material_products_url       = $('#delete-material-products').val();
+    var material_products_url = $('#get-material-products').val();
+    var change_batch_read_status = $('#change_batch_read_status').val();
+    var get_batch_material_products = $('#get-batch-material-products').val();
+    var get_batch = $('#get-batch').val();
+    var get_masters = $('#get_masters').val();
+    var pageName = $('#page-name').val();
+    var duplicate_material_products_url = $('#duplicate-material-products').val();
+    var delete_material_products_url = $('#delete-material-products').val();
     var delete_material_products_batch_url = $('#delete-material-products-batch').val();
-    var get_save_search_url                = $('#get-save-search').val();
-    var transfer_batch                     = $('#transfer_batch').val();
-    var repack_batch                       = $('#repack_batch').val();
-    var app_URL                            = $('#app_URL').val();
-        $scope.auth_id                     = $('#auth-id').val();
-        $scope.auth_role                   = $('#auth-role').val();
-        $scope.current_date                = moment(new Date()).format('YYYY-MM-DD')
-        $scope.on_all_check_box            = false
+    var get_save_search_url = $('#get-save-search').val();
+    var transfer_batch = $('#transfer_batch').val();
+    var repack_batch = $('#repack_batch').val();
+    var app_URL = $('#app_URL').val();
+    $scope.auth_id = $('#auth-id').val();
+    $scope.auth_role = $('#auth-role').val();
+    $scope.current_date = moment(new Date()).format('YYYY-MM-DD')
+    $scope.on_all_check_box = false
 
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
-        var given = moment(date_of_expiry.replaceAll('/','-'), "YYYY-MM-DD");
-        var day   = moment.duration(given.diff(current_date)).asDays();
+        var given = moment(date_of_expiry.replaceAll('/', '-'), "YYYY-MM-DD");
+        var day = moment.duration(given.diff(current_date)).asDays();
         if (current_date >= given) {
             return 'text-danger'
         } else {
@@ -89,7 +89,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_storage_area = true
             $scope.on_supplier = true
             // $scope.on_unit_of_measure = true
-            $scope.on_no_of_extension =  true
+            $scope.on_no_of_extension = true
             $scope.on_unit_packing_value = true
             $scope.on_used_for_td_expt_only = true
         } else {
@@ -140,7 +140,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_unit_of_measure = false
             $scope.on_unit_packing_value = true
             $scope.on_used_for_td_expt_only = true
-            $scope.on_no_of_extension =  false
+            $scope.on_no_of_extension = false
 
         }
     }
@@ -326,15 +326,15 @@ app.controller('RootController', function ($scope, $http) {
             data: {
                 filters: $scope.barcode_number
             }
-        }).then(function (response) { 
-    
+        }).then(function (response) {
+
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();
             $scope.material_products.links.pop();
 
             setTimeout(() => {
                 $(".loader").hide()
-            }, 100); 
+            }, 100);
             // switch (pageName) {
             //     case 'MATERIAL_WITHDRAWAL':
             //         $scope.withdrawalStatus = true
@@ -352,7 +352,7 @@ app.controller('RootController', function ($scope, $http) {
             //         if ($scope.deductTrackOutlife === undefined) {
             //             $scope.deductTrackOutlife = []
             //         }
-                    
+
             //         $scope.material_products.data.map((material) => {
             //             material.batches.map((batch) => {
             //                 if (batch.barcode_number == $scope.barcode_number) {
@@ -370,7 +370,7 @@ app.controller('RootController', function ($scope, $http) {
             //                             if(pushStatus === true) {
             //                                 $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
             //                             }
-                                       
+
             //                             $scope.resetBarCode()
             //                             console.log(batch)
             //                             console.log(material)
@@ -382,10 +382,10 @@ app.controller('RootController', function ($scope, $http) {
             //                         case 'DEDUCT_TRACK_OUTLIFE':
             //                             $scope.deductTrackOutlife = [];
             //                             $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name,category_selection: material.category_selection })
-                                    
+
             //                                 $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
             //                                     row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
-                                           
+
             //                                 })
             //                             break;
             //                         default:
@@ -564,6 +564,26 @@ app.controller('RootController', function ($scope, $http) {
 
     $http.get(get_masters).then((res) => {
         $scope.MasterData = res.data
+        // $scope.myDropdownOptions = [{
+        //     id: "S",
+        //     label: "Standard"
+        // }, {
+        //     id: "I",
+        //     label: "Intermediate"
+        // }, {
+        //     id: "B",
+        //     label: "Best available"
+        // }];
+        
+        $scope.owners = $scope.MasterData.owners
+        $scope.owners =  $scope.owners.map((user) => {
+            return {
+                id: user.id,
+                label: user.alias_name
+            }
+        })
+        console.log($scope.owners)
+        $scope.myDropdownModel = [ ];
     });
 
     $scope.Transfers = (id, quantity) => {
@@ -690,7 +710,7 @@ app.controller('RootController', function ($scope, $http) {
             default: break;
         }
     }
-
+  
     // Print Barcode
     $scope.view_print_barcode = (id) => {
         window.location.href = `${APP_URL}/print-label/${id}`
@@ -727,16 +747,16 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.RepackOutlife = (batch, unit_of_measure) => {
 
-        if(batch.updated_outlife != null) {
+        if (batch.updated_outlife != null) {
             var initial_day = batch.updated_outlife
         } else {
             var initial_day = batch.outlife + " Days"
         }
-         
+
         $scope.repack_outlife_unit_of_measure = unit_of_measure.name
-        $scope.repack_outlife_days            = initial_day  
-        $scope.currentBatchId                 = batch.id
-        $scope.currentBatch                   = batch
+        $scope.repack_outlife_days = initial_day
+        $scope.currentBatchId = batch.id
+        $scope.currentBatch = batch
         $http.get(`search-or-add/repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
@@ -745,37 +765,37 @@ app.controller('RootController', function ($scope, $http) {
                 RepackData.repack_outlife.forEach(element => {
                     $scope.repack_outlife_table.push(
                         {
-                            id     : element.id,
+                            id: element.id,
                             draw_in: {
-                                status    : element.draw_in,
+                                status: element.draw_in,
                                 time_stamp: element.draw_in_time_stamp
                             },
                             draw_out: {
-                                status    : element.draw_out,
+                                status: element.draw_out,
                                 time_stamp: element.draw_out_time_stamp
                             },
-                            last_access           : JSON.parse(RepackData.access),
-                            initial_amount        : element.input_repack_amount,
-                            initial_count         : RepackData.outlife,
-                            repack_amount         : element.input_repack_amount,
-                            balance_amount        : element.remain_amount,
-                            repack_size           : element.repack_size,
-                            quantity              : element.quantity,
-                            remaining_days        : element.remain_days,
+                            last_access: JSON.parse(RepackData.access),
+                            initial_amount: element.input_repack_amount,
+                            initial_count: RepackData.outlife,
+                            repack_amount: element.input_repack_amount,
+                            balance_amount: element.remain_amount,
+                            repack_size: element.repack_size,
+                            quantity: element.quantity,
+                            remaining_days: element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
-                            barcode_number        : RepackData.barcode_number,
-                            total_quantity        : Number(element.total_quantity),
+                            barcode_number: RepackData.barcode_number,
+                            total_quantity: Number(element.total_quantity),
                         }
                     );
-                }) 
-            }  
+                })
+            }
             $('#RepackOutlife').modal('show');
         })
     }
 
     $scope.next_draw = false
     $scope.saveRepackOutlife = () => {
-        $http.post(`store-repack-batch/${$scope.currentBatchId}`, { repack_id : localStorage.getItem('repack_outlife_id') , data : $scope.repack_outlife_table})
+        $http.post(`store-repack-batch/${$scope.currentBatchId}`, { repack_id: localStorage.getItem('repack_outlife_id'), data: $scope.repack_outlife_table })
             .then((response) => {
                 $scope.next_draw = response.data.new_draw_in
                 $http.get(`search-or-add/repack-batch/${$scope.currentBatchId}`).then((response) => {
@@ -785,30 +805,30 @@ app.controller('RootController', function ($scope, $http) {
                         RepackData.repack_outlife.forEach(element => {
                             $scope.repack_outlife_table.push(
                                 {
-                                    id     : element.id,
+                                    id: element.id,
                                     draw_in: {
-                                        status    : element.draw_in,
+                                        status: element.draw_in,
                                         time_stamp: element.draw_in_time_stamp
                                     },
                                     draw_out: {
-                                        status    : element.draw_out,
+                                        status: element.draw_out,
                                         time_stamp: element.draw_out_time_stamp
                                     },
-                                    last_access           : JSON.parse(RepackData.access),
-                                    initial_amount        : RepackData.unit_packing_value,
-                                    initial_count         : RepackData.outlife,
-                                    repack_amount         : element.input_repack_amount,
-                                    balance_amount        : element.remain_amount,
-                                    repack_size           : element.repack_size,
-                                    qty_cut               : element.qty_cut,
-                                    remaining_days        : element.remain_days,
+                                    last_access: JSON.parse(RepackData.access),
+                                    initial_amount: RepackData.unit_packing_value,
+                                    initial_count: RepackData.outlife,
+                                    repack_amount: element.input_repack_amount,
+                                    balance_amount: element.remain_amount,
+                                    repack_size: element.repack_size,
+                                    qty_cut: element.qty_cut,
+                                    remaining_days: element.remain_days,
                                     remaining_days_seconds: element.remaining_days_seconds,
-                                    barcode_number        : RepackData.barcode_number,
-                                    total_quantity        : Number(RepackData.total_quantity),
+                                    barcode_number: RepackData.barcode_number,
+                                    total_quantity: Number(RepackData.total_quantity),
                                 }
                             );
-                        }) 
-                    }  
+                        })
+                    }
                     Message('success', "Repack Outlife Saved !")
                 })
                 if ($('#exportLogCheckBox').is(':checked')) {
@@ -829,10 +849,10 @@ app.controller('RootController', function ($scope, $http) {
             $scope.get_material_products()
             getNotificationCount()
         })
-    }  
+    }
 
 
-    $scope.extension = (batch) => { 
+    $scope.extension = (batch) => {
         $scope.batch = batch
         $scope.batch.date_of_expiry = moment(batch.date_of_expiry).format('YYYY-DD-MM')
         $('#Extensionmodal').modal('show');
@@ -841,7 +861,7 @@ app.controller('RootController', function ($scope, $http) {
     setTimeout(() => {
         if ($scope.extend_status_batch_id !== 'null' && $scope.extend_status_batch_id != undefined) {
             $http.get(APP_URL + '/get-extend-expiry' + "/" + $scope.extend_status_batch_id).then((res) => {
-                if(res.data != 404) {
+                if (res.data != 404) {
                     $scope.batch = res.data
                     $('#Extensionmodal').modal('show');
                 }
@@ -856,7 +876,7 @@ app.controller('RootController', function ($scope, $http) {
     setTimeout(() => {
         if ($scope.disposal_status_batch_id !== 'null' && $scope.disposal_status_batch_id != undefined) {
             $http.get(APP_URL + '/get-disposal-expiry' + "/" + $scope.disposal_status_batch_id).then((res) => {
-                if(res.data != 404) {
+                if (res.data != 404) {
                     $scope.batch = res.data
                     $('#disposalModal').modal('show');
                 }
@@ -864,20 +884,20 @@ app.controller('RootController', function ($scope, $http) {
         }
     }, 500);
 
-    $scope.directDeduct       = []
-    $scope.deductTrackUsage   = []
+    $scope.directDeduct = []
+    $scope.deductTrackUsage = []
     $scope.deductTrackOutlife = [];
- 
+
     // ============ TO Reconciliate PROCESS ========
     $scope.toReconciliate = (batch) => {
         $('#reconciliation-modal').modal('show')
         $scope.ReconciliateId = batch.id
-        $scope.ReconciliateSystemStock = Number(batch.quantity) 
+        $scope.ReconciliateSystemStock = Number(batch.quantity)
     }
     $scope.ReconciliateSave = () => {
         $http.post(`${APP_URL}/reconciliation/update/${$scope.ReconciliateId}`, $scope.Reconciliate).then((res) => {
             $scope.Reconciliate.PhysicalStock = '';
-            $scope.Reconciliate.Remarks       = '';
+            $scope.Reconciliate.Remarks = '';
             $('#reconciliation-modal').modal('hide');
             Message('success', 'Reconciliation Success !');
             $scope.get_material_products();
