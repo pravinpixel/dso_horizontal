@@ -260,23 +260,19 @@ class MaterialProductsController extends Controller
             $request->session()->put('wizard_mode', 'duplicate');  
         }
 
-        $material_product       =  MaterialProducts::find(material_product() ?? $id);
-        $batch                  =  Batches::find(batch_id() ?? $batch_id);
-        $batch_id               =  $batch->id ?? null;
-        $category_selection_db  =  MasterCategories::pluck('name', 'id');
-        $statutory_body_db      =  StatutoryBody::pluck('name', 'id');
-        $unit_packing_size_db   =  PackingSizeData::pluck('name', 'id');
-        $storage_room_db        =  StorageRoom::pluck('name', 'id');
-        $house_type_db          =  HouseTypes::pluck('name', 'id');
-        $departments_db         =  Departments::pluck('name', 'id');
-        $iqc_status             =  [1 => "Pass", 0 => "Fail"];
-        $department             =  Departments::get();
-        $owners_list            =  User::pluck("alias_name", 'id');
-        $owners = [];
-
-        foreach ($owners_list as $key => $value) {
-            $owners[$value] = $value;
-        }
+        $material_product      = MaterialProducts::find(material_product() ?? $id);
+        $batch                 = Batches::find(batch_id() ?? $batch_id);
+        $batch_id              = $batch->id ?? null;
+        $category_selection_db = MasterCategories::pluck('name', 'id');
+        $statutory_body_db     = StatutoryBody::pluck('name', 'id');
+        $unit_packing_size_db  = PackingSizeData::pluck('name', 'id');
+        $storage_room_db       = StorageRoom::pluck('name', 'id');
+        $house_type_db         = HouseTypes::pluck('name', 'id');
+        $departments_db        = Departments::pluck('name', 'id');
+        $iqc_status            = [1 => "Pass", 0 => "Fail"];
+        $department            = Departments::get();
+        $owners                = User::pluck("alias_name", 'id');
+      
         if ($material_product != null) {
             foreach ($material_product->toArray() as $key => $value) {
                 $material_product->{$key} = is_reset(

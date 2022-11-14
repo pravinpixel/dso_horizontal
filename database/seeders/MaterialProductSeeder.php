@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\LogActivity;
 use App\Models\Batches;
-use App\Models\DeductTrackUsage;
 use App\Models\LogSheet;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
@@ -50,8 +48,6 @@ class MaterialProductSeeder extends Seeder
             "storage_area"                 => "5",
             "housing_type"                 => "9",
             "housing"                      => "15",
-            "owner_one"                    => "Ainsley",
-            "owner_two"                    => "Mia",
             "department"                   => "5",
             "access"                       => json_encode(["4"]),
             "date_in"                      => "2005-12-22",
@@ -118,8 +114,6 @@ class MaterialProductSeeder extends Seeder
             "storage_area"                 => "5",
             "housing_type"                 => "9",
             "housing"                      => "15",
-            "owner_one"                    => "Hesbrew",
-            "owner_two"                    => "Elena",
             "department"                   => "3",
             "access"                       => json_encode(["4"]),
             "date_in"                      => "2022-12-22",
@@ -186,8 +180,6 @@ class MaterialProductSeeder extends Seeder
             "storage_area"                 => "3",
             "housing_type"                 => "5",
             "housing"                      => "15",
-            "owner_one"                    => "Elena",
-            "owner_two"                    => "Hesbrew",
             "department"                   => "2",
             "access"                       => json_encode(["4"]),
             "date_in"                      => "2022-11-20",
