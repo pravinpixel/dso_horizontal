@@ -1,5 +1,5 @@
 <div class="row m-0">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Storage area <sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -46,22 +46,7 @@
                 ])  !!}
             </div>
         </div>
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Owner 1  <sup class="text-danger">*</sup></label>
-            <div class="col-8">
-                {!! Form::select('owner_one', $owners , $batch->owner_one ?? null, ['class' =>'ownner_select form-select form-select-sm need-word-match', 'placeholder' => '-- Select --' , 'required', 
-                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status")
-                ])  !!} 
-            </div>
-        </div>
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Owner 2 (SE/PL/FM) <sup class="text-danger">*</sup></label>
-            <div class="col-8">
-                {!! Form::select('owner_two', $owners , $batch->owner_two ?? null, ['class' =>'form-select ownner_select form-select-sm ', 'placeholder' => '-- Select --' , 'required', 
-                    config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_two.status")
-                ])  !!}
-            </div>
-        </div>
+        
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Department <sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -70,30 +55,7 @@
                 ])  !!}
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Access <sup class="text-danger">*</sup></label>
-            <div class="col-8"> 
-                <input type="text" id="access_flag" class="position-absolute" style="opacity: 0" />
-                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
-                    @foreach ($staff_by_department as $row)  
-                        @if (count($row['list']) != 0)
-                            <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
-                                @foreach ($row['list'] as $staff) 
-                                    <option 
-                                        {{ $material_product_dropdown == null ? 'selected' : '' }}
-                                        {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}}  
-                                        value="{{ $staff->id }}">
-                                        {{ $staff->alias_name }}
-                                    </option>
-                                @endforeach
-                            </optgroup>
-                        @endif
-                    @endforeach
-                </select> 
-            </div>
-        </div>
+      
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Date in <sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -110,47 +72,7 @@
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."date_of_expiry.status")
                 ]) !!}
             </div>
-        </div>
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
-            <div class="col-8"> 
-                <div class="d-flex y-center border rounded p-0"> 
-                    <input 
-                        multiple
-                        type="file" 
-                        name="coc_coa_mill_cert[]" 
-                        id="coc_coa_mill_cert_input"
-                        class="form-control form-control-sm border-0 coc_coa_mill_cert_input" 
-                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")  }}
-                    />
-                    <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
-                        <input 
-                            type="checkbox" 
-                            class="form-check-input"
-                            name="coc_coa_mill_cert_status" 
-                            id="coc_coa_mill_cert_check_box" 
-                            onclick="change_coc_coa_status()" 
-                            {{ $batch->coc_coa_mill_cert_status == 'on' ? 'checked' : '' }}
-                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
-                        /> 
-                    </span>
-                </div>
-                <small id="coc_coa_myList"></small>
-                @if (!is_null($batch->BatchFiles))
-                    <div class="d-flex flex-wrap">
-                        @foreach ($batch->BatchFiles as $key => $cocfile) 
-                            <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
-                                <button onclick="download('{{ $cocfile->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
-                                    <i class="fa fa-download me-1"></i>Download
-                                </button>
-                                <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-                <small class="float-end"><i>Used for TD/Expt only</i></small>
-            </div>
-        </div>
+        </div> 
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">IQC status  (P/F)<sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -190,17 +112,92 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4 p-0">
+        <div class="row m-0 y-center my-2">
+            <label for="" class="col-4 mb-2">Owners  <sup class="text-danger">*</sup></label>
+            <div class="col-12">
+                <select class="owners_select" name="owners[]" multiple="multiple" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status") }}>
+                    @foreach ($owners as $id => $owner)
+                        <option {{ auth_user()->id ==  $id ? "selected" :''  }} 
+                            {{ in_array($id, json_decode($batch->owners) ?? []) ? "selected" : ""}} 
+                            value="{{ $id }}">{{ $owner }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row m-0 y-center my-2">
+            <label for="" class="col-4 mb-2">Access <sup class="text-danger">*</sup></label>
+            <div class="col-12"> 
+                <input type="text" id="access_flag" class="position-absolute" style="opacity: 0" />
+                <select name="access[]" multiple="multiple" id="multiple_access" class="form-select" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") }}>
+                    @foreach ($staff_by_department as $row)  
+                        @if (count($row['list']) != 0)
+                            <optgroup label="{{ $row['name']}} {{ count($row['list']) }}">
+                                @foreach ($row['list'] as $staff) 
+                                    <option 
+                                        {{ $material_product_dropdown == null ? 'selected' : '' }}
+                                        {{ in_array($staff->id, $material_product_dropdown ?? []) ? "selected" : ""}}  
+                                        value="{{ $staff->id }}">
+                                        {{ $staff->alias_name }}
+                                    </option>
+                                @endforeach
+                            </optgroup>
+                        @endif
+                    @endforeach
+                </select>
+            </div> 
+        </div>
+        <div class="row m-0 y-center my-2">
+            <label for="" class="col-12 mb-1">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
+            <div class="col-12"> 
+                <div class="d-flex y-center border rounded p-0"> 
+                    <input 
+                        multiple
+                        type="file" 
+                        name="coc_coa_mill_cert[]" 
+                        id="coc_coa_mill_cert_input"
+                        class="form-control form-control-sm border-0 coc_coa_mill_cert_input" 
+                        {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status")  }}
+                    />
+                    <span class="btn btn-light btn-sm border-start {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}"> 
+                        <input 
+                            type="checkbox" 
+                            class="form-check-input"
+                            name="coc_coa_mill_cert_status" 
+                            id="coc_coa_mill_cert_check_box" 
+                            onclick="change_coc_coa_status()" 
+                            {{ $batch->coc_coa_mill_cert_status == 'on' ? 'checked' : '' }}
+                            {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") }}
+                        /> 
+                    </span>
+                </div>
+                <small id="coc_coa_myList"></small>
+                @if (!is_null($batch->BatchFiles))
+                    <div class="d-flex flex-wrap">
+                        @foreach ($batch->BatchFiles as $key => $cocfile) 
+                            <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                                <button onclick="download('{{ $cocfile->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                    <i class="fa fa-download me-1"></i>Download
+                                </button>
+                                <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteFile('{{ $cocfile->id }}',this)" style="cursor: pointer"></i>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+                <small class="float-end"><i>Used for TD/Expt only</i></small>
+            </div>
+        </div>
+    </div> 
 </div>
 
 @section('styles')
     <link rel="stylesheet" href="https://www.jquery-az.com/jquery/css/jquery.multiselect.css"> 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="{{ asset('public/asset/css/vendors/select2.min.css') }}"></script>    
 @endsection
 
-@section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+@section('scripts') 
     <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/select2.min.js') }}"></script>    
     <script src="https://www.jqueryscript.net/demo/multiple-file-upload-validation/jquery.MultiFile.js"></script>
     @if (config(is_disable(category_type() ?? $material_product->category_selection ?? null)."access.status") == 'disabled')
         <script>
@@ -211,6 +208,15 @@
     @endif
     <script> 
         $('.ownner_select').select2(); 
+        $('.owners_select').select2({
+            placeholder:"-- Choose a Owners --",
+        });
+
+        toggleCheckBox = (name) => {
+            Object.entries(document.querySelectorAll(`.${name}`)).map((checkBox)=>{
+                checkBox[1].toggleAttribute('checked')
+            })
+        }
 
         $('.coc_coa_mill_cert_input').MultiFile({
             list: '#coc_coa_myList',
