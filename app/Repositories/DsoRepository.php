@@ -111,10 +111,11 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
                 
                 $owners = "";
+                $batch->owners_id = $batch->owners;
                 foreach (json_decode($batch->owners) as $key => $owner) { 
                     $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.User::find($owner)->alias_name.'</small>';
                 }
-                $batch->owners = $owners;
+                $batch->owners = $owners; 
                 
                 if(!is_null($date_of_expiry)) {
                     $diff   = Carbon::parse($date_of_expiry)->diffInDays();
@@ -204,12 +205,21 @@ class DsoRepository implements DsoRepositoryInterface
         foreach ($access_material_product as $material_index => $material) {
             foreach ($material->Batches as $batch_index => $batch) {
                 if(auth_user_role()->slug == 'staff') {
-                    $access = json_decode($batch->access);
+                    $access    = json_decode($batch->access);
+                    $owners_id = json_decode($batch->owners_id);
+                   
                     if(isset($access)) {
                         if(in_array(auth_user()->id,$access) == false) {
                             unset($access_material_product[$material_index]->Batches[$batch_index]);
                         }
+                        if(in_array(auth_user()->id, $owners_id) == false) {
+                            $batch->permission = 'READ_ONLY';
+                        } else {
+                            $batch->permission = 'READ_AND_WRITE';
+                        }
                     }
+                } else {
+                    $batch->permission = 'READ_AND_WRITE';
                 }
             }
             if(count($material->Batches) == 0) {

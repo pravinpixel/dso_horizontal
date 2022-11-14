@@ -13,7 +13,7 @@
                     <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
                 @break
                 @case('owners')
-                    <div class="text-start" ng-bind-html="batch.owners"></div>
+                    <div class="text-start" ng-bind-html="batch.owners"></div> 
                 @break
                 @case('serial')
                     {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!}  
@@ -45,25 +45,25 @@
                 </a> 
                 <div class="dropdown-menu">  
                     <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button>
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
-                    <button class="dropdown-item text-secondary" ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.permission == 'READ_ONLY'"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.permission == 'READ_ONLY'" ng-click="editOrDuplicate('edit',row.id, batch.id)"><i class="bi bi-pencil-square me-1"></i>Edit batch</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.permission == 'READ_ONLY'"  ng-click="Transfers(batch.id ,  row.quantity)"><i class="bi bi-arrows-move me-1"></i>Transfer</button>
         
                     {{--  ==== REPACK OUTLIFE ====  --}}
                     {{-- ng-disabled="batch.require_outlife_tracking ==  1 || batch.is_draft == 1" --}}
-                        <button  class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1  || batch.withdrawal_type == 'DEDUCT_TRACK_USAGE'  || batch.withdrawal_type == 'DEDUCT_TRACK_OUTLIFE'" ng-click="RepackTransfers('view',batch , row)">
+                        <button  class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1  || batch.withdrawal_type == 'DEDUCT_TRACK_USAGE'  || batch.withdrawal_type == 'DEDUCT_TRACK_OUTLIFE' || batch.permission == 'READ_ONLY'" ng-click="RepackTransfers('view',batch , row)">
                             <i class="bi bi-box-seam me-1"></i> Repack/Transfer 
                         </button>
                     {{--  ==== REPACK OUTLIFE ====  --}}
         
                     {{--  ==== REPACK OUTLIFE ====  --}}
-                        <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.withdrawal_type == 'DIRECT_DEDUCT'  || batch.withdrawal_type == 'DEDUCT_TRACK_USAGE'" ng-click="RepackOutlife(batch, row.unit_of_measure)">
+                        <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.withdrawal_type == 'DIRECT_DEDUCT'  || batch.withdrawal_type == 'DEDUCT_TRACK_USAGE' || batch.permission == 'READ_ONLY'" ng-click="RepackOutlife(batch, row.unit_of_measure)">
                             <i class="bi bi-box2-fill me-1"></i> Repack/outlife
                         </button> 
                     {{--  ==== REPACK OUTLIFE ====  --}}
         
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
-                    <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.permission == 'READ_ONLY'" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
+                    <button class="dropdown-item text-danger" ng-disabled="batch.permission == 'READ_ONLY'" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>
         </div>  

@@ -118,9 +118,7 @@
             <div class="col-12">
                 <select class="owners_select" name="owners[]" multiple="multiple" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status") }}>
                     @foreach ($owners as $id => $owner)
-                        <option {{ auth_user()->id ==  $id ? "selected" :''  }} 
-                            {{ in_array($id, json_decode($batch->owners) ?? []) ? "selected" : ""}} 
-                            value="{{ $id }}">{{ $owner }}</option>
+                        <option  {{ in_array($id, json_decode($batch->owners) ?? []) ? "selected" : ""}} value="{{ $id }}">{{ $owner }}</option>
                     @endforeach
                 </select>
             </div>
@@ -207,11 +205,12 @@
         </script>
     @endif
     <script> 
+        var authUserName = "{{ auth_user()->alias_name }}"
         $('.ownner_select').select2(); 
         $('.owners_select').select2({
             placeholder:"-- Choose a Owners --",
         });
-
+       
         toggleCheckBox = (name) => {
             Object.entries(document.querySelectorAll(`.${name}`)).map((checkBox)=>{
                 checkBox[1].toggleAttribute('checked')
