@@ -111,10 +111,10 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
                 
                 $owners = "";
-                $batch->owners_id = $batch->owners;
+                
                 if($batch->owners) {
-                    foreach (json_decode($batch->owners) as $key => $owner) { 
-                        $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.User::find($owner)->alias_name.'</small>';
+                    foreach ($batch->BatchOwners as $key => $owner) { 
+                        $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.$owner->alias_name.'</small>';
                     }
                 }
                 

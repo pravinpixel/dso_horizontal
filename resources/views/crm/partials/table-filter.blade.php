@@ -21,8 +21,8 @@
     </div> 
     <div class="col">
         <label for="" class="form-label">Owners</label>
-        <div > 
-            <div ng-dropdown-multiselect="" options="owners" selected-model="myDropdownModel"></div>
+        <div>  
+            <div ng-dropdown-multiselect=""  options="owners" selected-model="advanced_filter_owners"></div>
         </div>
     </div> 
     <div class="col">

@@ -4,8 +4,10 @@ namespace App\Repositories;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\Batches;
+use App\Models\BatchOwners;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
+use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,17 +30,21 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         }
         $material_product_fillable = $fillable;
         unset($material_product_fillable['unit_packing_value']);
-
+        
+        $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
+        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
+        
         if(isset($fillable['owners'])) {
             if($fillable['owners']) {
                 $authUser = [...$fillable['owners'], ...[auth_user()->id]];
-                $fillable['owners'] = $authUser;
+                foreach ($authUser as $key => $id) {
+                    $batch->BatchOwners()->updateOrCreate(["user_id"    => (int) $id,"batch_id"    => (int) $batch_id],[
+                        "user_id"    => (int) $id,
+                        "alias_name" => getUserById((int)$id)->alias_name
+                    ]);
+                }
             }
         }
-      
- 
-        $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
-        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
         
         if($material_product->quantity_update_status == 1) { 
             $MaterialBatch = Batches::find($batch_id);

@@ -116,9 +116,14 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4 mb-2">Owners  <sup class="text-danger">*</sup></label>
             <div class="col-12">
+               
+                @php
+                    $owner_users = \Arr::pluck($batch->BatchOwners->toArray(), 'user_id')
+                @endphp
+
                 <select class="owners_select" name="owners[]" required multiple="multiple" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status") }}>
-                    @foreach ($owners as $id => $owner)
-                        <option  {{ in_array($id, json_decode($batch->owners) ?? []) ? "selected" : ""}} value="{{ $id }}">{{ $owner }}</option>
+                    @foreach ($owners as $id => $owner) 
+                        <option  {{ in_array($id, $owner_users) ? "selected" : ""}}   value="{{ $id }}">  {{ $owner }}</option>
                     @endforeach
                 </select>
             </div>

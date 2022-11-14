@@ -6,6 +6,7 @@ app.controller('RootController', function ($scope, $http) {
     $scope.advance_search_pre_saved = true
     $scope.view_my_saved_search_model = false
     $scope.sort_by_payload = false
+    $scope.advanced_filter = {}
 
     // === Route Lists ===
     var material_products_url = $('#get-material-products').val();
@@ -415,6 +416,7 @@ app.controller('RootController', function ($scope, $http) {
 
 
     $scope.clear_advanced_filter = () => {
+        $scope.advanced_filter.owners = {}
         $scope.advanced_filter = {}
     }
 
@@ -468,18 +470,19 @@ app.controller('RootController', function ($scope, $http) {
         $scope.barcode_number = ''
     }
     $scope.reset_bulk_search = function () {
-        $scope.get_material_products();
-        $scope.filter_status = false;
-        $scope.advance_search_status = false;
-        $scope.sort_by_payload = false;
+        location.reload()
+        // $scope.get_material_products();
+        // $scope.filter_status = false;
+        // $scope.advance_search_status = false;
+        // $scope.sort_by_payload = false;
 
-        $scope.barcode_number = ''
+        // $scope.barcode_number = ''
 
-        // ====Bulk Search Rest====
-        $scope.filter = ""
-        // ====Bulk Search Rest===
-        delete $scope.filter_data
-        $scope.clear_advanced_filter()
+        // // ====Bulk Search Rest====
+        // $scope.filter = ""
+        // // ====Bulk Search Rest===
+        // delete $scope.filter_data
+        // $scope.clear_advanced_filter()
     }
 
     $scope.filler_function = () => {
@@ -581,9 +584,13 @@ app.controller('RootController', function ($scope, $http) {
                 id: user.id,
                 label: user.alias_name
             }
-        })
-        console.log($scope.owners)
-        $scope.myDropdownModel = [ ];
+        }) 
+        $scope.setOwnerData =  () => {
+            console.log("object")
+        }
+        $scope.advanced_filter_owners = [];
+         
+        $scope.advanced_filter.owners = $scope.advanced_filter_owners
     });
 
     $scope.Transfers = (id, quantity) => {

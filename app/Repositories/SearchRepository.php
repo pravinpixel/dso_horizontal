@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
+use App\Models\BatchOwners;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -42,6 +43,7 @@ class SearchRepository implements SearchRepositoryInterface
 
     public function advanced_search($filter)
     {
+        
         $material_table =  [
             'quantity',
             'category_selection',
@@ -72,27 +74,45 @@ class SearchRepository implements SearchRepositoryInterface
                     }
                 }
             },
-            'Batches.RepackOutlife', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
+            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
         ])
-            ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
-                foreach ($filter as $column => $value) {
+        ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
+            foreach ($filter as $column => $value) {
+                if ($value != '') {
+                    $q->where($column, $value);
+                }
+            }
+        })
+        ->WhereHas('Batches', function ($q) use ($filter) {
+            foreach ($filter as $column => $value) {
+                if (checkIsBatchDateColumn($column)) {
+                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                } else {
                     if ($value != '') {
-                        $q->where($column, $value);
+                        $q->where($column, $value); 
                     }
                 }
-            })
-            ->WhereHas('Batches', function ($q) use ($filter) {
-                foreach ($filter as $column => $value) {
-                    if (checkIsBatchDateColumn($column)) {
-                        $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                    } else {
-                        if ($value != '') {
-                            $q->where($column, $value);
-                        }
+            }
+        })->get();
+ 
+        $material_product_data_by_owners = [];
+        foreach ($filter as $column => $value) { 
+            if($column == 'owners'){
+                foreach ($value as $owner) { 
+                    $batch_owner                     = BatchOwners::with('Batches')->where('user_id',$owner['id'])->first();
+                    if(!is_null($batch_owner)) {
+                        $Batches                         = Batches::findOrFail($batch_owner['batch_id']);
+                        $material = MaterialProducts::with('Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody')->find($Batches->material_product_id);
+                        $material_product_data_by_owners[] = $material;
                     }
                 }
-            })
-            ->get();
+            } 
+        }
+   
+        if(isset($material_product_data_by_owners)) {
+            return $this->dsoRepository->renderTableData($material_product_data_by_owners);
+        }
+         
         return $this->dsoRepository->renderTableData($material_product_data);
     }
     public function sortingOrder($sort_by)
