@@ -40,7 +40,7 @@ class CreateBatchesTable extends Migration
             $table->string('housing')->nullable();
             $table->json('owners')->nullable();
             $table->string('department')->nullable();
-            $table->string('access')->nullable();
+            $table->longText('access')->nullable();
             $table->string('date_in')->nullable();
             $table->string('date_of_expiry')->nullable();
             $table->text('coc_coa_mill_cert')->nullable();
