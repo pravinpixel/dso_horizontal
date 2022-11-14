@@ -12,8 +12,8 @@
                     <span ng-if="batch.is_draft != 1" class="mx-auto badge bg-success rounded-pill">Active</span>
                     <span ng-if="batch.is_draft == 1" class="mx-auto badge bg-secondary rounded-pill">Draft</span> 
                 @break
-                @case('owner_two')
-                    {!! $tableAllColumns['owner_one']['batch'].' , ' !!} {!! $tableAllColumns['owner_two']['batch'] !!} 
+                @case('owners')
+                    <div class="text-start" ng-bind-html="batch.owners"></div>
                 @break
                 @case('serial')
                     {!! $tableAllColumns['batch']['batch'].' / ' !!} {!! $tableAllColumns['serial']['batch'] !!}  

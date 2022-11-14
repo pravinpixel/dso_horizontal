@@ -126,11 +126,15 @@
             </div>
         </li>
     @endif
-    @if ($batch->owner_one || $batch->owner_two)
+    @if ($batch->owners)
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
-                <div class="fw-bold mb-1">Owner 1/Owner 2 (SE/PL/FM)</div>
-                {{ $batch->owner_one." / ".$batch->owner_two }}
+                <div class="fw-bold mb-1">Owners (SE/PL/FM)</div>
+                @foreach (json_decode($batch->owners) as $key => $owner) 
+                    <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                        {{ getUserById($owner)->alias_name }}
+                    </small> 
+                @endforeach
             </div>
         </li>
     @endif

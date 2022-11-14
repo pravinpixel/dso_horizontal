@@ -110,6 +110,12 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_manufacture = !is_null($batch->date_of_manufacture) ? Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') : '';
                 $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
                 
+                $owners = "";
+                foreach (json_decode($batch->owners) as $key => $owner) { 
+                    $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">'.User::find($owner)->alias_name.'</small>';
+                }
+                $batch->owners = $owners;
+                
                 if(!is_null($date_of_expiry)) {
                     $diff   = Carbon::parse($date_of_expiry)->diffInDays();
                     if ($diff == 0) {
@@ -129,7 +135,7 @@ class DsoRepository implements DsoRepositoryInterface
                     // $UnitPackingCount         = $parent->Batches[0]->unit_packing_value;
                     $total_bath_quantity     += (int) $batch->quantity;
                     $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
-                    $batch->total_quantity = $batch->quantity * $batch->unit_packing_value;
+                    $batch->total_quantity    = $batch->quantity * $batch->unit_packing_value;
                 }
 
                 if($page_name != 'REPORT_DISPOSED_ITEMS') {
