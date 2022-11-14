@@ -53,7 +53,7 @@ app.controller("PrintController", ($scope, $http) => {
                         margin  :30px auto;
                         text-align:center;
                         border-radius:15px;
-                        width: ${$scope.print_size == 'small' ? '350px' : '650px'};
+                        width: ${$scope.print_size == 'small' ? '341px' : '548px'};
                         clear: both;
                         page-break-after: always;
                     }
