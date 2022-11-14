@@ -20,22 +20,10 @@
         <input type="text" ng-model="advanced_filter.brand" name="brand" class="form-control custom need-word-match" placeholder="Type here..." >
     </div> 
     <div class="col">
-        <label for=""  class="form-label">Owner 1</label>
-        <select name="owner_one" ng-model="advanced_filter.owner_one" class="form-select custom" >
-            <option value="">-- Select --</option>
-            @foreach ($owners as $row)
-                <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
-            @endforeach 
-        </select>
-    </div> 
-    <div class="col">
-        <label for=""  class="form-label">Owner 2</label>
-        <select name="owner_two" ng-model="advanced_filter.owner_two" class="form-select custom" >
-            <option value="">-- Select --</option>
-            @foreach ($owners as $row)
-                <option value="{{ $row->alias_name }}">{{ $row->alias_name }}</option>
-            @endforeach 
-        </select>
+        <label for="" class="form-label">Owners</label>
+        <div > 
+            <div ng-dropdown-multiselect="" options="owners" selected-model="myDropdownModel"></div>
+        </div>
     </div> 
     <div class="col">
         <label for="" class="form-label">Department</label>

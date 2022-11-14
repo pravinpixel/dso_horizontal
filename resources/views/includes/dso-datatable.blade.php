@@ -1,5 +1,6 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/date-picker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/angular-multiple-select.css') }}" />
 @endsection
 @section('scripts')
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
@@ -24,6 +25,7 @@
     <script src="{{ asset('public/asset/js/directives/pagePagination.js') }}"></script>
     <script src="{{ asset('public/asset/js/directives/RepackOutlife.js') }}"></script>  
     <script src="{{ asset('public/asset/js/directives/RepackAndTransfer.js') }}"></script>
+    <script src="{{ asset('public/asset/js/vendors/angularjs-dropdown-multiselect.js') }}"></script>
     <script>
         wordMatchSuggest = (element) => {
             $.ajax({
