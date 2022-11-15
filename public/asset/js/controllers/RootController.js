@@ -585,32 +585,50 @@ app.controller('RootController', function ($scope, $http) {
                 label: user.alias_name
             }
         }) 
-        $scope.setOwnerData =  () => {
-            console.log("object")
-        }
+         
         $scope.advanced_filter_owners = [];
          
         $scope.advanced_filter.owners = $scope.advanced_filter_owners
     });
-
+ 
     $scope.Transfers = (id, quantity) => {
         $scope.TransfersBatch = null
         $http.get(`${get_batch}/${id}`).then((response) => {
-            $scope.TransfersBatch = response.data
+            $scope.TransfersBatch            = response.data
+            $scope.TransfersBatchOwners      = $scope.owners;
+            $scope.TransfersBatchOwnersModel = []
+            
+            $scope.TransfersBatchOwners.map((user,i) => { 
+                $scope.TransfersBatch.batch_owners.map((batch_user) => {
+                    if(user.id == batch_user.user_id) {
+                        $scope.TransfersBatchOwnersModel.push($scope.TransfersBatchOwners[i])
+                    }
+                })
+            })  
             $scope.TransfersBatchMaxQuantity = response.data.quantity
             $('#Transfers').modal('show');
         });
     }
     $scope.transferBatch = () => {
-        if ($scope.TransfersBatch.quantity == '' || $scope.TransfersBatch.storage_area == '' || $scope.TransfersBatch.housing_type == '' || $scope.TransfersBatch.housing == '' || $scope.TransfersBatch.owner_one == '' || $scope.TransfersBatch.owner_two == '') {
+        if ($scope.TransfersBatch.quantity == '' || $scope.TransfersBatch.storage_area == '' || $scope.TransfersBatch.housing_type == '' || $scope.TransfersBatch.housing == '' || $scope.TransfersBatch.owners == ''  || $scope.TransfersBatch.owners.length == 0 ) {
             Message('danger', "All fields is Required !");
             return false
         }
-        if ($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing == null || $scope.TransfersBatch.owner_one == null || $scope.TransfersBatch.owner_two == null) {
+        if ($scope.TransfersBatch.quantity == null || $scope.TransfersBatch.storage_area == null || $scope.TransfersBatch.housing_type == null || $scope.TransfersBatch.housing == null || $scope.TransfersBatch.owners == undefined || $scope.TransfersBatch.owners == null) {
             Message('danger', "All fields is Required !");
             return false
         }
-        $http.post(transfer_batch, $scope.TransfersBatch).then((response) => {
+        var data = {
+            id                 : $scope.TransfersBatch.id,
+            material_product_id: $scope.TransfersBatch.material_product_id,
+            quantity           : $scope.TransfersBatch.quantity,
+            storage_area       : $scope.TransfersBatch.storage_area,
+            housing            : $scope.TransfersBatch.housing,
+            housing_type       : $scope.TransfersBatch.housing_type,
+            owners             : $scope.TransfersBatchOwnersModel,
+        } 
+         
+        $http.post(transfer_batch, data ).then((response) => {
             $scope.get_material_products();
             Message('success', response.data.message);
             $('#Transfers').modal('hide');

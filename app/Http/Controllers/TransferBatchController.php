@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
-    { 
+    {  
+    
         $current_batch                 = Batches::find($request->id);
         $created_batch                 = $current_batch->replicate();
         $created_batch->created_at     = Carbon::now();
@@ -20,11 +21,18 @@ class TransferBatchController extends Controller
         $created_batch->storage_area   = $request->storage_area;
         $created_batch->housing_type   = $request->housing_type;
         $created_batch->housing        = $request->housing;
-        $created_batch->owner_one      = $request->owner_one;
-        $created_batch->owner_two      = $request->owner_two;
         $created_batch->is_read        = 0;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
+
+        if($request->owners) {
+            foreach ($request->owners as $key => $owner) {
+                $created_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $created_batch->id],[
+                    "user_id"    =>  $owner['id'],
+                    "alias_name" => getUserById($owner['id'])->alias_name
+                ]);
+            }
+        }
 
         $old_value           = $current_batch;
         $new_value           = clone $current_batch;

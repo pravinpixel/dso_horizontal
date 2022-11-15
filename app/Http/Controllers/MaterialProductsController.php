@@ -431,7 +431,7 @@ class MaterialProductsController extends Controller
 
     public function show_batch($id)
     {
-        return Batches::findOrFail($id);
+        return Batches::with('BatchOwners')->findOrFail($id);
     }
     public function viewBatch($id)
     {
