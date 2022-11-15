@@ -171,10 +171,11 @@ class WithdrawalController extends Controller
                         'quantity'      => 1,
                     ]);
 
-                    $deduct_track_outlife = withdrawCart::with('batch')->where([
+                    $deduct_track_outlife = withdrawCart::with(['batch','RepackOutlife'])->where([
                         'user_id'         => auth_user()->id ,
                         'withdraw_type'   => 'DEDUCT_TRACK_OUTLIFE'
                     ])->get();
+                    
 
                     $data = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife')); 
 
