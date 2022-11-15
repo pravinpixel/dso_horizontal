@@ -19,7 +19,15 @@
                     <td>{{ $batch->BatchMaterialProduct->item_description }}</td>
                     <td>{{ $batch->brand }}</td>
                     <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
-                    <td>{{ $batch->owner_one }} , {{ $batch->owner_two }}</td>
+                    <td>
+                        @if(count($batch->BatchOwners))
+                            @foreach ($batch->BatchOwners as $owner)
+                                <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                                    {{ $owner->alias_name }}
+                                </small> 
+                            @endforeach
+                        @endif
+                    </td>
                     <td>{{  Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
                     <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
                     <td>{{ $batch->project_name }}</td>  
@@ -48,7 +56,15 @@
                                 <b class="text-dark">Project name</b> : 
                                 {{ $batch->project_name }}
                             </p>
-                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owner 1/2</b>  : {{ $batch->owner_one }} / {{ $batch->owner_two }}</p>
+                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  : 
+                                @if(count($batch->BatchOwners))
+                                    @foreach ($batch->BatchOwners as $owner)
+                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                                            {{ $owner->alias_name }}
+                                        </small> 
+                                    @endforeach
+                                @endif
+                            </p>
                         </div> 
                     </div> 
                     <div class="border-top mt-3 pt-3 print-border">
@@ -121,7 +137,7 @@
                                 <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS Pictogram</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="owners" id="Owner1">Owner1/Owner2</label>
+                                <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="owners" id="Owner1">Owners</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="td_expt" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="used_for_td_expt_only" id="td_expt">Used for TD/EXPT</label>
@@ -178,7 +194,6 @@
         #printImages img {
             width: 95px !important
         }
-         
         .barcode_label {
             font-family: 'barcode font', Courier;
             font-size: 58px !important;
