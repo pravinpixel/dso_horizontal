@@ -38,7 +38,7 @@ class CreateBatchesTable extends Migration
             $table->string('storage_area')->nullable();
             $table->string('housing_type')->nullable();
             $table->string('housing')->nullable();
-            $table->json('owners')->default(json_encode([]));
+            $table->longText('owners')->nullable();
             $table->string('department')->nullable();
             $table->longText('access')->nullable();
             $table->string('date_in')->nullable();
