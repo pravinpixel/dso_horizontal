@@ -252,7 +252,7 @@ class WithdrawalController extends Controller
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
         if($request->print_outlife_expiry == 1) {
-            return redirect(route('print-barcode', RepackOutlife::find($request->id[0])->batch_id));
+            return redirect(route('print.barcode', RepackOutlife::find($request->id[0])->batch_id));
         }
         return redirect()->back();
     }

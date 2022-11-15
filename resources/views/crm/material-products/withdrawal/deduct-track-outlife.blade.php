@@ -33,7 +33,7 @@
                                             <tr>
                                                 <td>
                                                     <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
-                                                    <input type="hidden" name="id[]" value="{{ $row->id }}">
+                                                    <input type="hidden" name="id[]" value="{{ $repack['id'] }}">
                                                 </td>
                                                 <td><small>{{ $row->Batch->brand }}</small></td>
                                                 <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
