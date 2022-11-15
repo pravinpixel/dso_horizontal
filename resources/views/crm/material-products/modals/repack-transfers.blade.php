@@ -23,8 +23,7 @@
                             <td>Storage Area</td>
                             <td>Housing type</td>
                             <td>Housing No</td>
-                            <td>Owner 1</td>
-                            <td>Owner 2</td>
+                            <td>Owners</td>
                             <th><i class="text-danger bi bi-trash3-fill"></i></th>
                         </tr>
                     </thead>
@@ -77,19 +76,10 @@
                                 </select>
                             </td>
                             <td width="130px">
-                                <select class="custom-input" ng-model="RepackTransfer.owner_one">
-                                    <option ng-selected="row.alias_name == RepackTransfer.owner_one" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
-                                </select>
-                            </td>
-                            <td width="130px">
-                                <select class="custom-input" ng-model="RepackTransfer.owner_two">
-                                    <option ng-selected="row.alias_name == RepackTransfer.owner_two" ng-value="row.alias_name" ng-repeat="row in MasterData.owners">@{{ row.alias_name }}</option>
-                                </select>
+                                <div ng-dropdown-multiselect="" class="border rounded bg-white" options="RepackTransfersBatchOwners" selected-model="RepackTransfersBatchOwnersModel"></div>
                             </td>
                             <td>
-                                <i  ng-click="RepackTransfers('clear')" 
-                                    class="btn btn-sm border shadow btn-light rounded-pill bi bi-x">
-                                </i>
+                                <i ng-click="RepackTransfers('clear')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
                             </td>
                         </tr>
                     </tbody>

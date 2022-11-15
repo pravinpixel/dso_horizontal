@@ -20,7 +20,7 @@ class RepackBatchController extends Controller
 
     public function repack(Request $request)
     { 
-        // dd($request->all());
+         
         $previous_batch                = Batches::find($request->id);
         $new_batch                     = $previous_batch->replicate();
         $new_batch->created_at         = Carbon::now();
@@ -31,11 +31,19 @@ class RepackBatchController extends Controller
         $new_batch->storage_area       = $request->storage_area['id'] ?? $request->storage_area;
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
-        $new_batch->owner_one          = $request->owner_one;
         $new_batch->iqc_status         = 0;
-        $new_batch->owner_two          = $request->owner_two;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
+
+
+        if($request->owners) {
+            foreach ($request->owners as $key => $owner) {
+                $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
+                    "user_id"    =>  $owner['id'],
+                    "alias_name" => getUserById($owner['id'])->alias_name
+                ]);
+            }
+        }
 
         $old_value             = $previous_batch;
         $new_value             = clone $previous_batch;

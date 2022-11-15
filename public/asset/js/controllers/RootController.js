@@ -660,8 +660,7 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.TransfersBatch.storage_area = ''
                 $scope.TransfersBatch.housing_type = ''
                 $scope.TransfersBatch.housing = ''
-                $scope.TransfersBatch.owner_one = ''
-                $scope.TransfersBatch.owner_two = ''
+                $scope.TransfersBatch.owners = '' 
                 $scope.$apply()
             }
         });
@@ -677,24 +676,47 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.RepackTransfer = batch;
                 $scope.RepackTransferPackSize = row.unit_packing_value
                 $scope.RepackTransferQty = batch.quantity
-                $scope.RepackTransferMeasure = row.unit_of_measure.name
+                $scope.RepackTransferMeasure = row.unit_of_measure.name 
                 const CurrentAccessed = JSON.parse($scope.RepackTransfer.access);
                 $scope.CurrentAccessed = CurrentAccessed.join()
+
+                $scope.RepackTransfersBatchOwners      = $scope.owners;
+                    $scope.RepackTransfersBatchOwnersModel = []
+                    
+                    $scope.RepackTransfersBatchOwners.map((user,i) => { 
+                        $scope.RepackTransfer.batch_owners.map((batch_user) => {
+                            if(user.id == batch_user.user_id) {
+                                $scope.RepackTransfersBatchOwnersModel.push($scope.RepackTransfersBatchOwners[i])
+                            }
+                        })
+                    })
+                    
                 break;
             case "store":
                 if ($scope.RepackTransfer.RepackQuantity === null || $scope.RepackTransfer.RepackQuantity === undefined) {
                     Message('danger', "Input Used amt (L) is Required !");
                     return false;
                 }
-                if ($scope.RepackTransfer.new_unit_packing_value == '' || $scope.RepackTransfer.quantity == '' || $scope.RepackTransfer.storage_area == '' || $scope.RepackTransfer.housing_type == '' || $scope.RepackTransfer.housing == '' || $scope.RepackTransfer.owner_one == '' || $scope.RepackTransfer.owner_two == '') {
+                if ($scope.RepackTransfer.new_unit_packing_value == '' || $scope.RepackTransfer.quantity == '' || $scope.RepackTransfer.storage_area == '' || $scope.RepackTransfer.housing_type == '' || $scope.RepackTransfer.housing == '') {
                     Message('danger', "All fields is Required !");
                     return false
                 }
-                if ($scope.RepackTransfer.new_unit_packing_value == null || $scope.RepackTransfer.quantity == null || $scope.RepackTransfer.storage_area == null || $scope.RepackTransfer.housing_type == null || $scope.RepackTransfer.housing == null || $scope.RepackTransfer.owner_one == null || $scope.RepackTransfer.owner_two == null) {
+                if ($scope.RepackTransfer.new_unit_packing_value == null || $scope.RepackTransfer.quantity == null || $scope.RepackTransfer.storage_area == null || $scope.RepackTransfer.housing_type == null || $scope.RepackTransfer.housing == null) {
                     Message('danger', "All fields is Required !");
                     return false
                 }
-                $http.post(repack_batch, $scope.RepackTransfer).then((response) => {
+                var data = {
+                    "id"                    : $scope.RepackTransfer.id,
+                    "material_product_id"   : $scope.RepackTransfer.material_product_id,
+                    "AutoCalQty"            : $scope.RepackTransfer.AutoCalQty,
+                    "new_unit_packing_value": $scope.RepackTransfer.new_unit_packing_value,
+                    "storage_area"          : $scope.RepackTransfer.storage_area,
+                    "housing_type"          : $scope.RepackTransfer.housing_type,
+                    "housing"               : $scope.RepackTransfer.housing,
+                    "RemainQuantity"        : $scope.RepackTransfer.RemainQuantity,
+                    "owners"                : $scope.RepackTransfersBatchOwnersModel,
+                }
+                $http.post(repack_batch, data).then((response) => {
                     $scope.get_material_products();
                     Message(response.data.status == true ? 'success' : 'danger', response.data.message);
                     $('#RepackTransfers').modal('hide');
