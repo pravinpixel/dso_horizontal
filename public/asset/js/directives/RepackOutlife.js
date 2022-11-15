@@ -22,6 +22,8 @@ app.directive('repackTable', () => {
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
 
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
+                    console.log(scope.repack.remaining_days)
+                    console.log(diff)
                     scope.repack.remaining_days_seconds = diff
                     scope.$apply(); 
                 }

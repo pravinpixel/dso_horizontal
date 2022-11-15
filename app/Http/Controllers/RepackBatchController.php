@@ -109,7 +109,6 @@ class RepackBatchController extends Controller
 
     public function store_repack_outlife(Request $request , $id)
     {
-        // dd($request);
         foreach ($request->data as $key => $row) {
             if($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
@@ -127,7 +126,6 @@ class RepackBatchController extends Controller
                     $next_batch->unit_packing_value = $row['repack_size'];
                     $next_batch->total_quantity     = $row['repack_amount'];
                     $next_batch->quantity           = $row['quantity'];
-                    $next_batch->iqc_status         = 0;
                     $next_batch->save();
 
                     LogActivity::tracker([
@@ -146,11 +144,11 @@ class RepackBatchController extends Controller
                         'total_quantity' => $row['repack_amount'],
                     ]);
 
-                    RepackOutlife::create([
-                        'batch_id'            => $id,
-                        'input_repack_amount' => $row['repack_size'],
-                        'total_quantity'      => $row['balance_amount'],
-                    ]);
+                    // RepackOutlife::create([
+                    //     'batch_id'            => $id,
+                    //     'input_repack_amount' => $row['repack_size'],
+                    //     'total_quantity'      => $row['balance_amount'],
+                    // ]);
 
                     $old_value           = $current_batch;
                     $new_value           = clone $current_batch;
@@ -166,7 +164,8 @@ class RepackBatchController extends Controller
                     if($Batches->unit_packing_value != 0) {
                         RepackOutlife::create([
                             'batch_id'            => $id,
-                            'input_repack_amount' => $row['repack_size']
+                            'input_repack_amount' => $row['repack_size'],
+                            'total_quantity'      => $row['balance_amount']
                         ]);
                     }
 
@@ -182,7 +181,8 @@ class RepackBatchController extends Controller
                     $current_outlife_expiry  =  CarbonImmutable::now()->add($updated_outlife_seconds, 'second')->toDateTimeString();
                     
                     $Batches->update([
-                        'outlife_seconds'   => $updated_outlife_seconds,
+                        'outlife_seconds' => $updated_outlife_seconds,
+                        'outlife'         => $updated_outlife,
                     ]); 
                 }
                  
@@ -190,6 +190,7 @@ class RepackBatchController extends Controller
                     'draw_in'                 => $draw_in,
                     'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
                     'draw_out'                => $draw_out,
+                    'quantity'      => $row['quantity'],
                     'draw_out_time_stamp'     => $row['draw_out']['time_stamp'], 
                     'remain_amount'           => $row['balance_amount'],
                     'repack_size'             => $row['repack_size'],
