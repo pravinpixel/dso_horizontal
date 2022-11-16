@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+ 
     <div ng-app="PrintLabelApp" ng-controller="PrintController">
         <div> 
             <table class="table table-bordered bg-white custom">

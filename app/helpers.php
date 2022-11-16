@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 if(! function_exists('category_type')) {
@@ -508,17 +509,18 @@ if(!function_exists('getRoutes')) {
             return Carbon::parse($date)->format('d/m/Y');
         }
     } 
-    if(!function_exists('getBarcode')) {
-        function getBarcode($number)
-        {
-            return Carbon::parse($number)->format('d/m/Y');
-        }
-    } 
     if(!function_exists('getBarcodeImage')) {
         function getBarcodeImage($number)
         {
             $generatorPNG = new BarcodeGeneratorPNG;
             return '<img src="data:image/png;base64,'.base64_encode($generatorPNG->getBarcode($number, $generatorPNG::TYPE_CODE_128)).'">';
+        }
+    } 
+    if(!function_exists('getBarcode')) {
+        function getBarcode($number)
+        {
+            $generator = new  BarcodeGeneratorHTML();
+            return $generator->getBarcode($number, $generator::TYPE_CODE_128);
         }
     } 
 }
