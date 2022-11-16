@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content') 
+@section('content')
     <div ng-app="RootApp" ng-controller="RootController">
         <div class="d-flex align-items-center mb-3">
             <div class="col-5 p-1 border rounded-pill shadow-sm bg-white">
