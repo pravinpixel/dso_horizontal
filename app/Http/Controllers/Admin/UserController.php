@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
+use App\Exports\UserBarcodeExport;
 use App\Http\Controllers\Controller;
 use App\Models\Masters\Departments;
 use App\Models\RoleUsers;
@@ -8,10 +10,10 @@ use App\Models\User;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class UserController extends Controller
@@ -58,6 +60,11 @@ class UserController extends Controller
         }
 
         return view('masters.user.index', compact('users','roles'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new UserBarcodeExport(), 'users.xlsx');
     }
 
     public function create(Request $request)

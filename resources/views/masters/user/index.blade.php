@@ -3,8 +3,9 @@
 @section('masters') 
     <div class="card">
         <div class="card-header text-end ">
-            <a class="btn btn-primary"  href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>
-        </div> 
+            <a class="btn btn-success rounded-pill" href="{{ route('user.export') }}"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export Barcode</a>
+            <a class="btn btn-primary rounded-pill" href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>
+        </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
