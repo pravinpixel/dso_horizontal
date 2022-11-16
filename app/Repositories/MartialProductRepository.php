@@ -36,12 +36,16 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         
         if(isset($fillable['owners'])) {
             if($fillable['owners']) {
-                $authUser = [...$fillable['owners'], ...[auth_user()->id]];
-                foreach ($authUser as $key => $id) {
-                    $batch->BatchOwners()->updateOrCreate(["user_id"    => (int) $id,"batch_id"    => (int) $batch_id],[
-                        "user_id"    => (int) $id,
-                        "alias_name" => getUserById((int)$id)->alias_name
-                    ]);
+                try {
+                    $authUser = [...$fillable['owners'], ...[auth_user()->id]];
+                    foreach ($authUser as $key => $id) {
+                        $batch->BatchOwners()->updateOrCreate(["user_id"    => (int) $id,"batch_id"    => (int) $batch_id],[
+                            "user_id"    => (int) $id,
+                            "alias_name" => getUserById((int)$id)->alias_name
+                        ]);
+                    }
+                } catch (\Throwable $th) {
+                    //throw $th;
                 }
             }
         }
