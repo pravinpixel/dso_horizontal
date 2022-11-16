@@ -209,7 +209,7 @@ class MaterialProductsController extends Controller
                             'iqc_result'                   => $row['iqc_result'] ?? null,
                             'sds'                          => $row['sds'] ?? null,
                             'cas'                          => $row['cas'] ?? null,
-                            'fm_1202'                      => $row['fm_1202']  == 'Yes' ? 1 : 0,
+                            'fm_1202'                      => $row['fm_1202']  == 'Yes' ? 'on' : 'off',
                             'project_name'                 => $row['project_name'] ?? null,
                             'material_product_type'        => $row['material_product_type'] ?? null,
                             'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
