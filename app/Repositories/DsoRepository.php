@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\DsoRepositoryInterface;
+use App\Models\BatchOwners;
 use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
@@ -212,19 +213,20 @@ class DsoRepository implements DsoRepositoryInterface
         foreach ($access_material_product as $material_index => $material) {
             foreach ($material->Batches as $batch_index => $batch) {
                 if(auth_user_role()->slug == 'staff') {
-                    $access    = json_decode($batch->access);
-                    $owners_id = json_decode($batch->owners_id);
+                    $access     = json_decode($batch->access);  
                    
                     if(isset($access)) {
                         if(in_array(auth_user()->id,$access) == false) {
                             unset($access_material_product[$material_index]->Batches[$batch_index]);
-                        }
-                        if(in_array(auth_user()->id, $owners_id) == false) {
+                        } 
+                    }
+                    if(count($batch->BatchOwners)) {   
+                        if(in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id')) == false) { 
                             $batch->permission = 'READ_ONLY';
                         } else {
                             $batch->permission = 'READ_AND_WRITE';
                         }
-                    }
+                    } 
                 } else {
                     $batch->permission = 'READ_AND_WRITE';
                 }
