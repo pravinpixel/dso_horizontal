@@ -12,7 +12,7 @@ app.directive('repackTransferTable', () => {
                     }
                 }
                 if(attribute.repackTransferTable == 'NEW_UNIT_PACKING_VALUE') {
-                    var AutoCalQty = scope.RepackTransfer.unit_packing_value * scope.RepackTransfer.RepackQuantity / scope.RepackTransfer.new_unit_packing_value
+                    var AutoCalQty = scope.RepackTransfer.RepackQuantity / scope.RepackTransfer.new_unit_packing_value
                     if(typeof(AutoCalQty) == NaN || typeof(AutoCalQty) == undefined || typeof(AutoCalQty) == Infinity) {
                         scope.RepackTransfer.AutoCalQty = ''
                     } else {
