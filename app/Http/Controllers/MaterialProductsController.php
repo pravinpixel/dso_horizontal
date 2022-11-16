@@ -193,7 +193,7 @@ class MaterialProductsController extends Controller
                             'statutory_body'               => $statutory_body->id,
                             'euc_material'                 => strtolower($row['euc_material']) == 'yes' ? 1 : 0,
                             'require_bulk_volume_tracking' => strtolower($row['require_bulk_volume_tracking']) == 'yes' ? 1 : 0,
-                            'require_outlife_tracking'     => strtolower($row['require_outlife_tracking']) == 'yYes' ? 1 : 0,
+                            'require_outlife_tracking'     => strtolower($row['require_outlife_tracking']) == 'yes' ? 1 : 0,
                             'outlife'                      => $row['outlife'] ?? null,
                             'storage_area'                 => $storage_area->id,
                             'housing_type'                 => $housing_type->id,
