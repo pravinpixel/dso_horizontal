@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
+use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Illuminate\Http\Request; 
 
@@ -24,6 +25,13 @@ class TransferBatchController extends Controller
         $created_batch->is_read        = 0;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
+
+        RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [
+            'batch_id'            => $created_batch->id,
+            'quantity'            => $created_batch->quantity,
+            'total_quantity'      => $created_batch->quantity * $created_batch->unit_packing_value,
+            'input_repack_amount' => $created_batch->unit_packing_value
+        ]);
 
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {

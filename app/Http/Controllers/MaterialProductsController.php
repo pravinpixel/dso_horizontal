@@ -23,6 +23,7 @@ use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use App\Models\BatchFiles;
 use App\Models\BatchTracker;
+use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route; 
@@ -563,6 +564,14 @@ class MaterialProductsController extends Controller
         }
         
         $created_batch->save(); 
+        
+        RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [
+            'batch_id'            => $created_batch->id,
+            'quantity'            => $created_batch->quantity,
+            'total_quantity'      => $created_batch->quantity * $created_batch->unit_packing_value,
+            'input_repack_amount' => $created_batch->unit_packing_value
+        ]);
+
         request()->session()->put('material_product_id', $created_batch->material_product_id);
         request()->session()->put('batch_id', $created_batch->id);
         LogActivity::log($created_batch->id);

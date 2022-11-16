@@ -35,6 +35,13 @@ class RepackBatchController extends Controller
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
 
+        RepackOutlife::updateOrCreate(['batch_id' => $new_batch->id], [
+            'batch_id'            => $new_batch->id,
+            'quantity'            => $new_batch->quantity,
+            'total_quantity'      => $new_batch->quantity * $new_batch->unit_packing_value,
+            'input_repack_amount' => $new_batch->unit_packing_value
+        ]);
+
 
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
