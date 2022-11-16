@@ -51,13 +51,13 @@
                         <td><small>{{ $row->Batch->quantity }}</small></td>
                         <td width="100px">
                             <div class="d-flex align-items-center">
-                                <input id="used_amount" name="used_amount" step="any" onkeyup="startTrackUsage({{ $row->Batch->quantity * $row->Batch->unit_packing_value }},this.value)" type="number" style="width: 80px" value="0" class="me-2 form-control-sm form-control">
+                                <input id="used_amount" name="used_amount" step="any" max="{{ $row->Batch->quantity }}"  onkeyup="startTrackUsage({{ $row->Batch->quantity }},this.value)" type="number" style="width: 80px" value="0" class="me-2 form-control-sm form-control">
                                 <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
                             </div>
                         </td>
                         <td> 
                             <div class="d-flex align-items-center">
-                                <input id="remain_amount" name="remain_amount" step="any" readonly type="text" style="width: 80px" value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}" class="me-2 form-control-sm form-control">
+                                <input id="remain_amount" name="remain_amount" step="any" readonly type="text" style="width: 80px" value="{{ $row->Batch->quantity  }}" class="me-2 form-control-sm form-control">
                                 <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
                             </div> 
                         </td>

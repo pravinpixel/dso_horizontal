@@ -221,12 +221,12 @@ class WithdrawalController extends Controller
             'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
             'last_accessed'    => auth_user()->alias_name,
             'used_amount'      => $request->used_amount,
-            'remain_amount'    => $request->remain_amount / $batch->unit_packing_value,
+            'remain_amount'    => $request->remain_amount,
             'remarks'          => $request->remarks ?? ""
         ]);
   
         $batch->update([
-            "quantity" => (float) $request->remain_amount / $batch->unit_packing_value
+            "quantity" => (float) $request->remain_amount
         ]);
        
         $old_value     = clone $material;
