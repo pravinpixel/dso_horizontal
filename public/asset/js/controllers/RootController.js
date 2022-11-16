@@ -826,15 +826,16 @@ app.controller('RootController', function ($scope, $http) {
                             repack_amount: element.input_repack_amount,
                             balance_amount: element.remain_amount,
                             repack_size: element.repack_size,
-                            quantity: element.quantity,
+                            quantity: RepackData.quantity,
                             remaining_days: element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
                             barcode_number: RepackData.barcode_number,
-                            total_quantity: Number(element.total_quantity),
+                            total_quantity: Number(RepackData.total_quantity),
                         }
                     );
                 })
             }
+            console.log($scope.repack_outlife_table)
             $('#RepackOutlife').modal('show');
         })
     }
