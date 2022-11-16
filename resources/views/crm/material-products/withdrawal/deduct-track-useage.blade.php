@@ -26,8 +26,8 @@
                         <td><small>{{ $row->batch_serial }}</small></td>
                         <td><small>{{ $row->last_accessed }}</small></td>
                         <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
-                        <td><small>1</small></td>
-                        <td><small>1</small></td>
+                        <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value }}</small></td>
+                        <td><small>{{ $row->used_amount  + $row->remain_amount}}</small></td>
                         <td><small>{{ $row->used_amount }}</small></td>
                         <td><small>{{ $row->remain_amount }}</small></td>
                         <td><small>{{ $row->remarks }}</small></td>
