@@ -506,7 +506,12 @@ class MaterialProductsController extends Controller
     }
     public function destroy($id)
     { 
-        MaterialProducts::find($id)->delete();
+        $data   =   MaterialProducts::find($id);
+        foreach ($data->Batches() as $key => $batch) {
+            $batch->BatchOwners()->delete();
+        }
+        $data->Batches()->delete();
+        $data->delete();
         LogActivity::log($id);
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
@@ -530,6 +535,7 @@ class MaterialProductsController extends Controller
                 Storage::delete($data->extended_qc_result);
             }
             BatchRestore($id);
+            $data->BatchOwners()->delete();
             $data->delete();
             LogActivity::log($id);
             return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);

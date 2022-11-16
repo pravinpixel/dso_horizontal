@@ -126,14 +126,23 @@ class RepackBatchController extends Controller
                     $draw_out      = 1;
                     $draw_in       = 0;
                  
-                    $current_batch                  = Batches::find($repackData->batch_id);
-                    $next_batch                     = $current_batch->replicate();
-                    $next_batch->created_at         = Carbon::now();
-                    $next_batch->barcode_number     = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
-                    $next_batch->unit_packing_value = $row['repack_size'];
-                    $next_batch->total_quantity     = $row['repack_amount'];
-                    $next_batch->quantity           = $row['quantity'];
+                    $current_batch                   = Batches::find($repackData->batch_id);
+                    $next_batch                      = $current_batch->replicate();
+                    $next_batch->created_at          = Carbon::now();
+                    $next_batch->barcode_number      = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
+                    $next_batch->unit_packing_value  = $row['repack_size'];
+                    $next_batch->total_quantity      = $row['repack_amount'];
+                    $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
+
+                    if(count($current_batch->BatchOwners)) {
+                        foreach ($current_batch->BatchOwners as $key => $user) {
+                            $next_batch->BatchOwners()->updateOrCreate(["user_id" => $user['id'],"batch_id" => $next_batch->id],[
+                                "user_id"    =>  $user['id'],
+                                "alias_name" => getUserById($user['id'])->alias_name
+                            ]);
+                        }
+                    }
 
                     LogActivity::tracker([
                         "from"           => $current_batch->id,
