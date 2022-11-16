@@ -204,6 +204,7 @@ class MaterialProductsController extends Controller
                             'date_of_expiry'               => strExcelDate($row['date_of_expiry']),
                             'iqc_status'                   => strtolower($row['iqc_status']) == 'pass' ? 1 : 0,
                             'iqc_result'                   => $row['iqc_result'] ?? null,
+                            'iqc_result_status'            => 'on',
                             'sds'                          => $row['sds'] ?? null,
                             'cas'                          => $row['cas'] ?? null,
                             'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
