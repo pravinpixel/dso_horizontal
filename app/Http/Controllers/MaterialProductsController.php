@@ -213,10 +213,11 @@ class MaterialProductsController extends Controller
                             'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
                             'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                             'remarks'                      => $row['remarks'] ?? null,
-                            'used_for_td_expt_only'         => 1,
+                            'used_for_td_expt_only'        => "1",
                             'no_of_extension'              => $row['no_of_extension'] ?? 0
                         ]);
-                        $batch->BatchOwners()->updateOrCreate(["user_id" => (int) auth_user()->id ,"batch_id"    => (int) $batch->id],[
+                   
+                        $batch->BatchOwners()->create([
                             "user_id"    => auth_user()->id,
                             "alias_name" => auth_user()->alias_name
                         ]);
