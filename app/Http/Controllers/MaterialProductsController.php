@@ -214,6 +214,7 @@ class MaterialProductsController extends Controller
                             'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                             'remarks'                      => $row['remarks'] ?? null,
                             'used_for_td_expt_only'        => "1",
+                            'coc_coa_mill_cert_status'     => 'on',
                             'no_of_extension'              => $row['no_of_extension'] ?? 0
                         ]);
                    
