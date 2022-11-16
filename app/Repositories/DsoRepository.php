@@ -156,15 +156,19 @@ class DsoRepository implements DsoRepositoryInterface
                     if($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'EXTEND_EXPIRY') {
-                    if($batch->iqc_status == 1) {
+                } elseif ($page_name == 'EXTEND_EXPIRY') { 
+                    if($batch->iqc_status == 1 || $batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif ($page_name == 'REPORT_DISPOSED_ITEMS') {
                     if($batch->quantity != 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                }
+                } elseif($page_name == 'EARLY_DISPOSAL') {
+                    if($batch->is_draft == 1) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                } 
             }
            
             $parent['material_total_quantity'] = $material_total_quantity;
@@ -191,7 +195,7 @@ class DsoRepository implements DsoRepositoryInterface
             }
 
             $parent['quantityColor'] = $quantityColor;
-            
+        
             if($page_name == 'THRESHOLD_QTY') { 
                 if($parent['quantityColor'] == 'text-success') {
                     unset($material_product[$key]);
@@ -200,7 +204,7 @@ class DsoRepository implements DsoRepositoryInterface
                 if($draftBatchCount != 0) {
                     unset($material_product[$key]);
                 }
-            }
+            } 
         }
 
        $access_material_product = $material_product;
