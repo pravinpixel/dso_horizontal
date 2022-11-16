@@ -45,7 +45,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                         "alias_name" => getUserById((int)$id)->alias_name
                     ]);
                 }
-                $batch->BatchOwners()->updateOrCreate(["user_id" => (int) auth_user()->id ,"batch_id"    => (int) $batch_id],[
+                $batch->BatchOwners()->create([
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
