@@ -54,7 +54,7 @@ class NotificationController extends Controller
     }
     public function near_expiry_expired_ajax($type = null)
     {
-        $data        = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
+        $data        = Batches::with(['BatchOwners','BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
         $near_expiry = [];
         $expired     = [];
         $failed_iqc  = [];
@@ -89,7 +89,15 @@ class NotificationController extends Controller
                 return $table->batch."/".$table->serial."/".$table->po_number;
             })
             ->addColumn('owners', function($table){
-                return $table->owner_one."/".$table->owner_two;
+                $owners = "";
+                foreach($table->BatchOwners as $key => $owner)  {
+                    $owners .=  '
+                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                            '.$owner->alias_name.'
+                        </small> 
+                    ';
+                } 
+                return $owners;
             })
             ->addColumn('storage_area', function($table){
                 return $table->StorageArea->name;
@@ -106,7 +114,7 @@ class NotificationController extends Controller
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="'.route('disposal',$table->id).'"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                             <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                            <a class="dropdown-item"  onclick="viewBatch('.$table->id.')"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
+                            <a class="dropdown-item" onclick="viewBatch('.$table->id.')"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
                         </div>
                     </div>
                 ';

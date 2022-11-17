@@ -14,7 +14,7 @@
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
-                            <td class="text-near-expiry"><b><small>Owner 1/2</small></b></td>
+                            <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
@@ -37,7 +37,7 @@
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
-                            <td class="text-near-expiry"><b><small>Owner 1/2</small></b></td>
+                            <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
@@ -60,7 +60,7 @@
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
-                            <td class="text-near-expiry"><b><small>Owner 1/2</small></b></td>
+                            <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
@@ -72,19 +72,7 @@
             </div>
         </div>
     </section>
-    <div id="View_Batch_Details" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog w-100 modal-right h-100">
-            <div class="modal-content h-100 rounded-0">
-                <div class="modal-header bg-primary text-white border-0 rounded-0">
-                    <h4>View Batch Details</h4>
-                    <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
-                </div>
-                <div class="modal-body modal-scroll-2 p-0"> 
-                    <ol class="list-group list-group-numbered" style="overflow: hidden" id="Batch_Details"></ol> 
-                </div> 
-            </div> 
-        </div>
-    </div>
+    @include('crm.material-products.modals.view-batch-list')
 </div>
 @endsection 
 @section('scripts')  
