@@ -94,22 +94,21 @@ class SearchRepository implements SearchRepositoryInterface
                 }
             }
         })->get();
- 
-        $material_product_data_by_owners = [];
-        foreach ($filter as $column => $value) { 
-            if($column == 'owners'){
-                foreach ($value as $owner) { 
-                    $batch_owner                     = BatchOwners::with('Batches')->where('user_id',$owner['id'])->first();
-                    if(!is_null($batch_owner)) {
-                        $Batches                         = Batches::findOrFail($batch_owner['batch_id']);
-                        $material = MaterialProducts::with('Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody')->find($Batches->material_product_id);
-                        $material_product_data_by_owners[] = $material;
+  
+        if($filter->owners ?? false) {
+            $material_product_data_by_owners = [];
+            foreach ($filter as $column => $value) { 
+                if($column == 'owners'){
+                    foreach ($value as $owner) { 
+                        $batch_owner                     = BatchOwners::with('Batches')->where('user_id',$owner['id'])->first();
+                        if(!is_null($batch_owner)) {
+                            $Batches                         = Batches::findOrFail($batch_owner['batch_id']);
+                            $material = MaterialProducts::with('Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody')->find($Batches->material_product_id);
+                            $material_product_data_by_owners[] = $material;
+                        }
                     }
-                }
-            } 
-        }
-   
-        if(isset($material_product_data_by_owners)) {
+                } 
+            }
             return $this->dsoRepository->renderTableData($material_product_data_by_owners);
         }
          

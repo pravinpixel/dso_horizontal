@@ -7,15 +7,8 @@
             {{-- ======= Table Header  ====== --}}
         </div>
         <div class="custom-table-body">
-           <b class="jhfs"> @{{ row.hideParentRow }}</b>
             {{-- ng-if="row.hideParentRow == 0" --}}
-            @switch($page_name)
-                @case('THRESHOLD_QTY')
-                    <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
-                @break  
-                @default
-                <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
-            @endswitch
+            <div class="custom-table-row" ng-repeat="(index,row) in material_products.data">
             
                 {{--  ng-if="row.access.includes(auth_id) || auth_role == 'admin'"  > --}}
                 <div class="custom-table">

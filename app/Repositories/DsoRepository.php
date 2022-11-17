@@ -3,13 +3,11 @@
 namespace App\Repositories;
 
 use App\Interfaces\DsoRepositoryInterface;
-use App\Models\BatchOwners;
 use App\Models\Masters\Departments;
 use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
-use App\Models\MaterialProducts;
 use App\Models\tableOrder;
 use App\Models\User;
 use Carbon\Carbon;
@@ -133,23 +131,12 @@ class DsoRepository implements DsoRepositoryInterface
                         } else {
                             $batch->date_of_expiry_color = "text-danger";
                         }
-                    }
-                    
-                    // if($diff < $days_of_alert) {
-                    //     if($days_of_alert > $diff) {
-                    //         $batch->date_of_expiry_color = "text-warning";
-                    //     } else {
-                    //         $batch->date_of_expiry_color = "text-danger";
-                    //     }
-                    // } else
+                    } 
                 }
 
                 if ($batch->is_draft == 1 ) {
                     $draftBatchCount += 1; 
                 } else { 
-                    // $QtyCount                 = $parent->Batches[0]->quantity;
-                    // $totalQtyCount            = $parent->Batches[0]->quantity *  $parent->Batches[0]->unit_packing_value;
-                    // $UnitPackingCount         = $parent->Batches[0]->unit_packing_value;
                     $total_bath_quantity     += (int) $batch->quantity;
                     $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
                     $batch->total_quantity    = $batch->quantity * $batch->unit_packing_value;
@@ -162,7 +149,8 @@ class DsoRepository implements DsoRepositoryInterface
                 }
  
                 if($page_name == 'THRESHOLD_QTY') { 
-                    if($batch->is_draft == 1) {
+                    Log::info($batch->quantity_color);
+                    if($batch->is_draft == 1 && $batch->quantity_color == 'GREEN') {
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif($page_name == 'PRINT_BARCODE_LABEL') {
