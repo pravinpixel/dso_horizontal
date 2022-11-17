@@ -231,7 +231,11 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">FM1202</div>
-                {{ $batch->fm_1202 }}
+                @if ($batch->fm_1202 == 'on')
+                        <span class="badge bg-success rounded-pill">ON</span>
+                    @else
+                    <span class="badge bg-danger rounded-pill">OFF</span>
+                @endif
             </div>
         </li>
     @endif

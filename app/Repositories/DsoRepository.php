@@ -122,14 +122,26 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->owners = $owners; 
                 
                 if(!is_null($date_of_expiry)) {
-                    $diff   = Carbon::parse($date_of_expiry)->diffInDays();
-                    if ($diff == 0) {
-                        $batch->date_of_expiry_color = "text-warning";
-                    } elseif($diff <= 21){
-                        $batch->date_of_expiry_color = "text-danger";
-                    } else {
+                    $diff          = Carbon::parse($date_of_expiry)->diffInDays();
+                    $days_of_alert = $batch->BatchMaterialProduct->alert_before_expiry * 7;
+                    
+                    if($diff > $days_of_alert) {
                         $batch->date_of_expiry_color = "text-success";
-                    } 
+                    } else {
+                        if($diff == $days_of_alert) {
+                            $batch->date_of_expiry_color = "text-warning";
+                        } else {
+                            $batch->date_of_expiry_color = "text-danger";
+                        }
+                    }
+                    
+                    // if($diff < $days_of_alert) {
+                    //     if($days_of_alert > $diff) {
+                    //         $batch->date_of_expiry_color = "text-warning";
+                    //     } else {
+                    //         $batch->date_of_expiry_color = "text-danger";
+                    //     }
+                    // } else
                 }
 
                 if ($batch->is_draft == 1 ) {
