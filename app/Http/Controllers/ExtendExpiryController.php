@@ -35,14 +35,13 @@ class ExtendExpiryController extends Controller
         $this->MartialProduct->storeFiles($request, $batch);
         $old_value  =   clone $batch;
         $new_value  =   $batch; 
+     
         $batch->update([
             'date_of_expiry' => $request->extended_expiry,
             'remarks'         => $request->remarks,
             'iqc_status'      => $request->iqc_status
         ]);
-
-     
-        
+  
         LogActivity::dataLog($old_value, $new_value);
         return redirect()->route('extend-expiry')->with('success',"Extension Success !");
     }

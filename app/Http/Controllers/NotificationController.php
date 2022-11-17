@@ -7,6 +7,7 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\ElseIf_;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -60,6 +61,7 @@ class NotificationController extends Controller
         $failed_iqc  = [];
 
         foreach ($data as $key => $row) {
+            Log::info($row->is_draft);
             $now            = Carbon::now();
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
             if ($now >= $date_of_expiry) {
@@ -67,7 +69,7 @@ class NotificationController extends Controller
             } elseif($row->iqc_status != "1") {
                 $near_expiry[] = $row;
             }
-            if($row->iqc_status == "1") {
+            if($row->iqc_status == 0) {
                 $failed_iqc[] = $row;
             }
         }
