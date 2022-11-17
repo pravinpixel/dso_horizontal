@@ -105,6 +105,9 @@ class NotificationController extends Controller
             ->addColumn('housing_type', function($table){
                 return $table->HousingType->name;
             })
+            ->addColumn('date_of_expiry', function($table){
+                return SetDateFormat($table->date_of_expiry);
+            })
             ->addColumn('action', function($table){
                 return '
                     <div class="dropdown">
