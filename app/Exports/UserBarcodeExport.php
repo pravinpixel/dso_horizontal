@@ -9,10 +9,7 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-
 class UserBarcodeExport  implements FromArray, WithDrawings, WithEvents
 {
     // public function styles(Worksheet $sheet)
