@@ -36,7 +36,7 @@ class UserBarcodeExport  implements FromArray, WithDrawings, WithEvents
             $drawingCollection[] = $drawing =new Drawing();
             $drawing->setName('Logo');
             $drawing->setDescription('This is my logo');
-            $drawing->setPath(storage_path('app')."\\".$code);
+            $drawing->setPath(storage_path('app')."/".$code);
             $drawing->setHeight(50);
             $drawing->setCoordinates($col);
         }
