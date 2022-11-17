@@ -10,6 +10,9 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Intervention\Image\ImageManagerStatic as Image;
+
+
 class UserBarcodeExport  implements FromArray, WithDrawings, WithEvents
 {
     // public function styles(Worksheet $sheet)
@@ -22,12 +25,12 @@ class UserBarcodeExport  implements FromArray, WithDrawings, WithEvents
         $staffs            = User::all();
         $barcodeCollection = [];
         foreach ($staffs as $key => $user) {
-            $filename = $user->email.$user->alias_name.'.jpg';
+            $filename = $user->email.$user->alias_name.'.png';
             if(Storage::exists($filename)) {
                 Storage::delete($filename); 
             }
             $generatorPNG = new BarcodeGeneratorPNG;
-            \Image::make(base64_encode($generatorPNG->getBarcode($user->email, $generatorPNG::TYPE_CODE_128)))->save(storage_path('app/').$filename);
+            Image::make(base64_encode($generatorPNG->getBarcode($user->email, $generatorPNG::TYPE_CODE_128)))->save(storage_path('app/').$filename);
             $barcodeCollection[] = $filename;
         }
         $drawingCollection =[];
@@ -36,7 +39,7 @@ class UserBarcodeExport  implements FromArray, WithDrawings, WithEvents
             $drawingCollection[] = $drawing =new Drawing();
             $drawing->setName('Logo');
             $drawing->setDescription('This is my logo');
-            $drawing->setPath(storage_path('app')."\\".$code);
+            $drawing->setPath(storage_path('app').env('APP_ROOT_SYM','/').$code);
             $drawing->setHeight(50);
             $drawing->setCoordinates($col);
         }
