@@ -232,9 +232,9 @@
             <div class="w-100">
                 <div class="fw-bold mb-1">FM1202</div>
                 @if ($batch->fm_1202 == 'on')
-                        <span class="badge bg-success rounded-pill">ON</span>
+                        <span class="badge bg-success rounded-pill">Yes</span>
                     @else
-                    <span class="badge bg-danger rounded-pill">OFF</span>
+                    <span class="badge bg-danger rounded-pill">No</span>
                 @endif
             </div>
         </li>

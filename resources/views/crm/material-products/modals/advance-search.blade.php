@@ -106,7 +106,7 @@
                             <select class="form-select" ng-model="advanced_filter.fm_1202">
                                 <option value="">-- Select --</option>
                                 <option value="on">Yes</option>
-                                <option value="no">No</option> 
+                                <option value="off">No</option> 
                             </select>
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">

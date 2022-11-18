@@ -418,6 +418,7 @@ app.controller('RootController', function ($scope, $http) {
     $scope.clear_advanced_filter = () => {
         $scope.advanced_filter.owners = {}
         $scope.advanced_filter = {}
+        $scope.get_material_products()
     }
 
     // Advanced Search Fitters
