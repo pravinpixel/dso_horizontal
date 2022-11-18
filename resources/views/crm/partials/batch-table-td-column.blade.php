@@ -120,6 +120,7 @@
                         <i class="bi bi-trash2 me-1"></i>
                       To Dispose /  <br>  Used for TD / Expt Project 
                     </a>
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
                     <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
