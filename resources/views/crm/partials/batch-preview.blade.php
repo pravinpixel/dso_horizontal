@@ -130,10 +130,12 @@
         <li class="list-group-item list-group-item-action d-flex align-self-start" >
             <div class="w-100">
                 <div class="fw-bold mb-1">Owners (SE/PL/FM)</div>
-                @foreach ($batch->BatchOwners as $key => $owner) 
-                    <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
-                        {{ $owner->alias_name }}
-                    </small> 
+                @foreach ($batch->BatchOwners as $key => $owner)
+                    @if ($owner->alias_name ?? false)
+                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                            {{ $owner->alias_name  }}
+                        </small> 
+                    @endif 
                 @endforeach
             </div>
         </li>
