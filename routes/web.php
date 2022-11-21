@@ -162,18 +162,20 @@ Route::middleware(['auth_users'])->group(function () {
 
     Route::prefix('reports')->group(function() {
         Route::get('/', [ReportsController::class,'disposed_items'])->name('reports'); 
-        Route::get('utilisation-cart', [ReportsController::class,'utilisation_cart'])->name('reports.utilisation_cart'); 
-        Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
-        Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
+
         Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
+        Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
         Route::get('security', [ReportsController::class,'security'])->name('reports.security');
+
+        Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife'); 
+        // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
+        // Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
     }); 
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
     Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
     
 
-    Route::get('reports/expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
     Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material'); 
 
     

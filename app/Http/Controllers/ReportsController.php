@@ -29,10 +29,10 @@ class ReportsController extends Controller
         $this->dsoRepository    =   $dsoRepositoryInterface;
         $this->MartialProduct   =   $MartialProductRepository;
     }
-    public function utilisation_cart()
+    public function deduct_track_outlife()
     {
-        $page_name  = "REPORT_UTILISATION_CART";
-        $view       = "crm.reports.utilisation-cart";
+        $page_name  = "DEDUCT_TRACK_OUTLIFE_REPORT";
+        $view       = "crm.reports.deduct-track-outlife";
         return $this->dsoRepository->renderPage($page_name, $view); 
     }
     public function export_cart()
