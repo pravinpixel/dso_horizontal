@@ -332,9 +332,7 @@ getToCart = (type) => {
     });
 }
 try {
-    getToCart('REPORT_UTILISATION_CART')
-    getToCart('REPORT_EXPORT_CART')
-    getToCart('REPORT_DISPOSED_ITEMS')
+    getToCart('DEDUCT_TRACK_OUTLIFE_REPORT')
 } catch (error) {
     console.log(error)
 } 

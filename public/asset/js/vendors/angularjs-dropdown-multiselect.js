@@ -99,7 +99,7 @@
 					toggleDropdown: '?toggleDropdown'
 				},
 				controller: _angularjsDropdownMultiselect2.default,
-				templateUrl: 'component/multiselect.html'
+				templateUrl: $('#app_URL').val() + '/component/multiselect.html'
 			};
 		}
 
@@ -666,5 +666,5 @@
 }
 /******/]);
 angular.module("angularjs-dropdown-multiselect").run(["$templateCache", function($templateCache) {
-    $templateCache.put("component/multiselect.html");
+    $templateCache.put( $('#app_URL').val() + "/component/multiselect.html");
 }]);

@@ -104,6 +104,18 @@
             </div>
         </div>
     @break
+    @case('DEDUCT_TRACK_OUTLIFE_REPORT')
+        <div class="box border-start box-sm">
+            <div class="dropdown">
+                <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" material-id="@{{ row.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    @break
     @case('REPORT_UTILISATION_CART')
         <div class="box border-start box-sm">
             <div class="dropdown">

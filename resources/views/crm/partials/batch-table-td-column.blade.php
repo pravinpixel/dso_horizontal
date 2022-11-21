@@ -126,6 +126,19 @@
                 </div>
             </div>
         </div>
+    @break 
+    @case('DEDUCT_TRACK_OUTLIFE_REPORT')
+        <div class="box border-start box-sm">
+            <div class="dropdown mx-1">
+                <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots text-dark"></i> 
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" batch-id="@{{ batch.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button>
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
+                </div>
+            </div>
+        </div>
     @break
     @case('REPORT_UTILISATION_CART')
         <div class="box border-start box-sm">
