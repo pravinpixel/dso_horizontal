@@ -14,6 +14,12 @@
             </a>
         </li>  --}}
         <li class="nav-item">
+            <a href="{{ route('reports.deduct_track_outlife') }}" class="bg-none nav-link {{ Route::is(['reports.deduct_track_outlife']) ? "active" : "" }}">
+                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                <span class="d-none d-md-block">Deduct Track Outlife</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items','reports']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Disposed items</span>
@@ -30,15 +36,9 @@
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Security History</span>
             </a>
-        </li>
-            {{-- <li class="nav-item">
-                <a href="{{ route('reports.history') }}" class="bg-none nav-link {{ Route::is(['reports.history']) ? "active" : "" }}">
-                    <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Material/Product History</span>
-                </a>
-            </li>    --}}
+        </li> 
     </ul> 
     <section class="pt-3">
         @yield('report_content')
     </section> 
-@endsection 
+@endsection  
