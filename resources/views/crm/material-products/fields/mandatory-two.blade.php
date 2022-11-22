@@ -210,6 +210,9 @@
         </script>
     @endif
     <script> 
+        setTimeout(() => {
+            $('.coc_coa_mill_cert_input').prop('required', true)
+        }, 200);
         var authUserName = "{{ auth_user()->alias_name }}"
         $('.ownner_select').select2(); 
         $('.owners_select').select2({
@@ -276,7 +279,8 @@
                 formInput.prop('required', true)
                 formInput.prop('disabled', false)
             }
-        }
+        } 
+         
         change_iqc_result_status = () => {
             const checkBox      =    $('#iqc_result_check_box')
             const formInput     =    $('#iqc_status_input')
