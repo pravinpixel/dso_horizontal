@@ -26,9 +26,15 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">FM1202 </label>
             <div class="col-8"> 
-                <div class="form-control form-control-sm {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") == 'disabled' ? "bg-light" : '' }}">  
-                    <input type="checkbox" {{ $batch->fm_1202 == 'on' ? 'checked' : '' }} name="fm_1202" value="on" class="form-check-input me-2" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") }}>               
-                    <small>Yes Included</small>
+                <div class="d-flex">
+                    <label for="yes" class="form-control form-control-sm form-radio-success me-2 {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") == 'disabled' ? "bg-light" : '' }}">  
+                        <input id="yes" {{ $batch->fm_1202 == 'on' ? 'checked' : null }} type="radio" name="fm_1202" value="on" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") }}>               
+                        <small class="text-secondary">Yes Included</small>
+                    </label>
+                    <label for="not" class=" form-radio-danger form-control form-control-sm {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") == 'disabled' ? "bg-light" : '' }}">  
+                        <input type="radio" {{ $batch->fm_1202 == 'off' ? 'checked' : null }} id="not" name="fm_1202" value="off" class="form-check-input" >   
+                        <small class="text-secondary">No Not Included</small>
+                    </label>
                 </div>
             </div>
         </div>
