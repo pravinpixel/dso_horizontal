@@ -11,11 +11,13 @@ use App\Models\Masters\StorageRoom;
 use App\Models\tableOrder;
 use App\Models\User;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\Else_;
 
 class DsoRepository implements DsoRepositoryInterface
 { 
@@ -120,18 +122,30 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->owners = $owners; 
                 
                 if(!is_null($date_of_expiry)) {
-                    $diff          = Carbon::parse($date_of_expiry)->diffInDays();
-                    $days_of_alert = $batch->BatchMaterialProduct->alert_before_expiry * 7;
-                    
-                    if($diff > $days_of_alert) {
-                        $batch->date_of_expiry_color = "text-success";
+               
+                    $finalDate  = date('Y-m-d', strtotime($date_of_expiry));
+                    $alertWeeks = (int)$batch->BatchMaterialProduct->alert_before_expiry;
+                    $checkDate  = date('Y-m-d', strtotime($finalDate.' - '.$alertWeeks.' weeks' ) );
+              
+                    $date1      = new DateTime($finalDate);
+                    $toDate     = new DateTime(date('Y-m-d'));
+
+                    if($alertWeeks == '')  {
+                        $batch->date_of_expiry_color = "text-dark";
                     } else {
-                        if($diff == $days_of_alert) {
-                            $batch->date_of_expiry_color = "text-warning";
-                        } else {
+                        if( $toDate > $date1 ) { 
                             $batch->date_of_expiry_color = "text-danger";
+                        } else {
+                            $diffWeeks  = Carbon::parse($date_of_expiry)->diffInWeeks();
+                            $alertWeeks = $batch->BatchMaterialProduct->alert_before_expiry;  
+                            $weekdays = $alertWeeks;
+                            if($diffWeeks <=  $weekdays ) {
+                                $batch->date_of_expiry_color = "text-warning";
+                            } else {
+                                $batch->date_of_expiry_color = "text-success"; 
+                            }
                         }
-                    } 
+                    }   
                 }
 
                 if ($batch->is_draft == 1 ) {
