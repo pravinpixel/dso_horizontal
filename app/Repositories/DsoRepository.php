@@ -173,7 +173,7 @@ class DsoRepository implements DsoRepositoryInterface
                     if($batch->is_draft == 1 || $batch->withdrawal_type != 'DEDUCT_TRACK_OUTLIFE') {
                         unset($parent->Batches[$batch_key]);
                     }
-                }
+                } 
             }
            
             $parent['material_total_quantity'] = $material_total_quantity;

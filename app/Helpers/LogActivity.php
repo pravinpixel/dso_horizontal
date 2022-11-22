@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\LogSheet;
+use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
 
@@ -61,7 +62,7 @@ class LogActivity
                     $action_type  = 'RECONCILIATION_FROM_IMPORT_EXCEL';
                     $module_name  = 'Batches';
                 break;
-        }
+        } 
 
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),
@@ -76,8 +77,7 @@ class LogActivity
     }
 
     public static function dataLog($old, $new , $remarks = null)
-    {
-         
+    { 
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
                 $action_type = 'TRANSFER';
@@ -122,18 +122,37 @@ class LogActivity
                 $remarks     = $new->remarks;
             break; 
         }
-        LogSheet::updateOrCreate([
-            'ip'          => request()->ip(),
-            'agent'       => request()->header('user-agent'),
-            'user_id'     => auth_user()->id,
-            'user_name'   => auth_user()->alias_name,
-            'module_name' => $module_name,
-            'action_type' => $action_type,
-            'old'         => json_encode($old),
-            'new'         => json_encode($new),
-            'module_id'   => $old->id ?? '',
-            'remarks'    =>  $remarks
-        ]);
+        // dd($new);
+        // dd($old);
+        // LogSheet::updateOrCreate([
+        //     'ip'          => request()->ip(),
+        //     'agent'       => request()->header('user-agent'),
+        //     'user_id'     => auth_user()->id,
+        //     'user_name'   => auth_user()->alias_name,
+        //     'module_name' => $module_name,
+        //     'action_type' => $action_type,
+        //     'old'         => json_encode($old),
+        //     'new'         => json_encode($new),
+        //     'module_id'   => $old->id ?? '',
+        //     'remarks'    =>  $remarks
+        // ]); 
+        // materialProductHistory::create([
+        //     'CategorySelection' => $old->BatchMaterialProduct->category_selection,
+        //     'ItemDescription'   => $old->BatchMaterialProduct->item_description,
+        //     'Brand'             => $old->brand,
+        //     'BatchSerial'       => $old->batch." / ".$old->serial,
+        //     'TransactionBy'     => auth_user()->alias_name,
+        //     'Module'            => session()->get('page_name'),
+        //     'ActionTaken'       => $action_type,
+        //     'UnitPackingValue'  => $old->unit_packing_value,
+        //     'Quantity',
+        //     'StorageArea' => $old->StorageArea->name,
+        //     'Housing'     => $old->housing,
+        //     'Owners'      => $old->BatchOwners,
+        //     'Remarks'     => $old->remarks,
+        //     'DrawStatus',
+        //     'RemainingOutlifeOfParent'
+        // ]);
     }
 
     public static function all()

@@ -35,6 +35,10 @@ class ReportsController extends Controller
         $view       = "crm.reports.deduct-track-outlife";
         return $this->dsoRepository->renderPage($page_name, $view); 
     }
+    public function material_in_house_pdt_history()
+    {
+        return view('crm.reports.material-in-house-pdt-history');
+    }
     public function export_cart()
     {
         $page_name  = "REPORT_EXPORT_CART";

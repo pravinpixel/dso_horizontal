@@ -166,8 +166,9 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items'); 
         Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material'); 
         Route::get('security', [ReportsController::class,'security'])->name('reports.security');
-
+        
         Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife'); 
+        Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history'); 
         // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
         // Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
     }); 
