@@ -14,6 +14,12 @@
             </a>
         </li>  --}}
         <li class="nav-item">
+            <a href="{{ route('reports.material_in_house_pdt_history') }}" class="bg-none nav-link {{ Route::is(['reports.material_in_house_pdt_history']) ? "active" : "" }}">
+                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                <span class="d-none d-md-block">Material inHouse pdt History </span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('reports.deduct_track_outlife') }}" class="bg-none nav-link {{ Route::is(['reports.deduct_track_outlife']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Deduct Track Outlife</span>
