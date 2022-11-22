@@ -138,8 +138,8 @@ class RepackBatchController extends Controller
                     if(count($current_batch->BatchOwners)) {
                         foreach ($current_batch->BatchOwners as $key => $user) {
                             $next_batch->BatchOwners()->updateOrCreate(["user_id" => $user['id'],"batch_id" => $next_batch->id],[
-                                "user_id"    =>  $user['id'],
-                                "alias_name" => getUserById($user['id'])->alias_name ?? ''
+                                "user_id"    => $user['user_id'],
+                                "alias_name" => getUserById($user['user_id'])->alias_name 
                             ]);
                         }
                     }
