@@ -162,9 +162,8 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
                  
-                if($page_name == 'THRESHOLD_QTY') { 
-                    Log::info($batch->quantity_color);
-                    if($batch->is_draft == 1 && $batch->quantity_color == 'GREEN') {
+                if($page_name == 'THRESHOLD_QTY') {  
+                    if($batch->is_draft == 1 && $batch->date_of_expiry_color == 'text-success') {
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif($page_name == 'PRINT_BARCODE_LABEL') {
@@ -172,7 +171,7 @@ class DsoRepository implements DsoRepositoryInterface
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif ($page_name == 'EXTEND_EXPIRY') { 
-                    if($batch->iqc_status == 1 || $batch->is_draft == 1) {
+                    if($batch->iqc_status == 1 || $batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success') {
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif ($page_name == 'REPORT_DISPOSED_ITEMS') {
