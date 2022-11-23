@@ -110,7 +110,6 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
 
                 $owners = "";
-
                 if ($batch->owners) {
                     foreach ($batch->BatchOwners as $key => $owner) {
                         $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">' . $owner->alias_name . '</small>';
@@ -131,56 +130,20 @@ class DsoRepository implements DsoRepositoryInterface
                     } else {
                         $FinalDateOfExpiry = date_create($date_of_expiry);
                         $alertWeeks        = $batch->BatchMaterialProduct->alert_before_expiry." Weeks"; //1 week
-                        date_sub($FinalDateOfExpiry,date_interval_create_from_date_string($alertWeeks));
-                        $CurrentExpiryFinalDate = date_format($FinalDateOfExpiry,"Y-m-d");
-
-                         
-                        if($CurrentExpiryFinalDate > date('Y-m-d')) {
-                            $DateOfExpiryStatus = "text-success";
-                        }  else {
-                            $DateOfExpiryStatus = "text-warning";
+                        if($batch->BatchMaterialProduct->alert_before_expiry) {
+                            date_sub($FinalDateOfExpiry,date_interval_create_from_date_string($alertWeeks));
+                            $CurrentExpiryFinalDate = date_format($FinalDateOfExpiry,"Y-m-d");
+                            if($CurrentExpiryFinalDate > date('Y-m-d')) {
+                                $DateOfExpiryStatus = "text-success";
+                            }  else {
+                                $DateOfExpiryStatus = "text-warning";
+                            }
+                        } else {
+                            $DateOfExpiryStatus = "text-dark";
                         }
-                        // if($CurrentExpiryFinalDate < $CurrentDate) {
-                        //     $DateOfExpiryStatus = "text-success";
-                        // } 
                     }
 
                     $batch->date_of_expiry_color = $DateOfExpiryStatus ?? 'text-dark';
-
-                    // $finalDate  = date('Y-m-d', strtotime($date_of_expiry));
-                    // $alertWeeks = (int)$batch->BatchMaterialProduct->alert_before_expiry;
-
-                    // $date1      = new DateTime($finalDate);
-                    // $toDate     = new DateTime(date('Y-m-d'));
-
-                    // if ($alertWeeks == '') {
-                    //     $batch->date_of_expiry_color = "text-dark";
-                    // } else {
-                    //     if ($toDate > $date1) {
-                    //         $batch->date_of_expiry_color = "text-danger";
-                    //     } else {
-                    //         $diffWeeks  = Carbon::parse($date_of_expiry)->diffInDays();
-                    //         $alertWeeks = $batch->BatchMaterialProduct->alert_before_expiry * 7;
-
-                    //         // log::info($diffWeeks >  $alertWeeks);
-                    //         if ($date_of_expiry > date('Y-m-d')  && $alertWeeks >  $diffWeeks) {
-                    //             // $batch->date_of_expiry_color = "text-success";
-                                
-                    //             if ($diffWeeks >  $alertWeeks) {
-                    //                 $batch->date_of_expiry_color = "text-success";
-                    //             } else {
-                    //                 $batch->date_of_expiry_color = "text-warning";
-                    //             }
-                    //         } else {
-                    //             // $batch->date_of_expiry_color = "text-warning";
-                    //             if ($diffWeeks <=  $alertWeeks) {
-                    //                 $batch->date_of_expiry_color = "text-warning";
-                    //             } else {
-                    //                 $batch->date_of_expiry_color = "text-success";
-                    //             }
-                    //         }
-                    //     }
-                    // }
                 }
 
                 if ($batch->is_draft == 1) {
