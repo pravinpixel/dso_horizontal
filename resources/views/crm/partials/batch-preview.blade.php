@@ -278,7 +278,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
-            <div class="fw-bold mb-1">Extended expiry</div>
+            <div class="fw-bold mb-1">No.of extension</div>
             @if ($batch->extended_expiry)
                 {{ $batch->extended_expiry }}
             @endif
