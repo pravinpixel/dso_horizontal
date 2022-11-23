@@ -78,7 +78,23 @@ class ReportsController extends Controller
     }
     public function disposed_items(Request $request)
     {  
-        $disposed = LogActivity::getDisposalItems(); 
+        $Batches =  Batches::where('quantity',0)->latest()->get();
+ 
+        $disposed = [];
+        foreach ($Batches as $key => $batch) {
+ 
+            if($batch->quantity == 0) {
+                $disposed[] = [
+                    "transaction_date" => $batch->created_at->format('d-m-Y'),
+                    "transaction_time" => $batch->created_at->format('h:m:s A'),
+                    "transaction_by"   => $batch->user_name,
+                    "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
+                    "batch_serial"     => $batch->batch.' / '.$batch->serial,
+                    "unit_pack_value"  => $batch->unit_packing_value,
+                    "quantity"         => (string) $batch->quantity, 
+                ];
+            }
+        }
         if ($request->ajax()) { 
             return DataTables::of($disposed)->addIndexColumn()->make(true);
         }
