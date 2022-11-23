@@ -94,7 +94,7 @@
                             <select name="advanced_filter.iqc_status" class="form-select" ng-model="advanced_filter.iqc_status">
                                 <option value="">-- Select --</option>
                                 <option value="1">Pass</option>
-                                <option value="2">Fail</option> 
+                                <option value="0">Fail</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
