@@ -19,23 +19,31 @@ class UserSeeder extends Seeder
     public function run()
     {
         #========Create ADmin======
-        $userDb = Sentinel::registerAndActivate([
-            'email'         => '123',
-            'password'      => config('auth.password'),
-            'full_name'     => 'Adrian',
-            'alias_name'    => 'Adrian',
-        ]); 
-
-        Sentinel::getRoleRepository()->createModel()->create([
+        $Admin = Sentinel::getRoleRepository()->createModel()->create([
             'name'       => 'Admin',
-            'slug'       => 'system-admin',
-            'permissions'=> config('permission'),
+            'slug'       => 'admin',
         ]);
 
-        Sentinel::getRoleRepository()->createModel()->create( [
+        $SuperAdmin = Sentinel::getRoleRepository()->createModel()->create([
             'name'       => 'Super Admin',
-            'slug'       => 'admin',
-        ])->users()->attach($userDb);
+            'slug'       => 'SuperAdmin',
+        ]);
+
+        $Admin->users()->attach(Sentinel::registerAndActivate([
+            'email'      => '123',
+            'password'   => config('auth.password'),
+            'full_name'  => 'Alexia',
+            'alias_name' => "Alexia Caleb",
+            'department' => 1
+        ]));
+
+        $SuperAdmin->users()->attach(Sentinel::registerAndActivate([
+            'email'      => '12345678',
+            'password'   => config('auth.password'),
+            'full_name'  => 'Developer',
+            'alias_name' => "Developer",
+            'department' => 1
+        ]));
  
         #========Create Staff====== 
 

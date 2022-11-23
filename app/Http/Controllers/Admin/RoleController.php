@@ -21,7 +21,7 @@ class RoleController extends Controller
     
 
     public function index(Request $request)
-    {
+    { 
         if($request->ajax()) {
              
             $data = Sentinel::getRoleRepository()->select([
@@ -30,23 +30,21 @@ class RoleController extends Controller
                 'name',
                 'created_at',
                 'updated_at',
-            ])->whereNotIn('slug',['admin','superadmin']);
-                return DataTables::eloquent($data)
-                ->addColumn('action', function ($data) {
-                    $action = '
-                        <div class="btn-group border">
-                            <a href="'.route('role.edit', $data->id).'" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
-                            <form method="post" action="'.route('role.delete', $data->id).'"> 
-                                    '.csrf_field().'
-                                <button id="confirmDelete" type="submit" class="btn btn-sm text-danger border-0" title="Delete"><i class="bi bi-trash"></i> </button>
-                            </form>
-                        </div>
-                    ';
-                    return $action;
-                })
-                
-            ->make(true);
+            ])->whereNotIn('slug',['SuperAdmin',auth_user_role()->slug]);
+
+            return DataTables::eloquent($data)->addColumn('action', function ($data) {
+                return '
+                    <div class="btn-group border">
+                        <a href="'.route('role.edit', $data->id).'" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
+                        <form method="post" action="'.route('role.delete', $data->id).'"> 
+                                '.csrf_field().'
+                            <button id="confirmDelete" type="submit" class="btn btn-sm text-danger border-0" title="Delete"><i class="bi bi-trash"></i> </button>
+                        </form>
+                    </div>
+                '; 
+            })->make(true);
         }
+
         return view('masters.role.index');
     }
 
