@@ -33,4 +33,9 @@ class RepackOutlife extends Model
         'remarks',
         'current_date_time'
     ];
+
+    public function Batch()
+    {
+        return $this->hasOne(Batches::class, 'id', 'batch_id');
+    }
 }

@@ -1,3 +1,4 @@
+@if(count($direct_deducts) != 0) 
 <form action="{{ route('direct-deduct') }}" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
     @csrf
     <table class="table bg-white table-borderless border table-centered">
@@ -20,7 +21,6 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($direct_deducts) != 0) 
                 @foreach ($direct_deducts as $row)
                     <tr>
                         <td>
@@ -46,23 +46,13 @@
                             <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
                         </td>
                     </tr>
-                @endforeach
-                @else
-                <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            @endif 
-        </tbody>
-    </table>
+                @endforeach 
+            </tbody>
+        </table>
     <div class="text-end"> 
         <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
     </div>
 </form>
+@else
+    {!! no_data_found() !!}
+@endif 
