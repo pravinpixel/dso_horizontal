@@ -182,16 +182,18 @@ validateDate = (endInput, element) => {
 }
 getNotificationCount = () => {
     fetch(APP_URL + '/NotificationCount').then(response => response.json()).then(response => {
-        var NotificationData            = response.data;
-        var NotificationCount           = document.getElementById('NotificationCount')
-        var NotificationList            = document.getElementById('NotificationList')
-            NotificationCount.innerHTML = response.count
+        var NotificationData    = response.data;
+        var NotificationCount   = document.getElementById('NotificationCount')
+        var NotificationList    = document.getElementById('NotificationList')
+            
+        NotificationList.innerHTML  = ''
+        NotificationCount.innerHTML = response.count
 
         NotificationData.map((item) => {
-            NotificationList.innerHTML += `
+            return NotificationList.innerHTML += `
                 <li class="list-group-item list-group-item-action btn">
-                    <div><a href="${APP_URL}/notification/threshold-qty">${item.material_product.item_description}</a></div>
-                    <small>${item.batch}</small>
+                    <div><a href="${APP_URL}/notification/threshold-qty">${item.item_description}</a></div>
+                    <small>${item.batches[0].batch}</small>
                     <small class="float-end text-secondary">${ moment(item.created_at).format('YYYY-MM-DD h:m:s A')}</small>
                 </li> 
             `

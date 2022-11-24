@@ -34,8 +34,10 @@ class NotificationController extends Controller
     }
     public function notification_count()
     {
-        $data = MaterialProducts::where(['is_read' => 0,'is_draft' => 0,])->get();
-       
+        $data = MaterialProducts::with('Batches')->where(['is_read' => 0,'is_draft' => 0,])->get();
+        
+        $MaterialProducts = [];
+
         foreach ($data as $key => $parent) {
             if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit || $parent->alert_threshold_qty_lower_limit < $parent->material_quantity && $parent->material_quantity < $parent->alert_threshold_qty_upper_limit) {
                 $MaterialProducts[]  = $parent;
