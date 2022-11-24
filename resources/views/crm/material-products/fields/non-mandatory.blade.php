@@ -32,7 +32,7 @@
                         <small class="text-secondary">Yes Included</small>
                     </label>
                     <label for="not" class=" form-radio-danger form-control form-control-sm {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") == 'disabled' ? "bg-light" : '' }}">  
-                        <input type="radio" {{ $batch->fm_1202 == 'off' ? 'checked' : null }} id="not" name="fm_1202" value="off" class="form-check-input" >   
+                        <input type="radio" {{ $batch->fm_1202 == 'off' ? 'checked' : null }} id="not" name="fm_1202" value="off" class="form-check-input" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."fm_1202.status") }}>   
                         <small class="text-secondary">No Not Included</small>
                     </label>
                 </div>

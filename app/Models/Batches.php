@@ -14,7 +14,6 @@ class Batches extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'is_read',
         'is_draft',
         'material_product_id',
         'brand',

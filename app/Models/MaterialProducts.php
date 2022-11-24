@@ -30,6 +30,7 @@ class MaterialProducts extends Model
         'quantity_update_status',
         'material_total_quantity',
         'is_draft',
+        'is_read'
     ];
 
     public function Batches()

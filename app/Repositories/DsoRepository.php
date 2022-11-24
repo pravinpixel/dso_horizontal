@@ -158,10 +158,8 @@ class DsoRepository implements DsoRepositoryInterface
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                }
-
-                if ($page_name == 'THRESHOLD_QTY') {
-                    if ($batch->is_draft == 1 && $batch->date_of_expiry_color == 'text-success') {
+                }elseif ($page_name == 'THRESHOLD_QTY') {
+                    if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
                 } elseif ($page_name == 'PRINT_BARCODE_LABEL') {
@@ -189,39 +187,31 @@ class DsoRepository implements DsoRepositoryInterface
 
             $parent['material_total_quantity'] = $material_total_quantity;
             $parent['material_quantity']       = $material_total_quantity != 0 ? ($material_total_quantity / $parent['unit_packing_value']) : 0;
-
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
             $parent['draftBatchCount']         = $draftBatchCount;
             $parent['total_bath_quantity']     = $total_bath_quantity;
 
-            if ($parent->totalQuantity < $parent->alert_threshold_qty_lower_limit) {
+            if ($total_bath_quantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
-            } else {
-                if ($parent->alert_threshold_qty_lower_limit < ($parent->quantity) &&  ($parent->alert_threshold_qty_upper_limit) > ($parent->quantity)) {
-                    $quantityColor = 'text-warning';
-                } else {
-                    if ($parent->totalQuantity > $parent->alert_threshold_qty_upper_limit) {
-                        $quantityColor = 'text-success';
-                    } else {
-                        $quantityColor = 'text-warning';
-                    }
-                }
             }
-
+            if ($total_bath_quantity > $parent->alert_threshold_qty_upper_limit && $total_bath_quantity > $parent->alert_threshold_qty_lower_limit) {
+                $quantityColor = 'text-success';
+            } 
+            if($parent->alert_threshold_qty_lower_limit < $total_bath_quantity && $total_bath_quantity < $parent->alert_threshold_qty_upper_limit){
+                $quantityColor = 'text-warning';
+            }
+             
             $parent['quantityColor'] = $quantityColor;
-
-            if ($page_name == 'THRESHOLD_QTY') {
-                if ($parent['quantityColor'] == 'text-success') {
-                    unset($material_product[$key]);
-                }
-            } elseif ($page_name == 'PRINT_BARCODE_LABEL') {
-                if ($draftBatchCount != 0) {
-                    unset($material_product[$key]);
-                }
-            }
+         
+            // if ($page_name == 'PRINT_BARCODE_LABEL') {
+            //     if ($draftBatchCount != 0) {
+            //         unset($material_product[$key]);
+            //     }
+            // }
         }
+         
 
         $access_material_product = $material_product;
 
@@ -248,6 +238,11 @@ class DsoRepository implements DsoRepositoryInterface
             }
             if (count($material->Batches) == 0) {
                 unset($access_material_product[$material_index]);
+            }
+            if ($page_name == 'THRESHOLD_QTY') {
+                if ($material->quantityColor == 'text-success') {
+                    unset($access_material_product[$material_index]);
+                }
             }
         }
 

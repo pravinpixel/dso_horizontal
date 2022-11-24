@@ -91,9 +91,15 @@
         </div>
     @break
     @case('THRESHOLD_QTY') 
-        <div class="box border-start">
-            <input ng-checked="batch.is_read == 1"  ng-click="changeReadStatus(batch.id)" type="checkbox" id="switch@{{ batch.id }}" data-switch="none"/>
-            <label class="border shadow-sm" for="switch@{{ batch.id }}"></label>
+        <div class="box border-start box-sm">
+            <div class="dropdown mx-1">
+                <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-three-dots text-dark"></i> 
+                </a> 
+                <div class="dropdown-menu"> 
+                    <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
+                </div>
+            </div>
         </div>
     @break
     @case('EXTEND_EXPIRY')
