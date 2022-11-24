@@ -6,9 +6,7 @@ use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Stmt\ElseIf_;
 use Yajra\DataTables\Facades\DataTables;
 
 class NotificationController extends Controller
@@ -16,7 +14,7 @@ class NotificationController extends Controller
     public function __construct(
         DsoRepositoryInterface $dsoRepositoryInterface
     ) {
-        $this->dsoRepository            = $dsoRepositoryInterface;
+        $this->dsoRepository  = $dsoRepositoryInterface;
     }
     public function threshold_index()
     {
@@ -26,10 +24,9 @@ class NotificationController extends Controller
     } 
     public function change_read_status($id)
     {
-        $batch = Batches::find($id);
-        $batch->is_read = $batch->is_read == 0 ? 1 : 0;
-        $batch->save();
-
+        $MaterialProducts = MaterialProducts::findOrFail($id);
+        $MaterialProducts->is_read = $MaterialProducts->is_read == 0 ? 1 : 0;
+        $MaterialProducts->save();
         return response()->json([
             'status'  => 200,
             'message' => 'Success'
@@ -37,16 +34,18 @@ class NotificationController extends Controller
     }
     public function notification_count()
     {
-        $data = Batches::where('is_read', 0)->where('quantity_color',"!=",'GREEN')->get(); 
- 
-        foreach ($data as $key => $row) {
-            $row['material_product'] = MaterialProducts::find($row->material_product_id);
+        $data = MaterialProducts::where(['is_read' => 0,'is_draft' => 0,])->get();
+       
+        foreach ($data as $key => $parent) {
+            if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit || $parent->alert_threshold_qty_lower_limit < $parent->material_quantity && $parent->material_quantity < $parent->alert_threshold_qty_upper_limit) {
+                $MaterialProducts[]  = $parent;
+            }
         }
         
         return response()->json([
             'status' => 200,
-            'data'   => $data,
-            'count'  => count($data),
+            'data'   => $MaterialProducts,
+            'count'  => count($MaterialProducts),
         ]);
     }
     public function near_expiry_expired_index()
