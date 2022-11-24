@@ -75,6 +75,31 @@ class WithdrawalController extends Controller
                 $deduct_track_usage = $records;
                 $table_view         = view('crm.material-products.withdrawal.deduct-track-useage', compact('deduct_track_usage'));
             break;
+            case 'DEDUCT_TRACK_OUTLIFE':
+                $deduct_track_outlife_data = withdrawCart::with('RepackOutlife')->where([
+                    'user_id'       => auth_user()->id,
+                    'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
+                ])->get();
+        
+                $deduct_track_outlife = [];
+                foreach ($deduct_track_outlife_data as $key => $value) {
+                    
+                    $RepackOutlife = [];
+                    foreach ($value->RepackOutlife->toArray() as $key => $repack) {
+                        if($repack['updated_outlife_seconds']) { 
+                            $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
+                            $RepackOutlife[] = $repack;
+                        }
+                    }
+                    if(count($RepackOutlife))    {
+                        $value['RepackOutlife'] = $RepackOutlife;
+                        $value['barcode_number'] = Batches::find($value['batch_id'])->barcode_number ;
+                        $deduct_track_outlife[] = $value;
+                    }
+                }
+             
+                $table_view         = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
+            break;
         }
 
         return response([

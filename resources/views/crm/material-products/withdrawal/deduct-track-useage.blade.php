@@ -1,4 +1,4 @@
-@if (count($deduct_track_usage_history ?? []) != 0)
+
     <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important"
         onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
         @csrf
@@ -26,20 +26,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($deduct_track_usage_history as $row)
-                    <tr>
-                        <td><small>{{ $row->item_description }}</small></td>
-                        <td><small>{{ $row->batch_serial }}</small></td>
-                        <td><small>{{ $row->last_accessed }}</small></td>
-                        <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
-                        <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value }}</small></td>
-                        <td><small>{{ $row->used_amount + $row->remain_amount }}</small></td>
-                        <td><small>{{ $row->used_amount }}</small></td>
-                        <td><small>{{ $row->remain_amount }}</small></td>
-                        <td><small>{{ $row->remarks }}</small></td>
-                        <td>-</td>
-                    </tr>
-                @endforeach
+                @if (count($deduct_track_usage_history ?? []) != 0)
+                    @foreach ($deduct_track_usage_history as $row)
+                        <tr>
+                            <td><small>{{ $row->item_description }}</small></td>
+                            <td><small>{{ $row->batch_serial }}</small></td>
+                            <td><small>{{ $row->last_accessed }}</small></td>
+                            <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
+                            <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value }}</small></td>
+                            <td><small>{{ $row->used_amount + $row->remain_amount }}</small></td>
+                            <td><small>{{ $row->used_amount }}</small></td>
+                            <td><small>{{ $row->remain_amount }}</small></td>
+                            <td><small>{{ $row->remarks }}</small></td>
+                            <td>-</td>
+                        </tr>
+                    @endforeach 
+                @endif 
                 @if (count($deduct_track_usage) != 0)
                     @foreach ($deduct_track_usage as $row)
                         <tr>
@@ -75,25 +77,13 @@
                             <td class="child-td py-0 px-1">
                                 <textarea name="remarks" class="form-control h-100 w-100"></textarea>
                             </td>
-                            <td>
+                            <td  class="text-center d-flex">
                                 <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')"
                                     class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
-                            </td>
+                                <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
+                            </td> 
                         </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
+                    @endforeach 
                 @endif
             </tbody>
         </table>
@@ -109,6 +99,4 @@
             </div>
         </div>
     </form>
-    @else
-    {!! no_data_found() !!}
-@endif 
+
