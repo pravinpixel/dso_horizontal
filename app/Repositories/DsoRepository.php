@@ -17,7 +17,6 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Stmt\Else_;
 
 class DsoRepository implements DsoRepositoryInterface
 {
@@ -168,11 +167,11 @@ class DsoRepository implements DsoRepositoryInterface
                         unset($parent->Batches[$batch_key]);
                     }
                 }
-                if ($page_name == 'EXTEND_EXPIRY') {
-                    if ($batch->iqc_status == 1 || $batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success') {
-                        unset($parent->Batches[$batch_key]);
-                    }
-                }
+                // if ($page_name == 'EXTEND_EXPIRY') {
+                //     if ($batch->iqc_status == 1 || $batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success') {
+                //         unset($parent->Batches[$batch_key]);
+                //     }
+                // }
                 if ($page_name == 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity != 0) {
                         unset($parent->Batches[$batch_key]);
