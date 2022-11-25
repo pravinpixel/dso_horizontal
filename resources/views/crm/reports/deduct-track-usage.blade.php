@@ -30,8 +30,7 @@
                 @include('crm.material-products.modals.repack-outlife')
                 @include('crm.material-products.modals.import-from-excel')
             {{-- ======= END : App Models ==== --}}
-        </div>
-        <cart-table type="{{ $page_name }}"></cart-table> 
+        </div> 
     </div> 
 @endsection 
 @include('includes.dso-datatable')

@@ -52,7 +52,7 @@
         <div class="box th border-start">
             Read Status
         </div>
-    @break
+    @break 
     @default
     <div class="box box-sm th border-start">
         Actions 
