@@ -153,28 +153,32 @@ class DsoRepository implements DsoRepositoryInterface
                     $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
                     $batch->total_quantity    = $batch->quantity * $batch->unit_packing_value;
                 }
-
                 if ($page_name != 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                }elseif ($page_name == 'THRESHOLD_QTY') {
+                }
+                if ($page_name == 'THRESHOLD_QTY') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'PRINT_BARCODE_LABEL') {
+                } 
+                if ($page_name == 'PRINT_BARCODE_LABEL') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'EXTEND_EXPIRY') {
+                }
+                if ($page_name == 'EXTEND_EXPIRY') {
                     if ($batch->iqc_status == 1 || $batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success') {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'REPORT_DISPOSED_ITEMS') {
+                }
+                if ($page_name == 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity != 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'EARLY_DISPOSAL') {
+                }
+                if ($page_name == 'EARLY_DISPOSAL') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
