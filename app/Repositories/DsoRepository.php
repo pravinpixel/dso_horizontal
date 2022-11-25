@@ -178,11 +178,13 @@ class DsoRepository implements DsoRepositoryInterface
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } elseif ($page_name == 'DEDUCT_TRACK_OUTLIFE_REPORT') {
+                } 
+                if ($page_name == 'DEDUCT_TRACK_OUTLIFE_REPORT') {
                     if ($batch->is_draft == 1 || $batch->withdrawal_type != 'DEDUCT_TRACK_OUTLIFE') {
+                        // Log::info($batch->RepackOutlife);
                         unset($parent->Batches[$batch_key]);
                     }
-                }
+                } 
             }
 
             $parent['material_total_quantity'] = $material_total_quantity;
@@ -231,7 +233,7 @@ class DsoRepository implements DsoRepositoryInterface
                         } else {
                             $batch->permission = 'READ_AND_WRITE';
                         }
-                    }
+                    } 
                 } else {
                     $batch->permission = 'READ_AND_WRITE';
                 }
