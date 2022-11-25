@@ -21,6 +21,7 @@ class CreateDisposedItemsTable extends Migration
             $table->string("ItemDescription")->nullable();
             $table->string("BatchSerial")->nullable();
             $table->string("UnitPackingValue")->nullable();
+            $table->string("BeforeQuantity")->nullable();
             $table->string("Quantity")->nullable();
             $table->timestamps();
         });

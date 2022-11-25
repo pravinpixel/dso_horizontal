@@ -125,12 +125,24 @@ class ReportsController extends Controller
                 })->addColumn('batch_serial',function ($data){
                     return $data->batch." / ".$data->serial;
                 })->addColumn('owners',function ($data){
-                    return $data->owner_one." / ".$data->owner_two;
+                    if (count($data->BatchOwners ?? [])) {
+                        $owners = '';
+                        foreach ($data->BatchOwners as $key => $owner){
+                            if ($owner->alias_name ?? false) {
+                                $owners .= ' <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                                    '.$owner->alias_name.'
+                                </small>';
+                            }
+                        }
+                        return $owners;
+                    }
+
                 })->addColumn('department',function ($data){
                     return $data->Department->name;
                 })->addColumn('storage_area',function ($data){
                     return $data->StorageArea->name;
                 })
+                ->rawColumns(['owners'])
                 ->addIndexColumn()
             ->make(true);
         }
@@ -154,6 +166,14 @@ class ReportsController extends Controller
                 ->latest()->get();
         $data = [];
         foreach ($batches as $key => $row) {
+            $owners = '';
+            if (count($row->BatchOwners ?? [])) {
+                foreach ($row->BatchOwners as $key => $owner){
+                    if ($owner->alias_name ?? false) {
+                        $owners .= $owner->alias_name." ,";
+                    }
+                }
+            }
             $data[] = [
                 "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
                 "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
@@ -165,7 +185,7 @@ class ReportsController extends Controller
                 "date_of_expiry"        => $row->date_of_expiry,
                 "used_for_td_expt_only" => $row->used_for_td_expt_only,
                 "department"            => $row->Department->name,
-                "owners"                => $row->owner_one." / ".$row->owner_two,
+                "owners"                => $owners,
             ];
         }
         return Excel::download(new ExpiredMaterialExport($data), 'expired-materials.xlsx');

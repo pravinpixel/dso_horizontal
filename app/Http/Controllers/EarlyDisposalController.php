@@ -46,7 +46,7 @@ class EarlyDisposalController extends Controller
         ]);
 
         if($batch->quantity == 0) {
-            TrackDisposedBatches($batch);
+            TrackDisposedBatches($batch, $request->quantity);
         }
  
         LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");

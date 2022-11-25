@@ -26,6 +26,7 @@
                             <th class="text-white bg-primary-2 text-center font-14">Item Description</th>
                             <th class="text-white bg-primary-2 text-center font-14">Batch/Serial</th>
                             <th class="text-white bg-primary-2 text-center font-14">Unit packing value</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Before Quantity</th>
                             <th class="text-white bg-primary-2 text-center font-14">Quantity</th>
                         </tr>
                     </thead>
@@ -75,9 +76,13 @@
                     name: 'UnitPackingValue'
                 },
                 {
+                    data: 'BeforeQuantity',
+                    name: 'BeforeQuantity'
+                },
+                {
                     data: 'Quantity',
                     name: 'Quantity'
-                }
+                },
             ]
         });
     </script>

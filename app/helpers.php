@@ -525,7 +525,7 @@ if(!function_exists('getRoutes')) {
         }
     } 
     if(!function_exists('TrackDisposedBatches')) { 
-        function TrackDisposedBatches($batch)
+        function TrackDisposedBatches($batch,$BeforeQuantity)
         {
             DisposedItems::create([
                 "TransactionDate"  => Carbon::now()->format('d/m/Y'),
@@ -534,7 +534,8 @@ if(!function_exists('getRoutes')) {
                 "ItemDescription"  => $batch->BatchMaterialProduct->item_description,
                 "BatchSerial"      => $batch->batch." / ".$batch->serial,
                 "UnitPackingValue" => $batch->unit_packing_value,
-                "Quantity"         => $batch->quantity
+                "Quantity"         => $batch->quantity,
+                "BeforeQuantity"   => $BeforeQuantity
             ]);
             return true;
         }

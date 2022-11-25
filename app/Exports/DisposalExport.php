@@ -41,6 +41,7 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
                 "ItemDescription",
                 "BatchSerial",
                 "UnitPackingValue",
+                "BeforeQuantity",
                 "Quantity"
             )->get()->toArray();
         }
@@ -58,6 +59,7 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
             "Item Description",
             "Batch Serial",
             "Unit Pack Value",
+            "BeforeQuantity",
             "Quantity"
         ];
     }
