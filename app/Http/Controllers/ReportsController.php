@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\DisposalExport;
 use App\Exports\ExpiredMaterialExport;
 use App\Exports\HistoryExport;
+use App\Exports\MaterialProductHistoryExport;
 use App\Exports\SecurityReportExcel;
 use App\Exports\TrackOutlifeExport;
 use App\Exports\TrackUsageExport;
@@ -116,6 +117,10 @@ class ReportsController extends Controller
     public function material_in_house_pdt_history()
     {
         return view('crm.reports.material-in-house-pdt-history');
+    }
+    public function material_in_house_pdt_history_download(Request $request)
+    {
+        return Excel::download(new MaterialProductHistoryExport($request->start_date,$request->end_date), 'MaterialProductHistoryExport.xlsx');  
     }
     public function export_cart()
     {

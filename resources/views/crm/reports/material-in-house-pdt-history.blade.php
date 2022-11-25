@@ -14,7 +14,8 @@
                                 placeholder="Click here to scan" autocomplete="off">
                         </div>
                     </div>
-                    <form action="">
+                    <form action="{{ route('reports.material_in_house_pdt_history_download') }}" method="POST">
+                        @csrf
                         <div class="input-group">
                             <input type="date" name="start_date" class="form-control form-control-sm">
                             <input type="date" name="end_date" class="form-control form-control-sm">

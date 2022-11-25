@@ -175,6 +175,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('deduct-track-usage-download', [ReportsController::class,'deduct_track_usage_download'])->name('reports.deduct_track_usage_download'); 
         
         Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history'); 
+        Route::post('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history_download'])->name('reports.material_in_house_pdt_history_download'); 
         // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
         // Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
     }); 
