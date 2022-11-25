@@ -316,7 +316,7 @@
         <div class="w-100">
             <div class="fw-bold mb-1">Used for TD/Expt only</div>
             @if ($batch->used_for_td_expt_only)
-                @if ($batch->used_for_td_expt_only)
+                @if ($batch->used_for_td_expt_only == 'on')
                     <span class="badge bg-success rounded-pill">YES</span>
                 @else
                     <span class="badge bg-danger rounded-pill">NO</span>

@@ -26,14 +26,13 @@ use App\Http\Controllers\WithdrawalController;
 
 Route::middleware(['auth_users'])->group(function () {
  
-    Route::prefix('dashboard')->group(function() { 
+    Route::prefix('dashboard')->group(function() {
         Route::get('/',[DashboardController::class ,'index'])->name('dashboard');
         Route::get('/get-dashBoard-counts',[DashboardController::class ,'getCounts']);
     });
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
     Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
- 
 
     Route::prefix('reconciliation')->group(function() {
         Route::get('/', [ReconciliationController::class,'index'])->name('reconciliation');
@@ -42,10 +41,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store'); 
         Route::post('/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update'); 
         Route::delete('/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy'); 
-    });
-    
+    });   
  
-      
     Route::get('disposed-items', function () {
         return view('crm.notification.disposed-items');  
     })->name('disposed-items');
@@ -99,11 +96,9 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/add-material-products-non-mandatory-form', [MaterialProductsController::class, 'non_mandatory_form_store'])->name('non-mandatory-form');
 
     // Add MaterialProducts Non Mandatory Fom
+    //  ==================================
     Route::get('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_index'])->name('other-form');
     Route::post('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_store'])->name('other-form');
-    
-    //  ==================================
-
     
 
     // ===================== Print Label ===================== 
