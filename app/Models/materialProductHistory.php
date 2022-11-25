@@ -10,6 +10,8 @@ class materialProductHistory extends Model
     use HasFactory;
 
     protected $fillable = [
+        'batch_id',
+        'barcode_number',
         'CategorySelection',
         'ItemDescription',
         'Brand',

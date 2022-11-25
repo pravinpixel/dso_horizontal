@@ -178,6 +178,9 @@ Route::middleware(['auth_users'])->group(function () {
         // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
         // Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
     }); 
+
+    Route::get('reports/get-material-product-history/{barcode?}', [ReportsController::class,'get_material_product_history'])->name('get-material-product-history');
+    Route::get('reports/check-material-product-history/{barcode?}/{check}', [ReportsController::class,'get_material_product_history']);
     Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items'); 
     Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');

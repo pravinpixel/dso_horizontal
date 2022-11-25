@@ -15,6 +15,8 @@ class CreateMaterialProductHistoriesTable extends Migration
     {
         Schema::create('material_product_histories', function (Blueprint $table) {
             $table->id();
+            $table->integer('batch_id')->nullable();
+            $table->string('barcode_number')->nullable(); 
             $table->string('CategorySelection')->nullable();
             $table->string('ItemDescription')->nullable();
             $table->string('Brand')->nullable();

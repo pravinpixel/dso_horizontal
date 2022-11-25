@@ -3,6 +3,7 @@
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\DisposedItems;
+use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
 use App\Models\User;
@@ -536,6 +537,38 @@ if(!function_exists('getRoutes')) {
                 "UnitPackingValue" => $batch->unit_packing_value,
                 "Quantity"         => $batch->quantity,
                 "BeforeQuantity"   => $BeforeQuantity
+            ]);
+            return true;
+        }
+    } 
+    if(!function_exists('MaterialProductHistory')) {
+        function MaterialProductHistory($batch,$ActionTaken)
+        { 
+            $BatchOwners = '';
+            foreach ($batch->BatchOwners as $key => $owner){
+                if ($owner->alias_name ?? false) {
+                    $BatchOwners .= $owner->alias_name.' , ';
+                }
+            }
+
+            materialProductHistory::updateOrCreate([
+                'batch_id' => $batch->id,
+                'barcode_number' => $batch->barcode_number,
+                'CategorySelection' => $batch->BatchMaterialProduct->category_selection,
+                'ItemDescription'   => $batch->BatchMaterialProduct->item_description,
+                'Brand'             => $batch->brand,
+                'BatchSerial'       => $batch->batch." / ".$batch->serial,
+                'TransactionBy'     => auth_user()->alias_name,
+                'Module'            => session()->get('page_name'),
+                'ActionTaken'       => $ActionTaken,
+                'UnitPackingValue'  => $batch->unit_packing_value,
+                'Quantity'          => $batch->quantity,
+                'StorageArea'       => $batch->StorageArea->name ?? '',
+                'Housing'           => $batch->housing,
+                'Owners'            => $BatchOwners,
+                'Remarks'           => $batch->remarks,
+                // 'DrawStatus',
+                // 'RemainingOutlifeOfParent'
             ]);
             return true;
         }

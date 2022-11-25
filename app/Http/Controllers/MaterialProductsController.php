@@ -394,6 +394,7 @@ class MaterialProductsController extends Controller
         }
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
+            MaterialProductHistory(Batches::find(batch_id() ?? $batch_id),wizard_mode());
             forgot_session();
             if($request->is_print == 1) {
                 return redirect()->route('barcode.listing', ["id" => $this_batch_id]);

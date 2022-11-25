@@ -82,7 +82,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
-        } 
+        }  
         return Flash::success(__('global.inserted'));
     }
  

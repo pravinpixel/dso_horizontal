@@ -15,6 +15,7 @@ use App\Models\DeductTrackUsage;
 use App\Models\DisposedItems;
 use App\Models\LogSheet;
 use App\Models\Masters\Departments;
+use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
@@ -148,6 +149,30 @@ class ReportsController extends Controller
         }
         $actions = array_unique(LogSheet::pluck('action_type')->toArray());
         return view('crm.reports.history', compact('actions'));
+    }
+    public function get_material_product_history($barcode_number,$check = null)
+    {
+        $materialProductHistory = materialProductHistory::where('barcode_number',$barcode_number)->get();
+        if(count($materialProductHistory) != 0) {
+            if($check !== null) {
+                return response([
+                    "status" => true
+                ]);
+            }
+        }
+        return DataTables::of($materialProductHistory)
+            ->addIndexColumn()
+            ->addColumn('TransactionDate', function($data){
+                return Carbon::parse($data->created_at)->toFormattedDateString();
+            })
+            ->addColumn('TransactionTime', function($data){
+                return Carbon::parse($data->created_at)->format('h:i:s A');
+            })
+            ->addColumn('TransactionBy', function($data){
+                return $data->User->alias_name ?? "SYSTEM BOT";
+            }) 
+            ->rawColumns(["TransactionDate","TransactionTime","TransactionBy"])
+            ->make(true);
     }
     public function export()
     {
