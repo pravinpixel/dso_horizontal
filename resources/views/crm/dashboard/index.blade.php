@@ -1,5 +1,78 @@
 @extends('layouts.app')
 @section('content')
+    <div class="card">
+        {{-- <div class="card-header py-3">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <label for="" class="col-3">Choose Department</label>
+                    <select name="" id="" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="">Department A</option>
+                        <option value="">Department B</option>
+                        <option value="">Department C</option>
+                    </select>
+                </div>
+                <div class="col-4 ms-auto">
+                    <div class="btn-group w-100">
+                        <button type="button" class="btn btn-outline-primary">Today</button>
+                        <button type="button" class="btn btn-outline-primary active">Last 7 Days</button>
+                        <button type="button" class="btn btn-outline-primary">This Month</button>
+                        <button type="button" class="btn btn-outline-primary">This Year</button>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+        <div class="card-body">
+            <h2 class="h3 px-1 mb-3">Overall Snapshots</h2>
+            <div class="row m-0">
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning bi bi-tools fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">Materials</p>
+                            <strong>1505</strong>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning fa fa-industry fa-2x me-3"></div>
+                    <div>
+                            <p class="mb-1">In-house</p>
+                            <strong>2540</strong>
+                    </div>
+                    </div>
+                </div> 
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning bi bi-trash2 fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">Disposals</p>
+                            <strong>3542</strong>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <di class="text-warning fa fa-exclamation-circle fa-2x me-3"></di>
+                    <div>
+                            <p class="mb-1">Expired </p>
+                            <strong>1254</strong>
+                    </div>
+                    </div>
+                </div> 
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
+                    <div>
+                            <p class="mb-1">Extended</p>
+                            <strong>3520</strong>
+                    </div>
+                    </div>
+                </div>  
+            </div> 
+        </div> 
+    </div>
     <div class="row">
         <div class="col-md-2">
             <div class="card shadow-hover border-hover animate__animated animate__fadeIn">
@@ -73,83 +146,9 @@
                 </a>
             </div>
         </div>  
-    </div>
-    <div class="card">
-        <div class="card-header py-3">
-            <div class="row">
-                <div class="col-6 d-flex align-items-center">
-                    <label for="" class="col-3">Choose Department</label>
-                    <select name="" id="" class="form-select">
-                        <option value="">-- Select --</option>
-                        <option value="">Department A</option>
-                        <option value="">Department B</option>
-                        <option value="">Department C</option>
-                    </select>
-                </div>
-                <div class="col-4 ms-auto">
-                    <div class="btn-group w-100">
-                        <button type="button" class="btn btn-outline-primary">Today</button>
-                        <button type="button" class="btn btn-outline-primary active">Last 7 Days</button>
-                        <button type="button" class="btn btn-outline-primary">This Month</button>
-                        <button type="button" class="btn btn-outline-primary">This Year</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-            <h2 class="h3 px-1 mb-3">Overall Snapshots</h2>
-            <div class="row m-0">
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning bi bi-tools fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">Materials</p>
-                            <strong>1505</strong>
-                        </div>
-                    </div>
-                </div> 
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning fa fa-industry fa-2x me-3"></div>
-                       <div>
-                            <p class="mb-1">In-house</p>
-                            <strong>2540</strong>
-                       </div>
-                    </div>
-                </div> 
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning bi bi-trash2 fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">Disposals</p>
-                            <strong>3542</strong>
-                        </div>
-                    </div>
-                </div> 
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <di class="text-warning fa fa-exclamation-circle fa-2x me-3"></di>
-                       <div>
-                            <p class="mb-1">Expired </p>
-                            <strong>1254</strong>
-                       </div>
-                    </div>
-                </div> 
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
-                       <div>
-                            <p class="mb-1">Extended</p>
-                            <strong>3520</strong>
-                       </div>
-                    </div>
-                </div>  
-            </div> 
-        </div> 
-    </div>
-
+    </div> 
     
-    <div class="row m-0 ">
+    {{-- <div class="row m-0 ">
         <div class="col-12 text-end mb-3">
             <button class="btn btn-primary fa fa-eye" id="toggle_show"></button>
         </div>
@@ -217,7 +216,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  --}}
     
 @endsection
 
