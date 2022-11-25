@@ -44,6 +44,10 @@ class EarlyDisposalController extends Controller
             'disposed_after'        => $request->disposed_after ?? null,
             'disposed_status'       => true
         ]);
+
+        if($batch->quantity == 0) {
+            TrackDisposedBatches($batch);
+        }
  
         LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
         return redirect()->route('disposal')->with('success',"Disposal Success !");

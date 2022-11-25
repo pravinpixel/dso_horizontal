@@ -9,6 +9,7 @@ use App\Exports\SecurityReportExcel;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
+use App\Models\DisposedItems;
 use App\Models\LogSheet;
 use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
@@ -84,27 +85,15 @@ class ReportsController extends Controller
     }
     public function disposed_items(Request $request)
     {  
-        $Batches =  Batches::where('quantity',0)->latest()->get();
- 
-        $disposed = [];
-        foreach ($Batches as $key => $batch) {
- 
-            if($batch->quantity == 0) {
-                $disposed[] = [
-                    "transaction_date" => $batch->created_at->format('d-m-Y'),
-                    "transaction_time" => $batch->created_at->format('h:m:s A'),
-                    "transaction_by"   => $batch->user_name,
-                    "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
-                    "batch_serial"     => $batch->batch.' / '.$batch->serial,
-                    "unit_pack_value"  => $batch->unit_packing_value,
-                    "quantity"         => (string) $batch->quantity, 
-                ];
-            }
-        }
+        $disposed  = DisposedItems::all();
         if ($request->ajax()) { 
             return DataTables::of($disposed)->addIndexColumn()->make(true);
         }
         return  view('crm.reports.disposed-items',compact('disposed')); 
+    }
+    public function export_disposed_items(Request $request)
+    { 
+        return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
     }
     public function expired_material(Request $request)
     {
@@ -156,10 +145,6 @@ class ReportsController extends Controller
         $departments = Departments::get();
          
         return view('crm.reports.expired-material',compact('departments','expired'));
-    }
-    public function export_disposed_items(Request $request)
-    { 
-        return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
     }
     public function export_expired_material(Request $request)
     {

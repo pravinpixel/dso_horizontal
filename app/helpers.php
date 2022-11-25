@@ -2,6 +2,7 @@
 
 use App\Models\Batches;
 use App\Models\BatchTracker;
+use App\Models\DisposedItems;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
 use App\Models\User;
@@ -521,6 +522,21 @@ if(!function_exists('getRoutes')) {
         {
             $generator = new  BarcodeGeneratorHTML();
             return $generator->getBarcode($number, $generator::TYPE_CODE_128);
+        }
+    } 
+    if(!function_exists('TrackDisposedBatches')) { 
+        function TrackDisposedBatches($batch)
+        {
+            DisposedItems::create([
+                "TransactionDate"  => Carbon::now()->format('d/m/Y'),
+                "TransactionTime"  => Carbon::now()->format('h:i:s A'),
+                "TransactionBy"    => auth_user()->alias_name,
+                "ItemDescription"  => $batch->BatchMaterialProduct->item_description,
+                "BatchSerial"      => $batch->batch." / ".$batch->serial,
+                "UnitPackingValue" => $batch->unit_packing_value,
+                "Quantity"         => $batch->quantity
+            ]);
+            return true;
         }
     } 
 }

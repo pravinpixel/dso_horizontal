@@ -51,32 +51,32 @@
                     name: 'id'
                 },
                 {
-                    data: 'transaction_date',
-                    name: 'transaction_date'
+                    data: 'TransactionDate',
+                    name: 'TransactionDate'
                 },
                 {
-                    data: 'transaction_time',
-                    name: 'transaction_time'
+                    data: 'TransactionTime',
+                    name: 'TransactionTime'
                 },
                 {
-                    data: 'transaction_by',
-                    name: 'transaction_by'
+                    data: 'TransactionBy',
+                    name: 'TransactionBy'
                 },
                 {
-                    data: 'item_description',
-                    name: 'item_description'
+                    data: 'ItemDescription',
+                    name: 'ItemDescription'
                 },
                 {
-                    data: 'batch_serial',
-                    name: 'batch_serial'
+                    data: 'BatchSerial',
+                    name: 'BatchSerial'
                 },
                 {
-                    data: 'unit_pack_value',
-                    name: 'unit_pack_value'
+                    data: 'UnitPackingValue',
+                    name: 'UnitPackingValue'
                 },
                 {
-                    data: 'quantity',
-                    name: 'quantity'
+                    data: 'Quantity',
+                    name: 'Quantity'
                 }
             ]
         });

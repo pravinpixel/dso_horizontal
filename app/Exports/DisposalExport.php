@@ -4,7 +4,9 @@ namespace App\Exports;
 
 use App\Helpers\LogActivity;
 use App\Models\Batches;
+use App\Models\DisposedItems;
 use App\Models\MaterialProducts;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -31,34 +33,21 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
     
     public function array():array
     {
-        $rangeStart = strtotime($this->start_date);
-        $rangeEnd   = strtotime($this->end_date);
-   
-   
-        $data =  Batches::where('quantity',0)->latest()->get();
- 
-        $disposed = [];
-        foreach ($data as $key => $batch) {
-            if($batch->quantity == 0) {
-                $disposed[] = [
-                    "transaction_date" => $batch->created_at->format('d-m-Y'),
-                    "transaction_time" => $batch->created_at->format('h:m:s A'),
-                    "transaction_by"   => $batch->user_name,
-                    "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
-                    "batch_serial"     => $batch->batch.' / '.$batch->serial,
-                    "unit_pack_value"  => $batch->unit_packing_value,
-                    "quantity"         => (string) $batch->quantity, 
-                ];
-            }
+        if(is_null($this->start_date) || is_null($this->end_date)) {
+            return DisposedItems::select(
+                "TransactionDate",
+                "TransactionTime",
+                "TransactionBy",
+                "ItemDescription",
+                "BatchSerial",
+                "UnitPackingValue",
+                "Quantity"
+            )->get()->toArray();
         }
-
-        $filtered_events = array_filter($disposed, function($var) use ($rangeStart, $rangeEnd) {  
-            $evtime = strtotime($var['transaction_date']); 
-            return $evtime <= $rangeEnd && $evtime >= $rangeStart;  
-        }); 
-       
+        $start_date = Carbon::parse($this->start_date);
+        $end_date   = Carbon::parse($this->end_date);
         securityLog('Disposal Items Export');
-        return $filtered_events;
+        return DisposedItems::whereDate('created_at','<=',$end_date)->whereDate('created_at','>=',$start_date)->get();
     }
     public function headings() :array
     { 
