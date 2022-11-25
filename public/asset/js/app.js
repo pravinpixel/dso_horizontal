@@ -335,6 +335,7 @@ getToCart = (type) => {
 }
 try {
     getToCart('DEDUCT_TRACK_OUTLIFE_REPORT')
+    getToCart('DEDUCT_TRACK_USAGE_REPORT')
 } catch (error) {
     console.log(error)
 } 

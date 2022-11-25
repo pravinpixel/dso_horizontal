@@ -101,7 +101,7 @@
             </div>
         </div>
     @break
-    @case('DEDUCT_TRACK_OUTLIFE_REPORT')
+    @case('DEDUCT_TRACK_OUTLIFE_REPORT' || 'DEDUCT_TRACK_USAGE_REPORT')
         <div class="box border-start box-sm">
             <div class="dropdown">
                 <a class="ropdown-toggle text-secondary"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
