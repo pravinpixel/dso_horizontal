@@ -206,8 +206,8 @@ class RepackBatchController extends Controller
                     'draw_in'                 => $draw_in,
                     'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
                     'draw_out'                => $draw_out,
-                    'quantity'      => $row['quantity'],
-                    'draw_out_time_stamp'     => $row['draw_out']['time_stamp'], 
+                    'quantity'                => $row['quantity'],
+                    'draw_out_time_stamp'     => $row['draw_out']['time_stamp'],
                     'remain_amount'           => $row['balance_amount'],
                     'repack_size'             => $row['repack_size'],
                     'barcode_number'          => $row['barcode_number'],
@@ -217,6 +217,7 @@ class RepackBatchController extends Controller
                     'updated_outlife'         => $updated_outlife ?? null,
                     'updated_outlife_seconds' => $updated_outlife_seconds ?? null,
                     'current_outlife_expiry'  => $current_outlife_expiry ?? null,
+                    'user_id'                 => auth_user()->id
                 ]);
 
                 return response()->json([

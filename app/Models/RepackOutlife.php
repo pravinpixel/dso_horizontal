@@ -31,11 +31,17 @@ class RepackOutlife extends Model
         'updated_outlife_seconds',
         'current_outlife_expiry',
         'remarks',
-        'current_date_time'
+        'current_date_time',
+        'user_id'
     ];
 
     public function Batch()
     {
         return $this->hasOne(Batches::class, 'id', 'batch_id');
+    }
+
+    public function User()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

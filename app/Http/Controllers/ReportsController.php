@@ -6,6 +6,7 @@ use App\Exports\DisposalExport;
 use App\Exports\ExpiredMaterialExport;
 use App\Exports\HistoryExport;
 use App\Exports\SecurityReportExcel;
+use App\Exports\TrackOutlifeExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
@@ -35,6 +36,10 @@ class ReportsController extends Controller
         $page_name  = "DEDUCT_TRACK_OUTLIFE_REPORT";
         $view       = "crm.reports.deduct-track-outlife";
         return $this->dsoRepository->renderPage($page_name, $view); 
+    }
+    public function deduct_track_outlife_download($id)
+    { 
+        return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');  
     }
     public function deduct_track_usage()
     { 

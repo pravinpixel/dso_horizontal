@@ -1,31 +1,31 @@
 app.controller('RootController', function ($scope, $http) {
 
-    $scope.withdrawalStatus = false
-    $scope.filter_status = false
-    $scope.advance_search_status = false
-    $scope.advance_search_pre_saved = true
+    $scope.withdrawalStatus           = false
+    $scope.filter_status              = false
+    $scope.advance_search_status      = false
+    $scope.advance_search_pre_saved   = true
     $scope.view_my_saved_search_model = false
-    $scope.sort_by_payload = false
-    $scope.advanced_filter = {}
+    $scope.sort_by_payload            = false
+    $scope.advanced_filter            = {}
 
     // === Route Lists ===
-    var material_products_url = $('#get-material-products').val();
-    var change_batch_read_status = $('#change_batch_read_status').val();
-    var get_batch_material_products = $('#get-batch-material-products').val();
-    var get_batch = $('#get-batch').val();
-    var get_masters = $('#get_masters').val();
-    var pageName = $('#page-name').val();
-    var duplicate_material_products_url = $('#duplicate-material-products').val();
-    var delete_material_products_url = $('#delete-material-products').val();
+    var material_products_url              = $('#get-material-products').val();
+    var change_batch_read_status           = $('#change_batch_read_status').val();
+    var get_batch_material_products        = $('#get-batch-material-products').val();
+    var get_batch                          = $('#get-batch').val();
+    var get_masters                        = $('#get_masters').val();
+    var pageName                           = $('#page-name').val();
+    var duplicate_material_products_url    = $('#duplicate-material-products').val();
+    var delete_material_products_url       = $('#delete-material-products').val();
     var delete_material_products_batch_url = $('#delete-material-products-batch').val();
-    var get_save_search_url = $('#get-save-search').val();
-    var transfer_batch = $('#transfer_batch').val();
-    var repack_batch = $('#repack_batch').val();
-    var app_URL = $('#app_URL').val();
-    $scope.auth_id = $('#auth-id').val();
-    $scope.auth_role = $('#auth-role').val();
-    $scope.current_date = moment(new Date()).format('YYYY-MM-DD')
-    $scope.on_all_check_box = false
+    var get_save_search_url                = $('#get-save-search').val();
+    var transfer_batch                     = $('#transfer_batch').val();
+    var repack_batch                       = $('#repack_batch').val();
+    var app_URL                            = $('#app_URL').val();
+        $scope.auth_id                     = $('#auth-id').val();
+        $scope.auth_role                   = $('#auth-role').val();
+        $scope.current_date                = moment(new Date()).format('YYYY-MM-DD')
+        $scope.on_all_check_box            = false
 
     $scope.getDateOfExpiryColor = (current_date, date_of_expiry) => {
         var given = moment(date_of_expiry.replaceAll('/', '-'), "YYYY-MM-DD");
@@ -45,104 +45,103 @@ app.controller('RootController', function ($scope, $http) {
     $scope.on_barcode_number = false
     $scope.select_all_check_box = () => {
         if ($scope.on_all_check_box === true) {
-            $scope.on_access = true
-            $scope.on_alert_before_expiry = true
+            $scope.on_access                          = true
+            $scope.on_alert_before_expiry             = true
             $scope.on_alert_threshold_qty_lower_limit = true
             $scope.on_alert_threshold_qty_upper_limit = true
-            $scope.on_barcode_number = true
-            $scope.on_batch = true
-            $scope.on_brand = true
-            $scope.on_cas = true
-            $scope.on_category_selection = true
-            $scope.on_coc_coa_mill_cert = true
-            $scope.on_cost_per_unit = true
-            $scope.on_date_in = true
-            $scope.on_date_of_expiry = true
-            $scope.on_date_of_manufacture = true
-            $scope.on_date_of_shipment = true
-            $scope.on_department = true
-            $scope.on_disposal_certificate = true
-            $scope.on_euc_material = true
-            $scope.on_extended_expiry = true
-            $scope.on_extended_qc_result = true
-            $scope.on_extended_qc_status = true
-            $scope.on_fm_1202 = true
+            $scope.on_barcode_number                  = true
+            $scope.on_batch                           = true
+            $scope.on_brand                           = true
+            $scope.on_cas                             = true
+            $scope.on_category_selection              = true
+            $scope.on_coc_coa_mill_cert               = true
+            $scope.on_cost_per_unit                   = true
+            $scope.on_date_in                         = true
+            $scope.on_date_of_expiry                  = true
+            $scope.on_date_of_manufacture             = true
+            $scope.on_date_of_shipment                = true
+            $scope.on_department                      = true
+            $scope.on_disposal_certificate            = true
+            $scope.on_euc_material                    = true
+            $scope.on_extended_expiry                 = true
+            $scope.on_extended_qc_result              = true
+            $scope.on_extended_qc_status              = true
+            $scope.on_fm_1202                         = true
             // $scope.on_housing = true
-            $scope.on_housing_type = true
-            $scope.on_iqc_result = true
-            $scope.on_iqc_status = true
-            $scope.on_material_product_id = true
+            $scope.on_housing_type          = true
+            $scope.on_iqc_result            = true
+            $scope.on_iqc_status            = true
+            $scope.on_material_product_id   = true
             $scope.on_material_product_type = true
-            $scope.on_outlife = true
+            $scope.on_outlife               = true
             // $scope.on_owner_one = true
             $scope.on_owner_two = true
             // $scope.on_packing_size = true
-            $scope.on_po_number = true
-            $scope.on_project_name = true
-            $scope.on_quantity = true
-            $scope.on_remarks = true
-            $scope.on_repack_size = true
+            $scope.on_po_number                    = true
+            $scope.on_project_name                 = true
+            $scope.on_quantity                     = true
+            $scope.on_remarks                      = true
+            $scope.on_repack_size                  = true
             $scope.on_require_bulk_volume_tracking = true
-            $scope.on_require_outlife_tracking = true
-            $scope.on_sds = true
-            $scope.on_serial = true
-            $scope.on_statutory_body = true
-            $scope.on_storage_area = true
-            $scope.on_supplier = true
+            $scope.on_require_outlife_tracking     = true
+            $scope.on_sds                          = true
+            $scope.on_serial                       = true
+            $scope.on_statutory_body               = true
+            $scope.on_storage_area                 = true
+            $scope.on_supplier                     = true
             // $scope.on_unit_of_measure = true
-            $scope.on_no_of_extension = true
-            $scope.on_unit_packing_value = true
+            $scope.on_no_of_extension       = true
+            $scope.on_unit_packing_value    = true
             $scope.on_used_for_td_expt_only = true
         } else {
-            $scope.on_access = false
-            $scope.on_alert_before_expiry = false
+            $scope.on_access                          = false
+            $scope.on_alert_before_expiry             = false
             $scope.on_alert_threshold_qty_lower_limit = false
             $scope.on_alert_threshold_qty_upper_limit = false
-            $scope.on_barcode_number = false
-            $scope.on_batch = false
-            $scope.on_brand = true
-            $scope.on_cas = false
-            $scope.on_category_selection = false
-            $scope.on_coc_coa_mill_cert = false
-            $scope.on_cost_per_unit = false
-            $scope.on_date_in = false
-            $scope.on_date_of_expiry = true
-            $scope.on_date_of_manufacture = false
-            $scope.on_date_of_shipment = false
-            $scope.on_department = true
-            $scope.on_disposal_certificate = false
-            $scope.on_euc_material = false
-            $scope.on_extended_expiry = false
-            $scope.on_extended_qc_result = false
-            $scope.on_extended_qc_status = false
-            $scope.on_fm_1202 = false
-            $scope.on_housing = false
-            $scope.on_housing_type = true
-            $scope.on_iqc_result = false
-            $scope.on_iqc_status = false
-            $scope.on_material_product_id = false
-            $scope.on_material_product_type = false
-            $scope.on_outlife = false
-            $scope.on_owner_one = false
-            $scope.on_owner_two = true
-            $scope.on_packing_size = false
-            $scope.on_po_number = false
-            $scope.on_project_name = false
-            $scope.on_quantity = true
-            $scope.on_remarks = false
-            $scope.on_repack_size = false
-            $scope.on_require_bulk_volume_tracking = false
-            $scope.on_require_outlife_tracking = false
-            $scope.on_sds = false
-            $scope.on_serial = false
-            $scope.on_statutory_body = false
-            $scope.on_storage_area = true
-            $scope.on_supplier = false
-            $scope.on_unit_of_measure = false
-            $scope.on_unit_packing_value = true
-            $scope.on_used_for_td_expt_only = true
-            $scope.on_no_of_extension = false
-
+            $scope.on_barcode_number                  = false
+            $scope.on_batch                           = false
+            $scope.on_brand                           = true
+            $scope.on_cas                             = false
+            $scope.on_category_selection              = false
+            $scope.on_coc_coa_mill_cert               = false
+            $scope.on_cost_per_unit                   = false
+            $scope.on_date_in                         = false
+            $scope.on_date_of_expiry                  = true
+            $scope.on_date_of_manufacture             = false
+            $scope.on_date_of_shipment                = false
+            $scope.on_department                      = true
+            $scope.on_disposal_certificate            = false
+            $scope.on_euc_material                    = false
+            $scope.on_extended_expiry                 = false
+            $scope.on_extended_qc_result              = false
+            $scope.on_extended_qc_status              = false
+            $scope.on_fm_1202                         = false
+            $scope.on_housing                         = false
+            $scope.on_housing_type                    = true
+            $scope.on_iqc_result                      = false
+            $scope.on_iqc_status                      = false
+            $scope.on_material_product_id             = false
+            $scope.on_material_product_type           = false
+            $scope.on_outlife                         = false
+            $scope.on_owner_one                       = false
+            $scope.on_owner_two                       = true
+            $scope.on_packing_size                    = false
+            $scope.on_po_number                       = false
+            $scope.on_project_name                    = false
+            $scope.on_quantity                        = true
+            $scope.on_remarks                         = false
+            $scope.on_repack_size                     = false
+            $scope.on_require_bulk_volume_tracking    = false
+            $scope.on_require_outlife_tracking        = false
+            $scope.on_sds                             = false
+            $scope.on_serial                          = false
+            $scope.on_statutory_body                  = false
+            $scope.on_storage_area                    = true
+            $scope.on_supplier                        = false
+            $scope.on_unit_of_measure                 = false
+            $scope.on_unit_packing_value              = true
+            $scope.on_used_for_td_expt_only           = true
+            $scope.on_no_of_extension                 = false
         }
     }
 
@@ -336,71 +335,7 @@ app.controller('RootController', function ($scope, $http) {
             setTimeout(() => {
                 $(".loader").hide()
             }, 100);
-            // switch (pageName) {
-            //     case 'MATERIAL_WITHDRAWAL':
-            //         $scope.withdrawalStatus = true
-
-            //         if (response.data.data === null) {
-            //             $scope.withdrawalStatus = false
-            //         } 
-
-            //         if ($scope.directDeduct === undefined) {
-            //             $scope.directDeduct = []
-            //         }
-            //         if ($scope.deductTrackUsage === undefined) {
-            //             $scope.deductTrackUsage = []
-            //         }
-            //         if ($scope.deductTrackOutlife === undefined) {
-            //             $scope.deductTrackOutlife = []
-            //         }
-
-            //         $scope.material_products.data.map((material) => {
-            //             material.batches.map((batch) => {
-            //                 if (batch.barcode_number == $scope.barcode_number) {
-            //                     $scope.withdrawalType = batch.withdrawal_type
-            //                     switch (batch.withdrawal_type) {
-            //                         case 'DIRECT_DEDUCT':
-            //                             var pushStatus               = true 
-            //                             batch.direct_detect_quantity = 1
-            //                             $scope.directDeduct.length !== 0 && $scope.directDeduct.map((batch) => {
-            //                                 if(batch.barcode_number == $scope.barcode_number ) { 
-            //                                     batch.direct_detect_quantity += 1  
-            //                                     pushStatus = false
-            //                                 }
-            //                             });
-            //                             if(pushStatus === true) {
-            //                                 $scope.directDeduct.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name, category_selection: material.category_selection })
-            //                             }
-
-            //                             $scope.resetBarCode()
-            //                             console.log(batch)
-            //                             console.log(material)
-            //                             break;
-            //                         case 'DEDUCT_TRACK_USAGE':
-            //                             $scope.deductTrackUsage = [];
-            //                             $scope.deductTrackUsage.push({ ...batch, material: material, })
-            //                             break;
-            //                         case 'DEDUCT_TRACK_OUTLIFE':
-            //                             $scope.deductTrackOutlife = [];
-            //                             $scope.deductTrackOutlife.push({ ...batch, item_description: material.item_description, unit_packing_value: material.unit_packing_value, unit_of_measure:material.unit_of_measure.name,category_selection: material.category_selection })
-
-            //                                 $scope.deductTrackOutlife[0].repack_outlife.map((row) => {
-            //                                     row.current_date_time =   moment(row.current_date_time).format('YYYY-MM-DD h:m:s')
-
-            //                                 })
-            //                             break;
-            //                         default:
-            //                             break;
-            //                     }
-            //                 }
-            //             })
-            //         });
-            //         break;
-            //     default:
-            //         $scope.withdrawalStatus = false
-            //         break;
-            // }
-
+        
         }, function (response) {
             Message('danger', response.data.message);
         });
@@ -950,5 +885,9 @@ app.controller('RootController', function ($scope, $http) {
             Message('success', 'Reconciliation Success !');
             $scope.get_material_products();
         })
+    }
+
+    $scope.exportExcel = (batch_id, pageName) => {
+        location.href = `${app_URL}/reports/deduct-track-outlife/download/${batch_id}`
     }
 });
