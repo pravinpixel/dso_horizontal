@@ -22,7 +22,6 @@ class TransferBatchController extends Controller
         $created_batch->storage_area   = $request->storage_area;
         $created_batch->housing_type   = $request->housing_type;
         $created_batch->housing        = $request->housing;
-        $created_batch->is_read        = 0;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
 
