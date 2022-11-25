@@ -7,19 +7,19 @@ use App\Exports\ExpiredMaterialExport;
 use App\Exports\HistoryExport;
 use App\Exports\SecurityReportExcel;
 use App\Exports\TrackOutlifeExport;
+use App\Exports\TrackUsageExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
+use App\Models\DeductTrackUsage;
 use App\Models\DisposedItems;
 use App\Models\LogSheet;
 use App\Models\Masters\Departments;
 use App\Models\MaterialProducts;
-use App\Models\SecurityReport;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
@@ -41,11 +41,76 @@ class ReportsController extends Controller
     { 
         return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');  
     }
-    public function deduct_track_usage()
+    public function deduct_track_usage(Request $request)
+    {
+        $data = DeductTrackUsage::all();
+        $DeductTrackUsage = [];
+
+        foreach ($data as $key => $value) {
+            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
+            $owners = '';
+            if($Batch->BatchOwners ) {
+                foreach ($Batch->BatchOwners as $key => $owner){
+                    if ($owner->alias_name ?? false) {
+                        $owners .= $owner->alias_name.' ,';
+                    }
+                }
+            }
+   
+            $DeductTrackUsage[] = [
+                "ItemDescription"  => $value->item_description,
+                "Brand"            => $Batch->brand,
+                "BatchSerial"      => $value->batch_serial,
+                "UnitPackingValue" => $Batch->unit_packing_value,
+                "StorageArea"      => $Batch->StorageArea->name,
+                "Housing"          => $Batch->housing,
+                "Owners"           => $owners,
+                "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
+                "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
+                "TransactionBy"    => $value->last_accessed,
+                "UsedAmount"       => $value->used_amount,
+                "RemainingAmount"  => $value->remain_amount,
+            ];
+        }
+
+        if ($request->ajax()) {
+            return DataTables::of($DeductTrackUsage)->addIndexColumn()->make(true);
+        }
+        return view('crm.reports.deduct-track-usage',compact('DeductTrackUsage'));
+    }
+    public function deduct_track_usage_download(Request $request)
     { 
-        $page_name  = "DEDUCT_TRACK_USAGE_REPORT";
-        $view       = "crm.reports.deduct-track-usage";
-        return $this->dsoRepository->renderPage($page_name, $view); 
+        $data = DeductTrackUsage::all();
+        $DeductTrackUsage = [];
+
+        foreach ($data as $key => $value) {
+            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
+            $owners = '';
+            if($Batch->BatchOwners ) {
+                foreach ($Batch->BatchOwners as $key => $owner){
+                    if ($owner->alias_name ?? false) {
+                        $owners .= $owner->alias_name.' ,';
+                    }
+                }
+            }
+   
+            $DeductTrackUsage[] = [
+                "ItemDescription"  => $value->item_description,
+                "Brand"            => $Batch->brand,
+                "BatchSerial"      => $value->batch_serial,
+                "UnitPackingValue" => $Batch->unit_packing_value,
+                "StorageArea"      => $Batch->StorageArea->name,
+                "Housing"          => $Batch->housing,
+                "Owners"           => $owners,
+                "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
+                "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
+                "TransactionBy"    => $value->last_accessed,
+                "UsedAmount"       => $value->used_amount,
+                "RemainingAmount"  => $value->remain_amount,
+            ];
+        }    
+        
+        return Excel::download(new TrackUsageExport($DeductTrackUsage), 'DeductTrackUsage.xlsx');  
     }
     public function material_in_house_pdt_history()
     {

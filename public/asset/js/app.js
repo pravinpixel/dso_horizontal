@@ -323,7 +323,7 @@ getToCart = (type) => {
                             </table>
                         </div>
                         <div class="card-footer text-end bg-light">
-                            <button class="btn btn-success rounded-pill"><i class="bi bi-arrow-repeat"></i> Generate</button>
+                            <button type="submit" class="btn btn-success rounded-pill"><i class="bi bi-arrow-repeat"></i> Generate</button>
                         </div>
                     </div>
                 `;

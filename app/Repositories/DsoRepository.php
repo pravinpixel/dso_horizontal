@@ -178,7 +178,7 @@ class DsoRepository implements DsoRepositoryInterface
                         unset($parent->Batches[$batch_key]);
                     }
                 }
-                if ($page_name == 'EARLY_DISPOSAL') {
+                if ($page_name == 'EARLY_DISPOSAL' || $page_name == 'DEDUCT_TRACK_USAGE_REPORT') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }

@@ -171,6 +171,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('deduct-track-outlife/download/{id}', [ReportsController::class,'deduct_track_outlife_download'])->name('reports.deduct_track_outlife_download'); 
         
         Route::get('deduct-track-usage', [ReportsController::class,'deduct_track_usage'])->name('reports.deduct_track_usage'); 
+        Route::get('deduct-track-usage', [ReportsController::class,'deduct_track_usage'])->name('reports.deduct_track_usage'); 
+        Route::post('deduct-track-usage-download', [ReportsController::class,'deduct_track_usage_download'])->name('reports.deduct_track_usage_download'); 
         
         Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history'); 
         // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
