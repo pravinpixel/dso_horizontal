@@ -30,6 +30,10 @@
                 @case('date_of_expiry')
                     {{ $column['batch'] }} <span><i class="ms-1 @{{ batch.date_of_expiry_color }} dot-sm bi bi-circle-fill"></i></span>
                 @break 
+                @case('used_for_td_expt_only')
+                    <span ng-if="batch.coc_coa_mill_cert_status == 'on'" class="mx-auto badge bg-success rounded-pill">Yes</span>
+                    <span ng-if="batch.coc_coa_mill_cert_status != 'on'" class="mx-auto badge bg-danger rounded-pill">No</span> 
+                @break
                 @default {!! $column['batch'] !!}
             @endswitch 
         </div>
