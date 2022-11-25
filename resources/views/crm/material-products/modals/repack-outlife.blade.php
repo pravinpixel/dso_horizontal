@@ -17,7 +17,7 @@
                             <td>Material / Product Draw status</td>
                             <td>Date & time stamp</td>
                             <td>Last accessed</td>
-                            <td>Total Qty</td>
+                            {{-- <td>Total Qty</td> --}}
                             <td> Input repack Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                             <td>Remain Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                             <td>Auto-generate unique barcode label</td>
@@ -72,14 +72,19 @@
                                     <tr><td class="text-center"><small ng-bind="repack.draw_out.time_stamp"></small></td></tr>
                                 </table>
                             </td>
-                            <td ng-bind="repack.last_access"></td>
-                            <td ng-bind="repack.total_quantity"></td>
+                            <td style="padding: 0" width="220px">
+                                <table class="text-center w-100">
+                                    <tr><td class="text-center"><small ng-bind="repack.draw_in_last_access"></small></td></tr>
+                                    <tr><td class="text-center"><small ng-bind="repack.draw_out_last_access"></small></td></tr>
+                                </table>
+                            </td>
+                            {{-- <td ng-bind="repack.last_access"></td> --}}
+                            {{-- <td ng-bind="repack.total_quantity"></td> --}}
                             <td class="text-center">
                                 <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
                                     <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " required>
                                 </span>
-                                <span ng-bind="repack.initial_amount" 
-                                    ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
+                                <span ng-bind="repack.initial_amount" ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1">
                                 </span>
                             </td>
                             <td ng-bind="repack.balance_amount"></td>

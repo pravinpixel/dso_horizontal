@@ -767,6 +767,8 @@ app.controller('RootController', function ($scope, $http) {
                             remaining_days_seconds: element.remaining_days_seconds,
                             barcode_number: RepackData.barcode_number,
                             total_quantity: Number(RepackData.total_quantity),
+                            draw_in_last_access:element.draw_in_last_access,
+                            draw_out_last_access:element.draw_out_last_access,
                         }
                     );
                 })
@@ -808,6 +810,8 @@ app.controller('RootController', function ($scope, $http) {
                                     remaining_days_seconds: element.remaining_days_seconds,
                                     barcode_number: RepackData.barcode_number,
                                     total_quantity: Number(RepackData.total_quantity),
+                                    draw_in_last_access:element.draw_in_last_access,
+                                    draw_out_last_access:element.draw_out_last_access,
                                 }
                             );
                         })

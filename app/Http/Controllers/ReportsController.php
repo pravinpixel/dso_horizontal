@@ -157,12 +157,16 @@ class ReportsController extends Controller
     }
     public function get_material_product_history($barcode_number,$check = null)
     {
-        $materialProductHistory = materialProductHistory::where('barcode_number',$barcode_number)->get();
-        if(count($materialProductHistory) != 0) {
-            if($check !== null) {
-                return response([
-                    "status" => true
-                ]);
+        if($barcode_number == null) {
+            $materialProductHistory = materialProductHistory::all();
+        } else {
+            $materialProductHistory = materialProductHistory::where('barcode_number',$barcode_number)->get();
+            if(count($materialProductHistory) != 0) {
+                if($check !== null) {
+                    return response([
+                        "status" => true
+                    ]);
+                }
             }
         }
         return DataTables::of($materialProductHistory)

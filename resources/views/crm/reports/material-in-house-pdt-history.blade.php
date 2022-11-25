@@ -5,15 +5,6 @@
         <div class="card border shadow-sm col-md-6 mx-auto">
             <div class="card-body">
                 <div>
-                    <h4 class="text-center mb-3">Scan Batch Barcode</h4>
-                    <div class="p-1 border rounded-pill shadow-sm bg-white mb-3">
-                        <div class="input-group align-items-center" title="Scan Barcode">
-                            <i class="bi bi-upc-scan font-20 mx-2"></i>
-                            <input type="number" min="1" onkeyup="getMaterialProductHistoryByBarcode(this.value)"
-                                class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill ng-pristine ng-valid ng-empty ng-valid-min ng-touched"
-                                placeholder="Click here to scan" autocomplete="off">
-                        </div>
-                    </div>
                     <form action="{{ route('reports.material_in_house_pdt_history_download') }}" method="POST">
                         @csrf
                         <div class="input-group">
@@ -32,6 +23,7 @@
                         <thead class="bg-primary text-white text-center">
                             <tr>
                                 <th style="font-weight: bold">S.No</th>
+                                <th style="font-weight: bold">Barcode Number</th>
                                 <th style="font-weight: bold">Category Selection</th>
                                 <th style="font-weight: bold">Item Description</th>
                                 <th style="font-weight: bold">Brand</th>
@@ -69,39 +61,75 @@
             axios.get(`${APP_URL}/reports/check-material-product-history/${barcode_number}/true`).then(function (response) {  
                 
                 if(response.data.status) {
-                    var historyTable = $('#historyTable').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                            url: "{{ route('get-material-product-history') }}" +"/"+ barcode_number,
-                        },
-                        columns: [{
-                                data: 'DT_RowIndex',
-                                name: 'id'
-                            }, 
-                            {data:"CategorySelection" , name:"CategorySelection"},
-                            {data:"ItemDescription" , name:"ItemDescription"},
-                            {data:"Brand" , name:"Brand"},
-                            {data:"BatchSerial" , name:"BatchSerial"},
-                            {data:"TransactionDate" , name:"TransactionDate"},
-                            {data:"TransactionTime" , name:"TransactionTime"},
-                            {data:"TransactionBy" , name:"TransactionBy"},
-                            {data:"Module" , name:"Module"},
-                            {data:"ActionTaken" , name:"ActionTaken"},
-                            {data:"UnitPackingValue" , name:"UnitPackingValue"},
-                            {data:"Quantity" , name:"Quantity"},
-                            {data:"StorageArea" , name:"StorageArea"},
-                            {data:"Housing" , name:"Housing"},
-                            {data:"Owners" , name:"Owners"},
-                            {data:"Remarks" , name:"Remarks"},
-                            {data:"DrawStatus" , name:"DrawStatus"},
-                            {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
-                        ]
-                    });
+                    setTimeout(() => {
+                        var historyTable = $('#historyTable').DataTable({
+                            processing: true,
+                            serverSide: true,
+                            ajax: {
+                                url: "{{ route('get-material-product-history') }}" +"/"+ barcode_number,
+                            },
+                            columns: [{
+                                    data: 'DT_RowIndex',
+                                    name: 'id'
+                                }, 
+                                {data:"CategorySelection" , name:"CategorySelection"},
+                                {data:"ItemDescription" , name:"ItemDescription"},
+                                {data:"Brand" , name:"Brand"},
+                                {data:"BatchSerial" , name:"BatchSerial"},
+                                {data:"TransactionDate" , name:"TransactionDate"},
+                                {data:"TransactionTime" , name:"TransactionTime"},
+                                {data:"TransactionBy" , name:"TransactionBy"},
+                                {data:"Module" , name:"Module"},
+                                {data:"ActionTaken" , name:"ActionTaken"},
+                                {data:"UnitPackingValue" , name:"UnitPackingValue"},
+                                {data:"Quantity" , name:"Quantity"},
+                                {data:"StorageArea" , name:"StorageArea"},
+                                {data:"Housing" , name:"Housing"},
+                                {data:"Owners" , name:"Owners"},
+                                {data:"Remarks" , name:"Remarks"},
+                                {data:"DrawStatus" , name:"DrawStatus"},
+                                {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
+                            ]
+                        });
+                    }, 1000);
                 }
             }).catch(function (error) {
                 console.log(error);
             }); 
+
         }
-    </script>
+        var historyTable = $('#historyTable').DataTable({
+            processing: true,
+            serverSide: true,
+            retrieve: true,
+            paging: false,
+            ajax: {
+                url: "{{ route('get-material-product-history') }}",
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'id'
+                }, 
+                
+                {data:"barcode_number" , name:"barcode_number"},
+                {data:"CategorySelection" , name:"CategorySelection"},
+                {data:"ItemDescription" , name:"ItemDescription"},
+                {data:"Brand" , name:"Brand"},
+                {data:"BatchSerial" , name:"BatchSerial"},
+                {data:"TransactionDate" , name:"TransactionDate"},
+                {data:"TransactionTime" , name:"TransactionTime"},
+                {data:"TransactionBy" , name:"TransactionBy"},
+                {data:"Module" , name:"Module"},
+                {data:"ActionTaken" , name:"ActionTaken"},
+                {data:"UnitPackingValue" , name:"UnitPackingValue"},
+                {data:"Quantity" , name:"Quantity"},
+                {data:"StorageArea" , name:"StorageArea"},
+                {data:"Housing" , name:"Housing"},
+                {data:"Owners" , name:"Owners"},
+                {data:"Remarks" , name:"Remarks"},
+                {data:"DrawStatus" , name:"DrawStatus"},
+                {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
+            ]
+        });
+        </script>
 @endsection

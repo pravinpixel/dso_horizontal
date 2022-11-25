@@ -98,8 +98,8 @@ class RepackBatchController extends Controller
             'quantity'              => $request->quantity, 
             'draw_in_time_stamp'    => date("Y-m-d h:i:sa"),
             'draw_out_time_stamp'   => '-',
-            'draw_in_last_access'   => json_encode($request->access),
-            'draw_out_last_access'  => json_encode($request->access),
+            'draw_in_last_access'   => auth_user()->alias_name,
+            'draw_out_last_access'  => auth_user()->alias_name,
             'input_repack_amount'   => $request->Draw_input_repack_amt,
             'remain_amount'         => $request->quantity - $request->Draw_input_repack_amt,
             'repack_size'           => $request->Draw_repack_size,
@@ -217,7 +217,9 @@ class RepackBatchController extends Controller
                     'updated_outlife'         => $updated_outlife ?? null,
                     'updated_outlife_seconds' => $updated_outlife_seconds ?? null,
                     'current_outlife_expiry'  => $current_outlife_expiry ?? null,
-                    'user_id'                 => auth_user()->id
+                    'user_id'                 => auth_user()->id,
+                    'draw_out_last_access'    => auth_user()->alias_name,
+                    'draw_in_last_access'     => auth_user()->alias_name,
                 ]);
 
                 return response()->json([
