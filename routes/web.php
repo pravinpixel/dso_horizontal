@@ -4,6 +4,7 @@ include('master.php');
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\EarlyDisposalController;
 use App\Http\Controllers\ExtendExpiryController;
@@ -25,10 +26,9 @@ use App\Http\Controllers\WithdrawalController;
 
 Route::middleware(['auth_users'])->group(function () {
  
-    Route::prefix('dashboard')->group(function() {
-        Route::get('/', function () {
-            return view('crm.dashboard.index');
-        })->name('dashboard'); 
+    Route::prefix('dashboard')->group(function() { 
+        Route::get('/',[DashboardController::class ,'index'])->name('dashboard');
+        Route::get('/get-dashBoard-counts',[DashboardController::class ,'getCounts']);
     });
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 

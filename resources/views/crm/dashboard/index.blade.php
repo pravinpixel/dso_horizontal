@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content') 
+@section('content')
     <div class="card border shadow-sm mt-4">
         {{-- <div class="card-header py-3">
             <div class="row">
@@ -30,38 +30,38 @@
                         <div class="text-warning bi bi-tools fa-2x me-3"></div>
                         <div>
                             <p class="mb-1">Materials</p>
-                            <strong>1505</strong>
+                            <strong class="fa-2x" id="Materials">0</strong>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
                         <div class="text-warning fa fa-industry fa-2x me-3"></div>
-                    <div>
+                        <div>
                             <p class="mb-1">In-house</p>
-                            <strong>2540</strong>
+                            <strong class="fa-2x" id="InHouse">0</strong>
+                        </div>
                     </div>
-                    </div>
-                </div> 
+                </div>
                 <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
                         <div class="text-warning bi bi-trash2 fa-2x me-3"></div>
                         <div>
                             <p class="mb-1">Disposals</p>
-                            <strong>3542</strong>
+                            <strong class="fa-2x" id="Disposals">0</strong>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
-                        <di class="text-warning fa fa-exclamation-circle fa-2x me-3"></di>
-                    <div>
+                        <div class="text-warning fa fa-exclamation-circle fa-2x me-3"></div>
+                        <div>
                             <p class="mb-1">Expired </p>
-                            <strong>1254</strong>
+                            <strong class="fa-2x" id="Expired">0</strong>
+                        </div>
                     </div>
-                    </div>
-                </div> 
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                </div>
+                {{-- <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
                         <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
                     <div>
@@ -69,9 +69,9 @@
                             <strong>3520</strong>
                     </div>
                     </div>
-                </div>  
-            </div> 
-        </div> 
+                </div>   --}}
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-2">
@@ -81,7 +81,7 @@
                     <div class="text-primary"><b>Withdrawal</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('list-material-products') }}" class="card-body btn">
@@ -89,23 +89,23 @@
                     <div class="text-primary"><b> Search or Add</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
-                <a href="{{ route("threshold-qty") }}" class="card-body btn">
+                <a href="{{ route('threshold-qty') }}" class="card-body btn">
                     <i class="text-warning bi bi-subtract fa-2x mb-2"></i>
                     <div class="text-primary"><b> Threshold Qty</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
-                <a href="{{ route("near-expiry-expired") }}" class="card-body btn">
+                <a href="{{ route('near-expiry-expired') }}" class="card-body btn">
                     <i class="text-warning bi bi-list-ul fa-2x mb-2"></i>
                     <div class="text-primary"><b> Near Expiry/Expired</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('disposal') }}" class="card-body btn">
@@ -113,7 +113,7 @@
                     <div class="text-primary"><b> Early Disposal</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('extend-expiry') }}" class="card-body btn">
@@ -121,7 +121,7 @@
                     <div class="text-primary"><b> Extended Expiry</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('reports') }}" class="card-body btn">
@@ -129,7 +129,7 @@
                     <div class="text-primary"><b> Report</b></div>
                 </a>
             </div>
-        </div> 
+        </div>
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('barcode.listing') }}" class="card-body btn">
@@ -145,9 +145,9 @@
                     <div class="text-primary"><b> Reconciliation</b></div>
                 </a>
             </div>
-        </div>  
-    </div> 
-    
+        </div>
+    </div>
+
     {{-- <div class="row m-0 ">
         <div class="col-12 text-end mb-3">
             <button class="btn btn-primary fa fa-eye" id="toggle_show"></button>
@@ -217,31 +217,28 @@
             </div>
         </div>
     </div>  --}}
-    
 @endsection
 
-
 @section('scripts')
-    <script>
-        var xValues = ['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
+    {{-- <script>
+        var xValues = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         new Chart("myChart", {
             type: "line",
             data: {
                 labels: xValues,
-                datasets: [{ 
-                    data: [3860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
-                    label:"Product 1",
+                datasets: [{
+                    data: [3860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                    label: "Product 1",
                     borderColor: "#163269",
                     fill: false
-                }, { 
-                data: [7600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
-                    label:"Product 2",
+                }, {
+                    data: [7600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                    label: "Product 2",
                     borderColor: "#FDCA3F",
                     fill: false
-                }, { 
-                data: [5300,700,2000,5000,6000,4000,2000,1000,200,100],
-                    label:"Product 3",
+                }, {
+                    data: [5300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+                    label: "Product 3",
                     borderColor: "#4389F6",
                     fill: false
                 }]
@@ -250,14 +247,13 @@
             //     legend: {display: false}
             // }
         });
-    </script>
+    </script> --}}
     <script>
-        $(document).ready(function(){
-            $("#toggle_show").click(function(){
+        $(document).ready(function() {
+            $("#toggle_show").click(function() {
                 $(".toggle_container").toggle();
             });
+            getDashBoardCounts()
         });
     </script>
 @endsection
-
-
