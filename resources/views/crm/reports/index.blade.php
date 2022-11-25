@@ -20,6 +20,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('reports.deduct_track_usage') }}" class="bg-none nav-link {{ Route::is(['reports.deduct_track_usage']) ? "active" : "" }}">
+                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                <span class="d-none d-md-block">Deduct Track Usage</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('reports.deduct_track_outlife') }}" class="bg-none nav-link {{ Route::is(['reports.deduct_track_outlife']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Deduct Track Outlife</span>

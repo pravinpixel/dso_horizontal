@@ -168,6 +168,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('security', [ReportsController::class,'security'])->name('reports.security');
         
         Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife'); 
+        Route::get('deduct-track-usage', [ReportsController::class,'deduct_track_usage'])->name('reports.deduct_track_usage'); 
+        
         Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history'); 
         // Route::get('export-cart', [ReportsController::class,'export_cart'])->name('reports.export_cart'); 
         // Route::get('history', [ReportsController::class,'history'])->name('reports.history');  
