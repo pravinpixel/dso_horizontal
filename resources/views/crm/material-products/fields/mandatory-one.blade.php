@@ -1,4 +1,5 @@
 <div class="row m-0">
+    <input type="hidden" name="user_id" value="{{ auth_user()->id }}">
     <div class="col-lg-6"> 
         <div class="row m-0 y-center my-2"> 
             <label for="" class="col-4">Category selection <sup class="text-danger">*</sup></label>

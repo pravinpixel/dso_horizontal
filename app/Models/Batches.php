@@ -68,7 +68,8 @@ class Batches extends Model
         'reconciliation_status',
         'system_stock',
         'physical_stock',
-        'updated_outlife'
+        'updated_outlife',
+        'user_id'
     ];
 
     public function BarCodeGenOne()

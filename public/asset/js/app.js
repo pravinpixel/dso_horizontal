@@ -367,15 +367,5 @@ download = (id,type) => {
     setTimeout(() => {
         $(`#downloadForm`).remove()
     }, 2000);
-}
-
-getDashBoardCounts = () => {
-    axios.get(`${APP_URL}/dashboard/get-dashBoard-counts`).then(function (response) {  
-        Object.entries(response.data).map((item) => {
-            document.querySelector(`#${item[0]}`).innerHTML = item[1]
-        })
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
+} 
  

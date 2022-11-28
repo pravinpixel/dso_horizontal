@@ -26,7 +26,7 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Packing size</div>
-            {{ $batch->unit_packing_value ?? '' }}
+            {{ $batch->unit_packing_value ?? '' }} {{ $batch->BatchMaterialProduct->UnitOfMeasure->name }}
         </div>
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
@@ -119,6 +119,14 @@
             <div class="fw-bold mb-1">Department</div>
             @if ($batch->Department)
                 {{ $batch->Department->name }}
+            @endif
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-action d-flex align-self-start">
+        <div class="w-100">
+            <div class="fw-bold mb-1">Storage Area</div>
+            @if ($batch->StorageArea)
+                {{ $batch->StorageArea->name }}
             @endif
         </div>
     </li>
@@ -279,8 +287,8 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">No.of extension</div>
-            @if ($batch->extended_expiry)
-                {{ $batch->extended_expiry }}
+            @if ($batch->no_of_extension)
+                {{ $batch->no_of_extension }}
             @endif
         </div>
     </li>

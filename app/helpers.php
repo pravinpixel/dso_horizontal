@@ -537,7 +537,8 @@ if(!function_exists('getRoutes')) {
                 "BatchSerial"      => $batch->batch." / ".$batch->serial,
                 "UnitPackingValue" => $batch->unit_packing_value,
                 "Quantity"         => $batch->quantity,
-                "BeforeQuantity"   => $BeforeQuantity
+                "BeforeQuantity"   => $BeforeQuantity,
+                "user_id"          => auth_user()->id
             ]);
             return true;
         }

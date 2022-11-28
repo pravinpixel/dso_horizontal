@@ -40,6 +40,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['disposal_certificate'],
             $tableColumns['iqc_result_status'],
             $tableColumns['is_read'],
+            $tableColumns['user_id'], 
             $tableColumns['outlife_seconds'],
             $tableColumns['updated_outlife'],
             $tableColumns['disposed_after'],

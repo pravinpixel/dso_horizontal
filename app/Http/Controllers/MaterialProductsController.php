@@ -163,7 +163,7 @@ class MaterialProductsController extends Controller
                             'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
                             'material_quantity'               => $row['quantity'],
                             'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
-                            'is_draft' => true
+                            'is_draft' => true,
                         ]);
     
                         LogActivity::log($material->id);
@@ -217,7 +217,8 @@ class MaterialProductsController extends Controller
                             'remarks'                      => $row['remarks'] ?? null,
                             'used_for_td_expt_only'        => "1",
                             'coc_coa_mill_cert_status'     => 'on',
-                            'no_of_extension'              => $row['no_of_extension'] ?? 0
+                            'no_of_extension'              => $row['no_of_extension'] ?? 0,
+                            'user_id' => auth_user()->id, 
                         ]);
                    
                         $batch->BatchOwners()->create([

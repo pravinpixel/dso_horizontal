@@ -23,6 +23,7 @@ class CreateDisposedItemsTable extends Migration
             $table->string("UnitPackingValue")->nullable();
             $table->string("BeforeQuantity")->nullable();
             $table->string("Quantity")->nullable();
+            $table->string("user_id")->nullable();
             $table->timestamps();
         });
     }

@@ -1,79 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card border shadow-sm mt-4">
-        {{-- <div class="card-header py-3">
-            <div class="row">
-                <div class="col-6 d-flex align-items-center">
-                    <label for="" class="col-3">Choose Department</label>
-                    <select name="" id="" class="form-select">
-                        <option value="">-- Select --</option>
-                        <option value="">Department A</option>
-                        <option value="">Department B</option>
-                        <option value="">Department C</option>
-                    </select>
-                </div>
-                <div class="col-4 ms-auto">
-                    <div class="btn-group w-100">
-                        <button type="button" class="btn btn-outline-primary">Today</button>
-                        <button type="button" class="btn btn-outline-primary active">Last 7 Days</button>
-                        <button type="button" class="btn btn-outline-primary">This Month</button>
-                        <button type="button" class="btn btn-outline-primary">This Year</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <div class="card-body">
-            <h2 class="h3 px-1 mb-3">Overall Snapshots</h2>
-            <div class="row m-0">
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning bi bi-tools fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">Materials</p>
-                            <strong class="fa-2x" id="Materials">0</strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning fa fa-industry fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">In-house</p>
-                            <strong class="fa-2x" id="InHouse">0</strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning bi bi-trash2 fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">Disposals</p>
-                            <strong class="fa-2x" id="Disposals">0</strong>
-                        </div>
-                    </div>
-                </div>
-                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <div class="text-warning fa fa-exclamation-circle fa-2x me-3"></div>
-                        <div>
-                            <p class="mb-1">Expired </p>
-                            <strong class="fa-2x" id="Expired">0</strong>
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
-                    <div class="d-flex align-items-center">
-                        <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
-                    <div>
-                            <p class="mb-1">Extended</p>
-                            <strong>3520</strong>
-                    </div>
-                    </div>
-                </div>   --}}
-            </div>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-2">
             <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                 <a href="{{ route('withdrawal_index') }}" class="card-body btn">
@@ -147,8 +74,73 @@
             </div>
         </div>
     </div>
-
-    {{-- <div class="row m-0 ">
+    <div class="card border shadow-sm">
+        <div class="card-header bg-light">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <h2 class="h3 px-1 m-0 text-primary">Overall Snapshots</h2>
+                </div>
+                <div class="col-4 ms-auto p-0">
+                    <div class="nav btn-group w-100" style="flex-wrap: nowrap !important">
+                        <button data-bs-toggle="tab" type="button" onclick="getDashboardData('today')" class="btn btn-outline-primary active">Today</button>
+                        <button data-bs-toggle="tab" type="button" onclick="getDashboardData('week')" class="btn btn-outline-primary">Last 7 Days</button>
+                        <button data-bs-toggle="tab" type="button" onclick="getDashboardData('month')" class="btn btn-outline-primary">This Month</button>
+                        <button data-bs-toggle="tab" type="button" onclick="getDashboardData('year')" class="btn btn-outline-primary">This Year</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row m-0">
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning bi bi-tools fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">Materials</p>
+                            <strong class="fa-2x" id="Materials">0</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning fa fa-industry fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">In-house</p>
+                            <strong class="fa-2x" id="InHouse">0</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning bi bi-trash2 fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">Disposals</p>
+                            <strong class="fa-2x" id="Disposals">0</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <div class="text-warning fa fa-exclamation-circle fa-2x me-3"></div>
+                        <div>
+                            <p class="mb-1">Expired </p>
+                            <strong class="fa-2x" id="Expired">0</strong>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                    <div class="d-flex align-items-center">
+                        <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
+                    <div>
+                            <p class="mb-1">Extended</p>
+                            <strong>3520</strong>
+                    </div>
+                    </div>
+                </div>   --}}
+            </div>
+        </div>
+    </div> 
+    <div class="row m-0 ">
         <div class="col-12 text-end mb-3">
             <button class="btn btn-primary fa fa-eye" id="toggle_show"></button>
         </div>
@@ -216,11 +208,11 @@
                 </div>
             </div>
         </div>
-    </div>  --}}
+    </div> 
 @endsection
 
 @section('scripts')
-    {{-- <script>
+    <script>
         var xValues = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         new Chart("myChart", {
             type: "line",
@@ -247,13 +239,25 @@
             //     legend: {display: false}
             // }
         });
-    </script> --}}
+    </script>
     <script>
         $(document).ready(function() {
             $("#toggle_show").click(function() {
                 $(".toggle_container").toggle();
             });
-            getDashBoardCounts()
+            getDashboardData = (type) => {
+                axios.post("{{ route('get-dashBoard-counts-by-filters') }}",{
+                    type : type
+                }).then(function (response) {  
+                    console.log(response.data)
+                    Object.entries(response.data).map((item) => {
+                        document.querySelector(`#${item[0]}`).innerHTML = item[1]
+                    })
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            getDashboardData('today')
         });
-    </script>
+    </script> 
 @endsection

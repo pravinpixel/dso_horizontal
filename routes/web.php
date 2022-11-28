@@ -29,6 +29,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::prefix('dashboard')->group(function() {
         Route::get('/',[DashboardController::class ,'index'])->name('dashboard');
         Route::get('/get-dashBoard-counts',[DashboardController::class ,'getCounts']);
+        Route::post('/get-dashBoard-counts-by-filters',[DashboardController::class ,'getCountsByFilters'])->name('get-dashBoard-counts-by-filters');
     });
 
     Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index'); 
