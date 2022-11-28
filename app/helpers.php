@@ -404,7 +404,8 @@ if(!function_exists('getRoutes')) {
                 'help_menu_edit',
                 'pictogram_edit',
                 'role_edit',
-                'edit_or_duplicate_material_product'
+                'edit_or_duplicate_material_product',
+                'master_update_category'
             ];
             $delete = [
                 'user_delete',

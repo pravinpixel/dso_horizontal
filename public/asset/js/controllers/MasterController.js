@@ -174,10 +174,14 @@ app.controller('MasterController', function($scope, $http) {
                 id:$scope.update_id
             }
         }).then(function(response) {
-            $scope.data = response.data;
-            $scope.GetMaster();
-            $scope.statutory = '';
-            $("#edit_modal").modal("hide");
+            if(response.data.status) {
+                $scope.data = response.data;
+                $scope.GetMaster();
+                $scope.statutory = '';
+                $("#edit_modal").modal("hide");
+            } else {
+                Message('danger','Permission Denied ! Contact your admin')
+            }
         }, function(response) {
             $scope.data = response.data || 'Request failed';
         });

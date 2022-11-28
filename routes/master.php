@@ -12,11 +12,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::prefix('data-center')->group(function () {
         Route::get('/master-settings', [MasterController::class, 'index'])->name('master.item-description'); 
         Route::post('/create-settings', [MasterController::class, 'store_master'])->name('master.store.category');
-        Route::post('/edit-setting/{id?}', [MasterController::class, 'edit_master'])->name('master.edit.category');
         Route::post('/delete-setting/{id?}', [MasterController::class, 'delete_master'])->name('master.delete.category');
+        Route::post('/update-settings', [MasterController::class, 'update_master'])->name('master.update.category');
     });
+    Route::post('/edit-setting/{id?}', [MasterController::class, 'edit_master'])->name('master.edit.category');
     Route::get('/', [MasterController::class, 'index'])->name('master-settings');
-    Route::post('/update-settings', [MasterController::class, 'update_master'])->name('master.update.category');
 
     Route::get('/get_masters', [MasterController::class, 'get_masters'])->name('get_masters');
 
