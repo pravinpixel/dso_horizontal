@@ -153,7 +153,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-12 mb-1">COC/COA/Mill Cert  <sup class="text-danger">*</sup></label>
             <div class="col-12"> 
-                <div class="d-flex y-center border rounded p-0"> 
+                <div class="d-flex y-center border rounded p-0">  
                     <input 
                         multiple
                         type="file" 
@@ -207,6 +207,14 @@
             $(document).ready(()=>{
                 $('.ms-options-wrap button').attr('style', 'background-color: #EEF2F7 !important;pointer-events:none  !important');
             })
+        </script>
+    @endif
+
+    @if(config(is_disable(category_type() ?? $material_product->category_selection ?? null)."coc_coa_mill_cert.status") == 'disabled')
+        <script>
+            setTimeout(() => {
+                $('.coc_coa_mill_cert_input').prop('disabled', true)
+            }, 200);
         </script>
     @endif
  
