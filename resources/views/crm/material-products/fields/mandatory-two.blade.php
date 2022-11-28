@@ -209,10 +209,15 @@
             })
         </script>
     @endif
-    <script> 
-        setTimeout(() => {
-            $('.coc_coa_mill_cert_input').prop('required', true)
-        }, 200);
+ 
+    @if (count($batch->BatchFiles) == 0)
+        <script>
+            setTimeout(() => {
+                $('.coc_coa_mill_cert_input').prop('required', true)
+            }, 200);
+        </script>
+    @endif
+    <script>        
         var authUserName = "{{ auth_user()->alias_name }}"
         $('.ownner_select').select2(); 
         $('.owners_select').select2({
