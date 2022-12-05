@@ -129,6 +129,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('deduct-track-usage');
         Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('deduct-track-outlife');
     });
+    Route::delete('/withdrawal/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage_clear'])->name('deduct-track-usage');
+
     
     Route::get('/decrease-quantity/{id}', [WithdrawalController::class, 'decrease_quantity'])->name('decrease-quantity');
     Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get-withdrawal_data');

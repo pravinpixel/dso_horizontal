@@ -276,6 +276,11 @@ class WithdrawalController extends Controller
         }
         return redirect()->back()->with("success_message", __('global.direct_deduct_success'));
     }
+    public function deduct_track_usage_clear()
+    {
+        withdrawCart::where('withdraw_type','DEDUCT_TRACK_USAGE')->delete();
+        return redirect()->back()->with("success_message", __('global.cart_clear_success'));
+    }
     public function deduct_track_usage(Request $request)
     {
         $batch      = Batches::findOrFail($request->batch_id);

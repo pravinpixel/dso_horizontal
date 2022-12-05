@@ -1,6 +1,10 @@
-
-    <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important"
-        onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
+@if (count($deduct_track_usage_history ?? []) != 0 || count($deduct_track_usage) != 0)
+    <form action="{{ route('deduct-track-usage') }}" class="text-end" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.clear_cart')">
+        @csrf
+        @method("DELETE")
+        <button class="btn btn-outline-danger btn-sm mb-2" type="submit"><i class="bi bi-trash3-fill"></i> Clear All</button>
+    </form> 
+    <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
         @csrf
         <table class="table bg-white table-hover table-centered">
             <thead>
@@ -22,7 +26,7 @@
                         ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})
                     </th>
                     <th class="font-12">Remarks</th>
-                    <th class="font-12"> <i class="text-danger bi bi-trash3-fill"></i></th>
+                    <th class="font-12"> Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,8 +83,7 @@
                                 <textarea name="remarks" {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }} class="form-control h-100 w-100"></textarea>
                             </td>
                             <td  class="text-center d-flex">
-                                <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')"
-                                    class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i>
+                                {{-- <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i> --}}
                                 <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
                             </td> 
                         </tr>
@@ -91,13 +94,16 @@
         <div class="d-flex align-items-center border-top pt-3">
             <div class="col-6 ms-auto text-end">
                 <label for="end_of_material_product" class="p-2">
-                    <input {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }} type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
+                    <input {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }} type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
                         name="end_of_material_product" value="1" class="form-check-input me-2"
                         id="end_of_material_product">
                     End of material/product
                 </label>
-                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}>Click to Confirm deduction</button>
+                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}>Click to Confirm deduction</button>
             </div>
         </div>
     </form>
+    @else
+    {!! no_data_found() !!}
+@endif
 

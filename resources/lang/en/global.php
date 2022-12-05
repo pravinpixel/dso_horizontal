@@ -33,5 +33,7 @@ return [
     'direct_deduct_success'             => "Track Reduction is successful",
     'end_batch'                         => "Do you want End this Batch ?",
     'deduct_track_usage_success'        => "Track deduction successful",
+    'clear_cart'                        => 'Do you want Clear this Cart ?',
+    'cart_clear_success'                =>  'Cart Cleared Successfully !'
 ];
 ?>
