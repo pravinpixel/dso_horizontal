@@ -57,7 +57,7 @@
                             </td>
                             <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
                             <td> {{ auth_user()->alias_name }} </td>
-                            <td>{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                            <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
                             <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                             <td><small>{{ $row->Batch->quantity }}</small></td>
                             <td width="100px">
@@ -106,4 +106,3 @@
     @else
     {!! no_data_found() !!}
 @endif
-

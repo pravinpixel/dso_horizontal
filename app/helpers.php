@@ -513,6 +513,12 @@ if(!function_exists('getRoutes')) {
             return Carbon::parse($date)->format('d/m/Y');
         }
     } 
+    if(!function_exists('SetDateFormatWithHour')) {
+        function SetDateFormatWithHour($date)
+        {
+            return Carbon::parse()->format('d/m/Y H:i');
+        }
+    } 
     if(!function_exists('getBarcodeImage')) {
         function getBarcodeImage($number)
         {

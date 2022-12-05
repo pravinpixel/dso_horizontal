@@ -48,17 +48,17 @@
                                                         </td>
                                                         <td class="p-0"><small> {{ auth_user()->alias_name }}
                                                             </small></td>
-                                                        <td>{{ \Carbon\Carbon::now()->toDateTimeString() }}</td>
+                                                        <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
                                                         <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                                                         <td><small>{{ $repack['quantity'] }}</small></td>
                                                         <td class="p-0 py-0 px-1">
                                                             <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
                                                         </td>
-                                                        <td class="child-td"><small
-                                                                class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
+                                                        <td class="child-td">
+                                                            <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
                                                         </td>
-                                                        <td class="child-td"><small
-                                                                class="text-dark">{{ $repack['current_outlife_expiry'] ?? '-' }}</small>
+                                                        <td class="child-td">
+                                                            <small class="text-dark">{{ SetDateFormatWithHour($repack['current_outlife_expiry']) ?? '-' }}</small>
                                                         </td>
                                                     </tr>
                                                 @endif
