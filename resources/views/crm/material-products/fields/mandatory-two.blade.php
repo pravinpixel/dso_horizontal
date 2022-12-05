@@ -88,7 +88,7 @@
                     {!! Form::file('iqc_result',  [
                         'class'       => 'form-control form-control-sm border-0',
                         'placeholder' => 'Type here...',
-                        'id' => "iqc_status_input",
+                        'id'          => "iqc_status_input",
                         $batch->iqc_result == null ? $batch->iqc_result_status != "on" ? 'required' : null : '',
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
                     ]) !!}
