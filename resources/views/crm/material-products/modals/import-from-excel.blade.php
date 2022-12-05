@@ -7,8 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="modal-body">
-                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="select_file" class="form-control mb-2"> 
-                <a download="DSO-Import-Data.xlsx" href="DSO-Import-Data.xlsx"><i class="bi bi-download"></i> Download sample format</a>
+                <input type="file" accept="application/csv" name="select_file" class="form-control mb-2"> 
+                <a download="DSO-Import-Data.csv" href="DSO-Import-Data.csv"><i class="bi bi-download"></i> Download sample format</a>
             </div>
             <div class="modal-footer border-top">
                 <button type="submit" class="btn btn-primary rounded-pill w-100"><i class="bi bi-box-arrow-in-down-left me-1"></i>Import</button>

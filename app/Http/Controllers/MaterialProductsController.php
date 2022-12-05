@@ -145,10 +145,15 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000',
         ]);
- 
+        if($request->file('select_file')->getClientOriginalExtension() !== 'csv') {
+            Flash::error('File Type must have CSV !');
+            return back();
+        }
         try {
             $array = Excel::toArray(new BulkImport, $request->file('select_file'));
+            // dd($array);
             foreach ($array[0] as $key => $row) {
+                log::info($row['category_selection']);
                 if (!is_null($row['category_selection'])) {
                     try {
                         $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
@@ -234,6 +239,7 @@ class MaterialProductsController extends Controller
             }
         } catch (\Throwable $th) {
             Log::info("Invalid Action !");
+            Flash::error($th->getMessage());
         }
         return back();
     }
