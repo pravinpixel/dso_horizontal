@@ -59,6 +59,7 @@
                             <td width="100px">
                                 <div class="d-flex align-items-center">
                                     <input id="used_amount" name="used_amount" step="any"
+                                        {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}
                                         max="{{ $row->Batch->quantity }}"
                                         onkeyup="startTrackUsage({{ $row->Batch->quantity }},this.value)"
                                         type="number" style="width: 80px" value="0"
@@ -68,14 +69,14 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <input id="remain_amount" name="remain_amount" step="any" readonly
+                                    <input id="remain_amount" name="remain_amount" step="any" readonly 
                                         type="text" style="width: 80px" value="{{ $row->Batch->quantity }}"
                                         class="me-2 form-control-sm form-control">
                                     <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
                                 </div>
                             </td>
                             <td class="child-td py-0 px-1">
-                                <textarea name="remarks" class="form-control h-100 w-100"></textarea>
+                                <textarea name="remarks" {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }} class="form-control h-100 w-100"></textarea>
                             </td>
                             <td  class="text-center d-flex">
                                 <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')"
@@ -90,12 +91,12 @@
         <div class="d-flex align-items-center border-top pt-3">
             <div class="col-6 ms-auto text-end">
                 <label for="end_of_material_product" class="p-2">
-                    <input type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
+                    <input {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }} type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
                         name="end_of_material_product" value="1" class="form-check-input me-2"
                         id="end_of_material_product">
                     End of material/product
                 </label>
-                <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
+                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}>Click to Confirm deduction</button>
             </div>
         </div>
     </form>
