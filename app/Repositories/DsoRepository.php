@@ -15,8 +15,7 @@ use DateTime;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Pagination\LengthAwarePaginator; 
 
 class DsoRepository implements DsoRepositoryInterface
 {
@@ -204,7 +203,7 @@ class DsoRepository implements DsoRepositoryInterface
             if ($total_bath_quantity > $parent->alert_threshold_qty_upper_limit && $total_bath_quantity > $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-success';
             } 
-            if($parent->alert_threshold_qty_lower_limit < $total_bath_quantity && $total_bath_quantity < $parent->alert_threshold_qty_upper_limit){
+            if($parent->alert_threshold_qty_lower_limit <= $total_bath_quantity && $total_bath_quantity <= $parent->alert_threshold_qty_upper_limit){
                 $quantityColor = 'text-warning';
             }
              
