@@ -22,6 +22,7 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
 use App\Models\Batches;
 use App\Models\BatchFiles;
+use App\Models\BatchOwners;
 use App\Models\BatchTracker;
 use App\Models\RepackOutlife;
 use Carbon\Carbon;
@@ -556,13 +557,13 @@ class MaterialProductsController extends Controller
     }
     public function duplicate_batch($id)
     {
-        $current_batch                  =   Batches::find($id);
-        $created_batch                  =   $current_batch->replicate();
-        $created_batch->created_at      =   Carbon::now();
-        $created_batch->is_draft        =   1;
-        $batch_parent_category          =   MaterialProducts::find($created_batch->material_product_id)->category_selection;
-        $created_batch->barcode_number  =   generateBarcode($batch_parent_category); 
-        $created_batch->iqc_status      =   0; 
+        $current_batch                 = Batches::find($id);
+        $created_batch                 = $current_batch->replicate();
+        $created_batch->created_at     = Carbon::now();
+        $created_batch->is_draft       = 1;
+        $batch_parent_category         = MaterialProducts::find($created_batch->material_product_id)->category_selection;
+        $created_batch->barcode_number = generateBarcode($batch_parent_category);
+        $created_batch->iqc_status     = 0; 
         
         foreach($created_batch->toArray() as $column => $value) {
             $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
@@ -572,6 +573,16 @@ class MaterialProductsController extends Controller
         }
         
         $created_batch->save(); 
+
+        foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
+            if(!is_null($created_batch->id)) {
+                BatchOwners::create([
+                    "batch_id"   => $created_batch->id,
+                    "user_id"    => $batchUser['user_id'],
+                    "alias_name" => $batchUser['alias_name'],
+                ]);
+            }
+        }
         
         RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [
             'batch_id'            => $created_batch->id,
