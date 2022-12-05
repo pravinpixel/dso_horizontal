@@ -260,15 +260,16 @@ if(! function_exists('no_data_found')) {
 }
 
 if(! function_exists('strExcelDate')) {
-    function strExcelDate($excel_date) {  
+    function strExcelDate($excel_date) {   
         if($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '' ) {
             return  null ;
         }
-        $excel_date = (int) $excel_date;
-        $unix_date  = ($excel_date - 25569) * 86400;
-        $excel_date = 25569 + ($unix_date / 86400);
-        $unix_date  = ($excel_date - 25569) * 86400;
-        return gmdate("Y-m-d", $unix_date); //2023-12-16
+        // $excel_date = (int) $excel_date;
+        // $unix_date  = ($excel_date - 25569) * 86400;
+        // $excel_date = 25569 + ($unix_date / 86400);
+        // $unix_date  = ($excel_date - 25569) * 86400;
+        // return gmdate("Y-m-d", $unix_date); //2023-12-16
+        return Carbon::parse($excel_date)->format('Y-m-d');
     }
 }
 

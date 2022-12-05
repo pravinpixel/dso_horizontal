@@ -153,7 +153,7 @@ class MaterialProductsController extends Controller
             $array = Excel::toArray(new BulkImport, $request->file('select_file'));
             // dd($array);
             foreach ($array[0] as $key => $row) {
-                log::info($row['category_selection']);
+                // dd($row);
                 if (!is_null($row['category_selection'])) {
                     try {
                         $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
