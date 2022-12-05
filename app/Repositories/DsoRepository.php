@@ -155,22 +155,18 @@ class DsoRepository implements DsoRepositoryInterface
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                }
-                if ($page_name == 'THRESHOLD_QTY') {
-                    if ($batch->is_draft == 1) {
-                        unset($parent->Batches[$batch_key]);
-                    }
                 } 
                 if ($page_name == 'PRINT_BARCODE_LABEL') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
                 }
-                // if ($page_name == 'EXTEND_EXPIRY') {
-                //     if ($batch->iqc_status == 1 || $batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success') {
-                //         unset($parent->Batches[$batch_key]);
-                //     }
-                // }
+                if ($page_name == 'EXTEND_EXPIRY') {
+                    // $batch->iqc_status == 1
+                    if ($batch->is_draft == 1 || $batch->date_of_expiry_color == 'text-success' || $batch->date_of_expiry_color == 'text-dark') {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                }
                 if ($page_name == 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity != 0) {
                         unset($parent->Batches[$batch_key]);
@@ -207,13 +203,13 @@ class DsoRepository implements DsoRepositoryInterface
                 $quantityColor = 'text-warning';
             }
              
-            $parent['quantityColor'] = $quantityColor;
-         
-            // if ($page_name == 'PRINT_BARCODE_LABEL') {
-            //     if ($draftBatchCount != 0) {
-            //         unset($material_product[$key]);
-            //     }
-            // }
+            $parent['quantityColor'] = $quantityColor;  
+
+            if ($page_name == 'THRESHOLD_QTY') {
+                if ($batch->is_draft == 1 || $quantityColor == 'text-success') {
+                    unset($parent->Batches[$batch_key]);
+                }
+            } 
         }
          
 

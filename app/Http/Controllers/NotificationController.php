@@ -38,8 +38,12 @@ class NotificationController extends Controller
         
         $MaterialProducts = [];
 
-        foreach ($data as $key => $parent) {
-            if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit || $parent->alert_threshold_qty_lower_limit < $parent->material_quantity && $parent->material_quantity < $parent->alert_threshold_qty_upper_limit) {
+        foreach ($data as $key => $parent) {  
+            $total_bath_quantity = 0;
+            foreach ($parent->Batches as $key => $batch) {
+                $total_bath_quantity     += (int) $batch->quantity;
+            }
+            if($parent->alert_threshold_qty_lower_limit <= $total_bath_quantity && $total_bath_quantity <= $parent->alert_threshold_qty_upper_limit || $total_bath_quantity < $parent->alert_threshold_qty_lower_limit){
                 $MaterialProducts[]  = $parent;
             }
         }
