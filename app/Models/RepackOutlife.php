@@ -20,6 +20,7 @@ class RepackOutlife extends Model
         'draw_in_last_access',
         'draw_out_last_access',
         'input_repack_amount',
+        'old_input_repack_amount',
         'remain_amount',
         'barcode_number',
         'repack_size',
