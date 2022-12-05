@@ -44,6 +44,30 @@ class SearchRepository implements SearchRepositoryInterface
     public function advanced_search($filter)
     {
         
+        if($filter->owners ?? false) {
+           
+            $material_product_data_by_owners = [];
+            $Owners = [];
+            foreach ($filter->owners as $key => $owner) {
+                $Owners[] = $owner['id'];
+            }
+    
+            foreach (BatchOwners::whereIn('user_id',$Owners)->get() as $key => $value) {
+
+                $material_product_data_by_owners[] = MaterialProducts::with([
+                                                        'Batches',
+                                                        'Batches.RepackOutlife', 
+                                                        'Batches.BatchOwners', 
+                                                        'Batches.HousingType', 
+                                                        'Batches.Department', 
+                                                        'Batches.StorageArea', 
+                                                        'Batches.StatutoryBody',
+                                                        'UnitOfMeasure', 
+                                                        ])->find(Batches::find($value['batch_id'])->material_product_id); 
+            }    
+            return $this->dsoRepository->renderTableData($material_product_data_by_owners);
+        } 
+
         $material_table =  [
             'quantity',
             'category_selection',
@@ -94,25 +118,9 @@ class SearchRepository implements SearchRepositoryInterface
                 }
             }
         })->get();
-  
-        if($filter->owners ?? false) {
-            $material_product_data_by_owners = [];
-            foreach ($filter as $column => $value) { 
-                if($column == 'owners'){
-                    foreach ($value as $owner) { 
-                        $batch_owner                     = BatchOwners::with('Batches')->where('user_id',$owner['id'])->first();
-                        if(!is_null($batch_owner)) {
-                            $Batches                         = Batches::findOrFail($batch_owner['batch_id']);
-                            $material = MaterialProducts::with('Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody')->find($Batches->material_product_id);
-                            $material_product_data_by_owners[] = $material;
-                        }
-                    }
-                } 
-            }
-            return $this->dsoRepository->renderTableData($material_product_data_by_owners);
-        }
-         
+        
         return $this->dsoRepository->renderTableData($material_product_data);
+         
     }
     public function sortingOrder($sort_by)
     {

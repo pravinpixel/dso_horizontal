@@ -99,7 +99,7 @@ class DsoRepository implements DsoRepositoryInterface
             $UnitPackingCount    = 0;
             $total_bath_quantity = 0;
             $material_total_quantity = 0;
-
+          
             foreach ($parent->Batches as $batch_key => $batch) {
 
                 $date_of_expiry             = $batch->date_of_expiry;

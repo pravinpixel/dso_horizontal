@@ -66,7 +66,6 @@ class CreateBatchesTable extends Migration
             $table->string('withdrawal_type')->nullable();
             $table->integer('user_id'); 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

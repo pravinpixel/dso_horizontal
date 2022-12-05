@@ -29,6 +29,7 @@ class MaterialProductSeeder extends Seeder
             'material_total_quantity'         => 175 * 100
         ];
         $data = [
+            "user_id"                      => 1,
             "unit_packing_value"           => "100",
             "is_draft"                     => "0",
             "quantity"                     => 175,
@@ -96,6 +97,7 @@ class MaterialProductSeeder extends Seeder
             'material_total_quantity'         => 5 * 10
         ];
         $data_two = [
+            "user_id"                      => 1,
             "unit_packing_value"           => "10",
             "is_draft"                     => "0",
             "quantity"                     => 5,
@@ -163,6 +165,7 @@ class MaterialProductSeeder extends Seeder
             'material_total_quantity'         => 155 * 175
         ];
         $data_three = [
+            "user_id"                      => 1,
             "unit_packing_value"           => "175",
             "is_draft"                     => "0",
             "quantity"                     => 155,
