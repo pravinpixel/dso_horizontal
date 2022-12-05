@@ -7,7 +7,7 @@
         clearLabel: 'Clear',
         locale: {
             separator: ' - ',
-            format: 'YYYY-MM-DD'
+            format: 'DD/MM/YYYY'
         }
     });
 

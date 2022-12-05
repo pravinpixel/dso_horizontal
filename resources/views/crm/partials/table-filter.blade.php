@@ -45,11 +45,11 @@
     </div> 
     <div class="col"> 
         <label for="" class="form-label">Date in</label>
-        <input type="text" date-range-picker ng-model="advanced_filter.date_in" name="date_in" class="form-control custom" placeholder="YYYY-MM-DD">
+        <input type="text" date-range-picker ng-model="advanced_filter.date_in" name="date_in" class="form-control custom" placeholder="DD/MM/YYYY">
     </div>
     <div class="col"> 
         <label for="" class="form-label">Date of expiry</label>
-        <input type="text" date-range-picker ng-model="advanced_filter.date_of_expiry" name="date_of_expiry" class="form-control custom" placeholder="YYYY-MM-DD">
+        <input type="text" date-range-picker ng-model="advanced_filter.date_of_expiry" name="date_of_expiry" class="form-control custom" placeholder="DD/MM/YYYY">
     </div>
     <div class="col d-flex align-items-center justify-content-center">
         <div class="btn-group">

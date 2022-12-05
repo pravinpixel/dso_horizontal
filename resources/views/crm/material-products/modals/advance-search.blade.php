@@ -119,18 +119,18 @@
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Date of manufacture</small>
-                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_manufacture" name="date_of_manufacture">
+                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="DD/MM/YYYY" ng-model="advanced_filter.date_of_manufacture" name="date_of_manufacture">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
                             <small class="mb-1 text-dark">Date of shipment</small>
-                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="YYYY-MM-DD" ng-model="advanced_filter.date_of_shipment" name="date_of_shipment">
+                            <input type="text" date-range-picker class="form-control need-word-match" placeholder="DD/MM/YYYY" ng-model="advanced_filter.date_of_shipment" name="date_of_shipment">
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
                             <label class="form-label text-dark">Used for TD/EXPT only</label>
-                            <select class="form-select" ng-model="advanced_filter.used_for_td_expt_only">
+                            <select class="form-select" ng-model="advanced_filter.coc_coa_mill_cert_status">
                                 <option value="">-- Select --</option>
-                                <option value="1">Yes</option>
-                                <option value="2">No</option> 
+                                <option value="on">Yes</option>
+                                <option value="off">No</option> 
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">

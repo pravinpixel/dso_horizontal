@@ -38,10 +38,10 @@
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Used for TD/Expt only</label>
-            <div class="col-8">
+            <div class="col-8"> 
                 <select class="form-select form-select-sm" name="used_for_td_expt_only"  disabled  >
-                    <option {{ $batch->coc_coa_mill_cert_status == 'off' ? "selected" : null }} value="on"> No </option>
-                    <option {{ $batch->coc_coa_mill_cert_status == 'on' ? "selected" : null }} value="off"> Yes </option>
+                    <option {{ $batch->coc_coa_mill_cert_status == 'off' ? "selected" : null }} value="0"> No </option>
+                    <option {{ $batch->coc_coa_mill_cert_status == 'on' ? "selected" : null }} value="1"> Yes </option>
                 </select>
             </div>
         </div>
