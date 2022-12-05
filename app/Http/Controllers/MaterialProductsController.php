@@ -616,4 +616,16 @@ class MaterialProductsController extends Controller
             "Message" => "success"
         ]);
     }
+    public function delete_batch_file($id, $type)
+    {
+        $batch   =   Batches::find($id);
+        if (Storage::exists($batch[$type])) {
+            Storage::delete($batch[$type]);
+        }
+        $batch[$type] = null;
+        $batch->save();
+        return response()->json([
+            "Message" => "success"
+        ]);
+    }
 }

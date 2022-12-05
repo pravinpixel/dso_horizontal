@@ -92,6 +92,7 @@
                         $batch->iqc_result == null ? $batch->iqc_result_status != "on" ? 'required' : null : '',
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."iqc_result.status") ,
                     ]) !!}
+                    
                     <span class="btn btn-light btn-sm border-start"> 
                         <input type="checkbox" name="iqc_result_status" id="iqc_result_check_box"
                             class="form-check-input"
@@ -103,11 +104,16 @@
                         />
                     </span>
                 </div>
-                @if ($batch->iqc_result)
-                    <button onclick="download('{{ $batch->id }}','iqc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
-                        <i class="fa fa-download me-1"></i>Download
-                    </button> 
-                @endif
+                <div class="d-flex">
+                    @if ($batch->iqc_result) 
+                        <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                            <button onclick="download('{{ $batch->id }}','iqc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                <i class="fa fa-download me-1"></i>Download
+                            </button>
+                            <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteBatchFile('{{ $batch->id }}','iqc_result',this)" style="cursor: pointer"></i>
+                        </div>
+                    @endif
+                </div>
                 <small class="float-end"><i>Visual check done</i></small>
             </div>
         </div>

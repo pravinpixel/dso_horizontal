@@ -16,11 +16,17 @@
             <label for="" class="col-4">Extended QC result</label>
             <div class="col-8 ">
                 {!! Form::file('extended_qc_result', ['class' => 'form-control form-control-sm', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_qc_result.status')]) !!}
-                @if ($batch->extended_qc_result)
-                    <button onclick="download('{{ $batch->id }}','extended_qc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
-                        <i class="fa fa-download me-1"></i>Download
-                    </button>
-                @endif
+        
+                <div class="d-flex">
+                    @if ($batch->extended_qc_result) 
+                        <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                            <button onclick="download('{{ $batch->id }}','extended_qc_result')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                <i class="fa fa-download me-1"></i>Download
+                            </button>
+                            <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteBatchFile('{{ $batch->id }}','extended_qc_result',this)" style="cursor: pointer"></i>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -29,11 +35,16 @@
             <label for="" class="col-4">Disposal certificate</label>
             <div class="col-8">
                 {!! Form::file('disposal_certificate', ['class' => 'form-control form-control-sm ', 'placeholder' => 'Type here...', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'disposal_certificate.status')]) !!}
-                @if ($batch->disposal_certificate)
-                    <button onclick="download('{{ $batch->id }}','disposal_certificate')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
-                        <i class="fa fa-download me-1"></i>Download
-                    </button>
+                <div class="d-flex">
+                    @if ($batch->disposal_certificate) 
+                    <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                        <button onclick="download('{{ $batch->id }}','disposal_certificate')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                            <i class="fa fa-download me-1"></i>Download
+                        </button>
+                        <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteBatchFile('{{ $batch->id }}','disposal_certificate',this)" style="cursor: pointer"></i>
+                    </div>
                 @endif
+                </div>
             </div>
         </div>
         <div class="row m-0 y-center my-2">

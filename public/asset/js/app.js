@@ -353,6 +353,15 @@ viewBatch = (id) => {
         console.log(error);
     });
 }
+
+deleteBatchFile = (id,type,element) => {
+    axios.get(`${APP_URL}/delete-batch-file/${id}/${type}`).then(function (response) {  
+        element.parentNode.classList.add('d-none')
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+ 
  
 download = (id,type) => { 
     const FORM = `

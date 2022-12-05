@@ -7,12 +7,17 @@
                     {!! Form::file('sds',  ['class' => 'form-control form-control-sm border-0', 'placeholder' => 'Type here...', 
                         config(is_disable(category_type() ?? $material_product->category_selection ?? null)."sds.status")
                     ]) !!}
+                </div> 
+                <div class="d-flex">
+                    @if ($batch->sds) 
+                        <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                            <button onclick="download('{{ $batch->id }}','sds')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                <i class="fa fa-download me-1"></i>Download
+                            </button>
+                            <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteBatchFile('{{ $batch->id }}','sds',this)" style="cursor: pointer"></i>
+                        </div>
+                    @endif
                 </div>
-                @if ($batch->sds)
-                    <button onclick="download('{{ $batch->id }}','sds')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
-                        <i class="fa fa-download me-1"></i>Download
-                    </button>
-                @endif
             </div>
         </div>
         <div class="row m-0 y-center my-2">

@@ -307,8 +307,15 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Extended QC result</div>
-            @if ($batch->extended_qc_result)
-                {{ $batch->extended_qc_result }}
+            @if (!is_null($batch->extended_qc_result))
+                <div class="btn-group mt-1">
+                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
+                        href="{{ asset('storage/app/') . '/' . $batch->extended_qc_result }}" target="_blank"><i
+                            class="fa fa-eye me-1"></i>view</a>
+                    <button onclick="download('{{ $batch->id }}','extended_qc_result')"
+                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
+                            class="fa fa-download me-1"></i>Download</button>
+                </div>
             @endif
         </div>
     </li>
