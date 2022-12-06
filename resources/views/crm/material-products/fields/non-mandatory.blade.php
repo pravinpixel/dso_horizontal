@@ -64,25 +64,37 @@
             </div>
         </div>
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Alert threshold Qty <br><small>(upper limit)</small></label>
+            <label for="" class="col-4 d-flex">Cost per unit <small class="sgd"> S$ </small></label>
             <div class="col-8">
-               {!! Form::number('alert_threshold_qty_upper_limit', $material_product->alert_threshold_qty_upper_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
-                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_threshold_qty_upper_limit.status")
-               ]) !!}
+            {!! Form::number('cost_per_unit', $batch->cost_per_unit ?? null, ['class' => 'form-control form-select-sm three-digits', 'placeholder' => 'Type here...',"step" => "0.01",
+                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."cost_per_unit.status")
+            ]) !!}
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6"> 
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Alert threshold Qty <br><small>(lower limit)</small></label>
+            <label for="" class="col-4">Alert threshold Qty <br><small class="text-success">(upper limit)</small></label>
             <div class="col-8">
-            {!! Form::number('alert_threshold_qty_lower_limit', $material_product->alert_threshold_qty_lower_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
+               {!! Form::number('alert_threshold_qty_upper_limit', $material_product->alert_threshold_qty_upper_limit ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
+                'onkeyup' => 'SetAlertThresholdLowLimit(this.value)',
+                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_threshold_qty_upper_limit.status")
+               ]) !!}
+            </div>
+        </div>  
+        <div class="row m-0 y-center my-2">
+            <label for="" class="col-4">Alert threshold Qty <br><small class="text-danger">(lower limit)</small></label>
+            <div class="col-8">
+            {!! Form::number('alert_threshold_qty_lower_limit', $material_product->alert_threshold_qty_lower_limit ?? null, [
+                'class'       => 'form-control form-select-sm',
+                'placeholder' => 'Type here...',
+                'max'         => $material_product->alert_threshold_qty_upper_limit,
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_threshold_qty_lower_limit.status")
             ]) !!}
             </div>
         </div>
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Alert before expiry <br><small>(weeks)</small></label>
+            <label for="" class="col-4">Alert before expiry <br><small class="text-info">(weeks)</small></label>
             <div class="col-8">
             {!! Form::number('alert_before_expiry', $material_product->alert_before_expiry ?? null, ['class' => 'form-control form-select-sm', 'placeholder' => 'Type here...',
                 config(is_disable(category_type() ?? $material_product->category_selection ?? null)."alert_before_expiry.status")
@@ -105,15 +117,7 @@
                     config(is_disable(category_type() ?? $material_product->category_selection ?? null)."date_of_shipment.status")
                 ]) !!}
             </div>
-        </div>
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4 d-flex">Cost per unit <small class="sgd"> S$ </small></label>
-            <div class="col-8">
-            {!! Form::number('cost_per_unit', $batch->cost_per_unit ?? null, ['class' => 'form-control form-select-sm three-digits', 'placeholder' => 'Type here...',"step" => "0.01",
-                config(is_disable(category_type() ?? $material_product->category_selection ?? null)."cost_per_unit.status")
-            ]) !!}
-            </div>
-        </div>
+        </div> 
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Remarks</label>
             <div class="col-8">
@@ -124,3 +128,10 @@
         </div>
     </div>
 </div>
+@section('scripts')
+    <script>
+        SetAlertThresholdLowLimit = (val) => {
+            $('input[name=alert_threshold_qty_lower_limit]').prop('max', val)
+        }
+    </script>
+@endsection

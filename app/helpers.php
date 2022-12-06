@@ -582,4 +582,12 @@ if(!function_exists('getRoutes')) {
             return true;
         }
     } 
+    if(!function_exists('Multiplicate')) {
+        function Multiplicate($one, $two)
+        {
+            $number_one = $one;
+            $number_two = $two;
+            return round($number_one * $number_two,2);
+        }
+    } 
 }

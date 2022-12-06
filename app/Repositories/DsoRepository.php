@@ -15,7 +15,9 @@ use DateTime;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator; 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Parser\Multiple;
 
 class DsoRepository implements DsoRepositoryInterface
 {
@@ -95,8 +97,7 @@ class DsoRepository implements DsoRepositoryInterface
             $quantityColor       = 'text-danger';
             $readCount           = 0;
             $draftBatchCount     = 0;
-            $UnitPackingCount    = 0;
-            $total_bath_quantity = 0;
+            $UnitPackingCount    = 0; 
             $material_total_quantity = 0;
           
             foreach ($parent->Batches as $batch_key => $batch) {
@@ -146,10 +147,10 @@ class DsoRepository implements DsoRepositoryInterface
 
                 if ($batch->is_draft == 1) {
                     $draftBatchCount += 1;
-                } else {
-                    $total_bath_quantity     += $batch->quantity;
-                    $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
-                    $batch->total_quantity    = $batch->quantity * $batch->unit_packing_value;
+                } else { 
+                  
+                    $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
+                    $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
                 }
                 if ($page_name != 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity == 0) {
@@ -184,6 +185,7 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 } 
             }
+       
 
             $parent['material_total_quantity'] = $material_total_quantity;
             $parent['material_quantity']       = $material_total_quantity != 0 ? ($material_total_quantity / $parent['unit_packing_value']) : 0;
@@ -191,15 +193,14 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
             $parent['draftBatchCount']         = $draftBatchCount;
-            $parent['total_bath_quantity']     = $total_bath_quantity;
-
-            if ($total_bath_quantity < $parent->alert_threshold_qty_lower_limit) {
+ 
+            if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
             }
-            if ($total_bath_quantity > $parent->alert_threshold_qty_upper_limit && $total_bath_quantity > $parent->alert_threshold_qty_lower_limit) {
+            if ($parent->material_quantity > $parent->alert_threshold_qty_upper_limit && $parent->material_quantity > $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-success';
             } 
-            if($parent->alert_threshold_qty_lower_limit <= $total_bath_quantity && $total_bath_quantity <= $parent->alert_threshold_qty_upper_limit){
+            if($parent->alert_threshold_qty_lower_limit <= $parent->material_quantity && $parent->material_quantity <= $parent->alert_threshold_qty_upper_limit){
                 $quantityColor = 'text-warning';
             }
              
