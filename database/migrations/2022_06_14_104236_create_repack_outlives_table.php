@@ -27,7 +27,7 @@ class CreateRepackOutlivesTable extends Migration
             $table->string('remain_amount')->nullable();
             $table->string('barcode_number')->nullable();
             $table->string('repack_size')->nullable();
-            $table->integer('quantity')->nullable();
+            $table->decimal('quantity',10)->nullable();
             $table->string('total_quantity')->nullable();
             $table->string('remain_days')->nullable();
             $table->string('last_date_time')->nullable();

@@ -762,7 +762,7 @@ app.controller('RootController', function ($scope, $http) {
                             repack_amount: element.input_repack_amount,
                             balance_amount: element.remain_amount,
                             repack_size: element.repack_size,
-                            quantity: RepackData.quantity,
+                            quantity: element.quantity,
                             remaining_days: element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
                             barcode_number: RepackData.barcode_number,
