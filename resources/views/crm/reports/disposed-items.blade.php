@@ -27,7 +27,8 @@
                             <th class="text-white bg-primary-2 text-center font-14">Batch/Serial</th>
                             <th class="text-white bg-primary-2 text-center font-14">Unit packing value</th>
                             <th class="text-white bg-primary-2 text-center font-14">Before Quantity</th>
-                            <th class="text-white bg-primary-2 text-center font-14">Quantity</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Disposed Quantity</th>
+                            <th class="text-white bg-primary-2 text-center font-14">After Quantity</th> 
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -80,8 +81,12 @@
                     name: 'BeforeQuantity'
                 },
                 {
-                    data: 'Quantity',
-                    name: 'Quantity'
+                    data: 'DisposedQuantity',
+                    name: 'DisposedQuantity'
+                },
+                {
+                    data: 'AfterQuantity',
+                    name: 'AfterQuantity'
                 },
             ]
         });

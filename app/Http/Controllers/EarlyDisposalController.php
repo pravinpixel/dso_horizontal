@@ -35,8 +35,8 @@ class EarlyDisposalController extends Controller
     {
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
-        $old_value  =   clone $batch;
-        $new_value  =   $batch;
+        $old_value  = clone $batch;
+        $new_value  = $batch;
 
         $batch->update([
             'used_for_td_expt_only' => $request->used_for_td_expt_only,
@@ -45,9 +45,7 @@ class EarlyDisposalController extends Controller
             'disposed_status'       => true
         ]);
 
-        if($batch->quantity == 0) {
-            TrackDisposedBatches($batch, $request->quantity);
-        }
+        TrackDisposedBatches($batch, $request->quantity);
  
         LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
         return redirect()->route('disposal')->with('success',"Disposal Success !");

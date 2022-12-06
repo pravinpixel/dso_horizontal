@@ -16,7 +16,8 @@ class DisposedItems extends Model
         "BatchSerial",
         "UnitPackingValue",
         "BeforeQuantity",
-        "Quantity",
+        "DisposedQuantity",
+        "AfterQuantity",
         "user_id",
     ];
 }
