@@ -147,7 +147,7 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1) {
                     $draftBatchCount += 1;
                 } else {
-                    $total_bath_quantity     += (int) $batch->quantity;
+                    $total_bath_quantity     += $batch->quantity;
                     $material_total_quantity += $batch->quantity * $batch->unit_packing_value;
                     $batch->total_quantity    = $batch->quantity * $batch->unit_packing_value;
                 }
