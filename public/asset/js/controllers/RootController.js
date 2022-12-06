@@ -251,8 +251,8 @@ app.controller('RootController', function ($scope, $http) {
             { name: 'Item description', item: row.item_description },
             { name: 'Unit Packing size', item: row.unit_packing_value },
             { name: 'Statutory body', item: row.batches[0].statutory_body !== null ? row.batches[0].statutory_body.name : '' },
-            { name: 'Alert threshold Qty (lower limit) ', item: row.alert_threshold_qty_lower_limit },
             { name: 'Alert threshold Qty (upper limit)', item: row.alert_threshold_qty_upper_limit },
+            { name: 'Alert threshold Qty (lower limit) ', item: row.alert_threshold_qty_lower_limit },
             { name: 'Alert before expiry (in weeks)', item: row.alert_before_expiry },
         ]
     }
