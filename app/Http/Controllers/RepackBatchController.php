@@ -140,7 +140,8 @@ class RepackBatchController extends Controller
                         'remain_amount'           => $row['balance_amount'],
                         'repack_size'             => $row['repack_size'],
                         'barcode_number'          => $row['barcode_number'], 
-                        'old_input_repack_amount' => $row['repack_amount']
+                        'old_input_repack_amount' => $row['repack_amount'],
+                        'draw_out_last_access'     => auth_user()->alias_name,
                     ]);
                 }
 
@@ -180,14 +181,13 @@ class RepackBatchController extends Controller
                         'current_outlife_expiry'  => $current_outlife_expiry,
                         'remain_days'             => $row['remaining_days'],
                         'remaining_days_seconds'  => $row['remaining_days_seconds'],
+                        'draw_in_last_access'    => auth_user()->alias_name,
                     ]);
 
                 }
                 
                 RepackOutlife::find($row['id'])->update([ 
-                    'user_id'                 => auth_user()->id,
-                    'draw_out_last_access'    => auth_user()->alias_name,
-                    'draw_in_last_access'     => auth_user()->alias_name,
+                    'user_id'                 => auth_user()->id, 
                     'current_date_time'       => Carbon::now()->toDateTimeLocalString()
                 ]);
 
