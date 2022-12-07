@@ -29,7 +29,7 @@ if(! function_exists('material_product')) {
     function material_product() {
         return session()->get('material_product_id');
     }
-} 
+}
 if(! function_exists('batch_id')) {
     function batch_id() {
         return session()->get('batch_id');
@@ -61,7 +61,7 @@ if(! function_exists('is_select')) {
         if(wizard_mode() == 'create') {
             $status  = 'selected';
         }
-  
+
         return $status ?? null;
     }
 }
@@ -74,7 +74,7 @@ if(! function_exists('is_disable')) {
     function is_disable($category_type) {
         $wizard_mode = wizard_mode();
         $edit_mode   = session()->get('edit_mode');
-        
+
         if(wizard_mode() != 'edit') {
             return "is_disable.{$wizard_mode}.{$category_type}." ;
         } else {
@@ -86,7 +86,7 @@ if(! function_exists('completed_tab')) {
     function completed_tab($type) {
         if(session()->get($type)  ==  'completed') {
             return route('create.material-product',['type'=>$type]);
-        } 
+        }
         else {
             return "#";
         }
@@ -104,7 +104,7 @@ if(! function_exists('auth_user_role')) {
 }
 if(! function_exists('storageGet')) {
     function storageGet($src) {
-        if (Storage::exists($src)) { 
+        if (Storage::exists($src)) {
             $file = asset(str_replace('public', 'public/storage/',$src)) ;
         } else {
             $file =  $src ;
@@ -148,7 +148,7 @@ if(! function_exists('is_reset')) {
 
 if(! function_exists('checkIsMaterialColumn')) {
     function checkIsMaterialColumn($column) {
-        $data =  [ 
+        $data =  [
             'category_selection',
             'item_description',
             'unit_of_measure',
@@ -224,9 +224,9 @@ if(! function_exists('checkIsBatchDateColumn')) {
         return in_array($column, $data) == true ? 1 : 0 ;
     }
 }
- 
+
 if(! function_exists('generateBarcode')) {
-    function generateBarcode($type) { 
+    function generateBarcode($type) {
         $category_code  = $type === 'material' ? 1 : 2 ;
         do {
             $barcode_number = random_int(10000000000, 99999999999);
@@ -236,7 +236,7 @@ if(! function_exists('generateBarcode')) {
 }
 
 if(! function_exists('storeFiles')) {
-    function storeFiles($fileName) { 
+    function storeFiles($fileName) {
         $file               =   request()->file($fileName);
         $OriginalName       =   $file->getClientOriginalName();
         $OriginalExtension  =   $file->getClientOriginalExtension();
@@ -244,7 +244,7 @@ if(! function_exists('storeFiles')) {
         $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
         return $file->storeAs('public/files/'.$fileName , $newFileName );
     }
-} 
+}
 
 if(! function_exists('no_data_found')) {
     function no_data_found() {
@@ -260,7 +260,7 @@ if(! function_exists('no_data_found')) {
 }
 
 if(! function_exists('strExcelDate')) {
-    function strExcelDate($excel_date) {   
+    function strExcelDate($excel_date) {
         if($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '' ) {
             return  null ;
         }
@@ -274,8 +274,8 @@ if(! function_exists('strExcelDate')) {
 }
 
 if(! function_exists('dateDifferStr')) {
-    function dateDifferStr($dt1,$dt2) { 
- 
+    function dateDifferStr($dt1,$dt2) {
+
         $updated_outlife_days      = $dt1->diff($dt2)->format('%a');
         $updated_outlife_hours     = $dt1->diff($dt2)->format('%h');
         $updated_outlife_minutes   = $dt1->diff($dt2)->format('%i');
@@ -298,7 +298,7 @@ if(!function_exists('BatchRestore')) {
         if(!is_null($result)) {
             $fromBatch  = Batches::find($result->from_batch_id);
             if(!is_null($fromBatch)){
-                if($result->action_type == 'REPACK_OUTLIFE') { 
+                if($result->action_type == 'REPACK_OUTLIFE') {
                     $fromBatch->quantity       = $result->quantity;
                     $fromBatch->total_quantity = $result->total_quantity;
                 }
@@ -312,14 +312,14 @@ if(!function_exists('BatchRestore')) {
 if(!function_exists('groupBy')) {
     function groupBy($key,$data)
     {
-        $result = array(); 
+        $result = array();
         foreach($data as $val) {
             $name = $val[1];
-            if(array_key_exists($key, $val)){ 
+            if(array_key_exists($key, $val)){
                 $result[$val[$key]][] = $name;
             }else{
                 $result[""][] = $name;
-            } 
+            }
         }
         return $result;
     }
@@ -353,21 +353,21 @@ if(!function_exists('getRoutes')) {
                     ]
                 ];
             }
-        } 
+        }
         $groupBy = groupBy(0, $routeList);
- 
+
         $menu_list = [];
         foreach($groupBy as $key => $menu) {
             $menu_array = [];
             foreach($menu as $menu_value) {
-                
+
                 $menu_array[key($menu_value)] = [
                     'name'   => key($menu_value),
                     'slug'   => page_format(key($menu_value)),
                     'status' => $menu_value[key($menu_value)]
                 ];
             }
-            
+
             $menu_list[$key] = $menu_array;
         }
         // dd($menu_list);
@@ -458,7 +458,7 @@ if(!function_exists('getRoutes')) {
                 return 'export cart';
             }elseif($menu_value == 'reports_history') {
                 return 'history';
-            }  
+            }
             return  $menu_value;
         }
     }
@@ -512,28 +512,28 @@ if(!function_exists('getRoutes')) {
         {
             return Carbon::parse($date)->format('d/m/Y');
         }
-    } 
+    }
     if(!function_exists('SetDateFormatWithHour')) {
         function SetDateFormatWithHour($date)
         {
             return Carbon::parse()->format('d/m/Y H:i');
         }
-    } 
+    }
     if(!function_exists('getBarcodeImage')) {
         function getBarcodeImage($number)
         {
             $generatorPNG = new BarcodeGeneratorPNG;
             return '<img src="data:image/png;base64,'.base64_encode($generatorPNG->getBarcode($number, $generatorPNG::TYPE_CODE_128)).'">';
         }
-    } 
+    }
     if(!function_exists('getBarcode')) {
         function getBarcode($number)
         {
             $generator = new  BarcodeGeneratorHTML();
             return $generator->getBarcode($number, $generator::TYPE_CODE_128);
         }
-    } 
-    if(!function_exists('TrackDisposedBatches')) { 
+    }
+    if(!function_exists('TrackDisposedBatches')) {
         function TrackDisposedBatches($batch,$AfterQuantity)
         {
             DisposedItems::create([
@@ -550,19 +550,21 @@ if(!function_exists('getRoutes')) {
             ]);
             return true;
         }
-    } 
+    }
     if(!function_exists('MaterialProductHistory')) {
-        function MaterialProductHistory($batch,$ActionTaken,$updated_outlife =null)
-        { 
+        function MaterialProductHistory($Batch,$ActionTaken,$updated_outlife =null)
+        {
+            $batch = Batches::find($Batch->id);
             $BatchOwners = '';
-            foreach ($batch->BatchOwners as $key => $owner){
-                if ($owner->alias_name ?? false) {
-                    $BatchOwners .= $owner->alias_name.' , ';
+            if($batch->BatchOwners ?? false) {
+                foreach ($batch->BatchOwners as $key => $owner){
+                    if ($owner->alias_name ?? false) {
+                        $BatchOwners .= $owner->alias_name.' , ';
+                    }
                 }
             }
-          
             if($ActionTaken == 'Repack_Outlife_Draw_IN') {
-                $DrawStatus = 'Draw IN'; 
+                $DrawStatus = 'Draw IN';
             }
             if($ActionTaken == 'Repack_Outlife_Draw_OUT') {
                 $DrawStatus = 'Draw OUT';
@@ -570,29 +572,29 @@ if(!function_exists('getRoutes')) {
             if($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
             }
- 
+           
             materialProductHistory::updateOrCreate([
-                'batch_id'          => $batch->id,
-                'barcode_number'    => $batch->barcode_number,
-                'CategorySelection' => $batch->BatchMaterialProduct->category_selection,
-                'ItemDescription'   => $batch->BatchMaterialProduct->item_description,
-                'Brand'             => $batch->brand,
-                'BatchSerial'       => $batch->batch." / ".$batch->serial,
-                'TransactionBy'     => auth_user()->alias_name,
-                'Module'            => session()->get('page_name'),
-                'ActionTaken'       => $ActionTaken,
-                'UnitPackingValue'  => $batch->unit_packing_value,
-                'Quantity'          => $batch->quantity,
-                'StorageArea'       => $batch->StorageArea->name ?? '',
-                'Housing'           => $batch->housing,
-                'Owners'            => $BatchOwners,
-                'Remarks'           => $batch->remarks,
-                'DrawStatus'        => $DrawStatus ?? null,
+                'batch_id'                 => $batch->id,
+                'barcode_number'           => $batch->barcode_number,
+                'CategorySelection'        => $batch->BatchMaterialProduct->category_selection,
+                'ItemDescription'          => $batch->BatchMaterialProduct->item_description,
+                'Brand'                    => $batch->brand,
+                'BatchSerial'              => $batch->batch." / ".$batch->serial,
+                'TransactionBy'            => auth_user()->alias_name,
+                'Module'                   => session()->get('page_name'),
+                'ActionTaken'              => $ActionTaken,
+                'UnitPackingValue'         => $batch->unit_packing_value,
+                'Quantity'                 => $batch->quantity,
+                'StorageArea'              => $batch->StorageArea->name ?? '',
+                'Housing'                  => $batch->housing,
+                'Owners'                   => $BatchOwners,
+                'Remarks'                  => $batch->remarks,
+                'DrawStatus'               => $DrawStatus ?? null,
                 'RemainingOutlifeOfParent' => $updated_outlife
             ]);
             return true;
         }
-    } 
+    }
     if(!function_exists('Multiplicate')) {
         function Multiplicate($one, $two)
         {
@@ -600,5 +602,5 @@ if(!function_exists('getRoutes')) {
             $number_two = $two;
             return round($number_one * $number_two,2);
         }
-    } 
+    }
 }

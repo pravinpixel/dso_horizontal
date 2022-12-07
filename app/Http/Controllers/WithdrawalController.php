@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use App\Models\withdrawCart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class WithdrawalController extends Controller
 {
@@ -30,10 +27,10 @@ class WithdrawalController extends Controller
 
         $deduct_track_outlife = [];
         foreach ($deduct_track_outlife_data as $key => $value) {
-            
+
             $RepackOutlife = [];
             foreach ($value->RepackOutlife->toArray() as $key => $repack) {
-                if($repack['updated_outlife_seconds']) { 
+                if($repack['updated_outlife_seconds']) {
                     $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
                     $RepackOutlife[] = $repack;
                 }
@@ -44,8 +41,6 @@ class WithdrawalController extends Controller
                 $deduct_track_outlife[] = $value;
             }
         }
-        // dd($deduct_track_outlife);
-        // dd($deduct_track_usage);
         return  view('crm.material-products.withdrawal.index', compact('direct_deducts','deduct_track_usage','deduct_track_outlife'));
     }
     public function decrease_quantity($id)
@@ -60,7 +55,7 @@ class WithdrawalController extends Controller
         ]);
     }
     public function get_withdrawal_data($type)
-    { 
+    {
         $records = withdrawCart::with('batch')->where([
             'user_id'       => auth_user()->id,
             'withdraw_type' => $type
@@ -80,13 +75,13 @@ class WithdrawalController extends Controller
                     'user_id'       => auth_user()->id,
                     'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
                 ])->get();
-        
+
                 $deduct_track_outlife = [];
                 foreach ($deduct_track_outlife_data as $key => $value) {
-                    
+
                     $RepackOutlife = [];
                     foreach ($value->RepackOutlife->toArray() as $key => $repack) {
-                        if($repack['updated_outlife_seconds']) { 
+                        if($repack['updated_outlife_seconds']) {
                             $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
                             $RepackOutlife[] = $repack;
                         }
@@ -97,8 +92,8 @@ class WithdrawalController extends Controller
                         $deduct_track_outlife[] = $value;
                     }
                 }
-             
-                $table_view         = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
+
+                $table_view = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
             break;
         }
 
@@ -142,14 +137,14 @@ class WithdrawalController extends Controller
     {
         try {
             $batches  = Batches::where('barcode_number', $barcode)->first();
-             
+
             switch ($batches->withdrawal_type) {
-                case 'DIRECT_DEDUCT': 
+                case 'DIRECT_DEDUCT':
                     $withdraw_cart = withdrawCart::with('batch')->where([
                         'user_id'  => auth_user()->id,
                         'batch_id' => $batches->id
-                    ])->get(); 
-                    
+                    ])->get();
+
                     if(count($withdraw_cart) == 0) {
                         withdrawCart::create([
                             'user_id'       => auth_user()->id,
@@ -176,7 +171,7 @@ class WithdrawalController extends Controller
                         'withdraw_type' => 'DIRECT_DEDUCT'
                     ])->get();
 
-                    $data = view('crm.material-products.withdrawal.direct-deduct', compact('direct_deducts')); 
+                    $data = view('crm.material-products.withdrawal.direct-deduct', compact('direct_deducts'));
 
                     return response([
                         'status' => true,
@@ -184,7 +179,7 @@ class WithdrawalController extends Controller
                         'withdraw_type' => 'DIRECT_DEDUCT'
                     ]);
                 break;
-                case 'DEDUCT_TRACK_USAGE' : 
+                case 'DEDUCT_TRACK_USAGE' :
                     withdrawCart::updateOrCreate([
                         'user_id'       => auth_user()->id,
                         'batch_id'      => $batches->id,
@@ -192,14 +187,14 @@ class WithdrawalController extends Controller
                         'quantity'      => 1,
                     ]);
 
-                    $deduct_track_usage_history = DeductTrackUsage::where(['batch_id' => $batches->id])->get(); 
+                    $deduct_track_usage_history = DeductTrackUsage::where(['batch_id' => $batches->id])->get();
 
                     $deduct_track_usage = withdrawCart::with('batch')->where([
                         'user_id'       => auth_user()->id ,
                         'withdraw_type' => 'DEDUCT_TRACK_USAGE'
                     ])->get();
-               
-                    $data = view('crm.material-products.withdrawal.deduct-track-useage', compact('deduct_track_usage','deduct_track_usage_history')); 
+
+                    $data = view('crm.material-products.withdrawal.deduct-track-useage', compact('deduct_track_usage','deduct_track_usage_history'));
 
                     return response([
                         'status'        => true,
@@ -207,8 +202,8 @@ class WithdrawalController extends Controller
                         'withdraw_type' => 'DEDUCT_TRACK_USAGE'
                     ]);
                 break;
-                case 'DEDUCT_TRACK_OUTLIFE' : 
-                   
+                case 'DEDUCT_TRACK_OUTLIFE' :
+
                     if(count($batches->RepackOutlife)) {
                         withdrawCart::updateOrCreate([
                             'user_id'       => auth_user()->id,
@@ -216,18 +211,18 @@ class WithdrawalController extends Controller
                             'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE',
                             'quantity'      => 1,
                         ]);
-    
+
                         $deduct_track_outlife_data = withdrawCart::with('RepackOutlife')->where([
                             'user_id'       => auth_user()->id,
                             'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
                         ])->get();
-                
+
                         $deduct_track_outlife = [];
                         foreach ($deduct_track_outlife_data as $key => $value) {
-                            
+
                             $RepackOutlife = [];
                             foreach ($value->RepackOutlife->toArray() as $key => $repack) {
-                                if($repack['updated_outlife_seconds'] != '' || $repack['updated_outlife_seconds'] != null) { 
+                                if($repack['updated_outlife_seconds'] != '' || $repack['updated_outlife_seconds'] != null) {
                                     $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
                                     $RepackOutlife[] = $repack;
                                 }
@@ -238,44 +233,41 @@ class WithdrawalController extends Controller
                                 $deduct_track_outlife[] = $value;
                             }
                         }
-    
+
                         // $deduct_track_outlife = withdrawCart::with(['batch','RepackOutlife'])->where([
                         //     'user_id'         => auth_user()->id ,
                         //     'withdraw_type'   => 'DEDUCT_TRACK_OUTLIFE'
                         // ])->get();
-                        
-    
-                        $data = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife')); 
-    
+
+
+                        $data = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
+
                         return response([
                             'status'        => true,
                             'data'          => "$data",
                             'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
                         ]);
-                    } 
+                    }
                 break;
             }
         } catch (\Throwable $th) {
                 return 404;
-        } 
+        }
     }
     public function direct_deduct(Request $request)
-    { 
+    {
         foreach ($request->batch_id as $key => $column) {
             $current_batch = Batches::find($request->batch_id[$key]);
-            $old_value     = clone $current_batch;
-            $new_value     = $current_batch; 
-
+            MaterialProductHistory($current_batch,'BEFORE_DIRECT_DEDUCT');
             $current_batch->update([
                 'quantity'  =>  $current_batch->quantity -  $request->quantity[$key]
             ]);
-
+            MaterialProductHistory($current_batch,'AFTER_DIRECT_DEDUCT');
             withdrawCart::with('batch')->where([
                 'user_id'       => auth_user()->id ,
                 'withdraw_type' => 'DIRECT_DEDUCT'
             ])->delete();
-            
-            LogActivity::dataLog($old_value, $new_value,  $request->remarks[$key] ?? "");
+
         }
         return redirect()->back()->with("success_message", __('global.direct_deduct_success'));
     }
@@ -288,7 +280,7 @@ class WithdrawalController extends Controller
     {
         $batch      = Batches::findOrFail($request->batch_id);
         $material   = MaterialProducts::find($batch->material_product_id);
-          
+        MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_USAGE');
         DeductTrackUsage::create([
             'batch_id'         => $request->batch_id,
             'item_description' => $material->item_description,
@@ -298,18 +290,15 @@ class WithdrawalController extends Controller
             'remain_amount'    => $request->remain_amount,
             'remarks'          => $request->remarks ?? ""
         ]);
-  
-        $batch->update([
-            "quantity" => (float) $request->remain_amount
-        ]);
-       
-        $old_value     = clone $material;
-        $new_value     = $material; 
 
+        $batch->update([
+            "total_quantity" => (float) $request->remain_amount,
+            "quantity"       => $request->remain_amount / $batch->unit_packing_value
+        ]);
+        MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_USAGE');
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
-        ]); 
-        LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
+        ]);
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_USAGE')->delete();
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
@@ -317,12 +306,11 @@ class WithdrawalController extends Controller
     {
         foreach ($request->id as $key => $row) {
             $repackOutlife = RepackOutlife::find($request->id[$key]);
-            $old_value     = clone $repackOutlife;
-            $new_value     = $repackOutlife;
+            MaterialProductHistory($repackOutlife,'BEFORE_DEDUCT_TRACK_OUTLIFE');
             $repackOutlife->update([
                 'remarks' => $request->remarks[$key],
             ]);
-            LogActivity::dataLog($old_value, $new_value,  $request->remarks[$key] ?? "");
+            MaterialProductHistory($repackOutlife,'AFTER_DEDUCT_TRACK_OUTLIFE');
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
         if($request->print_outlife_expiry == 1) {

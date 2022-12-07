@@ -23,8 +23,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Log;
-
 
 class ReportsController extends Controller
 {
@@ -39,11 +37,11 @@ class ReportsController extends Controller
     {
         $page_name  = "DEDUCT_TRACK_OUTLIFE_REPORT";
         $view       = "crm.reports.deduct-track-outlife";
-        return $this->dsoRepository->renderPage($page_name, $view); 
+        return $this->dsoRepository->renderPage($page_name, $view);
     }
     public function deduct_track_outlife_download($id)
-    { 
-        return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');  
+    {
+        return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');
     }
     public function deduct_track_usage(Request $request)
     {
@@ -51,7 +49,7 @@ class ReportsController extends Controller
         $DeductTrackUsage = [];
 
         foreach ($data as $key => $value) {
-            $Batch = Batches::with('BatchOwners')->find($value->batch_id); 
+            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
             if(!is_null($Batch)) {
                 $owners = '';
                 if($Batch->BatchOwners ?? false) {
@@ -84,7 +82,7 @@ class ReportsController extends Controller
         return view('crm.reports.deduct-track-usage',compact('DeductTrackUsage'));
     }
     public function deduct_track_usage_download(Request $request)
-    { 
+    {
         $data = DeductTrackUsage::all();
         $DeductTrackUsage = [];
 
@@ -98,7 +96,7 @@ class ReportsController extends Controller
                     }
                 }
             }
-   
+
             $DeductTrackUsage[] = [
                 "ItemDescription"  => $value->item_description,
                 "Brand"            => $Batch->brand,
@@ -113,9 +111,9 @@ class ReportsController extends Controller
                 "UsedAmount"       => $value->used_amount,
                 "RemainingAmount"  => $value->remain_amount,
             ];
-        }    
-        
-        return Excel::download(new TrackUsageExport($DeductTrackUsage), 'DeductTrackUsage.xlsx');  
+        }
+
+        return Excel::download(new TrackUsageExport($DeductTrackUsage), 'DeductTrackUsage.xlsx');
     }
     public function material_in_house_pdt_history()
     {
@@ -123,17 +121,17 @@ class ReportsController extends Controller
     }
     public function material_in_house_pdt_history_download(Request $request)
     {
-        return Excel::download(new MaterialProductHistoryExport($request->start_date,$request->end_date), 'MaterialProductHistoryExport.xlsx');  
+        return Excel::download(new MaterialProductHistoryExport($request->start_date,$request->end_date), 'MaterialProductHistoryExport.xlsx');
     }
     public function export_cart()
     {
         $page_name  = "REPORT_EXPORT_CART";
         $view       = "crm.reports.export-cart";
-        return $this->dsoRepository->renderPage($page_name, $view); 
+        return $this->dsoRepository->renderPage($page_name, $view);
     }
     public function history(Request $request)
     {
-        if ($request->ajax()) { 
+        if ($request->ajax()) {
             if (!empty($request->get('action_type'))) {
                 $data = LogSheet::with('User')->where('action_type', $request->get('action_type'))->latest();
             } else {
@@ -147,11 +145,11 @@ class ReportsController extends Controller
                     return Carbon::parse($data->created_at)->format('h:i:s A');
                 })
                 ->addColumn('TransactionBy', function($data){
-                    return $data->User->alias_name ?? "SYSTEM BOT";
-                }) 
+                    return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
+                })
                 ->addColumn('Remarks', function($data){
                     return $data->remarks != '' ? $data->remarks : "-";
-                }) 
+                })
                 ->rawColumns(['TransactionBy',"Remarks","TransactionDate","TransactionTime"])
             ->make(true);
         }
@@ -187,25 +185,25 @@ class ReportsController extends Controller
                 return Carbon::parse($data->created_at)->format('h:i:s A');
             })
             ->addColumn('TransactionBy', function($data){
-                return $data->User->alias_name ?? "SYSTEM BOT";
+                return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
             })
             ->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
             ->make(true);
     }
     public function export()
     {
-        return Excel::download(new HistoryExport, 'history.xlsx');  
+        return Excel::download(new HistoryExport, 'history.xlsx');
     }
     public function disposed_items(Request $request)
-    {  
+    {
         $disposed  = DisposedItems::all();
-        if ($request->ajax()) { 
+        if ($request->ajax()) {
             return DataTables::of($disposed)->addIndexColumn()->make(true);
         }
-        return  view('crm.reports.disposed-items',compact('disposed')); 
+        return  view('crm.reports.disposed-items',compact('disposed'));
     }
     public function export_disposed_items(Request $request)
-    { 
+    {
         return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
     }
     public function expired_material(Request $request)
@@ -213,15 +211,15 @@ class ReportsController extends Controller
         $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();;
         $expired = [];
 
-        if ($request->ajax()) { 
-            if (!empty($request->get('department')) || !empty($request->get('department'))) { 
+        if ($request->ajax()) {
+            if (!empty($request->get('department')) || !empty($request->get('department'))) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                     ->where( 'is_draft' , 0)
                     ->where( 'department',$request->department)
                     // ->where( 'department',$request->department)
                     ->latest()->get();
-            }  
-            
+            }
+
             foreach ($batches as $key => $row) {
                 $now            = Carbon::now();
                 $date_of_expiry = Carbon::parse($row->date_of_expiry);
@@ -268,7 +266,7 @@ class ReportsController extends Controller
         }
 
         $departments = Departments::get();
-         
+
         return view('crm.reports.expired-material',compact('departments','expired'));
     }
     public function export_expired_material(Request $request)
@@ -306,7 +304,7 @@ class ReportsController extends Controller
     public function security(Request $request)
     {
         $security = LogActivity::getSecurityReport();
-        if ($request->ajax()) { 
+        if ($request->ajax()) {
             return DataTables::of($security)->addIndexColumn()->make(true);
         }
         return view('crm.reports.security',compact('security'));

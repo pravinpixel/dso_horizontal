@@ -3,7 +3,7 @@
         @csrf
         @method("DELETE")
         <button class="btn btn-outline-danger btn-sm mb-2" type="submit"><i class="bi bi-trash3-fill"></i> Clear All</button>
-    </form> 
+    </form>
     <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
         @csrf
         <table class="table bg-white table-hover table-centered">
@@ -44,8 +44,8 @@
                             <td><small>{{ $row->remarks }}</small></td>
                             <td>-</td>
                         </tr>
-                    @endforeach 
-                @endif 
+                    @endforeach
+                @endif
                 @if (count($deduct_track_usage) != 0)
                     @foreach ($deduct_track_usage as $row)
                         <tr>
@@ -64,8 +64,8 @@
                                 <div class="d-flex align-items-center">
                                     <input id="used_amount" name="used_amount" step="any"
                                         {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}
-                                        max="{{ $row->Batch->quantity }}"
-                                        onkeyup="startTrackUsage({{ $row->Batch->quantity }},this.value)"
+                                        max="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
+                                        onkeyup="startTrackUsage({{ $row->Batch->quantity * $row->Batch->unit_packing_value }},this.value)"
                                         type="number" style="width: 80px" value="0"
                                         class="me-2 form-control-sm form-control">
                                     <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
@@ -73,8 +73,8 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <input id="remain_amount" name="remain_amount" step="any" readonly 
-                                        type="text" style="width: 80px" value="{{ $row->Batch->quantity }}"
+                                    <input id="remain_amount" name="remain_amount" step="any" readonly
+                                        type="text" style="width: 80px" value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
                                         class="me-2 form-control-sm form-control">
                                     <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
                                 </div>
@@ -85,9 +85,9 @@
                             <td  class="text-center d-flex">
                                 {{-- <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i> --}}
                                 <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
-                            </td> 
+                            </td>
                         </tr>
-                    @endforeach 
+                    @endforeach
                 @endif
             </tbody>
         </table>

@@ -1,20 +1,8 @@
 @extends('layouts.app')
-@section('content') 
+@section('content')
     <ul class="nav nav-tabs">
-        {{-- <li class="nav-item">
-            <a href="{{ route('reports.utilisation_cart') }}" class="bg-none nav-link {{ Route::is(['reports','reports.utilisation_cart']) ? "active" : "" }}">
-                <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                <span class="d-none d-md-block">Generate Material/ In-house Product Utilisation rate </span>
-            </a>
-        </li>
         <li class="nav-item">
-            <a href="{{ route('reports.export_cart') }}" class="bg-none nav-link {{ Route::is(['reports.export_cart']) ? "active" : "" }}">
-                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Generate list of Material/In-house Product</span>
-            </a>
-        </li>  --}}
-        <li class="nav-item">
-            <a href="{{ route('reports.material_in_house_pdt_history') }}" class="bg-none nav-link {{ Route::is(['reports.material_in_house_pdt_history']) ? "active" : "" }}">
+            <a href="{{ route('reports.material_in_house_pdt_history') }}" class="bg-none nav-link {{ Route::is(['reports.material_in_house_pdt_history','reports']) ? "active" : "" }}">
                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                 <span class="d-none d-md-block">Material inHouse pdt History </span>
             </a>
@@ -32,7 +20,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items','reports']) ? "active" : "" }}">
+            <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Disposed items</span>
             </a>
@@ -42,15 +30,15 @@
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Expired Material Report</span>
             </a>
-        </li> 
+        </li>
         <li class="nav-item">
             <a href="{{ route('reports.security') }}" class="bg-none nav-link {{ Route::is(['reports.security']) ? "active" : "" }}">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Security History</span>
             </a>
-        </li> 
-    </ul> 
+        </li>
+    </ul>
     <section class="pt-3">
         @yield('report_content')
-    </section> 
-@endsection  
+    </section>
+@endsection
