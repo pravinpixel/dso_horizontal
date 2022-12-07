@@ -142,9 +142,7 @@ class RepackBatchController extends Controller
                     ]);
                 }
 
-                if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
-
-                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_IN');
+                if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) { 
 
                     if($Batches->unit_packing_value != 0) {
                         RepackOutlife::create([
@@ -169,7 +167,7 @@ class RepackBatchController extends Controller
                         'outlife_seconds' => $updated_outlife_seconds,
                         'outlife'         => $updated_outlife,
                     ]); 
-
+                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_IN', $updated_outlife);
                     RepackOutlife::find($row['id'])->update([
                         'draw_in'                 => 1,
                         'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],

@@ -552,7 +552,7 @@ if(!function_exists('getRoutes')) {
         }
     } 
     if(!function_exists('MaterialProductHistory')) {
-        function MaterialProductHistory($batch,$ActionTaken)
+        function MaterialProductHistory($batch,$ActionTaken,$updated_outlife =null)
         { 
             $BatchOwners = '';
             foreach ($batch->BatchOwners as $key => $owner){
@@ -562,7 +562,7 @@ if(!function_exists('getRoutes')) {
             }
           
             if($ActionTaken == 'Repack_Outlife_Draw_IN') {
-                $DrawStatus = 'Draw IN';
+                $DrawStatus = 'Draw IN'; 
             }
             if($ActionTaken == 'Repack_Outlife_Draw_OUT') {
                 $DrawStatus = 'Draw OUT';
@@ -588,7 +588,7 @@ if(!function_exists('getRoutes')) {
                 'Owners'            => $BatchOwners,
                 'Remarks'           => $batch->remarks,
                 'DrawStatus'        => $DrawStatus ?? null,
-                // 'RemainingOutlifeOfParent'
+                'RemainingOutlifeOfParent' => $updated_outlife
             ]);
             return true;
         }
