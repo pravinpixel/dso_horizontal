@@ -141,7 +141,7 @@ class RepackBatchController extends Controller
                         'repack_size'             => $row['repack_size'],
                         'barcode_number'          => $row['barcode_number'], 
                         'old_input_repack_amount' => $row['repack_amount'],
-                        'draw_out_last_access'     => auth_user()->alias_name,
+                        'draw_in_last_access'     => auth_user()->alias_name,
                     ]);
                 }
 
@@ -181,7 +181,7 @@ class RepackBatchController extends Controller
                         'current_outlife_expiry'  => $current_outlife_expiry,
                         'remain_days'             => $row['remaining_days'],
                         'remaining_days_seconds'  => $row['remaining_days_seconds'],
-                        'draw_in_last_access'    => auth_user()->alias_name,
+                        'draw_out_last_access'    => auth_user()->alias_name,
                     ]);
 
                 }
