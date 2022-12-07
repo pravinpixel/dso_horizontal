@@ -21,6 +21,7 @@ class RepackBatchController extends Controller
     public function repack(Request $request)
     { 
         $previous_batch                = Batches::find($request->id);
+        MaterialProductHistory($previous_batch,'Before Repack / Transfer');
         $new_batch                     = $previous_batch->replicate();
         $new_batch->created_at         = Carbon::now();
         $new_batch->barcode_number     = generateBarcode(MaterialProducts::find($request->material_product_id)->category_selection);
@@ -33,6 +34,7 @@ class RepackBatchController extends Controller
         $new_batch->iqc_status         = 0;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
+        MaterialProductHistory($new_batch,'Before Repack / Transfer');
 
         RepackOutlife::updateOrCreate(['batch_id' => $new_batch->id], [
             'batch_id'            => $new_batch->id,
@@ -56,12 +58,12 @@ class RepackBatchController extends Controller
         $new_value->quantity   = $request->RemainQuantity;
 
         // LogActivity::dataLog($old_value, $new_value);
-        MaterialProductHistory($old_value,'Repack / Transfer');
+
         $previous_batch->update([
             'quantity'       => $request->RemainQuantity,
             'total_quantity' => $previous_batch->unit_packing_value * $request->RemainQuantity,
             // 'unit_packing_value' => $previous_batch->unit_packing_value  - $request->input_used_amount,
-        ]);
+        ]); 
 
         return response()->json([
             "status"  => true,

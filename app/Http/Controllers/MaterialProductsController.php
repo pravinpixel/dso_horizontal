@@ -544,6 +544,7 @@ class MaterialProductsController extends Controller
                 Storage::delete($data->extended_qc_result);
             }
             BatchRestore($id);
+            MaterialProductHistory($data,'Deleted Batch');
             $data->BatchOwners()->delete();
             $data->delete();
             LogActivity::log($id);
