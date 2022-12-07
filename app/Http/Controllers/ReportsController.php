@@ -23,6 +23,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Log;
+
 
 class ReportsController extends Controller
 {
@@ -49,30 +51,31 @@ class ReportsController extends Controller
         $DeductTrackUsage = [];
 
         foreach ($data as $key => $value) {
-            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
-            $owners = '';
-            if($Batch->BatchOwners ) {
-                foreach ($Batch->BatchOwners as $key => $owner){
-                    if ($owner->alias_name ?? false) {
-                        $owners .= $owner->alias_name.' ,';
+            $Batch = Batches::with('BatchOwners')->find($value->batch_id); 
+            if(!is_null($Batch)) {
+                $owners = '';
+                if($Batch->BatchOwners ?? false) {
+                    foreach ($Batch->BatchOwners as $key => $owner){
+                        if ($owner->alias_name ?? false) {
+                            $owners .= $owner->alias_name.' ,';
+                        }
                     }
                 }
+                $DeductTrackUsage[] = [
+                    "ItemDescription"  => $value->item_description,
+                    "Brand"            => $Batch->brand,
+                    "BatchSerial"      => $value->batch_serial,
+                    "UnitPackingValue" => $Batch->unit_packing_value,
+                    "StorageArea"      => $Batch->StorageArea->name,
+                    "Housing"          => $Batch->housing,
+                    "Owners"           => $owners,
+                    "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
+                    "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
+                    "TransactionBy"    => $value->last_accessed,
+                    "UsedAmount"       => $value->used_amount,
+                    "RemainingAmount"  => $value->remain_amount,
+                ];
             }
-   
-            $DeductTrackUsage[] = [
-                "ItemDescription"  => $value->item_description,
-                "Brand"            => $Batch->brand,
-                "BatchSerial"      => $value->batch_serial,
-                "UnitPackingValue" => $Batch->unit_packing_value,
-                "StorageArea"      => $Batch->StorageArea->name,
-                "Housing"          => $Batch->housing,
-                "Owners"           => $owners,
-                "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
-                "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
-                "TransactionBy"    => $value->last_accessed,
-                "UsedAmount"       => $value->used_amount,
-                "RemainingAmount"  => $value->remain_amount,
-            ];
         }
 
         if ($request->ajax()) {
