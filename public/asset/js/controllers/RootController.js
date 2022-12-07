@@ -334,7 +334,7 @@ app.controller('RootController', function ($scope, $http) {
             setTimeout(() => {
                 $(".loader").hide()
             }, 100);
-        
+
         }, function (response) {
             Message('danger', response.data.message);
         });
@@ -512,34 +512,34 @@ app.controller('RootController', function ($scope, $http) {
         //     id: "B",
         //     label: "Best available"
         // }];
-        
+
         $scope.owners = $scope.MasterData.owners
         $scope.owners =  $scope.owners.map((user) => {
             return {
                 id: user.id,
                 label: user.alias_name
             }
-        }) 
-         
+        })
+
         $scope.advanced_filter_owners = [];
-         
+
         $scope.advanced_filter.owners = $scope.advanced_filter_owners
     });
- 
+
     $scope.Transfers = (id, quantity) => {
         $scope.TransfersBatch = null
         $http.get(`${get_batch}/${id}`).then((response) => {
             $scope.TransfersBatch            = response.data
             $scope.TransfersBatchOwners      = $scope.owners;
             $scope.TransfersBatchOwnersModel = []
-            
-            $scope.TransfersBatchOwners.map((user,i) => { 
+
+            $scope.TransfersBatchOwners.map((user,i) => {
                 $scope.TransfersBatch.batch_owners.map((batch_user) => {
                     if(user.id == batch_user.user_id) {
                         $scope.TransfersBatchOwnersModel.push($scope.TransfersBatchOwners[i])
                     }
                 })
-            })  
+            })
             $scope.TransfersBatchMaxQuantity = response.data.quantity
             $('#Transfers').modal('show');
         });
@@ -561,8 +561,8 @@ app.controller('RootController', function ($scope, $http) {
             housing            : $scope.TransfersBatch.housing,
             housing_type       : $scope.TransfersBatch.housing_type,
             owners             : $scope.TransfersBatchOwnersModel,
-        } 
-         
+        }
+
         $http.post(transfer_batch, data ).then((response) => {
             $scope.get_material_products();
             Message('success', response.data.message);
@@ -595,13 +595,13 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.TransfersBatch.storage_area = ''
                 $scope.TransfersBatch.housing_type = ''
                 $scope.TransfersBatch.housing = ''
-                $scope.TransfersBatch.owners = '' 
+                $scope.TransfersBatch.owners = ''
                 $scope.$apply()
             }
         });
     }
 
-    // Repack And Transfer 
+    // Repack And Transfer
     $scope.CurrentDate = new Date();
 
     $scope.RepackTransfers = (type, batch, row) => {
@@ -611,21 +611,21 @@ app.controller('RootController', function ($scope, $http) {
                 $scope.RepackTransfer = batch;
                 $scope.RepackTransferPackSize = row.unit_packing_value
                 $scope.RepackTransferQty = batch.quantity
-                $scope.RepackTransferMeasure = row.unit_of_measure.name 
+                $scope.RepackTransferMeasure = row.unit_of_measure.name
                 const CurrentAccessed = JSON.parse($scope.RepackTransfer.access);
                 $scope.CurrentAccessed = CurrentAccessed.join()
 
                 $scope.RepackTransfersBatchOwners      = $scope.owners;
                     $scope.RepackTransfersBatchOwnersModel = []
-                    
-                    $scope.RepackTransfersBatchOwners.map((user,i) => { 
+
+                    $scope.RepackTransfersBatchOwners.map((user,i) => {
                         $scope.RepackTransfer.batch_owners.map((batch_user) => {
                             if(user.id == batch_user.user_id) {
                                 $scope.RepackTransfersBatchOwnersModel.push($scope.RepackTransfersBatchOwners[i])
                             }
                         })
                     })
-                    
+
                 break;
             case "store":
                 if ($scope.RepackTransfer.RepackQuantity === null || $scope.RepackTransfer.RepackQuantity === undefined) {
@@ -692,7 +692,7 @@ app.controller('RootController', function ($scope, $http) {
             default: break;
         }
     }
-  
+
     // Print Barcode
     $scope.view_print_barcode = (id) => {
         window.location.href = `${APP_URL}/print-label/${id}`
@@ -723,7 +723,7 @@ app.controller('RootController', function ($scope, $http) {
             }
         });
     }
-    // New Repack Outlife eFlow 
+    // New Repack Outlife eFlow
     $scope.repack_outlife_table = [];
     $scope.disable_repack_outlife = false
 
@@ -739,6 +739,7 @@ app.controller('RootController', function ($scope, $http) {
         $scope.repack_outlife_days = initial_day
         $scope.currentBatchId = batch.id
         $scope.currentBatch = batch
+        // end_of_batch
         $http.get(`search-or-add/repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
@@ -757,7 +758,7 @@ app.controller('RootController', function ($scope, $http) {
                             },
                             last_access: JSON.parse(RepackData.access),
                             initial_amount: element.input_repack_amount,
-                            old_input_repack_amount: element.old_input_repack_amount,                            
+                            old_input_repack_amount: element.old_input_repack_amount,
                             initial_count: RepackData.outlife,
                             repack_amount: element.input_repack_amount,
                             balance_amount: element.remain_amount,
@@ -780,7 +781,7 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.next_draw = false
     $scope.saveRepackOutlife = () => {
-        console.log($scope.repack_outlife_table)
+
         $http.post(`store-repack-batch/${$scope.currentBatchId}`, { repack_id: localStorage.getItem('repack_outlife_id'), data: $scope.repack_outlife_table }).then((response) => {
                 $scope.next_draw = response.data.new_draw_in
                 $http.get(`search-or-add/repack-batch/${$scope.currentBatchId}`).then((response) => {
@@ -894,5 +895,14 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.exportExcel = (batch_id, pageName) => {
         location.href = `${app_URL}/reports/deduct-track-outlife/download/${batch_id}`
+    }
+    $scope.setEndOfBatch = (id) => {
+        $http.get(APP_URL + '/change-end-of-batch' + "/" + id).then((res) => {
+            if (res.data != 404) {
+                $('#RepackOutlife').modal('hide');
+                Message('success', 'Batch to be ended!');
+                location.reload()
+            }
+        })
     }
 });
