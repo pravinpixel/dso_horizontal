@@ -178,6 +178,11 @@ class DsoRepository implements DsoRepositoryInterface
                         unset($parent->Batches[$batch_key]);
                     }
                 } 
+                if ($page_name == 'THRESHOLD_QTY') {
+                    if ($batch->is_draft == 1) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                } 
                 if ($page_name == 'DEDUCT_TRACK_OUTLIFE_REPORT') {
                     if ($batch->is_draft == 1 || $batch->withdrawal_type != 'DEDUCT_TRACK_OUTLIFE') {
                         // Log::info($batch->RepackOutlife);
@@ -207,7 +212,7 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['quantityColor'] = $quantityColor;  
 
             if ($page_name == 'THRESHOLD_QTY') {
-                if ($batch->is_draft == 1 || $quantityColor == 'text-success') {
+                if ($quantityColor == 'text-success') {
                     unset($parent->Batches[$batch_key]);
                 }
             } 
