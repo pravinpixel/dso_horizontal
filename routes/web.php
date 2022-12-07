@@ -64,6 +64,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
     });
 
+    Route::get('/change-end-of-batch/{id}', [MaterialProductsController::class, 'end_of_batch']);
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
     Route::post('/get-save-search', [MaterialProductsController::class, 'save_search_history'])->name('get-save-search');
     Route::delete('/get-save-search/{id?}', [MaterialProductsController::class, 'delete_search_history'])->name('get-save-search');
@@ -130,7 +131,6 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('deduct-track-outlife');
     });
     Route::delete('/withdrawal/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage_clear'])->name('deduct-track-usage');
-
 
     Route::get('/decrease-quantity/{id}', [WithdrawalController::class, 'decrease_quantity'])->name('decrease-quantity');
     Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get-withdrawal_data');

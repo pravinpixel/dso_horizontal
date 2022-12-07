@@ -22,7 +22,7 @@ class CreateBatchesTable extends Migration
             $table->string('supplier')->nullable();
             $table->string('unit_packing_value')->nullable();
             $table->string('quantity')->nullable();
-            $table->string('total_quantity')->nullable(); 
+            $table->string('total_quantity')->nullable();
             $table->string('quantity_color')->nullable();
             $table->string('batch')->nullable();
             $table->string('serial')->nullable();
@@ -32,7 +32,7 @@ class CreateBatchesTable extends Migration
             $table->string('require_bulk_volume_tracking')->nullable();
             $table->string('require_outlife_tracking')->nullable();
             $table->string('outlife')->nullable();
-            $table->string('updated_outlife')->nullable(); 
+            $table->string('updated_outlife')->nullable();
             $table->integer('outlife_seconds')->nullable();
             $table->string('storage_area')->nullable();
             $table->string('housing_type')->nullable();
@@ -64,7 +64,7 @@ class CreateBatchesTable extends Migration
             $table->longText('repack_size')->nullable();
             $table->integer('end_of_batch')->nullable()->default(0);
             $table->string('withdrawal_type')->nullable();
-            $table->integer('user_id'); 
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

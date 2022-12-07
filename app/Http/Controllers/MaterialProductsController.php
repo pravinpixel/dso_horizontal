@@ -27,7 +27,7 @@ use App\Models\BatchTracker;
 use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -50,8 +50,8 @@ class MaterialProductsController extends Controller
         if ($request->filters) {
             $material_product      =   $this->SearchRepository->barCodeSearch($request);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
-        } 
-        
+        }
+
         if ($request->save_advanced_search) {
             $row        =   (object) $request->save_advanced_search['advanced_search'];
             $result     =   $this->SearchRepository->storeBulkSearch($row, $request);
@@ -69,18 +69,18 @@ class MaterialProductsController extends Controller
             $result     =   $this->SearchRepository->sortingOrder($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-       
+
         $material_product_data   =   MaterialProducts::with([
-            'Batches', 
+            'Batches',
             'Batches.RepackOutlife',
-            'Batches.HousingType', 
-            'Batches.Department', 
+            'Batches.HousingType',
+            'Batches.Department',
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
         ])->get();
-        
-        $material_product = $this->dsoRepository->renderTableData($material_product_data); 
+
+        $material_product = $this->dsoRepository->renderTableData($material_product_data);
 
         return response(['status'   =>  true, 'data' => $material_product ], Response::HTTP_OK);
     }
@@ -104,6 +104,13 @@ class MaterialProductsController extends Controller
         }
     }
 
+    public function end_of_batch($id)
+    {
+        Batches::findOrFail($id)->update([
+            "end_of_batch" => 1
+        ]);
+    }
+
     public function my_search_history()
     {
         $data  = User::with('SaveMySearch')->where('id', auth_user()->id)->first();
@@ -121,10 +128,10 @@ class MaterialProductsController extends Controller
     }
 
     public function save_search_history(Request $request)
-    { 
+    {
         $request->validate([
             'search_title' => 'required|unique:save_my_searches',
-        ]); 
+        ]);
         $data = SaveMySearch::create([
             'user_id'      => auth_user()->id,
             'search_title' => $request->search_title,
@@ -135,7 +142,7 @@ class MaterialProductsController extends Controller
     }
     public function delete_search_history($id)
     {
-        SaveMySearch::findOrFail($id)->delete(); 
+        SaveMySearch::findOrFail($id)->delete();
         LogActivity::log($id);
         return response(['status' => true, "message" => "Delete Success !"], Response::HTTP_OK);
     }
@@ -171,9 +178,9 @@ class MaterialProductsController extends Controller
                             'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
                             'is_draft' => true,
                         ]);
-    
+
                         LogActivity::log($material->id);
-                        
+
                         $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body'] ],[
                             'name' => $row['statutory_body']
                         ]);
@@ -224,9 +231,9 @@ class MaterialProductsController extends Controller
                             'used_for_td_expt_only'        => "1",
                             'coc_coa_mill_cert_status'     => 'on',
                             'no_of_extension'              => $row['no_of_extension'] ?? 0,
-                            'user_id' => auth_user()->id, 
+                            'user_id' => auth_user()->id,
                         ]);
-                   
+
                         $batch->BatchOwners()->create([
                             "user_id"    => auth_user()->id,
                             "alias_name" => auth_user()->alias_name
@@ -250,7 +257,7 @@ class MaterialProductsController extends Controller
         $view       =  "crm.material-products.list";
         return  $this->dsoRepository->renderPage($page_name, $view);
     }
- 
+
     public function change_product_category(Request $request)
     {
         $request->session()->put('category_type', $request->type);
@@ -265,13 +272,13 @@ class MaterialProductsController extends Controller
         } else {
             $request->session()->put('edit_mode', 'batch');
         }
-       
+
         if (Route::is('create.material-product')) $request->session()->put('wizard_mode', 'create');
 
         if ($request->route('wizard_mode') == 'edit') $request->session()->put('wizard_mode', 'edit');
 
-        if ($request->route('wizard_mode') == 'duplicate') { 
-            $request->session()->put('wizard_mode', 'duplicate');  
+        if ($request->route('wizard_mode') == 'duplicate') {
+            $request->session()->put('wizard_mode', 'duplicate');
         }
 
         $material_product      = MaterialProducts::find(material_product() ?? $id);
@@ -286,7 +293,7 @@ class MaterialProductsController extends Controller
         $iqc_status            = [1 => "Pass", 0 => "Fail"];
         $department            = Departments::get();
         $owners                = User::pluck("alias_name", 'id');
-      
+
         if ($material_product != null) {
             foreach ($material_product->toArray() as $key => $value) {
                 $material_product->{$key} = is_reset(
@@ -354,15 +361,15 @@ class MaterialProductsController extends Controller
         if(is_null($request->coc_coa_mill_cert_status) && $type == 'form-two') {
             $request['coc_coa_mill_cert_status'] = 'off';
         }
-    
+
         $result = $this->MartialProductRepository->save_material_product(
             material_product() ?? $id,
             batch_id() ?? $batch_id,
             $request
         );
-        
+
         if ($type == 'form-one') {
-            $current_batch = Batches::find(batch_id() ?? $batch_id); 
+            $current_batch = Batches::find(batch_id() ?? $batch_id);
             if($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DIRECT_DEDUCT';
             } elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 0) {
@@ -372,7 +379,7 @@ class MaterialProductsController extends Controller
             }  elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
                 $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
             }
- 
+
             $current_batch->update([
                 'withdrawal_type' => $withdrawal_type
             ]);
@@ -380,7 +387,7 @@ class MaterialProductsController extends Controller
             if(wizard_mode() == 'edit') {
                 LogActivity::log(material_product() ?? $id);
             }
-            
+
             if (wizard_mode() == 'create') {
                 LogActivity::log(material_product() ?? $id);
                 $request->session()->put('form-one', 'completed');
@@ -514,7 +521,7 @@ class MaterialProductsController extends Controller
         // ];
     }
     public function destroy($id)
-    { 
+    {
         $data   =   MaterialProducts::find($id);
         foreach ($data->Batches() as $key => $batch) {
             $batch->BatchOwners()->delete();
@@ -525,7 +532,7 @@ class MaterialProductsController extends Controller
         return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function batch_destroy($id)
-    { 
+    {
         if(BatchTracker::where('from_batch_id', $id)->count() == 0) {
             $data   =   Batches::find($id);
             if (Storage::exists($data->sds_mill_cert_document)) {
@@ -570,16 +577,16 @@ class MaterialProductsController extends Controller
         $created_batch->is_draft       = 1;
         $batch_parent_category         = MaterialProducts::find($created_batch->material_product_id)->category_selection;
         $created_batch->barcode_number = generateBarcode($batch_parent_category);
-        $created_batch->iqc_status     = 0; 
-        
+        $created_batch->iqc_status     = 0;
+
         foreach($created_batch->toArray() as $column => $value) {
             $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
             if($rest == 1 || $rest == true) {
                 $created_batch->$column = NULL;
             }
         }
-        
-        $created_batch->save(); 
+
+        $created_batch->save();
 
         foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
             if(!is_null($created_batch->id)) {
@@ -590,7 +597,7 @@ class MaterialProductsController extends Controller
                 ]);
             }
         }
-        
+
         RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [
             'batch_id'            => $created_batch->id,
             'quantity'            => $created_batch->quantity,
@@ -607,7 +614,7 @@ class MaterialProductsController extends Controller
             "batch_id"              =>  $created_batch->id,
             "material_product_id"   =>  $created_batch->material_product_id,
         ]);
-    } 
+    }
     public function delete_file($id)
     {
         $file = BatchFiles::findOrFail($id);

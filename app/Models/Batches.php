@@ -68,7 +68,8 @@ class Batches extends Model
         'system_stock',
         'physical_stock',
         'updated_outlife',
-        'user_id'
+        'user_id',
+        'end_of_batch'
     ];
 
     public function BarCodeGenOne()
@@ -89,7 +90,7 @@ class Batches extends Model
     public function BatchMaterialProduct()
     {
         return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id');
-    } 
+    }
 
     public function BatchBarcode()
     {
@@ -102,22 +103,22 @@ class Batches extends Model
     }
     public function HousingType()
     {
-        return  $this->hasOne(HouseTypes::class, 'id', 'housing_type'); 
+        return  $this->hasOne(HouseTypes::class, 'id', 'housing_type');
     }
 
     public function Department()
     {
-        return  $this->hasOne(Departments::class, 'id', 'department'); 
-    } 
+        return  $this->hasOne(Departments::class, 'id', 'department');
+    }
 
     public function StorageArea()
     {
-        return  $this->hasOne(StorageRoom::class, 'id', 'storage_area'); 
-    }  
-    
+        return  $this->hasOne(StorageRoom::class, 'id', 'storage_area');
+    }
+
     public function StatutoryBody()
     {
-        return  $this->hasOne(StatutoryBody::class, 'id', 'statutory_body'); 
+        return  $this->hasOne(StatutoryBody::class, 'id', 'statutory_body');
     }
 
     public function DeductTrackUsage()
