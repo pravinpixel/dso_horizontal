@@ -560,10 +560,20 @@ if(!function_exists('getRoutes')) {
                     $BatchOwners .= $owner->alias_name.' , ';
                 }
             }
-
+          
+            if($ActionTaken == 'Repack_Outlife_Draw_IN') {
+                $DrawStatus = 'Draw IN';
+            }
+            if($ActionTaken == 'Repack_Outlife_Draw_OUT') {
+                $DrawStatus = 'Draw OUT';
+            }
+            if($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
+                $ActionTaken = 'Repack Outlife';
+            }
+ 
             materialProductHistory::updateOrCreate([
-                'batch_id' => $batch->id,
-                'barcode_number' => $batch->barcode_number,
+                'batch_id'          => $batch->id,
+                'barcode_number'    => $batch->barcode_number,
                 'CategorySelection' => $batch->BatchMaterialProduct->category_selection,
                 'ItemDescription'   => $batch->BatchMaterialProduct->item_description,
                 'Brand'             => $batch->brand,
@@ -577,7 +587,7 @@ if(!function_exists('getRoutes')) {
                 'Housing'           => $batch->housing,
                 'Owners'            => $BatchOwners,
                 'Remarks'           => $batch->remarks,
-                // 'DrawStatus',
+                'DrawStatus'        => $DrawStatus ?? null,
                 // 'RemainingOutlifeOfParent'
             ]);
             return true;

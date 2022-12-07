@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <input type="file" accept="application/csv" name="select_file" class="form-control mb-2"> 
-                <a download="Import-Format.csv" href="Import-Format.csv"><i class="bi bi-download"></i> Download sample format</a>
+                <a download="DSO-Import-Format.csv" href="DSO-Import-Format.csv"><i class="bi bi-download"></i> Download sample format</a>
             </div>
             <div class="modal-footer border-top">
                 <button type="submit" class="btn btn-primary rounded-pill w-100"><i class="bi bi-box-arrow-in-down-left me-1"></i>Import</button>
