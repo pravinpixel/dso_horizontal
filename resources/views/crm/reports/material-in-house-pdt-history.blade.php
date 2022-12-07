@@ -101,8 +101,8 @@
         var historyTable = $('#historyTable').DataTable({
             processing: true,
             serverSide: true,
-            retrieve: true,
-            paging: false,
+            // retrieve: true,
+            // paging: false,
             ajax: {
                 url: "{{ route('get-material-product-history') }}",
             },

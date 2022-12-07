@@ -55,8 +55,8 @@ class RepackBatchController extends Controller
         $new_value             = clone $previous_batch;
         $new_value->quantity   = $request->RemainQuantity;
 
-        LogActivity::dataLog($old_value, $new_value);
-
+        // LogActivity::dataLog($old_value, $new_value);
+        MaterialProductHistory($old_value,'Repack / Transfer');
         $previous_batch->update([
             'quantity'       => $request->RemainQuantity,
             'total_quantity' => $previous_batch->unit_packing_value * $request->RemainQuantity,
@@ -89,7 +89,8 @@ class RepackBatchController extends Controller
                 $Batches    = Batches::find($repackData->batch_id);
 
                 if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                    Log::info("Draw OUT");
+                   
+                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_OUT');
                  
                     $current_batch                   = Batches::find($repackData->batch_id);
                     $next_batch                      = $current_batch->replicate();
@@ -142,6 +143,8 @@ class RepackBatchController extends Controller
                 }
 
                 if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
+
+                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_IN');
 
                     if($Batches->unit_packing_value != 0) {
                         RepackOutlife::create([

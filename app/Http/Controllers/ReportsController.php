@@ -171,6 +171,12 @@ class ReportsController extends Controller
         }
         return DataTables::of($materialProductHistory)
             ->addIndexColumn()
+            ->addColumn('Module', function($data){
+                return strtoupper(str_replace('_',' ',$data->Module));
+            })
+            ->addColumn('ActionTaken', function($data){
+                return strtoupper(str_replace('_',' ',$data->ActionTaken));
+            })
             ->addColumn('TransactionDate', function($data){
                 return Carbon::parse($data->created_at)->toFormattedDateString();
             })
@@ -179,8 +185,8 @@ class ReportsController extends Controller
             })
             ->addColumn('TransactionBy', function($data){
                 return $data->User->alias_name ?? "SYSTEM BOT";
-            }) 
-            ->rawColumns(["TransactionDate","TransactionTime","TransactionBy"])
+            })
+            ->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
             ->make(true);
     }
     public function export()
