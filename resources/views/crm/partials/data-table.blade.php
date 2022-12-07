@@ -21,23 +21,23 @@
                         {{-- ======= Matrial Product Batches Data  ====== --}} 
                             @switch($page_name)
                                 @case('MATERIAL_SEARCH_OR_ADD')
-                                    <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                    <div class="custom-table-row @{{ barcode_number == batch.barcode_number ? 'selected-batch' : '' }} " ng-repeat="batch in row.batches"  ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
                                 @case('PRINT_BARCODE_LABEL')
-                                    <div class="custom-table-row" ng-repeat="batch in row.batches" ng-if="batch.is_draft != 1">
+                                    <div class="custom-table-row @{{ barcode_number == batch.barcode_number ? 'selected-batch' : '' }} " ng-repeat="batch in row.batches"  ng-if="batch.is_draft != 1">
                                         {!! $batch_table_td_columns !!} 
                                     </div>
                                 @break
                                 @case('THRESHOLD_QTY')
-                                    <div class="custom-table-row" ng-repeat="batch in row.batches" ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
+                                    <div class="custom-table-row @{{ barcode_number == batch.barcode_number ? 'selected-batch' : '' }} " ng-repeat="batch in row.batches"  ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'">
                                         {!! $batch_table_td_columns !!}
                                     </div>
                                 @break  
                                 @default
                                 {{-- ng-class="batch.is_draft == 1 ? 'drafted' : 'non-drafted'" --}}
-                                <div class="custom-table-row " ng-repeat="batch in row.batches" ng-class="barcode_number == batch.barcode_number ? 'selected-batch' : ''" >
+                                <div class="custom-table-row  @{{ barcode_number == batch.barcode_number ? 'selected-batch' : '' }} " ng-repeat="batch in row.batches">
                                     {!! $batch_table_td_columns !!} 
                                 </div>
                             @endswitch
