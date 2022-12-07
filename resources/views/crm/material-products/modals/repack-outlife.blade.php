@@ -1,12 +1,18 @@
 <div id="RepackOutlife" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog custom-modal-dialog modal-top">
         <div class="modal-content rounded-0 border-bottom shadow " >
-            <span ng-show="currentBatch.end_of_batch == 1" class="disabled-text">This Batch no longer available</span>
+            <div ng-show="currentBatch.end_of_batch == 1" class="disabled-text text-center">
+                Batch NO Longer Available !
+                <br>
+                <button type="button" class="badge btn btn-light border text-dark rounded-pill mt-3" data-bs-dismiss="modal" aria-hidden="true">
+                   <i class="bi bi-x"></i> <small>Close</small>
+                </button>
+            </div>
+            <div class="modal-header rounded-0 bg-primary text-white  ">
+                <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
             <div class="@{{ currentBatch.end_of_batch == 1 ? 'disabled-content' : '' }}">
-                <div class="modal-header rounded-0 bg-primary text-white  ">
-                    <h4 class="modal-title" id="topModalLabel">Repack/Outlife Material/Product batch</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                </div>
                 <form name="repackOutlifeForm" class="modal-body p-2" style="border: none !important; max-height:85vh;overflow:auto">
                     <table class="table table-centered table-sm bg-white table-bordered custom-center m-0">
                         <thead class="bg-primary-2 text-white">
@@ -106,12 +112,12 @@
                     </table>
                 </form>
             </div>
-            <div class="card-footer bg-light @{{ currentBatch.end_of_batch == 1 ? 'disabled-content' : '' }}">
+            <div class="card-footer bg-light">
                 <div class="row align-items-center">
                     <div class="shadow-sm border col-4">
-                        <div>
+                        <div class="@{{ currentBatch.end_of_batch == 1 ? 'disabled-content' : '' }}">
                             <label for="end_of_batch" class="p-2">
-                                <input type="checkbox" ng-checked="currentBatch.end_of_batch" ng-model="end_of_batch" value="1" class="form-check-input me-2" id="end_of_batch">
+                                <input type="checkbox" ng-checked="currentBatch.end_of_batch == 1" ng-model="end_of_batch" value="1" class="form-check-input me-2" id="end_of_batch">
                                 End of batch
                             </label>
                             <span ng-if="end_of_batch" ng-click="setEndOfBatch(currentBatch.id)"  class="badge rounded-pill ms-2 py-1 px-2 btn btn-sm btn-success"> <i class="fa fa-save me-1"></i> Save </span>
