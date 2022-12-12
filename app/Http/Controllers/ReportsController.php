@@ -249,16 +249,27 @@ class ReportsController extends Controller
     }
     public function expired_material(Request $request)
     {
-        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();;
+        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
         $expired = [];
-
         if ($request->ajax()) {
-            if (!empty($request->get('department')) || !empty($request->get('department'))) {
+            if(!empty($request->used_for_td_expt_only) && !empty($request->department)) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-                    ->where( 'is_draft' , 0)
-                    ->where( 'department',$request->department)
-                    // ->where( 'department',$request->department)
-                    ->latest()->get();
+                ->where( 'is_draft' , 0)
+                ->where('department',$request->department)
+                ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
+                ->latest()->get();
+            } elseif(!empty($request->used_for_td_expt_only)) {
+                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+                ->where( 'is_draft' , 0)
+                ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
+                ->latest()->get();
+            } elseif(!empty($request->used_for_td_expt_only)) {
+                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+                ->where( 'is_draft' , 0)
+                ->where('department',$request->department)
+                ->latest()->get();
+            } else {
+                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
             }
 
             foreach ($batches as $key => $row) {
@@ -268,7 +279,6 @@ class ReportsController extends Controller
                     $expired[] = $row;
                 }
             }
-
             return DataTables::of($expired)
                 ->addColumn('category_selection',function ($data){
                     return MaterialProducts::find($data->material_product_id)->category_selection;
@@ -293,11 +303,14 @@ class ReportsController extends Controller
                     return $data->Department->name;
                 })->addColumn('storage_area',function ($data){
                     return $data->StorageArea->name;
+                })->addColumn('used_for_td_expt_only',function ($data){
+                    return $data->used_for_td_expt_only == 1 ? "Yes" : "No";
                 })
-                ->rawColumns(['owners'])
+                ->rawColumns(['owners','used_for_td_expt_only'])
                 ->addIndexColumn()
             ->make(true);
         }
+
         foreach ($batches as $key => $row) {
             $now            = Carbon::now();
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
@@ -312,12 +325,34 @@ class ReportsController extends Controller
     }
     public function export_expired_material(Request $request)
     {
-        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-                ->where( 'is_draft' , 0)
-                ->where( 'department',$request->department)
-                ->latest()->get();
-        $data = [];
+        if(!empty($request->used_for_td_expt_only) && !empty($request->department)) {
+            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+            ->where( 'is_draft' , 0)
+            ->where('department',$request->department)
+            ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
+            ->latest()->get();
+        } elseif(!empty($request->used_for_td_expt_only)) {
+            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+            ->where( 'is_draft' , 0)
+            ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
+            ->latest()->get();
+        } elseif(!empty($request->department)) {
+            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
+            ->where( 'is_draft' , 0)
+            ->where('department',$request->department)
+            ->latest()->get();
+        } else {
+            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
+        }
         foreach ($batches as $key => $row) {
+            $now            = Carbon::now();
+            $date_of_expiry = Carbon::parse($row->date_of_expiry);
+            if ($now >= $date_of_expiry) {
+                $expired[] = $row;
+            }
+        }
+        $data = [];
+        foreach ($expired as $key => $row) {
             $owners = '';
             if (count($row->BatchOwners ?? [])) {
                 foreach ($row->BatchOwners as $key => $owner){
@@ -340,7 +375,7 @@ class ReportsController extends Controller
                 "owners"                => $owners,
             ];
         }
-        return Excel::download(new ExpiredMaterialExport($data), 'expired-materials.xlsx');
+        return Excel::download(new ExpiredMaterialExport($data), generateFileName('expired-materials','xlsx'));
     }
     public function security(Request $request)
     {

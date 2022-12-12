@@ -2,50 +2,57 @@
 
 @section('report_content')
     @if (count($expired) != 0)
-        <div class="card border shadow-sm col-md-8 mx-auto">
-            <div class="card-body">
-                <form action="{{ route('reports.export_expired_material') }}" method="POST">
-                    @csrf
-                    <div class="d-flex justify-content-center">
-                        <label class="border px-1 rounded ">
-                            Deparments:
-                            <select id="department" name="department" class="form-select form-select-sm border-0" style="display: inline-block;width:auto">
-                                <option value="">-- Select --</option> 
+        <form action="{{ route('reports.export_expired_material') }}" method="POST">
+            @csrf
+            <div class="row m-0 justify-content-center">
+                <div class="col-8">
+                    <div class="table-fillters row m-0 border">
+                        <div class="col">
+                            <label for="department" class="form-label">Department</label>
+                            <select id="department" name="department" class="form-select custom w-100" style="display: inline-block;width:auto">
+                                <option value="">-- Select --</option>
                                 @foreach ($departments as $row)
                                     <option value="{{ $row->id }}">{{ $row->name }}</option>
                                 @endforeach
                             </select>
-                        </label>
-                        <label class="border px-1 rounded mx-1">
-                            Used for TD/Expt only:
-                            <select id="used_for_td_expt_only" name="used_for_td_expt_only" class="form-select form-select-sm border-0" style="display: inline-block;width:auto">
-                                <option value="">-- Select --</option> 
-                                <option value="yes">YES</option> 
-                                <option value="yes">NO</option> 
+                        </div>
+                        <div class="col">
+                            <label for="used_for_td_expt_only" class="form-label">Used for TD/Expt only</label>
+                            <select id="used_for_td_expt_only" name="used_for_td_expt_only"  class="form-select custom w-100" style="display: inline-block;width:auto">
+                                <option value="">-- Select --</option>
+                                <option value="1">YES</option>
+                                <option value="0">NO</option>
                             </select>
-                        </label>
-                        <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export Excel</button>
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-label">Actions</label>
+                            <div class="btn-group w-100">
+                                <button type="button" name="filter" id="filter" class="btn-sm btn btn-primary form-control-sm"><i class="fa fa-search"></i></button>
+                                <button type="submit" name="export" id="export" class="btn-sm btn btn-success form-control-sm"><i class="bi bi-file-earmark-spreadsheet"></i> Export</button>
+                                <button type="button" name="refresh" id="refresh" class="btn-sm btn btn-warning form-control-sm"><i class="fa fa-repeat"></i></button>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
         <div class="card">
             <div class="card-body table-responsive">
                 <table class="table m-0 pt-2 table-sm" id="custom-data-table">
                     <thead>
                         <tr>
                             <th class="text-white bg-primary-2 text-center font-14">S.No</th>
-                            <th class="text-white bg-primary-2 text-center font-14">Category</th>    
-                            <th class="text-white bg-primary-2 text-center font-14">Item description</th>      
-                            <th class="text-white bg-primary-2 text-center font-14">batch serial</th>          
-                            <th class="text-white bg-primary-2 text-center font-14">unit packing value</th>    
-                            <th class="text-white bg-primary-2 text-center font-14">quantity</th>              
-                            <th class="text-white bg-primary-2 text-center font-14">storage area</th>          
-                            <th class="text-white bg-primary-2 text-center font-14">housing</th>               
-                            <th class="text-white bg-primary-2 text-center font-14">date of expiry</th>        
-                            <th class="text-white bg-primary-2 text-center font-14">used for td expt only</th> 
-                            <th class="text-white bg-primary-2 text-center font-14">department</th>            
-                            <th class="text-white bg-primary-2 text-center font-14">owners</th>                
+                            <th class="text-white bg-primary-2 text-center font-14">Category</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Item description</th>
+                            <th class="text-white bg-primary-2 text-center font-14">batch serial</th>
+                            <th class="text-white bg-primary-2 text-center font-14">unit packing value</th>
+                            <th class="text-white bg-primary-2 text-center font-14">quantity</th>
+                            <th class="text-white bg-primary-2 text-center font-14">storage area</th>
+                            <th class="text-white bg-primary-2 text-center font-14">housing</th>
+                            <th class="text-white bg-primary-2 text-center font-14">date of expiry</th>
+                            <th class="text-white bg-primary-2 text-center font-14">used for td expt only</th>
+                            <th class="text-white bg-primary-2 text-center font-14">department</th>
+                            <th class="text-white bg-primary-2 text-center font-14">owners</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -57,38 +64,55 @@
     @endif
 @endsection
 
+
 @section('scripts')
-    <script>
-        var table = $('#custom-data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('reports.expired_material') }}",
-                data: function (d) {
-                    d.department            = $('#department').val(),
-                    d.used_for_td_expt_only = $('#used_for_td_expt_only').val()
-                }
-            },
-            columns: [
-                {data: 'DT_RowIndex',name: 'id'},
-                {data:"category_selection",name:"category_selection"},
-                {data:"item_description",name:"item_description"},
-                {data:"batch_serial",name:"batch_serial"},
-                {data:"unit_packing_value",name:"unit_packing_value"},
-                {data:"quantity",name:"quantity"} ,
-                {data:"storage_area",name:"storage_area"},
-                {data:"housing",name:"housing"},
-                {data:"date_of_expiry",name:"date_of_expiry"},
-                {data:"used_for_td_expt_only",name:"used_for_td_expt_only"} ,
-                {data:"department",name:"department"},
-                {data:"owners",name:"owners"},
-            ]
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function load_data(department = '', used_for_td_expt_only = '')    {
+                $('#custom-data-table').DataTable({
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    processing: true,
+                    serverSide: true,
+                    searching: false,
+                    ajax: {
+                        url: "{{ route('reports.expired_material') }}",
+                        data:{
+                            department:department,
+                            used_for_td_expt_only:used_for_td_expt_only,
+                        }
+                    },
+                    columns: [
+                        {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
+                        {data:"category_selection",name:"category_selection"},
+                        {data:"item_description",name:"item_description"},
+                        {data:"batch_serial",name:"batch_serial"},
+                        {data:"unit_packing_value",name:"unit_packing_value"},
+                        {data:"quantity",name:"quantity"} ,
+                        {data:"storage_area",name:"storage_area"},
+                        {data:"housing",name:"housing"},
+                        {data:"date_of_expiry",name:"date_of_expiry"},
+                        {data:"used_for_td_expt_only",name:"used_for_td_expt_only"} ,
+                        {data:"department",name:"department"},
+                        {data:"owners",name:"owners"},
+                    ],
+                });
+            } load_data();
+
+            $('#filter').click(function(){
+                var department = $('#department').val();
+                var used_for_td_expt_only   = $('#used_for_td_expt_only').val();
+
+                $('#custom-data-table').DataTable().destroy();
+                load_data(department, used_for_td_expt_only);
+            });
+
+            $('#refresh').click(function(){
+                $('#department').val('');
+                $('#used_for_td_expt_only').val('');
+                $('#custom-data-table').DataTable().destroy();
+                load_data();
+            });
         });
-        $('#department').change(function(){ 
-            table.draw();
-        });
-        $('#used_for_td_expt_only').change(function(){  
-            table.draw();
-        }); 
     </script>
 @endsection
+
