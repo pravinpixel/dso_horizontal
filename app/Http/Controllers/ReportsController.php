@@ -121,7 +121,18 @@ class ReportsController extends Controller
     }
     public function material_in_house_pdt_history_download(Request $request)
     {
-        return Excel::download(new MaterialProductHistoryExport($request->start_date,$request->end_date), 'MaterialProductHistoryExport.xlsx');
+        if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
+            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))
+            ->where('barcode_number', $request->barcode)
+            ->get();
+        } elseif(!empty($request->start_date) && !empty($request->end_date)) {
+            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))->get();
+        } elseif(!empty($request->barcode)) {
+            $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
+        } else {
+            $data = materialProductHistory::all();
+        }
+        return Excel::download(new MaterialProductHistoryExport($data),generateFileName('Material inHouse pdt History','xlsx'));
     }
     public function export_cart()
     {
@@ -156,39 +167,31 @@ class ReportsController extends Controller
         $actions = array_unique(LogSheet::pluck('action_type')->toArray());
         return view('crm.reports.history', compact('actions'));
     }
-    public function get_material_product_history($barcode_number,$check = null)
+    public function get_material_product_history(Request $request)
     {
-        if($barcode_number == null) {
-            $materialProductHistory = materialProductHistory::all();
+        if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
+            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))
+            ->where('barcode_number', $request->barcode)
+            ->get();
+        } elseif(!empty($request->start_date) && !empty($request->end_date)) {
+            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))->get();
+        } elseif(!empty($request->barcode)) {
+            $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
         } else {
-            $materialProductHistory = materialProductHistory::where('barcode_number',$barcode_number)->get();
-            if(count($materialProductHistory) != 0) {
-                if($check !== null) {
-                    return response([
-                        "status" => true
-                    ]);
-                }
-            }
+            $data = materialProductHistory::all();
         }
-        return DataTables::of($materialProductHistory)
-            ->addIndexColumn()
-            ->addColumn('Module', function($data){
+        return DataTables::of($data)->addIndexColumn()->addColumn('Module', function($data){
                 return strtoupper(str_replace('_',' ',$data->Module));
-            })
-            ->addColumn('ActionTaken', function($data){
+            })->addColumn('ActionTaken', function($data){
                 return strtoupper(str_replace('_',' ',$data->ActionTaken));
-            })
-            ->addColumn('TransactionDate', function($data){
+            })->addColumn('TransactionDate', function($data){
                 return Carbon::parse($data->created_at)->toFormattedDateString();
-            })
-            ->addColumn('TransactionTime', function($data){
+            })->addColumn('TransactionTime', function($data){
                 return Carbon::parse($data->created_at)->format('h:i:s A');
-            })
-            ->addColumn('TransactionBy', function($data){
+            })->addColumn('TransactionBy', function($data){
                 return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
-            })
-            ->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
-            ->make(true);
+            })->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
+        ->make(true);
     }
     public function export()
     {

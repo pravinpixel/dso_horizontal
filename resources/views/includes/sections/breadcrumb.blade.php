@@ -1,5 +1,5 @@
 @if (!Route::is('dashboard'))
-    <div class="container-fluid">
+    <div class="container-fluid" id="breadcrumb">
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">

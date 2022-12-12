@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs mt-3">
         <li class="nav-item">
             <a href="{{ route('reports.material_in_house_pdt_history') }}" class="bg-none nav-link {{ Route::is(['reports.material_in_house_pdt_history','reports']) ? "active" : "" }}">
                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
@@ -41,4 +41,7 @@
     <section class="pt-3">
         @yield('report_content')
     </section>
+@endsection
+@section('styles')
+    <style>#breadcrumb {display: none !important}</style>
 @endsection

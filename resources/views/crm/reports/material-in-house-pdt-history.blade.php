@@ -2,20 +2,48 @@
 
 @section('report_content')
     <div>
-        <div class="card border shadow-sm col-md-6 mx-auto">
-            <div class="card-body">
-                <div>
-                    <form action="{{ route('reports.material_in_house_pdt_history_download') }}" method="POST">
-                        @csrf
-                        <div class="input-group">
-                            <input type="date" name="start_date" class="form-control form-control-sm">
-                            <input type="date" name="end_date" class="form-control form-control-sm">
-                            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Export Excel</button>
+        <form action="{{ route('reports.material_in_house_pdt_history_download') }}" method="POST">
+            @csrf
+            <div class="row m-0 justify-content-center">
+                <div class="col-10">
+                    <div class="table-fillters row m-0 border">
+                        <div class="col">
+                            <label for="" class="form-label">Start Date</label>
+                            <input type="date" name="start_date" id="start_date" class="form-control custom" placeholder="DD/MM/YYYY">
                         </div>
-                    </form>
+                        <div class="col">
+                            <label for="" class="form-label">End Date</label>
+                            <input type="date" name="end_date" id="end_date" class="form-control custom" placeholder="DD/MM/YYYY">
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-label">Scan Barcode</label>
+                            <input type="text" name="barcode" id="barcode" class="form-control custom" placeholder="Scan here...">
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-label">Actions</label>
+                            <div class="btn-group w-100">
+                                <button type="button" name="filter" id="filter" class="btn-sm btn btn-primary form-control-sm"><i class="fa fa-search"></i></button>
+                                <button type="submit" name="export" id="export" class="btn-sm btn btn-success form-control-sm"><i class="bi bi-file-earmark-spreadsheet"></i> Export</button>
+                                <button type="button" name="refresh" id="refresh" class="btn-sm btn btn-warning form-control-sm"><i class="fa fa-repeat"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+        {{-- <div class="card border shadow-sm col-md-8 mx-auto">
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    <div class="col-10 border-end">
+                        <div class="input-group">
+                            <input type="date" name="start_date" id="start_date" class="form-control form-control-sm" placeholder="From Date" />
+                            <input type="date" name="end_date" id="end_date" class="form-control form-control-sm" placeholder="To Date"  />
+                            <input type="text" name="barcode" id="barcode" class="form-control form-control-sm" placeholder="Scan barcode ..."  />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -52,82 +80,63 @@
 @endsection
 
 @section('scripts')
-    <script>
-        getMaterialProductHistoryByBarcode = (barcode_number) => {
-            if(barcode_number == '' || barcode_number == undefined || barcode_number == null) {
-                return false;
-            }
-            axios.get(`${APP_URL}/reports/check-material-product-history/${barcode_number}/true`).then(function (response) {
-                if(response.data.status) {
-                    setTimeout(() => {
-                        var historyTable = $('#historyTable').DataTable({
-                            processing: true,
-                            serverSide: true,
-                            ajax: {
-                                url: "{{ route('get-material-product-history') }}" +"/"+ barcode_number,
-                            },
-                            columns: [{
-                                    data: 'DT_RowIndex',
-                                    name: 'id'
-                                },
-                                {data:"CategorySelection" , name:"CategorySelection"},
-                                {data:"ItemDescription" , name:"ItemDescription"},
-                                {data:"Brand" , name:"Brand"},
-                                {data:"BatchSerial" , name:"BatchSerial"},
-                                {data:"TransactionDate" , name:"TransactionDate"},
-                                {data:"TransactionTime" , name:"TransactionTime"},
-                                {data:"TransactionBy" , name:"TransactionBy"},
-                                {data:"Module" , name:"Module"},
-                                {data:"ActionTaken" , name:"ActionTaken"},
-                                {data:"UnitPackingValue" , name:"UnitPackingValue"},
-                                {data:"Quantity" , name:"Quantity"},
-                                {data:"StorageArea" , name:"StorageArea"},
-                                {data:"Housing" , name:"Housing"},
-                                {data:"Owners" , name:"Owners"},
-                                {data:"Remarks" , name:"Remarks"},
-                                {data:"DrawStatus" , name:"DrawStatus"},
-                                {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
-                            ]
-                        });
-                    }, 1000);
-                }
-            }).catch(function (error) {
-                console.log(error);
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function load_data(start_date = '', end_date = '',barcode = '')    {
+                $('#historyTable').DataTable({
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    processing: true,
+                    serverSide: true,
+                    searching: false,
+                    ajax: {
+                        url: "{{ route('get-material-product-history') }}",
+                        data:{
+                            start_date:start_date,
+                            end_date:end_date,
+                            barcode:barcode
+                        }
+                    },
+                    columns: [
+                        {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
+                        {data:"barcode_number" , name:"barcode_number"},
+                        {data:"CategorySelection" , name:"CategorySelection"},
+                        {data:"ItemDescription" , name:"ItemDescription"},
+                        {data:"Brand" , name:"Brand"},
+                        {data:"BatchSerial" , name:"BatchSerial"},
+                        {data:"TransactionDate" , name:"TransactionDate"},
+                        {data:"TransactionTime" , name:"TransactionTime"},
+                        {data:"TransactionBy" , name:"TransactionBy"},
+                        {data:"Module" , name:"Module"},
+                        {data:"ActionTaken" , name:"ActionTaken"},
+                        {data:"UnitPackingValue" , name:"UnitPackingValue"},
+                        {data:"Quantity" , name:"Quantity"},
+                        {data:"StorageArea" , name:"StorageArea"},
+                        {data:"Housing" , name:"Housing"},
+                        {data:"Owners" , name:"Owners"},
+                        {data:"Remarks" , name:"Remarks"},
+                        {data:"DrawStatus" , name:"DrawStatus"},
+                        {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
+                    ],
+                });
+            } load_data();
+
+            $('#filter').click(function(){
+                var start_date = $('#start_date').val();
+                var end_date   = $('#end_date').val();
+                var barcode   = $("#barcode").val();
+
+                $('#historyTable').DataTable().destroy();
+                load_data(start_date, end_date , barcode);
+
             });
 
-        }
-        var historyTable = $('#historyTable').DataTable({
-            processing: true,
-            serverSide: true,
-            // retrieve: true,
-            // paging: false,
-            ajax: {
-                url: "{{ route('get-material-product-history') }}",
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'id'
-                },
-
-                {data:"barcode_number" , name:"barcode_number"},
-                {data:"CategorySelection" , name:"CategorySelection"},
-                {data:"ItemDescription" , name:"ItemDescription"},
-                {data:"Brand" , name:"Brand"},
-                {data:"BatchSerial" , name:"BatchSerial"},
-                {data:"TransactionDate" , name:"TransactionDate"},
-                {data:"TransactionTime" , name:"TransactionTime"},
-                {data:"TransactionBy" , name:"TransactionBy"},
-                {data:"Module" , name:"Module"},
-                {data:"ActionTaken" , name:"ActionTaken"},
-                {data:"UnitPackingValue" , name:"UnitPackingValue"},
-                {data:"Quantity" , name:"Quantity"},
-                {data:"StorageArea" , name:"StorageArea"},
-                {data:"Housing" , name:"Housing"},
-                {data:"Owners" , name:"Owners"},
-                {data:"Remarks" , name:"Remarks"},
-                {data:"DrawStatus" , name:"DrawStatus"},
-                {data:"RemainingOutlifeOfParent" , name:"RemainingOutlifeOfParent"}
-            ]
+            $('#refresh').click(function(){
+                $('#start_date').val('');
+                $('#end_date').val('');
+                $('#barcode').val('');
+                $('#historyTable').DataTable().destroy();
+                load_data();
+            });
         });
-        </script>
+    </script>
 @endsection

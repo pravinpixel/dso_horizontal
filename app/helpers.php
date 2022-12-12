@@ -572,7 +572,7 @@ if(!function_exists('getRoutes')) {
             if($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
             }
-           
+
             materialProductHistory::updateOrCreate([
                 'batch_id'                 => $batch->id,
                 'barcode_number'           => $batch->barcode_number,
@@ -601,6 +601,12 @@ if(!function_exists('getRoutes')) {
             $number_one = $one;
             $number_two = $two;
             return round($number_one * $number_two,2);
+        }
+    }
+    if(!function_exists('generateFileName')) {
+        function generateFileName($name,$extension)
+        {
+            return str_replace(' ',"_",$name.'_'.Carbon::now()).'.'.$extension;
         }
     }
 }
