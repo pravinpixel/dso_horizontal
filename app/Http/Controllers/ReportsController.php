@@ -252,18 +252,18 @@ class ReportsController extends Controller
         $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
         $expired = [];
         if ($request->ajax()) {
-            if(!empty($request->used_for_td_expt_only) && !empty($request->department)) {
+            if(!is_null($request->used_for_td_expt_only) && !is_null($request->department)) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                 ->where( 'is_draft' , 0)
                 ->where('department',$request->department)
                 ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
                 ->latest()->get();
-            } elseif(!empty($request->used_for_td_expt_only)) {
+            } elseif(!is_null($request->used_for_td_expt_only)) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                 ->where( 'is_draft' , 0)
                 ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
                 ->latest()->get();
-            } elseif(!empty($request->used_for_td_expt_only)) {
+            } elseif(!is_null($request->used_for_td_expt_only)) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                 ->where( 'is_draft' , 0)
                 ->where('department',$request->department)
@@ -325,18 +325,18 @@ class ReportsController extends Controller
     }
     public function export_expired_material(Request $request)
     {
-        if(!empty($request->used_for_td_expt_only) && !empty($request->department)) {
+        if(!is_null($request->used_for_td_expt_only) && !is_null($request->department)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
             ->where( 'is_draft' , 0)
             ->where('department',$request->department)
             ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
             ->latest()->get();
-        } elseif(!empty($request->used_for_td_expt_only)) {
+        } elseif(!is_null($request->used_for_td_expt_only)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
             ->where( 'is_draft' , 0)
             ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
             ->latest()->get();
-        } elseif(!empty($request->department)) {
+        } elseif(!is_null($request->department)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
             ->where( 'is_draft' , 0)
             ->where('department',$request->department)
