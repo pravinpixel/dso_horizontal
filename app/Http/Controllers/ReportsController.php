@@ -379,7 +379,12 @@ class ReportsController extends Controller
     }
     public function security(Request $request)
     {
-        $security = LogActivity::getSecurityReport();
+        if(!empty($request->start_date) && !empty($request->end_date)) {
+            $security = LogActivity::where()->dateBetween($request);
+        } else {
+            $security = LogActivity::getSecurityReport();
+        }
+
         if ($request->ajax()) {
             return DataTables::of($security)->addIndexColumn()->make(true);
         }
@@ -387,6 +392,11 @@ class ReportsController extends Controller
     }
     public function security_export(Request $request)
     {
-        return Excel::download(new SecurityReportExcel($request->start_date,$request->end_date), 'SecurityReport.xlsx');
+        if(!empty($request->start_date) && !empty($request->end_date)) {
+            $security = LogActivity::where()->dateBetween($request);
+        } else {
+            $security = LogActivity::getSecurityReport();
+        }
+        return Excel::download(new SecurityReportExcel($security), generateFileName('security-report','xlsx'));
     }
 }

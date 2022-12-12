@@ -12,36 +12,27 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SecurityReportExcel  implements FromArray , WithHeadings, WithStyles, WithEvents
 {
-    protected $start_date;
+    protected $data;
     protected $end_date;
 
-    public function __construct( $start_date , $end_date)
+    public function __construct( $data)
     {
-        $this->start_date = $start_date;
-        $this->end_date   = $end_date;
+        $this->data = $data;
     }
     public function styles(Worksheet $sheet)
-    { 
+    {
         return [
             1    => ['font' => ['bold' => true]],
         ];
     }
-    
+
     public function array():array
     {
-        $rangeStart = strtotime($this->start_date);
-        $rangeEnd   = strtotime($this->end_date);
-        $data       = LogActivity::getSecurityReport();
-
-        $filtered_events = array_filter($data, function($var) use ($rangeStart, $rangeEnd) {  
-            $evtime = strtotime($var['transaction_date']); 
-            return $evtime <= $rangeEnd && $evtime >= $rangeStart;  
-        }); 
         securityLog('Security Report Export');
-        return $filtered_events;
+        return $this->data;
     }
     public function headings() :array
-    { 
+    {
         return [
             "Transaction Date",
             "Transaction Time",
@@ -57,7 +48,7 @@ class SecurityReportExcel  implements FromArray , WithHeadings, WithStyles, With
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(40);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(40);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(40); 
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(40);
             },
         ];
     }

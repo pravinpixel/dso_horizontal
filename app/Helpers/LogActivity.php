@@ -5,14 +5,13 @@ namespace App\Helpers;
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\LogSheet;
-use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
-
 class LogActivity
 {
+    static $SecurityReportData;
     public static function log($id, $remarks = null)
-    {   
+    {
         switch (request()->route()->getActionMethod()) {
             case 'batch_destroy':
                 $action_type  = 'DELETE';
@@ -53,7 +52,7 @@ class LogActivity
             case 'transfer':
                 $action_type  = 'TRANSFER';
                 $module_name  = 'Batches';
-                break;  
+                break;
             case 'ReconciliationUpdate' :
                 $action_type  = 'RECONCILIATION';
                 $module_name  = 'Batches';
@@ -62,7 +61,7 @@ class LogActivity
                     $action_type  = 'RECONCILIATION_FROM_IMPORT_EXCEL';
                     $module_name  = 'Batches';
                 break;
-        } 
+        }
 
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),
@@ -77,7 +76,7 @@ class LogActivity
     }
 
     public static function dataLog($old, $new , $remarks = null)
-    { 
+    {
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
                 $action_type = 'TRANSFER';
@@ -120,7 +119,7 @@ class LogActivity
                 $action_type = 'EXTEND_EXPIRY';
                 $module_name = 'Batches';
                 $remarks     = $new->remarks;
-            break; 
+            break;
         }
         // dd($new);
         // dd($old);
@@ -135,7 +134,7 @@ class LogActivity
         //     'new'         => json_encode($new),
         //     'module_id'   => $old->id ?? '',
         //     'remarks'    =>  $remarks
-        // ]); 
+        // ]);
         // materialProductHistory::create([
         //     'CategorySelection' => $old->BatchMaterialProduct->category_selection,
         //     'ItemDescription'   => $old->BatchMaterialProduct->item_description,
@@ -163,7 +162,7 @@ class LogActivity
     public static function tracker($data)
     {
         $batch = Batches::find($data['from']);
- 
+
         return BatchTracker::create([
             "from_batch_id"  => $data['from'],
             "to_batch_id"    => $data['to'],
@@ -177,7 +176,7 @@ class LogActivity
     public static function getDisposalItems()
     {
         $logs =  LogSheet::where('action_type','EARLY_DISPOSAL')->latest()->get();
- 
+
         $disposal_items = [];
         foreach ($logs as $key => $log) {
             $batch = json_decode($log->new);
@@ -189,7 +188,7 @@ class LogActivity
                     "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
                     "batch_serial"     => $batch->batch.' / '.$batch->serial,
                     "unit_pack_value"  => $batch->unit_packing_value,
-                    "quantity"         => (string) $batch->quantity, 
+                    "quantity"         => (string) $batch->quantity,
                 ];
             }
         }
@@ -207,6 +206,28 @@ class LogActivity
                 "action"           => $row->action,
             ];
         }
-        return $arr;
+        return  $arr;
+    }
+    public static function where($data = null)
+    {
+        if(is_null($data)) {
+            $data = SecurityReport::latest()->get();
+        }
+       static::$SecurityReportData = $data;
+       return new self;
+    }
+    public static function dateBetween($request) {
+        $SecurityReport =  SecurityReport::whereBetween('created_at', dateBetween($request))->latest()->get();
+        $arr = [];
+        foreach ($SecurityReport as $key => $row) {
+            $arr[] = [
+                "transaction_date" => $row->created_at->format('d-m-Y'),
+                "transaction_time" => $row->created_at->format('h:m:s A'),
+                "transaction_by"   => $row->user_name,
+                "action"           => $row->action,
+            ];
+        }
+        self::$SecurityReportData = $arr;
+        return self::$SecurityReportData;
     }
 }

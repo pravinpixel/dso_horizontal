@@ -1,8 +1,8 @@
 @extends('crm.reports.index')
- 
-@section('report_content')  
-    @if (count($actions) != 0) 
-        <div class="card"> 
+
+@section('report_content')
+    @if (count($actions) != 0)
+        <div class="card">
             <div class="card-body">
                 <table class="table m-0 pt-2 table-sm text-center" id="custom-data-table">
                     <thead>
@@ -17,14 +17,14 @@
                         </tr>
                     </thead>
                     <tbody></tbody>
-                </table> 
-            </div> 
+                </table>
+            </div>
         </div>
         @else
        {!! no_data_found() !!}
     @endif
 @endsection
- 
+
 @section('scripts')
     <script>
         var table = $('#custom-data-table').DataTable({
@@ -63,6 +63,59 @@
 
         $('#ActionType').change(function(){
             table.draw();
+        });
+    </script>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            function load_data(start_date = '', end_date = '',barcode = '')    {
+                $('#custom-data-table').DataTable({
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    processing: true,
+                    serverSide: true,
+                    searching: false,
+                    ajax: {
+                        url: "{{ route('reports.disposed_items') }}",
+                        data:{
+                            start_date:start_date,
+                            end_date:end_date,
+                            barcode:barcode
+                        }
+                    },
+                    columns: [
+                        {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
+                        { data: 'TransactionDate', name: 'TransactionDate' },
+                        {data: 'TransactionTime',name: 'TransactionTime'},
+                        {data: 'TransactionBy',name: 'TransactionBy'},
+                        {data: 'ItemDescription',name: 'ItemDescription'},
+                        {data: 'BatchSerial',name: 'BatchSerial'},
+                        {data: 'UnitPackingValue',name: 'UnitPackingValue'},
+                        {data: 'BeforeQuantity',name: 'BeforeQuantity'},
+                        {data: 'DisposedQuantity',name: 'DisposedQuantity'},
+                        {data: 'AfterQuantity',name: 'AfterQuantity'},
+                    ],
+                });
+            } load_data();
+
+            $('#filter').click(function(){
+                var start_date = $('#start_date').val();
+                var end_date   = $('#end_date').val();
+                var barcode   = $("#barcode").val();
+
+                $('#custom-data-table').DataTable().destroy();
+                load_data(start_date, end_date , barcode);
+
+            });
+
+            $('#refresh').click(function(){
+                $('#start_date').val('');
+                $('#end_date').val('');
+                $('#barcode').val('');
+                $('#custom-data-table').DataTable().destroy();
+                load_data();
+            });
         });
     </script>
 @endsection
