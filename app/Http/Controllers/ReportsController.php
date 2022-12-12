@@ -131,11 +131,11 @@ class ReportsController extends Controller
     public function material_in_house_pdt_history_download(Request $request)
     {
         if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
-            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))
+            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))
             ->where('barcode_number', $request->barcode)
             ->get();
         } elseif(!empty($request->start_date) && !empty($request->end_date)) {
-            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))->get();
+            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))->get();
         } elseif(!empty($request->barcode)) {
             $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
         } else {
@@ -179,11 +179,11 @@ class ReportsController extends Controller
     public function get_material_product_history(Request $request)
     {
         if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
-            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))
+            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))
             ->where('barcode_number', $request->barcode)
             ->get();
         } elseif(!empty($request->start_date) && !empty($request->end_date)) {
-            $data = materialProductHistory::whereBetween('created_at', array($request->start_date, $request->end_date))->get();
+            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))->get();
         } elseif(!empty($request->barcode)) {
             $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
         } else {
@@ -208,7 +208,11 @@ class ReportsController extends Controller
     }
     public function disposed_items(Request $request)
     {
-        $disposed  = DisposedItems::all();
+        if(!empty($request->start_date) && !empty($request->end_date)) {
+            $disposed = DisposedItems::whereBetween('created_at', dateBetween($request))->get();
+        } else {
+            $disposed = DisposedItems::all();
+        }
         if ($request->ajax()) {
             return DataTables::of($disposed)->addIndexColumn()->make(true);
         }
@@ -216,7 +220,32 @@ class ReportsController extends Controller
     }
     public function export_disposed_items(Request $request)
     {
-        return Excel::download(new DisposalExport($request->start_date,$request->end_date), 'disposal-items.xlsx');
+        if(!empty($request->start_date) && !empty($request->end_date)) {
+            $disposed = DisposedItems::whereBetween('created_at', dateBetween($request))->select(
+                "TransactionDate",
+                "TransactionTime",
+                "TransactionBy",
+                "ItemDescription",
+                "BatchSerial",
+                "UnitPackingValue",
+                "BeforeQuantity",
+                "DisposedQuantity",
+                "AfterQuantity"
+            )->get()->toArray();
+        } else {
+            $disposed = DisposedItems::select(
+                "TransactionDate",
+                "TransactionTime",
+                "TransactionBy",
+                "ItemDescription",
+                "BatchSerial",
+                "UnitPackingValue",
+                "BeforeQuantity",
+                "DisposedQuantity",
+                "AfterQuantity"
+            )->get()->toArray();
+        }
+        return Excel::download(new DisposalExport($disposed), generateFileName('disposal-items','xlsx'));
     }
     public function expired_material(Request $request)
     {

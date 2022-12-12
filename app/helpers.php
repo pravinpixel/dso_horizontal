@@ -609,4 +609,15 @@ if(!function_exists('getRoutes')) {
             return str_replace(' ',"_",$name.'_'.Carbon::now()).'.'.$extension;
         }
     }
+    if(!function_exists('dateBetween')) {
+        function dateBetween($request)
+        {
+            $start_date = Carbon::parse($request->start_date)->startOfDay();
+            $end_date   = Carbon::parse($request->end_date)->endOfDay();
+            return [
+                $start_date,
+                $end_date
+            ];
+        }
+    }
 }

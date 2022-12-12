@@ -16,42 +16,26 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvents
 {
-    protected $start_date;
-    protected $end_date;
+    protected $data;
 
-    public function __construct( $start_date , $end_date)
+    public function __construct( $data)
     {
-        $this->start_date = $start_date;
-        $this->end_date   = $end_date;
+        $this->data = $data;
     }
     public function styles(Worksheet $sheet)
-    { 
+    {
         return [
             1    => ['font' => ['bold' => true]],
         ];
     }
-    
+
     public function array():array
     {
-        if(is_null($this->start_date) || is_null($this->end_date)) {
-            return DisposedItems::select(
-                "TransactionDate",
-                "TransactionTime",
-                "TransactionBy",
-                "ItemDescription",
-                "BatchSerial",
-                "UnitPackingValue",
-                "BeforeQuantity",
-                "Quantity"
-            )->get()->toArray();
-        }
-        $start_date = Carbon::parse($this->start_date);
-        $end_date   = Carbon::parse($this->end_date);
         securityLog('Disposal Items Export');
-        return DisposedItems::whereDate('created_at','<=',$end_date)->whereDate('created_at','>=',$start_date)->get();
+        return $this->data;
     }
     public function headings() :array
-    { 
+    {
         return [
             "Transaction Date",
             "Transaction Time",
@@ -60,7 +44,8 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
             "Batch Serial",
             "Unit Pack Value",
             "BeforeQuantity",
-            "Quantity"
+            "DisposedQuantity",
+            "AfterQuantity"
         ];
     }
     public function registerEvents(): array
@@ -74,7 +59,7 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(40);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);  
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
             },
         ];
     }
