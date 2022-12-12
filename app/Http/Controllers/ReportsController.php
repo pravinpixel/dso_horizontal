@@ -263,7 +263,7 @@ class ReportsController extends Controller
                 ->where( 'is_draft' , 0)
                 ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
                 ->latest()->get();
-            } elseif(!is_null($request->used_for_td_expt_only)) {
+            } elseif(!is_null($request->department)) {
                 $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
                 ->where( 'is_draft' , 0)
                 ->where('department',$request->department)
@@ -304,7 +304,16 @@ class ReportsController extends Controller
                 })->addColumn('storage_area',function ($data){
                     return $data->StorageArea->name;
                 })->addColumn('used_for_td_expt_only',function ($data){
-                    return $data->used_for_td_expt_only == 1 ? "Yes" : "No";
+                    if($data->used_for_td_expt_only == 1) {
+                        $used_for_td_expt_only = 'Yes';
+                    }
+                    if($data->used_for_td_expt_only == 0) {
+                        $used_for_td_expt_only = 'No';
+                    }
+                    if(is_null($data->used_for_td_expt_only)) {
+                        $used_for_td_expt_only = '-';
+                    }
+                    return $used_for_td_expt_only;
                 })
                 ->rawColumns(['owners','used_for_td_expt_only'])
                 ->addIndexColumn()
