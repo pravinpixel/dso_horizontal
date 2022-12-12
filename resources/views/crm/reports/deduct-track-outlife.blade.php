@@ -34,4 +34,5 @@
         <cart-table type="{{ $page_name }}"></cart-table>
     </div>
 @endsection
+@section('styles') <style>#breadcrumb {display: none !important}</style> @endsection
 @include('includes.dso-datatable')
