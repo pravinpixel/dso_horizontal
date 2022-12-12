@@ -11,6 +11,7 @@ class DeductTrackUsage extends Model
 
     protected $fillable = [
         'batch_id',
+        'barcode_number',
         'item_description',
         'batch_serial',
         'last_accessed',

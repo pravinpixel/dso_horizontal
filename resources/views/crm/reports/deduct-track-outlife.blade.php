@@ -1,6 +1,6 @@
 @extends('crm.reports.index')
- 
-@section('report_content') 
+
+@section('report_content')
     <div>
         <div ng-app="RootApp" ng-controller="RootController">
             <div class="d-flex align-items-center mb-3">
@@ -9,17 +9,17 @@
                         <i class="bi bi-upc-scan font-20 mx-2"></i>
                         <input type="number" min="1" ng-model="barcode_number" min="1" ng-keyup="search_barcode_number()" class="form-control form-control-lg border-0 bg-light ms-1 rounded-pill" placeholder="Click here to scan">
                     </div>
-                </div> 
+                </div>
             </div>
-    
+
             {{-- = ==== Filletrs ====--}}
                 @include('crm.partials.table-filter')
             {{-- ====== Filletrs ===--}}
-             
+
             <section>
                 @include('crm.partials.data-table')
             </section>
-    
+
             {{-- ======= START : App Models ==== --}}
                 @include('crm.material-products.modals.view-batch-list')
                 @include('crm.material-products.modals.view-list')
@@ -31,7 +31,7 @@
                 @include('crm.material-products.modals.import-from-excel')
             {{-- ======= END : App Models ==== --}}
         </div>
-        <cart-table type="{{ $page_name }}"></cart-table> 
-    </div> 
-@endsection 
+        <cart-table type="{{ $page_name }}"></cart-table>
+    </div>
+@endsection
 @include('includes.dso-datatable')

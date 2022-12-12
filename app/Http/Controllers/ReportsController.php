@@ -45,9 +45,12 @@ class ReportsController extends Controller
     }
     public function deduct_track_usage(Request $request)
     {
-        $data = DeductTrackUsage::all();
+        if(!empty($request->barcode)) {
+            $data = DeductTrackUsage::where('barcode_number',$request->barcode)->get();
+        } else {
+            $data = DeductTrackUsage::all();
+        }
         $DeductTrackUsage = [];
-
         foreach ($data as $key => $value) {
             $Batch = Batches::with('BatchOwners')->find($value->batch_id);
             if(!is_null($Batch)) {
@@ -62,6 +65,7 @@ class ReportsController extends Controller
                 $DeductTrackUsage[] = [
                     "ItemDescription"  => $value->item_description,
                     "Brand"            => $Batch->brand,
+                    "Barcode"            => $Batch->barcode_number,
                     "BatchSerial"      => $value->batch_serial,
                     "UnitPackingValue" => $Batch->unit_packing_value,
                     "StorageArea"      => $Batch->StorageArea->name,
@@ -83,7 +87,12 @@ class ReportsController extends Controller
     }
     public function deduct_track_usage_download(Request $request)
     {
-        $data = DeductTrackUsage::all();
+        if(!empty($request->barcode)) {
+            $data = DeductTrackUsage::where('barcode_number',$request->barcode)->get();
+        } else {
+            $data = DeductTrackUsage::all();
+        }
+
         $DeductTrackUsage = [];
 
         foreach ($data as $key => $value) {
@@ -113,7 +122,7 @@ class ReportsController extends Controller
             ];
         }
 
-        return Excel::download(new TrackUsageExport($DeductTrackUsage), 'DeductTrackUsage.xlsx');
+        return Excel::download(new TrackUsageExport($DeductTrackUsage), generateFileName('DeductTrackUsage','xlsx'));
     }
     public function material_in_house_pdt_history()
     {

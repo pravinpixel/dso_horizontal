@@ -16,6 +16,7 @@ class CreateDeductTrackUsagesTable extends Migration
         Schema::create('deduct_track_usages', function (Blueprint $table) {
             $table->id();
             $table->integer('batch_id');
+            $table->string('barcode_number');
             $table->string('item_description');
             $table->string('batch_serial');
             $table->string('last_accessed');

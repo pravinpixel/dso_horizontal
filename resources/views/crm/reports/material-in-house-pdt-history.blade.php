@@ -31,19 +31,6 @@
                 </div>
             </div>
         </form>
-        {{-- <div class="card border shadow-sm col-md-8 mx-auto">
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-10 border-end">
-                        <div class="input-group">
-                            <input type="date" name="start_date" id="start_date" class="form-control form-control-sm" placeholder="From Date" />
-                            <input type="date" name="end_date" id="end_date" class="form-control form-control-sm" placeholder="To Date"  />
-                            <input type="text" name="barcode" id="barcode" class="form-control form-control-sm" placeholder="Scan barcode ..."  />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
