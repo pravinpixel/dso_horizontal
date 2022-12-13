@@ -38,7 +38,7 @@ class ExtendExpiryController extends Controller
             'remarks'            => $request->remarks,
             'extended_qc_status' => $request->extended_qc_status == 1 ? $request->extended_qc_status : 0
         ]);
-        if($request->iqc_status == 0) {
+        if($request->extended_qc_status == 0) {
             return redirect()->route('disposal',['id' => request()->route()->id == null ? $request->id : request()->route()->id ])->with('info',"Extended QC Results Status Changed to FAIL !");
         }
         return redirect()->route('extend-expiry')->with('success',"Extension Success !");
