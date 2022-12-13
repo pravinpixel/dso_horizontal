@@ -183,7 +183,7 @@ class LogActivity
             if($batch->quantity == 0) {
                 $disposal_items[] = [
                     "transaction_date" => $log->created_at->format('d-m-Y'),
-                    "transaction_time" => $log->created_at->format('h:m:s A'),
+                    "transaction_time" => $log->created_at->format('h:i:s A'),
                     "transaction_by"   => $log->user_name,
                     "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
                     "batch_serial"     => $batch->batch.' / '.$batch->serial,
@@ -201,7 +201,7 @@ class LogActivity
         foreach ($SecurityReport as $key => $row) {
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
-                "transaction_time" => $row->created_at->format('h:m:s A'),
+                "transaction_time" => $row->created_at->format('h:i:s A'),
                 "transaction_by"   => $row->user_name,
                 "action"           => $row->action,
             ];
@@ -222,7 +222,7 @@ class LogActivity
         foreach ($SecurityReport as $key => $row) {
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
-                "transaction_time" => $row->created_at->format('h:m:s A'),
+                "transaction_time" => $row->created_at->format('h:i:s A'),
                 "transaction_by"   => $row->user_name,
                 "action"           => $row->action,
             ];
