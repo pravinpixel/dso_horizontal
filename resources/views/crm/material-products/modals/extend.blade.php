@@ -13,13 +13,13 @@
                         <h1 class="h5">Extended QC Results Status :</h1>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <label for="Pass_label" class="nav-link active show form-radio-success">
-                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label"> 
+                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label">
                                 <span class="text-success"> Pass</span>
                             </label>
                             <label for="Fail_label" class="nav-link form-radio-danger ">
-                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'FAIL'" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label"> 
+                                <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'FAIL'" value="FAIL" type="radio" class="form-check-input border-danger" id="Fail_label">
                                 <span class="text-danger">Fail</span>
-                            </label> 
+                            </label>
                         </div>
                         <br>
                         <h1 class="h5 mb-3">Accordance to EG1 Chemical UIMS 2021</h1>
@@ -27,10 +27,10 @@
                             <div class="my-1"><span class="me-2">-</span> 2 years OEM unstated (liquids , others)</div>
                             <div class="my-1"><span class="me-2">-</span> 5 years OEM unstated (dry , others)</div>
                             <div class="my-1"><span class="me-2">-</span> 5 years OEM declare does not expire</div>
-                            <div class="my-1"><span class="me-2">-</span> DSO in house (ask Domain PMTS)</div> 
+                            <div class="my-1"><span class="me-2">-</span> DSO in house (ask Domain PMTS)</div>
                         </div>
                     </div>
-                    <div class="col-sm-8"> 
+                    <div class="col-sm-8">
                         <div ng-if="batch.extended_qc_status != null">
                             <p class="text-muted" style="text-transform: none !important">
                                 Please fill in the information below for <b class="text-dark">expiry extension</b>. The field labels marked with * are required input fields.
@@ -39,8 +39,8 @@
                                 <form  action="{{ route('update.extend-expiry') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="@{{ batch.id }}">
-                                    <input type="hidden" ng-if="batch.extended_qc_status == 'FAIL'" name="iqc_status" value="0">
-                                    <input type="hidden" ng-if="batch.extended_qc_status != 'FAIL'" name="iqc_status" value="1">
+                                    <input type="hidden" ng-if="batch.extended_qc_status == 'FAIL'" name="extended_qc_status" value="0">
+                                    <input type="hidden" ng-if="batch.extended_qc_status != 'FAIL'" name="extended_qc_status" value="1">
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Extended QC Documents*</small>
                                         <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
@@ -59,10 +59,10 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
-</div> 
+</div>
