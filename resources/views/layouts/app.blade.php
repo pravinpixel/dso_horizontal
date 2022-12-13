@@ -20,7 +20,7 @@
     <div class="sticky-top" id="navigation_menu">
         @include('includes.sections.nav-bar')
         @include('includes.sections.top-nav-bar')
-    </div> 
+    </div>
 
     @include('includes.sections.breadcrumb')
 
@@ -28,7 +28,7 @@
     <main class="container-fluid" style="min-height: 80vh">
         @yield('content')
     </main>
-   
+
     <div id="notification-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog w-100 modal-right h-100">
             <div class="modal-content h-100 rounded-0">
@@ -40,13 +40,18 @@
                     <div class="text-s">
                         <ul class="list-group" id="NotificationList"></ul>
                     </div>
-                </div> 
-            </div> 
+                </div>
+            </div>
         </div>
-    </div>   
+    </div>
     {{-- ========= SCRIPTS  ==========--}}
         @include('includes.scripts')
-    {{-- ========= SCRIPTS  ==========--}} 
-    
+    {{-- ========= SCRIPTS  ==========--}}
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

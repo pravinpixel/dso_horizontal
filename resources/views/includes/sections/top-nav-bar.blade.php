@@ -1,4 +1,5 @@
-<div class="topnav shadow bg-primary">
+<div class="topnav shadow bg-primary position-relative">
+    <div id="google_translate_element" style="position: absolute;top:15px;right: 10px;z-index: 11111;"></div>
     <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu ">
             <div class="collapse navbar-collapse" id="topnav-menu-content">
