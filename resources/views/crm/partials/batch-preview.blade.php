@@ -297,9 +297,9 @@
             <div class="fw-bold mb-1">Extended QC status (P/F)</div>
             @if (!is_null($batch->extended_qc_status))
                 @if ($batch->extended_qc_status)
-                    <span class="badge bg-success rounded-pill">YES</span>
+                    <span class="badge bg-success rounded-pill">Pass</span>
                 @else
-                    <span class="badge bg-danger rounded-pill">NO</span>
+                    <span class="badge bg-danger rounded-pill">Fail</span>
                 @endif
             @endif
         </div>
