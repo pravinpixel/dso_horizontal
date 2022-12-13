@@ -38,6 +38,13 @@ class ExtendExpiryController extends Controller
             'remarks'            => $request->remarks,
             'extended_qc_status' => $request->extended_qc_status == 1 ? $request->extended_qc_status : 0
         ]);
+        if($request->extended_qc_status == 1) {
+            if(is_null($batch->no_of_extension)) {
+                $batch->update(['no_of_extension' => 1 ]);
+            } else {
+                $batch->update(['no_of_extension' => $batch->no_of_extension + 1 ]);
+            }
+        }
         if($request->extended_qc_status == 0) {
             return redirect()->route('disposal',['id' => request()->route()->id == null ? $request->id : request()->route()->id ])->with('info',"Extended QC Results Status Changed to FAIL !");
         }
