@@ -1,10 +1,10 @@
 @font-face {
     font-family: "dsoFontFamily";
     src: url("../../asset/fonts/OpenSans-Bold.ttf"),
-    url("../../asset/fonts/OpenSans-BoldItalic.ttf"), 
-    url("../../asset/fonts/OpenSans-Italic.ttf"), 
-    url("../../asset/fonts/OpenSans-Light.ttf"), 
-    url("../../asset/fonts/OpenSans-Medium.ttf"), 
+    url("../../asset/fonts/OpenSans-BoldItalic.ttf"),
+    url("../../asset/fonts/OpenSans-Italic.ttf"),
+    url("../../asset/fonts/OpenSans-Light.ttf"),
+    url("../../asset/fonts/OpenSans-Medium.ttf"),
 }
 :root {
     --bs-blue: #3688fc;
@@ -74,7 +74,7 @@
     }
 }
 
- 
+
 body {
     margin: 0;
     font-family: 'system-ui' !important;
@@ -3443,7 +3443,7 @@ fieldset:disabled .btn {
 }
 
 .btn-success:hover ,
-.btn-success-light 
+.btn-success-light
  {
     color: #fff;
     background-color: #38b385;
@@ -3586,7 +3586,7 @@ fieldset:disabled .btn {
 }
 
 .btn-danger:hover ,
-.btn-danger-light 
+.btn-danger-light
 {
     color: #fff;
     background-color: #d55858;
@@ -6119,7 +6119,7 @@ fieldset:disabled .btn {
 .select2-container .select2-selection--multiple {
     min-height: 50px !important;
 }
- 
+
 .list-group-numbered>li::before {
     content: counters(section, ".") ". ";
     counter-increment: section;
@@ -14617,10 +14617,10 @@ body[data-layout=detached] .footer .container-xxl {
 
 .topnav .navbar-nav .nav-link {
     font-size: .9375rem;
-    position: relative; 
+    position: relative;
     height: 100%;
     padding: 1rem 1.3rem
-} 
+}
 
 .topnav .nav-item.active>a {
     color: #3688fc
@@ -16170,7 +16170,7 @@ input[data-switch]+label:after {
     content: "";
     position: absolute;
     left: 4px;
-    background-color: #adb5bd;
+    background-color: #fa6767;
     -webkit-box-shadow: none;
     box-shadow: none;
     border-radius: 2rem;
@@ -21659,20 +21659,20 @@ div.dataTables_scrollBody>table>:not(:first-child) {
 ::-webkit-scrollbar {
     width: 5px;
   }
-  
+
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #f1f1f1;
   }
-   
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: lightgray; 
+    background: lightgray;
   }
-  
+
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
   }
 
 
@@ -21721,7 +21721,7 @@ table.tr-sm >:not(caption)>*>*{
 }
 
 .btn-draw-in {
-    background: #EDF4F2; 
+    background: #EDF4F2;
 }
 .btn-disabled {
     cursor: not-allowed;
