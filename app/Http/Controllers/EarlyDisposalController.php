@@ -39,14 +39,14 @@ class EarlyDisposalController extends Controller
         $new_value  = $batch;
 
         $batch->update([
-            'used_for_td_expt_only' => $request->used_for_td_expt_only,
+            'coc_coa_mill_cert_status' => $request->used_for_td_expt_only == 1 ? 'on' : 'off',
             'quantity'              => $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity,
             'disposed_after'        => $request->disposed_after ?? null,
             'disposed_status'       => true
         ]);
 
         TrackDisposedBatches($batch, $request->quantity);
- 
+
         LogActivity::dataLog($old_value, $new_value,  $request->remarks ?? "");
         return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
