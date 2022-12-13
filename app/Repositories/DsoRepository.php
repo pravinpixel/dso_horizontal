@@ -88,18 +88,22 @@ class DsoRepository implements DsoRepositoryInterface
             'page_name'
         ));
     }
-    public function renderTableData($material_product)
+    public function renderTableData($material_product, $config = null)
     {
-        $page_name = session()->get('page_name');
+        if(is_null($config)) {
+            $page_name = session()->get('page_name');
+        } else {
+            $page_name = $config['page_name'];
+        }
 
         foreach ($material_product as $key => $parent) {
 
             $quantityColor       = 'text-danger';
             $readCount           = 0;
             $draftBatchCount     = 0;
-            $UnitPackingCount    = 0; 
+            $UnitPackingCount    = 0;
             $material_total_quantity = 0;
-          
+
             foreach ($parent->Batches as $batch_key => $batch) {
 
                 $date_of_expiry             = $batch->date_of_expiry;
@@ -147,8 +151,8 @@ class DsoRepository implements DsoRepositoryInterface
 
                 if ($batch->is_draft == 1) {
                     $draftBatchCount += 1;
-                } else { 
-                  
+                } else {
+
                     $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
                     $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
                 }
@@ -156,7 +160,7 @@ class DsoRepository implements DsoRepositoryInterface
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } 
+                }
                 if ($page_name == 'PRINT_BARCODE_LABEL') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
@@ -177,20 +181,20 @@ class DsoRepository implements DsoRepositoryInterface
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } 
+                }
                 if ($page_name == 'THRESHOLD_QTY') {
                     if ($batch->is_draft == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                } 
+                }
                 if ($page_name == 'DEDUCT_TRACK_OUTLIFE_REPORT') {
                     if ($batch->is_draft == 1 || $batch->withdrawal_type != 'DEDUCT_TRACK_OUTLIFE') {
                         // Log::info($batch->RepackOutlife);
                         unset($parent->Batches[$batch_key]);
                     }
-                } 
+                }
             }
-       
+
 
             $parent['material_total_quantity'] = $material_total_quantity;
             $parent['material_quantity']       = $material_total_quantity != 0 ? ($material_total_quantity / $parent['unit_packing_value']) : 0;
@@ -198,27 +202,25 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
             $parent['draftBatchCount']         = $draftBatchCount;
- 
+
             if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-danger';
             }
             if ($parent->material_quantity > $parent->alert_threshold_qty_upper_limit && $parent->material_quantity > $parent->alert_threshold_qty_lower_limit) {
                 $quantityColor = 'text-success';
-            } 
+            }
             if($parent->alert_threshold_qty_lower_limit <= $parent->material_quantity && $parent->material_quantity <= $parent->alert_threshold_qty_upper_limit){
                 $quantityColor = 'text-warning';
             }
-             
-            $parent['quantityColor'] = $quantityColor;  
+
+            $parent['quantityColor'] = $quantityColor;
 
             if ($page_name == 'THRESHOLD_QTY') {
                 if ($quantityColor == 'text-success') {
                     unset($parent->Batches[$batch_key]);
                 }
-            } 
+            }
         }
-         
-
         $access_material_product = $material_product;
 
         foreach ($access_material_product as $material_index => $material) {
@@ -237,7 +239,7 @@ class DsoRepository implements DsoRepositoryInterface
                         } else {
                             $batch->permission = 'READ_AND_WRITE';
                         }
-                    } 
+                    }
                 } else {
                     $batch->permission = 'READ_AND_WRITE';
                 }
@@ -253,6 +255,11 @@ class DsoRepository implements DsoRepositoryInterface
         }
 
         $collection = Arr::flatten($access_material_product);
+        if(!is_null($config)) {
+            if($config['response'] == 'JSON') {
+                return $collection;
+            }
+        }
         $items      = collect($collection);
         $perPage    = config('app.paginate');
         $page       = null;

@@ -21,7 +21,7 @@ class NotificationController extends Controller
         $page_name  =  "THRESHOLD_QTY";
         $view       =  "crm.notification.threshold-qty";
         return  $this->dsoRepository->renderPage($page_name, $view);
-    } 
+    }
     public function change_read_status($id)
     {
         $MaterialProducts = MaterialProducts::findOrFail($id);
@@ -35,19 +35,12 @@ class NotificationController extends Controller
     public function notification_count()
     {
         $data = MaterialProducts::with('Batches')->where(['is_read' => 0,'is_draft' => 0,])->get();
-        
-        $MaterialProducts = [];
 
-        foreach ($data as $key => $parent) {  
-            $total_bath_quantity = 0;
-            foreach ($parent->Batches as $key => $batch) {
-                $total_bath_quantity     += (int) $batch->quantity;
-            }
-            if($parent->alert_threshold_qty_lower_limit <= $total_bath_quantity && $total_bath_quantity <= $parent->alert_threshold_qty_upper_limit || $total_bath_quantity < $parent->alert_threshold_qty_lower_limit){
-                $MaterialProducts[]  = $parent;
-            }
-        }
-        
+        $MaterialProducts =  $this->dsoRepository->renderTableData($data, [
+            "response" => "JSON",
+            "page_name" => "THRESHOLD_QTY"
+        ]);
+
         return response()->json([
             'status' => 200,
             'data'   => $MaterialProducts,
@@ -78,15 +71,15 @@ class NotificationController extends Controller
                 $failed_iqc[] = $row;
             }
         }
- 
-        if($type == 'NEAR_EXPIRY_TABLE') { 
+
+        if($type == 'NEAR_EXPIRY_TABLE') {
             $table = $near_expiry;
         } elseif($type == 'EXPIRY_TABLE') {
             $table = $expired;
         } elseif($type == 'FAILED_IQC_TABLE') {
             $table = $failed_iqc;
         }
-        
+
         return DataTables::of($table)
             ->addIndexColumn()
             ->addColumn('item_description', function($table){
@@ -101,9 +94,9 @@ class NotificationController extends Controller
                     $owners .=  '
                         <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
                             '.$owner->alias_name.'
-                        </small> 
+                        </small>
                     ';
-                } 
+                }
                 return $owners;
             })
             ->addColumn('storage_area', function($table){
@@ -120,7 +113,7 @@ class NotificationController extends Controller
                     <div class="dropdown">
                         <a class="ropdown-toggle text-secondary" href="#" id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
-                        </a> 
+                        </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="'.route('disposal',$table->id).'"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
                             <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>

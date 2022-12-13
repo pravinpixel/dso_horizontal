@@ -6,7 +6,7 @@ use App\Models\Masters\PackingSizeData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
+
 
 class MaterialProducts extends Model
 {
@@ -29,6 +29,7 @@ class MaterialProducts extends Model
         'material_quantity',
         'quantity_update_status',
         'material_total_quantity',
+        'material_quantity_color',
         'is_draft',
         'is_read'
     ];
@@ -39,6 +40,6 @@ class MaterialProducts extends Model
     }
     public function UnitOfMeasure()
     {
-        return  $this->hasOne(PackingSizeData::class, 'id', 'unit_of_measure'); 
-    } 
+        return  $this->hasOne(PackingSizeData::class, 'id', 'unit_of_measure');
+    }
 }
