@@ -192,9 +192,12 @@ getNotificationCount = () => {
         NotificationData.map((item) => {
             return NotificationList.innerHTML += `
                 <li class="list-group-item list-group-item-action btn">
-                    <div><a href="${APP_URL}/notification/threshold-qty">${item.item_description}</a></div>
-                    <small> ${ item.batches.length != 0 ?  item.batches[0].batch : "" } </small>
-                    <small class="float-end text-secondary">${ moment(item.created_at).format('YYYY-MM-DD h:m:s A')}</small>
+                    <a href="${APP_URL}/notification/threshold-qty" class="text-dark">
+                        <div><b class="text-primary"><i class="bi bi-bell-fill text-danger"></i> ${item.item_description.toUpperCase()}</b></div>
+                        <small><b class="text-dark">Barcode :</b> ${ item.batches.length != 0 ?  item.batches[0].barcode_number : "" } </small>  <br>
+                        <small><b class="text-dark">Batch :</b> ${ item.batches.length != 0 ?  item.batches[0].batch : "" } </small>
+                        <small class="float-end text-danger"><i class="bi bi-calendar2-week"></i> ${ moment(item.updated_at).format('DD/MM/YYYY h:m A')}</small>
+                    </a>
                 </li>
             `
         });
