@@ -34,6 +34,7 @@ class SearchRepository implements SearchRepositoryInterface
             ->WhereHas('Batches', function ($q) use ($parent_id) {
                 $q->where('material_product_id', $parent_id);
             })
+            ->latest()
             ->get();
             return $this->dsoRepository->renderTableData($material_product_data);
         } catch (\Throwable $th) {
@@ -43,30 +44,30 @@ class SearchRepository implements SearchRepositoryInterface
 
     public function advanced_search($filter)
     {
-        
+
         if($filter->owners ?? false) {
-           
+
             $material_product_data_by_owners = [];
             $Owners = [];
             foreach ($filter->owners as $key => $owner) {
                 $Owners[] = $owner['id'];
             }
-    
+
             foreach (BatchOwners::whereIn('user_id',$Owners)->get() as $key => $value) {
 
                 $material_product_data_by_owners[] = MaterialProducts::with([
                                                         'Batches',
-                                                        'Batches.RepackOutlife', 
-                                                        'Batches.BatchOwners', 
-                                                        'Batches.HousingType', 
-                                                        'Batches.Department', 
-                                                        'Batches.StorageArea', 
+                                                        'Batches.RepackOutlife',
+                                                        'Batches.BatchOwners',
+                                                        'Batches.HousingType',
+                                                        'Batches.Department',
+                                                        'Batches.StorageArea',
                                                         'Batches.StatutoryBody',
-                                                        'UnitOfMeasure', 
-                                                        ])->find(Batches::find($value['batch_id'])->material_product_id); 
-            }    
+                                                        'UnitOfMeasure',
+                                                        ])->find(Batches::find($value['batch_id'])->material_product_id);
+            }
             return $this->dsoRepository->renderTableData($material_product_data_by_owners);
-        } 
+        }
 
         $material_table =  [
             'quantity',
@@ -113,14 +114,14 @@ class SearchRepository implements SearchRepositoryInterface
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                 } else {
                     if ($value != '') {
-                        $q->where($column, $value); 
+                        $q->where($column, $value);
                     }
                 }
             }
-        })->get();
-        
+        })->latest()->get();
+
         return $this->dsoRepository->renderTableData($material_product_data);
-         
+
     }
     public function sortingOrder($sort_by)
     {
@@ -135,6 +136,7 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StatutoryBody',
             ])
             ->orderBy($sort_by->col_name, $sort_by->order_type)
+            ->latest()
             ->get();
             return $this->dsoRepository->renderTableData($material_product_data);
         } else {
@@ -148,7 +150,7 @@ class SearchRepository implements SearchRepositoryInterface
                 'UnitOfMeasure',
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
-            ])->get();
+            ])->latest()->get();
             return $this->dsoRepository->renderTableData($material_product_data);
         }
     }

@@ -34,7 +34,7 @@ class NotificationController extends Controller
     }
     public function notification_count()
     {
-        $data = MaterialProducts::with('Batches')->where(['is_read' => 0,'is_draft' => 0,])->get();
+        $data = MaterialProducts::with('Batches')->where(['is_read' => 0,'is_draft' => 0,])->orderBy('updated_at')->get();
 
         $MaterialProducts =  $this->dsoRepository->renderTableData($data, [
             "response" => "JSON",

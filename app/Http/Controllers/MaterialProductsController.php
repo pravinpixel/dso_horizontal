@@ -78,7 +78,7 @@ class MaterialProductsController extends Controller
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
-        ])->get();
+        ])->latest()->get();
 
         $material_product = $this->dsoRepository->renderTableData($material_product_data);
 

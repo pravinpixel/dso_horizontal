@@ -17,7 +17,7 @@ class MaterialProductSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 500; $i++) {
             $parent_data = [
                 "category_selection"              => "material",
                 "item_description"                => "Honeycomb/6mmthk/5mmcellsize",
