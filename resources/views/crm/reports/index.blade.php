@@ -2,6 +2,12 @@
 @section('content')
     <ul class="nav nav-tabs mt-3">
         <li class="nav-item">
+            <a href="{{ route('reports.utilization-cart') }}" class="bg-none nav-link {{ Route::is(['reports.utilization-cart']) ? "active" : "" }}">
+                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                <span class="d-none d-md-block">Utilization Cart</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('reports.material_in_house_pdt_history') }}" class="bg-none nav-link {{ Route::is(['reports.material_in_house_pdt_history','reports']) ? "active" : "" }}">
                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                 <span class="d-none d-md-block">Material inHouse pdt History </span>

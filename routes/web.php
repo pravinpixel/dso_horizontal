@@ -157,10 +157,10 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('deduct-track-usage-download', [ReportsController::class,'deduct_track_usage_download'])->name('reports.deduct_track_usage_download');
         Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history');
         Route::post('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history_download'])->name('reports.material_in_house_pdt_history_download');
+        Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
     });
     Route::get('reports/get-material-product-history/{barcode?}', [ReportsController::class,'get_material_product_history'])->name('get-material-product-history');
     Route::get('reports/check-material-product-history/{barcode?}/{check}', [ReportsController::class,'get_material_product_history']);
-    Route::get('reports/export', [ReportsController::class,'export'])->name('reports.export');
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items');
     Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
     Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material');

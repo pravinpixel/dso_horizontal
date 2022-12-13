@@ -143,38 +143,9 @@ class ReportsController extends Controller
         }
         return Excel::download(new MaterialProductHistoryExport($data),generateFileName('Material inHouse pdt History','xlsx'));
     }
-    public function export_cart()
+    public function utilization_cart()
     {
-        $page_name  = "REPORT_EXPORT_CART";
-        $view       = "crm.reports.export-cart";
-        return $this->dsoRepository->renderPage($page_name, $view);
-    }
-    public function history(Request $request)
-    {
-        if ($request->ajax()) {
-            if (!empty($request->get('action_type'))) {
-                $data = LogSheet::with('User')->where('action_type', $request->get('action_type'))->latest();
-            } else {
-                $data = LogSheet::with('User')->latest();
-            }
-            return DataTables::of($data)->addIndexColumn()
-                ->addColumn('TransactionDate', function($data){
-                    return Carbon::parse($data->created_at)->toFormattedDateString();
-                })
-                ->addColumn('TransactionTime', function($data){
-                    return Carbon::parse($data->created_at)->format('h:i:s A');
-                })
-                ->addColumn('TransactionBy', function($data){
-                    return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
-                })
-                ->addColumn('Remarks', function($data){
-                    return $data->remarks != '' ? $data->remarks : "-";
-                })
-                ->rawColumns(['TransactionBy',"Remarks","TransactionDate","TransactionTime"])
-            ->make(true);
-        }
-        $actions = array_unique(LogSheet::pluck('action_type')->toArray());
-        return view('crm.reports.history', compact('actions'));
+        return view('crm.reports.utilization-cart');
     }
     public function get_material_product_history(Request $request)
     {
@@ -201,10 +172,6 @@ class ReportsController extends Controller
                 return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
             })->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
         ->make(true);
-    }
-    public function export()
-    {
-        return Excel::download(new HistoryExport, 'history.xlsx');
     }
     public function disposed_items(Request $request)
     {
