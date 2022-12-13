@@ -7,15 +7,15 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use Carbon\Carbon;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 
 class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
-    {  
+    {
 
         $current_batch                 = Batches::find($request->id);
-        MaterialProductHistory($current_batch,'transfer');
+        MaterialProductHistory($current_batch,'before_transfer');
         $created_batch                 = $current_batch->replicate();
         $created_batch->created_at     = Carbon::now();
         $created_batch->quantity       = $request->quantity;
@@ -48,14 +48,13 @@ class TransferBatchController extends Controller
         $new_value           = clone $current_batch;
         $new_value->quantity = $new_value->quantity  - $request->quantity;
         LogActivity::dataLog($old_value, $new_value);
- 
+
         $current_batch->update([
             'quantity'       => $current_batch->quantity - $request->quantity,
             'total_quantity' => $current_batch->unit_packing_value * ($current_batch->quantity - $request->quantity)
         ]);
-        MaterialProductHistory($current_batch,'before_transfer');
+        MaterialProductHistory($current_batch,'transfer');
 
-       
         return response()->json([
             "status" => true,
             "message" => "Transfer Success !"
