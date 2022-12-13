@@ -281,8 +281,10 @@ class WithdrawalController extends Controller
         $batch      = Batches::findOrFail($request->batch_id);
         $material   = MaterialProducts::find($batch->material_product_id);
         MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_USAGE');
+
         DeductTrackUsage::create([
             'batch_id'         => $request->batch_id,
+            "quantity"         => $batch->quantity,
             'barcode_number'   => $batch->barcode_number,
             'item_description' => $material->item_description,
             'batch_serial'     => $batch->batch . ' / ' . $batch->serial,

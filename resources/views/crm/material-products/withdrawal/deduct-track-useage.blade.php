@@ -9,7 +9,7 @@
         <table class="table bg-white table-hover table-centered">
             <thead>
                 <tr class="text-white bg-primary-2">
-                    <th class="text-center" style="padding: 5px !important" colspan="10"><span class="text-center">Bulk
+                    <th class="text-center" style="padding: 5px !important" colspan="11"><span class="text-center">Bulk
                             vol tracking logsheet</span></th>
                 </tr>
                 <tr class="bg-primary-light text-dark">
@@ -19,6 +19,7 @@
                     <th class="font-12">Date&time stamp</th>
                     <th class="font-12">Unit Packing Value</th>
                     <th class="font-12">Quantity</th>
+                    <th class="font-12">Total Quantity</th>
                     <th class="font-12">Used Amt
                         ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})
                     </th>
@@ -38,7 +39,8 @@
                             <td><small>{{ $row->last_accessed }}</small></td>
                             <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
                             <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value }}</small></td>
-                            <td><small>{{ $row->used_amount + $row->remain_amount }}</small></td>
+                            <td><small>{{ $row->quantity }}</small></td>
+                            <td><small>{{  $deduct_track_usage[0]->Batch->unit_packing_value * $row->quantity }}</small></td>
                             <td><small>{{ $row->used_amount }}</small></td>
                             <td><small>{{ $row->remain_amount }}</small></td>
                             <td><small>{{ $row->remarks }}</small></td>
@@ -60,6 +62,7 @@
                             <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
                             <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                             <td><small>{{ $row->Batch->quantity }}</small></td>
+                            <td><small>{{ $row->Batch->unit_packing_value * $row->Batch->quantity }}</small></td>
                             <td width="100px">
                                 <div class="d-flex align-items-center">
                                     <input id="used_amount" name="used_amount" step="any"
