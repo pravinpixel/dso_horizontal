@@ -22,18 +22,18 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             'extended_qc_result',
             'disposal_certificate',
         ]);
- 
-        $fillable   = []; 
+
+        $fillable   = [];
         foreach($inputs as $column => $row) {
-        
+
             $fillable[$column] = $row;
         }
         $material_product_fillable = $fillable;
         unset($material_product_fillable['unit_packing_value']);
-        
+
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
-        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable); 
-         
+        $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
+
         if(isset($fillable['owners'])) {
             if($fillable['owners']) {
                 $authUser = $fillable['owners'] ;
@@ -51,8 +51,8 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 ]);
             }
         }
-        
-        if($material_product->quantity_update_status == 1) { 
+
+        if($material_product->quantity_update_status == 1) {
             $MaterialBatch = Batches::find($batch_id);
             $material_product->update([
                 "material_quantity"       => $batch->quantity,
@@ -62,30 +62,30 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 "unit_packing_value" =>  $MaterialBatch->unit_packing_value
             ]);
         }
-        
+
         $batch->update([
             "total_quantity" => $batch->quantity * $material_product->unit_packing_value
         ]);
         if(wizard_mode() == 'create' || wizard_mode() == 'edit') {
             $batch->update(["system_stock"  => $batch->quantity]);
         }
-        
+
         // $batch                  =   Batches::updateOrCreate(['material_product_id' => $material_product->id], $fillable);
- 
+
         RepackOutlife::updateOrCreate(['batch_id' => $batch->id],[
             'batch_id'            => $batch->id,
             'input_repack_amount' => $batch->unit_packing_value
-        ]); 
+        ]);
 
         $this->storeFiles($request, $batch);
-        
+
         if(wizard_mode() == 'duplicate' || wizard_mode() == 'create')  {
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
-        }  
+        }
         return Flash::success(__('global.inserted'));
     }
- 
+
     public function storeFiles($request, $batch)
     {
         if($request->has('coc_coa_mill_cert')) {
@@ -100,7 +100,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                     'file_path'      => asset('storage/app').'/'.$newFileName,
                 ]);
             }
-       
+
             if($batch->coc_coa_mill_cert !== null) {
                 foreach (json_decode($batch->coc_coa_mill_cert) as $key => $files) {
                     if(Storage::exists($files)){
@@ -109,7 +109,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
                 }
             }
         }
-        if($request->has('iqc_result')) { 
+        if($request->has('iqc_result')) {
             if(Storage::exists($batch->iqc_result)){
                 Storage::delete($batch->iqc_result);
             }
@@ -142,5 +142,13 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
             $batch  ->  disposal_certificate   =    $disposal_certificate;
             $batch  ->  save();
         }
-    } 
+        if($request->has('used_for_td_certificate')) {
+            if(Storage::exists($batch->used_for_td_certificate)){
+                Storage::delete($batch->used_for_td_certificate);
+            }
+            $used_for_td_certificate              =    Storage::put('public',$request->used_for_td_certificate);
+            $batch  ->  used_for_td_certificate   =    $used_for_td_certificate;
+            $batch  ->  save();
+        }
+    }
 }

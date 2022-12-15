@@ -16,15 +16,15 @@ class TableOrderSeeder extends Seeder
      */
     public function run()
     {
-        $parentTable            =   Schema::getColumnListing("material_products"); 
+        $parentTable            =   Schema::getColumnListing("material_products");
         $childTable             =   Schema::getColumnListing("batches");
         $allColumns             =   array_merge($parentTable, $childTable);
-        $tableColumns           =   array_combine($allColumns,$allColumns );  
+        $tableColumns           =   array_combine($allColumns,$allColumns );
         unset(
-            $tableColumns['id'], 
-            $tableColumns['withdrawal_type'], 
-            $tableColumns['created_at'],  
-            $tableColumns['updated_at'], 
+            $tableColumns['id'],
+            $tableColumns['withdrawal_type'],
+            $tableColumns['created_at'],
+            $tableColumns['updated_at'],
             $tableColumns['deleted_at'],
             $tableColumns['coc_coa_mill_cert_status'],
             $tableColumns['repack_size'],
@@ -32,15 +32,16 @@ class TableOrderSeeder extends Seeder
             $tableColumns['end_of_batch'],
             $tableColumns['access'],
             $tableColumns['coc_coa_mill_cert'],
-            $tableColumns['iqc_result'], 
+            $tableColumns['iqc_result'],
             $tableColumns['sds'],
             $tableColumns['fm_1202'],
             $tableColumns['remarks'],
             $tableColumns['extended_qc_result'],
             $tableColumns['disposal_certificate'],
+            $tableColumns['used_for_td_certificate'],
             $tableColumns['iqc_result_status'],
             $tableColumns['is_read'],
-            $tableColumns['user_id'], 
+            $tableColumns['user_id'],
             $tableColumns['outlife_seconds'],
             $tableColumns['updated_outlife'],
             $tableColumns['disposed_after'],
@@ -52,10 +53,10 @@ class TableOrderSeeder extends Seeder
             $tableColumns['quantity_color'],
             $tableColumns['material_quantity'],
             $tableColumns['material_total_quantity'],
-            $tableColumns['quantity_update_status'], 
-            $tableColumns['end_of_material_product'], 
+            $tableColumns['quantity_update_status'],
+            $tableColumns['end_of_material_product'],
         );
-        $i = 0; 
+        $i = 0;
         foreach($tableColumns as $key => $value) {
             if($value == 'category_selection') {
                 $data   = 1;

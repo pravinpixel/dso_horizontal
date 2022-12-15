@@ -16,7 +16,7 @@
                     <input type="hidden" name="id" value="@{{ batch.id }}">
                     <div class="col-md-6 border-end p-4">
                         <label for="Pass_label" class="form-radio-warning mb-3">
-                            <input  type="radio" name="used_for_td_expt_only" class="me-2 form-check-input border-warning" value="0" ng-checked="batch.used_for_td_expt_only == 0"  ng-model="batch.used_for_td_expt_only" id="Pass_label" required /> 
+                            <input  type="radio" name="used_for_td_expt_only" class="me-2 form-check-input border-warning" value="0" ng-checked="batch.used_for_td_expt_only == 0"  ng-model="batch.used_for_td_expt_only" id="Pass_label" required />
                             <span class="text-warning"> For Disposal</span>
                         </label>
                         <div class="mb-3">
@@ -31,37 +31,37 @@
                                     <th class="p-2">:</th>
                                     <td class="p-2">@{{ batch.quantity - batch_qty }}</td>
                                 </tr>
-                            </table> 
+                            </table>
                         </div>
                         <label class="pb-2"><strong>Supporting Documents (If any)</strong></label>
-                        <input ng-disabled="batch.used_for_td_expt_only == 1" type="file" name="disposal_certificate" id="" class="form-control" > 
+                        <input ng-disabled="batch.used_for_td_expt_only == 1" type="file" name="disposal_certificate" id="" class="form-control" >
                     </div>
                     <div class="col-md-6 p-4">
                         <label for="Passss_label" class="form-radio-success mb-3">
-                            <input type="radio" name="used_for_td_expt_only"  class="me-2 form-check-input border-success" value="1" ng-checked="batch.used_for_td_expt_only == 1" ng-model="batch.used_for_td_expt_only" id="Passss_label" required> 
+                            <input type="radio" name="used_for_td_expt_only"  class="me-2 form-check-input border-success" value="1" ng-checked="batch.used_for_td_expt_only == 1" ng-model="batch.used_for_td_expt_only" id="Passss_label" required>
                             <span class="text-success">Used for TD/Expt Project</span>
                         </label>
                         <div class="mb-3">
-                            <span><strong>Supporting Documents (Approval email)</strong></span>
-                            <input type="file" ng-disabled="batch.used_for_td_expt_only == 0" name="disposal_certificate" id="" class="form-control" required> 
+                            <span><strong>Supporting Documents (Approval email)</strong></span>used_for_td_certificate
+                            <input type="file" ng-disabled="batch.used_for_td_expt_only == 0" name="used_for_td_certificate" id="" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <span><strong>* To be Disposed after</strong></span>
-                            <input type="date" ng-disabled="batch.used_for_td_expt_only == 0" name="disposed_after" value="@{{ batch.disposed_after }}" class="form-control" required> 
+                            <input type="date" ng-disabled="batch.used_for_td_expt_only == 0" name="disposed_after" value="@{{ batch.disposed_after }}" class="form-control" required>
                         </div>
                         <h1 class="h5 my-3">Accordance to EG1 Chemical UIMS 2021</h1>
                         <div>
                             <div class="my-1"><span class="me-2">-</span> 2 years OEM unstated (liquids , others)</div>
                             <div class="my-1"><span class="me-2">-</span> 5 years OEM unstated (dry , others)</div>
                             <div class="my-1"><span class="me-2">-</span> 5 years OEM declare does not expire</div>
-                            <div class="my-1"><span class="me-2">-</span> DSO in house (ask Domain PMTS)</div> 
+                            <div class="my-1"><span class="me-2">-</span> DSO in house (ask Domain PMTS)</div>
                         </div>
                     </div>
                     <div class="col-12 text-center mt-4">
                         <button type="submit" class="px-3 rounded-pill btn btn-primary">Submit</button>
                     </div>
-                </form> 
-            </div>  
+                </form>
+            </div>
         </div>
     </div>
-</div> 
+</div>
