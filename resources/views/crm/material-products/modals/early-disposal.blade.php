@@ -42,7 +42,7 @@
                             <span class="text-success">Used for TD/Expt Project</span>
                         </label>
                         <div class="mb-3">
-                            <span><strong>Supporting Documents (Approval email)</strong></span>used_for_td_certificate
+                            <span><strong>Supporting Documents (Approval email)</strong></span>
                             <input type="file" ng-disabled="batch.used_for_td_expt_only == 0" name="used_for_td_certificate" id="" class="form-control" required>
                         </div>
                         <div class="mb-3">

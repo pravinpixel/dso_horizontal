@@ -344,6 +344,17 @@
                     <span class="badge bg-danger rounded-pill">NO</span>
                 @endif
             @endif
+            @if (!is_null($batch->used_for_td_certificate))
+            <br>
+                <div class="btn-group mt-1">
+                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
+                        href="{{ asset('storage/app/') . '/' . $batch->used_for_td_certificate }}" target="_blank"><i
+                            class="fa fa-eye me-1"></i>view</a>
+                    <button onclick="download('{{ $batch->id }}','used_for_td_certificate')"
+                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
+                            class="fa fa-download me-1"></i>Download</button>
+                </div>
+            @endif
         </div>
     </li>
 </ol>

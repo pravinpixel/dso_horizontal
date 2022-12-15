@@ -8,7 +8,7 @@
         </div>
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Extended QC status</label>
-            <div class="col-8"> 
+            <div class="col-8">
                 {!! Form::select('extended_qc_status', ['0' => 'Fail', '1' => 'Pass'], $batch->extended_qc_status ?? null, ['class' => 'form-select form-select-sm', 'placeholder' => '-- Select --', config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'extended_qc_status.status')]) !!}
             </div>
         </div>
@@ -54,6 +54,16 @@
                     <option {{ $batch->coc_coa_mill_cert_status == 'off' ? "selected" : null }} value="0"> No </option>
                     <option {{ $batch->coc_coa_mill_cert_status == 'on' ? "selected" : null }} value="1"> Yes </option>
                 </select>
+                @if ($batch->used_for_td_certificate)
+                   <div class="d-flex">
+                        <div class="d-flex align-items-center border shadow-sm p-1 rounded me-1 mt-1">
+                            <button onclick="download('{{ $batch->id }}','used_for_td_certificate')" class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button" >
+                                <i class="fa fa-download me-1"></i>Download
+                            </button>
+                            <i class="fa fa-times ms-1 text-danger bg-white rounded font-12" onclick="deleteBatchFile('{{ $batch->id }}','used_for_td_certificate',this)" style="cursor: pointer"></i>
+                        </div>
+                   </div>
+                @endif
             </div>
         </div>
     </div>
