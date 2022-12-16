@@ -158,7 +158,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history');
         Route::post('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history_download'])->name('reports.material_in_house_pdt_history_download');
         Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
-        Route::post('utilization-cart', [ReportsController::class,'utilization_chart'])->name('reports.utilization-cart');
+        Route::post('utilization-chart', [ReportsController::class,'utilization_chart'])->name('reports.utilization-chart');
     });
     Route::get('reports/get-material-product-history/{barcode?}', [ReportsController::class,'get_material_product_history'])->name('get-material-product-history');
     Route::get('reports/check-material-product-history/{barcode?}/{check}', [ReportsController::class,'get_material_product_history']);

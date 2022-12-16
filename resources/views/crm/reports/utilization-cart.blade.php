@@ -8,17 +8,18 @@
                 <div class="table-fillters row m-0 border">
                     <div class="col">
                         <label for="" class="form-label">Start Date</label>
-                        <input type="month" onchange="setMonthValidateion(this.value)" name="start_month" id="start_month" class="form-control custom" placeholder="DD/MM/YYYY">
+                        <input type="month" onchange="setMonthValidateion(this.value)" name="start_month" id="start_month"
+                            class="form-control custom" placeholder="DD/MM/YYYY">
                     </div>
                     <div class="col">
                         <label for="" class="form-label">End Date</label>
-                        <input type="month" name="end_month" id="end_month" class="form-control custom" placeholder="DD/MM/YYYY">
+                        <input type="month" name="end_month" id="end_month" class="form-control custom"
+                            placeholder="DD/MM/YYYY">
                     </div>
                     <div class="col">
                         <label for="" class="form-label">Actions</label>
                         <div class="btn-group w-100">
                             <button type="button" name="filter" id="filter" class="btn-sm btn btn-primary form-control-sm"><i class="fa fa-refresh"></i> Generate</button>
-                            <button type="submit" name="export" id="export" class="btn-sm btn btn-success form-control-sm"><i class="bi bi-file-earmark-spreadsheet"></i> Export</button>
                             <button type="button" name="refresh" id="refresh" class="btn-sm btn btn-warning form-control-sm"><i class="fa fa-repeat"></i></button>
                         </div>
                     </div>
@@ -26,8 +27,33 @@
             </div>
         </div>
     </form>
+    <div class="modal fade" id="utiliation-cart-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light border-bottom">
+                    <h4 class="modal-title text-center w-100 text-primary" id="myLargeModalLabel">Utilization Cart</h4>
+                    <div>
+                        <button type="button" class="btn-sm btn btn-light border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                    </figure>
+                </div>
+                <div class="modal-footer border bg-light">
+                    <div class="d-flex col-5 mx-auto justify-content-center align-items-center">
+                        <input type="month" name="start_month" disabled id="chart_start_month" class="form-control custom border-0">
+                        <span class="px-2"> to </span>
+                        <input type="month" name="end_month" disabled id="chart_end_month" class="form-control custom border-0">
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="card">
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table m-0 pt-2 table-sm" id="custom-data-table">
                 <thead>
                     <tr>
@@ -46,56 +72,123 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
+    <style>.highcharts-credits{display: none !important}</style>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            function load_data(start_month = '', end_month = '',barcode = '')    {
+        $(document).ready(function() {
+            function load_data(start_month = '', end_month = '') {
                 $('#custom-data-table').DataTable({
-                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        [10, 25, 50, "All"]
+                    ],
                     processing: true,
                     serverSide: true,
                     searching: false,
                     ajax: {
                         url: "{{ route('reports.utilization-cart') }}",
-                        data:{
-                            start_month:start_month,
-                            end_month:end_month,
-                            barcode:barcode
+                        data: {
+                            start_month: start_month,
+                            end_month  : end_month,
                         }
                     },
-                    columns: [
-                        {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                        {data: "item_description" , name:"item_description"},
-                        {data: "brand" , name:"brand"},
-                        {data: "batch_serial" , name:"batch_serial"},
-                        {data: "unit_packing_value" , name:"unit_packing_value"},
-                        {data: "total_quantity" , name:"total_quantity"},
-                        {data: "average_quantity" , name:"average_quantity"},
-                        {data: "maximum_quantity" , name:"maximum_quantity"},
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'id',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: "item_description",
+                            name: "item_description"
+                        },
+                        {
+                            data: "brand",
+                            name: "brand"
+                        },
+                        {
+                            data: "batch_serial",
+                            name: "batch_serial"
+                        },
+                        {
+                            data: "unit_packing_value",
+                            name: "unit_packing_value"
+                        },
+                        {
+                            data: "total_quantity",
+                            name: "total_quantity"
+                        },
+                        {
+                            data: "average_quantity",
+                            name: "average_quantity"
+                        },
+                        {
+                            data: "maximum_quantity",
+                            name: "maximum_quantity"
+                        },
                     ],
                 });
-            } load_data();
+            }
+            load_data();
 
-            $('#filter').click(function(){
-                var start_month = $('#start_month').val();
-                var end_month   = $('#end_month').val();
-                var barcode   = $("#barcode").val();
-
-                $('#custom-data-table').DataTable().destroy();
-                load_data(start_month, end_month , barcode);
-
-            });
+            generateChart = (start_month,end_month) => {
+                axios.post('{{ route("reports.utilization-chart") }}', {
+                    start_month: start_month,
+                    end_month  : end_month
+                }).then(function (response) {
+                    $('#utiliation-cart-model').modal('show');
+                    $('#chart_start_month').attr('value',start_month)
+                    $('#chart_end_month').attr('value',end_month)
+                    var UtilizationChart = Highcharts.chart('container', {
+                        title: false,
+                        yAxis: { title: { text: 'Withdrawal Quantity Amount' } },
+                        xAxis: {
+                            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
+                            title: {
+                                text: 'Months'
+                            }
+                        },
+                        legend: false,
+                        series:  response.data.data,
+                        tooltip: {
+                            formatter: function () {
+                                return this.points.reduce(function (s, point) {
+                                    return s + '<br/>' + point.series.name + ': ' +
+                                        point.y + ' Qty';
+                                }, '<b>' + this.x + '</b>');
+                            },
+                            shared: true
+                        },
+                    });
+                    // UtilizationChart.redraw();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
 
             setMonthValidateion = (month) => {
-                $('#end_month').attr('min',month);
+                $('#end_month').attr('min', month);
             }
-            $('#refresh').click(function(){
+            $('#refresh').click(function() {
+                $('#chartContainer').addClass('d-none')
                 $('#start_month').val('');
                 $('#end_month').val('');
                 $('#barcode').val('');
                 $('#custom-data-table').DataTable().destroy();
                 load_data();
+            });
+            $('#filter').click(function() {
+                var start_month = $('#start_month').val();
+                var end_month   = $('#end_month').val();
+                if(start_month == '' || start_month == undefined || end_month == '' || end_month == undefined) {
+                    Message('danger',"Choose Start & End Months")
+                    return false
+                }
+                generateChart(start_month, end_month)
+                $('#custom-data-table').DataTable().destroy();
+                load_data(start_month, end_month);
             });
         });
     </script>

@@ -184,7 +184,26 @@ class ReportsController extends Controller
     }
     public function utilization_chart(Request $request)
     {
-        dd($request->all());
+        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])
+        ->select("quantity","batch_id")
+        ->get()->groupBy(function($data) {
+            return $data->batch_id;
+        });
+        $data = [];
+        foreach($UtilizationCart as $list) {
+            $quantity = [];
+            foreach ($list as $key => $batch) {
+                $quantity[] = $batch->quantity;
+            }
+            $data[] = [
+                "name" => $list[0]->Batch->BatchMaterialProduct->item_description,
+                "data" => $quantity
+            ];
+        }
+        return response([
+            "status" => true,
+            "data"   => $data,
+        ]);
     }
     public function get_material_product_history(Request $request)
     {
