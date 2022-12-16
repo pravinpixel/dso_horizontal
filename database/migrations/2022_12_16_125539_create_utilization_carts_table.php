@@ -15,6 +15,8 @@ class CreateUtilizationCartsTable extends Migration
     {
         Schema::create('utilization_carts', function (Blueprint $table) {
             $table->id();
+            $table->string('batch_id');
+            $table->float('quantity');
             $table->timestamps();
         });
     }
