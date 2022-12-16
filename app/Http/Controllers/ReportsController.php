@@ -18,6 +18,7 @@ use App\Models\LogSheet;
 use App\Models\Masters\Departments;
 use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
+use App\Models\UtilizationCart;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -143,9 +144,47 @@ class ReportsController extends Controller
         }
         return Excel::download(new MaterialProductHistoryExport($data),generateFileName('Material inHouse pdt History','xlsx'));
     }
-    public function utilization_cart()
+    public function utilization_cart(Request $request)
     {
+        if($request->ajax()) {
+            if($request->start_month) {
+                $UtilizationCart = UtilizationCart::with('Batch')
+                ->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])
+                ->get()->groupBy(function($data) {
+                    return $data->batch_id;
+                });
+            } else {
+                $UtilizationCart = UtilizationCart::with('Batch')->get()->groupBy(function($data) {
+                    return $data->batch_id;
+                });
+            }
+            if(!is_null($UtilizationCart)) {
+                $UtilizationCartData = [];
+                foreach ($UtilizationCart as $key => $batches) {
+                    $total_quantity   = 0;
+                    $array_quantity = [];
+                    foreach ($batches as $key => $batch) {
+                        $array_quantity[] = $batch->quantity;
+                        $total_quantity += $batch->quantity;
+                    }
+                    $UtilizationCartData[] = [
+                        "item_description"   => $batches[0]->Batch->BatchMaterialProduct->item_description,
+                        "brand"              => $batches[0]->Batch->brand,
+                        "batch_serial"       => $batches[0]->Batch->batch." / ".$batches[0]->Batch->serial,
+                        "unit_packing_value" => $batches[0]->Batch->unit_packing_value,
+                        "total_quantity"     => toFixed($total_quantity,3),
+                        "average_quantity"   => toFixed((array_sum($array_quantity) / count($array_quantity)),3),
+                        "maximum_quantity"   => toFixed(max($array_quantity),3),
+                    ];
+                }
+            }
+            return DataTables::of($UtilizationCartData)->addIndexColumn()->make(true);
+        }
         return view('crm.reports.utilization-cart');
+    }
+    public function utilization_chart(Request $request)
+    {
+        dd($request->all());
     }
     public function get_material_product_history(Request $request)
     {

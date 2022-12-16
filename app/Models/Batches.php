@@ -83,6 +83,11 @@ class Batches extends Model
         return $this->hasMany(BatchFiles::class, 'batch_id', 'id');
     }
 
+    public function UtilizationCart()
+    {
+        return $this->hasMany(UtilizationCart::class, 'batch_id', 'id');
+    } 
+
     public function BatchOwners()
     {
         return $this->hasMany(BatchOwners::class, 'batch_id', 'id');

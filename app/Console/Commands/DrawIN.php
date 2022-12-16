@@ -2,11 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\LogActivity;
-use App\Http\Controllers\RepackBatchController;
 use App\Models\Batches;
 use App\Models\LogSheet;
-use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTime;
@@ -53,7 +50,7 @@ class DrawIN extends Command
                     $time1     = new DateTime($outlife->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-                    
+
                     if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
 
                         if($batch->unit_packing_value != 0) {
@@ -65,20 +62,20 @@ class DrawIN extends Command
                         $draw_out_date_strToTime = strtotime($outlife->created_at);
                         $draw_in_date_strToTime  = strtotime(now());
                         $remaining_days_seconds  = abs($draw_out_date_strToTime-$draw_in_date_strToTime);
-    
+
                         if($batch->outlife_seconds === null) {
                             $updated_outlife_seconds    =  (int) $batch->outlife * 86400 - (int) $remaining_days_seconds;
                         } else {
                             $updated_outlife_seconds    =  (int) $batch->outlife_seconds - (int) $remaining_days_seconds;
                         }
-    
+
                         $current_outlife_expiry  =  CarbonImmutable::now()->add($updated_outlife_seconds, 'second')->toDateTimeString();
-                        
+
                         $batch->update([
                             'outlife_seconds'   => $updated_outlife_seconds,
                             'updated_outlife'   => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds"))
-                        ]); 
-    
+                        ]);
+
                         $outlife->update([
                             'draw_in'                 => 1,
                             'draw_out'                => 1,
@@ -90,7 +87,6 @@ class DrawIN extends Command
                             'updated_outlife_seconds' => $updated_outlife_seconds,
                             'current_outlife_expiry'  => $current_outlife_expiry,
                         ]);
-
                         LogSheet::updateOrCreate([
                             'ip'          => request()->ip(),
                             'agent'       => request()->header('user-agent'),
@@ -106,5 +102,6 @@ class DrawIN extends Command
                 }
             }
         }
+        Log::info("Draw IN Working !");
     }
 }

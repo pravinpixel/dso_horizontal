@@ -620,4 +620,10 @@ if(!function_exists('getRoutes')) {
             ];
         }
     }
+    if(!function_exists('toFixed')) {
+        function toFixed($number,$digit)
+        {
+           return  number_format($number, $digit, '.', '');
+        }
+    }
 }
