@@ -259,6 +259,7 @@ class WithdrawalController extends Controller
         foreach ($request->batch_id as $key => $column) {
             $current_batch = Batches::find($request->batch_id[$key]);
             MaterialProductHistory($current_batch,'BEFORE_DIRECT_DEDUCT');
+            $current_batch->UtilizationCart()->create(["quantity" =>  $request->quantity[$key]]);
             $current_batch->update([
                 'quantity'  =>  $current_batch->quantity -  $request->quantity[$key]
             ]);
@@ -293,6 +294,8 @@ class WithdrawalController extends Controller
             'remain_amount'    => $request->remain_amount,
             'remarks'          => $request->remarks ?? ""
         ]);
+
+        $batch->UtilizationCart()->create(["quantity" =>  $batch->quantity -  $request->remain_amount / $batch->unit_packing_value]);
 
         $batch->update([
             "total_quantity" => (float) $request->remain_amount,
