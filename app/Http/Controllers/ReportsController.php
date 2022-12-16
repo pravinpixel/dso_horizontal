@@ -329,13 +329,13 @@ class ReportsController extends Controller
                 })->addColumn('storage_area',function ($data){
                     return $data->StorageArea->name;
                 })->addColumn('used_for_td_expt_only',function ($data){
-                    if($data->used_for_td_expt_only == 1) {
+                    if($data->coc_coa_mill_cert_status == 'on') {
                         $used_for_td_expt_only = 'Yes';
                     }
-                    if($data->used_for_td_expt_only == 0) {
+                    if($data->coc_coa_mill_cert_status == 'off') {
                         $used_for_td_expt_only = 'No';
                     }
-                    if(is_null($data->used_for_td_expt_only)) {
+                    if(is_null($data->coc_coa_mill_cert_status)) {
                         $used_for_td_expt_only = '-';
                     }
                     return $used_for_td_expt_only;
