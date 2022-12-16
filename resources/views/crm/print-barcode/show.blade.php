@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
- 
+
     <div ng-app="PrintLabelApp" ng-controller="PrintController">
-        <div> 
+        <div>
             <table class="table table-bordered bg-white custom">
                 <thead class="bg-primary text-white">
                     <tr>
@@ -11,10 +11,10 @@
                         <th class="p-1">Batch/Serial#</th>
                         <th class="p-1">Owner1/2</th>
                         <th class="p-1">DOE</th>
-                        <th class="p-1">Used for TD/Expt</th> 
+                        <th class="p-1">Used for TD/Expt</th>
                         <th class="p-1">Project Name</th>
                         <th class="p-1">Qty to print</th>
-                    </tr> 
+                    </tr>
                 </thead>
                 <tr>
                     <td>{{ $batch->BatchMaterialProduct->item_description }}</td>
@@ -25,23 +25,23 @@
                             @foreach ($batch->BatchOwners as $owner)
                                 <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
                                     {{ $owner->alias_name }}
-                                </small> 
+                                </small>
                             @endforeach
                         @endif
                     </td>
                     <td>{{  Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
                     <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
-                    <td>{{ $batch->project_name }}</td>  
+                    <td>{{ $batch->project_name }}</td>
                     <td>
                         @{{ print_qty }}
-                    </td> 
+                    </td>
                 </tr>
-            </table> 
+            </table>
         </div>
         <div class="row m-0">
-            <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel"> 
-                <div class="border card text-center rounded-5 p-3 print-card" > 
-                    <div ng-if="Barcode" style="padding: 15px 0"> 
+            <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel">
+                <div class="border card text-center rounded-5 p-3 print-card" >
+                    <div ng-if="Barcode" style="padding: 15px 0">
                         <div>{!! getBarcodeImage($batch->barcode_number) !!}</div>
                         <b>{{ $batch->barcode_number }}</b>
                     </div>
@@ -55,34 +55,34 @@
                                 <b class="text-dark">DOE</b> :   {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
                             </p>
                             <p class="m-0" ng-if="project_name">
-                                <b class="text-dark">Project name</b> : 
+                                <b class="text-dark">Project name</b> :
                                 {{ $batch->project_name }}
                             </p>
-                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  : 
+                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  :
                                 @if(count($batch->BatchOwners))
                                     @foreach ($batch->BatchOwners as $owner)
                                         <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
                                             {{ $owner->alias_name }}
-                                        </small> 
+                                        </small>
                                     @endforeach
                                 @endif
                             </p>
-                        </div> 
-                    </div> 
+                        </div>
+                    </div>
                     <div class="border-top mt-3 pt-3 print-border">
                         <div id="printImages">
                             @if ($pictograms)
                                 @foreach ($pictograms as $pictogram)
                                     <img id="pictograms_{{ $pictogram->id }}" ng-if="pictogramsLab_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
                                 @endforeach
-                            @endif 
+                            @endif
                         </div>
                     </div>
-                    <div class="text-end">  
+                    <div class="text-end">
                         <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
-                        <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->date_of_shipment)->format('d/m/Y')}}</small>
+                        <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
                     </div>
-                </div>  
+                </div>
             </div>
             <div class="col-md-8 p-0 position-relative">
                 <div class="card shadow-sm border" >
@@ -94,7 +94,7 @@
                                         Qty
                                     </label>
                                     <input type="number" class="fw-bold form-control rounded-pill" ng-model="print_qty">
-                                </div> 
+                                </div>
                             </div>
                             <div class="col-md-4  ">
                                 <div class="d-flex align-items-center">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body text-center">            
+                    <div class="card-body text-center">
                         <div class="row m-0 ">
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="Barcode" class="p-1 form-label cursor ps-2 bg-light  rounded-pill shadow-sm border w-100">
@@ -143,18 +143,18 @@
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="td_expt" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="used_for_td_expt_only" id="td_expt">Used for TD/EXPT</label>
-                            </div> 
+                            </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="date_of_shipment" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  ng-model="date_of_shipment" id="date_of_shipment">DOD</label>
                             </div>
-                        </div>  
+                        </div>
                     </div>
-                </div> 
+                </div>
                 <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated" style="top: 0" id="GHSPictogramMenu">
                     <div class="card-header border-bottom bg-light text-dark">
                         <h3 class="h5 text-center">Select the pictogram for your label:</h3>
                     </div>
-                    <div class="card-body bg-white"> 
+                    <div class="card-body bg-white">
                         <div class="row m-0">
                             @if ($pictograms)
                                 @foreach ($pictograms as $pictogram)
@@ -168,17 +168,17 @@
                                         </div>
                                     </label>
                                 @endforeach
-                            @endif 
+                            @endif
                         </div>
                         <hr>
                         <button class="btn btn-light border rounded-pill my-2" ng-click="confirmGHS()">
                             <i class="fa fa-times me-1"> </i> Close
-                        </button>  
+                        </button>
                     </div>
                 </div>
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
     <div id="printBox" class="d-none bg-primary"></div>
 @endsection
 @section('styles')
