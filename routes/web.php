@@ -24,6 +24,10 @@ use App\Http\Controllers\WithdrawalController;
 |
 */
 
+Route::prefix('jobs')->group(function () {
+    Route::queueMonitor();
+});
+
 Route::middleware(['auth_users'])->group(function () {
 
     Route::prefix('dashboard')->group(function() {
