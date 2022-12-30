@@ -218,6 +218,7 @@ class ReportsController extends Controller
         } else {
             $data = materialProductHistory::all();
         }
+        
         return DataTables::of($data)->addIndexColumn()->addColumn('Module', function($data){
                 return strtoupper(str_replace('_',' ',$data->Module));
             })->addColumn('ActionTaken', function($data){
@@ -227,7 +228,7 @@ class ReportsController extends Controller
             })->addColumn('TransactionTime', function($data){
                 return Carbon::parse($data->created_at)->format('h:i:s A');
             })->addColumn('TransactionBy', function($data){
-                return $data->User->alias_name ?? auth_user()->alias_name ?? "SYSTEM BOT";
+                return $data->TransactionBy ?? "SYSTEM BOT";
             })->rawColumns(["TransactionDate","TransactionTime","TransactionBy","Module","ActionTaken"])
         ->make(true);
     }
