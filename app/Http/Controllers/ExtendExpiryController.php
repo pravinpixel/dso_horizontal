@@ -33,8 +33,13 @@ class ExtendExpiryController extends Controller
     {
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
+
+        if(!empty($request->extended_expiry) && !is_null($request->extended_expiry)) {
+            $batch->update([
+                'date_of_expiry'     => $request->extended_expiry,
+            ]);
+        }
         $batch->update([
-            'date_of_expiry'     => $request->extended_expiry,
             'remarks'            => $request->remarks,
             'extended_qc_status' => $request->extended_qc_status == 1 ? $request->extended_qc_status : 0
         ]);
