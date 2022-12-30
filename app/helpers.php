@@ -14,34 +14,40 @@ use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
-if(! function_exists('category_type')) {
-    function category_type() {
+if (!function_exists('category_type')) {
+    function category_type()
+    {
         return session()->get('category_type');
     }
 }
 
-if(! function_exists('entry_id')) {
-    function entry_id() {
+if (!function_exists('entry_id')) {
+    function entry_id()
+    {
         return session()->get('material_product_id');
     }
 }
-if(! function_exists('material_product')) {
-    function material_product() {
+if (!function_exists('material_product')) {
+    function material_product()
+    {
         return session()->get('material_product_id');
     }
 }
-if(! function_exists('batch_id')) {
-    function batch_id() {
+if (!function_exists('batch_id')) {
+    function batch_id()
+    {
         return session()->get('batch_id');
     }
 }
-if(! function_exists('wizard_mode')) {
-    function wizard_mode() {
+if (!function_exists('wizard_mode')) {
+    function wizard_mode()
+    {
         return session()->get('wizard_mode');
     }
 }
-if(! function_exists('forgot_session')) {
-    function forgot_session() {
+if (!function_exists('forgot_session')) {
+    function forgot_session()
+    {
         return session()->forget([
             'wizard_mode',
             'batch_id',
@@ -55,72 +61,79 @@ if(! function_exists('forgot_session')) {
         ]);
     }
 }
-if(! function_exists('is_select')) {
-    function is_select() {
+if (!function_exists('is_select')) {
+    function is_select()
+    {
 
-        if(wizard_mode() == 'create') {
+        if (wizard_mode() == 'create') {
             $status  = 'selected';
         }
 
         return $status ?? null;
     }
 }
-if(! function_exists('is_parent')) {
-    function is_parent() {
+if (!function_exists('is_parent')) {
+    function is_parent()
+    {
         return  session()->get('edit_mode') == 'parent' ? 1 : '';
     }
 }
-if(! function_exists('is_disable')) {
-    function is_disable($category_type) {
+if (!function_exists('is_disable')) {
+    function is_disable($category_type)
+    {
         $wizard_mode = wizard_mode();
         $edit_mode   = session()->get('edit_mode');
 
-        if(wizard_mode() != 'edit') {
-            return "is_disable.{$wizard_mode}.{$category_type}." ;
+        if (wizard_mode() != 'edit') {
+            return "is_disable.{$wizard_mode}.{$category_type}.";
         } else {
             return "is_disable.{$wizard_mode}.{$edit_mode}.{$category_type}.";
         }
     }
 }
-if(! function_exists('completed_tab')) {
-    function completed_tab($type) {
-        if(session()->get($type)  ==  'completed') {
-            return route('create.material-product',['type'=>$type]);
-        }
-        else {
+if (!function_exists('completed_tab')) {
+    function completed_tab($type)
+    {
+        if (session()->get($type)  ==  'completed') {
+            return route('create.material-product', ['type' => $type]);
+        } else {
             return "#";
         }
     }
 }
-if(! function_exists('auth_user')) {
-    function auth_user() {
+if (!function_exists('auth_user')) {
+    function auth_user()
+    {
         return Sentinel::getUser();
     }
 }
-if(! function_exists('auth_user_role')) {
-    function auth_user_role() {
+if (!function_exists('auth_user_role')) {
+    function auth_user_role()
+    {
         return Sentinel::getUser()->roles[0];
     }
 }
-if(! function_exists('storageGet')) {
-    function storageGet($src) {
+if (!function_exists('storageGet')) {
+    function storageGet($src)
+    {
         if (Storage::exists($src)) {
-            $file = asset(str_replace('public', 'public/storage/',$src)) ;
+            $file = asset(str_replace('public', 'public/storage/', $src));
         } else {
-            $file =  $src ;
+            $file =  $src;
         }
         return $file;
     }
 }
-if(! function_exists('is_reset')) {
-    function is_reset($column, $value, $category_type) {
+if (!function_exists('is_reset')) {
+    function is_reset($column, $value, $category_type)
+    {
         $wizard_mode    = wizard_mode();
-        if($wizard_mode == 'duplicate') {
+        if ($wizard_mode == 'duplicate') {
             return $value;
         }
         $reset_status   = config("is_disable.{$wizard_mode}.{$category_type}.{$column}.reset");
-        if($reset_status == true || $reset_status == 1) {
-            if(session()->get('is_skip_duplicate') === null) {
+        if ($reset_status == true || $reset_status == 1) {
+            if (session()->get('is_skip_duplicate') === null) {
                 return null;
             } else {
                 return $value;
@@ -146,8 +159,9 @@ if(! function_exists('is_reset')) {
     }
 }
 
-if(! function_exists('checkIsMaterialColumn')) {
-    function checkIsMaterialColumn($column) {
+if (!function_exists('checkIsMaterialColumn')) {
+    function checkIsMaterialColumn($column)
+    {
         $data =  [
             'category_selection',
             'item_description',
@@ -157,11 +171,12 @@ if(! function_exists('checkIsMaterialColumn')) {
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
         ];
-        return in_array($column, $data) == true ? 1 : 0 ;
+        return in_array($column, $data) == true ? 1 : 0;
     }
 }
-if(! function_exists('checkIsBatchesColumn')) {
-    function checkIsBatchesColumn($column) {
+if (!function_exists('checkIsBatchesColumn')) {
+    function checkIsBatchesColumn($column)
+    {
         $data =  [
             'is_draft',
             'barcode_number',
@@ -210,47 +225,51 @@ if(! function_exists('checkIsBatchesColumn')) {
             'barcode_number',
             'iqc_result_status'
         ];
-        return in_array($column, $data) == true ? 1 : 0 ;
+        return in_array($column, $data) == true ? 1 : 0;
     }
 }
-if(! function_exists('checkIsBatchDateColumn')) {
-    function checkIsBatchDateColumn($column) {
+if (!function_exists('checkIsBatchDateColumn')) {
+    function checkIsBatchDateColumn($column)
+    {
         $data =  [
             "date_in",
             "date_of_expiry",
             "date_of_manufacture",
             "date_of_shipment"
         ];
-        return in_array($column, $data) == true ? 1 : 0 ;
+        return in_array($column, $data) == true ? 1 : 0;
     }
 }
 
-if(! function_exists('generateBarcode')) {
-    function generateBarcode($type) {
-        $category_code  = $type === 'material' ? 1 : 2 ;
+if (!function_exists('generateBarcode')) {
+    function generateBarcode($type)
+    {
+        $category_code  = $type === 'material' ? 1 : 2;
         do {
             $barcode_number = random_int(10000000000, 99999999999);
-        } while (Batches::where("barcode_number", "=", $category_code.$barcode_number)->first());
-        return $category_code.$barcode_number;
+        } while (Batches::where("barcode_number", "=", $category_code . $barcode_number)->first());
+        return $category_code . $barcode_number;
     }
 }
 
-if(! function_exists('storeFiles')) {
-    function storeFiles($fileName) {
+if (!function_exists('storeFiles')) {
+    function storeFiles($fileName)
+    {
         $file               =   request()->file($fileName);
         $OriginalName       =   $file->getClientOriginalName();
         $OriginalExtension  =   $file->getClientOriginalExtension();
-        $baseName           =   basename($OriginalName, '.'.$OriginalExtension);
-        $newFileName        =   $baseName.'_'.time().'.'.$OriginalExtension;
-        return $file->storeAs('public/files/'.$fileName , $newFileName );
+        $baseName           =   basename($OriginalName, '.' . $OriginalExtension);
+        $newFileName        =   $baseName . '_' . time() . '.' . $OriginalExtension;
+        return $file->storeAs('public/files/' . $fileName, $newFileName);
     }
 }
 
-if(! function_exists('no_data_found')) {
-    function no_data_found() {
+if (!function_exists('no_data_found')) {
+    function no_data_found()
+    {
         return '
             <div class="my-5 text-center lead">
-                <img src="'.asset('public/asset/images/no-data.png').'" width="150" />
+                <img src="' . asset('public/asset/images/no-data.png') . '" width="150" />
                 <div class="text-secondary mt-3">
                    Oops ! there is no data.
                 </div>
@@ -259,10 +278,11 @@ if(! function_exists('no_data_found')) {
     }
 }
 
-if(! function_exists('strExcelDate')) {
-    function strExcelDate($excel_date) {
-        if($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '' ) {
-            return  null ;
+if (!function_exists('strExcelDate')) {
+    function strExcelDate($excel_date)
+    {
+        if ($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '') {
+            return  null;
         }
         // $excel_date = (int) $excel_date;
         // $unix_date  = ($excel_date - 25569) * 86400;
@@ -273,32 +293,33 @@ if(! function_exists('strExcelDate')) {
     }
 }
 
-if(! function_exists('dateDifferStr')) {
-    function dateDifferStr($dt1,$dt2) {
+if (!function_exists('dateDifferStr')) {
+    function dateDifferStr($dt1, $dt2)
+    {
 
         $updated_outlife_days      = $dt1->diff($dt2)->format('%a');
         $updated_outlife_hours     = $dt1->diff($dt2)->format('%h');
         $updated_outlife_minutes   = $dt1->diff($dt2)->format('%i');
         $updated_outlife_inSeconds = $dt1->diff($dt2)->format('%s');
 
-        $days    = $updated_outlife_days != 0  ? $updated_outlife_days." days," : ' ' ;
-        $hours   = $updated_outlife_hours != 0  ? $updated_outlife_hours." hours," : ' ' ;
-        $minutes = $updated_outlife_minutes != 0  ? $updated_outlife_minutes." minutes," : ' ' ;
-        $seconds = $updated_outlife_inSeconds != 0  ? $updated_outlife_inSeconds." seconds," : ' ' ;
+        $days    = $updated_outlife_days != 0  ? $updated_outlife_days . " days," : ' ';
+        $hours   = $updated_outlife_hours != 0  ? $updated_outlife_hours . " hours," : ' ';
+        $minutes = $updated_outlife_minutes != 0  ? $updated_outlife_minutes . " minutes," : ' ';
+        $seconds = $updated_outlife_inSeconds != 0  ? $updated_outlife_inSeconds . " seconds," : ' ';
 
-        return $days.$hours.$minutes.$seconds;
+        return $days . $hours . $minutes . $seconds;
     }
 }
 
-if(!function_exists('BatchRestore')) {
+if (!function_exists('BatchRestore')) {
     function BatchRestore($id)
     {
-        $result  =   BatchTracker::where('to_batch_id', $id)->first() ;
+        $result  =   BatchTracker::where('to_batch_id', $id)->first();
 
-        if(!is_null($result)) {
+        if (!is_null($result)) {
             $fromBatch  = Batches::find($result->from_batch_id);
-            if(!is_null($fromBatch)){
-                if($result->action_type == 'REPACK_OUTLIFE') {
+            if (!is_null($fromBatch)) {
+                if ($result->action_type == 'REPACK_OUTLIFE') {
                     $fromBatch->quantity       = $result->quantity;
                     $fromBatch->total_quantity = $result->total_quantity;
                 }
@@ -309,45 +330,46 @@ if(!function_exists('BatchRestore')) {
         return true;
     }
 }
-if(!function_exists('groupBy')) {
-    function groupBy($key,$data)
+if (!function_exists('groupBy')) {
+    function groupBy($key, $data)
     {
         $result = array();
-        foreach($data as $val) {
+        foreach ($data as $val) {
             $name = $val[1];
-            if(array_key_exists($key, $val)){
+            if (array_key_exists($key, $val)) {
                 $result[$val[$key]][] = $name;
-            }else{
+            } else {
                 $result[""][] = $name;
             }
         }
         return $result;
     }
 }
-if(!function_exists('format_text')) {
+if (!function_exists('format_text')) {
     function format_text($text)
     {
-        return ucfirst(str_replace(['.','_','-'],' ',$text));
+        return ucfirst(str_replace(['.', '_', '-'], ' ', $text));
     }
 }
-if(!function_exists('format_route')) {
+if (!function_exists('format_route')) {
     function format_route($text)
     {
-        return str_replace(['.','-'],'_',$text);
+        return str_replace(['.', '-'], '_', $text);
     }
 }
 
-if(!function_exists('getRoutes')) {
-    function getRoutes() {
+if (!function_exists('getRoutes')) {
+    function getRoutes()
+    {
         $routeCollection = Route::getRoutes();
         $routeList       = (array) [];
 
         foreach ($routeCollection as $value) {
             $prefix = $value->getAction()['prefix'];
             $name   = $value->getAction()['as'] ?? '';
-            if($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '') {
+            if ($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '') {
                 $routeList[] =  [
-                    0 => str_replace('/','',$prefix),
+                    0 => str_replace('/', '', $prefix),
                     1 => [
                         format_route($name) => false
                     ]
@@ -357,9 +379,9 @@ if(!function_exists('getRoutes')) {
         $groupBy = groupBy(0, $routeList);
 
         $menu_list = [];
-        foreach($groupBy as $key => $menu) {
+        foreach ($groupBy as $key => $menu) {
             $menu_array = [];
-            foreach($menu as $menu_value) {
+            foreach ($menu as $menu_value) {
 
                 $menu_array[key($menu_value)] = [
                     'name'   => key($menu_value),
@@ -373,8 +395,9 @@ if(!function_exists('getRoutes')) {
         // dd($menu_list);
         return $menu_list;
     }
-    if(!function_exists('page_format')) {
-        function page_format($menu_value) {
+    if (!function_exists('page_format')) {
+        function page_format($menu_value)
+        {
             $view = [
                 'user_index',
                 'master_item_description',
@@ -416,56 +439,56 @@ if(!function_exists('getRoutes')) {
                 'role_delete',
                 'reconciliation_destroy',
             ];
-            if(in_array($menu_value,$view)) {
+            if (in_array($menu_value, $view)) {
                 return 'view';
-            } elseif(in_array($menu_value,$edit)) {
+            } elseif (in_array($menu_value, $edit)) {
                 return 'edit';
-            } elseif(in_array($menu_value,$create)) {
+            } elseif (in_array($menu_value, $create)) {
                 return 'create';
-            }elseif(in_array($menu_value,$delete)) {
+            } elseif (in_array($menu_value, $delete)) {
                 return 'delete';
-            }elseif($menu_value == 'view_reconciliation') {
+            } elseif ($menu_value == 'view_reconciliation') {
                 return 'listing view';
-            }elseif($menu_value == 'reconciliation_download') {
+            } elseif ($menu_value == 'reconciliation_download') {
                 return 'download';
-            }elseif($menu_value == 'reconciliation_store') {
+            } elseif ($menu_value == 'reconciliation_store') {
                 return 'Import Reconciliate';
-            }elseif($menu_value == 'reconciliation_update') {
+            } elseif ($menu_value == 'reconciliation_update') {
                 return 'Manual Reconciliate';
-            }elseif($menu_value == 'delete_material_products') {
+            } elseif ($menu_value == 'delete_material_products') {
                 return 'Delete Parent';
-            }elseif($menu_value == 'delete_material_products_batch') {
+            } elseif ($menu_value == 'delete_material_products_batch') {
                 return 'Delete Batch';
-            }elseif($menu_value == 'transfer_batch') {
+            } elseif ($menu_value == 'transfer_batch') {
                 return 'transfer';
-            }elseif($menu_value == 'repack_batch') {
+            } elseif ($menu_value == 'repack_batch') {
                 return 'repack / transfer';
-            }elseif($menu_value == 'repack_outlife') {
+            } elseif ($menu_value == 'repack_outlife') {
                 return 'repack / outlife';
-            }elseif($menu_value == 'barcode_listing') {
+            } elseif ($menu_value == 'barcode_listing') {
                 return 'listing view';
-            }elseif($menu_value == 'show_barcode') {
+            } elseif ($menu_value == 'show_barcode') {
                 return 'preview';
-            }elseif($menu_value == 'print_barcode') {
+            } elseif ($menu_value == 'print_barcode') {
                 return 'print';
-            } elseif($menu_value == 'update_extend_expiry') {
+            } elseif ($menu_value == 'update_extend_expiry') {
                 return 'extend';
-            }elseif($menu_value == 'update_disposal') {
+            } elseif ($menu_value == 'update_disposal') {
                 return 'dispose';
-            }elseif($menu_value == 'reports_utilisation_cart') {
+            } elseif ($menu_value == 'reports_utilisation_cart') {
                 return 'utilization cart';
-            }elseif($menu_value == 'reports_export_cart') {
+            } elseif ($menu_value == 'reports_export_cart') {
                 return 'export cart';
-            }elseif($menu_value == 'reports_history') {
+            } elseif ($menu_value == 'reports_history') {
                 return 'history';
             }
             return  $menu_value;
         }
     }
-    if(!function_exists('getExpiredMaterials')) {
+    if (!function_exists('getExpiredMaterials')) {
         function getExpiredMaterials()
         {
-            $data             = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
+            $data             = Batches::with(['BatchMaterialProduct', 'StorageArea', 'HousingType'])->where('is_draft', 0)->latest()->get();
             $expired_material = [];
             foreach ($data as $key => $row) {
                 $now            = Carbon::now();
@@ -474,7 +497,7 @@ if(!function_exists('getRoutes')) {
                     $expired_material[] = [
                         "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
                         "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
-                        "batch_serial"          => $row->batch." / ".$row->serial,
+                        "batch_serial"          => $row->batch . " / " . $row->serial,
                         "unit_packing_value"    => $row->unit_packing_value,
                         "quantity"              => $row->quantity,
                         "storage_area"          => $row->StorageArea->name,
@@ -483,14 +506,14 @@ if(!function_exists('getRoutes')) {
                         "used_for_td_expt_only" => $row->used_for_td_expt_only,
                         "department"            => $row->Department->name,
                         "department_id"         => $row->department,
-                        "owners"                => $row->owner_one." / ".$row->owner_two,
+                        "owners"                => $row->owner_one . " / " . $row->owner_two,
                     ];
                 }
             }
             return $expired_material;
         }
     }
-    if(!function_exists('securityLog')) {
+    if (!function_exists('securityLog')) {
         function securityLog($action_name)
         {
             SecurityReport::create([
@@ -501,47 +524,47 @@ if(!function_exists('getRoutes')) {
             return true;
         }
     }
-    if(!function_exists('getUserById')) {
+    if (!function_exists('getUserById')) {
         function getUserById($id)
         {
             return User::find($id);
         }
     }
-    if(!function_exists('SetDateFormat')) {
+    if (!function_exists('SetDateFormat')) {
         function SetDateFormat($date)
         {
             return Carbon::parse($date)->format('d/m/Y');
         }
     }
-    if(!function_exists('SetDateFormatWithHour')) {
+    if (!function_exists('SetDateFormatWithHour')) {
         function SetDateFormatWithHour($date)
         {
             return Carbon::parse()->format('d/m/Y H:i');
         }
     }
-    if(!function_exists('getBarcodeImage')) {
+    if (!function_exists('getBarcodeImage')) {
         function getBarcodeImage($number)
         {
             $generatorPNG = new BarcodeGeneratorPNG;
-            return '<img src="data:image/png;base64,'.base64_encode($generatorPNG->getBarcode($number, $generatorPNG::TYPE_CODE_128)).'">';
+            return '<img src="data:image/png;base64,' . base64_encode($generatorPNG->getBarcode($number, $generatorPNG::TYPE_CODE_128)) . '">';
         }
     }
-    if(!function_exists('getBarcode')) {
+    if (!function_exists('getBarcode')) {
         function getBarcode($number)
         {
             $generator = new  BarcodeGeneratorHTML();
             return $generator->getBarcode($number, $generator::TYPE_CODE_128);
         }
     }
-    if(!function_exists('TrackDisposedBatches')) {
-        function TrackDisposedBatches($batch,$AfterQuantity)
+    if (!function_exists('TrackDisposedBatches')) {
+        function TrackDisposedBatches($batch, $AfterQuantity)
         {
             DisposedItems::create([
                 "TransactionDate"  => Carbon::now()->format('d/m/Y'),
                 "TransactionTime"  => Carbon::now()->format('h:i:s A'),
                 "TransactionBy"    => auth_user()->alias_name,
                 "ItemDescription"  => $batch->BatchMaterialProduct->item_description,
-                "BatchSerial"      => $batch->batch." / ".$batch->serial,
+                "BatchSerial"      => $batch->batch . " / " . $batch->serial,
                 "UnitPackingValue" => $batch->unit_packing_value,
                 "BeforeQuantity"   => $batch->quantity + $AfterQuantity,
                 "DisposedQuantity" => $AfterQuantity,
@@ -551,25 +574,25 @@ if(!function_exists('getRoutes')) {
             return true;
         }
     }
-    if(!function_exists('MaterialProductHistory')) {
-        function MaterialProductHistory($Batch,$ActionTaken,$updated_outlife =null)
+    if (!function_exists('MaterialProductHistory')) {
+        function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
         {
             $batch = Batches::find($Batch->id);
             $BatchOwners = '';
-            if($batch->BatchOwners ?? false) {
-                foreach ($batch->BatchOwners as $key => $owner){
+            if ($batch->BatchOwners ?? false) {
+                foreach ($batch->BatchOwners as $key => $owner) {
                     if ($owner->alias_name ?? false) {
-                        $BatchOwners .= $owner->alias_name.' , ';
+                        $BatchOwners .= $owner->alias_name . ' , ';
                     }
                 }
             }
-            if($ActionTaken == 'Repack_Outlife_Draw_IN') {
+            if ($ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $DrawStatus = 'Draw IN';
             }
-            if($ActionTaken == 'Repack_Outlife_Draw_OUT') {
+            if ($ActionTaken == 'Repack_Outlife_Draw_OUT') {
                 $DrawStatus = 'Draw OUT';
             }
-            if($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
+            if ($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
             }
 
@@ -579,7 +602,7 @@ if(!function_exists('getRoutes')) {
                 'CategorySelection'        => $batch->BatchMaterialProduct->category_selection,
                 'ItemDescription'          => $batch->BatchMaterialProduct->item_description,
                 'Brand'                    => $batch->brand,
-                'BatchSerial'              => $batch->batch." / ".$batch->serial,
+                'BatchSerial'              => $batch->batch . " / " . $batch->serial,
                 'TransactionBy'            => auth_user()->alias_name,
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
@@ -595,21 +618,21 @@ if(!function_exists('getRoutes')) {
             return true;
         }
     }
-    if(!function_exists('Multiplicate')) {
+    if (!function_exists('Multiplicate')) {
         function Multiplicate($one, $two)
         {
             $number_one = $one;
             $number_two = $two;
-            return round($number_one * $number_two,2);
+            return round($number_one * $number_two, 2);
         }
     }
-    if(!function_exists('generateFileName')) {
-        function generateFileName($name,$extension)
+    if (!function_exists('generateFileName')) {
+        function generateFileName($name, $extension)
         {
-            return str_replace(' ',"_",$name.'_'.Carbon::now()).'.'.$extension;
+            return str_replace(' ', "_", $name . '_' . Carbon::now()) . '.' . $extension;
         }
     }
-    if(!function_exists('dateBetween')) {
+    if (!function_exists('dateBetween')) {
         function dateBetween($request)
         {
             $start_date = Carbon::parse($request->start_date)->startOfDay();
@@ -620,10 +643,27 @@ if(!function_exists('getRoutes')) {
             ];
         }
     }
-    if(!function_exists('toFixed')) {
-        function toFixed($number,$digit)
+    if (!function_exists('toFixed')) {
+        function toFixed($number, $digit)
         {
-           return  number_format($number, $digit, '.', '');
+            return  number_format($number, $digit, '.', '');
+        }
+    }
+
+    if (!function_exists('ExportDataFormat')) {
+        function ExportDataFormat($data)
+        {
+            $FormatedData = [];
+            foreach ($data as $key => $item) {
+                if ($item['used_for_td_expt_only'] == 1) {
+                    $item['used_for_td_expt_only'] = "Yes";
+                } else {
+                    $item['used_for_td_expt_only'] = "No";
+                }
+
+                $FormatedData[] = $item;
+            }
+            return $FormatedData;
         }
     }
 }

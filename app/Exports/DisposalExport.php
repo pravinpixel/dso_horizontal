@@ -32,7 +32,7 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
     public function array():array
     {
         securityLog('Disposal Items Export');
-        return $this->data;
+        return ExportDataFormat($this->data);
     }
     public function headings() :array
     {

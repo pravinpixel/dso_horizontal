@@ -29,7 +29,7 @@ class SecurityReportExcel  implements FromArray , WithHeadings, WithStyles, With
     public function array():array
     {
         securityLog('Security Report Export');
-        return $this->data;
+        return ExportDataFormat($this->data);
     }
     public function headings() :array
     {

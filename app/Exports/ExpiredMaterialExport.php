@@ -19,19 +19,19 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
         $this->data = $data;
     }
     public function styles(Worksheet $sheet)
-    { 
+    {
         return [
             1    => ['font' => ['bold' => true]],
         ];
     }
-    
+
     public function array():array
-    { 
+    {
         securityLog('Expired Material Report Export');
-        return $this->data;
+        return ExportDataFormat($this->data); 
     }
     public function headings() :array
-    { 
+    {
         return [
             "Category selection",
             "Item description",
@@ -57,11 +57,11 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(40);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);  
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);  
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20);  
-                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);  
-                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);  
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(20);
             },
         ];
     }
