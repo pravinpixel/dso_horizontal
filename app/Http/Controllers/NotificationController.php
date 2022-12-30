@@ -59,16 +59,17 @@ class NotificationController extends Controller
         $failed_iqc  = [];
 
         foreach ($data as $key => $row) {
-            Log::info($row->is_draft);
             $now            = Carbon::now();
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
-            if ($now >= $date_of_expiry) {
-                $expired[] = $row;
-            } elseif($row->iqc_status != "1") {
-                $near_expiry[] = $row;
-            }
-            if($row->iqc_status == 0) {
-                $failed_iqc[] = $row;
+            if(!is_null($row->date_of_expiry) && !empty($row->date_of_expiry)) {
+                if ($now >= $date_of_expiry && $row->quantity != 0) {
+                    $expired[] = $row;
+                } elseif($row->iqc_status != "1" && $row->quantity != 0) {
+                    $near_expiry[] = $row;
+                }
+                if($row->iqc_status == 0 && $row->quantity != 0) {
+                    $failed_iqc[] = $row;
+                }
             }
         }
 
