@@ -80,7 +80,11 @@
                     </div>
                     <div class="text-end">
                         <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
-                        <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
+                        @if (is_null($batch->disposed_after))
+                            <small class="text-dark" ng-if="date_of_shipment">DOD:  DD/MM/YYYY</small>
+                        @else
+                            <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
+                        @endif
                     </div>
                 </div>
             </div>
