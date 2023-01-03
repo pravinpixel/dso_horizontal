@@ -19,33 +19,40 @@
                     <div class="col">
                         <label for="" class="form-label">Actions</label>
                         <div class="btn-group w-100">
-                            <button type="button" name="filter" id="filter" class="btn-sm btn btn-primary form-control-sm"><i class="fa fa-refresh"></i> Generate</button>
-                            <button type="button" name="refresh" id="refresh" class="btn-sm btn btn-warning form-control-sm"><i class="fa fa-repeat"></i></button>
+                            <button type="button" name="filter" id="filter"
+                                class="btn-sm btn btn-primary form-control-sm"><i class="fa fa-refresh"></i>
+                                Generate</button>
+                            <button type="button" name="refresh" id="refresh"
+                                class="btn-sm btn btn-warning form-control-sm"><i class="fa fa-repeat"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    <div class="modal fade" id="utiliation-cart-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="utiliation-cart-model" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-light border-bottom">
                     <h4 class="modal-title text-center w-100 text-primary" id="myLargeModalLabel">Utilization Cart</h4>
                     <div>
-                        <button type="button" class="btn-sm btn btn-light border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
+                        <button type="button" class="btn-sm btn btn-light border" onclick="closeUtilizationCart()"><i class="bi bi-x"></i></button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <figure class="highcharts-figure">
                         <div id="container"></div>
                     </figure>
+                    <canvas id="myChart"></canvas>
                 </div>
                 <div class="modal-footer border bg-light">
                     <div class="d-flex col-5 mx-auto justify-content-center align-items-center">
-                        <input type="month" name="start_month" disabled id="chart_start_month" class="form-control custom border-0">
+                        <input type="month" name="start_month" disabled id="chart_start_month"
+                            class="form-control custom border-0">
                         <span class="px-2"> to </span>
-                        <input type="month" name="end_month" disabled id="chart_end_month" class="form-control custom border-0">
+                        <input type="month" name="end_month" disabled id="chart_end_month"
+                            class="form-control custom border-0">
                     </div>
                 </div>
             </div><!-- /.modal-content -->
@@ -73,9 +80,7 @@
     </div>
 @endsection
 @section('scripts')
-    <style>.highcharts-credits{display: none !important}</style>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             function load_data(start_month = '', end_month = '') {
@@ -91,7 +96,7 @@
                         url: "{{ route('reports.utilization-cart') }}",
                         data: {
                             start_month: start_month,
-                            end_month  : end_month,
+                            end_month: end_month,
                         }
                     },
                     columns: [{
@@ -133,39 +138,70 @@
             }
             load_data();
 
-            generateChart = (start_month,end_month) => {
-                axios.post('{{ route("reports.utilization-chart") }}', {
+            generateChart = (start_month, end_month) => {
+                axios.post('{{ route('reports.utilization-chart') }}', {
                     start_month: start_month,
-                    end_month  : end_month
-                }).then(function (response) {
-                    $('#utiliation-cart-model').modal('show');
-                    $('#chart_start_month').attr('value',start_month)
-                    $('#chart_end_month').attr('value',end_month)
-                    var UtilizationChart = Highcharts.chart('container', {
-                        title: false,
-                        yAxis: { title: { text: 'Withdrawal Quantity Amount' } },
-                        xAxis: {
-                            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-                            title: {
-                                text: 'Months'
-                            }
-                        },
-                        legend: false,
-                        series:  response.data.data,
-                        tooltip: {
-                            formatter: function () {
-                                return this.points.reduce(function (s, point) {
-                                    return s + '<br/>' + point.series.name + ': ' +
-                                        point.y + ' Qty';
-                                }, '<b>' + this.x + '</b>');
-                            },
-                            shared: true
-                        },
-                    });
-                    // UtilizationChart.redraw();
-                }).catch(function (error) {
+                    end_month: end_month
+                }).then(function(response) {
+                    generateChartView(response.data)
+                    $('#chart_start_month').attr('value', start_month)
+                    $('#chart_end_month').attr('value', end_month)
+                }).catch(function(error) {
                     console.log(error);
                 });
+            }
+
+            generateChartView = (data) => {
+                new Chart(document.getElementById('myChart'), {
+                    type: 'line',
+                    data: {
+                        labels: data.chart_labels,
+                        datasets: data.datasets
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                enabled: true,
+                                usePointStyle: true,
+                                callbacks: { 
+                                    title: (item) => { 
+                                        console.log(item)
+                                        return 'Barcode Number : ' +  item[0].dataset.label
+                                    },
+                                    label: (item) => { 
+                                        return `Quantity : ${item.raw} / ${item.label}`
+                                    }
+                                },
+                            },
+                            legend: false,
+                            zoom: {
+                                limits: {
+                                    y: {
+                                        min: 0,
+                                        max: 100
+                                    },
+                                    y2: {
+                                        min: -5,
+                                        max: 5
+                                    }
+                                },
+                            },
+                            title: {
+                                display: true,
+                                text: 'Batches Barcodes'
+                            }
+                        }
+                    },
+                })
+                $('#utiliation-cart-model').modal('show');
+            }
+            closeUtilizationCart = () => {
+                $('#utiliation-cart-model').modal('hide');
+                let chartStatus = Chart.getChart("myChart"); // <canvas> id
+                if (chartStatus != undefined) {
+                    chartStatus.destroy();
+                }
             }
 
             setMonthValidateion = (month) => {
@@ -181,9 +217,10 @@
             });
             $('#filter').click(function() {
                 var start_month = $('#start_month').val();
-                var end_month   = $('#end_month').val();
-                if(start_month == '' || start_month == undefined || end_month == '' || end_month == undefined) {
-                    Message('danger',"Choose Start & End Months")
+                var end_month = $('#end_month').val();
+                if (start_month == '' || start_month == undefined || end_month == '' || end_month ==
+                    undefined) {
+                    Message('danger', "Choose Start & End Months")
                     return false
                 }
                 generateChart(start_month, end_month)

@@ -177,32 +177,35 @@ class ReportsController extends Controller
                         "maximum_quantity"   => toFixed(max($array_quantity),3),
                     ];
                 }
+                return DataTables::of($UtilizationCartData)->addIndexColumn()->make(true);
             }
-            return DataTables::of($UtilizationCartData)->addIndexColumn()->make(true);
         }
         return view('crm.reports.utilization-cart');
     }
     public function utilization_chart(Request $request)
     {
-        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])
-        ->select("quantity","batch_id")
-        ->get()->groupBy(function($data) {
-            return $data->batch_id;
-        });
+        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])->select("quantity","batch_id","created_at")->get()->groupBy('created_at');
         $data = [];
+        $datasets = [];
+        $chart_labels = [];
+        
         foreach($UtilizationCart as $list) {
             $quantity = [];
             foreach ($list as $key => $batch) {
                 $quantity[] = $batch->quantity;
             }
-            $data[] = [
-                "name" => $list[0]->Batch->BatchMaterialProduct->item_description,
-                "data" => $quantity
+            $chart_labels[] = $list[0]->created_at;
+            $datasets[] = [
+                "label" => $list[0]->Batch->barcode_number,
+                "data" =>  $quantity,
+                // "backgroundColor"=> '#4088f9',
             ];
         }
         return response([
             "status" => true,
             "data"   => $data,
+            "datasets"   => $datasets,
+            "chart_labels"   => $chart_labels,
         ]);
     }
     public function get_material_product_history(Request $request)
