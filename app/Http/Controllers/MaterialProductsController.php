@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Storage;
 class MaterialProductsController extends Controller
 {
     private   $MartialProductRepository;
+    private   $SearchRepository;
+    private   $dsoRepository;
 
     public function __construct(
         MartialProductRepositoryInterface $MartialProductRepository,

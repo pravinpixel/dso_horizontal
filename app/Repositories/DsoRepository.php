@@ -257,7 +257,7 @@ class DsoRepository implements DsoRepositoryInterface
         $collection = Arr::flatten($access_material_product);
         if(!is_null($config)) {
             if($config['response'] == 'JSON') {
-                return $collection;
+                return collect($collection);
             }
         }
         $items      = collect($collection);

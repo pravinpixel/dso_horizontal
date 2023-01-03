@@ -53,24 +53,41 @@ class NotificationController extends Controller
     }
     public function near_expiry_expired_ajax($type = null)
     {
-        $data        = Batches::with(['BatchOwners','BatchMaterialProduct','StorageArea','HousingType'])->where('is_draft',0)->latest()->get();
+        $material_product_data   =   MaterialProducts::with([
+            'Batches',
+            'Batches.RepackOutlife',
+            'Batches.HousingType',
+            'Batches.Department',
+            'UnitOfMeasure',
+            'Batches.StorageArea',
+            'Batches.StatutoryBody',
+        ])->latest()->get();
+
+        $material_product = $this->dsoRepository->renderTableData($material_product_data,[
+            "response" => 'JSON',
+            "page_name" => $type
+        ]);
+        $Batches = [];
+        foreach ($material_product as $key => $value) {
+            foreach ($value['Batches'] as $key => $row) {
+                $Batches[] = $row;
+            }
+        }
+ 
         $near_expiry = [];
         $expired     = [];
         $failed_iqc  = [];
 
-        foreach ($data as $key => $row) {
-            $now            = Carbon::now();
-            $date_of_expiry = Carbon::parse($row->date_of_expiry);
-            if(!is_null($row->date_of_expiry) && !empty($row->date_of_expiry)) {
-                if ($now >= $date_of_expiry && $row->quantity != 0) {
-                    $expired[] = $row;
-                } elseif($row->iqc_status != "1" && $row->quantity != 0) {
-                    $near_expiry[] = $row;
-                }
-                if($row->iqc_status == 0 && $row->quantity != 0) {
-                    $failed_iqc[] = $row;
-                }
+        foreach ($Batches as $key => $row) {
+            if($row->date_of_expiry_color == 'text-warning') {
+                $near_expiry[] = $row;
             }
+            if($row->date_of_expiry_color == 'text-danger') {
+                $expired[] = $row;
+            }
+            if($row->iqc_status == 0 && $row->quantity != 0) {
+                $failed_iqc[] = $row;
+            } 
         }
 
         if($type == 'NEAR_EXPIRY_TABLE') {
@@ -106,8 +123,12 @@ class NotificationController extends Controller
             ->addColumn('housing_type', function($table){
                 return $table->HousingType->name;
             })
-            ->addColumn('date_of_expiry', function($table){
-                return SetDateFormat($table->date_of_expiry);
+            ->addColumn('iqc_status', function($table){
+                if ($table->iqc_status) {
+                    return '<span class="badge bg-success rounded-pill">PASS</span>';
+                } else {
+                    return '<span class="badge bg-danger rounded-pill">FAIL</span>';
+                }
             })
             ->addColumn('action', function($table){
                 return '
@@ -123,7 +144,7 @@ class NotificationController extends Controller
                     </div>
                 ';
             })
-            ->rawColumns(['action','item_description','batch_serial_po_number','owners','housing_type','storage_area'])
+            ->rawColumns(['action','item_description','batch_serial_po_number','owners','housing_type','storage_area','iqc_status'])
         ->make(true);
     }
 }
