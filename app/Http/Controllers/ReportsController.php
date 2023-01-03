@@ -69,7 +69,7 @@ class ReportsController extends Controller
                     "Barcode"            => $Batch->barcode_number,
                     "BatchSerial"      => $value->batch_serial,
                     "UnitPackingValue" => $Batch->unit_packing_value,
-                    "StorageArea"      => $Batch->StorageArea->name,
+                    "StorageArea"      => $Batch->StorageArea->name ?? "-",
                     "Housing"          => $Batch->housing,
                     "Owners"           => $owners,
                     "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
