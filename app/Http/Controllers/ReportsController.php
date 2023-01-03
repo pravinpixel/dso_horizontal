@@ -53,7 +53,7 @@ class ReportsController extends Controller
         }
         $DeductTrackUsage = [];
         foreach ($data as $key => $value) {
-            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
+            $Batch = Batches::with('BatchOwners','StorageArea')->find($value->batch_id);
             if(!is_null($Batch)) {
                 $owners = '';
                 if($Batch->BatchOwners ?? false) {
