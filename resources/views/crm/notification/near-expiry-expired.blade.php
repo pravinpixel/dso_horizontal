@@ -15,8 +15,8 @@
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
-                            <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
+                            {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
+                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
@@ -39,8 +39,8 @@
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
-                            <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
+                            {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
+                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
@@ -63,8 +63,8 @@
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
-                            <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td>
+                            {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
+                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>DOE</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
@@ -100,8 +100,8 @@
                         {data: 'batch_serial_po_number', name: 'batch_serial_po_number'},
                         {data: 'quantity', name: 'quantity'},
                         {data: 'owners', name: 'owners'},
-                        {data: 'storage_area', name: 'storage_area'},
-                        {data: 'housing_type', name: 'housing_type'},
+                        // {data: 'storage_area', name: 'storage_area'},
+                        // {data: 'housing_type', name: 'housing_type'},
                         {data: 'date_of_expiry', name: 'date_of_expiry'},
                         {data: 'iqc_status', name: 'iqc_status'},
                         {data: 'action', name: 'action', orderable: false, searchable: false},

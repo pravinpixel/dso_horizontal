@@ -117,12 +117,12 @@ class NotificationController extends Controller
                 }
                 return $owners;
             })
-            ->addColumn('storage_area', function($table){
-                return $table->StorageArea->name;
-            })
-            ->addColumn('housing_type', function($table){
-                return $table->HousingType->name;
-            })
+            // ->addColumn('storage_area', function($table){
+            //     return $table->StorageArea->name;
+            // })
+            // ->addColumn('housing_type', function($table){
+            //     return $table->HousingType->name;
+            // })
             ->addColumn('iqc_status', function($table){
                 if ($table->iqc_status) {
                     return '<span class="badge bg-success rounded-pill">PASS</span>';
