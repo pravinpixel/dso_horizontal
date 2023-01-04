@@ -74,7 +74,7 @@
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     processing: true,
                     serverSide: true,
-                    searching: false,
+                    // searching: false,
                     ajax: {
                         url: "{{ route('get-material-product-history') }}",
                         data:{

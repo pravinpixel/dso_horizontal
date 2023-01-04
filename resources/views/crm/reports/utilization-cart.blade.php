@@ -80,7 +80,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/Chart.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             function load_data(start_month = '', end_month = '') {

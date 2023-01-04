@@ -167,15 +167,17 @@ class ReportsController extends Controller
                         $array_quantity[] = $batch->quantity;
                         $total_quantity += $batch->quantity;
                     }
-                    $UtilizationCartData[] = [
-                        "item_description"   => $batches[0]->Batch->BatchMaterialProduct->item_description,
-                        "brand"              => $batches[0]->Batch->brand,
-                        "batch_serial"       => $batches[0]->Batch->batch." / ".$batches[0]->Batch->serial,
-                        "unit_packing_value" => $batches[0]->Batch->unit_packing_value,
-                        "total_quantity"     => toFixed($total_quantity,3),
-                        "average_quantity"   => toFixed((array_sum($array_quantity) / count($array_quantity)),3),
-                        "maximum_quantity"   => toFixed(max($array_quantity),3),
-                    ];
+                    if($batches[0]->Batch) {
+                        $UtilizationCartData[] = [
+                            "item_description"   => $batches[0]->Batch->BatchMaterialProduct->item_description ?? null,
+                            "brand"              => $batches[0]->Batch->brand ?? null,
+                            "batch_serial"       => $batches[0]->Batch->batch." / ".$batches[0]->Batch->serial ?? null,
+                            "unit_packing_value" => $batches[0]->Batch->unit_packing_value ?? null,
+                            "total_quantity"     => toFixed($total_quantity,3) ?? null,
+                            "average_quantity"   => toFixed((array_sum($array_quantity) / count($array_quantity)),3) ?? null,
+                            "maximum_quantity"   => toFixed(max($array_quantity),3) ?? null,
+                        ];
+                    }
                 }
                 return DataTables::of($UtilizationCartData)->addIndexColumn()->make(true);
             }
