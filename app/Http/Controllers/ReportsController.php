@@ -337,8 +337,7 @@ class ReportsController extends Controller
                 })->addColumn('used_for_td_expt_only',function ($data){
                     if($data->coc_coa_mill_cert_status == 'on') {
                         $used_for_td_expt_only = 'Yes';
-                    }
-                    if($data->coc_coa_mill_cert_status == 'off') {
+                    } else   {
                         $used_for_td_expt_only = 'No';
                     }
                     if(is_null($data->coc_coa_mill_cert_status)) {
