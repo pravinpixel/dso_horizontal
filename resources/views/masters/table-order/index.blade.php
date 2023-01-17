@@ -1,51 +1,69 @@
 @extends('masters.index')
 @section('masters')
-     <table class="table custom table-bordered table-striped table-centered">
+     <table class="table custom table-bordered table-striped table-centered" id="data-table">
           <thead>
                <tr>
                     <th>S.No</th>
-                    <th>Order By</th>
                     <th>Name</th>
+                    <th>Order By</th>
                     <th>Status</th>
                </tr>
           </thead>
-          <tbody id="orderTable">
-               @foreach ($table_orders as $key =>  $row)
-                    <tr>
-                         <td scope="row">{{ $row->id }}</td>
-                         <td width="200px">
-                              <input type="number" id="col_{{ $row->id }}" class="form-control form-control-sm" onkeyup="changeOrder({{  $row->id }},'order_by')" value="{{ $row->order_by }}">
-                         </td>
-                         <td>{{ str_replace( '_'  , ' ',  ucfirst($row->column) ) }}</td>
-                         <td>
-                              <select class="form-select" id="status_{{ $row->id }}" onchange="changeOrder({{  $row->id }} , 'status')">
-                                   <option {{ $row->status === 0 ? "selected" : null }} value="0">OFF</option>
-                                   <option {{ $row->status === 1 ? "selected" : null }} value="1">ON</option>
-                              </select>
-                         </td>
-                    </tr>
-               @endforeach
-          </tbody>
-     </table>
-     {!! $table_orders->links() !!}
+          <tbody></tbody>
+     </table> 
+@endsection
+@section('styles')
+     <link href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css" rel="stylesheet" />
 @endsection
 @section('scripts')
+     <script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
      <script>
           changeOrder    = (id) => {
-               const data = {
-                    id        : id,
-                    order_by  : $(`#col_${id}`).val(),
-                    status    : $(`#status_${id}`).val()
-               }
-               console.log($(`#status_${id}`).val())
-               fetch('{{ route("table-order.store") }}', {
-                    headers   : {
-                         'Content-Type'  :  'application/json',
-                         'X-CSRF-TOKEN'  :  $('meta[name="csrf-token"]').attr('content')
-                    },
-                    method    : 'POST',
-                    body      : JSON.stringify(data)
-               });
+               axios.post(`{{ route("table-order.store") }}/${id}`).then((response) => {
+                    console.log(response.data)
+               })
           }
+     </script>
+     <script>
+          let dtOverrideGlobals = {
+                    processing: true,
+                    serverSide: true,
+                    retrieve: true,
+                    ajax: "{{ route('table-order.index') }}",
+                    columns: [ 
+                         { data: 'id', name: 'id' }, 
+                         { data: 'column', name: 'column' },
+                         { data: 'order_by', name: 'order_by'},
+                         { data: 'action', name: 'action' }
+                    ],
+                    order: [[ 2, 'asc' ]],
+                    pageLength: 8,
+                    rowReorder: {
+                         selector: 'tr td:not(:first-of-type,:last-of-type)',
+                         dataSrc: 'order_by'
+                    },
+               };
+
+               let datatable = $('#data-table').DataTable(dtOverrideGlobals);
+               datatable.on('row-reorder', function (e, details) {
+                    if(details.length) {
+                         let rows = [];
+                         details.forEach(element => {
+                              rows.push({
+                                   id        : datatable.row(element.node).data().id,
+                                   order_by  : element.newData
+                              });
+                         });
+
+                         $.ajax({
+                              headers: {'x-csrf-token': '{{ csrf_token() }}'},
+                              method: 'POST',
+                              url: "{{ route('update-orderby') }}",
+                              data: { rows }
+                         }).done(function () { 
+                              // datatable.ajax.reload() 
+                         });
+                    }
+               });
      </script>
 @endsection

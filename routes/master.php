@@ -12,8 +12,11 @@ use App\Http\Controllers\Admin\TableOrderController;
 Route::middleware(['auth_users'])->group(function () {
     Route::prefix('table-order')->group(function () {
         Route::get('/', [TableOrderController::class, 'index'])->name('table-order.index');
-        Route::post('/', [TableOrderController::class, 'store'])->name('table-order.store');
+        Route::post('/store/{id?}', [TableOrderController::class, 'store'])->name('table-order.store');
     });
+    
+    Route::post('/table-order/update-order', [TableOrderController::class, 'update_order'])->name('update-orderby');
+
     Route::prefix('data-center')->group(function () {
         Route::get('/master-settings', [MasterController::class, 'index'])->name('master.item-description');
         Route::post('/create-settings', [MasterController::class, 'store_master'])->name('master.store.category');
