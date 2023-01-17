@@ -16,7 +16,7 @@
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('reports.material_in_house_pdt_history') }}" class="card-body btn">
                         <i class="text-warning bi bi-folder fa-2x mb-2"></i>
-                        <div class="text-primary"><b> Material inHouse pdt History</b></div>
+                        <div class="text-primary"><b> Prodcts History</b></div>
                     </a>
                 </div>
             </div> 
