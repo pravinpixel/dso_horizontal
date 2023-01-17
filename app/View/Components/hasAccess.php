@@ -24,11 +24,17 @@ class hasAccess extends Component
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
-    {
+    { 
         if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
             foreach (auth_user_role()['permissions'] as $menu => $access) {
-                if($menu == $this->menu_name && $access == true) {
-                    $this->access = true;
+                if(is_array($this->menu_name)) {
+                    if(in_array($menu,$this->menu_name) && $access == true) {
+                        $this->access = true;
+                    }
+                } else {
+                    if($menu == $this->menu_name && $access == true) {
+                        $this->access = true;
+                    }
                 }
             }
         } else {
