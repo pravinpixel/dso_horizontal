@@ -14,6 +14,9 @@ class TableOrderController extends Controller
         if ($request->ajax()) { 
             $query = tableOrder::orderBy('order_by','asc')->get();
             $table = Datatables::of($query);
+            $table->addColumn('column', function($row) {
+                return format_text($row->column);
+            });
             $table->addColumn('place_holder', function($row) {
                 return '<button class="btn btn-light btn-sm border shadow-sm"><i class="bi bi-arrows-expand"></i></button>';
             });
