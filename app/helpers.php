@@ -141,21 +141,6 @@ if (!function_exists('is_reset')) {
         } else {
             return $value;
         }
-        // if($reset_status != null) {
-        //     if(session()->get('is_skip_duplicate') === null) {
-        //         if($reset_status == true || $reset_status == 1) {
-        //             Log::info($reset_status);
-        //             return null ;
-        //         } else {
-        //             Log::info($reset_status);
-        //             return $value;
-        //         }
-        //     } else {
-        //         return $value;
-        //     }
-        // } else {
-        //     return $value;
-        // }
     }
 }
 
@@ -411,7 +396,7 @@ if (!function_exists('getRoutes')) {
                 'extend_expiry',
                 'disposal',
                 'reports',
-                'table_order_index'
+                'table_order_index', 
             ];
             $create = [
                 'user_store',
@@ -481,7 +466,29 @@ if (!function_exists('getRoutes')) {
                 return 'export cart';
             } elseif ($menu_value == 'reports_history') {
                 return 'history';
-            }
+            } elseif ($menu_value == 'reports_disposed_items') {
+                return 'Disposed Items';
+            } elseif ($menu_value == 'reports_expired_material') {
+                return 'Expired Material';
+            } elseif ($menu_value == 'reports_security') {
+                return 'Security History';
+            } elseif ($menu_value == 'reports_export_security') {
+                return 'Export / Security History';
+            }elseif ($menu_value == 'reports_deduct_track_outlife') {
+                return 'Deduct Track Outlife';
+            }elseif ($menu_value == 'reports_deduct_track_outlife_download') {
+                return 'Export / Deduct Track Outlife';
+            }elseif ($menu_value == 'reports_deduct_track_usage') {
+                return 'Deduct Track Usage';
+            }elseif ($menu_value == 'reports_deduct_track_usage_download') {
+                return 'Export / Deduct Track Usage';
+            }elseif ($menu_value == 'reports_material_in_house_pdt_history') {
+                return 'Products History';
+            }elseif ($menu_value == 'reports_material_in_house_pdt_history_download') {
+                return 'Export / Products History';
+            }elseif ($menu_value == 'reports_utilization_cart') {
+                return 'Utilization Cart';
+            } 
             return  $menu_value;
         }
     }

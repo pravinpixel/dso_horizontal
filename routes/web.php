@@ -1,6 +1,6 @@
-<?php
+<?php 
 include('auth.php');
-include('master.php');
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
@@ -24,35 +24,24 @@ use App\Http\Controllers\WithdrawalController;
 |
 */
 
-Route::prefix('jobs')->group(function () {
-    Route::queueMonitor();
-});
+// Route::prefix('jobs')->group(function () {
+//     Route::queueMonitor();
+// });
 
 Route::middleware(['auth_users'])->group(function () {
 
     Route::prefix('dashboard')->group(function() {
         Route::get('/',[DashboardController::class ,'index'])->name('dashboard');
         Route::get('/get-dashBoard-counts',[DashboardController::class ,'getCounts']);
-        Route::post('/get-dashBoard-counts-by-filters',[DashboardController::class ,'getCountsByFilters'])->name('get-dashBoard-counts-by-filters');
     });
 
-    Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index');
-    Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document');
-
-    Route::prefix('reconciliation')->group(function() {
-        Route::get('/', [ReconciliationController::class,'index'])->name('reconciliation');
-        Route::get('/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
-        Route::post('/download', [ReconciliationController::class,'download'])->name('reconciliation.download');
-        Route::post('/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store');
-        Route::post('/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update');
-        Route::delete('/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy');
+    Route::prefix('withdrawal')->group(function() {
+        Route::get('/material-are-in-house-products', [WithdrawalController::class, 'index'])->name('withdrawal_index');
+        Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('direct-deduct');
+        Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('deduct-track-usage');
+        Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('deduct-track-outlife');
     });
-
-    Route::get('disposed-items', function () {
-        return view('crm.notification.disposed-items');
-    })->name('disposed-items');
-
-    //  Listing Page
+     
     Route::prefix('search-or-add')->group(function() {
         Route::get('/', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
         Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
@@ -67,6 +56,60 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
         Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
     });
+
+    Route::prefix('notification')->group(function() {
+        Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired');
+        Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
+        Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
+    });
+
+    Route::prefix('early-disposal')->group(function() {
+        Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
+        Route::post('/disposal/{id?}', [EarlyDisposalController::class,'disposal_update'])->name('update.disposal');
+    });
+
+    Route::prefix('extend-expiry')->group(function() {
+        Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
+        Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
+    });
+
+    Route::prefix('reports')->group(function() {
+        Route::get('/', [ReportsController::class,'material_in_house_pdt_history'])->name('reports');
+        Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items');
+        Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material');
+        Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
+        Route::get('security', [ReportsController::class,'security'])->name('reports.security');
+        Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
+        Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife');
+        Route::get('deduct-track-outlife/download/{id}', [ReportsController::class,'deduct_track_outlife_download'])->name('reports.deduct_track_outlife_download');
+        Route::get('deduct-track-usage', [ReportsController::class,'deduct_track_usage'])->name('reports.deduct_track_usage');
+        Route::post('deduct-track-usage-download', [ReportsController::class,'deduct_track_usage_download'])->name('reports.deduct_track_usage_download');
+        Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history');
+        Route::post('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history_download'])->name('reports.material_in_house_pdt_history_download');
+    }); 
+
+    Route::prefix('print-label')->group(function() {
+        Route::get('/', [PrintBarcodeController::class, 'index'])->name('barcode.listing');
+        Route::get('/{id?}', [PrintBarcodeController::class, 'show'])->name('show.barcode');
+        Route::post('/{id?}', [PrintBarcodeController::class, 'print'])->name('print.barcode');
+    });
+
+    Route::prefix('reconciliation')->group(function() {
+        Route::get('/', [ReconciliationController::class,'index'])->name('reconciliation');
+        Route::get('/list', [ReconciliationController::class,'show'])->name('view-reconciliation');
+        Route::post('/download', [ReconciliationController::class,'download'])->name('reconciliation.download');
+        Route::post('/store', [ReconciliationController::class,'ReconciliationImportUpdate'])->name('reconciliation.store');
+        Route::post('/update/{id}', [ReconciliationController::class,'ReconciliationUpdate'])->name('reconciliation.update');
+        Route::delete('/destroy/{id}', [ReconciliationController::class,'destroy'])->name('reconciliation.destroy');
+    });
+
+    Route::post('/get-dashBoard-counts-by-filters',[DashboardController::class ,'getCountsByFilters'])->name('get-dashBoard-counts-by-filters');
+    Route::get('/help-menu', [HelpMenuController::class, 'help_index'])->name('help.index');
+    Route::get('/help-document/{id}', [HelpMenuController::class, 'show_document'])->name('help.document'); 
+
+    Route::get('disposed-items', function () {
+        return view('crm.notification.disposed-items');
+    })->name('disposed-items');
 
     Route::get('/change-end-of-batch/{id}', [MaterialProductsController::class, 'end_of_batch']);
     Route::get('/get-save-search', [MaterialProductsController::class, 'my_search_history'])->name('get-save-search');
@@ -105,13 +148,7 @@ Route::middleware(['auth_users'])->group(function () {
     //  ==================================
     Route::get('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_index'])->name('other-form');
     Route::post('/add-material-products-other-form', [MaterialProductsController::class, 'other_form_store'])->name('other-form');
-    // ===================== Print Label =====================
-        Route::prefix('print-label')->group(function() {
-            Route::get('/', [PrintBarcodeController::class, 'index'])->name('barcode.listing');
-            Route::get('/{id?}', [PrintBarcodeController::class, 'show'])->name('show.barcode');
-            Route::post('/{id?}', [PrintBarcodeController::class, 'print'])->name('print.barcode');
-        });
-    // ===================== Print Label =====================
+   
     // ==================== Repack Draw IN / OUT Flow ===============
         Route::post('/repack-batch/{batch_id}', [RepackBatchController::class, 'repack_outlife'])->name('repack_outlife');
         Route::post('/store-repack-batch/{batch_id}', [RepackBatchController::class, 'store_repack_outlife'])->name('store_repack_outlife');
@@ -120,55 +157,24 @@ Route::middleware(['auth_users'])->group(function () {
     // ==================== Repack Draw IN / OUT Flow ===============
 
     // Word Suggestion
-    Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion');
-    Route::prefix('withdrawal')->group(function() {
-        Route::get('/material-are-in-house-products', [WithdrawalController::class, 'index'])->name('withdrawal_index');
-        Route::post('/withdrawal-direct-deduct', [WithdrawalController::class, 'direct_deduct'])->name('direct-deduct');
-        Route::post('/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage'])->name('deduct-track-usage');
-        Route::post('/withdrawal-deduct-track-outlife', [WithdrawalController::class, 'deduct_track_outlife'])->name('deduct-track-outlife');
-    });
+    Route::post('/get-suggestion', [MaterialProductsController::class, 'suggestion'])->name('suggestion'); 
     Route::delete('/withdrawal/withdrawal-deduct-track-usage', [WithdrawalController::class, 'deduct_track_usage_clear'])->name('deduct-track-usage');
     Route::get('/decrease-quantity/{id}', [WithdrawalController::class, 'decrease_quantity'])->name('decrease-quantity');
     Route::get('/get-withdrawal-data/{type}', [WithdrawalController::class, 'get_withdrawal_data'])->name('get-withdrawal_data');
     Route::get('/delete-withdraw-cart/{id}', [WithdrawalController::class, 'delete_withdraw_cart'])->name('delete-withdraw_cart');
     Route::get('/get-withdraw-cart-count', [WithdrawalController::class, 'withdraw_cart_count'])->name('withdraw-cart-count');
     Route::get('/get-withdrawal-batches/{barcode?}', [WithdrawalController::class, 'withdrawal_indexing'])->name('withdrawal-indexing');
-    Route::prefix('notification')->group(function() {
-        Route::get('threshold-qty', [NotificationController::class,'threshold_index'])->name('threshold-qty');
-        Route::post('change-read-status/{batch_id?}', [NotificationController::class,'change_read_status'])->name('change-read-status');
-        Route::get('/near-expiry-expired',[NotificationController::class,'near_expiry_expired_index'])->name('near-expiry-expired');
-    });
+    
     Route::get('NotificationCount',[NotificationController::class,'notification_count']);
-    Route::get('/near-expiry-expired-ajax/{type?}',[NotificationController::class,'near_expiry_expired_ajax'])->name('near_expiry_expired_ajax');
-    Route::prefix('extend-expiry')->group(function() {
-        Route::get('extend-expiry/{id?}', [ExtendExpiryController::class,'index'])->name('extend-expiry');
-        Route::post('/extend-expiry/{id?}', [ExtendExpiryController::class,'update'])->name('update.extend-expiry');
-    });
-    Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show'])->name('view.extend-expiry');
-    Route::prefix('early-disposal')->group(function() {
-        Route::get('disposal/{id?}', [EarlyDisposalController::class,'index'])->name('disposal');
-        Route::post('/disposal/{id?}', [EarlyDisposalController::class,'disposal_update'])->name('update.disposal');
-    });
-    Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show'])->name('view.disposal');
-    Route::prefix('reports')->group(function() {
-        Route::get('/', [ReportsController::class,'material_in_house_pdt_history'])->name('reports');
-        Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items');
-        Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material');
-        Route::get('security', [ReportsController::class,'security'])->name('reports.security');
-        Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife');
-        Route::get('deduct-track-outlife/download/{id}', [ReportsController::class,'deduct_track_outlife_download'])->name('reports.deduct_track_outlife_download');
-        Route::get('deduct-track-usage', [ReportsController::class,'deduct_track_usage'])->name('reports.deduct_track_usage');
-        Route::post('deduct-track-usage-download', [ReportsController::class,'deduct_track_usage_download'])->name('reports.deduct_track_usage_download');
-        Route::get('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history'])->name('reports.material_in_house_pdt_history');
-        Route::post('material-in-house-pdt-history', [ReportsController::class,'material_in_house_pdt_history_download'])->name('reports.material_in_house_pdt_history_download');
-        Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
-        Route::post('utilization-chart', [ReportsController::class,'utilization_chart'])->name('reports.utilization-chart');
-    });
+    Route::get('/near-expiry-expired-ajax/{type?}',[NotificationController::class,'near_expiry_expired_ajax'])->name('near_expiry_expired_ajax'); 
+    Route::get('/get-extend-expiry/{id?}', [ExtendExpiryController::class,'show'])->name('view.extend-expiry'); 
+    Route::get('/get-disposal-expiry/{id?}', [EarlyDisposalController::class,'show'])->name('view.disposal'); 
+    Route::post('reports/utilization-chart', [ReportsController::class,'utilization_chart'])->name('reports.utilization-chart');
     Route::get('reports/get-material-product-history/{barcode?}', [ReportsController::class,'get_material_product_history'])->name('get-material-product-history');
     Route::get('reports/check-material-product-history/{barcode?}/{check}', [ReportsController::class,'get_material_product_history']);
     Route::post('reports/export/disposed-items', [ReportsController::class,'export_disposed_items'])->name('reports.export_disposed_items');
-    Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
     Route::post('reports/export/expired-material', [ReportsController::class,'export_expired_material'])->name('reports.export_expired_material');
+    
     Route::resource('/product-cart', ProductCartController::class);
     Route::get('/get-product-cart',[ ProductCartController::class,'index']);
     Route::get('/delete-file/{id}', [MaterialProductsController::class, 'delete_file']);
@@ -177,3 +183,4 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/{id}/{type}', [DownloadController::class,'download'])->name('download-files');
     });
 });
+include('master.php');
