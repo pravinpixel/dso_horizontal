@@ -14,12 +14,15 @@ class TableOrderController extends Controller
         if ($request->ajax()) { 
             $query = tableOrder::orderBy('order_by','asc')->get();
             $table = Datatables::of($query);
+            $table->addColumn('place_holder', function($row) {
+                return '<button class="btn btn-light btn-sm border shadow-sm"><i class="bi bi-arrows-expand"></i></button>';
+            });
             $table->addColumn('action', function($row) {
                 $on = $row->status == 1 ? "checked":"";
                 return '<input type="checkbox" id="switch'.$row->id.'" '.$on.' onchange="changeOrder('.$row->id.')" data-switch="primary"/>
                         <label for="switch'.$row->id.'" data-on-label="On" data-off-label="Off"></label>';
             });
-            $table->rawColumns(['action']); 
+            $table->rawColumns(['action','place_holder']); 
             $table->addIndexColumn();
             return  $table->make(true);
         }
@@ -38,10 +41,13 @@ class TableOrderController extends Controller
     }
     public function update_order(Request $request)
     {
-        foreach($request->input('rows', []) as $row) {
-            tableOrder::find($row['id'])->update([
-                'order_by' => $row['order_by']
-            ]);
+        $posts = tableOrder::all();
+        foreach ($posts as $post) {
+            foreach ($request->input('rows', []) as $order) {
+                if ($order['id'] == $post->id) {
+                    $post->update(['order_by' => $order['order_by']]);
+                }
+            }
         }
         return response()->noContent();
     }

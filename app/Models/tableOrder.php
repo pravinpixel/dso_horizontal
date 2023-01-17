@@ -16,7 +16,7 @@ class tableOrder extends Model
 
     static  function getTableColumn()
     {
-        $result = tableOrder::orderBy('order_by')->get();
+        $result = tableOrder::orderBy('order_by','asc')->get();
         $column = [];
         foreach ($result as $key => $value) { 
             $column[$value->column] = [

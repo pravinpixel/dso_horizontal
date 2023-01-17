@@ -1,16 +1,18 @@
 @extends('masters.index')
 @section('masters')
-     <table class="table custom table-bordered table-striped table-centered" id="data-table">
-          <thead>
-               <tr>
-                    <th>S.No</th>
-                    <th>Name</th>
-                    <th>Order By</th>
-                    <th>Status</th>
-               </tr>
-          </thead>
-          <tbody></tbody>
-     </table> 
+     <div class="card card-body">
+          <table class="table table-sm table-centered" id="data-table">
+               <thead>
+                    <tr>
+                         <th width="35px">#</th>
+                         <th>Order By</th>
+                         <th>Name</th>
+                         <th>Status</th>
+                    </tr>
+               </thead>
+               <tbody></tbody>
+          </table> 
+     </div>
 @endsection
 @section('styles')
      <link href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css" rel="stylesheet" />
@@ -25,21 +27,21 @@
           }
      </script>
      <script>
-          let dtOverrideGlobals = {
+               let dtOverrideGlobals = {
                     processing: true,
                     serverSide: true,
                     retrieve: true,
                     ajax: "{{ route('table-order.index') }}",
                     columns: [ 
-                         { data: 'id', name: 'id' }, 
-                         { data: 'column', name: 'column' },
+                         { data: 'place_holder', name: 'place_holder',sortable:false }, 
                          { data: 'order_by', name: 'order_by'},
+                         { data: 'column', name: 'column' },
                          { data: 'action', name: 'action' }
                     ],
-                    order: [[ 2, 'asc' ]],
-                    pageLength: 8,
+                    order: [[ 1, 'asc' ]],
+                    pageLength: 10,
                     rowReorder: {
-                         selector: 'tr td:not(:first-of-type,:last-of-type)',
+                         selector: 'tr td button',
                          dataSrc: 'order_by'
                     },
                };
@@ -61,7 +63,7 @@
                               url: "{{ route('update-orderby') }}",
                               data: { rows }
                          }).done(function () { 
-                              // datatable.ajax.reload() 
+                              datatable.ajax.reload() 
                          });
                     }
                });
