@@ -1,5 +1,5 @@
 <?php
-
+include('permission.php');
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\DisposedItems;
