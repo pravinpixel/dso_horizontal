@@ -34,6 +34,10 @@ class ReportsController extends Controller
         $this->dsoRepository    =   $dsoRepositoryInterface;
         $this->MartialProduct   =   $MartialProductRepository;
     }
+    public function index()
+    {
+        return view('crm.reports.index-board');
+    }
     public function deduct_track_outlife()
     {
         $page_name  = "DEDUCT_TRACK_OUTLIFE_REPORT";

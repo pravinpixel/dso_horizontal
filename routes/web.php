@@ -74,7 +74,7 @@ Route::middleware(['auth_users'])->group(function () {
     });
 
     Route::prefix('reports')->group(function() {
-        Route::get('/', [ReportsController::class,'material_in_house_pdt_history'])->name('reports');
+        Route::get('/', [ReportsController::class,'index'])->name('reports');
         Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items');
         Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material');
         Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
