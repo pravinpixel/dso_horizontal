@@ -131,22 +131,32 @@ class ReportsController extends Controller
     }
     public function material_in_house_pdt_history()
     {
-        return view('crm.reports.material-in-house-pdt-history');
+        $TransactionBy     = materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy');
+        $StorageArea       = materialProductHistory::groupBy('StorageArea')->pluck('StorageArea');
+        $Brand             = materialProductHistory::groupBy('Brand')->pluck('Brand');
+        $Housing       = materialProductHistory::groupBy('Housing')->pluck('Housing');
+        $Module            = materialProductHistory::groupBy('Module')->pluck('Module');
+        $ActionTaken       = materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken');
+        $ItemDescription   = materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription');
+        $CategorySelection = materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection');
+        $DrawStatus = materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus');
+        $filters = [
+            "Item Description"   => $ItemDescription,
+            "Category Selection" => $CategorySelection,
+            "Brand"              => $Brand,
+            "Housing"            => $Housing,
+            "Storage Area"       => $StorageArea,
+            "Module"             => $Module,
+            "Action Taken"       => $ActionTaken,
+            "Transaction By"     => $TransactionBy,
+            "Draw Status"        => $DrawStatus,
+        ];
+        return view('crm.reports.material-in-house-pdt-history',compact('filters'));
     }
     public function material_in_house_pdt_history_download(Request $request)
     {
-        if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
-            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))
-            ->where('barcode_number', $request->barcode)
-            ->get();
-        } elseif(!empty($request->start_date) && !empty($request->end_date)) {
-            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))->get();
-        } elseif(!empty($request->barcode)) {
-            $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
-        } else {
-            $data = materialProductHistory::all();
-        }
-        return Excel::download(new MaterialProductHistoryExport($data),generateFileName('Material inHouse pdt History','xlsx'));
+        $material = $this->materialHistoryFilter($request);
+        return Excel::download(new MaterialProductHistoryExport($material),generateFileName('Material inHouse pdt History','xlsx'));
     }
     public function utilization_cart(Request $request)
     {
@@ -214,21 +224,48 @@ class ReportsController extends Controller
             "chart_labels"   => $chart_labels,
         ]);
     }
-    public function get_material_product_history(Request $request)
+    public function materialHistoryFilter($request)
     {
-        if(!empty($request->start_date) && !empty($request->end_date) && !empty($request->barcode)) {
-            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))
-            ->where('barcode_number', $request->barcode)
-            ->get();
-        } elseif(!empty($request->start_date) && !empty($request->end_date)) {
-            $data = materialProductHistory::whereBetween('created_at', dateBetween($request))->get();
-        } elseif(!empty($request->barcode)) {
-            $data = materialProductHistory::where('barcode_number', $request->barcode)->get();
-        } else {
-            $data = materialProductHistory::all();
-        }
-        
-        return DataTables::of($data)->addIndexColumn()->addColumn('Module', function($data){
+        $material = materialProductHistory::select('*');
+        $material->when(isset($request->ItemDescription), function($query) use ($request){
+            $query->where("ItemDescription",$request->ItemDescription);
+        });
+        $material->when(isset($request->CategorySelection), function($query) use ($request){
+            $query->where("CategorySelection",$request->CategorySelection);
+        });
+        $material->when(isset($request->Brand), function($query) use ($request){
+            $query->where("Brand",$request->Brand);
+        });
+        $material->when(isset($request->Housing), function($query) use ($request){
+            $query->where("Housing",$request->Housing);
+        });
+        $material->when(isset($request->StorageArea), function($query) use ($request){
+            $query->where("StorageArea",$request->StorageArea);
+        });
+        $material->when(isset($request->Module), function($query) use ($request){
+            $query->where("Module",$request->Module);
+        });
+        $material->when(isset($request->ActionTaken), function($query) use ($request){
+            $query->where("ActionTaken",$request->ActionTaken);
+        });
+        $material->when(isset($request->TransactionBy), function($query) use ($request){
+            $query->where("TransactionBy",$request->TransactionBy);
+        });
+        $material->when(isset($request->DrawStatus), function($query) use ($request){
+            $query->where("DrawStatus",$request->DrawStatus);
+        });
+        $material->when(isset($request->StartDate), function($query) use ($request){
+            $query->whereBetween('created_at', dateBetween($request));
+        });
+        $material->when(isset($request->EndDate), function($query) use ($request){
+            $query->whereBetween('created_at', dateBetween($request));
+        });
+        return $material->get();
+    }
+    public function get_material_product_history(Request $request)
+    { 
+        $material = $this->materialHistoryFilter($request);
+        return DataTables::of($material)->addIndexColumn()->addColumn('Module', function($data){
                 return strtoupper(str_replace('_',' ',$data->Module));
             })->addColumn('ActionTaken', function($data){
                 return strtoupper(str_replace('_',' ',$data->ActionTaken));

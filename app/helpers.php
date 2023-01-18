@@ -3,6 +3,12 @@ include('permission.php');
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\DisposedItems;
+use App\Models\Masters\Departments;
+use App\Models\Masters\HouseTypes;
+use App\Models\Masters\MasterCategories;
+use App\Models\Masters\PackingSizeData;
+use App\Models\Masters\StatutoryBody;
+use App\Models\Masters\StorageRoom;
 use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
@@ -671,6 +677,32 @@ if (!function_exists('getRoutes')) {
                 $FormatedData[] = $item;
             }
             return $FormatedData;
+        }
+    }
+
+    if (!function_exists('getMasterData')) {
+        function getMasterData($type)
+        {
+            switch ($type) {
+                case 'category_selection':
+                    return MasterCategories::all();
+                    break; 
+                case 'statutory_body':
+                    return StatutoryBody::all();
+                    break; 
+                case 'unit_packing_size':
+                    return PackingSizeData::all();
+                    break; 
+                case 'storage_room':
+                    return StorageRoom::all();
+                    break; 
+                case 'house_type':
+                    return HouseTypes::all();
+                    break; 
+                case 'departments':
+                    return Departments::all();
+                    break; 
+            }
         }
     }
 }
