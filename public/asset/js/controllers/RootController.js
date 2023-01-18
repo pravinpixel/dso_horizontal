@@ -835,8 +835,12 @@ app.controller('RootController', function ($scope, $http) {
     }
     $scope.changeReadStatus = (id) => {
         $http.post(change_batch_read_status + "/" + id).then((res) => {
-            $scope.get_material_products()
-            getNotificationCount()
+            if(res.status === 301) { 
+                Message('danger', 'Permission Denied ! Contact your admin');
+            } else {
+                $scope.get_material_products()
+                getNotificationCount()
+            }
         })
     }
 
