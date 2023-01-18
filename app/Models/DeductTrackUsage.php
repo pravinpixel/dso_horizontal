@@ -19,5 +19,9 @@ class DeductTrackUsage extends Model
         'used_amount',
         'remain_amount',
         'remarks',
+        'brand',
+        'unit_packing_value',
+        'storage_area',
+        'housing',
     ];
 }

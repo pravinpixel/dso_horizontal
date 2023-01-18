@@ -279,20 +279,24 @@ class WithdrawalController extends Controller
     }
     public function deduct_track_usage(Request $request)
     {
-        $batch      = Batches::findOrFail($request->batch_id);
+        $batch      = Batches::with('StorageArea')->findOrFail($request->batch_id);
         $material   = MaterialProducts::find($batch->material_product_id);
         MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_USAGE');
 
         DeductTrackUsage::create([
-            'batch_id'         => $request->batch_id,
-            "quantity"         => $batch->quantity,
-            'barcode_number'   => $batch->barcode_number,
-            'item_description' => $material->item_description,
-            'batch_serial'     => $batch->batch . ' / ' . $batch->serial,
-            'last_accessed'    => auth_user()->alias_name,
-            'used_amount'      => $request->used_amount,
-            'remain_amount'    => $request->remain_amount,
-            'remarks'          => $request->remarks ?? ""
+            'batch_id'           => $request->batch_id,
+            "quantity"           => $batch->quantity,
+            'barcode_number'     => $batch->barcode_number,
+            'item_description'   => $material->item_description,
+            'batch_serial'       => $batch->batch . ' / ' . $batch->serial,
+            'last_accessed'      => auth_user()->alias_name,
+            'used_amount'        => $request->used_amount,
+            'remain_amount'      => $request->remain_amount,
+            'remarks'            => $request->remarks ?? "",
+            'brand'              => $batch->batch,
+            'unit_packing_value' => $material->unit_packing_value,
+            'storage_area'       => $batch->StorageArea->name,
+            'housing'            => $batch->housing,
         ]);
 
         $batch->UtilizationCart()->create(["quantity" =>  $batch->quantity -  $request->remain_amount / $batch->unit_packing_value]);

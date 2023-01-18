@@ -27,23 +27,32 @@ class TrackUsageExport  implements FromArray , WithHeadings, WithStyles, WithEve
 
     public function array():array
     {
+        foreach ($this->data as $key => $value) {
+            unset($this->data[$key]['id']);
+            unset($this->data[$key]['batch_id']);
+            unset($this->data[$key]['barcode_number']);
+            unset($this->data[$key]['quantity']);
+            unset($this->data[$key]['remarks']);
+            unset($this->data[$key]['created_at']);
+            unset($this->data[$key]['updated_at']);
+        }
         return $this->data;
     }
     public function headings() :array
     {
         return [
             "Item Description",
-            "Brand",
             "Batch/Serial",
+            "Transaction By	",
+            "Used Amt",
+            "Remaining amt ",
+            "Brand",
             "Unit packing value",
             "Storage area",
             "Housing",
             "Owners	",
             "Transaction Date",
             "Transaction Time",
-            "Transaction By	",
-            "Used Amt",
-            "Remaining amt ",
         ];
     }
     public function registerEvents(): array

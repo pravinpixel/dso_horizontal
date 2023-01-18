@@ -27,6 +27,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ReportsController extends Controller
 {
+    public $dsoRepository;
+    public $MartialProduct;
+    
     public function __construct(
         DsoRepositoryInterface $dsoRepositoryInterface,
         MartialProductRepository $MartialProductRepository
@@ -48,15 +51,34 @@ class ReportsController extends Controller
     {
         return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');
     }
-    public function deduct_track_usage(Request $request)
+    public function deduct_track_usage_filter($request)
     {
-        if(!empty($request->barcode)) {
-            $data = DeductTrackUsage::where('barcode_number',$request->barcode)->get();
-        } else {
-            $data = DeductTrackUsage::all();
-        }
-        $DeductTrackUsage = [];
-        foreach ($data as $key => $value) {
+        $DeductTrackUsage = DeductTrackUsage::select('*');
+
+        $DeductTrackUsage->when(isset($request->item_description),function($query) use ($request) {
+            $query->where('item_description',$request->item_description);
+        });
+        $DeductTrackUsage->when(isset($request->batch_serial),function($query) use ($request) {
+            $query->where('batch_serial',$request->batch_serial);
+        });
+        $DeductTrackUsage->when(isset($request->last_accessed),function($query) use ($request) {
+            $query->where('last_accessed',$request->last_accessed);
+        });
+        $DeductTrackUsage->when(isset($request->barcode_number),function($query) use ($request) {
+            $query->where('barcode_number',$request->barcode_number);
+        });
+        $DeductTrackUsage->when(isset($request->brand),function($query) use ($request) {
+            $query->where('brand',$request->brand);
+        });       
+        $DeductTrackUsage->when(isset($request->storage_area),function($query) use ($request) {
+            $query->where('storage_area',$request->storage_area);
+        });       
+        $DeductTrackUsage->when(isset($request->housing),function($query) use ($request) {
+            $query->where('housing',$request->housing);
+        });
+         
+        $result = $DeductTrackUsage->get();
+        foreach ($result as $key => $value) {
             $Batch = Batches::with('BatchOwners','StorageArea')->find($value->batch_id);
             if(!is_null($Batch)) {
                 $owners = '';
@@ -67,67 +89,34 @@ class ReportsController extends Controller
                         }
                     }
                 }
-                $DeductTrackUsage[] = [
-                    "ItemDescription"  => $value->item_description,
-                    "Brand"            => $Batch->brand,
-                    "Barcode"            => $Batch->barcode_number,
-                    "BatchSerial"      => $value->batch_serial,
-                    "UnitPackingValue" => $Batch->unit_packing_value,
-                    "StorageArea"      => $Batch->StorageArea->name ?? "-",
-                    "Housing"          => $Batch->housing,
-                    "Owners"           => $owners,
-                    "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
-                    "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
-                    "TransactionBy"    => $value->last_accessed,
-                    "UsedAmount"       => $value->used_amount,
-                    "RemainingAmount"  => $value->remain_amount,
-                ];
+                $value['Owners'] = $owners;
+                $value["TransactionDate"]  = Carbon::parse($value->created_at)->toFormattedDateString();
+                $value["TransactionTime"]  = Carbon::parse($value->created_at)->format('h:i:s A'); 
             }
         }
-
+        return $result;
+    }
+    public function deduct_track_usage(Request $request)
+    { 
+        $DeductTrackUsage = $this->deduct_track_usage_filter($request);
+        $filters = [
+            "item_description" => DeductTrackUsage::groupBy('item_description')->pluck('item_description'),
+            "brand"            => DeductTrackUsage::groupBy('brand')->pluck('brand'),
+            "batch_serial"     => DeductTrackUsage::groupBy('batch_serial')->pluck('batch_serial'),
+            "storage_area"     => DeductTrackUsage::groupBy('storage_area')->pluck('storage_area'),
+            "housing"          => DeductTrackUsage::groupBy('housing')->pluck('housing'),
+            "last_accessed"    => DeductTrackUsage::groupBy('last_accessed')->pluck('last_accessed'),
+            "barcode_number"    => DeductTrackUsage::groupBy('barcode_number')->pluck('barcode_number'),
+        ];
         if ($request->ajax()) {
             return DataTables::of($DeductTrackUsage)->addIndexColumn()->make(true);
         }
-        return view('crm.reports.deduct-track-usage',compact('DeductTrackUsage'));
+        return view('crm.reports.deduct-track-usage',compact('DeductTrackUsage','filters'));
     }
     public function deduct_track_usage_download(Request $request)
     {
-        if(!empty($request->barcode)) {
-            $data = DeductTrackUsage::where('barcode_number',$request->barcode)->get();
-        } else {
-            $data = DeductTrackUsage::all();
-        }
-
-        $DeductTrackUsage = [];
-
-        foreach ($data as $key => $value) {
-            $Batch = Batches::with('BatchOwners')->find($value->batch_id);
-            $owners = '';
-            if($Batch->BatchOwners ) {
-                foreach ($Batch->BatchOwners as $key => $owner){
-                    if ($owner->alias_name ?? false) {
-                        $owners .= $owner->alias_name.' ,';
-                    }
-                }
-            }
-
-            $DeductTrackUsage[] = [
-                "ItemDescription"  => $value->item_description,
-                "Brand"            => $Batch->brand,
-                "BatchSerial"      => $value->batch_serial,
-                "UnitPackingValue" => $Batch->unit_packing_value,
-                "StorageArea"      => $Batch->StorageArea->name,
-                "Housing"          => $Batch->housing,
-                "Owners"           => $owners,
-                "TransactionDate"  => Carbon::parse($value->created_at)->toFormattedDateString(),
-                "TransactionTime"  => Carbon::parse($value->created_at)->format('h:i:s A'),
-                "TransactionBy"    => $value->last_accessed,
-                "UsedAmount"       => $value->used_amount,
-                "RemainingAmount"  => $value->remain_amount,
-            ];
-        }
-
-        return Excel::download(new TrackUsageExport($DeductTrackUsage), generateFileName('DeductTrackUsage','xlsx'));
+        $DeductTrackUsage = $this->deduct_track_usage_filter($request);   
+        return Excel::download(new TrackUsageExport($DeductTrackUsage->toArray()), generateFileName('DeductTrackUsage','xlsx'));
     }
     public function material_in_house_pdt_history()
     { 
