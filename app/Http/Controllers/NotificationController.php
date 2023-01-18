@@ -11,6 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class NotificationController extends Controller
 {
+    public $dsoRepository;
     public function __construct(
         DsoRepositoryInterface $dsoRepositoryInterface
     ) {
@@ -37,10 +38,20 @@ class NotificationController extends Controller
         $data = MaterialProducts::with('Batches')->where(['is_read' => 0,'is_draft' => 0,])->orderBy('updated_at')->get();
 
         $MaterialProducts =  $this->dsoRepository->renderTableData($data, [
-            "response" => "JSON",
+            "response"  => "JSON",
             "page_name" => "THRESHOLD_QTY"
         ]);
 
+        foreach ($MaterialProducts as $key => $value) {
+            foreach ($value['Batches'] as $index => $row) {
+                if($row['permission'] == 'READ_ONLY') {
+                    unset($MaterialProducts[$key]['Batches'][$index]);
+                }
+            }
+            if(count($value['Batches']) == 0) {
+                unset($MaterialProducts[$key]);
+            }
+        }
         return response()->json([
             'status' => 200,
             'data'   => $MaterialProducts,

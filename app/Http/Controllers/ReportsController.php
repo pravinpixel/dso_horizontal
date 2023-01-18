@@ -130,26 +130,17 @@ class ReportsController extends Controller
         return Excel::download(new TrackUsageExport($DeductTrackUsage), generateFileName('DeductTrackUsage','xlsx'));
     }
     public function material_in_house_pdt_history()
-    {
-        $TransactionBy     = materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy');
-        $StorageArea       = materialProductHistory::groupBy('StorageArea')->pluck('StorageArea');
-        $Brand             = materialProductHistory::groupBy('Brand')->pluck('Brand');
-        $Housing       = materialProductHistory::groupBy('Housing')->pluck('Housing');
-        $Module            = materialProductHistory::groupBy('Module')->pluck('Module');
-        $ActionTaken       = materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken');
-        $ItemDescription   = materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription');
-        $CategorySelection = materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection');
-        $DrawStatus = materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus');
+    { 
         $filters = [
-            "Item Description"   => $ItemDescription,
-            "Category Selection" => $CategorySelection,
-            "Brand"              => $Brand,
-            "Housing"            => $Housing,
-            "Storage Area"       => $StorageArea,
-            "Module"             => $Module,
-            "Action Taken"       => $ActionTaken,
-            "Transaction By"     => $TransactionBy,
-            "Draw Status"        => $DrawStatus,
+            "Transaction By"     => materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
+            "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
+            "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
+            "Housing"            => materialProductHistory::groupBy('Housing')->pluck('Housing'),
+            "Module"             => materialProductHistory::groupBy('Module')->pluck('Module'),
+            "Action Taken"       => materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken'),
+            "Item Description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
+            "Category Selection" => materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection'),
+            "Draw Status"        => materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus')
         ];
         return view('crm.reports.material-in-house-pdt-history',compact('filters'));
     }
