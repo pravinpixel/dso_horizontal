@@ -27,7 +27,7 @@ class TrackUsageExport  implements FromArray , WithHeadings, WithStyles, WithEve
 
     public function array():array
     {
-        return ExportDataFormat($this->data);
+        return $this->data;
     }
     public function headings() :array
     {
