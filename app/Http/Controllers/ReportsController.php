@@ -282,92 +282,9 @@ class ReportsController extends Controller
         }
         return Excel::download(new DisposalExport($disposed), generateFileName('disposal-items','xlsx'));
     }
-    public function expired_material(Request $request)
+    public function expired_material_data($request)
     {
         $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
-        $expired = [];
-        if ($request->ajax()) {
-            if(!is_null($request->used_for_td_expt_only) && !is_null($request->department)) {
-                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-                ->where( 'is_draft' , 0)
-                ->where('department',$request->department)
-                ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
-                ->latest()->get();
-            } elseif(!is_null($request->used_for_td_expt_only)) {
-                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-                ->where( 'is_draft' , 0)
-                ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
-                ->latest()->get();
-            } elseif(!is_null($request->department)) {
-                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-                ->where( 'is_draft' , 0)
-                ->where('department',$request->department)
-                ->latest()->get();
-            } else {
-                $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
-            }
-
-            foreach ($batches as $key => $row) {
-                $now            = Carbon::now();
-                $date_of_expiry = Carbon::parse($row->date_of_expiry);
-                if ($now >= $date_of_expiry) {
-                    $expired[] = $row;
-                }
-            }
-            return DataTables::of($expired)
-                ->addColumn('category_selection',function ($data){
-                    return MaterialProducts::find($data->material_product_id)->category_selection;
-                })->addColumn('item_description',function ($data){
-                    return MaterialProducts::find($data->material_product_id)->item_description;
-                })->addColumn('batch_serial',function ($data){
-                    return $data->batch." / ".$data->serial;
-                })->addColumn('owners',function ($data){
-                    if (count($data->BatchOwners ?? [])) {
-                        $owners = '';
-                        foreach ($data->BatchOwners as $key => $owner){
-                            if ($owner->alias_name ?? false) {
-                                $owners .= ' <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
-                                    '.$owner->alias_name.'
-                                </small>';
-                            }
-                        }
-                        return $owners;
-                    }
-
-                })->addColumn('department',function ($data){
-                    return $data->Department->name;
-                })->addColumn('storage_area',function ($data){
-                    return $data->StorageArea->name;
-                })->addColumn('used_for_td_expt_only',function ($data){
-                    if($data->coc_coa_mill_cert_status == 'on') {
-                        $used_for_td_expt_only = 'Yes';
-                    } else   {
-                        $used_for_td_expt_only = 'No';
-                    }
-                    if(is_null($data->coc_coa_mill_cert_status)) {
-                        $used_for_td_expt_only = '-';
-                    }
-                    return $used_for_td_expt_only;
-                })
-                ->rawColumns(['owners','used_for_td_expt_only'])
-                ->addIndexColumn()
-            ->make(true);
-        }
-
-        foreach ($batches as $key => $row) {
-            $now            = Carbon::now();
-            $date_of_expiry = Carbon::parse($row->date_of_expiry);
-            if ($now >= $date_of_expiry) {
-                $expired[] = $row;
-            }
-        }
-
-        $departments = Departments::get();
-
-        return view('crm.reports.expired-material',compact('departments','expired'));
-    }
-    public function export_expired_material(Request $request)
-    {
         if(!is_null($request->used_for_td_expt_only) && !is_null($request->department)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
             ->where( 'is_draft' , 0)
@@ -387,37 +304,49 @@ class ReportsController extends Controller
         } else {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
         }
+        $expired = [];
         foreach ($batches as $key => $row) {
+            $owners = '';
             $now            = Carbon::now();
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
             if ($now >= $date_of_expiry) {
-                $expired[] = $row;
-            }
-        }
-        $data = [];
-        foreach ($expired as $key => $row) {
-            $owners = '';
-            if (count($row->BatchOwners ?? [])) {
-                foreach ($row->BatchOwners as $key => $owner){
-                    if ($owner->alias_name ?? false) {
-                        $owners .= $owner->alias_name." ,";
+                if (count($row->BatchOwners ?? [])) {
+                    foreach ($row->BatchOwners as $key => $owner){
+                        if ($owner->alias_name ?? false) {
+                            $space = $key != 0 ? ', ' : '';
+                            $owners .= $space.$owner->alias_name;
+                        }
                     }
                 }
+                $expired[] = [
+                    "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
+                    "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
+                    "batch_serial"          => $row->batch." / ".$row->serial,
+                    "unit_packing_value"    => $row->unit_packing_value,
+                    "quantity"              => $row->quantity,
+                    "storage_area"          => $row->StorageArea->name,
+                    "housing"               => $row->housing,
+                    "date_of_expiry"        => $row->date_of_expiry,
+                    "used_for_td_expt_only" => $row->coc_coa_mill_cert_status == "on" ? "YES" : "NO",
+                    "department"            => $row->Department->name,
+                    "owners"                => $owners,
+                ];
             }
-            $data[] = [
-                "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
-                "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
-                "batch_serial"          => $row->batch." / ".$row->serial,
-                "unit_packing_value"    => $row->unit_packing_value,
-                "quantity"              => $row->quantity,
-                "storage_area"          => $row->StorageArea->name,
-                "housing"               => $row->housing,
-                "date_of_expiry"        => $row->date_of_expiry,
-                "used_for_td_expt_only" => $row->used_for_td_expt_only,
-                "department"            => $row->Department->name,
-                "owners"                => $owners,
-            ];
+        }  
+        return $expired;
+    }
+    public function expired_material(Request $request)
+    { 
+        $expired = $this->expired_material_data($request);
+        if ($request->ajax()) {
+            return DataTables::of($expired)->rawColumns(['owners'])->addIndexColumn()->make(true);
         }
+        $departments = Departments::get();
+        return view('crm.reports.expired-material',compact('departments','expired'));
+    }
+    public function export_expired_material(Request $request)
+    {
+        $data = $this->expired_material_data($request); 
         return Excel::download(new ExpiredMaterialExport($data), generateFileName('expired-materials','xlsx'));
     }
     public function security(Request $request)

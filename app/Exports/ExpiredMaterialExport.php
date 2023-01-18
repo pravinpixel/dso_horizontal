@@ -28,7 +28,7 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
     public function array():array
     {
         securityLog('Expired Material Report Export');
-        return ExportDataFormat($this->data); 
+        return $this->data; 
     }
     public function headings() :array
     {
