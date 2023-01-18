@@ -122,6 +122,7 @@ Route::middleware(['auth_users'])->group(function () {
 
     // Get Material Bathes Data
     Route::get('/get-material-batch/{batch?}', [MaterialProductsController::class, 'view_batch'])->name('get-batch-material-products');
+    Route::get('/get-material/{material_id?}', [MaterialProductsController::class, 'view_parent_batch']);
     Route::get('/get-batch/{batch?}', [MaterialProductsController::class, 'show_batch'])->name('get-batch');
     Route::get('/view-batch/{batch?}', [MaterialProductsController::class, 'viewBatch'])->name('view-batch');
 

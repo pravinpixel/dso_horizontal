@@ -245,7 +245,7 @@ app.controller('RootController', function ($scope, $http) {
     }
 
     $scope.view_material_product = function (row) {
-        $('#View_Material_Product_Details').modal('show');
+        viewParentBatch(row.id) 
         $scope.view_material_product_data = [
             { name: "Category Selection", item: row.category_selection == 'in_house' ? 'In-house Product' : 'Material' },
             { name: 'Item description', item: row.item_description },

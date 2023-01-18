@@ -5,16 +5,7 @@
                 <h4>View Material / Product details</h4>
                 <button class="rounded-pill btn btn-light btn-sm ms-auto shadow-sm border" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x"></i></button>
             </div>
-            <div class="modal-body modal-scroll-2 p-0"> 
-                <ol class="list-group list-group-numbered">
-                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_material_product_data">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">@{{ row.name }}</div>
-                            @{{ row.item }}
-                        </div>
-                    </li>
-                </ol> 
-            </div> 
+            <div class="modal-body modal-scroll-2 p-0" id="View_Material_Product_Details_Data"> </div> 
         </div> 
     </div>
 </div>

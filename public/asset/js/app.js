@@ -357,6 +357,15 @@ viewBatch = (id) => {
     });
 }
 
+viewParentBatch = (id) => {
+    axios.get(`${APP_URL}/get-material/${id}`).then(function (response) {
+        $('#View_Material_Product_Details').modal('show');
+        document.getElementById('View_Material_Product_Details_Data').innerHTML = response.data
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
 deleteBatchFile = (id,type,element) => {
     axios.get(`${APP_URL}/delete-batch-file/${id}/${type}`).then(function (response) {
         element.parentNode.classList.add('d-none')
