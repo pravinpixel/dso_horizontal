@@ -91,7 +91,6 @@
                     ],
                     processing: true,
                     serverSide: true,
-                    searching: false,
                     ajax: {
                         url: "{{ route('reports.utilization-cart') }}",
                         data: {
