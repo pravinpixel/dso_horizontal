@@ -95,8 +95,8 @@
         </div>
     @break
     @case('THRESHOLD_QTY') 
-        <div class="box border-start ">
-            <div class="dropdown mx-1">
+        <div class="box border-start">
+            <div class="dropdown mx-1" ng-hide="batch.permission == 'READ_ONLY'">
                 <a class="ropdown-toggle"  id="topnav-dashboards" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-three-dots text-dark"></i> 
                 </a> 
@@ -104,6 +104,7 @@
                     <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View Batch Details</button> 
                 </div>
             </div>
+            <span ng-show="batch.permission == 'READ_ONLY'"><i class="bi bi-three-dots text-dark"></i></span>
         </div>
     @break
     @case('EXTEND_EXPIRY')

@@ -80,11 +80,12 @@
     @break
     @case('THRESHOLD_QTY')
         <div class="box border-start align-items-center">
-            <button ng-click="view_material_product(row)" class="btn btn-sm btn-outline-light border shadow-sm rounded-pill p-1 py-0"><i class="bi bi-eye-fill"></i></button>
-            <div class="ms-2">
+            <button ng-hide="row.batches[0].permission == 'READ_ONLY'" ng-click="view_material_product(row)" class="btn btn-sm btn-outline-light border shadow-sm rounded-pill p-1 py-0"><i class="bi bi-eye-fill"></i></button>
+            <div class="ms-2" ng-hide="row.batches[0].permission == 'READ_ONLY'">
                 <input class="form-check-success" ng-checked="row.is_read == 1"  ng-click="changeReadStatus(row.id)" type="checkbox" id="switch@{{ row.id }}" data-switch="success"/>
                 <label class="border border-dark shadow-sm" for="switch@{{ row.id }}"></label>
             </div>
+            <span ng-show="row.batches[0].permission == 'READ_ONLY'"><i class="bi bi-three-dots text-dark"></i></span>
         </div>
     @break
     @case('EARLY_DISPOSAL')
