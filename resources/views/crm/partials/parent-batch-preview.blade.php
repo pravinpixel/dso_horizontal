@@ -26,7 +26,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
-            <div class="fw-bold mb-1">Owners (SE/PL/FM)</div>
+            <div class="fw-bold mb-1">Owners</div>
             @if (count($material->Batches[0]->BatchOwners ?? []))
                 @foreach ($material->Batches[0]->BatchOwners as $key => $owner)
                     @if ($owner->alias_name ?? false)
