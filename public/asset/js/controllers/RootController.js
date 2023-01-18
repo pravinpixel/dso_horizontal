@@ -835,11 +835,12 @@ app.controller('RootController', function ($scope, $http) {
     }
     $scope.changeReadStatus = (id) => {
         $http.post(change_batch_read_status + "/" + id).then((res) => {
-            if(res.status === 302) { 
-                Message('danger', 'Permission Denied ! Contact your admin');
-            } else {
+            console.log(res)
+            if(res.data.status === 200) { 
                 $scope.get_material_products()
                 getNotificationCount()
+            } else {
+                Message('danger', 'Permission Denied ! Contact your admin');
             }
         })
     }
