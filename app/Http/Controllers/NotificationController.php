@@ -67,10 +67,13 @@ class NotificationController extends Controller
             "response" => 'JSON',
             "page_name" => $type
         ]);
+
         $Batches = [];
         foreach ($material_product as $key => $value) {
             foreach ($value['Batches'] as $key => $row) {
-                $Batches[] = $row;
+                if($row['permission'] == 'READ_AND_WRITE') {
+                    $Batches[] = $row;
+                }
             }
         }
  
