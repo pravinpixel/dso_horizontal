@@ -34,6 +34,7 @@ class RepackBatchController extends Controller
         $new_batch->iqc_status         = 0;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
+        cloneDocumentFromBatch($request->id,$new_batch->id);
         MaterialProductHistory($new_batch,'Before Repack / Transfer');
 
         RepackOutlife::updateOrCreate(['batch_id' => $new_batch->id], [
@@ -102,6 +103,8 @@ class RepackBatchController extends Controller
                     $next_batch->total_quantity      = $row['repack_amount'];
                     $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
+
+                    cloneDocumentFromBatch($repackData->batch_id,$next_batch->id);
 
                     if(count($current_batch->BatchOwners)) {
                         foreach ($current_batch->BatchOwners as $key => $user) {
