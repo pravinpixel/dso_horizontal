@@ -58,12 +58,9 @@ class RepackBatchController extends Controller
         $new_value             = clone $previous_batch;
         $new_value->quantity   = $request->RemainQuantity;
 
-        // LogActivity::dataLog($old_value, $new_value);
-
         $previous_batch->update([
-            'quantity'       => $request->RemainQuantity,
-            'total_quantity' => $previous_batch->unit_packing_value * $request->RemainQuantity,
-            // 'unit_packing_value' => $previous_batch->unit_packing_value  - $request->input_used_amount,
+            'quantity'       =>   $request->RemainQuantity / $previous_batch->unit_packing_value ,
+            'total_quantity' =>  $request->RemainQuantity,
         ]); 
 
         return response()->json([

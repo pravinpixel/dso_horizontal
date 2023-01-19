@@ -5,7 +5,8 @@ app.directive('repackTransferTable', () => {
             element.on('keyup', () => { 
                 if(attribute.repackTransferTable == 'REPACK_QUANTITY') {
                     if(scope.RepackTransfer.RepackQuantity != null) {
-                        var RemainQuantity                    =   scope.RepackTransfer.quantity - scope.RepackTransfer.RepackQuantity
+                        console.log(scope.RepackTransfer)
+                        var RemainQuantity                    =   scope.RepackTransfer.total_quantity - scope.RepackTransfer.RepackQuantity
                         scope.RepackTransfer.RemainQuantity   =   RemainQuantity.toFixed(3)
                     } else {
                         scope.RepackTransfer.RemainQuantity = ''

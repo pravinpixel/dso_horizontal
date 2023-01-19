@@ -35,7 +35,7 @@
                                 <input 
                                     type="number" 
                                     min="1" 
-                                    ng-max="RepackTransfer.quantity"
+                                    ng-max="RepackTransfer.total_quantity"
                                     ng-model="RepackTransfer.RepackQuantity"
                                     class="custom-input"
                                     repack-transfer-table="REPACK_QUANTITY"
