@@ -183,9 +183,9 @@ class ReportsController extends Controller
     {
         $start_month     = Carbon::parse($request->start_month)->firstOfMonth();
         $end_month       = Carbon::parse($request->end_month)->lastOfMonth(); 
+        // dd($start_month);
         $UtilizationCart = UtilizationCart::with('Batch')
                 ->whereBetween('created_at', [$start_month,$end_month])
-                ->select("quantity","batch_id","created_at")
                 ->get()
                 ->groupBy('batch_id');
         $series     = [];
@@ -195,19 +195,18 @@ class ReportsController extends Controller
             $label = [];
             foreach ($list as $key => $batch) {
                 $quantity[] = $batch->quantity;
-                $label[]    = Carbon::parse($batch->created_at)->format('d-M-Y');
+                $label[]    =  Carbon::parse($batch->created_at)->format('d-M-Y');
             }
             $categories[] = $label;
-   
             $series[] = [
                 "name" =>  MaterialProducts::find($list[0]->Batch->material_product_id)->item_description,
                 "data" => $quantity
             ];
         }
         return response([
-            "status"     => true,
-            "categories" => $categories[0],
-            "series"     => $series,
+            "status"       => true,
+            "categories"   => $categories[0],
+            "series"       => $series,
             "chart_footer" => Carbon::parse($request->start_month)->format('F Y')." to ".Carbon::parse($request->end_month)->format('F Y')
         ]);
     }
