@@ -26,6 +26,8 @@ class TransferBatchController extends Controller
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
 
+        cloneDocumentFromBatch($request->id,$created_batch->id);
+
         MaterialProductHistory($created_batch,'after_transfer');
 
         RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [

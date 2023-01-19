@@ -98,14 +98,13 @@ class DsoRepository implements DsoRepositoryInterface
 
         foreach ($material_product as $key => $parent) {
 
-            $quantityColor       = 'text-danger';
-            $readCount           = 0;
-            $draftBatchCount     = 0;
-            $UnitPackingCount    = 0;
+            $quantityColor           = 'text-danger';
+            $readCount               = 0;
+            $draftBatchCount         = 0;
+            $UnitPackingCount        = 0;
             $material_total_quantity = 0;
 
             foreach ($parent->Batches as $batch_key => $batch) {
-
                 $date_of_expiry             = $batch->date_of_expiry;
                 $batch->date_in             = !is_null($batch->date_in) ? Carbon::parse($batch->date_in)->format('d/m/Y') : '';
                 $batch->date_of_expiry      = !is_null($batch->date_of_expiry) ? Carbon::parse($batch->date_of_expiry)->format('d/m/Y') : '';
@@ -145,17 +144,16 @@ class DsoRepository implements DsoRepositoryInterface
                             $DateOfExpiryStatus = "text-dark";
                         }
                     }
-
                     $batch->date_of_expiry_color = $DateOfExpiryStatus ?? 'text-dark';
                 }
 
                 if ($batch->is_draft == 1) {
                     $draftBatchCount += 1;
                 } else {
-
                     $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
                     $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
                 }
+
                 if ($page_name != 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
@@ -242,6 +240,9 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 } else {
                     $batch->permission = 'READ_AND_WRITE';
+                }
+                if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin') {
+                    unset($access_material_product[$material_index]->Batches[$batch_index]); 
                 }
             }
             if (count($material->Batches) == 0) {

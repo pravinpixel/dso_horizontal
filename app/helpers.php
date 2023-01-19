@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
 use Picqer\Barcode\BarcodeGeneratorPNG;
+use Illuminate\Support\Str;
 
 if (!function_exists('category_type')) {
     function category_type()
@@ -703,6 +704,64 @@ if (!function_exists('getRoutes')) {
                     return Departments::all();
                     break; 
             }
+        }
+    }
+
+    if (!function_exists('strtoFileExtenion')) {
+        function strtoFileExtenion($text)
+        {
+            return  Str::random(15).'.'.explode('.',$text)[1];
+        }
+    }
+
+    if(!function_exists('cloneDocumentFromBatch')) {
+        function cloneDocumentFromBatch($from_id, $to_id)
+        {
+            $from_batch = Batches::with('BatchFiles')->find($from_id);
+            $to_batch   = Batches::with('BatchFiles')->find($to_id);
+
+            if(Storage::exists($from_batch->iqc_result)) {  
+                $iqc_result_new_file =  "public/".strtoFileExtenion($from_batch->iqc_result);
+                Storage::copy($from_batch->iqc_result, $iqc_result_new_file);
+                $to_batch->iqc_result =  $iqc_result_new_file;
+            }
+
+            if(Storage::exists($from_batch->sds)) {  
+                $sds_new_file =  "public/".strtoFileExtenion($from_batch->sds);
+                Storage::copy($from_batch->sds, $sds_new_file);
+                $to_batch->sds =  $sds_new_file;
+            }
+ 
+            if(Storage::exists($from_batch->extended_qc_result)) {  
+                $extended_qc_result_new_file =  "public/".strtoFileExtenion($from_batch->extended_qc_result);
+                Storage::copy($from_batch->extended_qc_result, $extended_qc_result_new_file);
+                $to_batch->extended_qc_result =  $extended_qc_result_new_file;
+            }
+
+            if(Storage::exists($from_batch->disposal_certificate)) {  
+                $disposal_certificate_new_file =  "public/".strtoFileExtenion($from_batch->disposal_certificate);
+                Storage::copy($from_batch->disposal_certificate, $disposal_certificate_new_file);
+                $to_batch->disposal_certificate =  $disposal_certificate_new_file;
+            }
+
+            if(count($from_batch->BatchFiles) > 0) {
+                foreach ($from_batch->BatchFiles as $key => $file) {
+                    if(Storage::exists($file->file_name)) {  
+                        $file_name =  "public/".strtoFileExtenion($file->file_name);
+                        Storage::copy($file->file_name, $file_name); 
+                        $to_batch->BatchFiles()->create([
+                            'column_name'    => 'coc_coa_mill_cert',
+                            'original_name'  => $file->file_name,
+                            'file_name'      => $file_name,
+                            'file_extension' => explode('.',$file_name)[1],
+                            'file_path'      => asset('storage/app').'/'.$file_name,
+                        ]);
+                    }
+                }
+            }
+            $to_batch->save();
+          
+            return true;
         }
     }
 }
