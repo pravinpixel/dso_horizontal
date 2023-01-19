@@ -22,6 +22,7 @@ use App\Models\UtilizationCart;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -188,8 +189,9 @@ class ReportsController extends Controller
             $quantity = [];
             $label = [];
             foreach ($list as $key => $batch) {
+                Log::info($batch);
                 $quantity[] = $batch->quantity;
-                $label[] =Carbon::parse( $list[0]->created_at)->format('d-M-Y');
+                $label[]    = Carbon::parse($batch->created_at)->format('d-M-Y');
             }
             $categories[] = $label;
    

@@ -15,10 +15,6 @@ class UtilizationCart extends Model
         'quantity'
     ];
 
-    public function getCreatedAtAttribute($date) {
-        return Carbon::parse($date)->format('F');
-    }
-
     public function Batch()
     {
         return $this->hasOne(Batches::class, 'id', 'batch_id');
