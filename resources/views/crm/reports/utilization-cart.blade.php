@@ -1,6 +1,6 @@
 @extends('crm.reports.index')
 
-@section('report_content')
+@section('report_content') 
     <form action="{{ route('reports.utilization-cart') }}" method="POST">
         @csrf
         <div class="row m-0 justify-content-center">
@@ -29,22 +29,22 @@
                 </div>
             </div>
         </div>
-    </form>
-    <div class="modal fade" id="utiliation-cart-model" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+    </form> 
+    <div class="modal fade" id="utiliation-cart-model" data-bs-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-light border-bottom">
                     <h4 class="modal-title text-center w-100 text-primary" id="myLargeModalLabel">Utilization Cart</h4>
                     <div>
-                        <button type="button" class="btn-sm btn btn-light border" onclick="closeUtilizationCart()"><i class="bi bi-x"></i></button>
+                        <button type="button" class="btn-sm btn btn-light border" onclick="closeUtilizationCart()"><i
+                                class="bi bi-x"></i></button>
                     </div>
                 </div>
                 <div class="modal-body">
                     <figure class="highcharts-figure">
                         <div id="container"></div>
                     </figure>
-                    <canvas id="myChart"></canvas>
                 </div>
                 <div class="modal-footer border bg-light">
                     <div class="d-flex col-5 mx-auto justify-content-center align-items-center">
@@ -80,7 +80,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('public/asset/js/vendors/Chart.min.js') }}"></script>
+    <script src="{{ asset('public/asset/js/vendors/HightChart.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             function load_data(start_month = '', end_month = '') {
@@ -91,6 +91,7 @@
                     ],
                     processing: true,
                     serverSide: true,
+                    searching: false,
                     ajax: {
                         url: "{{ route('reports.utilization-cart') }}",
                         data: {
@@ -150,49 +151,30 @@
                 });
             }
 
-            generateChartView = (data) => {
-                new Chart(document.getElementById('myChart'), {
-                    type: 'line',
-                    data: {
-                        labels: data.chart_labels,
-                        datasets: data.datasets
+            generateChartView = (data) => { 
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'line'
                     },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            tooltip: {
-                                enabled: true,
-                                usePointStyle: true,
-                                callbacks: { 
-                                    title: (item) => { 
-                                        console.log(item)
-                                        return 'Barcode Number : ' +  item[0].dataset.label
-                                    },
-                                    label: (item) => { 
-                                        return `Quantity : ${item.raw} / ${item.label}`
-                                    }
-                                },
+                    title: {
+                        text: 'Utilization Cart'
+                    },
+                    xAxis: {
+                        categories : data.categories,
+                    },
+                    yAxis: {
+                        title: false
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
                             },
-                            legend: false,
-                            zoom: {
-                                limits: {
-                                    y: {
-                                        min: 0,
-                                        max: 100
-                                    },
-                                    y2: {
-                                        min: -5,
-                                        max: 5
-                                    }
-                                },
-                            },
-                            title: {
-                                display: true,
-                                text: 'Batches Barcodes'
-                            }
+                            enableMouseTracking: false
                         }
                     },
-                })
+                    series : data.series,
+                });
                 $('#utiliation-cart-model').modal('show');
             }
             closeUtilizationCart = () => {
@@ -228,4 +210,52 @@
             });
         });
     </script>
+
+    <style>
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 360px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+        .highcharts-credits {
+            display: none !important
+        }
+    </style> 
 @endsection

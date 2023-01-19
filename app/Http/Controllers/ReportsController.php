@@ -180,28 +180,28 @@ class ReportsController extends Controller
     }
     public function utilization_chart(Request $request)
     {
-        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])->select("quantity","batch_id","created_at")->get()->groupBy('created_at');
-        $data = [];
-        $datasets = [];
-        $chart_labels = [];
-        
+        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])->select("quantity","batch_id","created_at")->get()->groupBy('batch_id');
+ 
+        $series = [];
+        $categories = [];
         foreach($UtilizationCart as $list) {
             $quantity = [];
+            $label = [];
             foreach ($list as $key => $batch) {
                 $quantity[] = $batch->quantity;
+                $label[] =Carbon::parse( $list[0]->created_at)->format('d-M-Y');
             }
-            $chart_labels[] = $list[0]->created_at;
-            $datasets[] = [
-                "label" => $list[0]->Batch->barcode_number,
-                "data" =>  $quantity,
-                // "backgroundColor"=> '#4088f9',
+            $categories[] = $label;
+   
+            $series[] = [
+                "name" =>  MaterialProducts::find($list[0]->Batch->material_product_id)->item_description,
+                "data" => $quantity
             ];
         }
         return response([
-            "status" => true,
-            "data"   => $data,
-            "datasets"   => $datasets,
-            "chart_labels"   => $chart_labels,
+            "status"     => true,
+            "categories" => $categories[0],
+            "series"     => $series,
         ]);
     }
     public function materialHistoryFilter($request)
