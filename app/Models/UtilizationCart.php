@@ -13,7 +13,7 @@ class UtilizationCart extends Model
     protected $fillable = [
         'batch_id',
         'quantity'
-    ];
+    ]; 
 
     public function Batch()
     {

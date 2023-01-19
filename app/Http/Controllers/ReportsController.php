@@ -181,15 +181,19 @@ class ReportsController extends Controller
     }
     public function utilization_chart(Request $request)
     {
-        $UtilizationCart = UtilizationCart::with('Batch')->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])->select("quantity","batch_id","created_at")->get()->groupBy('batch_id');
- 
-        $series = [];
+        $start_month     = Carbon::parse($request->start_month)->firstOfMonth();
+        $end_month       = Carbon::parse($request->end_month)->lastOfMonth(); 
+        $UtilizationCart = UtilizationCart::with('Batch')
+                ->whereBetween('created_at', [$start_month,$end_month])
+                ->select("quantity","batch_id","created_at")
+                ->get()
+                ->groupBy('batch_id');
+        $series     = [];
         $categories = [];
         foreach($UtilizationCart as $list) {
             $quantity = [];
             $label = [];
             foreach ($list as $key => $batch) {
-                Log::info($batch);
                 $quantity[] = $batch->quantity;
                 $label[]    = Carbon::parse($batch->created_at)->format('d-M-Y');
             }
@@ -204,6 +208,7 @@ class ReportsController extends Controller
             "status"     => true,
             "categories" => $categories[0],
             "series"     => $series,
+            "chart_footer" => Carbon::parse($request->start_month)->format('F Y')." to ".Carbon::parse($request->end_month)->format('F Y')
         ]);
     }
     public function materialHistoryFilter($request)

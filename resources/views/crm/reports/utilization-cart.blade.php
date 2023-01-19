@@ -32,10 +32,10 @@
     </form> 
     <div class="modal fade" id="utiliation-cart-model" data-bs-backdrop="static" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-light border-bottom">
-                    <h4 class="modal-title text-center w-100 text-primary" id="myLargeModalLabel">Utilization Cart</h4>
+                    <h4 class="modal-title w-100 text-primary" id="myLargeModalLabel">Chart Overview</h4>
                     <div>
                         <button type="button" class="btn-sm btn btn-light border" onclick="closeUtilizationCart()"><i
                                 class="bi bi-x"></i></button>
@@ -46,14 +46,8 @@
                         <div id="container"></div>
                     </figure>
                 </div>
-                <div class="modal-footer border bg-light">
-                    <div class="d-flex col-5 mx-auto justify-content-center align-items-center">
-                        <input type="month" name="start_month" disabled id="chart_start_month"
-                            class="form-control custom border-0">
-                        <span class="px-2"> to </span>
-                        <input type="month" name="end_month" disabled id="chart_end_month"
-                            class="form-control custom border-0">
-                    </div>
+                <div class="modal-footer text-center border bg-light justify-content-center fw-bold text-primary">
+                    <div id="chart_footer"></div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -174,7 +168,8 @@
                         }
                     },
                     series : data.series,
-                });
+                }); 
+                $('#chart_footer').html(data.chart_footer)
                 $('#utiliation-cart-model').modal('show');
             }
             closeUtilizationCart = () => {
