@@ -188,26 +188,31 @@ class ReportsController extends Controller
                 ->whereBetween('created_at', [$start_month,$end_month])
                 ->get()
                 ->groupBy('batch_id');
-        $series     = [];
-        $categories = [];
+        
+        $datasets = [];
         foreach($UtilizationCart as $list) {
             $quantity = [];
-            $label = [];
+            $created_at = [];
+            $series = [];
             foreach ($list as $key => $batch) {
-                $quantity[] = $batch->quantity;
-                $label[]    =  Carbon::parse($batch->created_at)->format('d-M-Y');
+                $quantity  [] = $batch->quantity;
+                $created_at[] = SetDateFormat($batch->created_at);
+                $series[] = [
+                    "name" =>  "gfgh",
+                    "data" => $quantity
+                ];
             }
-            $categories[] = $label;
-            $series[] = [
-                "name" =>  MaterialProducts::find($list[0]->Batch->material_product_id)->item_description,
-                "data" => $quantity
+            $datasets[] = [
+                "label" => $created_at,
+                "data"  => $quantity,
+                "datasets" => $series,
+                // "backgroundColor"=> '#4088f9',
             ];
         }
         return response([
             "status"       => true,
-            "categories"   => $categories[0],
-            "series"       => $series,
-            "chart_footer" => Carbon::parse($request->start_month)->format('F Y')." to ".Carbon::parse($request->end_month)->format('F Y')
+            "datasets"     => $datasets,
+            "chart_labels" => $created_at,
         ]);
     }
     public function materialHistoryFilter($request)
