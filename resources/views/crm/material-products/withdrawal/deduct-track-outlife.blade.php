@@ -34,35 +34,59 @@
                                                 <th class="font-12">Outlife expiry from last date/time</th>
                                                 <th class="font-12">Outlife expiry from current date/time</th>
                                             </tr>
-                                            @foreach (array_reverse($row['RepackOutlife']) as $key => $repack)
-                                                @if ($repack['updated_outlife_seconds'])
-                                                    <tr>
-                                                        <td>
-                                                            <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
-                                                            <input type="hidden" name="id[]"
-                                                                value="{{ $repack['id'] }}">
-                                                        </td>
-                                                        <td><small>{{ $row->Batch->brand }}</small></td>
-                                                        <td><small>{{ $row->Batch->batch }} /
-                                                                {{ $row->Batch->serial }}</small>
-                                                        </td>
-                                                        <td class="p-0"><small> {{ auth_user()->alias_name }}
-                                                            </small></td>
-                                                        <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
-                                                        <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
-                                                        <td><small>{{ $repack['quantity'] }}</small></td>
-                                                        <td class="p-0 py-0 px-1">
-                                                            <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
-                                                        </td>
-                                                        <td class="child-td">
-                                                            <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
-                                                        </td>
-                                                        <td class="child-td">
-                                                            <small class="text-dark">{{ SetDateFormatWithHour($repack['current_outlife_expiry']) ?? '-' }}</small>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
+                                            @if (count($row['RepackOutlife']))
+                                                @foreach (array_reverse($row['RepackOutlife']) as $key => $repack)
+                                                    @if ($repack['updated_outlife_seconds'])
+                                                        <tr>
+                                                            <td>
+                                                                <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+                                                                <input type="hidden" name="id[]"
+                                                                    value="{{ $repack['id'] }}">
+                                                            </td>
+                                                            <td><small>{{ $row->Batch->brand }}</small></td>
+                                                            <td><small>{{ $row->Batch->batch }} /
+                                                                    {{ $row->Batch->serial }}</small>
+                                                            </td>
+                                                            <td class="p-0"><small> {{ auth_user()->alias_name }}
+                                                                </small></td>
+                                                            <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
+                                                            <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
+                                                            <td><small>{{ $repack['quantity'] }}</small></td>
+                                                            <td class="p-0 py-0 px-1">
+                                                                <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
+                                                            </td>
+                                                            <td class="child-td">
+                                                                <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
+                                                            </td>
+                                                            <td class="child-td">
+                                                                <small class="text-dark">{{ SetDateFormatWithHour($repack['current_outlife_expiry']) ?? '-' }}</small>
+                                                            </td>
+                                                        </tr>
+                                                        @else
+                                                        <tr>
+                                                            <td>
+                                                                <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+                                                                <input type="hidden" name="id[]"
+                                                                    value="{{ $repack['id'] }}">
+                                                            </td>
+                                                            <td><small>{{ $row->Batch->brand }}</small></td>
+                                                            <td><small>{{ $row->Batch->batch }} /
+                                                                    {{ $row->Batch->serial }}</small>
+                                                            </td>
+                                                            <td class="p-0"><small> {{ auth_user()->alias_name }}
+                                                                </small></td>
+                                                            <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
+                                                            <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
+                                                            <td><small>{{ $repack['quantity'] }}</small></td>
+                                                            <td class="p-0 py-0 px-1">
+                                                                <textarea name="remarks[]" class="form-control h-100 w-100"></textarea>
+                                                            </td>
+                                                            <td class="child-td">-</td>
+                                                            <td class="child-td">-</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
