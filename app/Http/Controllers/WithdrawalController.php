@@ -21,32 +21,17 @@ class WithdrawalController extends Controller
                 'user_id'       => auth_user()->id,
                 'withdraw_type' => 'DEDUCT_TRACK_USAGE'
             ])->get();
-            $deduct_track_outlife_data = withdrawCart::with('RepackOutlife')->where([
+            $deduct_track_outlife = withdrawCart::with('batch','RepackOutlife')->where([
                 'user_id'       => auth_user()->id,
                 'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
             ])->get();
-            $deduct_track_outlife = [];
-            foreach ($deduct_track_outlife_data as $key => $value) {
-                $RepackOutlife = [];
-                foreach ($value->RepackOutlife->toArray() as $key => $repack) {
-                    // if($repack['updated_outlife_seconds']) {
-                        $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
-                        $RepackOutlife[] = $repack;
-                    // }
-                }
-                if(count($RepackOutlife))    {
-                    $value['RepackOutlife'] = $RepackOutlife;
-                    $value['barcode_number'] = Batches::find($value['batch_id'])->barcode_number ;
-                    $deduct_track_outlife[] = $value;
-                }
-            }
             return [
                 "direct_deducts"       => $direct_deducts,
                 "deduct_track_usage"   => $deduct_track_usage,
                 "deduct_track_outlife" => $deduct_track_outlife,
             ];
         } else {
-            return withdrawCart::with('batch')->where([
+            return withdrawCart::with('batch','RepackOutlife')->where([
                 'user_id'       => auth_user()->id,
                 'withdraw_type' => $type
             ])->get();
@@ -87,7 +72,7 @@ class WithdrawalController extends Controller
             $table_view = view('crm.material-products.withdrawal.direct-deduct', compact('direct_deducts'));
         } elseif($type === 'DEDUCT_TRACK_USAGE') {
             $table_view = view('crm.material-products.withdrawal.deduct-track-useage', compact('deduct_track_usage'));
-        } elseif($type === 'DEDUCT_TRACK_USAGE') {
+        } elseif($type === 'DEDUCT_TRACK_OUTLIFE') {
             $table_view = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
         }
 
@@ -192,26 +177,11 @@ class WithdrawalController extends Controller
                         'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE',
                         'quantity'      => 1,
                     ]);
-                    $deduct_track_outlife_data = withdrawCart::with('RepackOutlife')->where([
+                    $deduct_track_outlife = withdrawCart::with('RepackOutlife')->where([
                         'user_id'       => auth_user()->id,
                         'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
                     ])->get();
-
-                    $deduct_track_outlife = [];
-                    foreach ($deduct_track_outlife_data as $key => $value) {
-                        $RepackOutlife = [];
-                        foreach ($value->RepackOutlife->toArray() as $key => $repack) {
-                            // if($repack['updated_outlife_seconds'] != '' || $repack['updated_outlife_seconds'] != null) {
-                                $repack['item_description'] = Batches::find($repack['batch_id'])->BatchMaterialProduct->item_description;
-                                $RepackOutlife[] = $repack;
-                            // }
-                        }
-                        if(count($RepackOutlife)) {
-                            $value['RepackOutlife'] = $RepackOutlife;
-                            $value['barcode_number'] = Batches::find($value['batch_id'])->barcode_number ;
-                            $deduct_track_outlife[] = $value;
-                        }
-                    }
+             
                     $data = view('crm.material-products.withdrawal.deduct-track-outlife', compact('deduct_track_outlife'));
 
                     return response([

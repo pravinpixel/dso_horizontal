@@ -71,11 +71,10 @@ class MartialProductRepository implements MartialProductRepositoryInterface {
         }
 
         // $batch                  =   Batches::updateOrCreate(['material_product_id' => $material_product->id], $fillable);
-
-        RepackOutlife::updateOrCreate(['batch_id' => $batch->id],[
-            'batch_id'            => $batch->id,
-            'input_repack_amount' => $batch->unit_packing_value
-        ]);
+        // RepackOutlife::updateOrCreate(['batch_id' => $batch->id],[
+        //     'batch_id'            => $batch->id,
+        //     'input_repack_amount' => $batch->unit_packing_value
+        // ]);
 
         $this->storeFiles($request, $batch);
 

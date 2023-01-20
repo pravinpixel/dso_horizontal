@@ -13,7 +13,6 @@ class TransferBatchController extends Controller
 {
     public function transfer(Request $request)
     {
-
         $current_batch                 = Batches::find($request->id);
         MaterialProductHistory($current_batch,'before_transfer');
         $created_batch                 = $current_batch->replicate();
@@ -25,18 +24,8 @@ class TransferBatchController extends Controller
         $created_batch->housing        = $request->housing;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
-
         cloneDocumentFromBatch($request->id,$created_batch->id);
-
         MaterialProductHistory($created_batch,'after_transfer');
-
-        RepackOutlife::updateOrCreate(['batch_id' => $created_batch->id], [
-            'batch_id'            => $created_batch->id,
-            'quantity'            => $created_batch->quantity,
-            'total_quantity'      => $created_batch->quantity * $created_batch->unit_packing_value,
-            'input_repack_amount' => $created_batch->unit_packing_value
-        ]);
-
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
                 $created_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $created_batch->id],[

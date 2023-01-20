@@ -36,15 +36,6 @@ class RepackBatchController extends Controller
         $new_batch->save();
         cloneDocumentFromBatch($request->id,$new_batch->id);
         MaterialProductHistory($new_batch,'Before Repack / Transfer');
-
-        RepackOutlife::updateOrCreate(['batch_id' => $new_batch->id], [
-            'batch_id'            => $new_batch->id,
-            'quantity'            => $new_batch->quantity,
-            'total_quantity'      => $new_batch->quantity * $new_batch->unit_packing_value,
-            'input_repack_amount' => $new_batch->unit_packing_value
-        ]);
-
-
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
                 $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
@@ -122,11 +113,7 @@ class RepackBatchController extends Controller
                     $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");
                     $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
-
-                    RepackOutlife::create([
-                        'batch_id'       => $next_batch->id,
-                        'total_quantity' => $row['repack_amount'],
-                    ]);
+                    
                     $old_value           = $current_batch;
                     $new_value           = clone $current_batch;
                     LogActivity::dataLog($old_value, $new_value);
