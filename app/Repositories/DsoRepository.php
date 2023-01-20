@@ -241,7 +241,7 @@ class DsoRepository implements DsoRepositoryInterface
                 } else {
                     $batch->permission = 'READ_AND_WRITE';
                 }
-                if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin') {
+                if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin' && $page_name == 'THRESHOLD_QTY') {
                     unset($access_material_product[$material_index]->Batches[$batch_index]); 
                 }
             }

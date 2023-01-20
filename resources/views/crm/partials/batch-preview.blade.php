@@ -178,11 +178,8 @@
             @if (!is_null($batch->BatchFiles))
                 @foreach ($batch->BatchFiles as $coc)
                     <div class="btn-group mt-1">
-                        <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                            href="{{ asset('storage/app/') . '/' . $coc->file_name }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                        <button onclick="download('{{ $coc->id }}',$coc->file_name)"
-                            class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                                class="fa fa-download me-1"></i>Download</button>
+                        <a class="badge badge-outline-info rounded-pill" href="{{ asset('storage/app/') . '/' . $coc->file_name }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
+                        <button onclick="download('{{ $coc->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i class="fa fa-download me-1"></i>Download</button>
                     </div>
                 @endforeach
             @endif
