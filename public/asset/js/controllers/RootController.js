@@ -736,9 +736,9 @@ app.controller('RootController', function ($scope, $http) {
         }
 
         $scope.repack_outlife_unit_of_measure = unit_of_measure.name
-        $scope.repack_outlife_days = initial_day
-        $scope.currentBatchId = batch.id
-        $scope.currentBatch = batch
+        $scope.repack_outlife_days            = initial_day
+        $scope.currentBatchId                 = batch.id
+        $scope.currentBatch                   = batch
         // end_of_batch
         $http.get(`search-or-add/repack-batch/${batch.id}`).then((response) => {
             $scope.repack_outlife_table.length = 0;

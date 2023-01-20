@@ -61,16 +61,21 @@ class RepackBatchController extends Controller
     }
     public static function get_repack_outlife($id)
     {
-        $Batches    =    Batches::with('RepackOutlife')->find($id);
- 
+        $batch    =   Batches::with('RepackOutlife')->find($id);
+        if(count($batch->RepackOutlife) == 0) {
+            $batch->RepackOutlife()->create([
+                'input_repack_amount' => $batch->unit_packing_value
+            ]);
+        }
+        $batch    =   Batches::with('RepackOutlife')->find($id);
         $users = [];
-        if(!is_null($Batches->access)) {
-            foreach(json_decode($Batches->access) as $user_id) {
+        if(!is_null($batch->access)) {
+            foreach(json_decode($batch->access) as $user_id) {
                 $users[] = User::find($user_id)->alias_name;
             }
-            $Batches->access = json_encode($users[0]);
+            $batch->access = json_encode($users[0]);
         } 
-        return $Batches;
+        return $batch;
     } 
     public function store_repack_outlife(Request $request , $id)
     { 

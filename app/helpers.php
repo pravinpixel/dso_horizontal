@@ -764,4 +764,17 @@ if (!function_exists('getRoutes')) {
             return true;
         }
     }
+
+    if (!function_exists('is_repack_outlife')) {
+        function is_repack_outlife($data)
+        {
+            $is_null = 0;
+            foreach ($data as $key => $item) {
+                if(!is_null($item->draw_in_time_stamp)) {
+                    $is_null ++;
+                }
+            }
+            return $is_null == 0 ? 0 : 1;
+        }
+    }
 }
