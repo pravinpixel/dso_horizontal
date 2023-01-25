@@ -76,11 +76,13 @@
                                                                     <small class="text-dark">{{ $row->Batch->outlife }}</small>
                                                                 </td>
                                                                 <td class="child-td">
-                                                                    <small class="text-dark">{{ $repack['current_outlife_expiry'] }}</small>
+                                                                    <small class="text-dark">
+                                                                        {{ currentOutlifeExpiry($row->Batch->outlife_seconds) }}
+                                                                    </small>
                                                                 </td>
                                                             </tr> 
                                                         @endif
-                                                    @endif 
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

@@ -14,6 +14,7 @@ use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -782,4 +783,12 @@ if (!function_exists('getRoutes')) {
             return $is_null == 0 ? 0 : 1;
         }
     }
+
+    if (!function_exists('currentOutlifeExpiry')) {
+        function currentOutlifeExpiry($outlife_seconds)
+        {
+            return CarbonImmutable::now()->add($outlife_seconds, 'second')->toDateTimeString();
+        }
+    }
+
 }
