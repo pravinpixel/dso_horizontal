@@ -36,29 +36,50 @@
                                                     <th class="font-12">Outlife expiry from last date/time</th>
                                                     <th class="font-12">Outlife expiry from current date/time</th>
                                                 </tr> 
-                                                @foreach ($row->RepackOutlife as $repack)
-
+                                                @if (count($row->Batch->TrackOutlifeHistory) > 0)
+                                                    @foreach ($row->Batch->TrackOutlifeHistory as $history)
+                                                        @if ($history->type == 'WITH_DRAWING')
+                                                            <tr>
+                                                                <td> <small>{{ $history->item_description }}</small> </td>
+                                                                <td><small>{{ $history->batch_serial }}</small></td>
+                                                                <td class="p-0"><small> {{ $history->last_accessed }} </small></td>
+                                                                <td><small>{{ SetDateFormatWithHour($history->created_at) }}</small></td>
+                                                                <td><small>{{ $history->unit_packing_value }}</small></td>
+                                                                <td><small>{{ $history->quantity }}</small></td>
+                                                                <td><small>{{ $history->total_quantity }}</small></td>
+                                                                <td><small>{{ $history->withdraw_quantity }}</small></td>
+                                                                <td><small>{{ $history->remarks }}</small></td>
+                                                                <td><small>{{ $row->RepackOutlife[0]->updated_outlife }}</small></td>
+                                                                <td><small>{{ $row->RepackOutlife[0]->current_outlife_expiry }}</small></td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                                @foreach ($row->RepackOutlife->toArray() as $key => $repack)
                                                     @if ($repack['draw_in'] == 1 && $repack['draw_out'] == 1)
-                                                        <tr>
-                                                            <td>
-                                                                <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
-                                                                <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
-                                                            </td>
-                                                            <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
-                                                            <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
-                                                            <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
-                                                            <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
-                                                            <td><small>{{ $repack['quantity'] }}</small></td>
-                                                            <td><small>{{ $row->Batch->total_quantity  * $repack['quantity'] }}</small></td>
-                                                            <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
-                                                            <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value="{{ $repack['remarks'] ?? "-" }}"/></td> 
-                                                            <td class="child-td">
-                                                                <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
-                                                            </td>
-                                                            <td class="child-td">
-                                                                <small class="text-dark">{{ $repack['current_outlife_expiry'] }}</small>
-                                                            </td>
-                                                        </tr>
+                                                        @if ($key == 0)
+                                                            <tr>
+                                                                <td>
+                                                                    <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+                                                                    <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
+                                                                    <input type="hidden" value="WITH_DRAWING" name="cart_type[]"/>
+                                                                </td>
+                                                                <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
+                                                                <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
+                                                                <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
+                                                                <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
+                                                                <td><small>{{ $row->Batch->quantity }}</small></td>
+                                                                <td><small>{{ $row->Batch->total_quantity }}</small></td>
+                                                                <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
+                                                                <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value="{{ $repack['remarks'] }}"/></td> 
+                                                                <td class="child-td">
+                                                                    <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
+                                                                </td>
+                                                                <td class="child-td">
+                                                                    <small class="text-dark">{{ $repack['current_outlife_expiry'] }}</small>
+                                                                </td>
+                                                            </tr> 
+                                                        @endif
                                                     @endif 
                                                 @endforeach
                                             </tbody>
@@ -94,9 +115,27 @@
                                                     <th class="font-12">Withdraw Qty</th>
                                                     <th class="font-12">Remarks</th>
                                                 </tr> 
+                                                @if (count($row->Batch->TrackOutlifeHistory) > 0)
+                                                    @foreach ($row->Batch->TrackOutlifeHistory as $history)
+                                                        @if ($history->type == 'WITH_OUT_DRAWING')
+                                                            <tr>
+                                                                <td> <small>{{ $history->item_description }}</small> </td>
+                                                                <td><small>{{ $history->batch_serial }}</small></td>
+                                                                <td class="p-0"><small> {{ $history->last_accessed }} </small></td>
+                                                                <td><small>{{ SetDateFormatWithHour($history->created_at) }}</small></td>
+                                                                <td><small>{{ $history->unit_packing_value }}</small></td>
+                                                                <td><small>{{ $history->quantity }}</small></td>
+                                                                <td><small>{{ $history->total_quantity }}</small></td>
+                                                                <td><small>{{ $history->withdraw_quantity }}</small></td>
+                                                                <td><small>{{ $history->remarks }}</small></td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                                 <tr>
                                                     <td>
                                                         <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
+                                                        <input type="hidden" value="WITH_OUT_DRAWING" name="cart_type[]"/> 
                                                         <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
                                                     </td>
                                                     <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>

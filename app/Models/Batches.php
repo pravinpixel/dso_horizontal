@@ -131,4 +131,9 @@ class Batches extends Model
     {
         return $this->hasMany(DeductTrackUsage::class, 'batch_id', 'id');
     }
+    
+    public function TrackOutlifeHistory()
+    {
+        return $this->hasMany(TrackOutlifeHistory::class, 'batch_id', 'id');
+    } 
 }

@@ -265,15 +265,30 @@ class WithdrawalController extends Controller
     public function deduct_track_outlife(Request $request)
     { 
         foreach ($request->batch_id as $key => $batch_id) {
-            $batch          = Batches::find($batch_id);
-            MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_OUTLIFE'); 
-            $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
-            $batch->update([
-                'remarks'        => $request->remarks[$key],
-                'quantity'       => $total_quantity / $batch->unit_packing_value,
-                'total_quantity' => $total_quantity
-            ]);
-            MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
+            if(isset($request->withdraw_quantity[$key])) {
+                $batch  = Batches::with('BatchMaterialProduct')->find($batch_id);
+
+                $batch->TrackOutlifeHistory()->create([
+                    'type'               => $request->cart_type[$key],
+                    'item_description'   => $batch->BatchMaterialProduct->item_description,
+                    'batch_serial'       => $batch->batch.' / '.$batch->serial,
+                    'last_accessed'      => auth_user()->alias_name,
+                    'unit_packing_value' => $batch->unit_packing_value,
+                    'quantity'           => $batch->quantity,
+                    'total_quantity'     => $batch->total_quantity,
+                    'withdraw_quantity'  => $request->withdraw_quantity[$key],
+                    'remarks'            => $request->remarks[$key] ?? "-"
+                ]);
+                
+                MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_OUTLIFE');
+                $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
+                $batch->update([
+                    'remarks'        => $request->remarks[$key],
+                    'quantity'       => $total_quantity / $batch->unit_packing_value,
+                    'total_quantity' => $total_quantity
+                ]);
+                MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
+            }
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
         if($request->print_outlife_expiry == 1) {

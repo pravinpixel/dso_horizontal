@@ -775,7 +775,7 @@ if (!function_exists('getRoutes')) {
         {
             $is_null = 0;
             foreach ($data as $key => $item) {
-                if(!is_null($item->draw_in_time_stamp)) {
+                if(!is_null($item->draw_in_time_stamp) && !is_null($item->draw_out_time_stamp)) {
                     $is_null ++;
                 }
             }
