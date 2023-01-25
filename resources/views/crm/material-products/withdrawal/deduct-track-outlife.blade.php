@@ -42,15 +42,15 @@
                                                         <tr>
                                                             <td>
                                                                 <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
-                                                                <input type="hidden" name="id[]" value="{{ $repack['id'] }}">
+                                                                <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
                                                             </td>
                                                             <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
                                                             <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
                                                             <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
                                                             <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                                                             <td><small>{{ $repack['quantity'] }}</small></td>
-                                                            <td><small>{{ $row->Batch->unit_packing_value  * $repack['quantity'] }}</small></td>
-                                                            <td class="p-0 py-0 px-1"><input class="form-control form-control-sm text-center" type="number"/></td> 
+                                                            <td><small>{{ $row->Batch->total_quantity  * $repack['quantity'] }}</small></td>
+                                                            <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
                                                             <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value="{{ $repack['remarks'] ?? "-" }}"/></td> 
                                                             <td class="child-td">
                                                                 <small class="text-dark">{{ $repack['updated_outlife'] ?? '-' }}</small>
@@ -96,6 +96,7 @@
                                                 </tr> 
                                                 <tr>
                                                     <td>
+                                                        <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
                                                         <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
                                                     </td>
                                                     <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
@@ -103,8 +104,8 @@
                                                     <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
                                                     <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                                                     <td><small>{{ $row->Batch->quantity }}</small></td>
-                                                    <td><small>{{ $row->Batch->unit_packing_value  * $row->Batch->quantity }}</small></td>
-                                                    <td class="p-0 py-0 px-1"><input class="form-control form-control-sm text-center" type="number"/></td> 
+                                                    <td><small>{{ $row->Batch->total_quantity }}</small></td>
+                                                    <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
                                                     <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
                                                 </tr>
                                             </tbody>

@@ -609,7 +609,12 @@ if (!function_exists('getRoutes')) {
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
             }
-
+            if($ActionTaken == 'BEFORE_DEDUCT_TRACK_OUTLIFE') {
+                $ActionTaken = 'Before With Out Draw In/Out';
+            }
+            if($ActionTaken == 'AFTER_DEDUCT_TRACK_OUTLIFE') {
+                $ActionTaken = 'After With Out Draw In/Out';
+            }
             materialProductHistory::updateOrCreate([
                 'batch_id'                 => $batch->id,
                 'barcode_number'           => $batch->barcode_number,

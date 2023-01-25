@@ -263,14 +263,17 @@ class WithdrawalController extends Controller
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
     public function deduct_track_outlife(Request $request)
-    {
-        foreach ($request->id as $key => $row) {
-            $repackOutlife = RepackOutlife::find($request->id[$key]);
-            MaterialProductHistory($repackOutlife,'BEFORE_DEDUCT_TRACK_OUTLIFE');
-            $repackOutlife->update([
-                'remarks' => $request->remarks[$key],
+    { 
+        foreach ($request->batch_id as $key => $batch_id) {
+            $batch          = Batches::find($batch_id);
+            MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_OUTLIFE'); 
+            $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
+            $batch->update([
+                'remarks'        => $request->remarks[$key],
+                'quantity'       => $total_quantity / $batch->unit_packing_value,
+                'total_quantity' => $total_quantity
             ]);
-            MaterialProductHistory($repackOutlife,'AFTER_DEDUCT_TRACK_OUTLIFE');
+            MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
         if($request->print_outlife_expiry == 1) {
