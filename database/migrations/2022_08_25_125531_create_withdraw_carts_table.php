@@ -16,9 +16,10 @@ class CreateWithdrawCartsTable extends Migration
         Schema::create('withdraw_carts', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->string('withdraw_type');
             $table->integer('quantity')->default(1);
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

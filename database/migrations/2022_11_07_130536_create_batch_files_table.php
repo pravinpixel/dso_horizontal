@@ -15,12 +15,13 @@ class CreateBatchFilesTable extends Migration
     {
         Schema::create('batch_files', function (Blueprint $table) {
             $table->id();
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->string('column_name'); 
             $table->string('original_name');
             $table->string('file_name');
             $table->string('file_extension');
             $table->text('file_path');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

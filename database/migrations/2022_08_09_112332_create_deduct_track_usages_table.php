@@ -15,7 +15,7 @@ class CreateDeductTrackUsagesTable extends Migration
     {
         Schema::create('deduct_track_usages', function (Blueprint $table) {
             $table->id();
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->bigInteger('quantity');
             $table->string('barcode_number');
             $table->string('item_description');
@@ -24,6 +24,7 @@ class CreateDeductTrackUsagesTable extends Migration
             $table->decimal('used_amount',10,3);
             $table->decimal('remain_amount',10,3);
             $table->string('remarks')->nullable();
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

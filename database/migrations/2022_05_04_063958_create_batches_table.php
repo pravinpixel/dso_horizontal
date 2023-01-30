@@ -65,7 +65,7 @@ class CreateBatchesTable extends Migration
             $table->longText('repack_size')->nullable();
             $table->integer('end_of_batch')->nullable()->default(0);
             $table->string('withdrawal_type')->nullable();
-            $table->integer('user_id');
+            $table->integer('user_id'); 
             $table->timestamps();
         });
     }

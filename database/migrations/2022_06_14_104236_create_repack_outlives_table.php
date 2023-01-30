@@ -15,7 +15,7 @@ class CreateRepackOutlivesTable extends Migration
     {
         Schema::create('repack_outlives', function (Blueprint $table) {
             $table->id();
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->boolean('draw_in')->nullable()->default(true);
             $table->boolean('draw_out')->nullable()->default(false);
             $table->string('draw_in_time_stamp')->nullable();
@@ -38,6 +38,7 @@ class CreateRepackOutlivesTable extends Migration
             $table->string('current_outlife_expiry')->nullable();
             $table->longText('remarks')->nullable();
             $table->integer('user_id')->nullable(); 
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

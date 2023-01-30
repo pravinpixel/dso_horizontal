@@ -447,7 +447,7 @@ class MaterialProductsController extends Controller
                 }
             }
         }
-        Log::info($quantityColor);
+
         return $batch->update([
             'quantity_color' => $quantityColor
         ]);
@@ -521,7 +521,7 @@ class MaterialProductsController extends Controller
         $data->Batches()->delete();
         $data->delete();
         LogActivity::log($id);
-        return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
+        return response(['status' => true, 'message' => trans('response.delete')], Response::HTTP_OK);
     }
     public function batch_destroy($id)
     {

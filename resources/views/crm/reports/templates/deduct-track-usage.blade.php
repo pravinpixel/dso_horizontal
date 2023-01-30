@@ -17,7 +17,7 @@
             <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
             <td>{{ $batch->quantity }}</td>
             <td>{{ $batch->StorageArea->name }}</td>
-            <td>{{ $batch->housing_type.'  - '.$batch->housing  }}</td>
+            <td>{{ $batch->HousingType->name.'  - '.$batch->housing  }}</td>
             <td>
                 @if (count($batch->BatchOwners ?? []))
                     @foreach ($batch->BatchOwners as $key => $owner)

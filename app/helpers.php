@@ -16,6 +16,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
@@ -592,9 +593,9 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
         {
-            $batch = Batches::find($Batch->id);
+            $batch = Batches::with('BatchOwners')->find($Batch->id);
             $BatchOwners = '';
-            if ($batch->BatchOwners ?? false) {
+            if (count($batch->BatchOwners) > 0) {
                 foreach ($batch->BatchOwners as $key => $owner) {
                     if ($owner->alias_name ?? false) {
                         $BatchOwners .= $owner->alias_name . ' , ';
@@ -606,6 +607,9 @@ if (!function_exists('getRoutes')) {
             }
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT') {
                 $DrawStatus = 'Draw OUT';
+            }
+            if ($ActionTaken == 'AUTO_DRAW_IN') {
+                $DrawStatus = 'AUTO DRAW IN';
             }
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
@@ -623,7 +627,7 @@ if (!function_exists('getRoutes')) {
                 'ItemDescription'          => $batch->BatchMaterialProduct->item_description,
                 'Brand'                    => $batch->brand,
                 'BatchSerial'              => $batch->batch . " / " . $batch->serial,
-                'TransactionBy'            => auth_user()->alias_name,
+                'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRA",
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
                 'UnitPackingValue'         => $batch->unit_packing_value,

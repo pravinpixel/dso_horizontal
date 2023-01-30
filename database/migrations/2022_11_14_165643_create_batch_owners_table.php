@@ -15,9 +15,10 @@ class CreateBatchOwnersTable extends Migration
     {
         Schema::create('batch_owners', function (Blueprint $table) {
             $table->id();
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->integer('user_id');
             $table->string('alias_name');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

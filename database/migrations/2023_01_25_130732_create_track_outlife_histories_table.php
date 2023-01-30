@@ -15,7 +15,7 @@ class CreateTrackOutlifeHistoriesTable extends Migration
     {
         Schema::create('track_outlife_histories', function (Blueprint $table) {
             $table->id();
-            $table->integer('batch_id');
+            $table->unsignedBigInteger('batch_id');
             $table->string('type');
             $table->string('item_description');
             $table->string('batch_serial');
@@ -25,6 +25,7 @@ class CreateTrackOutlifeHistoriesTable extends Migration
             $table->string('total_quantity');
             $table->string('withdraw_quantity');
             $table->text('remarks');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
         });
     }

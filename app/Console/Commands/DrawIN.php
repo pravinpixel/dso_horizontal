@@ -43,15 +43,17 @@ class DrawIN extends Command
      */
     public function handle()
     {
-        $Batches = Batches::with("RepackOutlife")->get();
+        Log::info("Draw IN !");
+        $Batches = Batches::with("RepackOutlife","BatchOwners")->get();
         foreach($Batches as $batch) {
             foreach($batch->RepackOutlife as $outlife) {
-                if($outlife->draw_in == 0 && $outlife->draw_out == 1) { //$outlife->draw_in == 0 && $outlife->draw_out == 1
+                if(!is_null($outlife->draw_in_time_stamp) && is_null($outlife->draw_out_time_stamp)) {
                     $time1     = new DateTime($outlife->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
 
-                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
+                    if(true) {
+                     // if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
 
                         if($batch->unit_packing_value != 0) {
                             $batch->RepackOutlife()->create([
@@ -87,21 +89,11 @@ class DrawIN extends Command
                             'updated_outlife_seconds' => $updated_outlife_seconds,
                             'current_outlife_expiry'  => $current_outlife_expiry,
                         ]);
-                        LogSheet::updateOrCreate([
-                            'ip'          => request()->ip(),
-                            'agent'       => request()->header('user-agent'),
-                            'user_id'     => 0,
-                            'user_name'   => 'Server System',
-                            'module_name' => 'Batch',
-                            'action_type' => 'AUTO DRAW IN	',
-                            "module_id"   =>  $batch->id,
-                            'remarks'     =>  "New Auto Draw In"
-                        ]);
+                        MaterialProductHistory($batch,'AUTO_DRAW_IN');
                         Log::info("Draw IN Success !");
                     }
                 }
             }
         }
-        Log::info("Draw IN Working !");
     }
 }
