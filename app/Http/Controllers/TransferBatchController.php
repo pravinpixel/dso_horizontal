@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\LogActivity;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
-use App\Models\RepackOutlife;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

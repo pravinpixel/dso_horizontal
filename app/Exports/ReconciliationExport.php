@@ -20,7 +20,7 @@ class ReconciliationExport implements FromArray, WithHeadings , ShouldAutoSize, 
     public function array(): array
     {
         $ListOfBatches = [];
-        foreach (Batches::where('is_draft',0)->get() as $key => $batch) {
+        foreach (Batches::where('is_draft',0)->where('quantity','!=',0)->get() as $key => $batch) {
             $ListOfBatches[] = [
                 'no'               => $key + 1,
                 'item_description' => $batch->BatchMaterialProduct->item_description ?? '',

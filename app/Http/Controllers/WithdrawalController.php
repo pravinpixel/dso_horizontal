@@ -279,7 +279,7 @@ class WithdrawalController extends Controller
                     'withdraw_quantity'  => $request->withdraw_quantity[$key],
                     'remarks'            => $request->remarks[$key] ?? "-"
                 ]);
-                
+                $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] ]);
                 MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_OUTLIFE');
                 $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
                 $batch->update([
@@ -287,6 +287,7 @@ class WithdrawalController extends Controller
                     'quantity'       => $total_quantity / $batch->unit_packing_value,
                     'total_quantity' => $total_quantity
                 ]);
+               
                 MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
             }
         }

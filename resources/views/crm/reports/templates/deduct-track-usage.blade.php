@@ -17,7 +17,7 @@
             <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
             <td>{{ $batch->quantity }}</td>
             <td>{{ $batch->StorageArea->name }}</td>
-            <td>{{ $batch->housing }}</td>
+            <td>{{ $batch->housing_type.'  - '.$batch->housing  }}</td>
             <td>
                 @if (count($batch->BatchOwners ?? []))
                     @foreach ($batch->BatchOwners as $key => $owner)
@@ -52,7 +52,7 @@
                     <td>{{ $repack->created_at->format('d/m/Y') }}</td>
                     <td>{{ $repack->created_at->format('H:i:s A') }}</td>
                     <td>{{ $repack->User->alias_name ?? '' }}</td>
-                    <td>{{ $repack->input_repack_amount }}</td>
+                    <td>{{ $repack->old_input_repack_amount }}</td>
                     <td>{{ $repack->remain_amount }}</td>
                     <td>{{ $repack->remain_days }}</td>
                     <td>{{ $batch->barcode_number }}</td>
