@@ -24,7 +24,7 @@ class AutoDrawInJob implements ShouldQueue
                     $time1     = new DateTime($outlife->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-                    if(true) {
+                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
                         $auto_draw_date       = Carbon::parse($outlife->updated_at)->addHours(8)->addMinutes(30);
                         $auto_draw_difference = dateDifferStr(new DateTime($outlife->updated_at), new DateTime($auto_draw_date));
                         
