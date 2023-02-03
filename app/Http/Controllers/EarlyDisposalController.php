@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class EarlyDisposalController extends Controller
 {
+    public $MartialProduct, $dsoRepository;
     public function __construct(
         DsoRepositoryInterface $dsoRepositoryInterface,
         MartialProductRepository $MartialProductRepository
@@ -33,7 +34,6 @@ class EarlyDisposalController extends Controller
     }
     public function disposal_update(Request $request)
     {
-        // dd("update.disposal");
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $batch->update([
@@ -42,6 +42,11 @@ class EarlyDisposalController extends Controller
             'disposed_after'           => $request->disposed_after ?? null,
             'disposed_status'          => true
         ]);
+        if($request->used_for_td_expt_only == 1) {
+            MaterialProductHistory($batch,'USED_FOR_TD_EXPT');
+        } else {
+            MaterialProductHistory($batch,'TO_DISPOSE');
+        }
         TrackDisposedBatches($batch, $request->quantity);
         return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
