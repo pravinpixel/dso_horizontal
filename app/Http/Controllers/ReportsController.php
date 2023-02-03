@@ -321,7 +321,7 @@ class ReportsController extends Controller
         } elseif(!is_null($request->used_for_td_expt_only)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
             ->where( 'is_draft' , 0)
-            ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
+            ->where('coc_coa_mill_cert_status',$request->used_for_td_expt_only == 1 ? 'on' : 'off')
             ->latest()->get();
         } elseif(!is_null($request->department)) {
             $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
