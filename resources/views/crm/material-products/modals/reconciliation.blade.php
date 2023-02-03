@@ -10,17 +10,17 @@
                         <tr>
                             <th>Item Description</th>
                             <td>:</td>
-                            <td>Acetone IND</td>
+                            <td ng-bind="item_description"></td>
                         </tr>
                         <tr>
                             <th>Brand</th>
                             <td>:</td>
-                            <td>XOX</td>
+                            <td ng-bind="brand"></td>
                         </tr>
                         <tr>
                             <th>Batch/Serial#</th>
                             <td>:</td>
-                            <td>Batch/1</td>
+                            <td ng-bind="batch_serial"></td>
                         </tr>
                         <tr>
                             <th>System Stock</th>

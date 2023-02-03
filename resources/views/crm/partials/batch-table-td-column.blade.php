@@ -234,7 +234,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <button class="dropdown-item text-secondary"  ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View Batch Details</button>
-                    <button class="dropdown-item text-secondary"  ng-click="toReconciliate(batch)"><i class="bi bi-arrow-repeat"></i> To reconciliate</button>
+                    <button class="dropdown-item text-secondary"  ng-click="toReconciliate(row,batch)"><i class="bi bi-arrow-repeat"></i> To reconciliate</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>

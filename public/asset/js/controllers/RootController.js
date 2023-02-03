@@ -883,7 +883,11 @@ app.controller('RootController', function ($scope, $http) {
     $scope.deductTrackOutlife = [];
 
     // ============ TO Reconciliate PROCESS ========
-    $scope.toReconciliate = (batch) => {
+    $scope.toReconciliate = (row,batch) => {
+        // console.log(batch)   
+        $scope.item_description = row.item_description
+        $scope.brand            = batch.batch
+        $scope.batch_serial     = `${batch.batch} / ${batch.serial}`
         $('#reconciliation-modal').modal('show')
         $scope.ReconciliateId = batch.id
         $scope.ReconciliateSystemStock = Number(batch.quantity)
