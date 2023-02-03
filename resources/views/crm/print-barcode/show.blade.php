@@ -79,8 +79,8 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="text-end">
-                            <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
+                        <div class="text-end pt-3">
+                            <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
                             @if (is_null($batch->disposed_after))
                                 <small class="text-dark" ng-if="date_of_shipment">DOD:  DD/MM/YYYY</small>
                             @else

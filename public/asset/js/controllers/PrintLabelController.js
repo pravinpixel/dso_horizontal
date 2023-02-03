@@ -46,6 +46,17 @@ app.controller("PrintController", ($scope, $http) => {
                     }
                }
                 @media print, screen {
+                    small {
+                        font-size:20px !important
+                    }
+                    .badge {
+                        border: 1px solid black;
+                        padding: 1px 5px;
+                        border-radius: 10px;
+                        margin: 5px;
+                        line-height: 38px;
+                        color:black !important
+                    }
                     .print-card {
                         border  :   1px solid gray !important;
                         background  :   white;
@@ -55,6 +66,7 @@ app.controller("PrintController", ($scope, $http) => {
                         width: ${$scope.print_size == 'small' ? '341px' : '548px'};
                         clear: both;
                         page-break-after: always;
+                        font-size:20px !important
                     }
                     .print-border {
                         padding-top : 20px; 
@@ -66,7 +78,6 @@ app.controller("PrintController", ($scope, $http) => {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        border : 2px solid red
                     }
                     .text-end {
                         text-align:right;
@@ -84,7 +95,7 @@ app.controller("PrintController", ($scope, $http) => {
                     }
                     .barcode_label {
                         font-family: 'barcode font', Courier;
-                        font-size: 58px !important;
+                        font-size: 68px !important;
                         color: black !important;
                         letter-spacing: 3px;
                         margin-bottom: 15px !important
