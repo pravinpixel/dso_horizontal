@@ -21,8 +21,7 @@ use App\Models\MaterialProducts;
 use App\Models\UtilizationCart;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request; 
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -145,11 +144,11 @@ class ReportsController extends Controller
             if($request->start_month) {
                 $UtilizationCart = UtilizationCart::with('Batch')
                 ->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(),Carbon::parse($request->end_month)->lastOfMonth()])
-                ->get()->groupBy(function($data) {
+                ->latest()->get()->groupBy(function($data) {
                     return $data->batch_id;
                 });
             } else {
-                $UtilizationCart = UtilizationCart::with('Batch')->get()->groupBy(function($data) {
+                $UtilizationCart = UtilizationCart::with('Batch')->latest()->get()->groupBy(function($data) {
                     return $data->batch_id;
                 });
             }
@@ -251,7 +250,7 @@ class ReportsController extends Controller
         $material->when(isset($request->EndDate), function($query) use ($request){
             $query->whereBetween('created_at', dateBetween($request));
         });
-        return $material->get();
+        return $material->latest()->get();
     }
     public function get_material_product_history(Request $request)
     { 
@@ -272,9 +271,9 @@ class ReportsController extends Controller
     public function disposed_items(Request $request)
     {
         if(!empty($request->start_date) && !empty($request->end_date)) {
-            $disposed = DisposedItems::whereBetween('created_at', dateBetween($request))->get();
+            $disposed = DisposedItems::whereBetween('created_at', dateBetween($request))->latest()->get();
         } else {
-            $disposed = DisposedItems::all();
+            $disposed = DisposedItems::latest()->get();
         }
         if ($request->ajax()) {
             return DataTables::of($disposed)->addIndexColumn()->make(true);
