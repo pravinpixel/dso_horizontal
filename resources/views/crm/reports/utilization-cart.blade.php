@@ -157,16 +157,7 @@
                     data: {
                         labels  : data.chart_labels,
                         datasets: data.datasets
-                    },
-                    options: {
-                        scales: {
-                            x: {
-                                ticks: {
-                                    display: false
-                                }
-                            }
-                        }
-                    },
+                    }, 
                     options: {
                         responsive: true,
                         plugins: {
@@ -175,7 +166,6 @@
                                 usePointStyle: true,
                                 callbacks: { 
                                     label: (item) => { 
-                                        console.log(item)
                                         return `Quantity : ${item.raw}`
                                     }
                                 },
@@ -197,6 +187,16 @@
                                 display: true,
                                 text: 'Batches Barcodes'
                             }
+                        },
+                        scales: {
+                        x: {
+                            ticks: {
+                                callback: function(val, index) {
+                                    return this.getLabelForValue(val).split(',')[2].replace('Date :','')
+                                },
+                                color: 'royalblue',
+                            }
+                        }
                         }
                     },
                 })

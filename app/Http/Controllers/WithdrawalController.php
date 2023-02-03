@@ -296,7 +296,6 @@ class WithdrawalController extends Controller
         if($request->print_outlife_expiry == 1) {
             return redirect(route('print.barcode', RepackOutlife::find($request->id[0])->batch_id));
         }
-        Flash::success('Track deduction successful');
-        return redirect()->back();
+        return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
 }

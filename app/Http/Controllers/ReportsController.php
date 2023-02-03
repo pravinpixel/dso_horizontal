@@ -183,7 +183,7 @@ class ReportsController extends Controller
         $start_month     = Carbon::parse($request->start_month)->firstOfMonth();
         $end_month       = Carbon::parse($request->end_month)->lastOfMonth(); 
         // dd($start_month);
-        $UtilizationCart = UtilizationCart::with('Batch')
+        $UtilizationCart = UtilizationCart::with('Batch','Batch.BatchMaterialProduct')
                 ->whereBetween('created_at', [$start_month,$end_month])
                 ->get()
                 ->groupBy('batch_id');
@@ -193,17 +193,18 @@ class ReportsController extends Controller
             $quantity = [];
             $created_at = [];
             $series = [];
-            foreach ($list as $key => $batch) {
+            foreach ($list as $key => $batch) { 
                 $quantity  [] = $batch->quantity;
-                $created_at[] = SetDateFormat($batch->created_at);
+                $created_at[] = "Item Description : ".$batch->Batch->BatchMaterialProduct->item_description." , Barcode : ".$batch->Batch->barcode_number.", Date : ".SetDateFormat($batch->created_at);
                 $series[] = [
                     "name" =>  "gfgh",
                     "data" => $quantity
                 ];
             }
             $datasets[] = [
-                "label" => $created_at,
-                "data"  => $quantity,
+                "label"    => $created_at,
+                "fill"      => "true",
+                "data"     => $quantity,
                 "datasets" => $series,
                 // "backgroundColor"=> '#4088f9',
             ];
