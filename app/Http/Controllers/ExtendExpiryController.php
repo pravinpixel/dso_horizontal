@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Repositories\MartialProductRepository;
@@ -33,7 +32,6 @@ class ExtendExpiryController extends Controller
     {
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
-
         if(!empty($request->extended_expiry) && !is_null($request->extended_expiry)) {
             $batch->update([
                 'date_of_expiry'     => $request->extended_expiry,
@@ -49,6 +47,11 @@ class ExtendExpiryController extends Controller
             } else {
                 $batch->update(['no_of_extension' => $batch->no_of_extension + 1 ]);
             }
+        }
+        if($request->extended_qc_status == 0) {
+            MaterialProductHistory($batch,'FAILED');
+        } else {
+            MaterialProductHistory($batch,'PASSED');
         }
         if($request->extended_qc_status == 0) {
             return redirect()->route('disposal',['id' => request()->route()->id == null ? $request->id : request()->route()->id ])->with('info',"Extended QC Results Status Changed to FAIL !");
