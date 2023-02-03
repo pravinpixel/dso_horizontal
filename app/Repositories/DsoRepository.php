@@ -170,6 +170,11 @@ class DsoRepository implements DsoRepositoryInterface
                         unset($parent->Batches[$batch_key]);
                     }
                 }
+                if ($page_name == 'RECONCILIATION_LIST') {
+                    if ($batch->is_draft == 1 ) {
+                        unset($parent->Batches[$batch_key]);
+                    }
+                }
                 if ($page_name == 'REPORT_DISPOSED_ITEMS') {
                     if ($batch->quantity != 0) {
                         unset($parent->Batches[$batch_key]);
