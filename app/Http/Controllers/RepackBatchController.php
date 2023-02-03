@@ -31,7 +31,6 @@ class RepackBatchController extends Controller
         $new_batch->storage_area       = $request->storage_area['id'] ?? $request->storage_area;
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
-        $new_batch->iqc_status         = 0;
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
         cloneDocumentFromBatch($request->id,$new_batch->id);
