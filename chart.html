@@ -1,66 +1,26 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<div class="col-md-6">
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <img id=image src="https://humoropedia.com/wp-content/uploads/2014/08/monkey-awesome-photo.jpg" alt=""> -->
+    <br>
+    <a id=waButton class="btn btn-success" href="">share image with whatsapp</a>
+    <script>
+        const button = document.getElementById('waButton');
+        let image = document.getElementById('image');
+        let imageURL = "https://humoropedia.com/wp-content/uploads/2014/08/monkey-awesome-photo.jpg";
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        // let sharehref = `whatsapp://send?text=${encodeURIComponent(imageSrc)}`;
+        
+        button.setAttribute('href', 'https://wa.me/+919003206449?text='+encodeURIComponent(imageURL));
 
-<script>
-
-    const labels = ["a","b","c","d"];
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: [5,10,20,30],
-                yAxisID: 'y',
-            },
-            {
-                label: 'Dataset 2',
-                data: [1,2,3,4],
-                yAxisID: 'y1',
-            }
-        ]
-    };
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            stacked: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart - Multi Axis'
-                }
-            },
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-
-                    // grid line settings
-                    grid: {
-                        drawOnChartArea: false, // only want the grid lines for one axis to show up
-                    },
-                },
-            }
-        },
-    };
-    const ctx = document.getElementById('myChart');
-
-    new Chart(ctx, config);
-</script>
+        //button.setAttribute('href', sharehref);
+        //console.log(button);
+    </script>
+</body>
+</html>

@@ -886,7 +886,7 @@ app.controller('RootController', function ($scope, $http) {
     $scope.toReconciliate = (row,batch) => {
         // console.log(batch)   
         $scope.item_description = row.item_description
-        $scope.brand            = batch.batch
+        $scope.brand            = batch.brand
         $scope.batch_serial     = `${batch.batch} / ${batch.serial}`
         $('#reconciliation-modal').modal('show')
         $scope.ReconciliateId = batch.id

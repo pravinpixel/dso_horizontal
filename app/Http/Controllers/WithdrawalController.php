@@ -7,6 +7,7 @@ use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use App\Models\withdrawCart;
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 
 class WithdrawalController extends Controller
 {
@@ -295,6 +296,7 @@ class WithdrawalController extends Controller
         if($request->print_outlife_expiry == 1) {
             return redirect(route('print.barcode', RepackOutlife::find($request->id[0])->batch_id));
         }
+        Flash::success('Track deduction successful');
         return redirect()->back();
     }
 }
