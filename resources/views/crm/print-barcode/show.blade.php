@@ -40,51 +40,53 @@
         </div>
         <div class="row m-0">
             <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel">
-                <div class="border card text-center rounded-5 p-3 print-card" >
-                    <div ng-if="Barcode" style="padding: 15px 0">
-                        <div>{!! getBarcodeImage($batch->barcode_number) !!}</div>
-                        <b>{{ $batch->barcode_number }}</b>
-                    </div>
-                    <div>
-                        <small ng-if="batch_id">
-                            <b class="text-dark">Batch#/Serial#</b> : {{ $batch->batch }} / {{ $batch->serial }}
-                        </small>
-                        <div class="text-primary">
-                            <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
-                            <p class="m-0" ng-if="date_of_expiry">
-                                <b class="text-dark">DOE</b> :   {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
-                            </p>
-                            <p class="m-0" ng-if="project_name">
-                                <b class="text-dark">Project name</b> :
-                                {{ $batch->project_name }}
-                            </p>
-                            <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  :
-                                @if(count($batch->BatchOwners))
-                                    @foreach ($batch->BatchOwners as $owner)
-                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
-                                            {{ $owner->alias_name }}
-                                        </small>
+                <div class="print-card-wrapper">
+                    <div class="border card text-center rounded-5 p-3 print-card" >
+                        <div ng-if="Barcode" style="padding: 15px 0">
+                            <div>{!! getBarcodeImage($batch->barcode_number) !!}</div>
+                            <b>{{ $batch->barcode_number }}</b>
+                        </div>
+                        <div>
+                            <small ng-if="batch_id">
+                                <b class="text-dark">Batch#/Serial#</b> : {{ $batch->batch }} / {{ $batch->serial }}
+                            </small>
+                            <div class="text-primary">
+                                <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
+                                <p class="m-0" ng-if="date_of_expiry">
+                                    <b class="text-dark">DOE</b> :   {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
+                                </p>
+                                <p class="m-0" ng-if="project_name">
+                                    <b class="text-dark">Project name</b> :
+                                    {{ $batch->project_name }}
+                                </p>
+                                <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  :
+                                    @if(count($batch->BatchOwners))
+                                        @foreach ($batch->BatchOwners as $owner)
+                                            <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                                                {{ $owner->alias_name }}
+                                            </small>
+                                        @endforeach
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                        <div class="border-top mt-3 pt-3 print-border">
+                            <div id="printImages">
+                                @if ($pictograms)
+                                    @foreach ($pictograms as $pictogram)
+                                        <img id="pictograms_{{ $pictogram->id }}" ng-if="pictogramsLab_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
                                     @endforeach
                                 @endif
-                            </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="border-top mt-3 pt-3 print-border">
-                        <div id="printImages">
-                            @if ($pictograms)
-                                @foreach ($pictograms as $pictogram)
-                                    <img id="pictograms_{{ $pictogram->id }}" ng-if="pictogramsLab_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
-                                @endforeach
+                        <div class="text-end">
+                            <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
+                            @if (is_null($batch->disposed_after))
+                                <small class="text-dark" ng-if="date_of_shipment">DOD:  DD/MM/YYYY</small>
+                            @else
+                                <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
                             @endif
                         </div>
-                    </div>
-                    <div class="text-end">
-                        <small class="bg-dark text-white badge print-badge" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
-                        @if (is_null($batch->disposed_after))
-                            <small class="text-dark" ng-if="date_of_shipment">DOD:  DD/MM/YYYY</small>
-                        @else
-                            <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -194,7 +196,6 @@
             src: local('barcode font'), url('https://fonts.cdnfonts.com/s/10997/BarcodeFont.woff') format('woff');
         }
     </style>
-
 
     <style>
         #printImages img {

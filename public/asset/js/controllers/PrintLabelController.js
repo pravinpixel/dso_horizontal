@@ -46,11 +46,10 @@ app.controller("PrintController", ($scope, $http) => {
                     }
                }
                 @media print, screen {
-                    .print-card{
+                    .print-card {
                         border  :   1px solid gray !important;
                         background  :   white;
                         padding : 30px;
-                        margin  :30px auto;
                         text-align:center;
                         border-radius:15px;
                         width: ${$scope.print_size == 'small' ? '341px' : '548px'};
@@ -61,6 +60,13 @@ app.controller("PrintController", ($scope, $http) => {
                         padding-top : 20px; 
                         margin-top : 20px;
                         border-top:1px solid gray 
+                    }
+                    .print-card-wrapper {
+                        min-height: 95vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border : 2px solid red
                     }
                     .text-end {
                         text-align:right;
