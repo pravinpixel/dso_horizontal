@@ -199,11 +199,13 @@ class LogActivity
         $SecurityReport = SecurityReport::latest()->get();
         $arr = [];
         foreach ($SecurityReport as $key => $row) {
+       
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:i:s A'),
                 "transaction_by"   => $row->user_name,
                 "action"           => $row->action,
+                "created_at"       => $row->created_at->format('d-m-Y h:i:s A')
             ];
         }
         return  $arr;
@@ -219,12 +221,13 @@ class LogActivity
     public static function dateBetween($request) {
         $SecurityReport =  SecurityReport::whereBetween('created_at', dateBetween($request))->latest()->get();
         $arr = [];
-        foreach ($SecurityReport as $key => $row) {
+        foreach ($SecurityReport as $key => $row) { 
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:i:s A'),
                 "transaction_by"   => $row->user_name,
                 "action"           => $row->action,
+                "created_at"       => $row->created_at->format('d-m-Y h:i:s A')
             ];
         }
         self::$SecurityReportData = $arr;

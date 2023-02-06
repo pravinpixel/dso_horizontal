@@ -384,7 +384,6 @@ class ReportsController extends Controller
         } else {
             $security = LogActivity::getSecurityReport();
         }
-
         if ($request->ajax()) {
             return DataTables::of($security)->addIndexColumn()->make(true);
         }

@@ -33,8 +33,7 @@
                     <thead>
                         <tr>
                             <th class="text-white bg-primary-2 text-center font-14">S.No</th>
-                            <th class="text-white bg-primary-2 text-center font-14">Transaction date </th>
-                            <th class="text-white bg-primary-2 text-center font-14">Transaction time </th>
+                            <th class="text-white bg-primary-2 text-center font-14">Transaction date & time </th>
                             <th class="text-white bg-primary-2 text-center font-14">Transaction By </th>
                             <th class="text-white bg-primary-2 text-center font-14">Action</th>
                         </tr>
@@ -67,8 +66,7 @@
                     },
                     columns: [
                         {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                        {data: 'transaction_date',name: 'transaction_date'},
-                        {data: 'transaction_time',name: 'transaction_time'},
+                        {data: 'created_at',name: 'created_at'},
                         {data: 'transaction_by',name: 'transaction_by'},
                         {data: 'action',name: 'action'}
                     ],
