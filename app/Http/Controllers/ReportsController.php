@@ -21,6 +21,7 @@ use App\Models\MaterialProducts;
 use App\Models\UtilizationCart;
 use App\Repositories\MartialProductRepository;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request; 
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
@@ -322,31 +323,36 @@ class ReportsController extends Controller
         $expired = [];
         foreach ($batches as $key => $row) {
             $owners = '';
-            $now            = Carbon::now();
             $date_of_expiry = Carbon::parse($row->date_of_expiry);
-            if ($now >= $date_of_expiry) {
-                if (count($row->BatchOwners ?? [])) {
-                    foreach ($row->BatchOwners as $key => $owner){
-                        if ($owner->alias_name ?? false) {
-                            $space = $key != 0 ? ', ' : '';
-                            $owners .= $space.$owner->alias_name;
+            if (!is_null($date_of_expiry)) {
+                $DateOfExpiry   = new DateTime(date('Y-m-d', strtotime($date_of_expiry)));
+                $CurrentDate    = new DateTime(date('Y-m-d'));
+                if($CurrentDate > $DateOfExpiry) { //Expired 'RED'
+                    if (count($row->BatchOwners ?? [])) {
+                        foreach ($row->BatchOwners as $key => $owner){
+                            if ($owner->alias_name ?? false) {
+                                $space = $key != 0 ? ', ' : '';
+                                $owners .= $space.$owner->alias_name;
+                            }
                         }
                     }
-                }
-                $expired[] = [
-                    "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
-                    "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
-                    "batch_serial"          => $row->batch." / ".$row->serial,
-                    "unit_packing_value"    => $row->unit_packing_value,
-                    "quantity"              => $row->quantity,
-                    "storage_area"          => $row->StorageArea->name,
-                    "housing"               => $row->housing,
-                    "date_of_expiry"        => $row->date_of_expiry,
-                    "used_for_td_expt_only" => $row->coc_coa_mill_cert_status == "on" ? "YES" : "NO",
-                    "department"            => $row->Department->name,
-                    "owners"                => $owners,
-                ];
+                    $expired[] = [
+                        "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
+                        "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
+                        "batch_serial"          => $row->batch." / ".$row->serial,
+                        "unit_packing_value"    => $row->unit_packing_value,
+                        "quantity"              => $row->quantity,
+                        "storage_area"          => $row->StorageArea->name,
+                        "housing"               => $row->housing,
+                        "date_of_expiry"        => $row->date_of_expiry,
+                        "used_for_td_expt_only" => $row->coc_coa_mill_cert_status == "on" ? "YES" : "NO",
+                        "department"            => $row->Department->name,
+                        "owners"                => $owners,
+                    ];
+                } 
             }
+            
+           
         }  
         return $expired;
     }
