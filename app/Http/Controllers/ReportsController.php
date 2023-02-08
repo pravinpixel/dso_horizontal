@@ -312,26 +312,13 @@ class ReportsController extends Controller
     }
     public function expired_material_data($request)
     {
-        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
-        if(!is_null($request->used_for_td_expt_only) && !is_null($request->department)) {
-            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-            ->where( 'is_draft' , 0)
-            ->where('department',$request->department)
-            ->where('used_for_td_expt_only',$request->used_for_td_expt_only)
-            ->latest()->get();
-        } elseif(!is_null($request->used_for_td_expt_only)) {
-            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-            ->where( 'is_draft' , 0)
-            ->where('coc_coa_mill_cert_status',$request->used_for_td_expt_only == 1 ? 'on' : 'off')
-            ->latest()->get();
-        } elseif(!is_null($request->department)) {
-            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])
-            ->where( 'is_draft' , 0)
-            ->where('department',$request->department)
-            ->latest()->get();
-        } else {
-            $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)->latest()->get();
-        }
+        $batches = Batches::with(['BatchMaterialProduct','StorageArea','HousingType'])->where( 'is_draft' , 0)
+        ->when(isset($request->used_for_td_expt_only),function($q)use($request) {
+            $q->where('coc_coa_mill_cert_status',$request->used_for_td_expt_only == 1 ? 'on' : 'off');
+        })->when(isset($request->department),function($q)use($request) {
+            $q->where('department',$request->department);
+        })->latest()->get();
+        
         $expired = [];
         foreach ($batches as $key => $row) {
             $owners = '';
