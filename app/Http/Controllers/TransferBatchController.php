@@ -23,8 +23,7 @@ class TransferBatchController extends Controller
         $created_batch->housing        = $request->housing;
         $created_batch->total_quantity = $created_batch->unit_packing_value * $created_batch->quantity;
         $created_batch->save();
-        cloneDocumentFromBatch($request->id,$created_batch->id);
-        MaterialProductHistory($created_batch,'after_transfer');
+        cloneDocumentFromBatch($request->id,$created_batch->id); 
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
                 $created_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $created_batch->id],[
@@ -33,7 +32,8 @@ class TransferBatchController extends Controller
                 ]);
             }
         }
-
+        MaterialProductHistory($created_batch,'after_transfer');
+        
         $old_value           = $current_batch;
         $new_value           = clone $current_batch;
         $new_value->quantity = $new_value->quantity  - $request->quantity;

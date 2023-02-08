@@ -49,9 +49,9 @@ class ExtendExpiryController extends Controller
             }
         }
         if($request->extended_qc_status == 0) {
-            MaterialProductHistory($batch,'FAILED');
+            MaterialProductHistory($batch,'FAIL');
         } else {
-            MaterialProductHistory($batch,'PASSED');
+            MaterialProductHistory($batch,'PASS');
         }
         if($request->extended_qc_status == 0) {
             return redirect()->route('disposal',['id' => request()->route()->id == null ? $request->id : request()->route()->id ])->with('info',"Extended QC Results Status Changed to FAIL !");
