@@ -43,6 +43,7 @@ app.controller("PrintController", ($scope, $http) => {
                        height: 99%;
                        page-break-after: avoid;
                        page-break-before: avoid;
+                       font-weight : bold !important
                     }
                }
                 @media print, screen {
