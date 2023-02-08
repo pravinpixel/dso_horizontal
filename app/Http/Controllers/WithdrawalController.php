@@ -44,7 +44,7 @@ class WithdrawalController extends Controller
         $direct_deducts       = $result['direct_deducts'];
         $deduct_track_usage   = $result['deduct_track_usage'];
         $deduct_track_outlife = $result['deduct_track_outlife'];
-
+        session()->put('page_name','WITHDRAWAL');
         return  view('crm.material-products.withdrawal.index', compact(
             'direct_deducts',
             'deduct_track_usage',
