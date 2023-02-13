@@ -555,9 +555,9 @@ class MaterialProductsController extends Controller
     public function suggestion(Request $request)
     {
         try {
-            $data =  MaterialProducts::where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+            $data =  MaterialProducts::where('is_draft',0)->where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
         } catch (\Throwable $th) {
-            $data =  Batches::where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+            $data =  Batches::where('is_draft',0)->where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
         }
         return response(['status' => true,  'data' => collect($data)->unique()], Response::HTTP_OK);
     }
