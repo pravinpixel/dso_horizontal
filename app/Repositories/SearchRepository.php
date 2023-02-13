@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class SearchRepository implements SearchRepositoryInterface
 {
+    public $dsoRepository;
     public function __construct(DsoRepositoryInterface $dsoRepositoryInterface)
     {
         $this->dsoRepository    = $dsoRepositoryInterface;
