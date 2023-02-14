@@ -12,7 +12,7 @@
                         <th class="p-1">Owner1/2</th>
                         <th class="p-1">DOE</th>
                         <th class="p-1">Used for TD/Expt</th>
-                        <th class="p-1">Project Name</th>
+                        <th class="p-1">Project name</th>
                         <th class="p-1">Qty to print</th>
                     </tr>
                 </thead>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-5 text-end p-0">
                                 <a href="{{ route('barcode.listing') }}" class="btn btn-light border rounded-pill shadow-sm"><i class="fa fa-times me-1"></i>Cancel & back</a>
-                                <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> print</button>
+                                <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> Print</button>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                                 </label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Project" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="project_name" id="Project">Project Name</label>
+                                <label  for="Project" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="project_name" id="Project">Project name</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="Batch" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="batch_id" id="Batch">Batch ID/Serial #</label>
@@ -142,7 +142,7 @@
                                 <label  for="DOE" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="date_of_expiry" id="DOE">DOE</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS Pictogram</label>
+                                <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS pictogram</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="owners" id="Owner1">Owners</label>
