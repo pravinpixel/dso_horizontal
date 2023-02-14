@@ -13,7 +13,7 @@
                             vol tracking logsheet</span></th>
                 </tr>
                 <tr class="bg-primary-light text-dark">
-                    <th class="font-12">Item Description</th>
+                    <th class="font-12">Item description</th>
                     <th class="font-12">Batch/Serial#</th>
                     <th class="font-12">Last accessed</th>
                     <th class="font-12">Date&time stamp</th>

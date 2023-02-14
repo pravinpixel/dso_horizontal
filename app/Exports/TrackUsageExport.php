@@ -41,9 +41,9 @@ class TrackUsageExport  implements FromArray , WithHeadings, WithStyles, WithEve
     public function headings() :array
     {
         return [
-            "Item Description",
+            "Item description",
             "Batch/Serial",
-            "Transaction By	",
+            "Transacted by	",
             "Used Amt",
             "Remaining amt ",
             "Brand",

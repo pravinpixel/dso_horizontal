@@ -65,7 +65,7 @@
                 <thead>
                     <tr>
                         <th class="text-white bg-primary-2 text-center font-14">S.No</th>
-                        <th class="text-white bg-primary-2 text-center font-14">Item Description</th>
+                        <th class="text-white bg-primary-2 text-center font-14">Item description</th>
                         <th class="text-white bg-primary-2 text-center font-14">Brand</th>
                         <th class="text-white bg-primary-2 text-center font-14">Batch / Serial</th>
                         <th class="text-white bg-primary-2 text-center font-14">Unit Packing Value</th>

@@ -6,7 +6,7 @@
             <table class="table table-bordered bg-white custom">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th class="p-1"> Item Description</th>
+                        <th class="p-1"> Item description</th>
                         <th class="p-1">Brand</th>
                         <th class="p-1">Batch/Serial#</th>
                         <th class="p-1">Owner1/2</th>

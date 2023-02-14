@@ -9,7 +9,17 @@
                     <div class="table-fillters row m-0 p-0">
                         @foreach ($filters as $index => $filter)
                             <div class="col">
-                                <label class="form-label">{{ $index }}</label>
+                                <label class="form-label">
+                                    @if ($index == 'batch_serial')
+                                        Batch#/Serial#
+                                        @elseif ($index == 'housing')
+                                        Housing type and #
+                                        @elseif ($index == 'last_accessed')
+                                        Transacted by
+                                        @else
+                                        {{ ucfirst(str_replace('_'," ",  $index)) }}
+                                    @endif
+                                </label>
                                 <select id="{{ $index }}_input" name="{{ str_replace(' ','',$index) }}" ng-model="advanced_filter.category_selection" class="form-select custom" onchange="filterTable(this)">
                                     <option value="">-- Select --</option>
                                     @foreach ($filter as $item)
@@ -34,19 +44,19 @@
                         <thead>
                             <tr>
                                 <th class="text-white bg-primary-2 text-center font-14">S.No</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Item Description</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Item description</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Brand</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Barcode</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Batch Serial</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Batch #/ Serial #</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Unit Packing Value</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Storage Area</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Housing</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Owners</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Transaction Date</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Transaction Time</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Transaction By</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Used Amount</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Remaining Amount</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Transacted By</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Used total amount</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Remaining total amount</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

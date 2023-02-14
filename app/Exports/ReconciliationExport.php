@@ -37,7 +37,7 @@ class ReconciliationExport implements FromArray, WithHeadings , ShouldAutoSize, 
     {   
         return [
             "S.No",
-            "Item Description ",
+            "Item description ",
             "Barcode Number",
             "Brand",
             "Batch/Serial",

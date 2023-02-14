@@ -36,7 +36,7 @@ class SecurityReportExcel  implements FromArray , WithHeadings, WithStyles, With
         return [
             "Transaction Date",
             "Transaction Time",
-            "Transaction by",
+            "Transacted by",
             "Action"
         ];
     }

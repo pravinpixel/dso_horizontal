@@ -30,7 +30,7 @@ class HistoryExport  implements FromArray , WithHeadings, WithStyles, WithEvents
                 "S.No"             => $key + 1,
                 "Transaction Date" => $row->created_at->format('Y-m-d'),
                 "Transaction Time" => $row->created_at->format('h:m A'),
-                "Transaction By"   => $row->user_name,
+                "Transacted by"   => $row->user_name,
                 "Module"           => $row->module_name,
                 "Action Taken"     => $row->action_type,
                 "Comments"         => $row->remarks != null && $row->remarks != '' ? $row->remarks : '-'
@@ -44,7 +44,7 @@ class HistoryExport  implements FromArray , WithHeadings, WithStyles, WithEvents
             "S.No",
             "Transaction Date",
             "Transaction Time",
-            "Transaction By",
+            "Transacted by",
             "Module",
             "Action Taken",
             "Comments",

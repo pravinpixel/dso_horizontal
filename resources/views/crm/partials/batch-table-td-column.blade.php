@@ -158,7 +158,7 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
                 <div class="dropdown-menu"> 
-                    <button class="dropdown-item text-secondary" ng-click="exportExcel(batch.id,'{{ $page_name }}')"><i class="bi bi-file-earmark-spreadsheet me-1"></i>Export Excel</button>
+                    <button class="dropdown-item text-secondary" ng-click="exportExcel(batch.id,'{{ $page_name }}')"><i class="bi bi-file-earmark-spreadsheet me-1"></i>Export excel</button>
                     <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
                 </div>
             </div>

@@ -39,9 +39,9 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
         return [
             "Transaction Date",
             "Transaction Time",
-            "Transaction by",
-            "Item Description",
-            "Batch Serial",
+            "Transacted by",
+            "Item description",
+            "Batch #/ Serial #",
             "Unit Pack Value",
             "BeforeQuantity",
             "DisposedQuantity",

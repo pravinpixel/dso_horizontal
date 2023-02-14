@@ -2,12 +2,12 @@
     <thead class="bg-primary text-white text-center">
         <tr>
             <th style="font-weight: bold">Category Selection</th>
-            <th style="font-weight: bold">Item Description</th>
+            <th style="font-weight: bold">Item description</th>
             <th style="font-weight: bold">Brand</th>
             <th style="font-weight: bold">Batch#/Serial#</th>
             <th style="font-weight: bold">Transaction Date</th>
             <th style="font-weight: bold">Transaction Time</th>
-            <th style="font-weight: bold">Transaction By</th>
+            <th style="font-weight: bold">Transacted by</th>
             <th style="font-weight: bold">Module</th>
             <th style="font-weight: bold">Action Taken</th>
             <th style="font-weight: bold">Unit packing value</th>

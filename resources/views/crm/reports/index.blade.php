@@ -37,7 +37,7 @@
             <li class="nav-item">
                 <a href="{{ route('reports.disposed_items') }}" class="bg-none nav-link {{ Route::is(['reports.disposed_items']) ? "active" : "" }}">
                     <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Disposed items</span>
+                    <span class="d-none d-md-block">Disposed Items</span>
                 </a>
             </li>
         </x-has-access>

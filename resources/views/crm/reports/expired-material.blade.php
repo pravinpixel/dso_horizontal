@@ -44,15 +44,15 @@
                             <th class="text-white bg-primary-2 text-center font-14">S.No</th>
                             <th class="text-white bg-primary-2 text-center font-14">Category</th>
                             <th class="text-white bg-primary-2 text-center font-14">Item description</th>
-                            <th class="text-white bg-primary-2 text-center font-14">batch serial</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Batch #/ Serial #</th>
                             <th class="text-white bg-primary-2 text-center font-14">unit packing value</th>
-                            <th class="text-white bg-primary-2 text-center font-14">quantity</th>
-                            <th class="text-white bg-primary-2 text-center font-14">storage area</th>
-                            <th class="text-white bg-primary-2 text-center font-14">housing</th>
-                            <th class="text-white bg-primary-2 text-center font-14">date of expiry</th>
-                            <th class="text-white bg-primary-2 text-center font-14">used for td expt only</th>
-                            <th class="text-white bg-primary-2 text-center font-14">department</th>
-                            <th class="text-white bg-primary-2 text-center font-14">owners</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Quantity</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Storage area</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Housing</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Date of expiry</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Used for TD/Expt</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Department</th>
+                            <th class="text-white bg-primary-2 text-center font-14">Owners</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

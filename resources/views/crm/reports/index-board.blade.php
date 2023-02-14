@@ -46,7 +46,7 @@
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('reports.disposed_items') }}" class="card-body btn">
                         <i class="text-warning bi bi-folder fa-2x mb-2"></i>
-                        <div class="text-primary"><b> Disposed items</b></div>
+                        <div class="text-primary"><b> Disposed Items</b></div>
                     </a>
                 </div>
             </div>  

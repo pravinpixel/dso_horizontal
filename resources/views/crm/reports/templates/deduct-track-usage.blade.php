@@ -1,7 +1,7 @@
 <table>
     <thead>
         <tr>
-            <th width="151px" style="font-weight: bold">Item Description</th>
+            <th width="151px" style="font-weight: bold">Item description</th>
             <th width="111px" style="font-weight: bold">Brand</th>
             <th width="196px" style="font-weight: bold">Batch/Serial</th>
             <th width="93px" style="font-weight: bold">Quantity</th>

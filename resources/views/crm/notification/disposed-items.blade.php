@@ -53,7 +53,7 @@
         <table class="table table-bordered table-hover bg-white">
             <thead>
                 <tr>
-                    <th class="table-th child-td-lg"> Item Description</th>
+                    <th class="table-th child-td-lg"> Item description</th>
                     <th class="table-th child-td">Brand</th>
                     <th class="table-th child-td">Batch/Serial#</th>
                     <th class="table-th child-td">Pkt Size</th>

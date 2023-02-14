@@ -35,13 +35,13 @@ class ExpiredMaterialExport  implements FromArray , WithHeadings, WithStyles, Wi
         return [
             "Category selection",
             "Item description",
-            "Batch serial",
+            "Batch #/ Serial #",
             "Unit packing value",
             "Quantity",
             "Storage area",
             "Housing",
             "Date of expiry",
-            "Used for td expt only",
+            "Used for TD/Expt",
             "Department",
             "Owners"
         ];

@@ -122,13 +122,13 @@ class ReportsController extends Controller
     public function material_in_house_pdt_history()
     { 
         $filters = [
-            "Transaction By"     => materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
+            "Transacted by"     => materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
             "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
             "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
             "Housing"            => materialProductHistory::groupBy('Housing')->pluck('Housing'),
             "Module"             => materialProductHistory::groupBy('Module')->pluck('Module'),
             "Action Taken"       => materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken'),
-            "Item Description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
+            "Item description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
             "Category Selection" => materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection'),
             "Draw Status"        => materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus')
         ];
@@ -196,7 +196,7 @@ class ReportsController extends Controller
             $series = [];
             foreach ($list as $key => $batch) { 
                 $quantity  [] = $batch->quantity;
-                $created_at[] = "Item Description : ".$batch->Batch->BatchMaterialProduct->item_description." , Barcode : ".$batch->Batch->barcode_number.", Date : ".SetDateFormat($batch->created_at);
+                $created_at[] = "Item description : ".$batch->Batch->BatchMaterialProduct->item_description." , Barcode : ".$batch->Batch->barcode_number.", Date : ".SetDateFormat($batch->created_at);
                 $series[] = [
                     "name" =>  "gfgh",
                     "data" => $quantity

@@ -49,12 +49,12 @@
                                     <th style="font-weight: bold;font-size:12px">S.No</th>
                                     <th style="font-weight: bold;font-size:12px">Barcode Number</th>
                                     <th style="font-weight: bold;font-size:12px">Category Selection</th>
-                                    <th style="font-weight: bold;font-size:12px">Item Description</th>
+                                    <th style="font-weight: bold;font-size:12px">Item description</th>
                                     <th style="font-weight: bold;font-size:12px">Brand</th>
                                     <th style="font-weight: bold;font-size:12px">Batch#/Serial#</th>
                                     <th style="font-weight: bold;font-size:12px">Transaction Date</th>
                                     <th style="font-weight: bold;font-size:12px">Transaction Time</th>
-                                    <th style="font-weight: bold;font-size:12px">Transaction By</th>
+                                    <th style="font-weight: bold;font-size:12px">Transacted by</th>
                                     <th style="font-weight: bold;font-size:12px">Module</th>
                                     <th style="font-weight: bold;font-size:12px">Action Taken</th>
                                     <th style="font-weight: bold;font-size:12px">Unit packing value</th>

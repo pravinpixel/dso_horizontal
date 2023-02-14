@@ -8,7 +8,7 @@
                 <form ng-submit="ReconciliateSave()">
                     <table class="table">
                         <tr>
-                            <th>Item Description</th>
+                            <th>Item description</th>
                             <td>:</td>
                             <td ng-bind="item_description"></td>
                         </tr>
