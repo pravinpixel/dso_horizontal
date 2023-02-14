@@ -17,13 +17,13 @@
                     <th class="font-12">Batch/Serial#</th>
                     <th class="font-12">Last accessed</th>
                     <th class="font-12">Date&time stamp</th>
-                    <th class="font-12">Unit Packing Value</th>
+                    <th class="font-12">Unit packing value</th>
                     <th class="font-12">Quantity</th>
-                    <th class="font-12">Total Quantity</th>
-                    <th class="font-12">Used Amt
+                    <th class="font-12">Total quantity</th>
+                    <th class="font-12">Used total quantity
                         ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})
                     </th>
-                    <th class="font-12">Remain Amt
+                    <th class="font-12">Remain total quantity
                         ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})
                     </th>
                     <th class="font-12">Remarks</th>
@@ -102,7 +102,7 @@
                         id="end_of_material_product">
                     End of material/product
                 </label>
-                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}>Click to Confirm deduction</button>
+                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}>Click to confirm deduction</button>
             </div>
         </div>
     </form>

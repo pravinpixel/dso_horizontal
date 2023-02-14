@@ -15,7 +15,7 @@
                 <th class="font-12">Batch#/ Serial#</th>
                 <th class="font-12">Unit packing value</th>
                 <th class="font-12">Quantity</th>
-                <th class="font-12">Withdraw Qty</th>
+                <th class="font-12">Withdraw quantity</th>
                 <th class="font-12">Remarks</th>
                 <th class="table-th child-td text-center"> <i class="text-danger bi bi-trash3-fill"></i></th>
             </tr>
@@ -50,7 +50,7 @@
             </tbody>
         </table>
     <div class="text-end"> 
-        <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
+        <button type="submit" class="btn btn-primary rounded-pill">Click to confirm deduction</button>
     </div>
 </form>
 @else

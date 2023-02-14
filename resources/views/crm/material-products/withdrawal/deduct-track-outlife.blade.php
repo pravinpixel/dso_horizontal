@@ -29,9 +29,9 @@
                                                     <th class="font-12">Last accessed</th>
                                                     <th class="font-12">Date & time stamp</th>
                                                     <th class="font-12">Pkt size</th>
-                                                    <th class="font-12">Qty</th>
-                                                    <th class="font-12">Total Qty</th>
-                                                    <th class="font-12">Withdraw Qty</th>
+                                                    <th class="font-12">Quantity</th>
+                                                    <th class="font-12">Total quantity</th>
+                                                    <th class="font-12">Withdraw total quantity</th>
                                                     <th class="font-12">Remarks</th>
                                                     <th class="font-12">Outlife expiry from last date/time</th>
                                                     <th class="font-12">Outlife expiry from current date/time</th>
@@ -164,7 +164,7 @@
                 <input type="checkbox" name="print_outlife_expiry" value="1" class="form-check-input me-2" id="print_outlife_expiry">
                 Print outlife expiry
             </label>
-            <button type="submit" class="btn btn-primary rounded-pill">Click to Confirm deduction</button>
+            <button type="submit" class="btn btn-primary rounded-pill">Click to confirm deduction</button>
         </div>
     </form>
 @else
