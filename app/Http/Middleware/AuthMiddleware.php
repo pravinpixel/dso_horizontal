@@ -3,32 +3,42 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Session\Store;
+use Auth;
+use Session;
 use Laracasts\Flash\Flash;
 
 class AuthMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
+    protected $session;
+    protected $timeout = 30;
+     
+    public function __construct(Store $session){
+        $this->session = $session;
+    }
+    public function checkSession($request,$next) {
+        $isLoggedIn = $request->path() != 'dashboard/logout';
+        if(! session('lastActivityTime'))
+            $this->session->put('lastActivityTime', time());
+        elseif(time() - $this->session->get('lastActivityTime') > $this->timeout){
+            $this->session->forget('lastActivityTime');
+            $cookie = cookie('intend', $isLoggedIn ? url()->current() : 'dashboard');
+            auth()->logout();
+        }
+        $isLoggedIn ? $this->session->put('lastActivityTime', time()) : $this->session->forget('lastActivityTime');
+        return $next($request);
+    }
     public function handle($request, Closure $next, $guard = null)
     {
         if (Sentinel::check()== FALSE) { 
             return redirect()->route('login'); 
-        } 
- 
+        }
         if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
             foreach(auth_user_role()->permissions as $access => $val) {
                 if(format_route(request()->route()->getName()) == format_route($access)) {
                     if($val == 1) {
-                        return $next($request);
+                        return $this->checkSession($request,$next);
                     } else {
                         Flash::error('Permission Denied ! Contact your admin');
                         return back();
@@ -36,6 +46,6 @@ class AuthMiddleware
                 }
             }
         }
-        return $next($request);
+        return $this->checkSession($request,$next);
     }
 }
