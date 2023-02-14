@@ -23,12 +23,12 @@
                             <td ng-bind="batch_serial"></td>
                         </tr>
                         <tr>
-                            <th>System Stock</th>
+                            <th>System quantity</th>
                             <td>:</td>
                             <td ng-bind="ReconciliateSystemStock"></td>
                         </tr>
                         <tr>
-                            <th>Physical Stock</th>
+                            <th>Physical quantity</th>
                             <td>:</td>
                             <td><input type="number" min="1" ng-model="Reconciliate.PhysicalStock" required class="bg-none form-control"></td>
                         </tr>

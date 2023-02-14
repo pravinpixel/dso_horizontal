@@ -41,8 +41,8 @@ class ReconciliationExport implements FromArray, WithHeadings , ShouldAutoSize, 
             "Barcode Number",
             "Brand",
             "Batch/Serial",
-            "System Stock",
-            "Physical Stock",
+            "System quantity",
+            "Physical quantity",
             "Remarks"
         ];
     }
