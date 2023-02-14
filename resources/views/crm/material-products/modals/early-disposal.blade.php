@@ -22,18 +22,18 @@
                         <div class="mb-3">
                             <table class="table table-centered m-0">
                                 <tr>
-                                    <th class="p-0">Qty</th>
+                                    <th class="p-0">Quantity</th>
                                     <th class="p-2">:</th>
                                     <td class="p-2"><input ng-model="batch_qty" step="any" ng-disabled="batch.used_for_td_expt_only == 1" type="number" min="1" max="@{{ batch.quantity }}" name="quantity" class="form-control form-control-sm text-center" style="width: 100px" required></td>
                                 </tr>
                                 <tr>
-                                    <th class="p-0">Remain Qty</th>
+                                    <th class="p-0">Remain quantity</th>
                                     <th class="p-2">:</th>
                                     <td class="p-2">@{{ batch.quantity - batch_qty }}</td>
                                 </tr>
                             </table>
                         </div>
-                        <label class="pb-2"><strong>Supporting Documents (If any)</strong></label>
+                        <label class="pb-2"><strong>Supporting documents (If any)</strong></label>
                         <input ng-disabled="batch.used_for_td_expt_only == 1" type="file" name="disposal_certificate" id="" class="form-control" >
                     </div>
                     <div class="col-md-6 p-4">
@@ -42,11 +42,11 @@
                             <span class="text-success">Used for TD/Expt Project</span>
                         </label>
                         <div class="mb-3">
-                            <span><strong>Supporting Documents (Approval email)</strong></span>
+                            <span><strong>Supporting documents (Approval email)</strong></span>
                             <input type="file" ng-disabled="batch.used_for_td_expt_only == 0" name="used_for_td_certificate" id="" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <span><strong>* To be Disposed after</strong></span>
+                            <span><strong>* To be disposed after</strong></span>
                             <input type="date" ng-disabled="batch.used_for_td_expt_only == 0" name="disposed_after" value="@{{ batch.disposed_after }}" class="form-control" required>
                         </div>
                         <h1 class="h5 my-3">Accordance to EG1 Chemical UIMS 2021</h1>

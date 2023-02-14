@@ -66,7 +66,7 @@
                         </button> 
                     {{--  ==== REPACK OUTLIFE ====  --}}
         
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.permission == 'READ_ONLY'" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1 || batch.permission == 'READ_ONLY'" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print barcode / label</button>
                     <button class="dropdown-item text-danger" ng-disabled="batch.permission == 'READ_ONLY'" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>
@@ -129,10 +129,10 @@
                 <div class="dropdown-menu"> 
                     <a class="dropdown-item d-flex align-items-start" ng-click="dispose(batch)">
                         <i class="bi bi-trash2 me-1"></i>
-                      To Dispose /  <br>  Used for TD / Expt Project 
+                      To dispose /  <br>  Used for TD / Expt Project 
                     </a>
                     <button class="dropdown-item text-secondary" ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button> 
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print barcode / label</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>
@@ -185,7 +185,7 @@
                 </a> 
                 <div class="dropdown-menu"> 
                     <button class="dropdown-item text-secondary" batch-id="@{{ row.id }}" onclick="addToCart(this,'{{ $page_name }}')"><i class="bi bi-cart-plus-fill me-1"></i>Add to Cart</button> 
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print barcode / label</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>
@@ -200,7 +200,7 @@
                 <div class="dropdown-menu"> 
                     <a class="dropdown-item d-flex align-items-start" ng-click="dispose(batch)">
                         <i class="bi bi-trash2 me-1"></i>
-                    To Dispose /  <br>  Used for TD / Expt Project 
+                    To dispose /  <br>  Used for TD / Expt Project 
                     </a>
                     <button class="dropdown-item text-secondary"  ng-click="view_batch_details(batch.id)"><i class="bi bi-eye"></i> View batch details</button>
                     <button class="dropdown-item text-secondary"  ng-click="duplicateThisBatch(batch.id)"><i class="bi bi-back me-1"></i>Duplicate batch</button>
@@ -220,7 +220,7 @@
                         </button> 
                     {{--  ==== REPACK OUTLIFE ====  --}}
         
-                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print Barcode/Label</button>
+                    <button class="dropdown-item text-secondary" ng-disabled="batch.is_draft == 1" ng-click="printBatchLabel(batch.id)" ><i class="bi bi-upc-scan me-1"></i>Print barcode / label</button>
                     <button class="dropdown-item text-danger" ng-click="delete_batch_material_product(batch.id)"><i class="bi bi-trash3-fill me-1"></i> Delete batch</button>  
                 </div>
             </div>
