@@ -34,7 +34,7 @@
                                     <a href="{{ route('threshold-qty') }}" class="dropdown-item {{ Route::is(['threshold-qty']) ? "active" : "" }}"><i class="bi bi-subtract me-1"></i><span>Threshold Qty</span></a>
                                 </x-has-access>
                                 <x-has-access name="near-expiry-expired">
-                                    <a href="{{ route('near-expiry-expired') }}" class="dropdown-item {{ Route::is(['near-expiry-expired']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Near Expiry/Expired </span></a>
+                                    <a href="{{ route('near-expiry-expired') }}" class="dropdown-item {{ Route::is(['near-expiry-expired']) ? "active" : "" }}"><i class="bi bi-list-ul me-1"></i><span>Near Expiry / Expired / Failed IQC</span></a>
                                 </x-has-access>
                             </div>
                         </li>

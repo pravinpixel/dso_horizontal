@@ -1,6 +1,6 @@
 <div ng-show="on_item_description" class="sticky-left">
     <div class="box position-relative h-100 th box-lg">
-        Item Description
+        Item description
         <div class="btn-sort">
             <i class="bi bi-arrow-up" ng-click="sort_by('item_description', 'DESC')" ></i>
             <i class="bi bi-arrow-down" ng-click="sort_by('item_description', 'ASC')"></i>
@@ -11,14 +11,14 @@
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">
             @if ($column['name'] == 'iqc_status')
-                IQC Status 
+                IQC status 
                 @elseif ($column['name'] == 'is_draft') Status
                 @elseif ($column['name'] == 'housing_type') Housing
                 @elseif ($column['name'] == 'owner_two') Owners
                 @elseif ($column['name'] == 'serial')Batch# / Serial#
                 @elseif ($column['name'] == 'po_number') PO number
                 @elseif ($column['name'] == 'cas') CAS#
-                @elseif ($column['name'] == 'euc_material') EUC Material
+                @elseif ($column['name'] == 'euc_material') EUC material
                 @elseif ($column['name'] == 'material_product_type') Material/Product type 
                 @elseif ($column['name'] == 'alert_threshold_qty_upper_limit') Alert threshold Qty (upper limit)
                 @elseif ($column['name'] == 'alert_threshold_qty_lower_limit') Alert threshold Qty (lower limit)

@@ -5,18 +5,13 @@ namespace App\Jobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use romanzipp\QueueMonitor\Traits\IsMonitored;
 use App\Models\Batches;
-use App\Models\LogSheet;
 use Carbon\Carbon;
-use Carbon\CarbonImmutable;
 use DateTime;
-use Illuminate\Support\Facades\Log;
-
 class AutoDrawInJob implements ShouldQueue
 {
     use IsMonitored;
     public function handle()
     {
-        
         $Batches = Batches::with("RepackOutlife")->get();
         foreach($Batches as $batch) {
             foreach($batch->RepackOutlife as $outlife) {

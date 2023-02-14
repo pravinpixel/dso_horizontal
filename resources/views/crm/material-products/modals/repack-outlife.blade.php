@@ -26,8 +26,8 @@
                                 <td>Date & time stamp</td>
                                 <td>Last accessed</td>
                                 {{-- <td>Total Qty</td> --}}
-                                <td> Input repack Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
-                                <td>Remain Amount  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
+                                <td> Input repack Amount (<small>Total Quantity</small>)  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
+                                <td>Remain Amount (<small>Total Quantity</small>)  <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                                 {{-- <td>Auto-generate unique barcode label</td> --}}
                                 <td>Repack size <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                                 <td>Quantity</td>

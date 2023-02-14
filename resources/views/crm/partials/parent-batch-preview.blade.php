@@ -2,7 +2,7 @@
 
     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_material_product_data">
         <div class="w-100">
-            <div class="fw-bold">Category Selection</div>
+            <div class="fw-bold">Category selection</div>
             {{ $material->category_selection == 'in_house' ? 'In-house Product' : 'Material'  }}
         </div>
     </li>
@@ -14,7 +14,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_material_product_data">
         <div class="w-100">
-            <div class="fw-bold">Unit Packing size</div>
+            <div class="fw-bold">Unit packing size</div>
             {{ $material->unit_packing_value }}
         </div>
     </li>

@@ -13,7 +13,6 @@ class TransferBatchController extends Controller
     public function transfer(Request $request)
     {
         $current_batch                 = Batches::find($request->id);
-        MaterialProductHistory($current_batch,'before_transfer');
         $created_batch                 = $current_batch->replicate();
         $created_batch->created_at     = Carbon::now();
         $created_batch->quantity       = $request->quantity;

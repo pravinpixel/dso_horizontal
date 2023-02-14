@@ -9,12 +9,10 @@
                 <table class="table table-centered bg-white table-bordered table-hover custom-center m-0">
                     <thead class="bg-light text-primary-2 table-bordered table-hover"> 
                         <tr>
-                            <th width="200px">Transfer Qty</th>
-                            {{-- <th>storage area (able to add in new rooms in the future)</th>
-                            <th>Housing type (able to add in new housing type in the future)</th> --}}
-                            <th>storage area </th>
+                            <th width="200px">Transfer quantity</th> 
+                            <th>Storage</th>
                             <th>Housing type </th>
-                            <th>Housing No.</th>
+                            <th>Housing no.</th>
                             <th>Owners</th>
                             <th> <i class="text-danger bi bi-trash3-fill"></i></th>
                         </tr>

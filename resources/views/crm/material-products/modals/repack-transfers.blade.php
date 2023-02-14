@@ -16,8 +16,8 @@
                         <tr>
                             <td>Date & time stamp	</td>
                             <td>Current accessed </td>
-                            <td>Repack Quantity</td>
-                            <td>Remain Quantity</td>
+                            <td>Repack total quantity</td>
+                            <td>Remain total quantity</td>
                             <td>New unit packing value</td>
                             <td>Quantity </td>
                             <td>Storage Area</td>
