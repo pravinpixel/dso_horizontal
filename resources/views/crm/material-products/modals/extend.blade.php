@@ -10,7 +10,7 @@
             <div class="modal-body ">
                 <div class="row container py-3 col-lg-9 mx-auto">
                     <div class="col-sm-4 mb-2 mb-sm-0 border-end  py-3">
-                        <h1 class="h5">Extended QC Results Status :</h1>
+                        <h1 class="h5">Extended QC results status :</h1>
                         <div class="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             <label for="Pass_label" class="nav-link active show form-radio-success">
                                 <input ng-model="batch.extended_qc_status" ng-checked="batch.extended_qc_status == 'PASS'" value="PASS" type="radio" class="form-check-input border-success" id="Pass_label">
