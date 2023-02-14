@@ -63,7 +63,7 @@
                     <th class="table-th child-td">Housing type</th>
                     <th class="table-th child-td">Threshold limit</th>
                     <th class="table-th child-td">DOE</th>
-                    <th class="table-th child-td">Read Status</th>
+                    <th class="table-th child-td">Read status</th>
 					 <th class="table-th child-td">Actions</th>
                 </tr> 
             </thead>

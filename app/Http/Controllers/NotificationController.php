@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\DsoRepositoryInterface;
-use App\Models\Batches;
 use App\Models\MaterialProducts;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
 class NotificationController extends Controller
@@ -152,8 +149,8 @@ class NotificationController extends Controller
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="'.route('disposal',$table->id).'"><i class="bi bi-trash2 me-1"></i>To Dispose/Used for TD/Expt Project</a>
-                            <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend Expiry</a>
-                            <a class="dropdown-item" onclick="viewBatch('.$table->id.')"><i class="bi bi-eye-fill me-1"></i>View Batch details</a>
+                            <a class="dropdown-item" href="'.route('extend-expiry',$table->id).'"><i class="bi bi-arrow-up-right-square me-1"></i> Extend expiry</a>
+                            <a class="dropdown-item" onclick="viewBatch('.$table->id.')"><i class="bi bi-eye-fill me-1"></i>View batch details</a>
                         </div>
                     </div>
                 ';

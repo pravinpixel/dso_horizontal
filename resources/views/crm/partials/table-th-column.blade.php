@@ -50,7 +50,7 @@
     @break
     @case($page_name == 'THRESHOLD_QTY')
         <div class="box th border-start">
-            Read Status
+            Read status
         </div>
     @break 
     @default

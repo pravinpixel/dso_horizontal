@@ -10,14 +10,14 @@
                 <table class="table m-0 table-hover table-sm" id="NEAR_EXPIRY_TABLE"> 
                     <thead>
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
-                            <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
+                            <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
-                            <td class="text-near-expiry"><b><small>DOE</small></b></td>
+                            <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
@@ -34,14 +34,14 @@
                 <table class="table m-0 table-hover table-sm" id="EXPIRY_TABLE"> 
                     <thead> 
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
-                            <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
+                            <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
-                            <td class="text-near-expiry"><b><small>DOE</small></b></td>
+                            <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
@@ -58,14 +58,14 @@
                 <table class="table m-0 table-hover table-sm" id="FAILED_IQC_TABLE"> 
                     <thead> 
                         <tr class="bg-light" style="position: sticky;top: 0;z-index: 11;">
-                            <td class="text-near-expiry"><b><small>Material / Product  Description</small></b></td>
+                            <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
                             <td class="text-near-expiry"><b><small>Qty</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
-                            <td class="text-near-expiry"><b><small>DOE</small></b></td>
+                            <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr> 
