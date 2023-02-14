@@ -36,7 +36,7 @@
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('near-expiry-expired') }}" class="card-body btn">
                         <i class="text-warning bi bi-list-ul fa-2x mb-2"></i>
-                        <div class="text-primary"><b> Near Expiry/Expired</b></div>
+                        <div class="text-primary"><b> Near Expiry / Expired / Failed IQC </b></div>
                     </a>
                 </div>
             </div>

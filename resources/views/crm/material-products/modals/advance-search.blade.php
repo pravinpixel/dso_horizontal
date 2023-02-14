@@ -24,7 +24,7 @@
                             <input type="text" class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.serial" name="serial">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <small class="mb-1 text-dark">PO Number</small>
+                            <small class="mb-1 text-dark">PO number</small>
                             <input type="number" min="1"  class="form-control need-word-match" placeholder="Type here" ng-model="advanced_filter.po_number" name="po_number">
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
@@ -37,7 +37,7 @@
                             </select>
                         </div> 
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label text-dark">EUC Material</label>
+                            <label class="form-label text-dark">EUC material</label>
                             <select class="form-select" ng-model="advanced_filter.euc_material">
                                 <option value="">-- Select --</option>
                                 <option value="1">Yes</option>
@@ -45,7 +45,7 @@
                             </select>
                         </div>
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label text-dark">Require Bulk volume tracking</label>
+                            <label class="form-label text-dark">Require bulk volume tracking </label>
                             <select class="form-select" ng-model="advanced_filter.require_bulk_volume_tracking">
                                 <option value="">-- Select --</option>
                                 <option value="1">Yes</option>
@@ -53,7 +53,7 @@
                             </select>
                         </div>  
                         <div class="col-6 text-start mb-2 px-1">
-                            <label class="form-label text-dark">Required Outlife Tracking</label>
+                            <label class="form-label text-dark">Required outlife tracking </label>
                             <select name="advanced_filter.require_outlife_tracking" class="form-select" ng-model="advanced_filter.require_outlife_tracking">
                                 <option value="">-- Select --</option>
                                 <option value="0">No</option>

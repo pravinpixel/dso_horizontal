@@ -194,14 +194,14 @@ app.controller('MasterController', function($scope, $http) {
             icon: "warning",
             buttons: {
                 cancel: {
-                    text: "Cancel",
+                    text: "No",
                     value: null,
                     visible: true,
                     className: "btn-light rounded-pill btn",
                     closeModal: true,
                 },
                 confirm: {
-                    text: "Yes, Delete",
+                    text: "Yes",
                     value: true,
                     visible: true,
                     className: "btn btn-danger rounded-pill",

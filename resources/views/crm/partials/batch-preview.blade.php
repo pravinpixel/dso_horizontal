@@ -7,7 +7,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
-            <div class="fw-bold mb-1">Item Description</div>
+            <div class="fw-bold mb-1">Item description</div>
             {{ $batch->BatchMaterialProduct->item_description ?? '' }}
         </div>
     </li>
@@ -124,7 +124,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
-            <div class="fw-bold mb-1">Storage Area</div>
+            <div class="fw-bold mb-1">Storage area</div>
             @if ($batch->StorageArea)
                 {{ $batch->StorageArea->name }}
             @endif
