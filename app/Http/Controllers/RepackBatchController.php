@@ -12,7 +12,6 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RepackBatchController extends Controller
@@ -34,7 +33,7 @@ class RepackBatchController extends Controller
         // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
         cloneDocumentFromBatch($request->id,$new_batch->id);
-        MaterialProductHistory($new_batch,'Before Repack / Transfer');
+        MaterialProductHistory($new_batch,'Repack / Transfer');
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
                 $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
@@ -52,7 +51,7 @@ class RepackBatchController extends Controller
             'quantity'       =>   $request->RemainQuantity / $previous_batch->unit_packing_value ,
             'total_quantity' =>  $request->RemainQuantity,
         ]); 
-
+        MaterialProductHistory($new_batch,'After Repack / Transfer');
         return response()->json([
             "status"  => true,
             "message" => "Repack / Transfer Success !"

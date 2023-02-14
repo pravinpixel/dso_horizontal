@@ -252,7 +252,7 @@ class ReportsController extends Controller
         $material->when(isset($request->EndDate), function($query) use ($request){
             $query->whereBetween('created_at', dateBetween($request));
         });
-        return $material->latest()->get();
+        return $material->get();
     }
     public function get_material_product_history(Request $request)
     { 

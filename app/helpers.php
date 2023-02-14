@@ -635,7 +635,7 @@ if (!function_exists('getRoutes')) {
                 'StorageArea'              => $batch->StorageArea->name ?? '',
                 'Housing'                  => $batch->housing,
                 'Owners'                   => $BatchOwners,
-                'Remarks'                  => $batch->remarks,
+                'Remarks'                  => $Batch->remarks ?? "-",
                 'DrawStatus'               => $DrawStatus ?? null,
                 'RemainingOutlifeOfParent' => $updated_outlife
             ]);
