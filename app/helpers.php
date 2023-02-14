@@ -283,7 +283,7 @@ if (!function_exists('strExcelDate')) {
         // $excel_date = 25569 + ($unix_date / 86400);
         // $unix_date  = ($excel_date - 25569) * 86400;
         // return gmdate("Y-m-d", $unix_date); //2023-12-16
-        return Carbon::parse($excel_date)->format('Y-m-d');
+        return Carbon::parse(str_replace('/','-',$excel_date))->format('Y-m-d');
     }
 }
 

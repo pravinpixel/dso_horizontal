@@ -84,7 +84,7 @@ class MaterialProductsController extends Controller
 
         $material_product = $this->dsoRepository->renderTableData($material_product_data);
 
-        return response(['status'   =>  true, 'data' => $material_product ], Response::HTTP_OK);
+        return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }
 
     public function advanced_search(Request $request)
@@ -154,102 +154,104 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000',
         ]);
-        if($request->file('select_file')->getClientOriginalExtension() !== 'csv') {
+        if ($request->file('select_file')->getClientOriginalExtension() !== 'csv') {
             Flash::error('File Type must have CSV !');
             return back();
         }
-        try {
-            $array = Excel::toArray(new BulkImport, $request->file('select_file'));
-            // dd($array);
-            foreach ($array[0] as $key => $row) {
-                // dd($row);
-                if (!is_null($row['category_selection'])) {
-                    try {
-                        $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure'] ],[
-                            'name' => $row['unit_of_measure']
-                        ]);
-                        $material  = MaterialProducts::create([
-                            'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
-                            'item_description'                => $row['item_description'] ?? null,
-                            'unit_of_measure'                 => $unit_of_measure->id,
-                            'unit_packing_value'              => $row['unit_packing_value'] ?? null,
-                            'alert_threshold_qty_upper_limit' => $row['alert_threshold_qty_upper_limit'] ?? null,
-                            'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
-                            'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
-                            'material_quantity'               => $row['quantity'],
-                            'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
-                            'is_draft' => true,
-                        ]);
 
-                        LogActivity::log($material->id);
-
-                        $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body'] ],[
-                            'name' => $row['statutory_body']
-                        ]);
-                        $storage_area = StorageRoom::updateOrCreate(['name' => $row['storage_area'] ],[
-                            'name' => $row['storage_area']
-                        ]);
-                        $housing_type = HouseTypes::updateOrCreate(['name' => $row['housing_type'] ],[
-                            'name' => $row['housing_type']
-                        ]);
-                        $department = Departments::updateOrCreate(['name' => $row['department'] ],[
-                            'name' => $row['department']
-                        ]);
-                        $batch = $material->Batches()->create([
-                            'is_draft'                     => 1,
-                            'barcode_number'               => generateBarcode($material->category_selection),
-                            'brand'                        => $row['brand'] ?? null,
-                            'supplier'                     => $row['supplier'] ?? null,
-                            'unit_packing_value'           => $row['unit_packing_value'] ?? null,
-                            'quantity'                     => $row['quantity'] ?? null,
-                            'total_quantity'               => $row['quantity'] * $row['unit_packing_value'],
-                            'batch'                        => $row['batch'] ?? null,
-                            'serial'                       => $row['serial'] ?? null,
-                            'po_number'                    => $row['po_number'] ?? null,
-                            'statutory_body'               => $statutory_body->id,
-                            'euc_material'                 => strtolower($row['euc_material']) == 'yes' ? 1 : 0,
-                            'require_bulk_volume_tracking' => strtolower($row['require_bulk_volume_tracking']) == 'yes' ? 1 : 0,
-                            'require_outlife_tracking'     => strtolower($row['require_outlife_tracking']) == 'yes' ? 1 : 0,
-                            'outlife'                      => $row['outlife'] ?? null,
-                            'storage_area'                 => $storage_area->id,
-                            'housing_type'                 => $housing_type->id,
-                            'housing'                      => $row['housing'] == '-' ? 'nil' : $row['housing'],
-                            'department'                   => $department->id,
-                            'access'                       => $row['access'] ?? null,
-                            'date_in'                      => strExcelDate($row['date_in']),
-                            'date_of_expiry'               => strExcelDate($row['date_of_expiry']),
-                            'iqc_status'                   => strtolower($row['iqc_status']) == 'pass' ? 1 : 0,
-                            'iqc_result'                   => $row['iqc_result'] ?? null,
-                            'iqc_result_status'            => 'on',
-                            'sds'                          => $row['sds'] ?? null,
-                            'cas'                          => $row['cas'] ?? null,
-                            'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
-                            'project_name'                 => $row['project_name'] ?? null,
-                            'material_product_type'        => $row['material_product_type'] ?? null,
-                            'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
-                            'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
-                            'cost_per_unit'                => $row['cost_per_unit'] ?? null,
-                            'remarks'                      => $row['remarks'] ?? null,
-                            'used_for_td_expt_only'        => "1",
-                            'coc_coa_mill_cert_status'     => 'on',
-                            'no_of_extension'              => $row['no_of_extension'] ?? 0,
-                            'user_id' => auth_user()->id,
-                        ]);
-
-                        $batch->BatchOwners()->create([
-                            "user_id"    => auth_user()->id,
-                            "alias_name" => auth_user()->alias_name
-                        ]);
-                        Flash::success(__('global.imported'));
-                    } catch (\Throwable $th) {
-                        Log::info($th->getMessage());
-                    }
+        $array = Excel::toArray(new BulkImport, $request->file('select_file'));
+        // dd($array);
+        foreach ($array[0] as $key => $row) {
+            // dd($row);
+            if (!is_null($row['category_selection'])) {
+                $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure']], [
+                    'name' => $row['unit_of_measure']
+                ]);
+                $material  = MaterialProducts::create([
+                    'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
+                    'item_description'                => $row['item_description'] ?? null,
+                    'unit_of_measure'                 => $unit_of_measure->id,
+                    'unit_packing_value'              => $row['unit_packing_value'] ?? null,
+                    'alert_threshold_qty_upper_limit' => $row['alert_threshold_qty_upper_limit'] ?? null,
+                    'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
+                    'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
+                    'material_quantity'               => $row['quantity'],
+                    'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
+                    'is_draft' => true,
+                ]);
+                $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body']], [
+                    'name' => $row['statutory_body']
+                ]);
+                $storage_area = StorageRoom::updateOrCreate(['name' => $row['storage_area']], [
+                    'name' => $row['storage_area']
+                ]);
+                $housing_type = HouseTypes::updateOrCreate(['name' => $row['housing_type']], [
+                    'name' => $row['housing_type']
+                ]);
+                $department = Departments::updateOrCreate(['name' => $row['department']], [
+                    'name' => $row['department']
+                ]);
+                $row['require_outlife_tracking']        =  strtolower($row['require_outlife_tracking']) == 'yes' ? 1 : 0;
+                $row['require_bulk_volume_tracking']    =  strtolower($row['require_bulk_volume_tracking']) == 'yes' ? 1 : 0;
+                if ($row['require_bulk_volume_tracking'] == 0 && $row['require_outlife_tracking'] == 0) {
+                    $withdrawal_type = 'DIRECT_DEDUCT';
                 }
+                if ($row['require_bulk_volume_tracking'] == 1 && $row['require_outlife_tracking'] == 0) {
+                    $withdrawal_type = 'DEDUCT_TRACK_USAGE';
+                }
+                if ($row['require_bulk_volume_tracking'] == 1 && $row['require_outlife_tracking'] == 1) {
+                    $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
+                }
+                $batch = $material->Batches()->create([
+                    'is_draft'                     => 1,
+                    'barcode_number'               => generateBarcode($material->category_selection),
+                    'brand'                        => $row['brand'] ?? null,
+                    'supplier'                     => $row['supplier'] ?? null,
+                    'unit_packing_value'           => $row['unit_packing_value'] ?? null,
+                    'quantity'                     => $row['quantity'] ?? null,
+                    'total_quantity'               => $row['quantity'] * $row['unit_packing_value'],
+                    'batch'                        => $row['batch'] ?? null,
+                    'serial'                       => $row['serial'] ?? null,
+                    'po_number'                    => $row['po_number'] ?? null,
+                    'statutory_body'               => $statutory_body->id,
+                    'euc_material'                 => strtolower($row['euc_material']) == 'yes' ? 1 : 0,
+                    'require_bulk_volume_tracking' =>  $row['require_bulk_volume_tracking'],
+                    'require_outlife_tracking'     =>  $row['require_outlife_tracking'],
+                    'outlife'                      => $row['outlife'] ?? null,
+                    'storage_area'                 => $storage_area->id,
+                    'housing_type'                 => $housing_type->id,
+                    'housing'                      => $row['housing'] == '-' ? 'nil' : $row['housing'],
+                    'department'                   => $department->id,
+                    'access'                       => $row['access'] ?? null,
+                    'date_in'                      => strExcelDate($row['date_in']),
+                    'date_of_expiry'               => strExcelDate($row['date_of_expiry']),
+                    'iqc_status'                   => strtolower($row['iqc_status']) == 'pass' ? 1 : 0,
+                    'iqc_result'                   => $row['iqc_result'] ?? null,
+                    'iqc_result_status'            => 'on',
+                    'sds'                          => $row['sds'] ?? null,
+                    'cas'                          => $row['cas'] ?? null,
+                    'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
+                    'project_name'                 => $row['project_name'] ?? null,
+                    'material_product_type'        => $row['material_product_type'] ?? null,
+                    'date_of_manufacture'          => strExcelDate($row['date_of_manufacture']),
+                    'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
+                    'cost_per_unit'                => $row['cost_per_unit'] ?? null,
+                    'remarks'                      => $row['remarks'] ?? null,
+                    'used_for_td_expt_only'        => "1",
+                    'coc_coa_mill_cert_status'     => 'on',
+                    'no_of_extension'              => $row['no_of_extension'] ?? 0,
+                    'user_id' => auth_user()->id,
+                    'withdrawal_type' => $withdrawal_type
+                ]);
+                $this->getQuantityColor($batch->id);
+                $batch->BatchOwners()->create([
+                    "user_id"    => auth_user()->id,
+                    "alias_name" => auth_user()->alias_name
+                ]);
+                Flash::success(__('global.imported'));
             }
-        } catch (\Throwable $th) {
-            Log::info("Invalid Action !");
-            Flash::error($th->getMessage());
         }
+
         return back();
     }
 
@@ -266,10 +268,10 @@ class MaterialProductsController extends Controller
         return response(['status' => true, 'message' => trans('Category to be changed !')], Response::HTTP_OK);
     }
 
-    public function wizardFormView(Request $request, $type = null, $wizard_mode = null, $id = null, $batch_id = null , $is_parent = null)
+    public function wizardFormView(Request $request, $type = null, $wizard_mode = null, $id = null, $batch_id = null, $is_parent = null)
     {
 
-        if($is_parent == 1) {
+        if ($is_parent == 1) {
             $request->session()->put('edit_mode', 'parent');
         } else {
             $request->session()->put('edit_mode', 'batch');
@@ -360,7 +362,7 @@ class MaterialProductsController extends Controller
     }
     public function storeWizardForm(Request $request, $type, $wizard_mode = null, $id = null, $batch_id = null)
     {
-        if(is_null($request->coc_coa_mill_cert_status) && $type == 'form-two') {
+        if (is_null($request->coc_coa_mill_cert_status) && $type == 'form-two') {
             $request['coc_coa_mill_cert_status'] = 'off';
         }
 
@@ -372,13 +374,13 @@ class MaterialProductsController extends Controller
 
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id);
-            if($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {
+            if ($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DIRECT_DEDUCT';
-            } elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 0) {
+            } elseif ($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DEDUCT_TRACK_USAGE';
-            } elseif($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 1) {
+            } elseif ($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 1) {
                 $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
-            }  elseif($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
+            } elseif ($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
                 $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
             }
 
@@ -386,7 +388,7 @@ class MaterialProductsController extends Controller
                 'withdrawal_type' => $withdrawal_type
             ]);
 
-            if(wizard_mode() == 'edit') {
+            if (wizard_mode() == 'edit') {
                 LogActivity::log(material_product() ?? $id);
             }
 
@@ -407,13 +409,13 @@ class MaterialProductsController extends Controller
                 $request->session()->put('form-three', 'completed');
             }
             $view  = 'form-four';
-            $this->getQuantityColor( batch_id() ?? $batch_id);
+            $this->getQuantityColor(batch_id() ?? $batch_id);
         }
         if ($type == 'form-four') {
             $this_batch_id =  batch_id() ?? $batch_id;
-            MaterialProductHistory(Batches::find(batch_id() ?? $batch_id),wizard_mode());
+            MaterialProductHistory(Batches::find(batch_id() ?? $batch_id), wizard_mode());
             forgot_session();
-            if($request->is_print == 1) {
+            if ($request->is_print == 1) {
                 return redirect()->route('barcode.listing', ["id" => $this_batch_id]);
             } else {
                 return redirect()->route('list-material-products');
@@ -422,7 +424,7 @@ class MaterialProductsController extends Controller
 
         if ($result) {
             if (wizard_mode() == 'create')     return redirect()->route('create.material-product', ['type' => $view]);
-            if (wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'edit', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id , "is_parent" =>  is_parent()]);
+            if (wizard_mode() == 'edit')       return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'edit', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id, "is_parent" =>  is_parent()]);
             if (wizard_mode() == 'duplicate')  return redirect()->route('edit_or_duplicate.material-product', ["wizard_mode" => 'duplicate', "type" => $view, "id" => material_product() ?? $id, batch_id() ?? $batch_id]);
         }
     }
@@ -434,13 +436,13 @@ class MaterialProductsController extends Controller
         $lower_limit = $batch->BatchMaterialProduct->alert_threshold_qty_lower_limit;
         $upper_limit = $batch->BatchMaterialProduct->alert_threshold_qty_upper_limit;
 
-        if($quantity < $lower_limit) {
+        if ($quantity < $lower_limit) {
             $quantityColor = 'RED';
         } else {
-            if($lower_limit < ($quantity) &&  ($upper_limit) > ($quantity)) {
+            if ($lower_limit < ($quantity) &&  ($upper_limit) > ($quantity)) {
                 $quantityColor = 'AMBER';
             } else {
-                if($quantity > $upper_limit) {
+                if ($quantity > $upper_limit) {
                     $quantityColor = 'GREEN';
                 } else {
                     $quantityColor = 'AMBER';
@@ -473,10 +475,10 @@ class MaterialProductsController extends Controller
             "statutory_body"               => $data->StatutoryBody->name,
             "euc_material"                 => $data->euc_material == 1 ? "Yes" : $data->euc_material == 0 ? "No" : "-",
             "require_bulk_volume_tracking" => $data->require_bulk_volume_tracking == 1 ? "Yes" : $data->require_bulk_volume_tracking == 0 ? "No" : "-",
-            "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : $data->require_outlife_tracking == 0 ? "No" : "-" .$data->outlife ?? "0",
+            "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : $data->require_outlife_tracking == 0 ? "No" : "-" . $data->outlife ?? "0",
             "storage_area"                 => $data->StorageArea !== null ? $data->StorageArea->name : '-',
-            "housing"                      => $data->housing_type !== null ? $data->HousingType->name : '-'."/".$data->housing,
-            "owners"                       => $data->owner_one."/".$data->owner_two,
+            "housing"                      => $data->housing_type !== null ? $data->HousingType->name : '-' . "/" . $data->housing,
+            "owners"                       => $data->owner_one . "/" . $data->owner_two,
             "department"                   => $data->Department->name,
             "access"                       => $data->access,
             "date_in"                      => $data->date_in,
@@ -504,13 +506,13 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $batch   =   Batches::with(['BatchMaterialProduct','Department','StatutoryBody','StorageArea','HousingType'])->findOrFail($id);
-        return view('crm.partials.batch-preview',compact('batch')); 
+        $batch   =   Batches::with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType'])->findOrFail($id);
+        return view('crm.partials.batch-preview', compact('batch'));
     }
     public function view_parent_batch($id)
     {
-        $material = MaterialProducts::with('Batches','Batches.BatchOwners')->findOrFail($id);
-        return view('crm.partials.parent-batch-preview',compact('material')); 
+        $material = MaterialProducts::with('Batches', 'Batches.BatchOwners')->findOrFail($id);
+        return view('crm.partials.parent-batch-preview', compact('material'));
     }
     public function destroy($id)
     {
@@ -525,7 +527,7 @@ class MaterialProductsController extends Controller
     }
     public function batch_destroy($id)
     {
-        if(BatchTracker::where('from_batch_id', $id)->count() == 0) {
+        if (BatchTracker::where('from_batch_id', $id)->count() == 0) {
             $data   =   Batches::find($id);
             if (Storage::exists($data->sds_mill_cert_document)) {
                 Storage::delete($data->sds_mill_cert_document);
@@ -543,7 +545,7 @@ class MaterialProductsController extends Controller
                 Storage::delete($data->extended_qc_result);
             }
             BatchRestore($id);
-            MaterialProductHistory($data,'Deleted Batch');
+            MaterialProductHistory($data, 'Deleted Batch');
             $data->BatchOwners()->delete();
             $data->delete();
             LogActivity::log($id);
@@ -555,9 +557,9 @@ class MaterialProductsController extends Controller
     public function suggestion(Request $request)
     {
         try {
-            $data =  MaterialProducts::where('is_draft',0)->where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+            $data =  MaterialProducts::where('is_draft', 0)->where($request->name, 'LIKE', '%' . $request->value . '%')->pluck($request->name);
         } catch (\Throwable $th) {
-            $data =  Batches::where('is_draft',0)->where($request->name, 'LIKE','%'.$request->value.'%')->pluck($request->name);
+            $data =  Batches::where('is_draft', 0)->where($request->name, 'LIKE', '%' . $request->value . '%')->pluck($request->name);
         }
         return response(['status' => true,  'data' => collect($data)->unique()], Response::HTTP_OK);
     }
@@ -571,9 +573,9 @@ class MaterialProductsController extends Controller
         $created_batch->barcode_number = generateBarcode($batch_parent_category);
         $created_batch->iqc_status     = 0;
 
-        foreach($created_batch->toArray() as $column => $value) {
-            $rest = config('is_disable.duplicate.'.$batch_parent_category.'.'.$column.'.reset');
-            if($rest == 1 || $rest == true) {
+        foreach ($created_batch->toArray() as $column => $value) {
+            $rest = config('is_disable.duplicate.' . $batch_parent_category . '.' . $column . '.reset');
+            if ($rest == 1 || $rest == true) {
                 $created_batch->$column = NULL;
             }
         }
@@ -581,7 +583,7 @@ class MaterialProductsController extends Controller
         $created_batch->save();
 
         foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
-            if(!is_null($created_batch->id)) {
+            if (!is_null($created_batch->id)) {
                 BatchOwners::create([
                     "batch_id"   => $created_batch->id,
                     "user_id"    => $batchUser['user_id'],
