@@ -70,7 +70,7 @@
                                                                 <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                                                                 <td><small>{{ $row->Batch->quantity }}</small></td>
                                                                 <td><small>{{ $row->Batch->total_quantity }}</small></td>
-                                                                <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
+                                                                <td class="p-0 py-0 px-1"><input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
                                                                 <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value="{{ $repack['remarks'] }}"/></td> 
                                                                 <td class="child-td">
                                                                     <small class="text-dark">{{ $row->Batch->outlife }}</small>
@@ -146,7 +146,7 @@
                                                     <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
                                                     <td><small>{{ $row->Batch->quantity }}</small></td>
                                                     <td><small>{{ $row->Batch->total_quantity }}</small></td>
-                                                    <td class="p-0 py-0 px-1"><input name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
+                                                    <td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
                                                     <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
                                                 </tr>
                                             </tbody>

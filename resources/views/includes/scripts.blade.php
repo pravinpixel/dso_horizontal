@@ -18,4 +18,19 @@
         console.log("End....")
     });
 </script> --}}
-@if ($message = Session::get('success_message')) <script>swal({text: "{{ $message }}",icon: "success",})</script> @endif
+@if ($message = Session::get('success_message'))
+    <script>
+        swal({
+            text: "{{ $message }}",
+            icon: "success",
+        })
+    </script>
+@endif
+<script>
+    const isNumber = (element) => {
+        if(Number(element.target.max) < Number(element.target.value)) {
+            element.target.value = element.target.max
+            return false
+        }
+    }
+</script>
