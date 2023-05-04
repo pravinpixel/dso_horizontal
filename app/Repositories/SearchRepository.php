@@ -9,6 +9,7 @@ use App\Models\BatchOwners;
 use App\Models\MaterialProducts;
 use App\Models\SaveMySearch;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 class SearchRepository implements SearchRepositoryInterface
@@ -44,32 +45,7 @@ class SearchRepository implements SearchRepositoryInterface
     }
 
     public function advanced_search($filter)
-    {
-
-        if($filter->owners ?? false) {
-
-            $material_product_data_by_owners = [];
-            $Owners = [];
-            foreach ($filter->owners as $key => $owner) {
-                $Owners[] = $owner['id'];
-            }
-
-            foreach (BatchOwners::whereIn('user_id',$Owners)->get() as $key => $value) {
-
-                $material_product_data_by_owners[] = MaterialProducts::with([
-                                                        'Batches',
-                                                        'Batches.RepackOutlife',
-                                                        'Batches.BatchOwners',
-                                                        'Batches.HousingType',
-                                                        'Batches.Department',
-                                                        'Batches.StorageArea',
-                                                        'Batches.StatutoryBody',
-                                                        'UnitOfMeasure',
-                                                        ])->find(Batches::find($value['batch_id'])->material_product_id);
-            }
-            return $this->dsoRepository->renderTableData($material_product_data_by_owners);
-        }
-
+    { 
         $material_table =  [
             'quantity',
             'category_selection',
@@ -80,18 +56,15 @@ class SearchRepository implements SearchRepositoryInterface
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
         ];
-
         $material_product_data =  MaterialProducts::with([
             'Batches' => function ($q) use ($filter, $material_table) {
                 foreach ($filter as $column => $value) {
                     if (in_array($column, $material_table) != 1) {
                         if (checkIsBatchDateColumn($column)) {
                             $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                        } elseif ($column == 'owner_one') {
-                            if ($value != '') {
-                                $q->where('owner_one', $value)
-                                    ->orWhere('owner_two', $value);
-                            }
+                        } elseif ($column == 'owners') {
+                            $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
+                            $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
                         } else {
                             if ($value != '') {
                                 $q->where($column, $value);
@@ -113,6 +86,9 @@ class SearchRepository implements SearchRepositoryInterface
             foreach ($filter as $column => $value) {
                 if (checkIsBatchDateColumn($column)) {
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                } elseif ($column == 'owners') {
+                    $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
+                    $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
                 } else {
                     if ($value != '') {
                         $q->where($column, $value);

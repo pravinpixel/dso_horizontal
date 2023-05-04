@@ -26,6 +26,7 @@ use App\Models\BatchOwners;
 use App\Models\BatchTracker;
 use App\Models\RepackOutlife;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -579,9 +580,9 @@ class MaterialProductsController extends Controller
                 $created_batch->$column = NULL;
             }
         }
-
+        $owners_id = Arr::pluck($current_batch->BatchOwners->toArray(),'user_id');
+        $created_batch->owners = implode("_",$owners_id);
         $created_batch->save();
-
         foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
             if (!is_null($created_batch->id)) {
                 BatchOwners::create([
