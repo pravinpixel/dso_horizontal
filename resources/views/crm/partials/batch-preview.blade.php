@@ -232,14 +232,12 @@
             @endif
         </div>
     </li>
-    @if ($batch->project_name)
-        <li class="list-group-item list-group-item-action d-flex align-self-start">
-            <div class="w-100">
-                <div class="fw-bold mb-1">Project name</div>
-                {{ $batch->project_name }}
-            </div>
-        </li>
-    @endif
+    <li class="list-group-item list-group-item-action d-flex align-self-start">
+        <div class="w-100">
+            <div class="fw-bold mb-1">Project name</div>
+            {{ $batch->project_name }}
+        </div>
+    </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Material/Product type</div>
