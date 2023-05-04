@@ -217,7 +217,9 @@ class DsoRepository implements DsoRepositoryInterface
             if($parent->alert_threshold_qty_lower_limit <= $parent->material_quantity && $parent->material_quantity <= $parent->alert_threshold_qty_upper_limit){
                 $quantityColor = 'text-warning';
             }
-
+            if(is_null($parent->alert_threshold_qty_upper_limit)) {
+                $quantityColor = 'text-dark';
+            }
             $parent['quantityColor'] = $quantityColor;
 
             if ($page_name == 'THRESHOLD_QTY') {
