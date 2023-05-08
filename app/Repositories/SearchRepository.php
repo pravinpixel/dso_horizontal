@@ -77,6 +77,7 @@ class SearchRepository implements SearchRepositoryInterface
                             }
                         }
                     }
+                    $q->where('is_draft', 0);
                 }
             },
             'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
@@ -107,6 +108,7 @@ class SearchRepository implements SearchRepositoryInterface
                         }
                     }
                 }
+                $q->where('is_draft', 0);
             })->latest()->get();
 
         return $this->dsoRepository->renderTableData($material_product_data, null);
