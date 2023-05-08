@@ -581,7 +581,7 @@ class MaterialProductsController extends Controller
             }
         }
         $owners_id = Arr::pluck($current_batch->BatchOwners->toArray(),'user_id');
-        $created_batch->owners = implode("_",$owners_id);
+        $created_batch->owners = implode(",",$owners_id);
         $created_batch->save();
         foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
             if (!is_null($created_batch->id)) {

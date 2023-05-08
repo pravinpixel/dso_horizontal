@@ -127,7 +127,7 @@
                     $owner_users = \Arr::pluck($batch->BatchOwners->toArray(), 'user_id')
                 @endphp
 
-                <select class="owners_select" name="owners[]" required multiple="multiple" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status") }}>
+                <select class="owners_select" name="batch_owners[]" required multiple="multiple" {{ config(is_disable(category_type() ?? $material_product->category_selection ?? null)."owner_one.status") }}>
                     @foreach ($owners as $id => $owner) 
                         <option  {{ in_array($id, $owner_users) ? "selected" : ""}}   value="{{ $id }}">  {{ $owner }}</option>
                     @endforeach

@@ -4,11 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\Batches;
-use App\Models\BatchOwners;
 use App\Models\MaterialProducts;
-use App\Models\RepackOutlife;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,11 +21,15 @@ class MartialProductRepository implements MartialProductRepositoryInterface
             'extended_qc_result',
             'disposal_certificate',
         ]);
-
         $fillable   = [];
+        $fillable["user_id"] = (int) auth_user()->id;
         foreach ($inputs as $column => $row) {
+            if ($column === 'access') {
+                $fillable[$column] = json_encode($row);
 
-            $fillable[$column] = $row;
+            } else {
+                $fillable[$column] = $row;
+            }
         }
         $material_product_fillable = $fillable;
         unset($material_product_fillable['unit_packing_value']);
@@ -37,10 +37,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
 
-        if (isset($fillable['owners'])) {
-            if ($fillable['owners']) {
-                $authUser = $fillable['owners'];
-
+        if (isset($fillable['batch_owners'])) {
+            if ($fillable['batch_owners']) {
+                $authUser = $fillable['batch_owners'];
                 $batch->BatchOwners()->delete();
                 foreach ($authUser as $key => $id) {
                     $batch->BatchOwners()->updateOrCreate(["user_id" => (int) $id, "batch_id" => (int) $batch_id], [
@@ -52,8 +51,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
+
                 Batches::find($batch_id)->update([
-                    'owners' => implode("_", $fillable['owners'])
+                    'owners' => implode(",", $fillable['batch_owners'])
                 ]);
             }
         }

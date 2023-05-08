@@ -38,7 +38,7 @@ class SearchRepository implements SearchRepositoryInterface
             })
             ->latest()
             ->get();
-            return $this->dsoRepository->renderTableData($material_product_data);
+            return $this->dsoRepository->renderTableData($material_product_data, null);
         } catch (\Throwable $th) {
             log::info($th->getMessage());
         }
@@ -63,8 +63,12 @@ class SearchRepository implements SearchRepositoryInterface
                         if (checkIsBatchDateColumn($column)) {
                             $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                         } elseif ($column == 'owners') {
-                            $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
-                            $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                            $request_ownners = implode(",",Arr::pluck($filter->owners,'id')); 
+                            if(count($filter->owners) > 1) {
+                                $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                            } else {
+                                $q->whereRaw('FIND_IN_SET('.$request_ownners.', owners)');
+                            }
                         } else {
                             if ($value != '') {
                                 $q->where($column, $value);
@@ -87,8 +91,9 @@ class SearchRepository implements SearchRepositoryInterface
                 if (checkIsBatchDateColumn($column)) {
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                 } elseif ($column == 'owners') {
-                    $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
-                    $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                    // $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
+                    // $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                    // $q->whereRaw('FIND_IN_SET(2, owners)');
                 } else {
                     if ($value != '') {
                         $q->where($column, $value);
@@ -97,7 +102,7 @@ class SearchRepository implements SearchRepositoryInterface
             }
         })->latest()->get();
 
-        return $this->dsoRepository->renderTableData($material_product_data);
+        return $this->dsoRepository->renderTableData($material_product_data, null);
 
     }
     public function sortingOrder($sort_by)
@@ -115,7 +120,7 @@ class SearchRepository implements SearchRepositoryInterface
             ->orderBy($sort_by->col_name, $sort_by->order_type)
             ->latest()
             ->get();
-            return $this->dsoRepository->renderTableData($material_product_data);
+            return $this->dsoRepository->renderTableData($material_product_data, null);
         } else {
             $material_product_data = MaterialProducts::with([
                 'Batches' => function ($q) use ($sort_by) {
@@ -128,7 +133,7 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
             ])->latest()->get();
-            return $this->dsoRepository->renderTableData($material_product_data);
+            return $this->dsoRepository->renderTableData($material_product_data, null);
         }
     }
 
@@ -158,7 +163,7 @@ class SearchRepository implements SearchRepositoryInterface
             'supplier'            =>  $row->af_supplier,
             'unit_pkt_size'       =>  $row->af_unit_pkt_size,
             'usage_tracking'      =>  $row->af_usage_tracking,
-            'outlife_tracking'    =>  $row->af_outlife_tracking,
+            'outlife_tracking'    =>  $row->af_outlife_tracking
         ]);
     }
 }
