@@ -21,7 +21,7 @@
                     <td>{{ $batch->brand }}</td>
                     <td>{{ $batch->batch }} / {{ $batch->serial }}</td>
                     <td>
-                        @if(count($batch->BatchOwners))
+                        @if (count($batch->BatchOwners))
                             @foreach ($batch->BatchOwners as $owner)
                                 <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
                                     {{ $owner->alias_name }}
@@ -29,8 +29,8 @@
                             @endforeach
                         @endif
                     </td>
-                    <td>{{  Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
-                    <td>{{ $batch->used_for_td_expt_only == 1 ? "Yes" : "No" }}</td>
+                    <td>{{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}</td>
+                    <td>{{ $batch->used_for_td_expt_only == 1 ? 'Yes' : 'No' }}</td>
                     <td>{{ $batch->project_name }}</td>
                     <td>
                         @{{ print_qty }}
@@ -41,7 +41,7 @@
         <div class="row m-0">
             <div class="col-md-4 p-0 pe-3" id="printableBarcodeLabel">
                 <div class="print-card-wrapper">
-                    <div class="border card text-center rounded-5 p-3 print-card" >
+                    <div class="border card text-center rounded-5 p-3 print-card">
                         <div ng-if="Barcode" style="padding: 15px 0">
                             <div>{!! getBarcodeImage($batch->barcode_number) !!}</div>
                             <b>{{ $batch->barcode_number }}</b>
@@ -51,18 +51,21 @@
                                 <b class="text-dark">Batch#/Serial#</b> : {{ $batch->batch }} / {{ $batch->serial }}
                             </small>
                             <div class="text-primary">
-                                <p class="m-0" ng-if="item_description">{{ $batch->BatchMaterialProduct->item_description}}</p>
+                                <p class="m-0" ng-if="item_description">
+                                    {{ $batch->BatchMaterialProduct->item_description }}</p>
                                 <p class="m-0" ng-if="date_of_expiry">
-                                    <b class="text-dark">DOE</b> :   {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
+                                    <b class="text-dark">DOE</b> :
+                                    {{ Carbon\Carbon::parse($batch->date_of_expiry)->format('d/m/Y') }}
                                 </p>
                                 <p class="m-0" ng-if="project_name">
                                     <b class="text-dark">Project name</b> :
                                     {{ $batch->project_name }}
                                 </p>
-                                <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b>  :
-                                    @if(count($batch->BatchOwners))
+                                <p class="m-0" ng-if="owners"> <b class="text-dark">Owners</b> :
+                                    @if (count($batch->BatchOwners))
                                         @foreach ($batch->BatchOwners as $owner)
-                                            <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
+                                            <small
+                                                class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">
                                                 {{ $owner->alias_name }}
                                             </small>
                                         @endforeach
@@ -70,28 +73,42 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="border-top mt-3 pt-3 print-border">
+                        <div class="border-top mt-3 pt-1 print-border">
                             <div id="printImages">
                                 @if ($pictograms)
                                     @foreach ($pictograms as $pictogram)
-                                        <img id="pictograms_{{ $pictogram->id }}" ng-if="pictogramsLab_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
+                                        <img id="pictograms_{{ $pictogram->id }}"
+                                            ng-if="pictogramsLab_{{ $pictogram->id }}"
+                                            src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
                                     @endforeach
                                 @endif
                             </div>
                         </div>
-                        <div class="text-end pt-3">
-                            <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill" ng-if="used_for_td_expt_only">Used  for TD/ EXPT</small><br>
-                            @if (is_null($batch->disposed_after))
-                                <small class="text-dark" ng-if="date_of_shipment">DOD:  DD/MM/YYYY</small>
-                            @else
-                                <small class="text-dark" ng-if="date_of_shipment">DOD: {{  Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y')}}</small>
-                            @endif
-                        </div>
+                        <table class="w-100 border-0">
+                            <tr style="vertical-align: baseline;">
+                                <td class="text-start" style="width:50% !important">
+                                    <div class="m-0 " ng-if="PrintOutlife">
+                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry</small><br>
+                                        <div><small>{{ $batch->outlife }}</small></div>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill"
+                                        ng-if="used_for_td_expt_only">Used for TD/ EXPT</small><br>
+                                    @if (is_null($batch->disposed_after))
+                                        <small class="text-dark" ng-if="date_of_shipment">DOD: DD/MM/YYYY</small>
+                                    @else
+                                        <small class="text-dark" ng-if="date_of_shipment">DOD:
+                                            {{ Carbon\Carbon::parse($batch->disposed_after)->format('d/m/Y') }}</small>
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="col-md-8 p-0 position-relative">
-                <div class="card shadow-sm border" >
+                <div class="card shadow-sm border">
                     <div class="card-header bg-light border-bottom">
                         <div class="row m-0">
                             <div class="col-md-3 p-0">
@@ -115,48 +132,85 @@
                                 </div>
                             </div>
                             <div class="col-md-5 text-end p-0">
-                                <a href="{{ route('barcode.listing') }}" class="btn btn-light border rounded-pill shadow-sm"><i class="fa fa-times me-1"></i>Cancel & back</a>
-                                <button type="button" ng-click="printBarcodeLabel()" class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> Print</button>
+                                <a href="{{ route('barcode.listing') }}"
+                                    class="btn btn-light border rounded-pill shadow-sm"><i
+                                        class="fa fa-times me-1"></i>Cancel & back</a>
+                                <button type="button" ng-click="printBarcodeLabel()"
+                                    class="btn btn-primary rounded-pill"><i class="fa fa-print me-1"></i> Print</button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <div class="row m-0 ">
+                        <div class="row m-0">
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Barcode" class="p-1 form-label cursor ps-2 bg-light  rounded-pill shadow-sm border w-100">
-                                    <input type="checkbox" class="form-check-input checked-input me-2" ng-model="Barcode" id="Barcode">Barcode
+                                <label for="PrintOutlife"
+                                    class="p-1 form-label cursor ps-2 bg-light rounded-pill shadow-sm border w-100">
+                                    <input type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="PrintOutlife" id="PrintOutlife">
+                                    Outlife expiry
                                 </label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Material_Description" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100">
-                                    <input type="checkbox" class="form-check-input checked-input me-2" ng-model="item_description" id="Material_Description">Item description
+                                <label for="Barcode"
+                                    class="p-1 form-label cursor ps-2 bg-light rounded-pill shadow-sm border w-100">
+                                    <input type="checkbox" class="form-check-input checked-input me-2" ng-model="Barcode"
+                                        id="Barcode">Barcode
                                 </label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Project" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="project_name" id="Project">Project name</label>
+                                <label for="Material_Description"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100">
+                                    <input type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="item_description" id="Material_Description">Item description
+                                </label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Batch" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="batch_id" id="Batch">Batch ID/Serial #</label>
+                                <label for="Project"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="project_name" id="Project">Project name</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="DOE" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="date_of_expiry" id="DOE">DOE</label>
+                                <label for="Batch"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2" ng-model="batch_id"
+                                        id="Batch">Batch ID/Serial #</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  id="GHS-Pictogram-checked-input">GHS pictogram</label>
+                                <label for="DOE"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="date_of_expiry" id="DOE">DOE</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="Owner1" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="owners" id="Owner1">Owners</label>
+                                <label ng-click="GHSPictogramMenu()" for="GHS-Pictogram-checked-input"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2"
+                                        id="GHS-Pictogram-checked-input">GHS pictogram</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="td_expt" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2" ng-model="used_for_td_expt_only" id="td_expt">Used for TD/EXPT</label>
+                                <label for="Owner1"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2" ng-model="owners"
+                                        id="Owner1">Owners</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
-                                <label  for="date_of_shipment" class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input type="checkbox" class="form-check-input checked-input me-2"  ng-model="date_of_shipment" id="date_of_shipment">DOD</label>
+                                <label for="td_expt"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="used_for_td_expt_only" id="td_expt">Used for TD/EXPT</label>
+                            </div>
+                            <div class="col-md-4 mb-2 text-start">
+                                <label for="date_of_shipment"
+                                    class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
+                                        type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="date_of_shipment" id="date_of_shipment">DOD</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated" style="top: 0" id="GHSPictogramMenu">
+                <div class="card shadow-sm border position-absolute w-100 animate__fadeInDown animate__animated"
+                    style="top: 0" id="GHSPictogramMenu">
                     <div class="card-header border-bottom bg-light text-dark">
                         <h3 class="h5 text-center">Select the pictogram for your label:</h3>
                     </div>
@@ -164,12 +218,19 @@
                         <div class="row m-0">
                             @if ($pictograms)
                                 @foreach ($pictograms as $pictogram)
-                                    <label  class="col-4 position-relative text-white row my-2"  for="pictogramsLab_{{ $pictogram->id }}">
+                                    <label class="col-4 position-relative text-white row my-2"
+                                        for="pictogramsLab_{{ $pictogram->id }}">
                                         <div class="col-4">
-                                            <img id="pictograms_{{ $pictogram->id }}" src="{{ storageGet($pictogram->image) }}" class="img-png" width="50px">
+                                            <img id="pictograms_{{ $pictogram->id }}"
+                                                src="{{ storageGet($pictogram->image) }}" class="img-png"
+                                                width="50px">
                                         </div>
-                                        <div class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
-                                            <input type="checkbox" name="pictograms" ng-model="pictogramsLab_{{ $pictogram->id }}" id="pictogramsLab_{{ $pictogram->id }}" class="checked-input me-1 form-check-input">
+                                        <div
+                                            class="text-dark col d-flex align-items-center text-dark bg-light p-2 rounded-pill">
+                                            <input type="checkbox" name="pictograms"
+                                                ng-model="pictogramsLab_{{ $pictogram->id }}"
+                                                id="pictogramsLab_{{ $pictogram->id }}"
+                                                class="checked-input me-1 form-check-input">
                                             <span><b>{{ $pictogram->name }}</b></span>
                                         </div>
                                     </label>
@@ -201,6 +262,7 @@
         #printImages img {
             width: 95px !important
         }
+
         .barcode_label {
             font-family: 'barcode font', Courier;
             font-size: 58px !important;

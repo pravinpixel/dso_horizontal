@@ -105,7 +105,9 @@ class WithdrawalController extends Controller
     public function withdrawal_indexing($barcode)
     {
         try {
-            $batches  = Batches::where('barcode_number', $barcode)->first();
+            $batches  = Batches::where('barcode_number', $barcode)
+            ->where('end_of_batch', 0)
+            ->where('is_draft', 0)->first();
 
             switch ($batches->withdrawal_type) {
                 case 'DIRECT_DEDUCT':
@@ -293,8 +295,8 @@ class WithdrawalController extends Controller
             }
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
-        if($request->print_outlife_expiry == 1) {
-            return redirect(route('print.barcode', RepackOutlife::find($request->id[0])->batch_id));
+        if($request->print_outlife_expiry == 1) { 
+            return redirect(route('print.barcode', $request->batch_id[0]));
         }
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
