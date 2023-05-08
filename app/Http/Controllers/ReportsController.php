@@ -123,13 +123,13 @@ class ReportsController extends Controller
     { 
         $filters = [
             "Transacted by"     =>  materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
-            "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
+            "Item description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
+            "Category Selection" => materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection'),
             "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
+            "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
             "Housing"            => materialProductHistory::groupBy('Housing')->pluck('Housing'),
             "Module"             => materialProductHistory::groupBy('Module')->pluck('Module'),
             "Action Taken"       => materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken'),
-            "Item description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
-            "Category Selection" => materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection'),
             "Draw Status"        => materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus')
         ];
         return view('crm.reports.material-in-house-pdt-history',compact('filters'));
