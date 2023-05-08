@@ -7,6 +7,7 @@ use App\Models\BatchTracker;
 use App\Models\LogSheet;
 use App\Models\MaterialProducts;
 use App\Models\SecurityReport;
+
 class LogActivity
 {
     static $SecurityReportData;
@@ -32,11 +33,7 @@ class LogActivity
             case 'delete_search_history':
                 $action_type  = 'DELETE';
                 $module_name  = 'SaveMySearch';
-                break;
-            case 'import_excel':
-                $action_type  = 'IMPORT';
-                $module_name  = 'MaterialProducts';
-                break;
+                break; 
             case 'storeWizardForm':
                 switch (request()->route()->getName()) {
                     case 'create.material-product':
@@ -53,16 +50,19 @@ class LogActivity
                 $action_type  = 'TRANSFER';
                 $module_name  = 'Batches';
                 break;
-            case 'ReconciliationUpdate' :
+            case 'ReconciliationUpdate':
                 $action_type  = 'RECONCILIATION';
                 $module_name  = 'Batches';
                 break;
             case 'ReconciliationImportUpdate':
-                    $action_type  = 'RECONCILIATION_FROM_IMPORT_EXCEL';
-                    $module_name  = 'Batches';
+                $action_type  = 'RECONCILIATION_FROM_IMPORT_EXCEL';
+                $module_name  = 'Batches';
+                break;
+            case 'import_excel':
+                $action_type  = 'IMPORTED_FROM_EXCEL';
+                $module_name  = 'MaterialProducts';
                 break;
         }
-
         LogSheet::updateOrCreate([
             'ip'          => request()->ip(),
             'agent'       => request()->header('user-agent'),
@@ -75,7 +75,7 @@ class LogActivity
         ]);
     }
 
-    public static function dataLog($old, $new , $remarks = null)
+    public static function dataLog($old, $new, $remarks = null)
     {
         switch (request()->route()->getActionMethod()) {
             case 'transfer':
@@ -88,7 +88,7 @@ class LogActivity
                 $module_name = "Batches";
                 $remarks     = $new->remarks;
                 break;
-            case 'store_repack_outlife' :
+            case 'store_repack_outlife':
                 $action_type = 'REPACK_OUTLIFE';
                 $module_name = 'Batches';
                 $remarks     = $new->remarks;
@@ -108,7 +108,7 @@ class LogActivity
                 $module_name = 'Batches';
                 $remarks     = '-';
                 break;
-            case 'deduct_track_usage' :
+            case 'deduct_track_usage':
                 $action_type = 'DEDUCT_TRACK_USAGE';
                 $module_name = 'Withdrawal';
                 $remarks     = $new->remarks;
@@ -119,7 +119,7 @@ class LogActivity
                 $action_type = 'EXTEND_EXPIRY';
                 $module_name = 'Batches';
                 $remarks     = $new->remarks;
-            break;
+                break;
         }
         // dd($new);
         // dd($old);
@@ -175,18 +175,18 @@ class LogActivity
 
     public static function getDisposalItems()
     {
-        $logs =  LogSheet::where('action_type','EARLY_DISPOSAL')->latest()->get();
+        $logs =  LogSheet::where('action_type', 'EARLY_DISPOSAL')->latest()->get();
 
         $disposal_items = [];
         foreach ($logs as $key => $log) {
             $batch = json_decode($log->new);
-            if($batch->quantity == 0) {
+            if ($batch->quantity == 0) {
                 $disposal_items[] = [
                     "transaction_date" => $log->created_at->format('d-m-Y'),
                     "transaction_time" => $log->created_at->format('h:i:s A'),
                     "transaction_by"   => $log->user_name,
                     "item_description" => MaterialProducts::find($batch->material_product_id)->item_description,
-                    "batch_serial"     => $batch->batch.' / '.$batch->serial,
+                    "batch_serial"     => $batch->batch . ' / ' . $batch->serial,
                     "unit_pack_value"  => $batch->unit_packing_value,
                     "quantity"         => (string) $batch->quantity,
                 ];
@@ -199,7 +199,7 @@ class LogActivity
         $SecurityReport = SecurityReport::latest()->get();
         $arr = [];
         foreach ($SecurityReport as $key => $row) {
-       
+
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:i:s A'),
@@ -212,16 +212,17 @@ class LogActivity
     }
     public static function where($data = null)
     {
-        if(is_null($data)) {
+        if (is_null($data)) {
             $data = SecurityReport::latest()->get();
         }
-       static::$SecurityReportData = $data;
-       return new self;
+        static::$SecurityReportData = $data;
+        return new self;
     }
-    public static function dateBetween($request) {
+    public static function dateBetween($request)
+    {
         $SecurityReport =  SecurityReport::whereBetween('created_at', dateBetween($request))->latest()->get();
         $arr = [];
-        foreach ($SecurityReport as $key => $row) { 
+        foreach ($SecurityReport as $key => $row) {
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:i:s A'),

@@ -122,7 +122,7 @@ class ReportsController extends Controller
     public function material_in_house_pdt_history()
     { 
         $filters = [
-            "Transacted by"     => materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
+            "Transacted by"     =>  materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
             "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
             "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
             "Housing"            => materialProductHistory::groupBy('Housing')->pluck('Housing'),

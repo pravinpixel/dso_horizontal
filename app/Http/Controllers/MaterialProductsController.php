@@ -249,6 +249,7 @@ class MaterialProductsController extends Controller
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
+                MaterialProductHistory($batch,'IMPORTED_FROM_EXCEL');
                 Flash::success(__('global.imported'));
             }
         }
