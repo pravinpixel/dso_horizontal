@@ -33,11 +33,11 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StatutoryBody',
                 'Batches.DeductTrackUsage',
             ])
-            ->WhereHas('Batches', function ($q) use ($parent_id) {
-                $q->where('material_product_id', $parent_id);
-            })
-            ->latest()
-            ->get();
+                ->WhereHas('Batches', function ($q) use ($parent_id) {
+                    $q->where('material_product_id', $parent_id);
+                })
+                ->latest()
+                ->get();
             return $this->dsoRepository->renderTableData($material_product_data, null);
         } catch (\Throwable $th) {
             log::info($th->getMessage());
@@ -45,7 +45,7 @@ class SearchRepository implements SearchRepositoryInterface
     }
 
     public function advanced_search($filter)
-    { 
+    {
         $material_table =  [
             'quantity',
             'category_selection',
@@ -63,11 +63,13 @@ class SearchRepository implements SearchRepositoryInterface
                         if (checkIsBatchDateColumn($column)) {
                             $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                         } elseif ($column == 'owners') {
-                            $request_ownners = implode(",",Arr::pluck($filter->owners,'id')); 
-                            if(count($filter->owners) > 1) {
-                                $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
-                            } else {
-                                $q->whereRaw('FIND_IN_SET('.$request_ownners.', owners)');
+                            $request_ownners = implode(",", Arr::pluck($filter->owners, 'id'));
+                            if (!empty($request_ownners)) {
+                                if (count($filter->owners) > 1) {
+                                    $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                                } else {
+                                    $q->whereRaw('FIND_IN_SET(' . $request_ownners . ', owners)');
+                                }
                             }
                         } else {
                             if ($value != '') {
@@ -79,31 +81,35 @@ class SearchRepository implements SearchRepositoryInterface
             },
             'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
         ])
-        ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
-            foreach ($filter as $column => $value) {
-                if ($value != '') {
-                    $q->where($column, $value);
-                }
-            }
-        })
-        ->WhereHas('Batches', function ($q) use ($filter) {
-            foreach ($filter as $column => $value) {
-                if (checkIsBatchDateColumn($column)) {
-                    $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
-                } elseif ($column == 'owners') {
-                    // $request_ownners = implode("_",Arr::pluck($filter->owners,'id'));
-                    // $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
-                    // $q->whereRaw('FIND_IN_SET(2, owners)');
-                } else {
+            ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
+                foreach ($filter as $column => $value) {
                     if ($value != '') {
                         $q->where($column, $value);
                     }
                 }
-            }
-        })->latest()->get();
+            })
+            ->WhereHas('Batches', function ($q) use ($filter) {
+                foreach ($filter as $column => $value) {
+                    if (checkIsBatchDateColumn($column)) {
+                        $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
+                    } elseif ($column == 'owners') {
+                        $request_ownners = implode(",", Arr::pluck($filter->owners, 'id'));
+                        if (!empty($request_ownners)) {
+                            if (count($filter->owners) > 1) {
+                                $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);
+                            } else {
+                                $q->whereRaw('FIND_IN_SET(' . $request_ownners . ', owners)');
+                            }
+                        }
+                    } else {
+                        if ($value != '') {
+                            $q->where($column, $value);
+                        }
+                    }
+                }
+            })->latest()->get();
 
         return $this->dsoRepository->renderTableData($material_product_data, null);
-
     }
     public function sortingOrder($sort_by)
     {
@@ -117,9 +123,9 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
             ])
-            ->orderBy($sort_by->col_name, $sort_by->order_type)
-            ->latest()
-            ->get();
+                ->orderBy($sort_by->col_name, $sort_by->order_type)
+                ->latest()
+                ->get();
             return $this->dsoRepository->renderTableData($material_product_data, null);
         } else {
             $material_product_data = MaterialProducts::with([
