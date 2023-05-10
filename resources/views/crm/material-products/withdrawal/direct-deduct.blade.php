@@ -33,7 +33,7 @@
                         <td><small>{{ $row->Batch->unit_packing_value }} {{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small></td>
                         <td><small>{{ $row->Batch->quantity }}</small></td>
                         <td width="170px" style="position: relative;"> 
-                            <input required type="text" name="quantity[]" step="any" max="{{ $row->Batch->quantity }}" readonly type="number" class="fw-bold  form-control text-center form-control-sm" style="width: 100px" value="{{ $row->quantity }}" >
+                            <input required type="text" min="0" name="quantity[]" step="any" max="{{ $row->Batch->quantity }}" readonly type="number" class="fw-bold  form-control text-center form-control-sm" style="width: 100px" value="{{ $row->quantity }}" >
                             @if ($row->quantity > 1)
                                 <span style="position: absolute; top: 16%; right: 5%;" class="font-18 bi bi-dash-circle text-danger btn" onclick="decreaseQuantity({{ $row->id }},'DIRECT_DEDUCT')"></span>
                             @endif

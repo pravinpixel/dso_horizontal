@@ -22,7 +22,9 @@ class SearchRepository implements SearchRepositoryInterface
     public function barCodeSearch($request)
     {
         try {
-            $parent_id = Batches::where('is_draft', 0)->where('barcode_number', (string) $request->filters)->first()->material_product_id;
+            $parent_id = Batches::where('is_draft', 0)
+            ->where('end_of_batch', 0)
+            ->where('barcode_number', (string) $request->filters)->first()->material_product_id;
             $material_product_data = MaterialProducts::with([
                 'Batches',
                 'Batches.RepackOutlife',

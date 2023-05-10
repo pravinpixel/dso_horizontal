@@ -115,6 +115,10 @@ class WithdrawalController extends Controller
                         'user_id'  => auth_user()->id,
                         'batch_id' => $batches->id
                     ])->get();
+                         
+                    if($batches->quantity < 1) {
+                        return 404; 
+                    }
 
                     if(count($withdraw_cart) == 0) {
                         withdrawCart::create([

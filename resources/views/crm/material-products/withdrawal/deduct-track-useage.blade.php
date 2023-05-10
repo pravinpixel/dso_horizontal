@@ -67,8 +67,9 @@
                                 <div class="d-flex align-items-center">
                                     <input id="used_amount" name="used_amount" step="any"
                                         {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}
+                                        min="0"
                                         max="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
-                                        onkeyup="startTrackUsage({{ $row->Batch->quantity * $row->Batch->unit_packing_value }},this.value)"
+                                        onkeyup="startTrackUsage({{ $row->Batch->quantity * $row->Batch->unit_packing_value }},this)"
                                         type="number" style="width: 80px" value="0"
                                         class="me-2 form-control-sm form-control">
                                     <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
