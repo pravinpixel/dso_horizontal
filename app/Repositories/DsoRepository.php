@@ -148,8 +148,8 @@ class DsoRepository implements DsoRepositoryInterface
                 if ($batch->is_draft == 1) {
                     $draftBatchCount += 1;
                 } else {
-                    $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
-                    $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
+                    // $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
+                    // $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
                 }
                 //  if ($page_name === 'MATERIAL_SEARCH_OR_ADD') {
                     if ($batch->end_of_batch == 1) {
@@ -199,10 +199,8 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
             }
-
-
-            $parent['material_total_quantity'] = $material_total_quantity;
-            $parent['material_quantity']       = $material_total_quantity != 0 ? ($material_total_quantity / $parent['unit_packing_value']) : 0;
+            // $parent['material_total_quantity'] = $material_total_quantity;
+            // $parent['material_quantity']       = $material_total_quantity != 0 ? ($material_total_quantity / $parent['unit_packing_value']) : 0;
             $parent['totalUnitPackValue']      = $UnitPackingCount;
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;

@@ -33,7 +33,10 @@ class MaterialProducts extends Model
         'is_draft',
         'is_read'
     ];
-
+    public function NonDraftBatches()
+    {
+        return $this->hasMany(Batches::class, 'material_product_id', 'id')->where('is_draft',0);
+    }
     public function Batches()
     {
         return $this->hasMany(Batches::class, 'material_product_id', 'id');

@@ -1,5 +1,6 @@
 <?php
 include('permission.php');
+
 use App\Models\Batches;
 use App\Models\BatchTracker;
 use App\Models\DisposedItems;
@@ -16,7 +17,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
@@ -283,7 +283,7 @@ if (!function_exists('strExcelDate')) {
         // $excel_date = 25569 + ($unix_date / 86400);
         // $unix_date  = ($excel_date - 25569) * 86400;
         // return gmdate("Y-m-d", $unix_date); //2023-12-16
-        return Carbon::parse(str_replace('/','-',$excel_date))->format('Y-m-d');
+        return Carbon::parse(str_replace('/', '-', $excel_date))->format('Y-m-d');
     }
 }
 
@@ -405,7 +405,7 @@ if (!function_exists('getRoutes')) {
                 'extend_expiry',
                 'disposal',
                 'reports',
-                'table_order_index', 
+                'table_order_index',
             ];
             $create = [
                 'user_store',
@@ -483,21 +483,21 @@ if (!function_exists('getRoutes')) {
                 return 'Security History';
             } elseif ($menu_value == 'reports_export_security') {
                 return 'Export / Security History';
-            }elseif ($menu_value == 'reports_deduct_track_outlife') {
+            } elseif ($menu_value == 'reports_deduct_track_outlife') {
                 return 'Deduct Track Outlife';
-            }elseif ($menu_value == 'reports_deduct_track_outlife_download') {
+            } elseif ($menu_value == 'reports_deduct_track_outlife_download') {
                 return 'Export / Deduct Track Outlife';
-            }elseif ($menu_value == 'reports_deduct_track_usage') {
+            } elseif ($menu_value == 'reports_deduct_track_usage') {
                 return 'Deduct Track Usage';
-            }elseif ($menu_value == 'reports_deduct_track_usage_download') {
+            } elseif ($menu_value == 'reports_deduct_track_usage_download') {
                 return 'Export / Deduct Track Usage';
-            }elseif ($menu_value == 'reports_material_in_house_pdt_history') {
+            } elseif ($menu_value == 'reports_material_in_house_pdt_history') {
                 return 'Products History';
-            }elseif ($menu_value == 'reports_material_in_house_pdt_history_download') {
+            } elseif ($menu_value == 'reports_material_in_house_pdt_history_download') {
                 return 'Export / Products History';
-            }elseif ($menu_value == 'reports_utilization_cart') {
+            } elseif ($menu_value == 'reports_utilization_cart') {
                 return 'Utilization Cart';
-            } 
+            }
             return  $menu_value;
         }
     }
@@ -614,10 +614,10 @@ if (!function_exists('getRoutes')) {
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $ActionTaken = 'Repack Outlife';
             }
-            if($ActionTaken == 'BEFORE_DEDUCT_TRACK_OUTLIFE') {
+            if ($ActionTaken == 'BEFORE_DEDUCT_TRACK_OUTLIFE') {
                 $ActionTaken = 'Before With Out Draw In/Out';
             }
-            if($ActionTaken == 'AFTER_DEDUCT_TRACK_OUTLIFE') {
+            if ($ActionTaken == 'AFTER_DEDUCT_TRACK_OUTLIFE') {
                 $ActionTaken = 'After With Out Draw In/Out';
             }
             materialProductHistory::updateOrCreate([
@@ -697,22 +697,22 @@ if (!function_exists('getRoutes')) {
             switch ($type) {
                 case 'category_selection':
                     return MasterCategories::all();
-                    break; 
+                    break;
                 case 'statutory_body':
                     return StatutoryBody::all();
-                    break; 
+                    break;
                 case 'unit_packing_size':
                     return PackingSizeData::all();
-                    break; 
+                    break;
                 case 'storage_room':
                     return StorageRoom::all();
-                    break; 
+                    break;
                 case 'house_type':
                     return HouseTypes::all();
-                    break; 
+                    break;
                 case 'departments':
                     return Departments::all();
-                    break; 
+                    break;
             }
         }
     }
@@ -720,57 +720,57 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('strtoFileExtenion')) {
         function strtoFileExtenion($text)
         {
-            return  Str::random(15).'.'.explode('.',$text)[1];
+            return  Str::random(15) . '.' . explode('.', $text)[1];
         }
     }
 
-    if(!function_exists('cloneDocumentFromBatch')) {
+    if (!function_exists('cloneDocumentFromBatch')) {
         function cloneDocumentFromBatch($from_id, $to_id)
         {
             $from_batch = Batches::with('BatchFiles')->find($from_id);
             $to_batch   = Batches::with('BatchFiles')->find($to_id);
 
-            if(Storage::exists($from_batch->iqc_result)) {  
-                $iqc_result_new_file =  "public/".strtoFileExtenion($from_batch->iqc_result);
+            if (Storage::exists($from_batch->iqc_result)) {
+                $iqc_result_new_file =  "public/" . strtoFileExtenion($from_batch->iqc_result);
                 Storage::copy($from_batch->iqc_result, $iqc_result_new_file);
                 $to_batch->iqc_result =  $iqc_result_new_file;
             }
 
-            if(Storage::exists($from_batch->sds)) {  
-                $sds_new_file =  "public/".strtoFileExtenion($from_batch->sds);
+            if (Storage::exists($from_batch->sds)) {
+                $sds_new_file =  "public/" . strtoFileExtenion($from_batch->sds);
                 Storage::copy($from_batch->sds, $sds_new_file);
                 $to_batch->sds =  $sds_new_file;
             }
- 
-            if(Storage::exists($from_batch->extended_qc_result)) {  
-                $extended_qc_result_new_file =  "public/".strtoFileExtenion($from_batch->extended_qc_result);
+
+            if (Storage::exists($from_batch->extended_qc_result)) {
+                $extended_qc_result_new_file =  "public/" . strtoFileExtenion($from_batch->extended_qc_result);
                 Storage::copy($from_batch->extended_qc_result, $extended_qc_result_new_file);
                 $to_batch->extended_qc_result =  $extended_qc_result_new_file;
             }
 
-            if(Storage::exists($from_batch->disposal_certificate)) {  
-                $disposal_certificate_new_file =  "public/".strtoFileExtenion($from_batch->disposal_certificate);
+            if (Storage::exists($from_batch->disposal_certificate)) {
+                $disposal_certificate_new_file =  "public/" . strtoFileExtenion($from_batch->disposal_certificate);
                 Storage::copy($from_batch->disposal_certificate, $disposal_certificate_new_file);
                 $to_batch->disposal_certificate =  $disposal_certificate_new_file;
             }
 
-            if(count($from_batch->BatchFiles) > 0) {
+            if (count($from_batch->BatchFiles) > 0) {
                 foreach ($from_batch->BatchFiles as $key => $file) {
-                    if(Storage::exists($file->file_name)) {  
-                        $file_name =  "public/".strtoFileExtenion($file->file_name);
-                        Storage::copy($file->file_name, $file_name); 
+                    if (Storage::exists($file->file_name)) {
+                        $file_name =  "public/" . strtoFileExtenion($file->file_name);
+                        Storage::copy($file->file_name, $file_name);
                         $to_batch->BatchFiles()->create([
                             'column_name'    => 'coc_coa_mill_cert',
                             'original_name'  => $file->file_name,
                             'file_name'      => $file_name,
-                            'file_extension' => explode('.',$file_name)[1],
-                            'file_path'      => asset('storage/app').'/'.$file_name,
+                            'file_extension' => explode('.', $file_name)[1],
+                            'file_path'      => asset('storage/app') . '/' . $file_name,
                         ]);
                     }
                 }
             }
             $to_batch->save();
-          
+
             return true;
         }
     }
@@ -780,8 +780,8 @@ if (!function_exists('getRoutes')) {
         {
             $is_null = 0;
             foreach ($data as $key => $item) {
-                if(!is_null($item->draw_in_time_stamp) && !is_null($item->draw_out_time_stamp)) {
-                    $is_null ++;
+                if (!is_null($item->draw_in_time_stamp) && !is_null($item->draw_out_time_stamp)) {
+                    $is_null++;
                 }
             }
             return $is_null == 0 ? 0 : 1;
@@ -795,4 +795,18 @@ if (!function_exists('getRoutes')) {
         }
     }
 
+    if (!function_exists('updateParentQuantity')) {
+        function updateParentQuantity($material_product)
+        {
+            $total_batch_quantity = 0;
+            foreach ($material_product->NonDraftBatches as $key => $batch) {
+                $total_batch_quantity += $batch->total_quantity;
+            }
+            $material_product->update([
+                "material_total_quantity" => $total_batch_quantity,
+                "material_quantity"       => $total_batch_quantity / $material_product->unit_packing_value,
+            ]);
+            return true;
+        }
+    }
 }
