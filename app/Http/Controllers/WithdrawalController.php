@@ -212,13 +212,14 @@ class WithdrawalController extends Controller
         }
     }
     public function direct_deduct(Request $request)
-    {
+    { 
         foreach ($request->batch_id as $key => $column) {
             $current_batch = Batches::find($request->batch_id[$key]);
             MaterialProductHistory($current_batch,'BEFORE_DIRECT_DEDUCT');
             $current_batch->UtilizationCart()->create(["quantity" =>  $request->quantity[$key]]);
             $current_batch->update([
-                'quantity'  =>  $current_batch->quantity -  $request->quantity[$key]
+                'quantity'       => $current_batch->quantity -  $request->quantity[$key],
+                'total_quantity' => ($current_batch->quantity -  $request->quantity[$key]) * $current_batch->unit_packing_value
             ]);
             MaterialProductHistory($current_batch,'AFTER_DIRECT_DEDUCT');
             withdrawCart::with('batch')->where([
@@ -227,6 +228,7 @@ class WithdrawalController extends Controller
             ])->delete();
 
         }
+        updateParentQuantity($request->material_product_id);
         return redirect()->back()->with("success_message", __('global.direct_deduct_success'));
     }
     public function deduct_track_usage_clear()
@@ -236,45 +238,45 @@ class WithdrawalController extends Controller
     }
     public function deduct_track_usage(Request $request)
     {
-        $batch      = Batches::with('StorageArea')->findOrFail($request->batch_id);
-        $material   = MaterialProducts::find($batch->material_product_id);
-        MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_USAGE');
+        $current_batch  = Batches::with('StorageArea')->findOrFail($request->batch_id);
+        $material       = MaterialProducts::find($current_batch->material_product_id);
+        MaterialProductHistory($current_batch,'BEFORE_DEDUCT_TRACK_USAGE');
 
         DeductTrackUsage::create([
             'batch_id'           => $request->batch_id,
-            "quantity"           => $batch->quantity,
-            'barcode_number'     => $batch->barcode_number,
+            "quantity"           => $current_batch->quantity,
+            'barcode_number'     => $current_batch->barcode_number,
             'item_description'   => $material->item_description,
-            'batch_serial'       => $batch->batch . ' / ' . $batch->serial,
+            'batch_serial'       => $current_batch->batch . ' / ' . $current_batch->serial,
             'last_accessed'      => auth_user()->alias_name,
             'used_amount'        => $request->used_amount,
             'remain_amount'      => $request->remain_amount,
             'remarks'            => $request->remarks ?? "",
-            'brand'              => $batch->batch,
+            'brand'              => $current_batch->batch,
             'unit_packing_value' => $material->unit_packing_value,
-            'storage_area'       => $batch->StorageArea->name,
-            'housing'            => $batch->housing,
+            'storage_area'       => $current_batch->StorageArea->name,
+            'housing'            => $current_batch->housing,
         ]);
 
-        $batch->UtilizationCart()->create(["quantity" =>  $batch->quantity -  $request->remain_amount / $batch->unit_packing_value]);
+        $current_batch->UtilizationCart()->create(["quantity" =>  $current_batch->quantity -  $request->remain_amount / $current_batch->unit_packing_value]);
 
-        $batch->update([
-            "total_quantity" => (float) $request->remain_amount,
-            "quantity"       => $request->remain_amount / $batch->unit_packing_value
+        $current_batch->update([
+            'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
+            'total_quantity' => $request->remain_amount
         ]);
-        MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_USAGE');
+        MaterialProductHistory($current_batch,'AFTER_DEDUCT_TRACK_USAGE');
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
-        ]);
+        ]); 
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_USAGE')->delete();
+        updateParentQuantity($material);
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
     public function deduct_track_outlife(Request $request)
     { 
         foreach ($request->batch_id as $key => $batch_id) {
             if(isset($request->withdraw_quantity[$key])) {
-                $batch  = Batches::with('BatchMaterialProduct')->find($batch_id);
-
+                $batch  = Batches::with('BatchMaterialProduct')->find($batch_id); 
                 $batch->TrackOutlifeHistory()->create([
                     'type'               => $request->cart_type[$key],
                     'item_description'   => $batch->BatchMaterialProduct->item_description,
@@ -294,7 +296,7 @@ class WithdrawalController extends Controller
                     'quantity'       => $total_quantity / $batch->unit_packing_value,
                     'total_quantity' => $total_quantity
                 ]);
-               
+                updateParentQuantity($batch->material_product_id);
                 MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
             }
         }

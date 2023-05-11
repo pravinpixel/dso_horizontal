@@ -115,7 +115,7 @@
         // ========== Deduct & Track Usage  =========
         startTrackUsage = (total_amount,used_amount) => {
             var remain_amount       = document.getElementById('remain_amount')
-                remain_amount.value = total_amount - used_amount
+                remain_amount.value = total_amount - used_amount.value
         }
     </script>
 @endsection

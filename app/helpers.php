@@ -796,10 +796,17 @@ if (!function_exists('getRoutes')) {
     }
 
     if (!function_exists('updateParentQuantity')) {
-        function updateParentQuantity($material_product)
+        function updateParentQuantity($id)
         {
             $total_batch_quantity = 0;
-            foreach ($material_product->NonDraftBatches as $key => $batch) {
+            try {
+                $batches          = $id->NonDraftBatches;
+                $material_product = $id;
+            } catch (\Throwable $th) {
+                $material_product = MaterialProducts::with('NonDraftBatches')->find($id);
+                $batches = $material_product->NonDraftBatches;
+            }
+            foreach ($batches as $key => $batch) {
                 $total_batch_quantity += $batch->total_quantity;
             }
             $material_product->update([

@@ -1,6 +1,7 @@
 @if(count($direct_deducts) != 0) 
 <form action="{{ route('direct-deduct') }}" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
-    @csrf
+    @csrf 
+    <input type="hidden" name="material_product_id" value="{{ $direct_deducts[0]->Batch->material_product_id }}">
     <table class="table bg-white table-borderless border table-centered">
         <thead class="border-bottom">
             <tr class="bg-primary-2 text-white">
