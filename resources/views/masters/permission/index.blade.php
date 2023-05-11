@@ -54,7 +54,7 @@
                     <td><input type="checkbox" value="true" class="delete form-check-input" name="delete[]"></td>
                 </tr>
                 <tr>
-                    <th>Near Expiry/Expired <input value="near_expiry_expired" type="hidden" name="menu[]"></th>
+                    <th>Near expiry/Expired/Failed IQC <input value="near_expiry_expired" type="hidden" name="menu[]"></th>
                     <td><input type="checkbox" value="true" class="view form-check-input" name="view[]"></td>
                     <td><input type="checkbox" value="true" class="add form-check-input" name="add[]"></td>
                     <td><input type="checkbox" value="true" class="edit form-check-input" name="edit[]"></td>
