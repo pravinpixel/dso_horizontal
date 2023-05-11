@@ -41,6 +41,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if (wizard_mode() === 'create' && !is_null($request->is_parent)) { // CREATE & MATRIAL (PARENT)
             unset($fillable['unit_packing_value']);
         }
+        if (wizard_mode() === 'edit' && !is_null($request->is_parent)) { // CREATE & MATRIAL (PARENT)
+            unset($fillable['unit_packing_value']);
+        }
  
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
