@@ -37,6 +37,10 @@ class MaterialProducts extends Model
     {
         return $this->hasMany(Batches::class, 'material_product_id', 'id')->where('is_draft',0);
     }
+    public function NotifyedBatches()
+    {
+        return $this->hasMany(Batches::class, 'material_product_id', 'id')->where('notification_status',0);
+    }
     public function Batches()
     {
         return $this->hasMany(Batches::class, 'material_product_id', 'id');

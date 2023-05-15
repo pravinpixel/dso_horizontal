@@ -66,6 +66,7 @@ class CreateBatchesTable extends Migration
             $table->integer('end_of_batch')->nullable()->default(0);
             $table->string('withdrawal_type')->nullable();
             $table->integer('user_id'); 
+            $table->integer('notification_status')->default(0);
             $table->timestamps();
         });
     }

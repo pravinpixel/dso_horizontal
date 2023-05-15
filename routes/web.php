@@ -179,9 +179,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::resource('/product-cart', ProductCartController::class);
     Route::get('/get-product-cart',[ ProductCartController::class,'index']);
     Route::get('/delete-file/{id}', [MaterialProductsController::class, 'delete_file']);
+    Route::get('/delete-notification/{id}', [NotificationController::class, 'delete_notification']);
     Route::get('/delete-batch-file/{id}/{type}', [MaterialProductsController::class, 'delete_batch_file']);
     Route::prefix('download-files')->group(function() {
         Route::post('/{id}/{type}', [DownloadController::class,'download'])->name('download-files');
     });
+    
 });
 include('master.php');

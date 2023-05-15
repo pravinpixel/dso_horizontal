@@ -13,6 +13,7 @@ class Batches extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'notification_status',
         'is_draft',
         'material_product_id',
         'brand',

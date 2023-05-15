@@ -35,7 +35,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if (wizard_mode() === 'edit' && is_null($request->is_parent)) { // EDIT & BATCH ( CHILDED)
             unset($material_product_fillable['unit_packing_value']);
         }
-        if (wizard_mode() === 'duplicate') {  
+        if (wizard_mode() === 'duplicate') {
             unset($material_product_fillable['unit_packing_value']);
         }
         if (wizard_mode() === 'create' && !is_null($request->is_parent)) { // CREATE & MATRIAL (PARENT)
@@ -44,7 +44,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if (wizard_mode() === 'edit' && !is_null($request->is_parent)) { // CREATE & MATRIAL (PARENT)
             unset($fillable['unit_packing_value']);
         }
- 
+
         $material_product       =   MaterialProducts::updateOrCreate(['id' => $material_product_id], $material_product_fillable);
         $batch                  =   $material_product->Batches()->updateOrCreate(['id' => $batch_id], $fillable);
         if (isset($fillable['batch_owners'])) {
@@ -67,7 +67,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                     'owners' => implode(",", $fillable['batch_owners'])
                 ]);
             }
-        } 
+        }
         if ($material_product->quantity_update_status == 1) {
             $MaterialBatch = Batches::find($batch_id);
             $material_product->update([
@@ -84,7 +84,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                 "material_total_quantity" => $batch->quantity *  $MaterialBatch->unit_packing_value,
                 "unit_packing_value"      => $material_product->unit_packing_value
             ]);
-        }        
+        }
         if ($request->has('unit_packing_value') && wizard_mode() === 'edit' && !is_null($request->is_parent)) {
             $material_product->update([
                 "material_quantity"  =>  $material_product->material_total_quantity / $request->unit_packing_value,
@@ -108,13 +108,15 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if (wizard_mode() == 'create' || wizard_mode() == 'edit') {
             $batch->update(["system_stock"  => $batch->quantity]);
         }
-        $this->storeFiles($request, $batch); 
         if (wizard_mode() == 'duplicate' || wizard_mode() == 'create') {
             updateParentQuantity($material_product);
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
         }
-
+        $result =  $this->storeFiles($request, $batch);
+        if($result) {
+            return  $result;
+        }
         return Flash::success(__('global.inserted'));
     }
 
@@ -122,65 +124,47 @@ class MartialProductRepository implements MartialProductRepositoryInterface
     {
         if ($request->has('coc_coa_mill_cert')) {
             foreach ($request->coc_coa_mill_cert as $key => $files) {
-                $newFileName = Storage::put('public', $files);
-                $batch->BatchFiles()->updateOrCreate([
-                    'batch_id'       => $batch->id,
-                    'column_name'    => 'coc_coa_mill_cert',
-                    'original_name'  => $files->getClientOriginalName(),
-                    'file_name'      => $newFileName,
-                    'file_extension' => $files->getClientOriginalExtension(),
-                    'file_path'      => asset('storage/app') . '/' . $newFileName,
+                putBatchFile([
+                    "batch_id" => $batch->id,
+                    "file"     => $files,
+                    "type"     => "coc_coa_mill_cert"
                 ]);
-            }
-
-            if ($batch->coc_coa_mill_cert !== null) {
-                foreach (json_decode($batch->coc_coa_mill_cert) as $key => $files) {
-                    if (Storage::exists($files)) {
-                        Storage::delete($files);
-                    }
-                }
             }
         }
         if ($request->has('iqc_result')) {
-            if (Storage::exists($batch->iqc_result)) {
-                Storage::delete($batch->iqc_result);
-            }
-            $iqc_result              =   Storage::put('public', $request->iqc_result);
-            $batch->iqc_result   =   $iqc_result;
-            $batch->save();
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->iqc_result,
+                "type"     => "iqc_result"
+            ]);
         }
         if ($request->has('sds')) {
-            if (Storage::exists($batch->sds)) {
-                Storage::delete($batch->sds);
-            }
-            $sds              =   Storage::put('public', $request->sds);
-            $batch->sds   =   $sds;
-            $batch->save();
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->sds,
+                "type"     => "sds"
+            ]);
         }
         if ($request->has('extended_qc_result')) {
-            if (Storage::exists($batch->extended_qc_result)) {
-                Storage::delete($batch->extended_qc_result);
-            }
-            $extended_qc_result              =   Storage::put('public', $request->extended_qc_result);
-            $batch->extended_qc_result   =   $extended_qc_result;
-            $batch->save();
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->extended_qc_result,
+                "type"     => "extended_qc_result"
+            ]);
         }
-
         if ($request->has('disposal_certificate')) {
-            if (Storage::exists($batch->disposal_certificate)) {
-                Storage::delete($batch->disposal_certificate);
-            }
-            $disposal_certificate              =    Storage::put('public', $request->disposal_certificate);
-            $batch->disposal_certificate   =    $disposal_certificate;
-            $batch->save();
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->disposal_certificate,
+                "type"     => "disposal_certificate"
+            ]);
         }
         if ($request->has('used_for_td_certificate')) {
-            if (Storage::exists($batch->used_for_td_certificate)) {
-                Storage::delete($batch->used_for_td_certificate);
-            }
-            $used_for_td_certificate              =    Storage::put('public', $request->used_for_td_certificate);
-            $batch->used_for_td_certificate   =    $used_for_td_certificate;
-            $batch->save();
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->used_for_td_certificate,
+                "type"     => "used_for_td_certificate"
+            ]);
         }
     }
 }

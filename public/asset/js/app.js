@@ -182,25 +182,8 @@ validateDate = (endInput, element) => {
 }
 getNotificationCount = () => {
     fetch(APP_URL + '/NotificationCount').then(response => response.json()).then(response => {
-        var NotificationData    = response.data;
-        var NotificationCount   = document.getElementById('NotificationCount')
-        var NotificationList    = document.getElementById('NotificationList')
-
-        NotificationList.innerHTML  = ''
-        NotificationCount.innerHTML = response.count
-
-        NotificationData.map((item) => {
-            return NotificationList.innerHTML += `
-                <li class="list-group-item list-group-item-action btn">
-                    <a href="${APP_URL}/notification/threshold-qty" class="text-dark">
-                        <div><b class="text-primary"><i class="bi bi-bell-fill ${ item.batches.length != 0 ?  item.quantityColor : "" } "></i> ${item.item_description.toUpperCase()}</b></div>
-                        <small><b class="text-dark">Unit packing value :</b> ${ item.batches.length != 0 ?  item.unit_packing_value  : "" } </small>  <br>
-                        <small><b class="text-dark">Quantity :</b> ${ item.batches.length != 0 ?  item.material_quantity : "" }</small>
-                        <small class="float-end ${ item.batches.length != 0 ?  item.quantityColor : "" } "><i class="bi bi-calendar2-week"></i> ${ moment(item.updated_at).format('DD/MM/YYYY h:m A')}</small>
-                    </a>
-                </li>
-            `
-        });
+       document.getElementById('NotificationCount').innerHTML = response.count
+       document.getElementById('NotificationList').innerHTML  = response.view
     });
 }
 getNotificationCount()

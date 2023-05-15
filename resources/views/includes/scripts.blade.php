@@ -28,9 +28,20 @@
 @endif
 <script>
     const isNumber = (element) => {
-        if(Number(element.target.max) < Number(element.target.value)) {
+        if (Number(element.target.max) < Number(element.target.value)) {
             element.target.value = element.target.max
             return false
         }
+    }
+    const AppUrl = "{{ url('/') }}"
+    deleteFile = (batch_id, element) => {
+        fetch(`${AppUrl}/delete-file/${batch_id}`).then((res) => res.json()).then((data) => {
+            element.parentNode.classList.add('d-none')
+        })
+    }
+    removeNotification = (id,element) => {
+        fetch(`${AppUrl}/delete-notification/${id}`).then((res) => res.json()).then((data) => {
+            element.parentNode.parentNode.parentNode.classList.add('d-none')
+        })
     }
 </script>

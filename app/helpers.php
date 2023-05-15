@@ -2,6 +2,7 @@
 include('permission.php');
 
 use App\Models\Batches;
+use App\Models\BatchFiles;
 use App\Models\BatchTracker;
 use App\Models\DisposedItems;
 use App\Models\Masters\Departments;
@@ -814,6 +815,36 @@ if (!function_exists('getRoutes')) {
                 "material_quantity"       => $total_batch_quantity / $material_product->unit_packing_value,
             ]);
             return true;
+        }
+    }
+
+    if (!function_exists('putBatchFile')) {
+        function putBatchFile($config)
+        {
+            if (Storage::exists($config['file'])) {
+                Storage::delete($config['file']);
+            }
+            $file_name_slug = Str::slug(str_replace($config['file']->getClientOriginalExtension(), '', $config['file']->getClientOriginalName())) . "." . $config['file']->getClientOriginalExtension();
+            $prevFiles      = BatchFiles::where("file_name", 'public/'.$file_name_slug)->get();
+            if(count($prevFiles)) {
+                return false;
+            }
+            $newFileName    = Storage::putFileAs('public', $config['file'], $file_name_slug);
+            BatchFiles::updateOrCreate([
+                'batch_id'       => $config['batch_id'],
+                'column_name'    => $config['type'],
+                'original_name'  => $config['file']->getClientOriginalName(),
+                'file_name'      => $newFileName,
+                'file_extension' => $config['file']->getClientOriginalExtension(),
+                'file_path'      => asset('storage/app') . '/' . $newFileName,
+            ]);
+            return true;
+        }
+    }
+    if (!function_exists('getBatchFile')) {
+        function getBatchFile($files, $type)
+        {
+            return view('templates.batch-files-ui', compact('files', 'type'));
         }
     }
 }
