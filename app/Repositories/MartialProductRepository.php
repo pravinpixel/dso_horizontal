@@ -95,6 +95,11 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                 "total_quantity" => $batch->quantity * $batch->unit_packing_value
             ]);
         }
+        if ($request->has('quantity') && wizard_mode() === 'duplicate' && is_null($request->is_parent)) {
+            $batch->update([
+                "total_quantity" => $batch->quantity * $batch->unit_packing_value
+            ]);
+        }
         if ($request->has('unit_packing_value') && wizard_mode() === 'edit' && is_null($request->is_parent)) {
             $batch->update([
                 "quantity" => $batch->total_quantity / $batch->unit_packing_value
