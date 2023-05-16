@@ -11,7 +11,7 @@ class DownloadController extends Controller
 {
     public function download($id, $type)
     {
-        $batch     = BatchFiles::find($id);
+        $batch     = BatchFiles::withTrashed()->find($id);
         $file_path = $batch->file_name;
         try {
             SecurityReport::create([

@@ -23,6 +23,7 @@ class CreateBatchFilesTable extends Migration
             $table->text('file_path');
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

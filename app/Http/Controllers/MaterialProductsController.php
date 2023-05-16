@@ -614,7 +614,7 @@ class MaterialProductsController extends Controller
     public function delete_file($id)
     {
         $file = BatchFiles::findOrFail($id);
-        Storage::delete($file->file_name);
+        // Storage::delete($file->file_name);
         $file->delete();
         return response()->json([
             "Message" => "success"
@@ -623,10 +623,6 @@ class MaterialProductsController extends Controller
     public function delete_batch_file($id, $type)
     {
         $batch   =   Batches::find($id);
-        if (Storage::exists($batch[$type])) {
-            Storage::delete($batch[$type]);
-        }
-        $batch[$type] = null;
         $batch->save();
         return response()->json([
             "Message" => "success"
