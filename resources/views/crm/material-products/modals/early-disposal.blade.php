@@ -46,7 +46,7 @@
                             <input type="file" ng-disabled="batch.used_for_td_expt_only == 0" name="used_for_td_certificate" id="" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <span><strong>* To be disposed after</strong></span>
+                            <span><strong>* To be disposed after (DOD)</strong></span>
                             <input type="date" ng-disabled="batch.used_for_td_expt_only == 0" name="disposed_after" value="@{{ batch.disposed_after }}" class="form-control" required>
                         </div>
                         <h1 class="h5 my-3">Accordance to EG1 Chemical UIMS 2021</h1>
