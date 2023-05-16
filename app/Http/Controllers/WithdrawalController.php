@@ -247,7 +247,7 @@ class WithdrawalController extends Controller
             'batch_serial'       => $current_batch->batch . ' / ' . $current_batch->serial,
             'last_accessed'      => auth_user()->alias_name,
             'used_amount'        => $request->used_amount,
-            'remain_amount'      => $request->remain_amount,
+            'remain_amount'      => $request->end_of_material_product == 1 ? $request->used_amount == 0 ? "0" : $request->remain_amount   : $request->remain_amount,
             'remarks'            => $request->remarks ?? "",
             'brand'              => $current_batch->batch,
             'unit_packing_value' => $material->unit_packing_value,
@@ -256,10 +256,10 @@ class WithdrawalController extends Controller
         ]);
 
         $current_batch->UtilizationCart()->create(["quantity" =>  $current_batch->quantity -  $request->remain_amount / $current_batch->unit_packing_value]);
-
         $current_batch->update([
             'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
-            'total_quantity' => $request->remain_amount
+            'total_quantity' => $request->remain_amount,
+            "end_of_batch"   => $request->end_of_material_product == 1 ? 1 : 0
         ]);
         MaterialProductHistory($current_batch,'AFTER_DEDUCT_TRACK_USAGE');
         $material->update([
