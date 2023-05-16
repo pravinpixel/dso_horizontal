@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Batches;
 use App\Models\DeductTrackUsage;
 use App\Models\MaterialProducts;
-use App\Models\RepackOutlife;
 use App\Models\withdrawCart;
 use Illuminate\Http\Request;
-use Laracasts\Flash\Flash;
 
 class WithdrawalController extends Controller
 {
@@ -215,13 +213,12 @@ class WithdrawalController extends Controller
     { 
         foreach ($request->batch_id as $key => $column) {
             $current_batch = Batches::find($request->batch_id[$key]);
-            MaterialProductHistory($current_batch,'BEFORE_DIRECT_DEDUCT');
             $current_batch->UtilizationCart()->create(["quantity" =>  $request->quantity[$key]]);
             $current_batch->update([
                 'quantity'       => $current_batch->quantity -  $request->quantity[$key],
                 'total_quantity' => ($current_batch->quantity -  $request->quantity[$key]) * $current_batch->unit_packing_value
             ]);
-            MaterialProductHistory($current_batch,'AFTER_DIRECT_DEDUCT');
+            MaterialProductHistory($current_batch,'DIRECT_DEDUCT');
             withdrawCart::with('batch')->where([
                 'user_id'       => auth_user()->id ,
                 'withdraw_type' => 'DIRECT_DEDUCT'
@@ -240,7 +237,7 @@ class WithdrawalController extends Controller
     {
         $current_batch  = Batches::with('StorageArea')->findOrFail($request->batch_id);
         $material       = MaterialProducts::find($current_batch->material_product_id);
-        MaterialProductHistory($current_batch,'BEFORE_DEDUCT_TRACK_USAGE');
+        // MaterialProductHistory($current_batch,'BEFORE_DEDUCT_TRACK_USAGE');
 
         DeductTrackUsage::create([
             'batch_id'           => $request->batch_id,

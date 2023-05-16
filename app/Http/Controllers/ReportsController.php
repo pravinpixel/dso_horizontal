@@ -218,7 +218,7 @@ class ReportsController extends Controller
     }
     public function materialHistoryFilter($request)
     {
-        $material = materialProductHistory::select('*');
+        $material = materialProductHistory::latest()->select('*');
         $material->when(isset($request->ItemDescription), function ($query) use ($request) {
             $query->where("ItemDescription", $request->ItemDescription);
         });

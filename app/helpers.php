@@ -619,7 +619,7 @@ if (!function_exists('getRoutes')) {
                 $ActionTaken = 'Before With Out Draw In/Out';
             }
             if ($ActionTaken == 'AFTER_DEDUCT_TRACK_OUTLIFE') {
-                $ActionTaken = 'After With Out Draw In/Out';
+                $ActionTaken = 'With Out Draw In/Out';
             }
             materialProductHistory::updateOrCreate([
                 'batch_id'                 => $batch->id,
