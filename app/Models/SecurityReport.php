@@ -12,6 +12,9 @@ class SecurityReport extends Model
     protected $fillable = [
         'user_name',
         'user_id',
-        'action'
-    ];
+        'type',
+        'file_path',
+        'action',
+        'file_id'
+    ]; 
 }

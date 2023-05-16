@@ -16,6 +16,9 @@ class CreateSecurityReportsTable extends Migration
         Schema::create('security_reports', function (Blueprint $table) {
             $table->id();
             $table->string('user_name');
+            $table->string('type')->nullable();
+            $table->text('file_path')->nullable();
+            $table->integer('file_id')->nullable();
             $table->integer('user_id');
             $table->text('action');
             $table->timestamps();

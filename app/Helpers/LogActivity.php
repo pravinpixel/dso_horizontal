@@ -199,12 +199,14 @@ class LogActivity
         $SecurityReport = SecurityReport::latest()->get();
         $arr = [];
         foreach ($SecurityReport as $key => $row) {
-
             $arr[] = [
                 "transaction_date" => $row->created_at->format('d-m-Y'),
                 "transaction_time" => $row->created_at->format('h:i:s A'),
                 "transaction_by"   => $row->user_name,
                 "action"           => $row->action,
+                "file_path"        => $row->file_path,
+                "file_id"          => $row->file_id,
+                "type"             => $row->type,
                 "created_at"       => $row->created_at->format('d-m-Y h:i:s A')
             ];
         }
