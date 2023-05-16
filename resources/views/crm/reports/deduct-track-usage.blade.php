@@ -46,7 +46,7 @@
                                 <th class="text-white bg-primary-2 text-center font-14">S.No</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Item description</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Brand</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Barcode</th>
+                                {{-- <th class="text-white bg-primary-2 text-center font-14">Barcode</th> --}}
                                 <th class="text-white bg-primary-2 text-center font-14">Batch #/ Serial #</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Unit Packing Value</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Storage Area</th>
@@ -85,7 +85,7 @@
                         {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                         {data:"item_description",name:"item_description"},
                         {data:"brand",name:"brand"},
-                        {data:"barcode_number",name:"barcode_number"},
+                        // {data:"barcode_number",name:"barcode_number"},
                         {data:"batch_serial",name:"batch_serial"},
                         {data:"unit_packing_value",name:"unit_packing_value" },
                         {data:"storage_area",name:"storage_area"},
