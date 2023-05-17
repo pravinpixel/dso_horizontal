@@ -50,7 +50,7 @@ class ReportsController extends Controller
     }
     public function deduct_track_outlife_download($id)
     {
-        return Excel::download(new TrackOutlifeExport($id), 'history.xlsx');
+        return Excel::download(new TrackOutlifeExport($id), 'deduct-track-outlife-history.xlsx');
     }
     public function deduct_track_usage_filter($request)
     {

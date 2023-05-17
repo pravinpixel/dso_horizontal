@@ -87,7 +87,7 @@ class Batches extends Model
     public function UtilizationCart()
     {
         return $this->hasMany(UtilizationCart::class, 'batch_id', 'id');
-    } 
+    }
 
     public function BatchOwners()
     {
@@ -103,7 +103,10 @@ class Batches extends Model
     {
         return $this->hasOne(BarcodeFormat::class, 'batch_id', 'id');
     }
-
+    public function RepackOutlifeDrawInOut()
+    {
+        return $this->hasMany(RepackOutlife::class, 'batch_id', 'id')->where('draw_in', 1)->where('draw_out', 1);
+    }
     public function RepackOutlife()
     {
         return $this->hasMany(RepackOutlife::class, 'batch_id', 'id');
@@ -132,9 +135,9 @@ class Batches extends Model
     {
         return $this->hasMany(DeductTrackUsage::class, 'batch_id', 'id');
     }
-    
+
     public function TrackOutlifeHistory()
     {
         return $this->hasMany(TrackOutlifeHistory::class, 'batch_id', 'id');
-    } 
+    }
 }
