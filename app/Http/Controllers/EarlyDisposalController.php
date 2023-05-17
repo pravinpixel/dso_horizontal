@@ -41,7 +41,7 @@ class EarlyDisposalController extends Controller
             'disposed_after'    => $request->disposed_after ?? null,
             'disposed_status'   => true
         ]);
-        if($request->used_for_td_expt_only == 1) {
+        if($request->used_for_td_expt_only === "1") {
             MaterialProductHistory($batch,'USED_FOR_TD_EXPT');
             $batch->update(["coc_coa_mill_cert_status" => 'on']);
         } else {

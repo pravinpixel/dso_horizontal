@@ -594,6 +594,7 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
         {
+      
             $batch = Batches::with('BatchOwners')->find($Batch->id);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
@@ -621,6 +622,12 @@ if (!function_exists('getRoutes')) {
             if ($ActionTaken == 'AFTER_DEDUCT_TRACK_OUTLIFE') {
                 $ActionTaken = 'With Out Draw In/Out';
             }
+            if ($ActionTaken == 'USED_FOR_TD_EXPT') {
+                $ActionTaken = 'Used for TD/Expt Project';
+            }
+            if ($ActionTaken == 'TO_DISPOSE') {
+                $ActionTaken = 'For Disposal';
+            }
             materialProductHistory::updateOrCreate([
                 'batch_id'                 => $batch->id,
                 'barcode_number'           => $batch->barcode_number,
@@ -628,7 +635,7 @@ if (!function_exists('getRoutes')) {
                 'ItemDescription'          => $batch->BatchMaterialProduct->item_description,
                 'Brand'                    => $batch->brand,
                 'BatchSerial'              => $batch->batch . " / " . $batch->serial,
-                'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRA",
+                'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRAW",
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
                 'UnitPackingValue'         => $batch->unit_packing_value,
