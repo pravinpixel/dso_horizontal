@@ -16,7 +16,7 @@
                     <i class="bi bi-calendar2-week"></i>
                     {{ $material->updated_at->format('d/m/Y h:i:s A') }}
                 </small>
-            </a>1
+            </a>
         </li>
     @endforeach
 @endif
