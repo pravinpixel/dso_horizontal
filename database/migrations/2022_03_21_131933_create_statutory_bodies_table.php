@@ -15,7 +15,7 @@ class CreateStatutoryBodiesTable extends Migration
     {
         Schema::create('statutory_bodies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

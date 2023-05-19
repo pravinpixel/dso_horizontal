@@ -15,7 +15,7 @@ class CreateHouseTypesTable extends Migration
     {
         Schema::create('house_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

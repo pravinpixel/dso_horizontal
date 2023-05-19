@@ -15,7 +15,7 @@ class CreatePackingSizeDataTable extends Migration
     {
         Schema::create('packing_size_data', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }

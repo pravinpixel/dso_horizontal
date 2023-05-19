@@ -66,7 +66,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('permissions')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';

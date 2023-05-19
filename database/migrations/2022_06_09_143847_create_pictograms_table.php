@@ -15,7 +15,7 @@ class CreatePictogramsTable extends Migration
     {
         Schema::create('pictograms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->longText('image');
             $table->timestamps();
         });
