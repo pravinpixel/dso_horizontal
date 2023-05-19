@@ -160,15 +160,8 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100 " class="w-100">
             <div class="fw-bold mb-1">SDS</div>
-            @if (!is_null($batch->sds))
-                <div class="btn-group mt-1">
-                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                        href="{{ asset('storage/app/') . '/' . $batch->sds }}" target="_blank"><i
-                            class="fa fa-eye me-1"></i>view</a>
-                    <button onclick="download('{{ $batch->id }}','sds')"
-                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                            class="fa fa-download me-1"></i>Download</button>
-                </div>
+            @if (!is_null($batch->BatchFiles))
+                {!! getBatchFile($batch->BatchFiles,'sds', false) !!}
             @endif
         </div>
     </li>
@@ -176,12 +169,7 @@
         <div class="w-100 " class="w-100">
             <div class="fw-bold mb-1">COC/COA/Mill Cert</div>
             @if (!is_null($batch->BatchFiles))
-                @foreach ($batch->BatchFiles as $coc)
-                    <div class="btn-group mt-1">
-                        <a class="badge badge-outline-info rounded-pill" href="{{ asset('storage/app/') . '/' . $coc->file_name }}" target="_blank"><i class="fa fa-eye me-1"></i>view</a>
-                        <button onclick="download('{{ $coc->id }}','coc_coa_mill_cert')" class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i class="fa fa-download me-1"></i>Download</button>
-                    </div>
-                @endforeach
+                {!! getBatchFile($batch->BatchFiles,'coc_coa_mill_cert', false) !!}
             @endif
         </div>
     </li>
@@ -200,15 +188,8 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100 " class="w-100">
             <div class="fw-bold mb-1">IQC result</div>
-            @if (!is_null($batch->iqc_result))
-                <div>
-                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                        href="{{ asset('storage/app/') . '/' . $batch->iqc_result }}" target="_blank"><i
-                            class="fa fa-eye me-1"></i>view</a>
-                    <button onclick="download('{{ $batch->id }}','iqc_result')"
-                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                            class="fa fa-download me-1"></i>Download</button>
-                </div>
+            @if (!is_null($batch->BatchFiles))
+                {!! getBatchFile($batch->BatchFiles,'iqc_result', false) !!}
             @endif
         </div>
     </li>
@@ -301,30 +282,16 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Extended QC result</div>
-            @if (!is_null($batch->extended_qc_result))
-                <div class="btn-group mt-1">
-                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                        href="{{ asset('storage/app/') . '/' . $batch->extended_qc_result }}" target="_blank"><i
-                            class="fa fa-eye me-1"></i>view</a>
-                    <button onclick="download('{{ $batch->id }}','extended_qc_result')"
-                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                            class="fa fa-download me-1"></i>Download</button>
-                </div>
+            @if (!is_null($batch->BatchFiles))
+                {!! getBatchFile($batch->BatchFiles,'extended_qc_result', false) !!}
             @endif
         </div>
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Disposed certificate</div>
-            @if (!is_null($batch->disposal_certificate))
-                <div class="btn-group mt-1">
-                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                        href="{{ asset('storage/app/') . '/' . $batch->disposal_certificate }}" target="_blank"><i
-                            class="fa fa-eye me-1"></i>view</a>
-                    <button onclick="download('{{ $batch->id }}','disposal_certificate')"
-                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                            class="fa fa-download me-1"></i>Download</button>
-                </div>
+            @if (!is_null($batch->BatchFiles))
+                {!! getBatchFile($batch->BatchFiles,'disposal_certificate', false) !!}
             @endif
         </div>
     </li>

@@ -849,9 +849,9 @@ if (!function_exists('getRoutes')) {
         }
     }
     if (!function_exists('getBatchFile')) {
-        function getBatchFile($files, $type)
+        function getBatchFile($files, $type, $removeBtn = null)
         {
-            return view('templates.batch-files-ui', compact('files', 'type'));
+            return view('templates.batch-files-ui', compact('files', 'type', 'removeBtn'));
         }
     }
 }

@@ -8,8 +8,10 @@
                         <i class="fa fa-download me-1"></i>
                         <i>{{ $file->original_name }}</i>
                     </button>
-                    <i class="fa fa-times ms-1 text-danger bg-white rounded font-12"
-                        onclick="deleteFile('{{ $file->id }}',this)" style="cursor: pointer"></i>
+                    @if (is_null($removeBtn))
+                        <i class="fa fa-times ms-1 text-danger bg-white rounded font-12"
+                            onclick="deleteFile('{{ $file->id }}',this)" style="cursor: pointer"></i>
+                    @endif
                 </div>
             @endif
         @endforeach
