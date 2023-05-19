@@ -20,7 +20,6 @@
         </li>
     @endforeach
 @endif
-
 @foreach ($notification_data as $type => $data)
     @if (count($data))
         <div class="card my-2 border">

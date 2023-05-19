@@ -188,7 +188,7 @@ class DsoRepository implements DsoRepositoryInterface
                     }
                 }
                 if ($page_name == 'THRESHOLD_QTY') {
-                    if ($batch->is_draft == 1) {
+                    if ($batch->is_draft == 1 ||  $batch->date_of_expiry_color == 'text-dark') {
                         unset($parent->Batches[$batch_key]);
                     }
                 }
