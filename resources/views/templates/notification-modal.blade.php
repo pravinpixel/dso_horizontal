@@ -24,10 +24,18 @@
 @foreach ($notification_data as $type => $data)
     @if (count($data))
         <div class="card my-2 border">
-            <div class="card-header bg-light fw-bold text-dark">{{ str_replace(['_', 'TABLE'], ' ', $type) }}</div>
+            <div class="card-header bg-light fw-bold text-dark">
+                @if ($type === 'NEAR_EXPIRY_TABLE')
+                    NEAR EXPIRY PRODUCTS
+                    @elseif ($type === 'EXPIRY_TABLE')
+                    EXPIRED PRODUCTS
+                    @else
+                    FAILED IQC PRODUCTS
+                @endif
+            </div>
             @foreach ($data as $row)
                 <li class="list-group-item list-group-item-action btn">
-                    <div class="text-dark">
+                    <a href="{{ route('near-expiry-expired') }}" class="text-dark">
                         <div>
                             <b class="text-primary">
                                 {{ $row->Batches->BatchMaterialProduct->item_description }}
@@ -43,9 +51,11 @@
                             {{ $row->updated_at->format('d/m/Y h:i:s A') }}
                         </small>
                         <div class="float-end">
-                            <button onclick="removeNotification({{ $row->id }}, this)" class="btn-warning btn-sm btn rounded-pill small p-0 px-1 border border-dark shadow"><i class="me-1 bi bi-bookmark-check-fill"></i>Mark as read</button>
+                            <button onclick="removeNotification({{ $row->id }}, this)"
+                                class="btn-warning btn-sm btn rounded-pill small p-0 px-1 border border-dark shadow"><i
+                                    class="me-1 bi bi-bookmark-check-fill"></i>Mark as read</button>
                         </div>
-                    </div>
+                    </a>
                 </li>
             @endforeach
         </div>
