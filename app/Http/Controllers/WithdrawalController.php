@@ -286,7 +286,7 @@ class WithdrawalController extends Controller
                     'remarks'            => $request->remarks[$key] ?? "-"
                 ]);
                 $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] ]);
-                MaterialProductHistory($batch,'BEFORE_DEDUCT_TRACK_OUTLIFE');
+             
                 $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
                 $batch->update([
                     'remarks'        => $request->remarks[$key],
@@ -294,7 +294,7 @@ class WithdrawalController extends Controller
                     'total_quantity' => $total_quantity
                 ]);
                 updateParentQuantity($batch->material_product_id);
-                MaterialProductHistory($batch,'AFTER_DEDUCT_TRACK_OUTLIFE');
+                MaterialProductHistory($batch,'DEDUCT_TRACK_OUTLIFE');
             }
         }
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_OUTLIFE')->delete();
