@@ -594,8 +594,7 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
         {
-      
-            $batch = Batches::with('BatchOwners')->find($Batch->id);
+            $batch       = Batches::with('BatchOwners')->find($Batch->id);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
                 foreach ($batch->BatchOwners as $key => $owner) {
@@ -806,17 +805,18 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('updateParentQuantity')) {
         function updateParentQuantity($id)
         {
-            $total_batch_quantity = 0;
-            try {
-                $batches          = $id->NonDraftBatches;
-                $material_product = $id;
-            } catch (\Throwable $th) {
+            if(is_numeric($id)) {
                 $material_product = MaterialProducts::with('NonDraftBatches')->find($id);
                 $batches = $material_product->NonDraftBatches;
+            } else {
+                $material_product = $id;
+                $batches          = $id->NonDraftBatches;
             }
+            $total_batch_quantity = 0;
             foreach ($batches as $key => $batch) {
                 $total_batch_quantity += $batch->total_quantity;
             }
+          
             $material_product->update([
                 "material_total_quantity" => $total_batch_quantity,
                 "material_quantity"       => $total_batch_quantity / $material_product->unit_packing_value,

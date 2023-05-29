@@ -6,7 +6,6 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Laracasts\Flash\Flash;
-use Illuminate\Support\Facades\Storage;
 
 class MartialProductRepository implements MartialProductRepositoryInterface
 {

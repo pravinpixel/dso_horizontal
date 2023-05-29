@@ -34,27 +34,29 @@
             </div>
             @foreach ($data as $row)
                 <li class="list-group-item list-group-item-action btn">
-                    <a href="{{ route('near-expiry-expired') }}" class="text-dark">
-                        <div>
+                    <div class="text-dark">
+                        <a  href="{{ route('near-expiry-expired') }}" >
                             <b class="text-primary">
                                 {{ $row->Batches->BatchMaterialProduct->item_description }}
                             </b>
-                        </div>
-                        <small>
-                            <b class="text-dark">IQC Staus :</b>
-                            @if ($row->Batches->iqc_status)
-                                <span class="badge bg-success rounded-pill">PASS</span>
-                            @else
-                                <span class="badge bg-danger rounded-pill">FAIL</span>
-                            @endif <br>
-                            {{ $row->updated_at->format('d/m/Y h:i:s A') }}
-                        </small>
+                        </a>
+                        <a href="{{ route('near-expiry-expired') }}">
+                            <small>
+                                <b class="text-dark">IQC Staus :</b>
+                                @if ($row->Batches->iqc_status)
+                                    <span class="badge bg-success rounded-pill">PASS</span>
+                                @else
+                                    <span class="badge bg-danger rounded-pill">FAIL</span>
+                                @endif <br>
+                                {{ $row->updated_at->format('d/m/Y h:i:s A') }}
+                            </small>
+                        </a>
                         <div class="float-end">
                             <button onclick="removeNotification({{ $row->id }}, this)"
                                 class="btn-warning btn-sm btn rounded-pill small p-0 px-1 border border-dark shadow"><i
                                     class="me-1 bi bi-bookmark-check-fill"></i>Mark as read</button>
                         </div>
-                    </a>
+                    </div>
                 </li>
             @endforeach
         </div>

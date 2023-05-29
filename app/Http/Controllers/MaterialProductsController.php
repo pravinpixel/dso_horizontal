@@ -551,6 +551,7 @@ class MaterialProductsController extends Controller
             $data->BatchOwners()->delete();
             $data->delete();
             LogActivity::log($id);
+            updateParentQuantity($data->material_product_id);
             return response(['status' => true,  'message' => trans('response.delete')], Response::HTTP_OK);
         } else {
             return response(['status' => true,  'message' => "You Can't Delete Batch!"], Response::HTTP_OK);

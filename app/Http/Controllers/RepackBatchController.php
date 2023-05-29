@@ -29,10 +29,8 @@ class RepackBatchController extends Controller
         $new_batch->storage_area       = $request->storage_area['id'] ?? $request->storage_area;
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
-        // $new_batch->repack_size        = $request->RepackQuantity;
         $new_batch->save();
         cloneDocumentFromBatch($request->id,$new_batch->id);
-        MaterialProductHistory($new_batch,'Repack / Transfer');
         if($request->owners) {
             foreach ($request->owners as $key => $owner) {
                 $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
@@ -41,7 +39,7 @@ class RepackBatchController extends Controller
                 ]);
             }
         }
-
+        MaterialProductHistory($new_batch,'Repack / Transfer');
         $old_value             = $previous_batch;
         $new_value             = clone $previous_batch;
         $new_value->quantity   = $request->RemainQuantity;
