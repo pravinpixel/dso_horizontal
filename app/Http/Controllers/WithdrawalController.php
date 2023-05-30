@@ -261,7 +261,7 @@ class WithdrawalController extends Controller
             'total_quantity' => $request->remain_amount,
             "end_of_batch"   => $request->end_of_material_product == 1 ? 1 : 0
         ]);
-        MaterialProductHistory($current_batch,'AFTER_DEDUCT_TRACK_USAGE');
+        MaterialProductHistory($current_batch,'DEDUCT_TRACK_USAGE');
         $material->update([
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
         ]); 
