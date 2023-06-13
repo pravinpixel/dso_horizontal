@@ -46,8 +46,8 @@ class EarlyDisposalController extends Controller
             $batch->update(["coc_coa_mill_cert_status" => 'on']);
         } else {
             MaterialProductHistory($batch,'TO_DISPOSE');
+            TrackDisposedBatches($batch, $request->quantity);
         }
-        TrackDisposedBatches($batch, $request->quantity);
         return redirect()->route('disposal')->with('success',"Disposal Success !");
     }
 }

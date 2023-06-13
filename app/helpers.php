@@ -593,8 +593,7 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
-        {
-            $batch       = Batches::with('BatchOwners')->find($Batch->id);
+        {             $batch       = Batches::with('BatchOwners')->find($Batch->id);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
                 foreach ($batch->BatchOwners as $key => $owner) {

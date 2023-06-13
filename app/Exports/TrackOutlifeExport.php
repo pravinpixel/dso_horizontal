@@ -16,7 +16,7 @@ class TrackOutlifeExport implements FromView
     }
     public function view(): View
     {
-        $batch = Batches::with('RepackOutlifeDrawInOut','TrackOutlifeHistory','BatchMaterialProduct','BatchOwners')->findOrFail($this->id);  
+        $batch = Batches::with('RepackOutlifeDrawInOut','TrackOutlifeHistory','BatchMaterialProduct','BatchOwners')->findOrFail($this->id); 
         securityLog('Track Outlife Report Export'); 
         return view('crm.reports.templates.deduct-track-usage',compact('batch'));
     }

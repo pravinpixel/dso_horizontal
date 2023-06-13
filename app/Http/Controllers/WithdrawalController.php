@@ -266,7 +266,7 @@ class WithdrawalController extends Controller
             "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
         ]); 
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_USAGE')->delete();
-        updateParentQuantity($material);
+        updateParentQuantity( $current_batch->material_product_id);
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
     }
     public function deduct_track_outlife(Request $request)

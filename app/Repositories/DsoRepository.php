@@ -151,12 +151,12 @@ class DsoRepository implements DsoRepositoryInterface
                     // $material_total_quantity  += (float) $batch->quantity * (float) $batch->unit_packing_value;
                     // $batch->total_quantity    = Multiplicate($batch->quantity,$batch->unit_packing_value);
                 }
-                //  if ($page_name === 'MATERIAL_SEARCH_OR_ADD') {
+                 if ($page_name !== 'DEDUCT_TRACK_OUTLIFE_REPORT') {
                     if ($batch->end_of_batch == 1) {
                         unset($parent->Batches[$batch_key]);
                     }
-                // }
-                if ($page_name != 'REPORT_DISPOSED_ITEMS') {
+                }
+                if ($page_name != 'REPORT_DISPOSED_ITEMS' && $page_name != "DEDUCT_TRACK_OUTLIFE_REPORT") {
                     if ($batch->quantity == 0) {
                         unset($parent->Batches[$batch_key]);
                     }

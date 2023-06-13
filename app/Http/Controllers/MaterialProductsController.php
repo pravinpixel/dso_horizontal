@@ -109,9 +109,13 @@ class MaterialProductsController extends Controller
 
     public function end_of_batch($id)
     {
-        Batches::findOrFail($id)->update([
-            "end_of_batch" => 1
+        $Batches = Batches::findOrFail($id);
+        $Batches->update([
+            "end_of_batch"   => 1,
+            "quantity"       => 0,
+            "total_quantity" => 0
         ]);
+        updateParentQuantity( $Batches->material_product_id);
     }
 
     public function my_search_history()
@@ -249,7 +253,7 @@ class MaterialProductsController extends Controller
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
-                MaterialProductHistory($batch,'IMPORTED_FROM_EXCEL');
+                MaterialProductHistory($batch, 'IMPORTED_FROM_EXCEL');
                 Flash::success(__('global.imported'));
             }
         }
@@ -475,9 +479,9 @@ class MaterialProductsController extends Controller
             "serial"                       => $data->serial,
             "po_number"                    => $data->po_number,
             "statutory_body"               => $data->StatutoryBody->name,
-            "euc_material"                 => $data->euc_material == 1 ? "Yes" : $data->euc_material == 0 ? "No" : "-",
-            "require_bulk_volume_tracking" => $data->require_bulk_volume_tracking == 1 ? "Yes" : $data->require_bulk_volume_tracking == 0 ? "No" : "-",
-            "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : $data->require_outlife_tracking == 0 ? "No" : "-" . $data->outlife ?? "0",
+            "euc_material"                 => $data->euc_material == 1 ? "Yes" : ($data->euc_material == 0 ? "No" : "-"),
+            "require_bulk_volume_tracking" => $data->require_bulk_volume_tracking == 1 ? "Yes" : ($data->require_bulk_volume_tracking == 0 ? "No" : "-"),
+            "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : ($data->require_outlife_tracking == 0 ? "No" : "-" . $data->outlife ?? "0"),
             "storage_area"                 => $data->StorageArea !== null ? $data->StorageArea->name : '-',
             "housing"                      => $data->housing_type !== null ? $data->HousingType->name : '-' . "/" . $data->housing,
             "owners"                       => $data->owner_one . "/" . $data->owner_two,
@@ -503,7 +507,7 @@ class MaterialProductsController extends Controller
             "extended_qc_status"           => $data->extended_qc_status ?? ' - ',
             "extended_qc_result"           => $data->extended_qc_result ?? ' - ',
             "disposal_certificate"         => $data->disposal_certificate ?? ' - ',
-            "used_for_td_expt_only"        => $data->used_for_td_expt_only == 1 ? 'Yes' : $data->used_for_td_expt_only == 0 ? "No" : "-",
+            "used_for_td_expt_only"        => $data->used_for_td_expt_only == 1 ? 'Yes' : ($data->used_for_td_expt_only == 0 ? "No" : "-"),
         ]);
     }
     public function view_batch($id)
@@ -582,8 +586,8 @@ class MaterialProductsController extends Controller
                 $created_batch->$column = NULL;
             }
         }
-        $owners_id = Arr::pluck($current_batch->BatchOwners->toArray(),'user_id');
-        $created_batch->owners = implode(",",$owners_id);
+        $owners_id = Arr::pluck($current_batch->BatchOwners->toArray(), 'user_id');
+        $created_batch->owners = implode(",", $owners_id);
         $created_batch->save();
         foreach ($current_batch->BatchOwners->toArray() as $key => $batchUser) {
             if (!is_null($created_batch->id)) {

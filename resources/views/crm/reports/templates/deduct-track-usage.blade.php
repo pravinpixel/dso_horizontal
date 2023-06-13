@@ -22,6 +22,17 @@
                 <td>{{ $row->created_at }}</td>
             </tr>
         @endforeach
+        @if ($batch->end_of_batch === 1)
+            <tr>
+                <td>{{ $row->item_description }}</td>
+                <td>{{ $row->batch_serial }}</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>End of Batch</td>
+                <td>{{ $batch->updated_at }}</td>
+            </tr>
+        @endif
     </tbody>
 </table>
 @if (count($batch->RepackOutlifeDrawInOut))
