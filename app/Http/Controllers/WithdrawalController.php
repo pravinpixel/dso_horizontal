@@ -285,7 +285,7 @@ class WithdrawalController extends Controller
                     'withdraw_quantity'  => $request->withdraw_quantity[$key],
                     'remarks'            => $request->remarks[$key] ?? "-"
                 ]);
-                $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] ]);
+                $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] / $batch->unit_packing_value ]);
              
                 $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
                 $batch->update([

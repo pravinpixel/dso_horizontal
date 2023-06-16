@@ -55,13 +55,15 @@ class NotificationController extends Controller
             "EXPIRY_TABLE"      => $this->near_expiry_expired_ajax('EXPIRY_TABLE', true),
             "FAILED_IQC_TABLE"  => $this->near_expiry_expired_ajax('FAILED_IQC_TABLE', true),
         ];
+        NEFNotification::truncate();
         foreach ($notifications as $type => $data) {
-            if (count($data)) {
+            if (count($data) !== 0) {
                 foreach ($data as $key => $batch) {
+                    // dd($batch);
                     if ($batch->notification_status == 0) {
                         NEFNotification::updateOrCreate([
                             'batch_id' => $batch['id'],
-                            'type'     => $type
+                            'type'     => $type,    
                         ]);
                     }
                 }
@@ -125,7 +127,6 @@ class NotificationController extends Controller
                 $failed_iqc[] = $row;
             }
         }
-
         if ($type == 'NEAR_EXPIRY_TABLE') {
             $table = $near_expiry;
         } elseif ($type == 'EXPIRY_TABLE') {
