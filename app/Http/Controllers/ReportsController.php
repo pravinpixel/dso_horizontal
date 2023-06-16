@@ -9,6 +9,7 @@ use App\Exports\MaterialProductHistoryExport;
 use App\Exports\SecurityReportExcel;
 use App\Exports\TrackOutlifeExport;
 use App\Exports\TrackUsageExport;
+use App\Exports\utilizationExport;
 use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
@@ -139,45 +140,52 @@ class ReportsController extends Controller
         $material = $this->materialHistoryFilter($request);
         return Excel::download(new MaterialProductHistoryExport($material), generateFileName('Material inHouse pdt History', 'xlsx'));
     }
+    public function getResultByFilters($request)
+    {
+        $UtilizationCart = [];
+        if ($request->start_month) {
+            $UtilizationCart = UtilizationCart::with('Batch')
+                ->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(), Carbon::parse($request->end_month)->lastOfMonth()])
+                ->latest()->get()->groupBy(function ($data) {
+                    return $data->batch_id;
+                });
+        }
+        if (!is_null($UtilizationCart)) {
+            $UtilizationCartData = [];
+            foreach ($UtilizationCart as $key => $batches) {
+                $total_quantity   = 0;
+                $array_quantity = [];
+                foreach ($batches as $key => $batch) {
+                    $array_quantity[] = $batch->quantity;
+                    $total_quantity += $batch->quantity;
+                }
+                if ($batches[0]->Batch) {
+                    $UtilizationCartData[] = [
+                        "item_description"   => $batches[0]->Batch->BatchMaterialProduct->item_description ?? null,
+                        "brand"              => $batches[0]->Batch->brand ?? null,
+                        "batch_serial"       => $batches[0]->Batch->batch . " / " . $batches[0]->Batch->serial ?? null,
+                        "unit_packing_value" => $batches[0]->Batch->unit_packing_value ?? null,
+                        "total_quantity"     => toFixed($total_quantity, 3) ?? null,
+                        "average_quantity"   => toFixed((array_sum($array_quantity) / count($array_quantity)), 3) ?? null,
+                        "maximum_quantity"   => toFixed(max($array_quantity), 3) ?? null,
+                    ];
+                }
+            }
+        }
+        return $UtilizationCartData;
+    }
     public function utilization_cart(Request $request)
     {
         if ($request->ajax()) {
-            if ($request->start_month) {
-                $UtilizationCart = UtilizationCart::with('Batch')
-                    ->whereBetween('created_at', [Carbon::parse($request->start_month)->firstOfMonth(), Carbon::parse($request->end_month)->lastOfMonth()])
-                    ->latest()->get()->groupBy(function ($data) {
-                        return $data->batch_id;
-                    });
-            } else {
-                $UtilizationCart = UtilizationCart::with('Batch')->latest()->get()->groupBy(function ($data) {
-                    return $data->batch_id;
-                });
-            }
-            if (!is_null($UtilizationCart)) {
-                $UtilizationCartData = [];
-                foreach ($UtilizationCart as $key => $batches) {
-                    $total_quantity   = 0;
-                    $array_quantity = [];
-                    foreach ($batches as $key => $batch) {
-                        $array_quantity[] = $batch->quantity;
-                        $total_quantity += $batch->quantity;
-                    }
-                    if ($batches[0]->Batch) {
-                        $UtilizationCartData[] = [
-                            "item_description"   => $batches[0]->Batch->BatchMaterialProduct->item_description ?? null,
-                            "brand"              => $batches[0]->Batch->brand ?? null,
-                            "batch_serial"       => $batches[0]->Batch->batch . " / " . $batches[0]->Batch->serial ?? null,
-                            "unit_packing_value" => $batches[0]->Batch->unit_packing_value ?? null,
-                            "total_quantity"     => toFixed($total_quantity, 3) ?? null,
-                            "average_quantity"   => toFixed((array_sum($array_quantity) / count($array_quantity)), 3) ?? null,
-                            "maximum_quantity"   => toFixed(max($array_quantity), 3) ?? null,
-                        ];
-                    }
-                }
-                return DataTables::of($UtilizationCartData)->addIndexColumn()->make(true);
-            }
+            $result = $this->getResultByFilters($request);
+            return DataTables::of($result)->addIndexColumn()->make(true);
         }
         return view('crm.reports.utilization-cart');
+    }
+    public function export_utilization_cart(Request $request)
+    {
+        $result = $this->getResultByFilters($request);
+        return Excel::download(new utilizationExport($result), generateFileName('utilization-cart', 'xlsx'));
     }
     public function utilization_chart(Request $request)
     {
@@ -378,12 +386,12 @@ class ReportsController extends Controller
         if ($request->ajax()) {
             return DataTables::of($security)->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    if (!is_null($data['file_path'])) { 
-                        return  $data['action'].' <button onclick=download('.$data["file_id"].',"'.$data["type"].'") class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button">
+                    if (!is_null($data['file_path'])) {
+                        return  $data['action'] . ' <button onclick=download(' . $data["file_id"] . ',"' . $data["type"] . '") class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button">
                                 <i class="fa fa-download me-1"></i>
-                                <i>'.str_replace('public/','', $data['file_path']).'</i>
+                                <i>' . str_replace('public/', '', $data['file_path']) . '</i>
                             </button>';
-                    } 
+                    }
                     return $data['action'];
                 })->rawColumns(["action"])
                 ->make(true);

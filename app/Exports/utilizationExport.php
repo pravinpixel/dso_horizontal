@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvents
+class utilizationExport implements FromArray , WithHeadings, WithStyles, WithEvents
 {
     protected $data;
 
@@ -23,24 +23,21 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
             1    => ['font' => ['bold' => true]],
         ];
     }
-
     public function array():array
     {
-        securityLog('Disposal Items Export');
+        securityLog('Utilization cart Export');
         return $this->data;
     }
     public function headings() :array
     {
         return [
-            "Transaction Date",
-            "Transaction Time",
-            "Transacted by",
             "Item description",
+            "Brand",
             "Batch #/ Serial #",
             "Unit Pack Value",
-            "BeforeQuantity",
-            "DisposedQuantity",
-            "AfterQuantity"
+            "Total Quantity",
+            "Average Quantity",
+            "Average Quantity",
         ];
     }
     public function registerEvents(): array
@@ -49,9 +46,9 @@ class DisposalExport  implements FromArray , WithHeadings, WithStyles, WithEvent
             AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(20);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(40);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(40);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(40);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(20);

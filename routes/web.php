@@ -78,6 +78,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('disposed-items', [ReportsController::class,'disposed_items'])->name('reports.disposed_items');
         Route::get('expired-material', [ReportsController::class,'expired_material'])->name('reports.expired_material');
         Route::get('utilization-cart', [ReportsController::class,'utilization_cart'])->name('reports.utilization-cart');
+        Route::post('utilization-cart', [ReportsController::class,'export_utilization_cart'])->name('reports.export-utilization-cart');
         Route::get('security', [ReportsController::class,'security'])->name('reports.security');
         Route::post('export-security', [ReportsController::class,'security_export'])->name('reports.export-security');
         Route::get('deduct-track-outlife', [ReportsController::class,'deduct_track_outlife'])->name('reports.deduct_track_outlife');
