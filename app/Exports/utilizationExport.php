@@ -37,7 +37,7 @@ class utilizationExport implements FromArray , WithHeadings, WithStyles, WithEve
             "Unit Pack Value",
             "Total Quantity",
             "Average Quantity",
-            "Average Quantity",
+            "Maximum Quantity",
         ];
     }
     public function registerEvents(): array
