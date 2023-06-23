@@ -29,7 +29,7 @@
                                 <tr>
                                     <th class="p-0">Remain quantity</th>
                                     <th class="p-2">:</th>
-                                    <td class="p-2">@{{ batch.quantity - batch_qty }}</td>
+                                    <td class="p-2" ng-bind="batch.quantity - batch_qty"></td>
                                 </tr>
                             </table>
                         </div>
