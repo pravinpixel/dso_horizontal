@@ -123,8 +123,8 @@ class ReportsController extends Controller
     public function material_in_house_pdt_history()
     {
         $filters = [
-            "Transacted by"     =>  materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
-            "Item description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
+            "Transaction by"     =>  materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
+            "Item Description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
             "Category Selection" => materialProductHistory::groupBy('CategorySelection')->pluck('CategorySelection'),
             "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
             "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
@@ -227,6 +227,7 @@ class ReportsController extends Controller
     public function materialHistoryFilter($request)
     {
         $material = materialProductHistory::latest()->select('*');
+          
         $material->when(isset($request->ItemDescription), function ($query) use ($request) {
             $query->where("ItemDescription", $request->ItemDescription);
         });
@@ -248,8 +249,8 @@ class ReportsController extends Controller
         $material->when(isset($request->ActionTaken), function ($query) use ($request) {
             $query->where("ActionTaken", $request->ActionTaken);
         });
-        $material->when(isset($request->TransactionBy), function ($query) use ($request) {
-            $query->where("TransactionBy", $request->TransactionBy);
+        $material->when(isset($request->Transactionby), function ($query) use ($request) {
+            $query->where("TransactionBy", $request->Transactionby);
         });
         $material->when(isset($request->DrawStatus), function ($query) use ($request) {
             $query->where("DrawStatus", $request->DrawStatus);

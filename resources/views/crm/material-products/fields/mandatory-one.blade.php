@@ -221,7 +221,11 @@
             </div>
         </div>
         <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Outlife<sup class="text-danger">*</sup></label>
+            <label for="" class="col-4">
+                Outlife
+                <small class="text-success">(day's)</small>
+                <sup class="text-danger">*</sup>
+            </label>
             <div class="col-8">
                 @if (session()->get('edit_mode') == 'parent')
                     {!! Form::number('outlife', $batch->outlife ?? null, [

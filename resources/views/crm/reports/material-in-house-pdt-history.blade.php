@@ -121,19 +121,12 @@
 
             filterTable = (e) => {
                 $('#historyTable').DataTable().destroy();
-                load_data({
-                    ItemDescription  : $('#ItemDescriptionFilter').val(),
-                    CategorySelection: $('#CategorySelectionFilter').val(),
-                    Brand            : $('#BrandFilter').val(),
-                    Housing          : $('#HousingFilter').val(),
-                    StorageArea      : $('#StorageAreaFilter').val(),
-                    Module           : $('#ModuleFilter').val(),
-                    ActionTaken      : $('#ActionTakenFilter').val(),
-                    TransactionBy    : $('#TransactionByFilter').val(),
-                    DrawStatus       : $('#DrawStatusFilter').val(),
-                    StartDate        : $('#StartDateFilter').val(),
-                    EndDate          : $('#EndDateFilter').val(),
-                });
+                const filters = {
+                @foreach ($filters as $index => $filter)
+                    {{ str_replace(' ','',$index) }}  : $('#{{ str_replace(' ','',$index) }}Filter').val(), 
+                @endforeach
+                }
+                load_data(filters);
             }
             $('#refresh').click(function() {
                 $('input').val('');
