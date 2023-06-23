@@ -88,8 +88,15 @@
                             <tr style="vertical-align: baseline;">
                                 <td class="text-start" style="width:50% !important">
                                     <div class="m-0 " ng-if="PrintOutlife">
-                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry</small><br>
-                                        <div><small>{{ $batch->outlife }}</small></div>
+                                        <small
+                                            class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife
+                                            expiry</small><br>
+                                        @if ($batch->RepackOutlife[0]->current_outlife_expiry ?? null)
+                                            <small>{{ $batch->RepackOutlife[0]->current_outlife_expiry }}</small>
+                                            <div><small>{{ $batch->outlife }}</small></div>
+                                            @else
+                                            <small class="text-dark" >DD/MM/YYYY</small>
+                                        @endif
                                     </div>
                                 </td>
                                 <td class="text-end">
