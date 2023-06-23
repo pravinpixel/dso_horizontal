@@ -65,7 +65,7 @@ class SearchRepository implements SearchRepositoryInterface
                         if (checkIsBatchDateColumn($column)) {
                             $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                         } elseif ($column == 'owners') {
-                            $request_ownners = implode(",", Arr::pluck($filter->owners, 'id'));
+                            $request_ownners = implode(",", Arr::pluck($filter->owners, 'id')); 
                             if (!empty($request_ownners)) {
                                 if (count($filter->owners) > 1) {
                                     $q->whereIn('owners', [$request_ownners, strrev($request_ownners)]);

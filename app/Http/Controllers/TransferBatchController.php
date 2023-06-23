@@ -7,6 +7,7 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class TransferBatchController extends Controller
 {
@@ -24,6 +25,8 @@ class TransferBatchController extends Controller
         $created_batch->save();
         cloneDocumentFromBatch($request->id,$created_batch->id); 
         if($request->owners) {
+            $created_batch->owners = implode(",", Arr::pluck($request->owners, 'id'));
+            $created_batch->save();
             foreach ($request->owners as $key => $owner) {
                 $created_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $created_batch->id],[
                     "user_id"    =>  $owner['id'],

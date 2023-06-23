@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RepackBatchController extends Controller
@@ -32,6 +33,8 @@ class RepackBatchController extends Controller
         $new_batch->save();
         cloneDocumentFromBatch($request->id,$new_batch->id);
         if($request->owners) {
+            $new_batch->owners = implode(",", Arr::pluck($request->owners, 'id'));
+            $new_batch->save();
             foreach ($request->owners as $key => $owner) {
                 $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
                     "user_id"    =>  $owner['id'],

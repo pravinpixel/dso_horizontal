@@ -49,6 +49,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if (isset($fillable['batch_owners'])) {
 
             if ($fillable['batch_owners']) {
+                $fillable['batch_owners'][] = (string) auth_user()->id;           
                 $authUser = $fillable['batch_owners'];
                 $batch->BatchOwners()->delete();
                 foreach ($authUser as $key => $id) {
@@ -57,11 +58,6 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                         "alias_name" => getUserById((int)$id)->alias_name
                     ]);
                 }
-                $batch->BatchOwners()->updateOrCreate(["user_id" => (int) auth_user()->id, "batch_id"    => (int) $batch_id], [
-                    "user_id"    => auth_user()->id,
-                    "alias_name" => auth_user()->alias_name
-                ]);
-
                 Batches::find($batch_id)->update([
                     'owners' => implode(",", $fillable['batch_owners'])
                 ]);

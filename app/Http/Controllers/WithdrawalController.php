@@ -247,24 +247,32 @@ class WithdrawalController extends Controller
             'batch_serial'       => $current_batch->batch . ' / ' . $current_batch->serial,
             'last_accessed'      => auth_user()->alias_name,
             'used_amount'        => $request->used_amount,
-            'remain_amount'      => $request->end_of_material_product == 1 ? $request->used_amount == 0 ? "0" : $request->remain_amount   : $request->remain_amount,
+            'remain_amount'      => $request->end_of_material_product == 1 ? ($request->used_amount == 0 ? "0" : $request->remain_amount) : $request->remain_amount,
             'remarks'            => $request->remarks ?? "",
             'brand'              => $current_batch->batch,
             'unit_packing_value' => $material->unit_packing_value,
             'storage_area'       => $current_batch->StorageArea->name,
             'housing'            => $current_batch->housing,
         ]);
-
         $current_batch->UtilizationCart()->create(["quantity" =>  $current_batch->quantity -  $request->remain_amount / $current_batch->unit_packing_value]);
-        $current_batch->update([
-            'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
-            'total_quantity' => $request->remain_amount,
-            "end_of_batch"   => $request->end_of_material_product == 1 ? 1 : 0
-        ]);
+        
+        if($request->end_of_material_product == 1) {
+            $current_batch->update([
+                "end_of_batch"   => 1,
+                "quantity"       => 0,
+                "total_quantity" => 0
+            ]);
+            $material->update([
+                "end_of_material_product" => true
+            ]); 
+        } else {
+            $current_batch->update([
+                'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
+                'total_quantity' => $request->remain_amount,
+                "end_of_batch"   => 0
+            ]);
+        }
         MaterialProductHistory($current_batch,'DEDUCT_TRACK_USAGE');
-        $material->update([
-            "end_of_material_product" => $request->end_of_material_product == 1 ? true : false
-        ]); 
         withdrawCart::where('withdraw_type','DEDUCT_TRACK_USAGE')->delete();
         updateParentQuantity( $current_batch->material_product_id);
         return redirect()->back()->with("success_message", __('global.deduct_track_usage_success'));
