@@ -24,8 +24,8 @@
         @endforeach
         @if ($batch->end_of_batch === 1)
             <tr>
-                <td>{{ $row->item_description }}</td>
-                <td>{{ $row->batch_serial }}</td>
+                <td>{{ $batch->BatchMaterialProduct->item_description }}</td>
+                <td>{{ $batch->batch }}/{{ $batch->serial }}</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
