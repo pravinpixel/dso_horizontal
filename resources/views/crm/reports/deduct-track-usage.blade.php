@@ -7,6 +7,7 @@
                 <form action="{{ route('reports.deduct_track_usage_download') }}" method="POST">
                     @csrf
                     <div class="table-fillters row m-0 p-0">
+                        @php  unset($filters['barcode_number'])  @endphp
                         @foreach ($filters as $index => $filter)
                             <div class="col">
                                 <label class="form-label">

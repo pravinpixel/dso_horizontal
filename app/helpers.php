@@ -593,7 +593,8 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
-        {             $batch       = Batches::with('BatchOwners')->find($Batch->id);
+        {           
+            $batch       = Batches::with('BatchOwners')->find($Batch['id']);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
                 foreach ($batch->BatchOwners as $key => $owner) {
@@ -627,21 +628,21 @@ if (!function_exists('getRoutes')) {
                 $ActionTaken = 'For Disposal';
             }
             materialProductHistory::updateOrCreate([
-                'batch_id'                 => $batch->id,
-                'barcode_number'           => $batch->barcode_number,
-                'CategorySelection'        => $batch->BatchMaterialProduct->category_selection,
-                'ItemDescription'          => $batch->BatchMaterialProduct->item_description,
-                'Brand'                    => $batch->brand,
-                'BatchSerial'              => $batch->batch . " / " . $batch->serial,
+                'batch_id'                 => $Batch['id'],
+                'barcode_number'           => $Batch['barcode_number'],
+                'CategorySelection'        => $batch['BatchMaterialProduct']['category_selection'],
+                'ItemDescription'          => $batch['BatchMaterialProduct']['item_description'],
+                'Brand'                    => $Batch['brand'],
+                'BatchSerial'              => $Batch['batch'] . " / " . $Batch['serial'],
                 'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRAW",
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
-                'UnitPackingValue'         => $batch->unit_packing_value,
-                'Quantity'                 => $batch->quantity,
-                'StorageArea'              => $batch->StorageArea->name ?? '',
-                'Housing'                  => $batch->housing,
+                'UnitPackingValue'         => $Batch['unit_packing_value'],
+                'Quantity'                 => $Batch['quantity'],
+                'StorageArea'              => $batch['StorageArea']['name'] ?? '',
+                'Housing'                  => $Batch['housing'],
                 'Owners'                   => $BatchOwners,
-                'Remarks'                  => $Batch->remarks ?? "-",
+                'Remarks'                  => $Batch['remarks'] ?? "-",
                 'DrawStatus'               => $DrawStatus ?? null,
                 'RemainingOutlifeOfParent' => $updated_outlife
             ]);
