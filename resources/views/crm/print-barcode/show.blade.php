@@ -44,7 +44,7 @@
                     <div class="border card text-center rounded-5 p-3 print-card">
                         <div ng-if="Barcode" style="padding: 15px 0">
                             <div>{!! getBarcodeImage($batch->barcode_number) !!}</div>
-                            <b>{{ $batch->barcode_number }}</b>
+                            <b>{{ (string) $batch->barcode_number }}</b>
                         </div>
                         <div>
                             <small ng-if="batch_id">
