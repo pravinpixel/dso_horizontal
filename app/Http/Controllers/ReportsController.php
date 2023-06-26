@@ -55,7 +55,7 @@ class ReportsController extends Controller
     }
     public function deduct_track_usage_filter($request)
     {
-        $DeductTrackUsage = DeductTrackUsage::select('*');
+        $DeductTrackUsage = DeductTrackUsage::select('*')->latest();
 
         $DeductTrackUsage->when(isset($request->item_description), function ($query) use ($request) {
             $query->where('item_description', $request->item_description);

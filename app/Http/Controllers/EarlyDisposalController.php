@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\LogActivity;
 use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Repositories\MartialProductRepository;
@@ -14,7 +13,7 @@ class EarlyDisposalController extends Controller
     public function __construct(
         DsoRepositoryInterface $dsoRepositoryInterface,
         MartialProductRepository $MartialProductRepository
-    ){
+    ) {
         $this->dsoRepository    =   $dsoRepositoryInterface;
         $this->MartialProduct   =   $MartialProductRepository;
     }
@@ -36,18 +35,21 @@ class EarlyDisposalController extends Controller
     {
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
+        $current_quantity = $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity;
         $batch->update([
-            'quantity'          => $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity,
-            'disposed_after'    => $request->disposed_after ?? null,
-            'disposed_status'   => true
+            'quantity'        => $current_quantity,
+            'total_quantity'  => $batch->unit_packing_value * $current_quantity,
+            'disposed_after'  => $request->disposed_after ?? null,
+            'disposed_status' => true
         ]);
-        if($request->used_for_td_expt_only === "1") {
-            MaterialProductHistory($batch,'USED_FOR_TD_EXPT');
+        updateParentQuantity($batch->material_product_id);
+        if ($request->used_for_td_expt_only === "1") {
+            MaterialProductHistory($batch, 'USED_FOR_TD_EXPT');
             $batch->update(["coc_coa_mill_cert_status" => 'on']);
         } else {
-            MaterialProductHistory($batch,'TO_DISPOSE');
+            MaterialProductHistory($batch, 'TO_DISPOSE');
             TrackDisposedBatches($batch, $request->quantity);
         }
-        return redirect()->route('disposal')->with('success',"Disposal Success !");
+        return redirect()->route('disposal')->with('success', "Disposal Success !");
     }
 }
