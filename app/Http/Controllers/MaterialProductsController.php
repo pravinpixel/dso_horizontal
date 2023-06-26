@@ -246,7 +246,8 @@ class MaterialProductsController extends Controller
                     'coc_coa_mill_cert_status'     => 'on',
                     'no_of_extension'              => $row['no_of_extension'] ?? 0,
                     'user_id' => auth_user()->id,
-                    'withdrawal_type' => $withdrawal_type
+                    'withdrawal_type' => $withdrawal_type,
+                    'owners' => auth_user()->id
                 ]);
                 $this->getQuantityColor($batch->id);
                 $batch->BatchOwners()->create([
