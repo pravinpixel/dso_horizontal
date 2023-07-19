@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, WithEvents
 {
+    public $id;
     public function __construct($id)
     {
         $this->id = $id;

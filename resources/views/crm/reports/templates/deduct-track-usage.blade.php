@@ -50,6 +50,7 @@
 <table>
     <thead>
         <tr>
+            <th width="30px" style="font-weight: bold">#</th>
             <th width="151px" style="font-weight: bold">Action Taken</th>
             <th width="151px" style="font-weight: bold">Transaction Date</th>
             <th width="151px" style="font-weight: bold">Transaction Time</th>
@@ -62,9 +63,10 @@
     </thead>
     <tbody>
         @if (count($batch->RepackOutlifeDrawInOut))
-            @foreach ($batch->RepackOutlife as $repack)
+            @foreach ($batch->RepackOutlife as $key =>  $repack)
                 @if ($repack->remain_days)
                     <tr>
+                        <td rowspan="1">{{ $key + 1 }}</td>
                         <td>Draw OUT</td>
                         <td>{{ $repack->created_at->format('d/m/Y') }}</td>
                         <td>{{ $repack->created_at->format('H:i:s A') }}</td>
@@ -75,6 +77,7 @@
                         <td>{{ "$batch->barcode_number" }}</td>
                     </tr>
                     <tr>
+                        <td rowspan="1"></td>
                         <td>Draw IN</td>
                         <td>{{ $repack->updated_at->format('d/m/Y') }}</td>
                         <td>{{ $repack->updated_at->format('H:i:s A') }}</td>
@@ -82,7 +85,7 @@
                         <td>-</td>
                         <td>-</td>
                         <td>{{ $repack->remain_days }}</td>
-                        <td>{{  "$batch->barcode_number" }}</td>
+                        <td>{{ $batch->barcode_number }}</td>
                     </tr>
                 @endif
             @endforeach
@@ -95,7 +98,8 @@
             <td>-</td>
             <td>-</td>
             <td>-</td>
-            <td>{{  "$batch->barcode_number" }}</td>
+            <td>-</td>
+            <td>{{ $batch->barcode_number }}</td>
         </tr>
     </tbody>
 </table>
