@@ -93,7 +93,7 @@ class Batches extends Model
     {
         return $this->hasMany(BatchOwners::class, 'batch_id', 'id');
     }
-
+  
     public function BatchMaterialProduct()
     {
         return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id');

@@ -593,7 +593,7 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
-        {           
+        {
             $batch       = Batches::with('BatchOwners')->find($Batch['id']);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
@@ -805,7 +805,7 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('updateParentQuantity')) {
         function updateParentQuantity($id)
         {
-            if(is_numeric($id)) {
+            if (is_numeric($id)) {
                 $material_product = MaterialProducts::with('NonDraftBatches')->find($id);
                 $batches = $material_product->NonDraftBatches;
             } else {
@@ -816,7 +816,7 @@ if (!function_exists('getRoutes')) {
             foreach ($batches as $key => $batch) {
                 $total_batch_quantity += $batch->total_quantity;
             }
-          
+
             $material_product->update([
                 "material_total_quantity" => $total_batch_quantity,
                 "material_quantity"       => $total_batch_quantity / $material_product->unit_packing_value,
@@ -832,8 +832,8 @@ if (!function_exists('getRoutes')) {
                 Storage::delete($config['file']);
             }
             $file_name_slug = Str::slug(str_replace($config['file']->getClientOriginalExtension(), '', $config['file']->getClientOriginalName())) . "." . $config['file']->getClientOriginalExtension();
-            $prevFiles      = BatchFiles::where("file_name", 'public/'.$file_name_slug)->get();
-            if(count($prevFiles)) {
+            $prevFiles      = BatchFiles::where("file_name", 'public/' . $file_name_slug)->get();
+            if (count($prevFiles)) {
                 return false;
             }
             $newFileName    = Storage::putFileAs('public', $config['file'], $file_name_slug);
@@ -852,6 +852,36 @@ if (!function_exists('getRoutes')) {
         function getBatchFile($files, $type, $removeBtn = null)
         {
             return view('templates.batch-files-ui', compact('files', 'type', 'removeBtn'));
+        }
+    }
+    if (!function_exists('str_rev')) {
+        function str_rev($delimiter, $string)
+        {
+            return implode($delimiter, array_reverse(explode($delimiter, $string)));
+        }
+    }
+    if (!function_exists('permute')) {
+
+        function permute($arr, $start = 0, &$result = [], $isArray)
+        {
+            if ($start === count($arr) - 1) {
+                $result[] = $isArray ?  $arr : implode(',', $arr);
+                return;
+            }
+            for ($i = $start; $i < count($arr); $i++) {
+                [$arr[$start], $arr[$i]] = [$arr[$i], $arr[$start]]; // Swap elements
+                permute($arr, $start + 1, $result, $isArray); // Recurse with the next start position
+                [$arr[$start], $arr[$i]] = [$arr[$i], $arr[$start]]; // Swap back to original order for next iteration
+            }
+        }
+    }
+
+    if (!function_exists('array_permute')) {
+        function array_permute($inputArray, $isArray = true)
+        {
+            $result = [];
+            permute($inputArray, 0, $result, $isArray);
+            return $result;
         }
     }
 }
