@@ -1,16 +1,20 @@
 @if (count($deduct_track_usage_history ?? []) != 0 || count($deduct_track_usage) != 0)
-    <form action="{{ route('deduct-track-usage') }}" class="text-end" method="POST" onsubmit="formConfirm(event)" alert-text="@lang('global.clear_cart')">
+    <form action="{{ route('deduct-track-usage') }}" class="text-end" method="POST" onsubmit="formConfirm(event)"
+        alert-text="@lang('global.clear_cart')">
         @csrf
-        @method("DELETE")
-        <button class="btn btn-outline-danger btn-sm mb-2" type="submit"><i class="bi bi-trash3-fill"></i> Clear All</button>
+        @method('DELETE')
+        <button class="btn btn-outline-danger btn-sm mb-2" type="submit"><i class="bi bi-trash3-fill"></i> Clear
+            All</button>
     </form>
-    <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important" onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
+    <form action="{{ route('deduct-track-usage') }}" method="POST" style="border: 0 !important"
+        onsubmit="formConfirm(event)" alert-text="@lang('global.direct_deduct_alert')">
         @csrf
         <table class="table bg-white table-hover table-centered">
             <thead>
                 <tr class="text-white bg-primary-2">
-                    <th class="text-center" style="padding: 5px !important" colspan="11"><span class="text-center">Bulk
-                            vol tracking logsheet</span></th>
+                    <th class="text-center" style="padding: 5px !important" colspan="11">
+                        <span class="text-center">Bulk vol tracking logsheet</span>
+                    </th>
                 </tr>
                 <tr class="bg-primary-light text-dark">
                     <th class="font-12">Item description</th>
@@ -40,7 +44,8 @@
                             <td><small>{{ $row->created_at->format('Y-m-d h:m:s') }}</small></td>
                             <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value }}</small></td>
                             <td><small>{{ $row->quantity }}</small></td>
-                            <td><small>{{  $deduct_track_usage[0]->Batch->unit_packing_value * $row->quantity }}</small></td>
+                            <td><small>{{ $deduct_track_usage[0]->Batch->unit_packing_value * $row->quantity }}</small>
+                            </td>
                             <td><small>{{ $row->used_amount }}</small></td>
                             <td><small>{{ $row->remain_amount }}</small></td>
                             <td><small>{{ $row->remarks }}</small></td>
@@ -78,17 +83,20 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <input id="remain_amount" name="remain_amount" step="any" readonly
-                                        type="text" style="width: 80px" value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
+                                        type="text" style="width: 80px"
+                                        value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
                                         class="me-2 form-control-sm form-control">
                                     <small>{{ $row->Batch->BatchMaterialProduct->UnitOfMeasure->name }}</small>
                                 </div>
                             </td>
                             <td class="child-td py-0 px-1">
-                                <textarea name="remarks" {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }} class="form-control h-100 w-100"></textarea>
+                                <textarea name="remarks" {{ $row->Batch->BatchMaterialProduct->end_of_material_product == 1 ? 'disabled' : '' }}
+                                    class="form-control h-100 w-100"></textarea>
                             </td>
-                            <td  class="text-center d-flex">
+                            <td class="text-center d-flex">
                                 {{-- <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_USAGE')" class="btn btn-sm border shadow btn-light rounded-pill bi bi-x"></i> --}}
-                                <i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
+                                <i onclick="viewBatch({{ $row->Batch->id }})"
+                                    class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
                             </td>
                         </tr>
                     @endforeach
@@ -98,15 +106,19 @@
         <div class="d-flex align-items-center border-top pt-3">
             <div class="col-6 ms-auto text-end">
                 <label for="end_of_material_product" class="p-2">
-                    <input {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }} type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
+                    <input
+                        {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}
+                        type="checkbox" onclick="checkboxConfirm(event)" alert-text="@lang('global.end_batch')"
                         name="end_of_material_product" value="1" class="form-check-input me-2"
                         id="end_of_material_product">
                     End of material/product
                 </label>
-                <button type="submit" class="btn btn-primary rounded-pill" {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}>Click to confirm deduction</button>
+                <button type="submit" class="btn btn-primary rounded-pill"
+                    {{ $deduct_track_usage[0]->Batch->BatchMaterialProduct->end_of_material_product ?? null == 1 ? 'disabled' : '' }}>Click
+                    to confirm deduction</button>
             </div>
         </div>
     </form>
-    @else
+@else
     {!! no_data_found() !!}
 @endif
