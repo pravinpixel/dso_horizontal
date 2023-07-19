@@ -36,6 +36,12 @@ class EarlyDisposalController extends Controller
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $current_quantity = $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity;
+        $batch->update(['quantity' => $request->quantity]);
+        if ($request->used_for_td_expt_only === "1") {
+            MaterialProductHistory($batch, 'USED_FOR_TD_EXPT');
+        } else {
+            MaterialProductHistory($batch, 'TO_DISPOSE');
+        }
         $batch->update([
             'quantity'        => $current_quantity,
             'total_quantity'  => $batch->unit_packing_value * $current_quantity,
@@ -44,10 +50,8 @@ class EarlyDisposalController extends Controller
         ]);
         updateParentQuantity($batch->material_product_id);
         if ($request->used_for_td_expt_only === "1") {
-            MaterialProductHistory($batch, 'USED_FOR_TD_EXPT');
             $batch->update(["coc_coa_mill_cert_status" => 'on']);
         } else {
-            MaterialProductHistory($batch, 'TO_DISPOSE');
             TrackDisposedBatches($batch, $request->quantity);
         }
         return redirect()->route('disposal')->with('success', "Disposal Success !");
