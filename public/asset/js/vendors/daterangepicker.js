@@ -794,7 +794,7 @@
 
                     var classes = [];
 
-                    //highlight today's date
+                    //highlight todays date
                     if (calendar[row][col].isSame(new Date(), "day"))
                         classes.push('today');
 

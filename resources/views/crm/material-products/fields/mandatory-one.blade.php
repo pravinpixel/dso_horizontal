@@ -223,7 +223,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">
                 Outlife
-                <small class="text-success">(day's)</small>
+                <small class="text-success">(days)</small>
                 <sup class="text-danger">*</sup>
             </label>
             <div class="col-8">
