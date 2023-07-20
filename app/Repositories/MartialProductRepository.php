@@ -107,7 +107,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
             $batch->update(["system_stock"  => $batch->quantity]);
         }
         if (wizard_mode() == 'duplicate' || wizard_mode() == 'create') {
-            updateParentQuantity($material_product);
+            updateParentQuantity($material_product); 
             $request->session()->put('material_product_id', $material_product->id);
             $request->session()->put('batch_id', $batch->id);
         }

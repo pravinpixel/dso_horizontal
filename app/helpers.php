@@ -883,5 +883,24 @@ if (!function_exists('getRoutes')) {
             permute($inputArray, 0, $result, $isArray);
             return $result;
         }
+    } 
+    if (!function_exists('generateQtyColor')) {
+        function generateQtyColor($material)
+        {
+            $quantityColor = 'text-dark';
+            if ($material->material_quantity < $material->alert_threshold_qty_lower_limit) {
+                $quantityColor = 'text-danger';
+            }
+            if ($material->material_quantity > $material->alert_threshold_qty_upper_limit && $material->material_quantity > $material->alert_threshold_qty_lower_limit) {
+                $quantityColor = 'text-success';
+            }
+            if ($material->alert_threshold_qty_lower_limit <= $material->material_quantity && $material->material_quantity <= $material->alert_threshold_qty_upper_limit) {
+                $quantityColor = 'text-warning';
+            }
+            if (is_null($material->alert_threshold_qty_upper_limit)) {
+                $quantityColor = 'text-dark';
+            }
+            return $quantityColor;
+        }
     }
 }

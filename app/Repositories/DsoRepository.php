@@ -88,19 +88,11 @@ class DsoRepository implements DsoRepositoryInterface
     }
     public function renderTableData($material_product, $config = null)
     {
-        if(is_null($config)) {
-            $page_name = session()->get('page_name');
-        } else {
-            $page_name = $config['page_name'];
-        }
-
-        foreach ($material_product as $key => $parent) {
-
-            $quantityColor           = 'text-danger';
-            $readCount               = 0;
-            $draftBatchCount         = 0;
-            $UnitPackingCount        = 0;
-            $material_total_quantity = 0;
+        $page_name = is_null($config) ? session()->get('page_name') : $config['page_name']; 
+        foreach ($material_product as $key => $parent) { 
+            $readCount        = 0;
+            $draftBatchCount  = 0;
+            $UnitPackingCount = 0;
 
             foreach ($parent->Batches as $batch_key => $batch) {
                 $date_of_expiry             = $batch->date_of_expiry;
@@ -205,24 +197,11 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['hideParentRow']           = $parent->Batches->count() == $draftBatchCount ?  1 : 0;
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
             $parent['draftBatchCount']         = $draftBatchCount;
-
-            if ($parent->material_quantity < $parent->alert_threshold_qty_lower_limit) {
-                $quantityColor = 'text-danger';
-            }
-            if ($parent->material_quantity > $parent->alert_threshold_qty_upper_limit && $parent->material_quantity > $parent->alert_threshold_qty_lower_limit) {
-                $quantityColor = 'text-success';
-            }
-            if($parent->alert_threshold_qty_lower_limit <= $parent->material_quantity && $parent->material_quantity <= $parent->alert_threshold_qty_upper_limit){
-                $quantityColor = 'text-warning';
-            }
-            if(is_null($parent->alert_threshold_qty_upper_limit)) {
-                $quantityColor = 'text-dark';
-            }
-            $parent['quantityColor'] = $quantityColor;
+            $parent['material_quantity_color'] = generateQtyColor($parent); 
 
             if ($page_name == 'THRESHOLD_QTY') {
-                if ($quantityColor == 'text-success') {
-                    unset($parent->Batches[$batch_key]);
+                if ($parent['material_quantity_color'] == 'text-success') {
+                    unset($parent[$key]);
                 }
             }
         }
@@ -256,7 +235,7 @@ class DsoRepository implements DsoRepositoryInterface
                 unset($access_material_product[$material_index]);
             }
             if ($page_name == 'THRESHOLD_QTY') {
-                if ($material->quantityColor == 'text-success' || $material->is_draft == 1) {
+                if ($material->material_quantity_color == 'text-success' || $material->is_draft == 1) {
                     unset($access_material_product[$material_index]);
                 }
             }

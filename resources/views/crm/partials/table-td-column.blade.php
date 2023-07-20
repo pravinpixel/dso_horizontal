@@ -24,7 +24,7 @@
                 @case('quantity')
                     <span>
                         <span ng-bind="row.material_quantity"></span>
-                        <i class="ms-1 @{{ row.quantityColor }} dot-sm bi bi-circle-fill"></i>
+                        <i ng-class="row.material_quantity_color" class="ms-1 dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
                 @case('total_quantity')

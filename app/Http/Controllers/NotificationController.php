@@ -37,33 +37,38 @@ class NotificationController extends Controller
         $data = MaterialProducts::with('Batches')->where(['is_read' => 0, 'is_draft' => 0,])->orderBy('updated_at')->get();
         $material_products =  $this->dsoRepository->renderTableData($data, [
             "response"  => "JSON",
-            "page_name" => "THRESHOLD_QTY"
+            "page_name" => "MATERIAL_SEARCH_OR_ADD"
         ]);
+        $notifications = [
+            'EXPIRY_TABLE' => [],
+            'NEAR_EXPIRY_TABLE' => [],
+            'FAILED_IQC_TABLE' => [],
+        ];
         foreach ($material_products as $key => $value) {
             foreach ($value['Batches'] as $index => $row) {
+                if ($row->date_of_expiry_color === 'text-danger') {
+                    $notifications['EXPIRY_TABLE'][] = $row;
+                } elseif ($row->date_of_expiry_color === 'text-warning') {
+                    $notifications['NEAR_EXPIRY_TABLE'][] = $row;
+                } elseif ($row->iqc_status == 0 && $row->quantity != 0) {
+                    $notifications['FAILED_IQC_TABLE'][] = $row;
+                }
                 if ($row['permission'] == 'READ_ONLY') {
-                    unset($MaterialProducts[$key]['Batches'][$index]);
+                    unset($material_products[$key]['Batches'][$index]);
                 }
             }
-            if (count($value['Batches']) == 0) {
-                unset($MaterialProducts[$key]);
+            if (count($value['Batches']) == 0 || $value['material_quantity_color'] == 'text-success') {
+                unset($material_products[$key]);
             }
-        }
-
-        $notifications = [
-            "NEAR_EXPIRY_TABLE" => $this->near_expiry_expired_ajax('NEAR_EXPIRY_TABLE', true),
-            "EXPIRY_TABLE"      => $this->near_expiry_expired_ajax('EXPIRY_TABLE', true),
-            "FAILED_IQC_TABLE"  => $this->near_expiry_expired_ajax('FAILED_IQC_TABLE', true),
-        ];
+        } 
         NEFNotification::truncate();
         foreach ($notifications as $type => $data) {
             if (count($data) !== 0) {
                 foreach ($data as $key => $batch) {
-                    // dd($batch);
                     if ($batch->notification_status == 0) {
                         NEFNotification::updateOrCreate([
                             'batch_id' => $batch['id'],
-                            'type'     => $type,    
+                            'type'     => $type,
                         ]);
                     }
                 }
@@ -97,43 +102,34 @@ class NotificationController extends Controller
             'Batches.StorageArea',
             'Batches.StatutoryBody',
         ])->latest()->get();
-
-        $material_product = $this->dsoRepository->renderTableData($material_product_data, [
-            "response" => 'JSON',
-            "page_name" => $type
+        $material_products =  $this->dsoRepository->renderTableData($material_product_data, [
+            "response"  => "JSON",
+            "page_name" => "MATERIAL_SEARCH_OR_ADD"
         ]);
-
-        $Batches = [];
-        foreach ($material_product as $key => $value) {
-            foreach ($value['Batches'] as $key => $row) {
-                if ($row['permission'] == 'READ_AND_WRITE') {
-                    $Batches[] = $row;
+        $notifications = [
+            'EXPIRY_TABLE' => [],
+            'NEAR_EXPIRY_TABLE' => [],
+            'FAILED_IQC_TABLE' => [],
+        ];
+        foreach ($material_products as $key => $value) {
+            foreach ($value['Batches'] as $index => $row) {
+                if ($row->date_of_expiry_color === 'text-danger') {
+                    $notifications['EXPIRY_TABLE'][] = $row;
+                } elseif ($row->date_of_expiry_color === 'text-warning') {
+                    $notifications['NEAR_EXPIRY_TABLE'][] = $row;
+                } elseif ($row->iqc_status == 0 && $row->quantity != 0) {
+                    $notifications['FAILED_IQC_TABLE'][] = $row;
+                }
+                if ($row['permission'] == 'READ_ONLY') {
+                    unset($material_products[$key]['Batches'][$index]);
                 }
             }
-        }
+            if (count($value['Batches']) == 0 || $value['material_quantity_color'] == 'text-success') {
+                unset($material_products[$key]);
+            }
+        } 
+        $table = $notifications[$type];
 
-        $near_expiry = [];
-        $expired     = [];
-        $failed_iqc  = [];
-
-        foreach ($Batches as $key => $row) {
-            if ($row->date_of_expiry_color == 'text-warning') {
-                $near_expiry[] = $row;
-            }
-            if ($row->date_of_expiry_color == 'text-danger') {
-                $expired[] = $row;
-            }
-            if ($row->iqc_status == 0 && $row->quantity != 0) {
-                $failed_iqc[] = $row;
-            }
-        }
-        if ($type == 'NEAR_EXPIRY_TABLE') {
-            $table = $near_expiry;
-        } elseif ($type == 'EXPIRY_TABLE') {
-            $table = $expired;
-        } elseif ($type == 'FAILED_IQC_TABLE') {
-            $table = $failed_iqc;
-        }
         if (!is_null($isTable)) {
             return $table;
         }

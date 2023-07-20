@@ -4,7 +4,7 @@
             <a href="{{ route('threshold-qty') }}" class="text-dark">
                 <div>
                     <b class="text-primary">
-                        <i class="bi bi-bell-fill {{ $material->quantityColor }}"></i>
+                        <i class="bi bi-bell-fill {{ $material->material_quantity_color }}"></i>
                         {{ $material->item_description }}
                     </b>
                 </div>
@@ -12,7 +12,7 @@
                     <b class="text-dark">Unit packing value :</b>
                     {{ $material->unit_packing_value }} </small> <br>
                 <small><b class="text-dark">Quantity :</b> {{ $material->material_quantity }} </small>
-                <small class="float-end  {{ $material->quantityColor }}">
+                <small class="float-end  {{ $material->material_quantity_color }}">
                     <i class="bi bi-calendar2-week"></i>
                     {{ $material->updated_at->format('d/m/Y h:i:s A') }}
                 </small>
@@ -26,16 +26,16 @@
             <div class="card-header bg-light fw-bold text-dark">
                 @if ($type === 'NEAR_EXPIRY_TABLE')
                     NEAR EXPIRY PRODUCTS
-                    @elseif ($type === 'EXPIRY_TABLE')
+                @elseif ($type === 'EXPIRY_TABLE')
                     EXPIRED PRODUCTS
-                    @else
+                @else
                     FAILED IQC PRODUCTS
                 @endif
             </div>
             @foreach ($data as $row)
                 <li class="list-group-item list-group-item-action btn">
                     <div class="text-dark">
-                        <a  href="{{ route('near-expiry-expired') }}" >
+                        <a href="{{ route('near-expiry-expired') }}">
                             <b class="text-primary">
                                 {{ $row->Batches->BatchMaterialProduct->item_description }}
                             </b>
