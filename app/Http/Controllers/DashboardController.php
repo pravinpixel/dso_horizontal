@@ -89,7 +89,7 @@ class DashboardController extends Controller
     {
 
         function getMaterialsByCategory($type)  {
-            $MaterialProducts = MaterialProducts::where('category_selection',$type)->get();
+            $MaterialProducts = MaterialProducts::with('Batches')->where('category_selection',$type)->get();
             $batchesCount     = -1 ;
             foreach ($MaterialProducts as $Material) {
                 $MaterialBatchesCount = $Material->Batches()

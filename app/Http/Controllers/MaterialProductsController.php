@@ -81,9 +81,12 @@ class MaterialProductsController extends Controller
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
+            'Batches.BatchMaterialProduct',
+            'Batches.BatchOwners',
+            'Batches.RepackOutlife', 
         ])->latest()->get();
 
-        $material_product = $this->dsoRepository->renderTableData($material_product_data);
+        $material_product = $this->dsoRepository->renderTableData($material_product_data, null);
 
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
     }

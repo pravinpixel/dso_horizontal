@@ -33,6 +33,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
                 'Batches.DeductTrackUsage',
+                'Batches.BatchMaterialProduct',
+                'Batches.BatchOwners'
             ])
                 ->WhereHas('Batches', function ($q) use ($parent_id) {
                     $q->where('material_product_id', $parent_id);
@@ -61,7 +63,7 @@ class SearchRepository implements SearchRepositoryInterface
             'Batches' => function ($q) use ($filter, $material_table) {
                 $this->searchFilter($q, $filter, $material_table);
             },
-            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody'
+            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody','Batches.BatchMaterialProduct'
         ])
             ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
                 foreach ($filter as $column => $value) {
@@ -87,6 +89,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'UnitOfMeasure',
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
+                'Batches.BatchMaterialProduct',
+                'Batches.BatchOwners'
             ])
                 ->orderBy($sort_by->col_name, $sort_by->order_type)
                 ->latest()
@@ -103,6 +107,8 @@ class SearchRepository implements SearchRepositoryInterface
                 'UnitOfMeasure',
                 'Batches.StorageArea',
                 'Batches.StatutoryBody',
+                'Batches.BatchMaterialProduct',
+                'Batches.BatchOwners'
             ])->latest()->get();
             return $this->dsoRepository->renderTableData($material_product_data, null);
         }

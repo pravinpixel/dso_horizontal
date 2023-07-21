@@ -13,11 +13,11 @@ class MaterialProductSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
+     *  return void
      */
     public function run()
     {
-        for ($i=0; $i < 1; $i++) {
+        for ($i=0; $i < 10000; $i++) {
             $parent_data = [
                 "category_selection"              => "material",
                 "item_description"                => "Honeycomb/6mmthk/5mmcellsize",

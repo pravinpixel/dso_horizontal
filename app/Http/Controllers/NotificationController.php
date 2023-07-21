@@ -34,7 +34,16 @@ class NotificationController extends Controller
     }
     public function notification_count()
     {
-        $data = MaterialProducts::with('Batches')->where(['is_read' => 0, 'is_draft' => 0,])->orderBy('updated_at')->get();
+        $data = MaterialProducts::with([
+            'Batches',
+            'Batches.RepackOutlife',
+            'Batches.HousingType',
+            'Batches.Department',
+            'UnitOfMeasure',
+            'Batches.StorageArea',
+            'Batches.StatutoryBody',
+            'Batches.BatchMaterialProduct'
+        ])->where(['is_read' => 0, 'is_draft' => 0,])->orderBy('updated_at')->get();
         $material_products =  $this->dsoRepository->renderTableData($data, [
             "response"  => "JSON",
             "page_name" => "MATERIAL_SEARCH_OR_ADD"
@@ -60,7 +69,7 @@ class NotificationController extends Controller
             if (count($value['Batches']) == 0 || $value['material_quantity_color'] == 'text-success') {
                 unset($material_products[$key]);
             }
-        } 
+        }
         NEFNotification::truncate();
         foreach ($notifications as $type => $data) {
             if (count($data) !== 0) {
@@ -101,6 +110,7 @@ class NotificationController extends Controller
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
+            'Batches.BatchMaterialProduct'
         ])->latest()->get();
         $material_products =  $this->dsoRepository->renderTableData($material_product_data, [
             "response"  => "JSON",
@@ -127,7 +137,7 @@ class NotificationController extends Controller
             if (count($value['Batches']) == 0 || $value['material_quantity_color'] == 'text-success') {
                 unset($material_products[$key]);
             }
-        } 
+        }
         $table = $notifications[$type];
 
         if (!is_null($isTable)) {
