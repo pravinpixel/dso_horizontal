@@ -21689,7 +21689,6 @@ div.dataTables_scrollBody>table>:not(:first-child) {
 .btn-close {
     width: 0;
     opacity: 1;
-    filter: brightness(5.5);
 }
 .show-edit-modal {
     display: flex;
