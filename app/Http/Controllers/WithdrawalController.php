@@ -194,15 +194,6 @@ class WithdrawalController extends Controller
                         'data'          => "$data",
                         'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
                     ]);
-                    // if(count($batches->RepackOutlife)) {
-
-                    //     // $deduct_track_outlife = withdrawCart::with(['batch','RepackOutlife'])->where([
-                    //     //     'user_id'         => auth_user()->id ,
-                    //     //     'withdraw_type'   => 'DEDUCT_TRACK_OUTLIFE'
-                    //     // ])->get();
-
-
-                    // }
                 break;
             }
         } catch (\Throwable $th) {
@@ -216,6 +207,7 @@ class WithdrawalController extends Controller
             $current_batch->UtilizationCart()->create(["quantity" =>  $request->quantity[$key]]);
             $report_current_batch = clone collect($current_batch);
             $report_current_batch['quantity']       = $request->quantity[$key];
+            $report_current_batch['remarks']       = $request->remarks[$key];
             $report_current_batch['total_quantity'] = $request->quantity[$key] * $current_batch->unit_packing_value;
             MaterialProductHistory($report_current_batch,'DIRECT_DEDUCT');
             $current_batch->update([
@@ -236,7 +228,7 @@ class WithdrawalController extends Controller
         return redirect()->back()->with("success_message", __('global.cart_clear_success'));
     }
     public function deduct_track_usage(Request $request)
-    {
+    { 
         $current_batch  = Batches::with('StorageArea')->findOrFail($request->batch_id);
         $material       = MaterialProducts::find($current_batch->material_product_id);
         // MaterialProductHistory($current_batch,'BEFORE_DEDUCT_TRACK_USAGE');
@@ -267,10 +259,13 @@ class WithdrawalController extends Controller
             $material->update([
                 "end_of_material_product" => true
             ]); 
+            $current_batch['remarks']       = $request->remarks;
+
             MaterialProductHistory($current_batch,'DEDUCT_TRACK_USAGE');
         } else {
             $report_current_batch = clone collect($current_batch);
             $report_current_batch['quantity']   = $request->used_amount;
+            $report_current_batch['remarks']       = $request->remarks;
             MaterialProductHistory($report_current_batch,'DEDUCT_TRACK_USAGE');
             $current_batch->update([
                 'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
@@ -302,6 +297,7 @@ class WithdrawalController extends Controller
                 $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] / $batch->unit_packing_value ]);
                 $report_current_batch = clone collect($batch);
                 $report_current_batch['quantity'] = $request->withdraw_quantity[$key];
+                $report_current_batch['remarks'] = $request->remarks[$key] ?? "-";
                 MaterialProductHistory($report_current_batch,'DEDUCT_TRACK_OUTLIFE');
                 $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
                 $batch->update([
