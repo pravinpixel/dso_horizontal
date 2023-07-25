@@ -6,6 +6,7 @@ use App\Http\Controllers\MaterialProductsController;
 use App\Http\Controllers\Admin\HelpMenuController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\dsoDevController;
 use App\Http\Controllers\EarlyDisposalController;
 use App\Http\Controllers\ExtendExpiryController;
 use App\Http\Controllers\NotificationController;
@@ -187,4 +188,5 @@ Route::middleware(['auth_users'])->group(function () {
     });
     
 });
+Route::get('/dev', [dsoDevController::class,'dev']);
 include('master.php');
