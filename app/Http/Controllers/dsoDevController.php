@@ -11,7 +11,7 @@ class dsoDevController extends Controller
     {
         $batches =  Batches::with("BatchOwners")->get();
         foreach ($batches as $batch) {
-            $owners = $batch->BatchOwners()->pluck("id")->toArray();
+            $owners = $batch->BatchOwners()->pluck("user_id")->toArray();
             $batch->update([
                 "owners" => (string) implode(',', $owners)
             ]);
