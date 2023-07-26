@@ -13,15 +13,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
             <div class="@{{ currentBatch.end_of_batch == 1 ? 'disabled-content' : '' }}">
-                <form name="repackOutlifeForm" class="modal-body p-2" style="border: none !important; max-height:85vh;overflow:auto">
+                <form name="repackOutlifeForm" class="modal-body p-0" style="border: none !important; max-height:85vh;overflow:auto">
                     <table class="table table-centered table-sm bg-white table-bordered custom-center m-0">
                         <thead class="bg-primary-2 text-white">
                             <tr>
-                                <th colspan="10">
+                                <th colspan="11">
                                     Mat/Pdt outlife logsheet
                                 </th>
                             </tr>
                             <tr>
+                                <td>#</td>
                                 <td>Material / Product Draw status</td>
                                 <td>Date & time stamp</td>
                                 <td>Last accessed</td>
@@ -42,6 +43,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="(i,repack) in repack_outlife_table">
+                                <td ng-bind="i + 1"></td>
                                 <td>
                                     <table class="w-100 text-center" ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 1">
                                         <tr>
