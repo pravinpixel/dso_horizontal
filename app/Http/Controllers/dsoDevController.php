@@ -12,9 +12,8 @@ class dsoDevController extends Controller
         $batches =  Batches::with("BatchOwners")->get();
         foreach ($batches as $batch) {
             $owners = $batch->BatchOwners()->pluck("id")->toArray();
-            dd(implode(',', $owners));
             $batch->update([
-                "owners" => implode(',', $owners)
+                "owners" => (string) implode(',', $owners)
             ]);
         }
         dd("OK");
