@@ -54,7 +54,7 @@ class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, W
                 $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(20);
                 $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(30);
                 $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(40);
                 $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
                 $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(20);
             },

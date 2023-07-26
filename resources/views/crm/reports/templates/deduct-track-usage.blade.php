@@ -52,8 +52,7 @@
         <tr>
             <th width="30px" style="font-weight: bold">#</th>
             <th width="151px" style="font-weight: bold">Action Taken</th>
-            <th width="151px" style="font-weight: bold">Transaction Date</th>
-            <th width="151px" style="font-weight: bold">Transaction Time</th>
+            <th width="151px" style="font-weight: bold">Date &amp; Time stamp</th>
             <th width="151px" style="font-weight: bold">Transacted by</th>
             <th width="151px" style="font-weight: bold">Draw out Amt</th>
             <th width="151px" style="font-weight: bold">Remaining amt</th>
@@ -68,8 +67,7 @@
                     <tr>
                         <td rowspan="1">{{ $key + 1 }}</td>
                         <td>Draw OUT</td>
-                        <td>{{ $repack->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $repack->created_at->format('H:i:s A') }}</td>
+                        <td>{{ $repack->draw_out_time_stamp }}</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>{{ $repack->old_input_repack_amount }}</td>
                         <td>{{ $repack->remain_amount }}</td>
@@ -79,8 +77,7 @@
                     <tr>
                         <td rowspan="1"></td>
                         <td>Draw IN</td>
-                        <td>{{ $repack->updated_at->format('d/m/Y') }}</td>
-                        <td>{{ $repack->updated_at->format('H:i:s A') }}</td>
+                        <td>{{ $repack->draw_in_time_stamp }}</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>-</td>
                         <td>-</td>
