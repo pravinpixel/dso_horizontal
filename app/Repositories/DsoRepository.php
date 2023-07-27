@@ -96,10 +96,10 @@ class DsoRepository implements DsoRepositoryInterface
 
             foreach ($parent->Batches as $batch_key => $batch) {
                 $date_of_expiry             = $batch->date_of_expiry;
-                // $batch->date_in             = !is_null($batch->date_in) ? Carbon::parse($batch->date_in)->format('d/m/Y') : '';
-                // $batch->date_of_expiry      = !is_null($batch->date_of_expiry) ? Carbon::parse($batch->date_of_expiry)->format('d/m/Y') : '';
-                // $batch->date_of_manufacture = !is_null($batch->date_of_manufacture) ? Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') : '';
-                // $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
+                $batch->date_in             = !is_null($batch->date_in) ? Carbon::parse($batch->date_in)->format('d/m/Y') : '';
+                $batch->date_of_expiry      = !is_null($batch->date_of_expiry) ? Carbon::parse($batch->date_of_expiry)->format('d/m/Y') : '';
+                $batch->date_of_manufacture = !is_null($batch->date_of_manufacture) ? Carbon::parse($batch->date_of_manufacture)->format('d/m/Y') : '';
+                $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse($batch->date_of_shipment)->format('d/m/Y') : '';
 
                 $owners = "";
                 if ($batch->owners) {
