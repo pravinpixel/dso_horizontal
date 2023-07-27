@@ -551,6 +551,9 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('SetDateFormat')) {
         function SetDateFormat($date)
         {
+            if(is_null($date) || empty($date)) {
+                return $date;
+            }
             return Carbon::parse($date)->format('d/m/Y');
         }
     }

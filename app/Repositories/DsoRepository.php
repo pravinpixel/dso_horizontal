@@ -15,7 +15,8 @@ use DateTime;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator; 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class DsoRepository implements DsoRepositoryInterface
 {
@@ -96,19 +97,19 @@ class DsoRepository implements DsoRepositoryInterface
 
             foreach ($parent->Batches as $batch_key => $batch) {
                 $date_of_expiry             = $batch->date_of_expiry;
-                $batch->date_in             = !is_null($batch->date_in) ? Carbon::parse(str_replace('/','-',$batch->date_in))->format('d/m/Y') : '';
-                $batch->date_of_expiry      = !is_null($batch->date_of_expiry) ? Carbon::parse(str_replace('/','-',$batch->date_of_expiry))->format('d/m/Y') : '';
-                $batch->date_of_manufacture = !is_null($batch->date_of_manufacture) ? Carbon::parse(str_replace('/','-',$batch->date_of_manufacture))->format('d/m/Y') : '';
-                $batch->date_of_shipment    = !is_null($batch->date_of_shipment) ? Carbon::parse(str_replace('/','-', $batch->date_of_shipment))->format('d/m/Y') : '';
+                $batch->date_in             = SetDateFormat($batch->date_in);
+                $batch->date_of_expiry      = SetDateFormat($batch->date_of_expiry);
+                $batch->date_of_manufacture = SetDateFormat($batch->date_of_manufacture);
+                $batch->date_of_shipment    = SetDateFormat($batch->date_of_shipment);
 
-                $owners = "";
                 if ($batch->owners) {
+                    $owners = "";
                     foreach ($batch->BatchOwners as $key => $owner) {
                         $owners .= '<small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">' . $owner->alias_name . '</small>';
                     }
+                    $batch->owners = $owners;
                 }
 
-                $batch->owners = $owners;
 
                 if (!is_null($date_of_expiry)) {
 
