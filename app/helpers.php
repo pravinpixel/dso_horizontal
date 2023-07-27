@@ -18,6 +18,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Picqer\Barcode\BarcodeGeneratorHTML;
@@ -358,11 +359,11 @@ if (!function_exists('getRoutes')) {
     {
         $routeCollection = Route::getRoutes();
         $routeList       = (array) [];
-
         foreach ($routeCollection as $value) {
             $prefix = $value->getAction()['prefix'];
-            $name   = $value->getAction()['as'] ?? '';
-            if ($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '') {
+            $name   = $value->getAction()['as'] ?? ''; 
+            if ($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '' && $prefix !== '_debugbar' && $prefix !== '/jobs') {
+                Log::info($prefix);
                 $routeList[] =  [
                     0 => str_replace('/', '', $prefix),
                     1 => [
@@ -901,6 +902,14 @@ if (!function_exists('getRoutes')) {
                 $quantityColor = 'text-dark';
             }
             return $quantityColor;
+        }
+    }
+    if(!function_exists('convertDateFormat')) {
+        function convertDateFormat($originalDate,$format)
+        {
+            $carbonDate = Carbon::createFromFormat('F jS Y, g:i:s a', $originalDate);
+            $formattedDate = $carbonDate->format($format);
+            return $formattedDate;
         }
     }
 }
