@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Masters\HelpMenu;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 use Laracasts\Flash\Flash;
-use Storage;
 
 class HelpMenuController extends Controller
 {
@@ -73,17 +73,13 @@ class HelpMenuController extends Controller
     }
     public function update(Request $request, $id)
     {
-        
-        
         $data = HelpMenu::find($id);
-
         if($request->has('attachments')) {
             if(Storage::exists($data->attachments)){
                 Storage::delete($data->attachments);
             }
             $attachments = $request->file('attachments')->store('public/files/helps-attachments');
         }
-         
         $data->update([
             'title'         =>  $request->title,
             'description'   =>  $request->description,
