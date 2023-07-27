@@ -30,7 +30,6 @@
                                 {{ Route::is('barcode.listing') ? 'Print Label' : null }}
                                 {{ Route::is(['reconciliation', 'view-reconciliation']) ? 'Reconciliation' : null }}
                                 {{ Route::is(['reports', 'reports.utilisation_cart', 'reports.export_cart', 'reports.history', 'reports.disposed_items']) ? 'Reports' : null }}
-
                                 {{ Route::is('list-search') ? 'List Search' : null }}
                                 {{ Route::is('extend-expiry') ? 'Extend Expiry' : null }}
                                 {{ Route::is('threshold-qty') ? 'Threshold Qty' : null }}
@@ -52,6 +51,7 @@
                                     'help.menu.index',
                                     'help.menu.create',
                                     'help.menu.edit',
+                                    'pictogram.index', 'pictogram.create','pictogram.edit'
                                 ])
                                     ? 'Master Settings'
                                     : null }}
@@ -94,6 +94,7 @@
                             'help.menu.index',
                             'help.menu.create',
                             'help.menu.edit',
+                            'pictogram.index', 'pictogram.create','pictogram.edit'
                         ])
                             ? 'Master Settings'
                             : null }}

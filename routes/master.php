@@ -18,7 +18,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/table-order/update-order', [TableOrderController::class, 'update_order'])->name('update-orderby');
 
     Route::prefix('data-center')->group(function () {
-        Route::get('/master-settings', [MasterController::class, 'index'])->name('master.item-description');
+        Route::get('/master-settings', [MasterController::class, 'item_description'])->name('master.item-description');
         Route::post('/create-settings', [MasterController::class, 'store_master'])->name('master.store.category');
         Route::post('/delete-setting/{id?}', [MasterController::class, 'delete_master'])->name('master.delete.category');
         Route::post('/update-settings', [MasterController::class, 'update_master'])->name('master.update.category');
@@ -50,7 +50,7 @@ Route::middleware(['auth_users'])->group(function () {
     });
 
     Route::post('/edit-setting/{id?}', [MasterController::class, 'edit_master'])->name('master.edit.category');
-    Route::get('/', [MasterController::class, 'index'])->name('master-settings');
+    Route::get('/settings', [MasterController::class, 'index'])->name('master-settings');
     Route::get('/get_masters', [MasterController::class, 'get_masters'])->name('get_masters');
     Route::put('users/update/{id}', [UserController::class, 'update'])->name('user.update');
     Route::get('users/create', [UserController::class, 'create'])->name('user.create');

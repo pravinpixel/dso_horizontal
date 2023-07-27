@@ -25,7 +25,12 @@ class MasterController extends Controller
 
     public function index()
     {        
-        return view('masters.Item-description');
+        return view('masters.menu');
+    }
+
+    public function item_description()
+    {        
+        return view('masters.item-description');
     }
 
     public function get_masters()    {
