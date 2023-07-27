@@ -361,7 +361,7 @@ if (!function_exists('getRoutes')) {
         $routeList       = (array) [];
         foreach ($routeCollection as $value) {
             $prefix = $value->getAction()['prefix'];
-            $name   = $value->getAction()['as'] ?? ''; 
+            $name   = $value->getAction()['as'] ?? '';
             if ($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '' && $prefix !== '_debugbar' && $prefix !== '/jobs') {
                 Log::info($prefix);
                 $routeList[] =  [
@@ -551,10 +551,14 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('SetDateFormat')) {
         function SetDateFormat($date)
         {
-            if(is_null($date) || empty($date)) {
+            if (is_null($date) || empty($date)) {
                 return $date;
             }
-            return Carbon::parse($date)->format('d/m/Y');
+            try {
+                return Carbon::parse(str_replace('/', '-', $date))->format('d/m/Y');
+            } catch (\Throwable $th) {
+                return $date;
+            }
         }
     }
     if (!function_exists('SetDateFormatWithHour')) {
@@ -887,7 +891,7 @@ if (!function_exists('getRoutes')) {
             permute($inputArray, 0, $result, $isArray);
             return $result;
         }
-    } 
+    }
     if (!function_exists('generateQtyColor')) {
         function generateQtyColor($material)
         {
@@ -907,8 +911,8 @@ if (!function_exists('getRoutes')) {
             return $quantityColor;
         }
     }
-    if(!function_exists('convertDateFormat')) {
-        function convertDateFormat($originalDate,$format)
+    if (!function_exists('convertDateFormat')) {
+        function convertDateFormat($originalDate, $format)
         {
             $carbonDate = Carbon::createFromFormat('F jS Y, g:i:s a', $originalDate);
             $formattedDate = $carbonDate->format($format);
