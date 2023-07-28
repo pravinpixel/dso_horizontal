@@ -15,7 +15,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReconciliationController extends Controller
 {
-    public function __construct(DsoRepositoryInterface $dsoRepositoryInterface){
+    public function __construct(DsoRepositoryInterface $dsoRepositoryInterface)
+    {
         $this->dsoRepository    =   $dsoRepositoryInterface;
     }
     public function index()
@@ -27,14 +28,14 @@ class ReconciliationController extends Controller
     {
         $page_name  = "RECONCILIATION_LIST";
         $view       = "crm.reconciliation.view";
-        return $this->dsoRepository->renderPage($page_name, $view); 
+        return $this->dsoRepository->renderPage($page_name, $view);
     }
     public function download()
     {
-        return Excel::download(new ReconciliationExport, 'data.xlsx');
+        return Excel::download(new ReconciliationExport, 'reconciliation-report.xlsx');
     }
     public function ReconciliationImportUpdate(Request $request)
-    { 
+    {
         $ReconciliationHistory              = new Reconciliation;
         $ReconciliationHistory->uploaded_at = auth_user()->alias_name;
         $ReconciliationHistory->created_at  = now();
@@ -46,14 +47,15 @@ class ReconciliationController extends Controller
             foreach ($ReconciliationImportData as $key => $data) {
                 $barcode_number =  $data[2];
                 $physical_stock =  $data[6];
-                if($key != 0 && $physical_stock != null) {
-                    $tempCount ++;
-                    $Batches = Batches::where('barcode_number',$barcode_number)->first();
-                    $Batches->update([ 'quantity' => $physical_stock ]);
+                if ($key != 0 && $physical_stock != null) {
+                    $tempCount++;
+                    $Batches = Batches::where('barcode_number', $barcode_number)->first();
+                    $Batches->update(['quantity' => $physical_stock]);
+                    updateParentQuantity($Batches->material_product_id);
                     LogActivity::log($Batches->id);
                 }
             }
-            if($tempCount == 0) {
+            if ($tempCount == 0) {
                 $ReconciliationHistory->status = false;
                 Flash::error("Invalid Action !");
             } else {
@@ -67,11 +69,14 @@ class ReconciliationController extends Controller
         $ReconciliationHistory->save();
         return back();
     }
-    public function ReconciliationUpdate(Request $request,$id)
+    public function ReconciliationUpdate(Request $request, $id)
     {
-        Batches::findOrFail($id)->update([
-            'quantity' => $request->PhysicalStock
+        $batch = Batches::findOrFail($id);
+        $batch->update([
+            'quantity' => $request->PhysicalStock,
+            'total_quantity' => ($batch->unit_packing_value * $request->PhysicalStock)
         ]);
+        updateParentQuantity($batch->material_product_id);
         LogActivity::log($id);
         return response()->json([
             "message" => "Reconciliation Success !"
@@ -80,7 +85,7 @@ class ReconciliationController extends Controller
     public function destroy($id)
     {
         $Reconciliation = Reconciliation::findOrFail($id);
-        if(Storage::exists($Reconciliation->file_name)) {
+        if (Storage::exists($Reconciliation->file_name)) {
             Storage::delete($Reconciliation->file_name);
         }
         $Reconciliation->delete();

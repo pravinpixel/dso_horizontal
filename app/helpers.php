@@ -820,14 +820,10 @@ if (!function_exists('getRoutes')) {
                 $material_product = $id;
                 $batches          = $id->NonDraftBatches;
             }
-            $total_batch_quantity = 0;
-            foreach ($batches as $key => $batch) {
-                $total_batch_quantity += $batch->total_quantity;
-            }
-
+            $total_batch_quantity = $batches->sum('total_quantity');
             $material_product->update([
                 "material_total_quantity" => $total_batch_quantity,
-                "material_quantity"       => $total_batch_quantity / $material_product->unit_packing_value,
+                "material_quantity"       => ($total_batch_quantity / $material_product->unit_packing_value),
             ]);
             return true;
         }
