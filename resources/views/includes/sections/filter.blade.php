@@ -49,7 +49,7 @@
         </select>
     </div> 
     <div class="col">
-        <label for="" class="form-label">storage area</label>
+        <label for="" class="form-label">Storage area</label>
         <select name="" id="" class="form-select custom">
             <option value="">-- Select --</option>
             <option value="1">AR</option>

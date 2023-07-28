@@ -5,12 +5,12 @@
             <ul class="nav nav-pills bg-nav-pills nav-justified m-0">
                 <li class="nav-item">
                     <a href="{{ route('edit_or_duplicate.material-product', ["wizard_mode"=>'duplicate',"type" => 'form-one' , "id" => $material_product->id , "batch_id" => $batch_id]) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-one' ? "active" : '' }}">
-                        <span class="h5">Mandatory Fields Page 1</span>
+                        <span class="h5">Mandatory fields page 1</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('edit_or_duplicate.material-product', ["wizard_mode"=>'duplicate',"type" => 'form-two' , "id" => $material_product->id , "batch_id" => $batch_id]) }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-two' ? "active" : '' }}">
-                        <span class="h5">Mandatory Fields Page 2</span>
+                        <span class="h5">Mandatory fields page 2</span>
                     </a>
                 </li>
                 <li class="nav-item">

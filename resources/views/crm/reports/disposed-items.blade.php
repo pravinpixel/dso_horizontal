@@ -35,7 +35,7 @@
                             <th class="text-white bg-primary-2 text-center font-14">S.No</th>
                             <th class="text-white bg-primary-2 text-center font-14">Transaction date </th>
                             <th class="text-white bg-primary-2 text-center font-14">Transaction time </th>
-                            <th class="text-white bg-primary-2 text-center font-14">Transacted by </th>
+                            <th class="text-white bg-primary-2 text-center font-14">Transacted </th>
                             <th class="text-white bg-primary-2 text-center font-14">Item description</th>
                             <th class="text-white bg-primary-2 text-center font-14">Batch/Serial</th>
                             <th class="text-white bg-primary-2 text-center font-14">Unit packing value</th>

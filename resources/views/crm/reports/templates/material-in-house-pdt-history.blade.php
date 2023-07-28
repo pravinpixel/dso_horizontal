@@ -7,7 +7,7 @@
             <th style="font-weight: bold">Batch#/Serial#</th>
             <th style="font-weight: bold">Transaction Date</th>
             <th style="font-weight: bold">Transaction Time</th>
-            <th style="font-weight: bold">Transacted by</th>
+            <th style="font-weight: bold">Transacted</th>
             <th style="font-weight: bold">Module</th>
             <th style="font-weight: bold">Action Taken</th>
             <th style="font-weight: bold">Unit packing value</th>

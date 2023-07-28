@@ -28,7 +28,7 @@
                                                     <th class="font-12">Batch#/ Serial#</th>
                                                     <th class="font-12">Last accessed</th>
                                                     <th class="font-12">Date & time stamp</th>
-                                                    <th class="font-12">Pkt size</th>
+                                                    <th class="font-12">Unit packing value</th>
                                                     <th class="font-12">Quantity</th>
                                                     <th class="font-12">Total quantity</th>
                                                     <th class="font-12">Withdraw total quantity</th>
@@ -111,10 +111,10 @@
                                                     <th class="font-12">Batch#/ Serial#</th>
                                                     <th class="font-12">Last accessed</th>
                                                     <th class="font-12">Date & time stamp</th>
-                                                    <th class="font-12">Pkt size</th>
-                                                    <th class="font-12">Qty</th>
-                                                    <th class="font-12">Total Qty</th>
-                                                    <th class="font-12">Withdraw Qty</th>
+                                                    <th class="font-12">Unit packing value</th>
+                                                    <th class="font-12">Quantity</th>
+                                                    <th class="font-12">Total  quantity</th>
+                                                    <th class="font-12">Withdraw quantity</th>
                                                     <th class="font-12">Remarks</th>
                                                 </tr> 
                                                 @if (count($row->Batch->TrackOutlifeHistory) > 0)

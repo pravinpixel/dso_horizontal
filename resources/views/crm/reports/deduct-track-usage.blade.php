@@ -16,7 +16,7 @@
                                         @elseif ($index == 'housing')
                                         Housing type and #
                                         @elseif ($index == 'last_accessed')
-                                        Transacted by
+                                        Transacted
                                         @else
                                         {{ ucfirst(str_replace('_'," ",  $index)) }}
                                     @endif
@@ -55,9 +55,9 @@
                                 <th class="text-white bg-primary-2 text-center font-14">Owners</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Transaction Date</th>
                                 <th class="text-white bg-primary-2 text-center font-14">Transaction Time</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Transacted By</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Used total amount</th>
-                                <th class="text-white bg-primary-2 text-center font-14">Remaining total amount</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Transacted</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Used Total Quantity</th>
+                                <th class="text-white bg-primary-2 text-center font-14">Remaining Total Quantity</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

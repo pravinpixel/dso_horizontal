@@ -298,8 +298,8 @@ getToCart = (type) => {
                                         <th class="text-dark">Item description</th>
                                         <th class="text-dark">Brand</th>
                                         <th class="text-dark">Batch#/ Serial#</th>
-                                        <th class="text-dark">Pkt size</th>
-                                        <th class="text-dark">Withdraw Qty</th>
+                                        <th class="text-dark">Unit packing value</th>
+                                        <th class="text-dark">Withdraw quantity</th>
                                         <th class="text-dark">
                                             <i class="text-danger bi bi-trash3-fill"></i>
                                         </th>

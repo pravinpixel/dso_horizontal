@@ -43,7 +43,7 @@ class TrackUsageExport  implements FromArray , WithHeadings, WithStyles, WithEve
         return [
             "Item description",
             "Batch/Serial",
-            "Transacted by	",
+            "Transacted	",
             "Used Amt",
             "Remaining amt ",
             "Brand",

@@ -6,6 +6,7 @@
     url("../../asset/fonts/OpenSans-Light.ttf"),
     url("../../asset/fonts/OpenSans-Medium.ttf"),
 }
+
 :root {
     --bs-blue: #3688fc;
     --bs-indigo: #727cf5;

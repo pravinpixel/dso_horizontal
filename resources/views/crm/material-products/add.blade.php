@@ -10,7 +10,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ completed_tab("form-two") }}" class="nav-link py-2 rounded-0 {{ Request::route('type') == 'form-two' ? "active" : '' }}">
-                        <span class="h5">Mandatory Fields Page 2</span>
+                        <span class="h5">Mandatory fields page 2</span>
                     </a>
                 </li>
                 <li class="nav-item">

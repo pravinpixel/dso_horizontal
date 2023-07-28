@@ -8,7 +8,7 @@
                     <tr>
                         <th class="p-1"> Item description</th>
                         <th class="p-1">Brand</th>
-                        <th class="p-1">Batch/Serial#</th>
+                        <th class="p-1">Batch#/Serial#	</th>
                         <th class="p-1">Owner1/2</th>
                         <th class="p-1">DOE</th>
                         <th class="p-1">Used for TD/Expt</th>
@@ -181,7 +181,7 @@
                                 <label for="Batch"
                                     class="p-1 form-label bg-light cursor ps-2 rounded-pill shadow-sm border w-100"><input
                                         type="checkbox" class="form-check-input checked-input me-2" ng-model="batch_id"
-                                        id="Batch">Batch ID/Serial #</label>
+                                        id="Batch">Batch #/Serial #</label>
                             </div>
                             <div class="col-md-4 mb-2 text-start">
                                 <label for="DOE"

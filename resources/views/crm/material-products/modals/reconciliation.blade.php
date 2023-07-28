@@ -18,7 +18,7 @@
                             <td ng-bind="brand"></td>
                         </tr>
                         <tr>
-                            <th>Batch/Serial#</th>
+                            <th>Batch#/Serial#	</th>
                             <td>:</td>
                             <td ng-bind="batch_serial"></td>
                         </tr>

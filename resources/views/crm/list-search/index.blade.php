@@ -35,9 +35,9 @@
                 <tr>
                      <th class="table-th child-td-lg"> Item description</th>
                     <th class="table-th child-td">Brand</th>
-                    <th class="table-th child-td">Batch/Serial#</th>
-                    <th class="table-th child-td">Pkt size</th>
-                    <th class="table-th child-td">Qty</th>
+                    <th class="table-th child-td">Batch#/Serial#	</th>
+                    <th class="table-th child-td">Unit packing value</th>
+                    <th class="table-th child-td">Quantity</th>
                     <th class="table-th child-td-lg">Owner1/2</th>
                     <th class="table-th child-td">storage area</th>
                     <th class="table-th child-td">Housing type</th>

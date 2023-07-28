@@ -13,7 +13,7 @@
                             <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
-                            <td class="text-near-expiry"><b><small>Qty</small></b></td>
+                            <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
@@ -37,7 +37,7 @@
                             <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
-                            <td class="text-near-expiry"><b><small>Qty</small></b></td>
+                            <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
@@ -61,7 +61,7 @@
                             <td class="text-near-expiry"><b><small>Material / Product  description</small></b></td>
                             <td class="text-near-expiry"><b><small>Brand</small></b></td>
                             <td class="text-near-expiry"><b><small>#Batch/Serial/PO No</small></b></td>
-                            <td class="text-near-expiry"><b><small>Qty</small></b></td>
+                            <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}

@@ -34,7 +34,7 @@
                         <tr>
                             <th class="text-white bg-primary-2 font-14">S.No</th>
                             <th class="text-white bg-primary-2 font-14">Transaction date & time </th>
-                            <th class="text-white bg-primary-2 font-14">Transacted by </th>
+                            <th class="text-white bg-primary-2 font-14">Transacted </th>
                             <th class="text-white bg-primary-2 font-14">Action</th>
                         </tr>
                     </thead>

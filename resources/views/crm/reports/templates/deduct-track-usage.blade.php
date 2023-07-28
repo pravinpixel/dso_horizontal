@@ -54,7 +54,7 @@
             <th width="151px" style="font-weight: bold">Action Taken</th>
             <th width="151px" style="font-weight: bold">Transaction Date</th>
             <th width="151px" style="font-weight: bold">Transaction Time</th>
-            <th width="151px" style="font-weight: bold">Transacted by</th>
+            <th width="151px" style="font-weight: bold">Transacted</th>
             <th width="151px" style="font-weight: bold">Draw out Amt</th>
             <th width="151px" style="font-weight: bold">Remaining amt</th>
             <th width="151px" style="font-weight: bold">Remainder outlife</th>

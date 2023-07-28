@@ -18,13 +18,13 @@
                 </tr>
                 <tr class="bg-primary-light text-dark">
                     <th class="font-12">Item description</th>
-                    <th class="font-12">Batch/Serial#</th>
+                    <th class="font-12">Batch#/Serial#	</th>
                     <th class="font-12">Last accessed</th>
                     <th class="font-12">Date&time stamp</th>
                     <th class="font-12">Unit packing value</th>
                     <th class="font-12">Quantity</th>
                     <th class="font-12">Total quantity</th>
-                    <th class="font-12">Used total quantity
+                    <th class="font-12">Used Total Quantity
                         ({{ count($deduct_track_usage) != 0 ? $deduct_track_usage[0]->Batch->BatchMaterialProduct->UnitOfMeasure->name : '' }})
                     </th>
                     <th class="font-12">Remain total quantity

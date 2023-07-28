@@ -20,9 +20,9 @@
                             <td>Remain total quantity</td>
                             <td>New unit packing value</td>
                             <td>Quantity </td>
-                            <td>Storage Area</td>
+                            <td>Storage area</td>
                             <td>Housing type</td>
-                            <td>Housing No</td>
+                            <td>Housing no</td>
                             <td>Owners</td>
                             <th><i class="text-danger bi bi-trash3-fill"></i></th>
                         </tr>
