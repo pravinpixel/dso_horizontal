@@ -280,11 +280,6 @@ if (!function_exists('strExcelDate')) {
         if ($excel_date == 'NIL' || $excel_date == 'nill' ||  $excel_date == 'Nill' ||  $excel_date == 'nil' ||  $excel_date == 'Nil' ||  $excel_date == '') {
             return  null;
         }
-        // $excel_date = (int) $excel_date;
-        // $unix_date  = ($excel_date - 25569) * 86400;
-        // $excel_date = 25569 + ($unix_date / 86400);
-        // $unix_date  = ($excel_date - 25569) * 86400;
-        // return gmdate("Y-m-d", $unix_date); //2023-12-16
         return Carbon::parse(str_replace('/', '-', $excel_date))->format('Y-m-d');
     }
 }
@@ -770,12 +765,12 @@ if (!function_exists('getRoutes')) {
             }
 
             if (count($from_batch->BatchFiles) > 0) {
-                foreach ($from_batch->BatchFiles as $key => $file) {
+                foreach ($from_batch->BatchFiles as $file) {
                     if (Storage::exists($file->file_name)) {
                         $file_name =  "public/" . strtoFileExtenion($file->file_name);
                         Storage::copy($file->file_name, $file_name);
                         $to_batch->BatchFiles()->create([
-                            'column_name'    => 'coc_coa_mill_cert',
+                            'column_name'    => $file->column_name,
                             'original_name'  => $file->file_name,
                             'file_name'      => $file_name,
                             'file_extension' => explode('.', $file_name)[1],
