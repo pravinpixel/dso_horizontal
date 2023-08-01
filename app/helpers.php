@@ -431,70 +431,73 @@ if (!function_exists('getRoutes')) {
                 'reconciliation_destroy',
             ];
             if (in_array($menu_value, $view)) {
-                return 'view';
+                $menu_value = 'view';
             } elseif (in_array($menu_value, $edit)) {
-                return 'edit';
+                $menu_value = 'edit';
             } elseif (in_array($menu_value, $create)) {
-                return 'create';
+                $menu_value = 'create';
             } elseif (in_array($menu_value, $delete)) {
-                return 'delete';
+                $menu_value = 'delete';
             } elseif ($menu_value == 'view_reconciliation') {
-                return 'listing view';
+                $menu_value = 'listing view';
             } elseif ($menu_value == 'reconciliation_download') {
-                return 'download';
+                $menu_value = 'download';
             } elseif ($menu_value == 'reconciliation_store') {
-                return 'Import Reconciliate';
+                $menu_value = 'Import Reconciliate';
             } elseif ($menu_value == 'reconciliation_update') {
-                return 'Manual Reconciliate';
+                $menu_value = 'Manual Reconciliate';
             } elseif ($menu_value == 'delete_material_products') {
-                return 'Delete Parent';
+                $menu_value = 'Delete parent';
             } elseif ($menu_value == 'delete_material_products_batch') {
-                return 'Delete Batch';
+                $menu_value = 'Delete batch';
             } elseif ($menu_value == 'transfer_batch') {
-                return 'transfer';
+                $menu_value = 'Transfer';
             } elseif ($menu_value == 'repack_batch') {
-                return 'repack / transfer';
+                $menu_value = 'Repack / transfer';
             } elseif ($menu_value == 'repack_outlife') {
-                return 'repack / outlife';
+                $menu_value = 'Repack / outlife';
             } elseif ($menu_value == 'barcode_listing') {
-                return 'listing view';
+                $menu_value = 'Listing view';
             } elseif ($menu_value == 'show_barcode') {
-                return 'preview';
+                $menu_value = 'Preview';
             } elseif ($menu_value == 'print_barcode') {
-                return 'print';
+                $menu_value = 'Print';
             } elseif ($menu_value == 'update_extend_expiry') {
-                return 'extend';
+                $menu_value = 'Extend';
             } elseif ($menu_value == 'update_disposal') {
-                return 'dispose';
+                $menu_value = 'Dispose';
             } elseif ($menu_value == 'reports_utilisation_cart') {
-                return 'utilization cart';
+                $menu_value = 'Utilization cart';
             } elseif ($menu_value == 'reports_export_cart') {
-                return 'export cart';
+                $menu_value = 'Export cart';
             } elseif ($menu_value == 'reports_history') {
-                return 'history';
+                $menu_value = 'History';
             } elseif ($menu_value == 'reports_disposed_items') {
-                return 'Disposed Items';
+                $menu_value = 'Disposed items';
             } elseif ($menu_value == 'reports_expired_material') {
-                return 'Expired Material';
+                $menu_value = 'Expired material';
             } elseif ($menu_value == 'reports_security') {
-                return 'Security History';
+                $menu_value = 'Security history';
             } elseif ($menu_value == 'reports_export_security') {
-                return 'Export / Security History';
+                $menu_value = 'Export / Security history';
             } elseif ($menu_value == 'reports_deduct_track_outlife') {
-                return 'Deduct Track Outlife';
+                $menu_value = 'Deduct track outlife';
             } elseif ($menu_value == 'reports_deduct_track_outlife_download') {
-                return 'Export / Deduct Track Outlife';
+                $menu_value = 'Export / Deduct track outlife';
             } elseif ($menu_value == 'reports_deduct_track_usage') {
-                return 'Deduct Track Usage';
+                $menu_value = 'Deduct track usage';
             } elseif ($menu_value == 'reports_deduct_track_usage_download') {
-                return 'Export / Deduct Track Usage';
+                $menu_value = 'Export / Deduct track usage';
             } elseif ($menu_value == 'reports_material_in_house_pdt_history') {
-                return 'Products History';
+                $menu_value = 'Products history';
             } elseif ($menu_value == 'reports_material_in_house_pdt_history_download') {
-                return 'Export / Products History';
+                $menu_value = 'Export / Products history';
             } elseif ($menu_value == 'reports_utilization_cart') {
-                return 'Utilization Cart';
+                $menu_value = 'Utilization cart';
+            }  elseif ($menu_value == 'near_expiry_expired') {
+                $menu_value = 'Near expiry / Expired / Failed IQC';
             }
+            
             return  $menu_value;
         }
     }
