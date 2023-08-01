@@ -82,7 +82,8 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <input id="remain_amount" name="remain_amount" step="any" readonly
+                                    <input id="remain_amount" name="remain_amount"   readonly
+                                        min="0"
                                         type="text" style="width: 80px"
                                         value="{{ $row->Batch->quantity * $row->Batch->unit_packing_value }}"
                                         class="me-2 form-control-sm form-control">

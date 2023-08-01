@@ -22,20 +22,22 @@
                 <li class="nav-item">
                     <a href="#DEDUCT_TRACK_USAGE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                         <span class="font-16 fw-bold">Deduct & Track Usage</span>
-                        <span class="badge ms-2 bg-blue-2" id="DeductTrackUsageCount">{{ count($deduct_track_usage) }}</span>
+                        <span class="badge ms-2 bg-blue-2"
+                            id="DeductTrackUsageCount">{{ count($deduct_track_usage) }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#DEDUCT_TRACK_OUTLIFE" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                         <span class="font-16 fw-bold">Deduct & Track Outlife</span>
-                        <span class="badge ms-2 bg-blue-3" id="DeductTrackOutlifeCount">{{ count($deduct_track_outlife) }}</span>
+                        <span class="badge ms-2 bg-blue-3"
+                            id="DeductTrackOutlifeCount">{{ count($deduct_track_outlife) }}</span>
                     </a>
                 </li>
             </ul>
             <div class="tab-content text-center border border-top-0 p-3 m-0 bg-white">
                 <div class="tab-pane show active" id="DIRECT_DEDUCT">
                     @include('crm.material-products.withdrawal.direct-deduct')
-                </div>  
+                </div>
                 <div class="tab-pane" id="DEDUCT_TRACK_USAGE">
                     @include('crm.material-products.withdrawal.deduct-track-useage')
                 </div>
@@ -52,12 +54,13 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
-        getWithDrawlCart = async (event,barcode) => { // Scan Barcode
-            if(event.keyCode == 17 || event.keyCode == 13 ) {
-                validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response.json()).then((data) => {
+        getWithDrawlCart = async (event, barcode) => { // Scan Barcode
+            if (event.keyCode == 17 || event.keyCode == 13) {
+                validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response
+                    .json()).then((data) => {
                     render(data);
                 });
-            } 
+            }
         }
         decreaseQuantity = (id, tabName) => { // Decresing Qty
             fetch(`${APP_URL}/decrease-quantity/${id}`).then(response => response.json()).then((data) => {
@@ -113,9 +116,10 @@
             }
         }
         // ========== Deduct & Track Usage  =========
-        startTrackUsage = (total_amount,used_amount) => {
-            var remain_amount       = document.getElementById('remain_amount')
-                remain_amount.value = total_amount - used_amount.value
+        startTrackUsage = (total_amount, used_amount) => {
+            var remain_amount = document.getElementById('remain_amount')
+            let result = total_amount - used_amount.value
+            remain_amount.value = result < 0 ? 0 :result
         }
     </script>
 @endsection
