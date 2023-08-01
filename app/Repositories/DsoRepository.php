@@ -8,6 +8,7 @@ use App\Models\Masters\HouseTypes;
 use App\Models\Masters\PackingSizeData;
 use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
+use App\Models\MaterialProducts;
 use App\Models\tableOrder;
 use App\Models\User;
 use Carbon\Carbon;
@@ -199,7 +200,11 @@ class DsoRepository implements DsoRepositoryInterface
             $parent['hideParentRowReadStatus'] = $readCount == 0 ? 1 : 0;
             $parent['draftBatchCount']         = $draftBatchCount;
             $parent['material_quantity_color'] = generateQtyColor($parent); 
-
+            if ($parent['material_quantity_color'] == 'text-success') {
+                MaterialProducts::find($parent->id)->update([
+                    "is_read" => 0
+                ]);
+            }
             if ($page_name == 'THRESHOLD_QTY') {
                 if ($parent['material_quantity_color'] == 'text-success') {
                     unset($parent[$key]);
