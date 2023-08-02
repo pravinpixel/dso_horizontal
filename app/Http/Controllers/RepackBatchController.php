@@ -82,7 +82,7 @@ class RepackBatchController extends Controller
                 $Batches    = Batches::find($repackData->batch_id);
 
                 if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                   
+                    $Batches['quantity']            = $row['quantity'];
                     MaterialProductHistory($Batches,'Repack_Outlife_Draw_OUT');
                  
                     $current_batch                   = Batches::find($repackData->batch_id);
