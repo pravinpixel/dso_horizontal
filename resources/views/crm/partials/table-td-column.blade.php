@@ -15,7 +15,7 @@
         <div ng-if="on_{{ $column['name'] }}" class="box justify-content-start" >
             @switch($column['name'])
                 @case('unit_packing_value')
-                    @{{ row.unit_packing_value }} 
+                    <span ng-bind="row.unit_packing_value"></span>
                     {{ $tableAllColumns['unit_of_measure']['row']}}
                 @break
                 @case('category_selection')
@@ -23,8 +23,8 @@
                 @break 
                 @case('quantity')
                     <span>
+                        <i ng-class="row.material_quantity_color" class="me-1 dot-sm bi bi-circle-fill"></i>
                         <span ng-bind="row.material_quantity"></span>
-                        <i ng-class="row.material_quantity_color" class="ms-1 dot-sm bi bi-circle-fill"></i>
                     </span>
                 @break
                 @case('total_quantity')

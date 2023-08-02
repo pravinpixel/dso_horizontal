@@ -63,19 +63,18 @@ class SearchRepository implements SearchRepositoryInterface
             'Batches' => function ($q) use ($filter, $material_table) {
                 $this->searchFilter($q, $filter, $material_table);
             },
-            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody','Batches.BatchMaterialProduct'
-        ])
-            ->when(in_array($filter, $material_table) == true, function ($q) use ($filter) {
-                foreach ($filter as $column => $value) {
-                    if ($value != '') {
+            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody', 'Batches.BatchMaterialProduct'
+        ])->when(true, function ($q) use ($filter, $material_table) {
+            foreach ($filter as $column => $value) {
+                if (in_array($column, $material_table)) {
+                    if (!empty($value)) {
                         $q->where($column, $value);
                     }
                 }
-            })
-            ->WhereHas('Batches', function ($q) use ($filter, $material_table) {
-                $this->searchFilter($q, $filter, $material_table);
-            })->latest()->get();
-
+            }
+        })->WhereHas('Batches', function ($q) use ($filter, $material_table) {
+            $this->searchFilter($q, $filter, $material_table);
+        })->latest()->get();
         return $this->dsoRepository->renderTableData($material_product_data, null);
     }
     public function sortingOrder($sort_by)
@@ -153,7 +152,7 @@ class SearchRepository implements SearchRepositoryInterface
                 } elseif ($column == 'owners') {
                     $inputArray = Arr::pluck($filter->owners, 'id');
                     $request_ownners = implode(",", $inputArray);
-                    if (!empty($request_ownners)) { 
+                    if (!empty($request_ownners)) {
                         if (count($filter->owners) > 1) {
                             $q->whereIn('owners', array_permute($inputArray, false));
                         } else {

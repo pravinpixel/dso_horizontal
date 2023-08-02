@@ -215,7 +215,8 @@ class DsoRepository implements DsoRepositoryInterface
 
         foreach ($access_material_product as $material_index => $material) {
             foreach ($material->Batches as $batch_index => $batch) {
-                if (auth_user_role()->slug == 'staff') {
+                $batch->permission = 'NONE';
+                // if (auth_user_role()->slug == 'staff') {
                     $access     = json_decode($batch->access);
 
                     if (isset($access)) {
@@ -224,15 +225,17 @@ class DsoRepository implements DsoRepositoryInterface
                         }
                     }
                     if (count($batch->BatchOwners)) {
-                        if (in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id')) == false) {
-                            $batch->permission = 'READ_ONLY';
-                        } else {
+                        // Log::info($batch->id);
+                        // Log::info(in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id')));
+                        if (in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id'))) {
                             $batch->permission = 'READ_AND_WRITE';
+                        } else {
+                            $batch->permission = 'READ_ONLY';
                         }
                     }
-                } else {
-                    $batch->permission = 'READ_AND_WRITE';
-                }
+                // } else {
+                //     $batch->permission = 'READ_AND_WRITE';
+                // }
                 if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin' && $page_name == 'THRESHOLD_QTY') {
                     unset($access_material_product[$material_index]->Batches[$batch_index]); 
                 }
