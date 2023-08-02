@@ -241,7 +241,7 @@ class DsoRepository implements DsoRepositoryInterface
                 unset($access_material_product[$material_index]);
             }
             if ($page_name == 'THRESHOLD_QTY') {
-                if ($material->material_quantity_color == 'text-success' || $material->is_draft == 1) {
+                if ($material->material_quantity_color == 'text-success' || $material->material_quantity_color == 'text-dark' || $material->is_draft == 1) {
                     unset($access_material_product[$material_index]);
                 }
             }
