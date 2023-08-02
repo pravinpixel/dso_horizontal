@@ -21,7 +21,7 @@
     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" ng-repeat="(index, row) in view_material_product_data">
         <div class="w-100">
             <div class="fw-bold">Statutory body</div>
-            {{ $material->Batches[0]->statutory_body ?? '-' }}
+            {{ $material->Batches[0]->StatutoryBody->name ?? '-' }}
         </div>
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
