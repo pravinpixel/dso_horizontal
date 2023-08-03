@@ -11,19 +11,15 @@ use App\Models\Masters\StorageRoom;
 use App\Models\MaterialProducts;
 use App\Models\tableOrder;
 use App\Models\User;
-use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Log;
-
 class DsoRepository implements DsoRepositoryInterface
 {
     public function renderPage($page_name, $view)
     {
-
         $storage_room_db        =   StorageRoom::all();
         $departments_db         =   Departments::all();
         $statutory_body_db      =   StatutoryBody::all();
