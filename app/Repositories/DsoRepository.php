@@ -239,6 +239,11 @@ class DsoRepository implements DsoRepositoryInterface
                 if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin' && $page_name == 'THRESHOLD_QTY') {
                     unset($access_material_product[$material_index]->Batches[$batch_index]); 
                 }
+                if($page_name === 'NEAR_EXPIRY_EXPIRED' && auth_user_role()->slug !== 'admin'){
+                    if (!in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id'))) { 
+                        unset($access_material_product[$material_index]->Batches[$batch_index]); 
+                    }
+                }
             }
             if (count($material->Batches) == 0) {
                 unset($access_material_product[$material_index]);

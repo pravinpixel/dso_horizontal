@@ -108,7 +108,7 @@ class NotificationController extends Controller
         ])->latest()->get();
         $material_products =  $this->dsoRepository->renderTableData($material_product_data, [
             "response"  => "JSON",
-            "page_name" => "MATERIAL_SEARCH_OR_ADD"
+            "page_name" => "NEAR_EXPIRY_EXPIRED"
         ]);
         $notifications = [
             'EXPIRY_TABLE' => [],
