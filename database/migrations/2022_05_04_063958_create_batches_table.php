@@ -16,7 +16,8 @@ class CreateBatchesTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->integer('is_draft')->nullable()->default(1);
-            $table->integer('material_product_id');
+            $table->unsignedBigInteger('material_product_id');
+            $table->foreign('material_product_id')->references('id')->on('material_products')->onDelete('cascade');
             $table->string('brand')->nullable();
             $table->string('barcode_number')->nullable();
             $table->string('supplier')->nullable();
