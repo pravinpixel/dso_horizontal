@@ -64,7 +64,7 @@
     <tbody>
         @if (count($batch->RepackOutlifeDrawInOut))
             @foreach ($batch->RepackOutlife as $key =>  $repack)
-                @if ($repack->remain_days)
+                @if ($repack->updated_outlife)
                     <tr>
                         <td rowspan="1">{{ $key + 1 }}</td>
                         <td>Draw OUT</td>
@@ -73,7 +73,7 @@
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>{{ $repack->old_input_repack_amount }}</td>
                         <td>{{ $repack->remain_amount }}</td>
-                        <td>{{ $repack->remain_days }}</td>
+                        <td>{{ $repack->updated_outlife }}</td>
                         <td>{{ "$batch->barcode_number" }}</td>
                     </tr>
                     <tr>
@@ -84,7 +84,7 @@
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>-</td>
                         <td>-</td>
-                        <td>{{ $repack->remain_days }}</td>
+                        <td>{{ $repack->updated_outlife }}</td>
                         <td>{{ $batch->barcode_number }}</td>
                     </tr>
                 @endif

@@ -33,7 +33,7 @@ class RepackOutlifeExport implements FromCollection, WithHeadings, WithStyles, W
             'draw_in_time_stamp',
             'draw_out_time_stamp',
             'input_repack_amount',
-            'remain_days',
+            'updated_outlife',
             'qty_cut'
         ])->get();
     }
