@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="row mt-4"> 
+    <div class="row mt-4">
         <x-has-access name="withdrawal_index">
             <div class="col-md-2">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
@@ -50,7 +50,7 @@
                     </a>
                 </div>
             </div>
-        </x-has-access> 
+        </x-has-access>
         <x-has-access name="extend-expiry">
             <div class="col-md-2">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
@@ -69,8 +69,8 @@
                         <div class="text-primary"><b> Report</b></div>
                     </a>
                 </div>
-            </div>    
-        </x-has-access> 
+            </div>
+        </x-has-access>
         <x-has-access name="threshold-qty">
             <div class="col-md-2">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
@@ -92,7 +92,9 @@
             </div>
         </x-has-access>
     </div>
-    <div class="card border shadow-sm">
+@endsection
+
+{{-- <div class="card border shadow-sm">
         <div class="card-header bg-light">
             <div class="row">
                 <div class="col-6 d-flex align-items-center">
@@ -146,7 +148,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
+                <div class="col rounded shadow-hover m-1 py-2 bg-primary-gradient px-3">
                     <div class="d-flex align-items-center">
                         <di class="text-warning bi bi-arrow-up-right-square fa-2x me-3"></di>
                     <div>
@@ -154,7 +156,7 @@
                             <strong>3520</strong>
                     </div>
                     </div>
-                </div>   --}}
+                </div>  
             </div>
         </div>
     </div> 
@@ -226,10 +228,8 @@
                 </div>
             </div>
         </div>
-    </div> 
-@endsection
-
-@section('scripts')
+    </div>  --}}
+{{-- @section('scripts')
     <script>
         var xValues = ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         new Chart("myChart", {
@@ -278,4 +278,4 @@
             getDashboardData('today')
         });
     </script> 
-@endsection
+@endsection --}}
