@@ -32,7 +32,7 @@ class EarlyDisposalController extends Controller
         }
     }
     public function disposal_update(Request $request)
-    {
+    { 
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         $current_quantity = $request->quantity != null ? $batch->quantity - $request->quantity : $batch->quantity;
@@ -50,7 +50,14 @@ class EarlyDisposalController extends Controller
         ]);
         updateParentQuantity($batch->material_product_id);
         if ($request->used_for_td_expt_only === "1") {
-            $batch->update(["coc_coa_mill_cert_status" => 'on']);
+            putBatchFile([
+                "batch_id" => $batch->id,
+                "file"     => $request->used_for_td_certificate,
+                "type"     => "used_for_td_certificate"
+            ]);
+            $batch->update([
+                "coc_coa_mill_cert_status" => 'on'
+            ]);
         } else {
             TrackDisposedBatches($batch, $request->quantity);
         }

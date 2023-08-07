@@ -135,8 +135,9 @@
             <div class="fw-bold mb-1">Access</div>
             @if (json_decode($batch->access))
                 @foreach (json_decode($batch->access) as $user_id)
-                    <span
-                        class="badge badge-outline-primary rounded-pill">{{ getUserById($user_id)->alias_name }}</span>
+                    <span class="badge badge-outline-primary rounded-pill">
+                        {{ getUserById($user_id)->alias_name }}
+                    </span>
                 @endforeach
             @endif
         </div>
@@ -305,17 +306,9 @@
                     <span class="badge bg-danger rounded-pill">NO</span>
                 @endif
             @endif
-            @if (!is_null($batch->used_for_td_certificate))
-            <br>
-                <div class="btn-group mt-1">
-                    <a data-lightbox="roadtrip" class="badge badge-outline-info rounded-pill"
-                        href="{{ asset('storage/app/') . '/' . $batch->used_for_td_certificate }}" target="_blank"><i
-                            class="fa fa-eye me-1"></i>view</a>
-                    <button onclick="download('{{ $batch->id }}','used_for_td_certificate')"
-                        class="badge bg-warning rounded-pill text-dark ms-1 border-0"><i
-                            class="fa fa-download me-1"></i>Download</button>
-                </div>
-            @endif
+            @if (!is_null($batch->BatchFiles))
+                {!! getBatchFile($batch->BatchFiles,'used_for_td_certificate', false) !!}
+            @endif 
         </div>
     </li>
 </ol>
