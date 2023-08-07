@@ -53,7 +53,7 @@
                                     'help.menu.edit',
                                     'pictogram.index', 'pictogram.create','pictogram.edit'
                                 ])
-                                    ? 'Master Settings'
+                                    ? 'Master Setting'
                                     : null }}
 
                                 {{ Route::is(['help.index', 'help.document']) ? 'Help Menu' : null }}
@@ -96,7 +96,7 @@
                             'help.menu.edit',
                             'pictogram.index', 'pictogram.create','pictogram.edit'
                         ])
-                            ? 'Master Settings'
+                            ? 'Master Setting'
                             : null }}
                         {{ Route::is(['help.index', 'help.document']) ? 'Help Menu' : null }}
                         {{ Route::is('disposed-items') ? 'Disposed Materials/In-house Products' : null }}

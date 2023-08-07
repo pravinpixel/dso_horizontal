@@ -16,7 +16,7 @@
                             <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
+                            <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
@@ -40,7 +40,7 @@
                             <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
+                            <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
@@ -64,7 +64,7 @@
                             <td class="text-near-expiry"><b><small>Quantity</small></b></td>
                             <td class="text-near-expiry"><b><small>Owners</small></b></td>
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
-                            <td class="text-near-expiry"><b><small>Housing Type</small></b></td> --}}
+                            <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>

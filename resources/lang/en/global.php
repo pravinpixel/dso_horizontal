@@ -1,7 +1,7 @@
 <?php
 return [
     'action'                            => 'Action',
-    'created_at'                        => 'Created At',
+    'created_at'                        => 'Created on',
     'updated_at'                        => 'Updated At',
     'status'                            => 'Status',
     'delete_confirmation'               => 'Are you sure you want to delete ?',

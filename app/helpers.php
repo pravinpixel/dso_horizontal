@@ -494,10 +494,10 @@ if (!function_exists('getRoutes')) {
                 $menu_value = 'Export / Products history';
             } elseif ($menu_value == 'reports_utilization_cart') {
                 $menu_value = 'Utilization cart';
-            }  elseif ($menu_value == 'near_expiry_expired') {
+            } elseif ($menu_value == 'near_expiry_expired') {
                 $menu_value = 'Near expiry / Expired / Failed IQC';
             }
-            
+
             return  $menu_value;
         }
     }
@@ -911,6 +911,62 @@ if (!function_exists('getRoutes')) {
             $carbonDate = Carbon::createFromFormat('F jS Y, g:i:s a', $originalDate);
             $formattedDate = $carbonDate->format($format);
             return $formattedDate;
+        }
+    }
+    if (!function_exists('sentenceCase')) {
+        function sentenceCase($input)
+        {
+            $sentences = preg_split('/([.?!]+)/', $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+            $new_sentences = [];
+
+            foreach ($sentences as $key => $sentence) {
+                if ($key % 2 == 0) {
+                    $new_sentences[] = ucfirst(trim($sentence));
+                } else {
+                    $new_sentences[] = $sentence;
+                }
+            }
+
+            return implode('', $new_sentences);
+        }
+    }
+
+    if (!function_exists('tableColumnFormat')) {
+        function tableColumnFormat($text)
+        {
+            switch ($text) {
+                case 'extended_qc_status':
+                    $text = 'Extended QC status';
+                    break;
+                case 'used_for_td_expt_only':
+                    $text = 'Used for TD/Expt only';
+                    break;
+                case 'iqc_status':
+                    $text = 'IQC status';
+                    break;
+                case 'alert_threshold_qty_lower_limit':
+                    $text = 'Alert threshold qty (lower limit)';
+                    break;
+                case 'alert_threshold_qty_upper_limit':
+                    $text = 'Alert threshold qty (upper limit)';
+                    break;
+                case 'cas':
+                    $text = 'CAS';
+                    break;
+                case 'po_number':
+                    $text = 'PO #';
+                    break;
+                case 'euc_material':
+                    $text = 'EUC material';
+                    break;
+                case 'housing':
+                    $text = 'Housing #';
+                    break;
+                default:
+                    $text = format_text($text);
+                    break;
+            }
+            return $text;
         }
     }
 }

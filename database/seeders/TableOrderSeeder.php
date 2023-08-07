@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\tableOrder;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class TableOrderSeeder extends Seeder
@@ -56,6 +55,7 @@ class TableOrderSeeder extends Seeder
             $tableColumns['quantity_update_status'],
             $tableColumns['end_of_material_product'],
             $tableColumns['notification_status'],
+            $tableColumns['is_draft'],
         );
         $i = 0;
         foreach($tableColumns as $key => $value) {
@@ -173,10 +173,7 @@ class TableOrderSeeder extends Seeder
             } elseif($value == 'barcode_number') {
                 $data   = 38;
                 $status = true;
-            }elseif($value == 'is_draft') {
-                $data   = 39;
-                $status = true;
-            }
+            } 
             tableOrder::create([
                 'order_by' => $data ?? $i + 1,
                 'column'   => $value,

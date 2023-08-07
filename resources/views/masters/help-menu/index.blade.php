@@ -12,7 +12,7 @@
                     <tr>
                         <th class="table-th" width="10%">No</th>
                         <th class="table-th">Name</th>
-                        <th class="table-th">Created At</th>
+                        <th class="table-th">Created on</th>
                         <th class="table-th" width="100px">Action</th>
                     </tr>
                 </thead>

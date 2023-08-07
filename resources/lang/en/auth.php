@@ -44,7 +44,7 @@ return [
 	'index_acl'                                             => 'Access Control List',
 	'index_column'                                          => 'Column',
 	'index_last_login'                                      => 'Last Login',
-	'index_created_at'                                      => 'Created At',
+	'index_created_at'                                      => 'Created on',
 	'index_updated_at'                                      => 'Updated At',
 	'index_created_by'                                      => 'Created By',
 	'index_updated_by'                                      => 'Updated By',

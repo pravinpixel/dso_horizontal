@@ -25,13 +25,13 @@
 <div class="row mb-3">
     <label class="col-2 text-end col-form-label">Department</label>
     <div class="col-10">
-        {!! Form::select('department',$departmentDb , $userDepartment, ['class' =>'form-select', 'placeholder' => '-- Select Role --'])  !!}
+        {!! Form::select('department',$departmentDb , $userDepartment, ['class' =>'form-select', 'placeholder' => '-- Select --'])  !!}
     </div>
 </div>
 <div class="row mb-3">
     <label class="col-2 text-end col-form-label">Role</label>
     <div class="col-10">
-        {!! Form::select('role_id',$roleDb , $userRole, ['class' =>'form-select', 'placeholder' => '-- Select Role --'])  !!}
+        {!! Form::select('role_id',$roleDb , $userRole, ['class' =>'form-select', 'placeholder' => '-- Select --'])  !!}
     </div>
 </div>
 
