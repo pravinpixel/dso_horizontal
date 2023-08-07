@@ -2,7 +2,7 @@
 @section('content')
     <div class="row mt-4">
         <x-has-access name="withdrawal_index">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('withdrawal_index') }}" class="card-body btn">
                         <i class="text-warning bi bi-aspect-ratio fa-2x mb-2"></i>
@@ -12,7 +12,7 @@
             </div>
         </x-has-access>
         <x-has-access name="list-material-products">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('list-material-products') }}" class="card-body btn">
                         <i class="text-warning bi bi-plus-circle-dotted fa-2x mb-2"></i>
@@ -22,7 +22,7 @@
             </div>
         </x-has-access>
         <x-has-access name="threshold-qty">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('threshold-qty') }}" class="card-body btn">
                         <i class="text-warning bi bi-subtract fa-2x mb-2"></i>
@@ -32,7 +32,7 @@
             </div>
         </x-has-access>
         <x-has-access name="near-expiry-expired">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('near-expiry-expired') }}" class="card-body btn">
                         <i class="text-warning bi bi-list-ul fa-2x mb-2"></i>
@@ -42,7 +42,7 @@
             </div>
         </x-has-access>
         <x-has-access name="disposal">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('disposal') }}" class="card-body btn">
                         <i class="text-warning bi bi-trash2 fa-2x mb-2"></i>
@@ -52,7 +52,7 @@
             </div>
         </x-has-access>
         <x-has-access name="extend-expiry">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('extend-expiry') }}" class="card-body btn">
                         <i class="text-warning bi bi-arrow-up-right-square fa-2x mb-2"></i>
@@ -62,7 +62,7 @@
             </div>
         </x-has-access>
         <x-has-access name="reports">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('reports') }}" class="card-body btn">
                         <i class="text-warning bi bi-file-earmark-bar-graph fa-2x mb-2"></i>
@@ -72,7 +72,7 @@
             </div>
         </x-has-access>
         <x-has-access name="threshold-qty">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('barcode.listing') }}" class="card-body btn">
                         <i class="text-warning bi bi-upc-scan fa-2x mb-2"></i>
@@ -82,7 +82,7 @@
             </div>
         </x-has-access>
         <x-has-access name="reconciliation">
-            <div class="col-xl-2 col-lg-3 col-md-4">
+            <div class="col-lg-3 col-md-4">
                 <div class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('reconciliation') }}" class="card-body btn">
                         <i class="text-warning bi bi-arrow-repeat fa-2x mb-2"></i>
