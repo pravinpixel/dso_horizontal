@@ -244,7 +244,7 @@ class DsoRepository implements DsoRepositoryInterface
             if (count($material->Batches) == 0) {
                 unset($access_material_product[$material_index]);
             } else {
-                array_values($material->Batches->toArray());
+                $material->Batches = array_values($material->Batches->toArray());
             }
             if ($page_name == 'THRESHOLD_QTY') {
                 if ($material->material_quantity_color == 'text-success' || $material->material_quantity_color == 'text-dark' || $material->is_draft == 1) {
