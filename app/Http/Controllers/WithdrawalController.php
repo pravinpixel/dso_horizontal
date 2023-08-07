@@ -264,8 +264,8 @@ class WithdrawalController extends Controller
             MaterialProductHistory($current_batch,'DEDUCT_TRACK_USAGE');
         } else {
             $report_current_batch = clone collect($current_batch);
-            $report_current_batch['quantity']   = $request->used_amount;
-            $report_current_batch['remarks']       = $request->remarks;
+            $report_current_batch['quantity']   = ($request->used_amount / $current_batch->unit_packing_value);
+            $report_current_batch['remarks']    = $request->remarks;
             MaterialProductHistory($report_current_batch,'DEDUCT_TRACK_USAGE');
             $current_batch->update([
                 'quantity'       => $request->remain_amount  / $current_batch->unit_packing_value,
@@ -296,8 +296,8 @@ class WithdrawalController extends Controller
                 ]);
                 $batch->UtilizationCart()->create(["quantity" =>  $request->withdraw_quantity[$key] / $batch->unit_packing_value ]);
                 $report_current_batch = clone collect($batch);
-                $report_current_batch['quantity'] = $request->withdraw_quantity[$key];
-                $report_current_batch['remarks'] = $request->remarks[$key] ?? "-";
+                $report_current_batch['quantity'] = $request->withdraw_quantity[$key]  / $batch->unit_packing_value;
+                $report_current_batch['remarks']  = $request->remarks[$key] ?? "-";
                 MaterialProductHistory($report_current_batch,'DEDUCT_TRACK_OUTLIFE');
                 $total_quantity = $batch->total_quantity - $request->withdraw_quantity[$key]; 
                 $batch->update([
