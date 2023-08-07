@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Laracasts\Flash\Flash;
-use Illuminate\Support\Facades\Log;
-use DataTables;
-use App\Models\Roles;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
@@ -18,30 +16,37 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
 
     public function index(Request $request)
-    { 
-        if($request->ajax()) {
-             
+    {
+        if ($request->ajax()) {
+
             $data = Sentinel::getRoleRepository()->select([
                 'id',
                 'slug',
                 'name',
                 'created_at',
                 'updated_at',
-            ])->whereNotIn('slug',['SuperAdmin',auth_user_role()->slug]);
+            ]);
 
-            return DataTables::eloquent($data)->addColumn('action', function ($data) {
-                return '
-                    <div class="btn-group border">
-                        <a href="'.route('role.edit', $data->id).'" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
-                        <form method="post" action="'.route('role.delete', $data->id).'"> 
-                                '.csrf_field().'
-                            <button id="confirmDelete" type="submit" class="btn btn-sm text-danger border-0" title="Delete"><i class="bi bi-trash"></i> </button>
-                        </form>
-                    </div>
-                '; 
+            return DataTables::eloquent($data)
+            ->editColumn('created_at', function($data) {
+                return SetDateFormatWithHour($data->created_at);
+            })
+            ->addColumn('action', function ($data) {
+                if (!(auth_user_role()->slug === $data->slug)) {
+                    return '
+                        <div class="btn-group border">
+                            <a href="' . route('role.edit', $data->id) . '" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
+                            <form method="post" action="' . route('role.delete', $data->id) . '"> 
+                                    ' . csrf_field() . '
+                                <button id="confirmDelete" type="submit" class="btn btn-sm text-danger border-0" title="Delete"><i class="bi bi-trash"></i> </button>
+                            </form>
+                        </div>
+                    ';
+                }
+                return "-";
             })->make(true);
         }
 
@@ -54,9 +59,9 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         $permissions = config('permission');
-        return view('masters.role.create',compact('permissions'));
+        return view('masters.role.create', compact('permissions'));
     }
 
     /**
@@ -67,19 +72,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $rules = [
-            'name'     => 'required|unique:roles|max:255', 
+            'name'     => 'required|unique:roles|max:255',
         ];
 
         $customMessages = [
             'name.required'    => trans('auth.role_name_required'),
             'name.unique'      => trans('auth.role_already_exists'),
         ];
-        
+
 
         $this->validate($request, $rules, $customMessages);
-        
+
         $permissions  = [];
 
         $permissions_data = $request->input();
@@ -87,18 +92,18 @@ class RoleController extends Controller
         unset($permissions_data['name']);
         unset($permissions_data['_token']);
 
-        foreach ($permissions_data as $key => $value) { 
+        foreach ($permissions_data as $key => $value) {
             $status = $value[1] ?? 0;
-            $permissions[$key] = (boolean) $status;
+            $permissions[$key] = (bool) $status;
         }
-   
-       
+
+
         Sentinel::getRoleRepository()->createModel()->create([
             'name'         =>  $request->name,
             'slug'         =>  Str::slug($request->name),
             'permissions'  =>  $permissions,
         ]);
-  
+
         Flash::success(__('auth.role_creation_successful'));
         return redirect()->route('role.index');
     }
@@ -123,7 +128,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         // dd(getRoutes());
-        $role   = Sentinel::findRoleById($id);  
+        $role   = Sentinel::findRoleById($id);
         return view('masters.role.edit', compact('role'));
     }
 
@@ -137,9 +142,9 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $role = Sentinel::findRoleById($id);
-        
+
         if (empty($role)) {
-            Flash::error( __('global.denied')); 
+            Flash::error(__('global.denied'));
             return redirect()->back();
         }
         $permissions  = [];
@@ -150,18 +155,18 @@ class RoleController extends Controller
         unset($permissions_data['_token']);
         unset($permissions_data['_method']);
 
-        foreach ($permissions_data as $key => $value) { 
+        foreach ($permissions_data as $key => $value) {
             $status = $value[1] ?? 0;
-            $permissions[$key] = (boolean) $status;
+            $permissions[$key] = (bool) $status;
         }
- 
+
         $role->update([
             'name'         =>  $request->name,
             'slug'         =>  Str::slug($request->name),
             'permissions'  =>  $permissions,
         ]);
-       
-        Flash::success( __('auth.role_update_successful'));
+
+        Flash::success(__('auth.role_update_successful'));
 
         return redirect()->back();
     }
@@ -189,5 +194,5 @@ class RoleController extends Controller
         Flash::success(__('auth.role_delete_successful'));
 
         return redirect()->route('role.index');
-    } 
+    }
 }

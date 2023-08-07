@@ -8,7 +8,6 @@ use App\Models\DisposedItems;
 use App\Models\MaterialProducts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
