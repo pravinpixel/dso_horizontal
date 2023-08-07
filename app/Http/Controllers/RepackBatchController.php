@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\RepackOutlifeExport;
 use App\Helpers\LogActivity;
 use App\Models\Batches;
+use App\Models\materialProductHistory;
 use App\Models\MaterialProducts;
 use App\Models\RepackOutlife;
 use App\Models\User;
@@ -19,7 +20,7 @@ class RepackBatchController extends Controller
 {
 
     public function repack(Request $request)
-    { 
+    {
         $previous_batch                = Batches::find($request->id);
         $new_batch                     = $previous_batch->replicate();
         $new_batch->created_at         = Carbon::now();
@@ -31,60 +32,60 @@ class RepackBatchController extends Controller
         $new_batch->housing_type       = $request->housing_type['id'] ?? $request->housing_type;
         $new_batch->housing            = $request->housing;
         $new_batch->save();
-        cloneDocumentFromBatch($request->id,$new_batch->id);
-        if($request->owners) {
+        cloneDocumentFromBatch($request->id, $new_batch->id);
+        if ($request->owners) {
             $new_batch->owners = implode(",", Arr::pluck($request->owners, 'id'));
             $new_batch->save();
             foreach ($request->owners as $key => $owner) {
-                $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'],"batch_id" => $new_batch->id],[
+                $new_batch->BatchOwners()->updateOrCreate(["user_id" => $owner['id'], "batch_id" => $new_batch->id], [
                     "user_id"    =>  $owner['id'],
                     "alias_name" => getUserById($owner['id'])->alias_name
                 ]);
             }
         }
-        MaterialProductHistory($new_batch,'Repack / Transfer');
+        MaterialProductHistory($new_batch, 'Repack / Transfer');
         $old_value             = $previous_batch;
         $new_value             = clone $previous_batch;
         $new_value->quantity   = $request->RemainQuantity;
 
         $previous_batch->update([
-            'quantity'       =>   $request->RemainQuantity / $previous_batch->unit_packing_value ,
+            'quantity'       =>   $request->RemainQuantity / $previous_batch->unit_packing_value,
             'total_quantity' =>  $request->RemainQuantity,
-        ]); 
+        ]);
         return response()->json([
             "status"  => true,
             "message" => "Repack / Transfer Success !"
-        ]); 
+        ]);
     }
     public static function get_repack_outlife($id)
     {
         $batch    =   Batches::with('RepackOutlife')->find($id);
-        if(count($batch->RepackOutlife) == 0) {
+        if (count($batch->RepackOutlife) == 0) {
             $batch->RepackOutlife()->create([
                 'input_repack_amount' => $batch->unit_packing_value
             ]);
         }
         $batch    =   Batches::with('RepackOutlife')->find($id);
         $users = [];
-        if(!is_null($batch->access)) {
-            foreach(json_decode($batch->access) as $user_id) {
+        if (!is_null($batch->access)) {
+            foreach (json_decode($batch->access) as $user_id) {
                 $users[] = User::find($user_id)->alias_name;
             }
             $batch->access = json_encode($users[0]);
-        } 
+        }
         return $batch;
-    } 
-    public function store_repack_outlife(Request $request , $id)
-    { 
+    }
+    public function store_repack_outlife(Request $request, $id)
+    {
         foreach ($request->data as $key => $row) {
-            if($request->repack_id == $row['id']) {
+            if ($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
                 $Batches    = Batches::find($repackData->batch_id);
 
-                if($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
+                if ($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
                     $Batches['quantity']            = $row['quantity'];
-                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_OUT');
-                 
+                    MaterialProductHistory($Batches, 'Repack_Outlife_Draw_OUT');
+
                     $current_batch                   = Batches::find($repackData->batch_id);
                     $next_batch                      = $current_batch->replicate();
                     $next_batch->created_at          = Carbon::now();
@@ -94,13 +95,13 @@ class RepackBatchController extends Controller
                     $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
 
-                    cloneDocumentFromBatch($repackData->batch_id,$next_batch->id);
+                    cloneDocumentFromBatch($repackData->batch_id, $next_batch->id);
 
-                    if(count($current_batch->BatchOwners)) {
+                    if (count($current_batch->BatchOwners)) {
                         foreach ($current_batch->BatchOwners as $key => $user) {
-                            $next_batch->BatchOwners()->updateOrCreate(["user_id" => $user['id'],"batch_id" => $next_batch->id],[
+                            $next_batch->BatchOwners()->updateOrCreate(["user_id" => $user['id'], "batch_id" => $next_batch->id], [
                                 "user_id"    => $user['user_id'],
-                                "alias_name" => getUserById($user['user_id'])->alias_name 
+                                "alias_name" => getUserById($user['user_id'])->alias_name
                             ]);
                         }
                     }
@@ -112,10 +113,10 @@ class RepackBatchController extends Controller
                         "action_by"      => auth_user()->alias_name,
                     ]);
 
-                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value,3,".","");
+                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value, 3, ".", "");
                     $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
-                    
+
                     $old_value           = $current_batch;
                     $new_value           = clone $current_batch;
                     LogActivity::dataLog($old_value, $new_value);
@@ -128,15 +129,15 @@ class RepackBatchController extends Controller
                         'draw_out_time_stamp'     => $row['draw_out']['time_stamp'],
                         'remain_amount'           => $row['balance_amount'],
                         'repack_size'             => $row['repack_size'],
-                        'barcode_number'          => $row['barcode_number'], 
+                        'barcode_number'          => $row['barcode_number'],
                         'old_input_repack_amount' => $row['repack_amount'],
                         'draw_in_last_access'     => auth_user()->alias_name,
                     ]);
                 }
 
-                if($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) { 
+                if ($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
 
-                    if($Batches->unit_packing_value != 0) {
+                    if ($Batches->unit_packing_value != 0) {
                         RepackOutlife::create([
                             'batch_id'            => $id,
                             'input_repack_amount' => $row['repack_size'],
@@ -144,22 +145,27 @@ class RepackBatchController extends Controller
                         ]);
                     }
 
-                    if($Batches->outlife_seconds === null) {
-                        $updated_outlife_seconds    =  (int) $Batches->outlife * 86400 - (int) substr_replace($row['remaining_days_seconds'] ,"", -3);
+                    if (is_null($Batches->outlife_seconds)) {
+                        $updated_outlife_seconds    =  (int) $Batches->outlife * 86400 - (int) substr_replace($row['remaining_days_seconds'], "", -3);
                     } else {
-                        $updated_outlife_seconds    =  (int) $Batches->outlife_seconds - (int) substr_replace($row['remaining_days_seconds'] ,"", -3);
+                        $updated_outlife_seconds    =  (int) $Batches->outlife_seconds - (int) substr_replace($row['remaining_days_seconds'], "", -3);
                     }
-                    
+
                     $dt1                     =  new DateTime("@0");
                     $dt2                     =  new DateTime("@$updated_outlife_seconds");
                     $updated_outlife         =  $dt1->diff($dt2)->format('%a days, %h hours, %i minutes and %s seconds');
                     $current_outlife_expiry  =  CarbonImmutable::now()->add($updated_outlife_seconds, 'second')->toDateTimeString();
-                    
+
                     $Batches->update([
                         'outlife_seconds' => $updated_outlife_seconds,
                         'outlife'         => $updated_outlife,
-                    ]); 
-                    MaterialProductHistory($Batches,'Repack_Outlife_Draw_IN', $updated_outlife);
+                    ]);
+                    $history = materialProductHistory::where(['barcode_number' => $Batches->barcode_number, 'DrawStatus' => 'Draw OUT'])->first();
+                    $newHistory =  $history->replicate();
+                    $newHistory->DrawStatus = 'Draw IN';
+                    $newHistory->RemainingOutlifeOfParent = $updated_outlife;
+                    $newHistory->save();
+                    
                     RepackOutlife::find($row['id'])->update([
                         'draw_in'                 => 1,
                         'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
@@ -172,11 +178,10 @@ class RepackBatchController extends Controller
                         'remaining_days_seconds'  => $row['remaining_days_seconds'],
                         'draw_out_last_access'    => auth_user()->alias_name,
                     ]);
-
                 }
-                
-                RepackOutlife::find($row['id'])->update([ 
-                    'user_id'                 => auth_user()->id, 
+
+                RepackOutlife::find($row['id'])->update([
+                    'user_id'                 => auth_user()->id,
                     'current_date_time'       => Carbon::now()->toDateTimeLocalString()
                 ]);
 
@@ -189,7 +194,7 @@ class RepackBatchController extends Controller
     }
     public function export_repack_outlife($id)
     {
-        $excel_file_name = "Repack-Outlife-".date("Y-M-d  h-i-s A").".xlsx";
+        $excel_file_name = "Repack-Outlife-" . date("Y-M-d  h-i-s A") . ".xlsx";
         return Excel::download(new RepackOutlifeExport($id), $excel_file_name);
     }
 }
