@@ -34,9 +34,9 @@ option {
     text-shadow: 1px 1px 4px red;
 }
 .container-fluid {
-    width: 95% !important;
-    padding-right: 24px;
-    padding-left: 24px;
+    width: 98% !important;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .box.th {
