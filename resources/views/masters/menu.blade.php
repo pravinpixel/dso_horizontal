@@ -4,7 +4,7 @@
         <div class="col-md-4 p-2">
             <x-has-access name="table-order.index">
                 <a class="shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn p-3 fw-bold align-items-center d-flex flex-column {{ Route::is(['table-order.index']) ? 'active' : '' }}"
-                    href="{{ route('table-order.index') }}"><i class="bi bi-table text-warning bi bi-folder fa-2x"></i> Table Order</a>
+                    href="{{ route('table-order.index') }}"><i class="bi bi-table text-warning bi bi-folder fa-2x"></i> Table order</a>
             </x-has-access>
         </div>
         <div class="col-md-4 p-2">
