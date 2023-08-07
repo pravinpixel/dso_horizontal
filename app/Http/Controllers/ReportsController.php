@@ -276,7 +276,9 @@ class ReportsController extends Controller
             return Carbon::parse($data->created_at)->format('h:i:s A');
         })->addColumn('TransactionBy', function ($data) {
             return $data->TransactionBy ?? "SYSTEM BOT";
-        })->rawColumns(["TransactionDate", "TransactionTime", "TransactionBy", "Module", "ActionTaken"])
+        })->addColumn('TotalQuantity', function ($data) {
+            return ((int)$data->UnitPackingValue * (int) $data->Quantity);
+        })->rawColumns(["TransactionDate", "TransactionTime", "TransactionBy", "Module", "ActionTaken",'TotalQuantity'])
             ->make(true);
     }
     public function disposed_items(Request $request)

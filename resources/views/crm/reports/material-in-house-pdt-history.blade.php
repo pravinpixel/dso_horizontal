@@ -59,6 +59,7 @@
                                     <th style="font-weight: bold;font-size:12px">Action Taken</th>
                                     <th style="font-weight: bold;font-size:12px">Unit packing value</th>
                                     <th style="font-weight: bold;font-size:12px">Quantity</th>
+                                    <th style="font-weight: bold;font-size:12px">Total quantity</th>
                                     <th style="font-weight: bold;font-size:12px">Storage area</th>
                                     <th style="font-weight: bold;font-size:12px">Housing </th>
                                     <th style="font-weight: bold;font-size:12px">Owners</th>
@@ -108,6 +109,7 @@
                         {data: "ActionTaken",name: "ActionTaken"},
                         {data: "UnitPackingValue",name: "UnitPackingValue"},
                         {data: "Quantity",name: "Quantity"},
+                        {data: "TotalQuantity",name: "TotalQuantity"},
                         {data: "StorageArea",name: "StorageArea"},
                         {data: "Housing",name: "Housing"},
                         {data: "Owners",name: "Owners"},
