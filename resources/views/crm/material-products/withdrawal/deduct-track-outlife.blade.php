@@ -114,7 +114,7 @@
                                                     <th class="font-12">Unit packing value</th>
                                                     <th class="font-12">Quantity</th>
                                                     <th class="font-12">Total  quantity</th>
-                                                    <th class="font-12">Withdraw quantity</th>
+                                                    <th class="font-12">Withdraw total quantity</th>
                                                     <th class="font-12">Remarks</th>
                                                 </tr> 
                                                 @if (count($row->Batch->TrackOutlifeHistory) > 0)

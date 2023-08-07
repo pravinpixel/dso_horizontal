@@ -113,7 +113,7 @@ class RepackBatchController extends Controller
                         "action_by"      => auth_user()->alias_name,
                     ]);
 
-                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value, 3, ".", "");
+                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $row['repack_size'], 3, ".", "");
                     $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
 
