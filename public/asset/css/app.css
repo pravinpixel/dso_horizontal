@@ -21730,3 +21730,6 @@ table.tr-sm >:not(caption)>*>*{
 .btn-draw-out {
     background: #16c79aad;
 }
+.place-items-center {
+    place-items: center;
+}
