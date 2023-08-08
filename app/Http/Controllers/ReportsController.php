@@ -277,7 +277,7 @@ class ReportsController extends Controller
         })->addColumn('TransactionBy', function ($data) {
             return $data->TransactionBy ?? "SYSTEM BOT";
         })->addColumn('TotalQuantity', function ($data) {
-            return ((int)$data->UnitPackingValue * (int) $data->Quantity);
+            return number_format($data->UnitPackingValue *  $data->Quantity, 3, ".", "");
         })->rawColumns(["TransactionDate", "TransactionTime", "TransactionBy", "Module", "ActionTaken",'TotalQuantity'])
             ->make(true);
     }
