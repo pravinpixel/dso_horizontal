@@ -83,16 +83,18 @@ class RepackBatchController extends Controller
                 $Batches    = Batches::find($repackData->batch_id);
 
                 if ($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                    $Batches['quantity']            = $row['quantity']; 
+                    $Batches['quantity']            = $row['quantity'];
                     $current_batch                   = Batches::find($repackData->batch_id);
-                    $next_batch                      = $current_batch->replicate();
+                    $next_batch                      = $current_batch->replicate(); 
                     $next_batch->created_at          = Carbon::now();
-                    $next_batch->barcode_number      = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
                     $next_batch->unit_packing_value  = $row['repack_size'];
                     $next_batch->total_quantity      = $row['repack_amount'];
                     $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
                     MaterialProductHistory($next_batch, 'Repack_Outlife_Draw_OUT');
+                    $next_batch->barcode_number = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
+                    $next_batch->save();
+
                     cloneDocumentFromBatch($repackData->batch_id, $next_batch->id);
                     if (count($current_batch->BatchOwners)) {
                         foreach ($current_batch->BatchOwners as $key => $user) {
@@ -162,7 +164,7 @@ class RepackBatchController extends Controller
                     $newHistory->DrawStatus = 'Draw IN';
                     $newHistory->RemainingOutlifeOfParent = $updated_outlife;
                     $newHistory->save();
-                    
+
                     RepackOutlife::find($row['id'])->update([
                         'draw_in'                 => 1,
                         'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
