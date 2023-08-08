@@ -83,9 +83,7 @@ class RepackBatchController extends Controller
                 $Batches    = Batches::find($repackData->batch_id);
 
                 if ($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                    $Batches['quantity']            = $row['quantity'];
-                    MaterialProductHistory($Batches, 'Repack_Outlife_Draw_OUT');
-
+                    $Batches['quantity']            = $row['quantity']; 
                     $current_batch                   = Batches::find($repackData->batch_id);
                     $next_batch                      = $current_batch->replicate();
                     $next_batch->created_at          = Carbon::now();
@@ -94,9 +92,8 @@ class RepackBatchController extends Controller
                     $next_batch->total_quantity      = $row['repack_amount'];
                     $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
-
+                    MaterialProductHistory($next_batch, 'Repack_Outlife_Draw_OUT');
                     cloneDocumentFromBatch($repackData->batch_id, $next_batch->id);
-
                     if (count($current_batch->BatchOwners)) {
                         foreach ($current_batch->BatchOwners as $key => $user) {
                             $next_batch->BatchOwners()->updateOrCreate(["user_id" => $user['id'], "batch_id" => $next_batch->id], [
@@ -113,7 +110,7 @@ class RepackBatchController extends Controller
                         "action_by"      => auth_user()->alias_name,
                     ]);
 
-                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $row['repack_size'], 3, ".", "");
+                    $current_batch->quantity       =  number_format($row['balance_amount'] /  $current_batch->unit_packing_value, 3, ".", "");
                     $current_batch->total_quantity =  $row['balance_amount'];
                     $current_batch->save();
 
