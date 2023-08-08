@@ -15,6 +15,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReconciliationController extends Controller
 {
+    public  $dsoRepository;
+
     public function __construct(DsoRepositoryInterface $dsoRepositoryInterface)
     {
         $this->dsoRepository    =   $dsoRepositoryInterface;
@@ -50,7 +52,10 @@ class ReconciliationController extends Controller
                 if ($key != 0 && $physical_stock != null) {
                     $tempCount++;
                     $Batches = Batches::where('barcode_number', $barcode_number)->first();
-                    $Batches->update(['quantity' => $physical_stock]);
+                    $Batches->update([
+                        'quantity' => $physical_stock,
+                        'total_quantity' => ($Batches->unit_packing_value * $physical_stock)
+                    ]);
                     updateParentQuantity($Batches->material_product_id);
                     LogActivity::log($Batches->id);
                 }
