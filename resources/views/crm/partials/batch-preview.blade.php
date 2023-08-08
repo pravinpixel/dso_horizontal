@@ -290,7 +290,7 @@
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
-            <div class="fw-bold mb-1">Disposed certificate</div>
+            <div class="fw-bold mb-1">Disposal certificate</div>
             @if (!is_null($batch->BatchFiles))
                 {!! getBatchFile($batch->BatchFiles,'disposal_certificate', false) !!}
             @endif
