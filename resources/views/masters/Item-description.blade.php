@@ -2,7 +2,7 @@
 
 @section('masters')
     <div class="row m-0 master-card-group">
-        <div class="col-md-4 mb-3 px-2">
+        {{-- <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0"> 
                 <div class="card-header bg-light p-2">
                     <strong class="h5 text-primary">Category selection</strong> 
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-md-4 mb-3 px-2">
             <div class="card border m-0">
                 <div class="card-header bg-light p-2">
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3 px-2">
+        <div class="col-md-8 mb-3 px-2">
             <div class="card border m-0">
                 <div class="card-header bg-light p-2">
                     <strong class="h5 text-primary">Housing type</strong> 
