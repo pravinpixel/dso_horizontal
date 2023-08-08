@@ -255,10 +255,10 @@ class ReportsController extends Controller
         $material->when(isset($request->DrawStatus), function ($query) use ($request) {
             $query->where("DrawStatus", $request->DrawStatus);
         });
-        $material->when(isset($request->StartDate), function ($query) use ($request) {
+        $material->when(!is_null($request->start_date), function ($query) use ($request) {
             $query->whereBetween('created_at', dateBetween($request));
         });
-        $material->when(isset($request->EndDate), function ($query) use ($request) {
+        $material->when(!is_null($request->end_date), function ($query) use ($request) {
             $query->whereBetween('created_at', dateBetween($request));
         });
         return $material->get();

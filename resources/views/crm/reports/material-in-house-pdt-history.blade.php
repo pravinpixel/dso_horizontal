@@ -124,9 +124,11 @@
             filterTable = (e) => {
                 $('#historyTable').DataTable().destroy();
                 const filters = {
-                @foreach ($filters as $index => $filter)
-                    {{ str_replace(' ','',$index) }}  : $('#{{ str_replace(' ','',$index) }}Filter').val(), 
-                @endforeach
+                    @foreach ($filters as $index => $filter)
+                        {{ str_replace(' ','',$index) }}  : $('#{{ str_replace(' ','',$index) }}Filter').val(), 
+                    @endforeach
+                    end_date: $('#EndDateFilter').val(),
+                    start_date: $('#StartDateFilter').val()
                 }
                 load_data(filters);
             }
