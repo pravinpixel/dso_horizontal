@@ -1,12 +1,11 @@
 var app = angular.module('PrintLabelApp', []);
 app.controller("PrintController", ($scope, $http) => {
-    $scope.Barcode                  = true
-    $scope.date_of_shipment         = true
-    $scope.owners                  = true
-    $scope.item_description         = true
-    $scope.date_of_expiry           = true
-    $scope.batch_id                 = true
-    $scope.used_for_td_expt_only    = true
+    $scope.Barcode          = true
+    $scope.date_of_shipment = true
+    $scope.owners           = true
+    $scope.item_description = true
+    $scope.date_of_expiry   = true
+    $scope.batch_id         = true
 
     $scope.confirmGHS = () => {
         $("#GHSPictogramMenu").hide();
