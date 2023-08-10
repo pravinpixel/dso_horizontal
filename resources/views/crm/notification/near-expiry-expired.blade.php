@@ -87,6 +87,7 @@
                 var API = `{{ route('near_expiry_expired_ajax') }}/${element[1].id}`;
                 $(`#${element[1].id}`).DataTable({
                     stripeClasses: [],
+                    order: [[ 0, 'desc' ] ],
                     lengthMenu: [
                         [5, 10, 25, 50, -1],
                         [5, 10, 25, 50, 'All'],

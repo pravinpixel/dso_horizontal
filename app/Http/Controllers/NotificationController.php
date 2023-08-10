@@ -105,7 +105,7 @@ class NotificationController extends Controller
             'Batches.StorageArea',
             'Batches.StatutoryBody',
             'Batches.BatchMaterialProduct'
-        ])->latest()->get();
+        ])->get();
         $material_products =  $this->dsoRepository->renderTableData($material_product_data, [
             "response"  => "JSON",
             "page_name" => "NEAR_EXPIRY_EXPIRED"

@@ -137,6 +137,8 @@ class ReportsController extends Controller
     }
     public function material_in_house_pdt_history_download(Request $request)
     {
+        $request['start_date'] = $request->StartDate;
+        $request['end_date']   = $request->EndDate;
         $material = $this->materialHistoryFilter($request);
         return Excel::download(new MaterialProductHistoryExport($material), generateFileName('Material inHouse pdt History', 'xlsx'));
     }

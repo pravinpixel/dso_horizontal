@@ -31,8 +31,8 @@
                 <td>{{ $data->created_at->format('d/m/Y') }}</td>
                 <td>{{ $data->created_at->format('H:i:s A') }}</td>
                 <td>{{ $data->TransactionBy }}</td>
-                <td>{{ $data->Module }}</td>
-                <td>{{ $data->ActionTaken }}</td>
+                <td>{{ ucfirst(strtolower(format_text($data->Module))) }}</td>
+                <td>{{ ucfirst(strtolower(format_text($data->ActionTaken))) }}</td>
                 <td>{{ $data->UnitPackingValue }}</td>
                 <td>{{ $data->Quantity }}</td>
                 <td>{{ number_format($data->UnitPackingValue *  $data->Quantity, 3, ".", "") }}</td>
