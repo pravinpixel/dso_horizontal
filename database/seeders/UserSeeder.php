@@ -20,13 +20,13 @@ class UserSeeder extends Seeder
     {
         #========Create ADmin======
         $Admin = Sentinel::getRoleRepository()->createModel()->create([
-            'name'       => 'Admin',
+            'name'       => 'Super Admin',
             'slug'       => 'admin',
         ]);
 
         $SuperAdmin = Sentinel::getRoleRepository()->createModel()->create([
-            'name'       => 'Super Admin',
-            'slug'       => 'SuperAdmin',
+            'name'       => 'Dso Admin',
+            'slug'       => 'dso-admin',
         ]);
 
         $Admin->users()->attach(Sentinel::registerAndActivate([
@@ -38,10 +38,10 @@ class UserSeeder extends Seeder
         ]));
 
         $SuperAdmin->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '12345678',
+            'email'      => 'DSOPw#456',
             'password'   => config('auth.password'),
-            'full_name'  => 'Developer',
-            'alias_name' => "Developer",
+            'full_name'  => 'Shizuka',
+            'alias_name' => "Shizuka",
             'department' => 1
         ]));
  
@@ -54,74 +54,11 @@ class UserSeeder extends Seeder
         ]);
         
         $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '456',
+            'email'      => 'DSOPwStaff@234',
             'password'   => config('auth.password'),
-            'full_name'  => 'Caleb',
-            'alias_name' => "Caleb",
+            'full_name'  => 'Himawari Nohara',
+            'alias_name' => "Himawari Nohara",
             'department' => 1
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '654',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Cheng',
-            'alias_name' => "Cheng",
-            'department' => 1
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '321',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Derrik',
-            'alias_name' => "Derrik",
-            'department' => 1
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '789',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Desmond',
-            'alias_name' => "Desmond",
-            'department' => 2
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '987',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Dalton',
-            'alias_name' => "Dalton",
-            'department' => 2
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '741',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Dale',
-            'alias_name' => "Dale",
-            'department' => 2
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '852',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Daylen',
-            'alias_name' => "Daylen",
-            'department' => 2
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '1654',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Desmond',
-            'alias_name' => "Desmond",
-            'department' => 3
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '7523',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Kenneth',
-            'alias_name' => "Kenneth",
-            'department' => 3
-        ]));
-        $employee->users()->attach(Sentinel::registerAndActivate([
-            'email'      => '321478',
-            'password'   => config('auth.password'),
-            'full_name'  => 'Joseph',
-            'alias_name' => "Joseph",
-            'department' => 3
         ]));
     }
 }

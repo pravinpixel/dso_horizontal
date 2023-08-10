@@ -28,14 +28,14 @@ class RoleController extends Controller
                 'name',
                 'created_at',
                 'updated_at',
-            ]);
+            ])->where('slug','!=','admin');
 
             return DataTables::eloquent($data)
             ->editColumn('created_at', function($data) {
                 return SetDateFormatWithHour($data->created_at);
             })
             ->addColumn('action', function ($data) {
-                if (!(auth_user_role()->slug === $data->slug)) {
+                if (!(auth_user_role()->slug === $data->slug)  && $data->slug !== 'admin') {
                     return '
                         <div class="btn-group border">
                             <a href="' . route('role.edit', $data->id) . '" class="btn btn-sm border-top-0  border-start-0 border-bottom-0 border" title="Edit"> <i class="bi bi-pencil-square"></i> </a>

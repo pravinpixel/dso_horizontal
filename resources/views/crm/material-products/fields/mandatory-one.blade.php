@@ -111,18 +111,27 @@
                 ]) !!}
             </div>
         </div>
-        <div class="row m-0 y-center my-2">
-            <label for="" class="col-4">Unique Barcode </label>
-            <div class="col-8">
-                {!! Form::number(
-                    'barcode_number',
-                    wizard_mode() === 'duplicate'
-                        ? generateBarcode(category_type() ?? ($material_product->category_selection ?? null))
-                        : $batch->barcode_number ?? generateBarcode(category_type() ?? ($material_product->category_selection ?? null)),
-                    ['class' => 'form-control form-select-sm', 'readonly'],
-                ) !!}
+        @env('local')
+            <div class="row m-0 y-center my-2">
+                <label for="" class="col-4">Unique Barcode </label>
+                <div class="col-8">
+                    {!! Form::number(
+                        'barcode_number',
+                        wizard_mode() === 'duplicate'
+                            ? generateBarcode(category_type() ?? ($material_product->category_selection ?? null))
+                            : $batch->barcode_number ?? generateBarcode(category_type() ?? ($material_product->category_selection ?? null)),
+                        ['class' => 'form-control form-select-sm', 'readonly'],
+                    ) !!}
+                </div>
             </div>
-        </div>
+            @else
+            {!! Form::hidden(
+                'barcode_number',  wizard_mode() === 'duplicate'
+                    ? generateBarcode(category_type() ?? ($material_product->category_selection ?? null))
+                    : $batch->barcode_number ?? generateBarcode(category_type() ?? ($material_product->category_selection ?? null)),
+                ['class' => 'form-control form-select-sm', 'readonly'],
+            ) !!}
+        @endenv
     </div>
     <div class="col-lg-6">
         <div class="row m-0 y-center my-2">
