@@ -51,7 +51,7 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/axios.min.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
         getWithDrawlCart = async (event, barcode) => { // Scan Barcode
@@ -119,7 +119,7 @@
         startTrackUsage = (total_amount, used_amount) => {
             var remain_amount = document.getElementById('remain_amount')
             let result = total_amount - used_amount.value
-            remain_amount.value = result < 0 ? 0 :result
+            remain_amount.value = result < 0 ? 0 : result
         }
     </script>
 @endsection

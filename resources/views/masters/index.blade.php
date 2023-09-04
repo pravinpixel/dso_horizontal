@@ -54,8 +54,7 @@
     <input type="hidden" value="{{ route('master.update.category') }}" id="update_master_category">
     <input type="hidden" value="{{ route('master.delete.category') }}" id="delete_master_category">
  
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/angular.min.js') }}"></script> 
     <script src="{{ asset('public/asset/js/modules/MasterApp.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/MasterController.js') }}"></script> 
 @endsection 

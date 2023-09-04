@@ -261,7 +261,7 @@
             font-family: 'barcode font';
             font-style: normal;
             font-weight: 400;
-            src: local('barcode font'), url('https://fonts.cdnfonts.com/s/10997/BarcodeFont.woff') format('woff');
+            src: local('barcode font'), url("{{ asset('asset/fonts/BarcodeFont.woff') }}") format('woff');
         }
     </style>
 
@@ -279,6 +279,6 @@
     </style>
 @endsection
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/angular.min.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/PrintLabelController.js') }}"></script>
 @endsection

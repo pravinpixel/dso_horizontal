@@ -205,14 +205,14 @@
 </div>
 
 @section('styles')
-    <link rel="stylesheet" href="https://www.jquery-az.com/jquery/css/jquery.multiselect.css">
+    <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/jquery.multiselect.css') }}">
     <script src="{{ asset('public/asset/css/vendors/select2.min.css') }}"></script>
 @endsection
 
 @section('scripts')
-    <script src="https://www.jquery-az.com/jquery/js/multiselect-checkbox/jquery.multiselect.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/jquery.multiselect.js') }}"></script>
     <script src="{{ asset('public/asset/js/vendors/select2.min.js') }}"></script>
-    <script src="https://www.jqueryscript.net/demo/multiple-file-upload-validation/jquery.MultiFile.js"></script>
+    <script src="{{ asset('public/asset/js/vendors/jquery.MultiFile.js') }}"></script>
     @if (config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'access.status') ==
             'disabled')
         <script>
