@@ -15,7 +15,7 @@ class AutoDrawInJob implements ShouldQueue
     public function handle()
     {
         $Batches = Batches::with("RepackOutlife")->get();
-        $status = true;
+        $status = false;
         foreach($Batches as $batch) {
             foreach($batch->RepackOutlife as $outlife) {
                 if($outlife->draw_in == 0 && $outlife->draw_out == 1) { //$outlife->draw_in == 0 && $outlife->draw_out == 1
@@ -36,7 +36,7 @@ class AutoDrawInJob implements ShouldQueue
                             $updated_outlife_seconds    =  (int) $batch->outlife_seconds - (int) substr_replace($remaining_days_seconds, "", -3);
                         }
         
-                        $updated_outlife  = dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds"));
+                        $updated_outlife  = dateDifferStr(new DateTime("@0"),new DateTime("@$remaining_days_seconds"));
                    
                         $current_outlife_expiry  =  Carbon::parse($auto_draw_date)->add($updated_outlife_seconds, 'second')->toDateTimeString();
 
@@ -59,7 +59,7 @@ class AutoDrawInJob implements ShouldQueue
                             'current_outlife_expiry'  => $current_outlife_expiry,
                         ]);
                         $batch->update([
-                            'outlife_seconds'   => $updated_outlife_seconds,
+                            'outlife_seconds'   => $remaining_days_seconds,
                             'updated_outlife'   => $updated_outlife
                         ]); 
                         $history = materialProductHistory::where(['barcode_number' => $batch->barcode_number, 'DrawStatus' => 'Draw OUT'])->first();
