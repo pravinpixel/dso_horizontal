@@ -92,7 +92,7 @@
                                             class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife
                                             expiry</small><br>
                                         @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
-                                            <small>{{ $batch->DrawInOutlifeLatest->current_outlife_expiry }}</small>
+                                            <small>{{ str_replace('T', ' ', $batch->DrawInOutlifeLatest->current_outlife_expiry) }}</small>
                                             <div><small>{{ $batch->outlife }}</small></div>
                                         @else
                                             <small class="text-dark">DD/MM/YYYY</small>
