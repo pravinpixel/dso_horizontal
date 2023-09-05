@@ -153,7 +153,7 @@ class RepackBatchController extends Controller
                     $dt1                     =  new DateTime("@0");
                     $dt2                     =  new DateTime("@$updated_outlife_seconds");
                     $updated_outlife         =  $dt1->diff($dt2)->format('%a days, %h hours, %i minutes and %s seconds');
-                    $current_outlife_expiry  =  CarbonImmutable::now()->add($updated_outlife_seconds, 'second')->toDateTimeString();
+                    $current_outlife_expiry  =  CarbonImmutable::now()->add($updated_outlife_seconds, 'second')->toDateTimeLocalString();
 
                     $Batches->update([
                         'outlife_seconds' => $updated_outlife_seconds,

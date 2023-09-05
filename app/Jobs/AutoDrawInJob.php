@@ -25,7 +25,7 @@ class AutoDrawInJob implements ShouldQueue
                         $remaining_days_seconds  = abs(strtotime($outlife->updated_at) - strtotime($draw_in_date));
                         $updated_outlife_seconds = (int) $batch->outlife_seconds - (int) substr_replace($remaining_days_seconds, "", -3);
                         $updated_outlife         = dateDifferStr(new DateTime("@$updated_outlife_seconds"), new DateTime("@$remaining_days_seconds"));
-                        $current_outlife_expiry  = Carbon::parse($draw_in_date)->add($updated_outlife_seconds, 'second')->toDateTimeString();
+                        $current_outlife_expiry  = Carbon::parse($draw_in_date)->add($updated_outlife_seconds, 'second')->toDateTimeLocalString();
                         $this->createNewOutlife($batch, $outlife);
                         $batch->update([
                             'outlife_seconds' => $updated_outlife_seconds,
@@ -50,7 +50,7 @@ class AutoDrawInJob implements ShouldQueue
     }
 
     function hasDrawIn($outlife) {
-        $status     = true;
+        $status     = false;
         $created_at = new DateTime($outlife->created_at);
         $now        = new DateTime();
         $time_diff  = $created_at->diff($now);

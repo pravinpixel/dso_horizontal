@@ -8,7 +8,7 @@
                     <tr>
                         <th class="p-1"> Item description</th>
                         <th class="p-1">Brand</th>
-                        <th class="p-1">Batch#/Serial#	</th>
+                        <th class="p-1">Batch#/Serial# </th>
                         <th class="p-1">Owner1/2</th>
                         <th class="p-1">DOE</th>
                         <th class="p-1">Used for TD/Expt</th>
@@ -91,11 +91,11 @@
                                         <small
                                             class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife
                                             expiry</small><br>
-                                        @if ($batch->RepackOutlife[0]->current_outlife_expiry ?? null)
-                                            <small>{{ $batch->RepackOutlife[0]->current_outlife_expiry }}</small>
+                                        @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
+                                            <small>{{ $batch->DrawInOutlifeLatest->current_outlife_expiry }}</small>
                                             <div><small>{{ $batch->outlife }}</small></div>
-                                            @else
-                                            <small class="text-dark" >DD/MM/YYYY</small>
+                                        @else
+                                            <small class="text-dark">DD/MM/YYYY</small>
                                         @endif
                                     </div>
                                 </td>
