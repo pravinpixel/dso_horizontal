@@ -111,6 +111,10 @@ class Batches extends Model
     {
         return $this->hasMany(RepackOutlife::class, 'batch_id', 'id');
     }
+    public function DrawInOutlife()
+    {
+        return $this->hasMany(RepackOutlife::class, 'batch_id', 'id')->where(['draw_in' => 0,'draw_out' => 1]);//outlife->draw_in == 0 && $outlife->draw_out == 1
+    }
     public function HousingType()
     {
         return  $this->hasOne(HouseTypes::class, 'id', 'housing_type');
