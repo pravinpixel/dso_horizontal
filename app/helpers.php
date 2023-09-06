@@ -358,7 +358,6 @@ if (!function_exists('getRoutes')) {
             $prefix = $value->getAction()['prefix'];
             $name   = $value->getAction()['as'] ?? '';
             if ($prefix != '_ignition' && $prefix != 'sanctum' && $prefix != 'api' && $prefix != '' && $prefix != '/' && $name != '' && $prefix !== '_debugbar' && $prefix !== '/jobs') {
-                Log::info($prefix);
                 $routeList[] =  [
                     0 => str_replace('/', '', $prefix),
                     1 => [

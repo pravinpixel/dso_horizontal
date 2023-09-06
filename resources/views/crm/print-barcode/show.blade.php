@@ -88,9 +88,7 @@
                             <tr style="vertical-align: baseline;">
                                 <td class="text-start" style="width:50% !important">
                                     <div class="m-0 " ng-if="PrintOutlife">
-                                        <small
-                                            class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife
-                                            expiry</small><br>
+                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry</small><br>
                                         @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
                                             <small>{{ str_replace('T', ' ', $batch->DrawInOutlifeLatest->current_outlife_expiry) }}</small>
                                             <div><small>{{ $batch->outlife }}</small></div>

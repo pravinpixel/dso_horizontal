@@ -1,8 +1,10 @@
 <?php
 
-if (!function_exists('hasAccess')) {
-    function hasAccess()
-    {
-        return 'TRUE';
+use Illuminate\Support\Facades\Log;
+
+if (!function_exists('hasAdmin')) {
+    function hasAdmin()
+    { 
+        return auth_user_role()->permissions['is_admin'] ?? false;
     }
 }

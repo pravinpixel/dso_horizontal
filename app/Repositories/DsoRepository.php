@@ -16,6 +16,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
+
 class DsoRepository implements DsoRepositoryInterface
 {
     public function renderPage($page_name, $view)
@@ -212,30 +214,27 @@ class DsoRepository implements DsoRepositoryInterface
         foreach ($access_material_product as $material_index => $material) {
             foreach ($material->Batches as $batch_index => $batch) {
                 $batch->permission = 'NONE';
-                if (auth_user_role()->slug == 'staff') {
+                if(hasAdmin()) {
+                    $batch->permission = 'READ_AND_WRITE';
+                } else {
                     $access     = json_decode($batch->access);
-
                     if (isset($access)) {
                         if (in_array(auth_user()->id, $access) == false) {
                             unset($access_material_product[$material_index]->Batches[$batch_index]);
                         }
                     }
-                    if (count($batch->BatchOwners)) {
-                        // Log::info($batch->id);
-                        // Log::info(in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id')));
+                    if (count($batch->BatchOwners)) { 
                         if (in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id'))) {
                             $batch->permission = 'READ_AND_WRITE';
                         } else {
                             $batch->permission = 'READ_ONLY';
                         }
                     }
-                } else {
-                    $batch->permission = 'READ_AND_WRITE';
-                }
-                if($batch->permission == 'READ_ONLY' && auth_user_role()->slug != 'admin' && $page_name == 'THRESHOLD_QTY') {
+                } 
+                if($batch->permission == 'READ_ONLY' && !hasAdmin() && $page_name == 'THRESHOLD_QTY') {
                     unset($access_material_product[$material_index]->Batches[$batch_index]); 
                 }
-                if($page_name === 'NEAR_EXPIRY_EXPIRED' && auth_user_role()->slug !== 'admin'){
+                if($page_name === 'NEAR_EXPIRY_EXPIRED' && !hasAdmin()){
                     if (!in_array(auth_user()->id, Arr::pluck($batch->BatchOwners->toArray(), 'user_id'))) { 
                         unset($access_material_product[$material_index]->Batches[$batch_index]); 
                     }
@@ -259,11 +258,11 @@ class DsoRepository implements DsoRepositoryInterface
                 return collect($collection);
             }
         }
-        $items      = collect($collection);
-        $perPage    = config('app.paginate');
-        $page       = null;
-        $page       = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items      = $items instanceof Collection ? $items : Collection::make($items);
+        $items   = collect($collection);
+        $perPage = config('app.paginate');
+        $page    = null;
+        $page    = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items   = $items instanceof Collection ? $items : Collection::make($items);
 
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, [
             'path'     => LengthAwarePaginator::resolveCurrentPath(),

@@ -15,7 +15,7 @@
     </div>
 @endsection
 @section('styles')
-    <link rel="stylesheet" href="{{ assets('public/asset/css/vendors/rowReorder.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/rowReorder.dataTables.min.css') }}">
 @endsection
 @section('scripts')
     <script src="{{ asset('public/asset/js/vendors/dataTables.rowReorder.min.js') }}"></script>

@@ -154,12 +154,11 @@ class RoleController extends Controller
         unset($permissions_data['name']);
         unset($permissions_data['_token']);
         unset($permissions_data['_method']);
-
+      
         foreach ($permissions_data as $key => $value) {
-            $status = $value[1] ?? 0;
+            $status =  $key !== 'is_admin' ? $value[1] ?? 0 : $value[0] ?? 0;
             $permissions[$key] = (bool) $status;
         }
-
         $role->update([
             'name'         =>  $request->name,
             'slug'         =>  Str::slug($request->name),
