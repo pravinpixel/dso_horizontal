@@ -128,7 +128,8 @@ if (!function_exists('storageGet')) {
     function storageGet($src)
     {
         if (Storage::exists($src)) {
-            $file = asset(str_replace('public', 'public/storage/', $src));
+            http://192.168.1.100/dso-inventory/storage/app/public/files/pictograms/HIp0DLOFjfICspdTyj4Dwj1JMTH1ezsDcuhgQkuP.jpg
+            $file = asset(str_replace('public', 'storage/app/public/', $src));
         } else {
             $file =  $src;
         }
