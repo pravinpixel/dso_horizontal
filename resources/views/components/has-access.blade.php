@@ -1,3 +1,3 @@
-@if ($access)
+{{ $access ?? '' }}
     {{ $slot }}
 @endif
