@@ -148,4 +148,8 @@ class Batches extends Model
     {
         return $this->hasMany(TrackOutlifeHistory::class, 'batch_id', 'id');
     }
+     public function LatestBatchFiles()
+    {
+        return $this->hasMany(BatchFiles::class, 'batch_id', 'id')->where('column_name','used_for_td_certificate')->orderBy('id','desc');
+    }
 }

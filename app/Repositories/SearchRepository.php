@@ -48,7 +48,7 @@ class SearchRepository implements SearchRepositoryInterface
     }
 
     public function advanced_search($filter)
-    {
+    {   
         $material_table =  [
             'quantity',
             'category_selection',
@@ -58,9 +58,12 @@ class SearchRepository implements SearchRepositoryInterface
             'alert_threshold_qty_upper_limit',
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
+           
         ];
+          
         $material_product_data =  MaterialProducts::with([
             'Batches' => function ($q) use ($filter, $material_table) {
+                
                 $this->searchFilter($q, $filter, $material_table);
             },
             'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody', 'Batches.BatchMaterialProduct'
@@ -68,6 +71,7 @@ class SearchRepository implements SearchRepositoryInterface
             foreach ($filter as $column => $value) {
                 if (in_array($column, $material_table)) {
                     if (!empty($value)) {
+
                         $q->where($column, $value);
                     }
                 }
@@ -75,10 +79,11 @@ class SearchRepository implements SearchRepositoryInterface
         })->WhereHas('Batches', function ($q) use ($filter, $material_table) {
             $this->searchFilter($q, $filter, $material_table);
         })->latest()->get();
+        
         return $this->dsoRepository->renderTableData($material_product_data, null);
     }
     public function sortingOrder($sort_by)
-    {
+    {    
         if (checkIsMaterialColumn($sort_by->col_name) == 1) {
             $material_product_data =  MaterialProducts::with([
                 'Batches',
@@ -139,15 +144,18 @@ class SearchRepository implements SearchRepositoryInterface
             'supplier'            =>  $row->af_supplier,
             'unit_pkt_size'       =>  $row->af_unit_pkt_size,
             'usage_tracking'      =>  $row->af_usage_tracking,
-            'outlife_tracking'    =>  $row->af_outlife_tracking
+            'outlife_tracking'    =>  $row->af_outlife_tracking,
+             'disposed_after'    =>  $row->af_disposed_after
         ]);
     }
 
     public function searchFilter($q, $filter, $material_table)
     {
+      
         foreach ($filter as $column => $value) {
             if (in_array($column, $material_table) != 1) {
                 if (checkIsBatchDateColumn($column)) {
+                     
                     $q->whereDate($column, '>=', $value['startDate'])->whereDate($column, '<=', $value['endDate']);
                 } elseif ($column == 'owners') {
                     $inputArray = Arr::pluck($filter->owners, 'id');

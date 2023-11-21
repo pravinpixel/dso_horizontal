@@ -38,6 +38,13 @@
                 {!! getBatchFile($batch->BatchFiles, 'used_for_td_certificate') !!}
             </div>
         </div>
+        <div class="row m-0 y-center my-2">
+            <label for="" class="col-4">Date Of Disposal</label>
+            <div class="col-8">
+               <input type="text" class="form-control form-select-sm" name="dod" value="{{$batch->disposed_after}}" readonly>
+               
+            </div>
+        </div>
     </div>
 </div>
 <div id="hidden_input"></div>

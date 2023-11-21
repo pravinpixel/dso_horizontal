@@ -94,7 +94,7 @@ class MaterialProductsController extends Controller
     public function advanced_search(Request $request)
     {
         if ($request->advanced_search) {
-
+  
             $row = (object) $request->advanced_search;
 
             $material_product = MaterialProducts::select("*")
@@ -516,7 +516,7 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $batch   =   Batches::with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType'])->findOrFail($id);
+        $batch   =   Batches::with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType','LatestBatchFiles'])->findOrFail($id);
         return view('crm.partials.batch-preview', compact('batch'));
     }
     public function view_parent_batch($id)

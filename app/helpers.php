@@ -231,6 +231,7 @@ if (!function_exists('checkIsBatchDateColumn')) {
         $data =  [
             "date_in",
             "date_of_expiry",
+            "disposed_after",
             "date_of_manufacture",
             "date_of_shipment"
         ];
@@ -864,7 +865,7 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('permute')) {
 
-        function permute($arr, $start = 0, &$result = [], $isArray)
+        function permute($arr=0, $start = 0, &$result = [], $isArray=[])
         {
             if ($start === count($arr) - 1) {
                 $result[] = $isArray ?  $arr : implode(',', $arr);

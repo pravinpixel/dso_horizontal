@@ -15,7 +15,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
-
+use App\Models\Batches;
 class UserController extends Controller
 {
     public function index(Request $request)
@@ -106,7 +106,22 @@ class UserController extends Controller
                 'email'      => $request->email,
                 'password'   => Hash::make(config('auth.password')),
             ]);
-
+            $data=[];
+            $users=User::select('id')->where('id','!=',$user->id)->orderBy('id','asc')->get();
+            foreach($users as $user_data){
+                 $data[]=$user_data->id;
+            }
+            $batches=Batches::all();
+            foreach($batches as $batch){
+            $batch_data=Batches::find($batch->id);
+            $access=json_decode($batch_data->access);
+           if($access==$data){
+            array_push($access,strval($user->id));
+            $batch_data->access=$access;
+            $batch_data->update();
+            }
+        }
+            
             // find a Users
             $user_activation = Sentinel::findById($user->id);
 
@@ -137,6 +152,14 @@ class UserController extends Controller
            Flash::error( __('global.not_found'));
 
             return redirect()->route('user.index');
+        }
+        $batches=Batches::all();
+            foreach($batches as $batch){
+            $batch_data=Batches::find($batch->id);
+            $access=json_decode($batch_data->access);
+        unset($access[array_search(strval($id),$access )]);
+            $batch_data->access=array_values($access);
+            $batch_data->update();  
         }
 
         $data->delete();

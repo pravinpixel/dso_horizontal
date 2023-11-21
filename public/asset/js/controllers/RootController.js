@@ -57,6 +57,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_coc_coa_mill_cert               = true
             $scope.on_cost_per_unit                   = true
             $scope.on_date_in                         = true
+            $scope.on_disposed_after                  = true
             $scope.on_date_of_expiry                  = true
             $scope.on_date_of_manufacture             = true
             $scope.on_date_of_shipment                = true
@@ -106,6 +107,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_coc_coa_mill_cert               = false
             $scope.on_cost_per_unit                   = false
             $scope.on_date_in                         = false
+            $scope.on_disposed_after                  = false
             $scope.on_date_of_expiry                  = true
             $scope.on_date_of_manufacture             = false
             $scope.on_date_of_shipment                = false
@@ -377,7 +379,7 @@ app.controller('RootController', function ($scope, $http) {
 
         Object.keys(payload_data.advanced_search).map((item) => {
             if (
-                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment"
+                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment" || item == "disposed_after"
             ) {
                 payload_data.advanced_search[item].startDate = moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
                 payload_data.advanced_search[item].endDate = moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')

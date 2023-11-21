@@ -51,7 +51,7 @@ class DsoRepository implements DsoRepositoryInterface
                         <span class="badge mx-auto badge-outline-danger rounded-pill" ng-if="batch.' . $value['name'] . ' == ' . "1" . ' != true">No</span>
                     ',
                 ];
-            } elseif ($value['name'] == 'date_of_manufacture' || $value['name'] == 'date_of_expiry' || $value['name'] == 'date_of_shipment'  || $value['name'] == 'extended_expiry') {
+            } elseif ($value['name'] == 'date_of_manufacture' || $value['name'] == 'date_of_expiry'|| $value['name'] == 'disposed_after' || $value['name'] == 'date_of_shipment'  || $value['name'] == 'extended_expiry') {
                 $tableAllColumns[$key] = [
                     "status"    => $value['status'],
                     "name"      => $key,
@@ -100,6 +100,7 @@ class DsoRepository implements DsoRepositoryInterface
                 $batch->date_of_expiry      = SetDateFormat($batch->date_of_expiry);
                 $batch->date_of_manufacture = SetDateFormat($batch->date_of_manufacture);
                 $batch->date_of_shipment    = SetDateFormat($batch->date_of_shipment);
+                 $batch->disposed_after    = SetDateFormat($batch->disposed_after);
 
                 if ($batch->owners) {
                     $owners = "";

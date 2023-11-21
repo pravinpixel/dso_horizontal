@@ -30,6 +30,7 @@
                                 @elseif ($column['name'] == 'outlife'  ) Outlife (days)
                                 @elseif ($column['name'] == 'used_for_td_expt_only'  ) Used for TD/Expt only
                                 @elseif ($column['name'] == 'extended_qc_status')  Extended QC status 
+                                @elseif ($column['name'] == 'disposed_after')  Date of Disposal 
                                 @else {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
                             @endif
                         </small>

@@ -88,12 +88,14 @@
                             <tr style="vertical-align: baseline;">
                                 <td class="text-start" style="width:50% !important">
                                     <div class="m-0 " ng-if="PrintOutlife">
-                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry</small><br>
+                                        <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Leftover Outlife</small><br>
                                         @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
-                                            <small>{{ str_replace('T', ' ', $batch->DrawInOutlifeLatest->current_outlife_expiry) }}</small>
-                                            <div><small>{{ $batch->outlife }}</small></div>
-                                        @else
-                                            <small class="text-dark">DD/MM/YYYY</small>
+                                            <small>{{ $batch->outlife }}</small>
+                                            <div>
+                                                <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
+<small>{{ date('d/m/Y'
+,strtotime($batch->DrawInOutlifeLatest->current_outlife_expiry)) }}</small></div>
+                                       
                                         @endif
                                     </div>
                                 </td>
@@ -147,14 +149,7 @@
                     </div>
                     <div class="card-body text-center">
                         <div class="row m-0">
-                            <div class="col-md-4 mb-2 text-start">
-                                <label for="PrintOutlife"
-                                    class="p-1 form-label cursor ps-2 bg-light rounded-pill shadow-sm border w-100">
-                                    <input type="checkbox" class="form-check-input checked-input me-2"
-                                        ng-model="PrintOutlife" id="PrintOutlife">
-                                    Outlife expiry
-                                </label>
-                            </div>
+                            
                             <div class="col-md-4 mb-2 text-start">
                                 <label for="Barcode"
                                     class="p-1 form-label cursor ps-2 bg-light rounded-pill shadow-sm border w-100">
@@ -211,6 +206,15 @@
                                         type="checkbox" class="form-check-input checked-input me-2"
                                         ng-model="date_of_shipment" id="date_of_shipment">DOD</label>
                             </div>
+                            <div class="col-md-4 mb-2 text-start">
+                                <label for="PrintOutlife"
+                                    class="p-1 form-label cursor ps-2 bg-light rounded-pill shadow-sm border w-100">
+                                    <input type="checkbox" class="form-check-input checked-input me-2"
+                                        ng-model="PrintOutlife" id="PrintOutlife">
+                                    Outlife expiry
+                                </label>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
