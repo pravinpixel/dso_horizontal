@@ -529,8 +529,10 @@ class MaterialProductsController extends Controller
         $data   =   MaterialProducts::find($id);
         foreach ($data->Batches() as $key => $batch) {
             $batch->BatchOwners()->delete();
+            BatchTracker::where('from_batch_id',$batch->id)->delete();
+         MaterialProductHistory($batch, 'Material Deleted Batch');
+         $batch->delete();
         }
-        $data->Batches()->delete();
         $data->delete();
         LogActivity::log($id);
         return response(['status' => true, 'message' => trans('response.delete')], Response::HTTP_OK);
