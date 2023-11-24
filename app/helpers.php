@@ -864,7 +864,7 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('permute')) {
 
-        function permute($arr, $start = 0, &$result = [], $isArray)
+        function permute($arr, $start = 0, &$result = [], $isArray=null)
         {
             if ($start === count($arr) - 1) {
                 $result[] = $isArray ?  $arr : implode(',', $arr);
