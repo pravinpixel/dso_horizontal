@@ -13,9 +13,9 @@
 <div class="card border shadow-sm m-0">
 <div class="card-header m-0 bg-primary-2 text-white border-bottom">
 <div class="d-flex justify-content-between align-items-center">
-<div>BARCODE : <b> {{ $row->batch->barcode_number }}</b></div>
+<div>BARCODE : <b> {{ $row->batch->barcode_number?? '' }}</b></div>
 <div>
-<i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
+<i onclick="viewBatch({{ $row->Batch->id??'' }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
 <i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_OUTLIFE')" class="btn btn-sm btn-danger border shadow rounded-pill bi bi-trash"></i>
 </div>
 </div>
@@ -36,7 +36,7 @@
 <th class="font-12">Leftover Outlife</th>
 <th class="font-12">Outlife expiry date from current date/time </th>
 </tr> 
-@if (count($row->Batch->TrackOutlifeHistory) > 0)
+@if (isset($row->Batch->TrackOutlifeHistory) && count($row->Batch->TrackOutlifeHistory) > 0)
 @foreach ($row->Batch->TrackOutlifeHistory as $history)
 @if ($history->type == 'WITH_DRAWING')
     <tr>
@@ -61,23 +61,23 @@
     <tr>
         <td>
             <small>{{ $row->Batch->BatchMaterialProduct->item_description??'' }}</small>
-            <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
+            <input type="hidden" value="{{ $row->Batch->id?? '' }}" name="batch_id[]"/>
             <input type="hidden" value="WITH_DRAWING" name="cart_type[]"/>
         </td>
-        <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
+        <td><small>{{ $row->Batch->batch ?? '' }} / {{ $row->Batch->serial ??'' }}</small></td>
         <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
         <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
-        <td><small>{{ $row->Batch->unit_packing_value }}</small></td>
-        <td><small>{{ $row->Batch->quantity }}</small></td>
-        <td><small>{{ $row->Batch->total_quantity }}</small></td>
-        <td class="p-0 py-0 px-1"><input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
+        <td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
+        <td><small>{{ $row->Batch->quantity??'' }}</small></td>
+        <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
+        <td class="p-0 py-0 px-1"><input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity??'' }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
         <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value="{{ $repack['remarks'] }}"/></td> 
         <td class="child-td">
-            <small class="text-dark">{{ $row->Batch->outlife }}</small>
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>
         </td>
         <td class="child-td">
             <small class="text-dark">
-                {{ currentOutlifeExpiry($row->Batch->outlife_seconds) }}
+                {{ currentOutlifeExpiry($row->Batch->outlife_seconds??'') }}
             </small>
         </td>
     </tr> 
@@ -96,10 +96,10 @@
 <div class="card border shadow-sm m-0">
 <div class="card-header m-0 bg-primary-2 text-white border-bottom">
 <div class="d-flex justify-content-between align-items-center">
-<div>BARCODE : <b> {{ $row->batch->barcode_number }}</b></div>
+<div>BARCODE : <b> {{ $row->batch->barcode_number??'' }}</b></div>
 <div>
-<i onclick="viewBatch({{ $row->Batch->id }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
-<i onclick="deleteRow({{ $row->id }},'DEDUCT_TRACK_OUTLIFE')" class="btn btn-sm btn-danger border shadow rounded-pill bi bi-trash"></i>
+<i onclick="viewBatch({{ $row->Batch->id??'' }})" class="btn btn-sm border shadow btn-primary rounded-pill bi bi-eye ms-2"></i>
+<i onclick="deleteRow({{ $row->id??'' }},'DEDUCT_TRACK_OUTLIFE')" class="btn btn-sm btn-danger border shadow rounded-pill bi bi-trash"></i>
 </div>
 </div>
 </div>
@@ -117,7 +117,7 @@
 <th class="font-12">Withdraw total quantity</th>
 <th class="font-12">Remarks</th>
 </tr> 
-@if (count($row->Batch->TrackOutlifeHistory) > 0)
+@if (isset($row->Batch->TrackOutlifeHistory) && count($row->Batch->TrackOutlifeHistory) > 0)
 @foreach ($row->Batch->TrackOutlifeHistory as $history)
 @if ($history->type == 'WITH_OUT_DRAWING')
     <tr>
@@ -136,17 +136,17 @@
 @endif
 <tr>
 <td>
-<input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
+<input type="hidden" value="{{ $row->Batch->id??'' }}" name="batch_id[]"/>
 <input type="hidden" value="WITH_OUT_DRAWING" name="cart_type[]"/> 
 <small>{{ $row->Batch->BatchMaterialProduct->item_description??'' }}</small>
 </td>
-<td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
+<td><small>{{ $row->Batch->batch??'' }} / {{ $row->Batch->serial??'' }}</small></td>
 <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
 <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
-<td><small>{{ $row->Batch->unit_packing_value }}</small></td>
-<td><small>{{ $row->Batch->quantity }}</small></td>
-<td><small>{{ $row->Batch->total_quantity }}</small></td>
-<td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
+<td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
+<td><small>{{ $row->Batch->quantity??'' }}</small></td>
+<td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
+<td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity??'' }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
 <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
 </tr>
 </tbody>

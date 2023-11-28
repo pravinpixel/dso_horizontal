@@ -56,7 +56,9 @@
             <button ng-click="search_advanced_mode()" class="btn btn-sm btn-primary rounded w-100 h-100 "><i class="bi bi-search"></i></button>
             &nbsp; 
             <button ng-click="reset_bulk_search()" class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button> &nbsp; 
+            @if(request()->route()->getName()=='list-material-products')
             <button ng-click="export()" class="btn btn-sm btn-primary rounded w-100 h-100 "><i class="bi bi-box-arrow-right"></i></button>
+            @endif
         </div>
     </div> 
 </div>
