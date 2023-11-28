@@ -68,6 +68,7 @@
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
+                             <td class="text-near-expiry"><b><small>Date of disposal</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr> 

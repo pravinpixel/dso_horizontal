@@ -60,7 +60,7 @@
 @if ($key == 0)
     <tr>
         <td>
-            <small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+            <small>{{ $row->Batch->BatchMaterialProduct->item_description??'' }}</small>
             <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
             <input type="hidden" value="WITH_DRAWING" name="cart_type[]"/>
         </td>
@@ -138,7 +138,7 @@
 <td>
 <input type="hidden" value="{{ $row->Batch->id }}" name="batch_id[]"/>
 <input type="hidden" value="WITH_OUT_DRAWING" name="cart_type[]"/> 
-<small>{{ $row->Batch->BatchMaterialProduct->item_description }}</small>
+<small>{{ $row->Batch->BatchMaterialProduct->item_description??'' }}</small>
 </td>
 <td><small>{{ $row->Batch->batch }} / {{ $row->Batch->serial }}</small></td>
 <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>

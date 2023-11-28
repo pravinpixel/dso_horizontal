@@ -8,10 +8,10 @@ use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Batches extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'notification_status',
         'is_draft',

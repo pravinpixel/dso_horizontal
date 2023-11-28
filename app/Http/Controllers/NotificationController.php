@@ -149,7 +149,7 @@ class NotificationController extends Controller
             })
              ->addColumn('date_of_disposal', function ($table) {
             if(isset($table->disposed_after)){
-                 return date('d/m/Y',strtotime($table->disposed_after));
+                 return $table->disposed_after;
                }
             return '';
                

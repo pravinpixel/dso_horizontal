@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="row mt-4">
-        <x-has-access name="withdrawal_index">
+        <!-- <x-has-access name="withdrawal_index"> -->
             <div class="col-lg-3 col-md-4 mb-3">
                 <div class="h-100 d-grid place-items-center  shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">
                     <a href="{{ route('withdrawal_index') }}" class="card-body d-grid place-items-center btn d-block h-100 w-100">
@@ -10,7 +10,7 @@
                     </a>
                 </div>
             </div>
-        </x-has-access>
+        <!-- </x-has-access> -->
         <x-has-access name="list-material-products">
             <div class="col-lg-3 col-md-4 mb-3">
                 <div class="h-100 d-grid place-items-center  shadow-sm card shadow-hover border-hover animate__animated animate__fadeIn">

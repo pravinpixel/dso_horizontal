@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('public/asset/css/vendors/angular-multiple-select.css') }}" />
 @endsection
 @section('scripts')
+   <input type="hidden" id="get-material-export" value="{{ route('list-material-products-export') }}">
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
