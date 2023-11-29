@@ -91,10 +91,10 @@
                                         <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Leftover Outlife</small><br>
                                         @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
                                             <small>{{ $batch->outlife }}</small>
-                                            <div>
-                                                <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
+                                           
+                        <small class="badge badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
 <small>{{ date('d/m/Y'
-,strtotime($batch->DrawInOutlifeLatest->current_outlife_expiry)) }}</small></div>
+,strtotime($batch->DrawInOutlifeLatest->current_outlife_expiry)) }}</small>
                                        
                                         @endif
                                     </div>

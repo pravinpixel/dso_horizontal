@@ -77,7 +77,7 @@
         </td>
         <td class="child-td">
             <small class="text-dark">
-                {{ currentOutlifeExpiry($row->Batch->outlife_seconds??'') }}
+                {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
             </small>
         </td>
     </tr> 
@@ -116,6 +116,8 @@
 <th class="font-12">Total  quantity</th>
 <th class="font-12">Withdraw total quantity</th>
 <th class="font-12">Remarks</th>
+<th class="font-12">Leftover Outlife</th>
+<th class="font-12">Outlife expiry date from current date/time </th>
 </tr> 
 @if (isset($row->Batch->TrackOutlifeHistory) && count($row->Batch->TrackOutlifeHistory) > 0)
 @foreach ($row->Batch->TrackOutlifeHistory as $history)
@@ -130,6 +132,8 @@
         <td><small>{{ $history->total_quantity }}</small></td>
         <td><small>{{ $history->withdraw_quantity }}</small></td>
         <td><small>{{ $history->remarks }}</small></td>
+
+
     </tr>
 @endif
 @endforeach
@@ -148,6 +152,14 @@
 <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
 <td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity??'' }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
 <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
+ <td class="child-td">
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>
+        </td>
+        <td class="child-td">
+            <small class="text-dark">
+                {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+            </small>
+        </td>
 </tr>
 </tbody>
 </table>

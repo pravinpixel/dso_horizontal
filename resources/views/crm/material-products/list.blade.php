@@ -10,8 +10,10 @@
             </div>
             <div class="col-6 d-flex justify-content-end ms-auto text-end">
                 <button data-bs-toggle="modal" data-bs-target="#ImportFromExcel" class="btn btn-success rounded-pill mx-1"><i class="bi bi-file-earmark-spreadsheet me-1"></i> Import from Excel</button>
+                 <button ng-click="export()" class="btn btn-success rounded-pill mx-1"><i class="bi bi-box-arrow-right"></i> Export from Excel</button>
                 <a href="{{ route('create.material-product',['type'=>'form-one']) }}" class="btn btn-primary rounded-pill mx-1"><i class="fa fa-plus me-1"></i> Add</a>
             </div>
+            
         </div>
 
         {{-- = ==== Filletrs ====--}}

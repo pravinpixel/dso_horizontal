@@ -157,9 +157,11 @@ class UserController extends Controller
             foreach($batches as $batch){
             $batch_data=Batches::find($batch->id);
             $access=json_decode($batch_data->access);
+            if(isset($access)){
         unset($access[array_search(strval($id),$access )]);
             $batch_data->access=array_values($access);
-            $batch_data->update();  
+            $batch_data->update();
+            }  
         }
 
         $data->delete();

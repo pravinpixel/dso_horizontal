@@ -538,7 +538,10 @@ class MaterialProductsController extends Controller
         foreach ($data->Batches as $key => $batch) {
          $batch->BatchOwners()->delete();
        BatchTracker::where('from_batch_id',$batch->id)->delete();
+       withdrawCart::where('batch_id',$batch->id)->delete();
+       RepackOutlife::where('batch_id',$batch->id)->delete();
          MaterialProductHistory($batch,'Material Batch Deleted');
+
          $batch->delete();
         }
          MaterialProductHistory($data,'Material Deleted');
