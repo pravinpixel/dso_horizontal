@@ -86,16 +86,17 @@
                         </div>
                         <table class="w-100 border-0">
                             <tr style="vertical-align: baseline;">
-                                <td class="text-start" style="width:50% !important">
+                                <td class="text-start" style="width:60% !important">
                                     <div class="m-0 " ng-if="PrintOutlife">
                                         <small class="badge mb-1 me-1 badge-outline-dark shadow-sm bg-light rounded-pill">Leftover Outlife</small><br>
                                         @if ($batch->DrawInOutlifeLatest->current_outlife_expiry ?? null)
                                             <small>{{ $batch->outlife }}</small>
-                                           
+                                          
+                                             <div>
                         <small class="badge badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
 <small>{{ date('d/m/Y'
 ,strtotime($batch->DrawInOutlifeLatest->current_outlife_expiry)) }}</small>
-                                       
+                        </div>                
                                         @endif
                                     </div>
                                 </td>
