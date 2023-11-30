@@ -95,7 +95,7 @@ class Batches extends Model
     }
     public function BatchMaterialProduct()
     {
-        return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id');
+        return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id')->withTrashed();
     }
 
     public function BatchBarcode()
@@ -149,6 +149,6 @@ class Batches extends Model
     }
      public function LatestBatchFiles()
     {
-        return $this->hasMany(BatchFiles::class, 'batch_id', 'id')->where('column_name','used_for_td_certificate')->orderBy('id','desc');
+        return $this->hasMany(BatchFiles::class, 'batch_id', 'id')->where('column_name','used_for_td_certificate')->withTrashed()->orderBy('id','desc');
     }
 }

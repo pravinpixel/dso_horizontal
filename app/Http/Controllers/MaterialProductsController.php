@@ -25,6 +25,7 @@ use App\Models\BatchFiles;
 use App\Models\BatchOwners;
 use App\Models\BatchTracker;
 use App\Models\RepackOutlife;
+use App\Models\withdrawCart;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -524,7 +525,8 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $batch   =   Batches::with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType','LatestBatchFiles'])->findOrFail($id);
+        $batch   =   Batches::withTrashed()->with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType','LatestBatchFiles'])->find($id);
+       
         return view('crm.partials.batch-preview', compact('batch'));
     }
     public function view_parent_batch($id)
@@ -553,21 +555,21 @@ class MaterialProductsController extends Controller
     {
         if (BatchTracker::where('from_batch_id', $id)->count() == 0) {
             $data   =   Batches::find($id);
-            if (Storage::exists($data->sds_mill_cert_document)) {
-                Storage::delete($data->sds_mill_cert_document);
-            }
-            if (Storage::exists($data->coc_coa_mill_cert_document)) {
-                Storage::delete($data->coc_coa_mill_cert_document);
-            }
-            if (Storage::exists($data->iqc_result)) {
-                Storage::delete($data->iqc_result);
-            }
-            if (Storage::exists($data->upload_disposal_certificate)) {
-                Storage::delete($data->upload_disposal_certificate);
-            }
-            if (Storage::exists($data->extended_qc_result)) {
-                Storage::delete($data->extended_qc_result);
-            }
+            // if (Storage::exists($data->sds_mill_cert_document)) {
+            //     Storage::delete($data->sds_mill_cert_document);
+            // }
+            // if (Storage::exists($data->coc_coa_mill_cert_document)) {
+            //     Storage::delete($data->coc_coa_mill_cert_document);
+            // }
+            // if (Storage::exists($data->iqc_result)) {
+            //     Storage::delete($data->iqc_result);
+            // }
+            // if (Storage::exists($data->upload_disposal_certificate)) {
+            //     Storage::delete($data->upload_disposal_certificate);
+            // }
+            // if (Storage::exists($data->extended_qc_result)) {
+            //     Storage::delete($data->extended_qc_result);
+            // }
             BatchRestore($id);
             MaterialProductHistory($data, 'Deleted Batch');
             $data->BatchOwners()->delete();
