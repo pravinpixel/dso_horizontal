@@ -231,6 +231,7 @@ if (!function_exists('checkIsBatchDateColumn')) {
         $data =  [
             "date_in",
             "date_of_expiry",
+            "disposed_after",
             "date_of_manufacture",
             "date_of_shipment"
         ];
@@ -600,6 +601,9 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('MaterialProductHistory')) {
         function MaterialProductHistory($Batch, $ActionTaken, $updated_outlife = null)
         {
+           if($ActionTaken=='Material Deleted'){
+            $batch       = MaterialProducts::find($Batch['id']);
+           }else{
             $batch       = Batches::with('BatchOwners')->find($Batch['id']);
             $BatchOwners = '';
             if (count($batch->BatchOwners) > 0) {
@@ -609,6 +613,8 @@ if (!function_exists('getRoutes')) {
                     }
                 }
             }
+           }
+            
             if ($ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $DrawStatus = 'Draw IN';
             }
@@ -635,22 +641,22 @@ if (!function_exists('getRoutes')) {
             }
             materialProductHistory::updateOrCreate([
                 'batch_id'                 => $Batch['id'],
-                'barcode_number'           => $Batch['barcode_number'],
-                'CategorySelection'        => $batch['BatchMaterialProduct']['category_selection'],
-                'ItemDescription'          => $batch['BatchMaterialProduct']['item_description'],
-                'Brand'                    => $Batch['brand'],
-                'BatchSerial'              => $Batch['batch'] . " / " . $Batch['serial'],
+                'barcode_number'           => $Batch['barcode_number']?? null,
+                'CategorySelection'        => $batch['BatchMaterialProduct']['category_selection']?? $batch['category_selection'] ,
+                'ItemDescription'          => $batch['BatchMaterialProduct']['item_description']?? $batch['item_description'],
+                'Brand'                    => $Batch['brand']??null,
+                'BatchSerial'              => $Batch['batch']??0 . " / " . $Batch['serial']??0,
                 'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRAW",
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
-                'UnitPackingValue'         => $Batch['unit_packing_value'],
-                'Quantity'                 => $Batch['quantity'],
+                'UnitPackingValue'         => $Batch['unit_packing_value']??null,
+                'Quantity'                 => $Batch['quantity']??null,
                 'StorageArea'              => $batch['StorageArea']['name'] ?? '',
-                'Housing'                  => $Batch['housing'],
-                'Owners'                   => $BatchOwners,
+                'Housing'                  => $Batch['housing']??null,
+                'Owners'                   => $BatchOwners??null,
                 'Remarks'                  => $Batch['remarks'] ?? "-",
                 'DrawStatus'               => $DrawStatus ?? null,
-                'RemainingOutlifeOfParent' => $updated_outlife
+                'RemainingOutlifeOfParent' => $updated_outlife??null
             ]);
             return true;
         }
@@ -864,7 +870,7 @@ if (!function_exists('getRoutes')) {
     }
     if (!function_exists('permute')) {
 
-        function permute($arr, $start = 0, &$result = [], $isArray)
+        function permute($arr=0, $start = 0, &$result = [], $isArray=[])
         {
             if ($start === count($arr) - 1) {
                 $result[] = $isArray ?  $arr : implode(',', $arr);

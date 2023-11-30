@@ -280,7 +280,15 @@ class ReportsController extends Controller
             return $data->TransactionBy ?? "SYSTEM BOT";
         })->addColumn('TotalQuantity', function ($data) {
             return number_format($data->UnitPackingValue *  $data->Quantity, 3, ".", "");
-        })->rawColumns(["TransactionDate", "TransactionTime", "TransactionBy", "Module", "ActionTaken",'TotalQuantity'])
+        })->editColumn('Actions', function ($data) {
+            if($data->ActionTaken!="Material Deleted"){
+         return'<a href="javascript:void(0);" onclick="viewBatch(' .$data->batch_id. ')" class="btn btn-icon btn-active-danger btn-light-danger mx-1 w-30px h-30px" > 
+                      <i
+                            class="bi bi-eye"></i> </a>';
+                        }else{
+                   return '-';         
+                        }
+        })->rawColumns(["TransactionDate", "TransactionTime", "TransactionBy", "Module", "ActionTaken",'TotalQuantity','Actions'])
             ->make(true);
     }
     public function disposed_items(Request $request)

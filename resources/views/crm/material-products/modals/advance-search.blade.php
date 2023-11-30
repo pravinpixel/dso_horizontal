@@ -141,6 +141,10 @@
                                 <option value="0">Active</option> 
                             </select>
                         </div>
+                         <div class="col-6 text-start mb-2 px-1"> 
+        <label for="" class="form-label">Date of Disposal</label>
+        <input type="text" date-range-picker ng-model="advanced_filter.disposed_after" name="disposed_after" class="form-control custom" placeholder="DD/MM/YYYY">
+    </div>
                     </div>
                 </div> 
             </div>

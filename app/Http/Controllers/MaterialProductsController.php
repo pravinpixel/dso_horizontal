@@ -25,12 +25,13 @@ use App\Models\BatchFiles;
 use App\Models\BatchOwners;
 use App\Models\BatchTracker;
 use App\Models\RepackOutlife;
+use App\Models\withdrawCart;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-
+use App\Exports\BannerExport;
 
 class MaterialProductsController extends Controller
 {
@@ -85,7 +86,7 @@ class MaterialProductsController extends Controller
             'Batches.BatchOwners',
             'Batches.RepackOutlife', 
         ])->latest()->get();
-
+               
         $material_product = $this->dsoRepository->renderTableData($material_product_data, null);
 
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
@@ -94,7 +95,7 @@ class MaterialProductsController extends Controller
     public function advanced_search(Request $request)
     {
         if ($request->advanced_search) {
-
+  
             $row = (object) $request->advanced_search;
 
             $material_product = MaterialProducts::select("*")
@@ -162,6 +163,7 @@ class MaterialProductsController extends Controller
         $request->validate([
             'select_file' => 'required|max:10000',
         ]);
+
         if ($request->file('select_file')->getClientOriginalExtension() !== 'csv') {
             Flash::error('File Type must have CSV !');
             return back();
@@ -171,7 +173,7 @@ class MaterialProductsController extends Controller
         // dd($array);
         foreach ($array[0] as $key => $row) {
             // dd($row);
-            if (!is_null($row['category_selection'])) {
+            if (!is_null($row['category_selection']) && $row['type']=='parent') {
                 $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure']], [
                     'name' => $row['unit_of_measure']
                 ]);
@@ -187,6 +189,10 @@ class MaterialProductsController extends Controller
                     'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
                     'is_draft' => true,
                 ]);
+             }
+               $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure']], [
+                    'name' => $row['unit_of_measure']
+                ]);
                 $statutory_body = StatutoryBody::updateOrCreate(['name' => $row['statutory_body']], [
                     'name' => $row['statutory_body']
                 ]);
@@ -199,6 +205,7 @@ class MaterialProductsController extends Controller
                 $department = Departments::updateOrCreate(['name' => $row['department']], [
                     'name' => $row['department']
                 ]);
+            
                 $row['require_outlife_tracking']        =  strtolower($row['require_outlife_tracking']) == 'yes' ? 1 : 0;
                 $row['require_bulk_volume_tracking']    =  strtolower($row['require_bulk_volume_tracking']) == 'yes' ? 1 : 0;
                 if ($row['require_bulk_volume_tracking'] == 0 && $row['require_outlife_tracking'] == 0) {
@@ -210,6 +217,8 @@ class MaterialProductsController extends Controller
                 if ($row['require_bulk_volume_tracking'] == 1 && $row['require_outlife_tracking'] == 1) {
                     $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
                 }
+           foreach ($array[0] as $key => $new_row) {
+            if ($new_row['type']=='child' && $new_row['id']==$row['id']) {
                 $batch = $material->Batches()->create([
                     'is_draft'                     => 1,
                     'barcode_number'               => generateBarcode($material->category_selection),
@@ -257,9 +266,9 @@ class MaterialProductsController extends Controller
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
+            } }
                 MaterialProductHistory($batch, 'IMPORTED_FROM_EXCEL');
                 Flash::success(__('global.imported'));
-            }
         }
 
         return back();
@@ -516,7 +525,8 @@ class MaterialProductsController extends Controller
     }
     public function view_batch($id)
     {
-        $batch   =   Batches::with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType'])->findOrFail($id);
+        $batch   =   Batches::withTrashed()->with(['BatchMaterialProduct', 'Department', 'StatutoryBody', 'StorageArea', 'HousingType','LatestBatchFiles'])->find($id);
+       
         return view('crm.partials.batch-preview', compact('batch'));
     }
     public function view_parent_batch($id)
@@ -527,10 +537,16 @@ class MaterialProductsController extends Controller
     public function destroy($id)
     {
         $data   =   MaterialProducts::find($id);
-        foreach ($data->Batches() as $key => $batch) {
-            $batch->BatchOwners()->delete();
+        foreach ($data->Batches as $key => $batch) {
+         $batch->BatchOwners()->delete();
+       BatchTracker::where('from_batch_id',$batch->id)->delete();
+       withdrawCart::where('batch_id',$batch->id)->delete();
+       RepackOutlife::where('batch_id',$batch->id)->delete();
+         MaterialProductHistory($batch,'Material Batch Deleted');
+
+         $batch->delete();
         }
-        $data->Batches()->delete();
+         MaterialProductHistory($data,'Material Deleted');
         $data->delete();
         LogActivity::log($id);
         return response(['status' => true, 'message' => trans('response.delete')], Response::HTTP_OK);
@@ -539,21 +555,21 @@ class MaterialProductsController extends Controller
     {
         if (BatchTracker::where('from_batch_id', $id)->count() == 0) {
             $data   =   Batches::find($id);
-            if (Storage::exists($data->sds_mill_cert_document)) {
-                Storage::delete($data->sds_mill_cert_document);
-            }
-            if (Storage::exists($data->coc_coa_mill_cert_document)) {
-                Storage::delete($data->coc_coa_mill_cert_document);
-            }
-            if (Storage::exists($data->iqc_result)) {
-                Storage::delete($data->iqc_result);
-            }
-            if (Storage::exists($data->upload_disposal_certificate)) {
-                Storage::delete($data->upload_disposal_certificate);
-            }
-            if (Storage::exists($data->extended_qc_result)) {
-                Storage::delete($data->extended_qc_result);
-            }
+            // if (Storage::exists($data->sds_mill_cert_document)) {
+            //     Storage::delete($data->sds_mill_cert_document);
+            // }
+            // if (Storage::exists($data->coc_coa_mill_cert_document)) {
+            //     Storage::delete($data->coc_coa_mill_cert_document);
+            // }
+            // if (Storage::exists($data->iqc_result)) {
+            //     Storage::delete($data->iqc_result);
+            // }
+            // if (Storage::exists($data->upload_disposal_certificate)) {
+            //     Storage::delete($data->upload_disposal_certificate);
+            // }
+            // if (Storage::exists($data->extended_qc_result)) {
+            //     Storage::delete($data->extended_qc_result);
+            // }
             BatchRestore($id);
             MaterialProductHistory($data, 'Deleted Batch');
             $data->BatchOwners()->delete();
@@ -637,4 +653,36 @@ class MaterialProductsController extends Controller
             "Message" => "success"
         ]);
     }
+     public function exportData(Request $request)
+    {    
+        
+        if(sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
+            return response(['status' => false, 'message' => trans('Please search anyone option before export.')], 400);
+            
+        }else{
+           
+        if ($request->filters) {
+            $result      =   $this->SearchRepository->barCodeSearch($request);
+            
+        }
+
+        if ($request->save_advanced_search) {
+            $row        =   (object) $request->save_advanced_search['advanced_search'];
+            $result     =   $this->SearchRepository->storeBulkSearch($row, $request);
+            
+        }
+
+        if ($request->advanced_search) {
+            $row         =   (object) $request->advanced_search;
+            $result      =   $this->SearchRepository->advanced_search($row);
+            
+        }
+         $response=Excel::download(new BannerExport($result??[]),'banner.csv');
+         return $response;   
+         // ->getFile()
+
+        }
+       
+    }
+    
 }

@@ -44,6 +44,8 @@ Route::middleware(['auth_users'])->group(function () {
     });
      
     Route::prefix('search-or-add')->group(function() {
+        Route::get('export', [MaterialProductsController::class, 'exportData'])->name('list-material-products-export');
+        Route::post('export', [MaterialProductsController::class, 'exportData'])->name('list-material-products-export');
         Route::get('/', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
         Route::get('/material-product/create/{type?}', [MaterialProductsController::class, 'wizardFormView'])->name('create.material-product');
         Route::get('/duplicate-batch/{id}', [MaterialProductsController::class, 'duplicate_batch'])->name('duplicate_batch');

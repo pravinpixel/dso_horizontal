@@ -78,6 +78,7 @@
                                     <th style="font-weight: bold;font-size:12px">Remarks </th>
                                     <th style="font-weight: bold;font-size:12px">Draw status</th>
                                     <th style="font-weight: bold;font-size:12px;">Remaining outlife of parent </th>
+                                      <th style="font-weight: bold;font-size:12px;">Actions</th>
                                 </tr>
                             </thead>
                             <tbody> </tbody>
@@ -87,14 +88,15 @@
             </div>
         </form>
     </div>
+@include('crm.material-products.modals.view-batch-list')
 @endsection
-
 @section('scripts')
     <style>
         .dataTables_length {
             display: none !important
         }
     </style>
+    
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -192,6 +194,9 @@
                         {
                             data: "RemainingOutlifeOfParent",
                             name: "RemainingOutlifeOfParent"
+                        },{
+                            data: "Actions",
+                            name: "Actions"
                         }
                     ],
                 });
@@ -219,3 +224,4 @@
         });
     </script>
 @endsection
+

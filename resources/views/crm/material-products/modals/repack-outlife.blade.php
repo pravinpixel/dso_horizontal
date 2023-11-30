@@ -33,11 +33,13 @@
                                 <td>Repack size <br> ( @{{ repack_outlife_unit_of_measure }} )</td>
                                 <td>Quantity</td>
                                 <td>
-                                    <div>Remaining outlife</div>
-                                    <small>(prepreg roll) </small>
-                                    <hr>
+                                  
                                     <div>Intital count :</div>
                                     <b ng-bind="repack_outlife_days"></b>
+                                     <hr>
+                                    <div>Remaining outlife</div>
+                                    <small>(prepreg roll) </small>
+                                   
                                 </td>
                             </tr>
                         </thead>

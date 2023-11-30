@@ -8,10 +8,10 @@ use App\Models\Masters\StatutoryBody;
 use App\Models\Masters\StorageRoom;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Batches extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'notification_status',
         'is_draft',
@@ -93,10 +93,9 @@ class Batches extends Model
     {
         return $this->hasMany(BatchOwners::class, 'batch_id', 'id');
     }
-  
     public function BatchMaterialProduct()
     {
-        return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id');
+        return $this->hasOne(MaterialProducts::class, 'id', 'material_product_id')->withTrashed();
     }
 
     public function BatchBarcode()
@@ -147,5 +146,9 @@ class Batches extends Model
     public function TrackOutlifeHistory()
     {
         return $this->hasMany(TrackOutlifeHistory::class, 'batch_id', 'id');
+    }
+     public function LatestBatchFiles()
+    {
+        return $this->hasMany(BatchFiles::class, 'batch_id', 'id')->where('column_name','used_for_td_certificate')->withTrashed()->orderBy('id','desc');
     }
 }

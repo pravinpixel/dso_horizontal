@@ -18,6 +18,7 @@
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
+                             <td class="text-near-expiry"><b><small>Date of disposal</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
@@ -42,6 +43,7 @@
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
+                             <td class="text-near-expiry"><b><small>Date of disposal</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr>
@@ -66,6 +68,7 @@
                             {{-- <td class="text-near-expiry"><b><small>Storage location</small></b></td>
                             <td class="text-near-expiry"><b><small>Housing type</small></b></td> --}}
                             <td class="text-near-expiry"><b><small>Date of expiry</small></b></td>
+                             <td class="text-near-expiry"><b><small>Date of disposal</small></b></td>
                             <td class="text-near-expiry"><b><small>IQC Status</small></b></td>
                             <td class="text-near-expiry"><b><small>Action</small></b></td>
                         </tr> 
@@ -104,6 +107,7 @@
                         // {data: 'storage_area', name: 'storage_area'},
                         // {data: 'housing_type', name: 'housing_type'},
                         {data: 'date_of_expiry', name: 'date_of_expiry'},
+                        {data: 'date_of_disposal', name: 'date_of_disposal'},
                         {data: 'iqc_status', name: 'iqc_status'},
                         {data: 'action', name: 'action', orderable: false, searchable: false},
                     ]

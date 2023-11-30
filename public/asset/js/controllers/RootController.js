@@ -10,6 +10,7 @@ app.controller('RootController', function ($scope, $http) {
 
     // === Route Lists ===
     var material_products_url              = $('#get-material-products').val();
+    var material_products_export              = $('#get-material-export').val();
     var change_batch_read_status           = $('#change_batch_read_status').val();
     var get_batch_material_products        = $('#get-batch-material-products').val();
     var get_batch                          = $('#get-batch').val();
@@ -57,6 +58,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_coc_coa_mill_cert               = true
             $scope.on_cost_per_unit                   = true
             $scope.on_date_in                         = true
+            $scope.on_disposed_after                  = true
             $scope.on_date_of_expiry                  = true
             $scope.on_date_of_manufacture             = true
             $scope.on_date_of_shipment                = true
@@ -106,6 +108,7 @@ app.controller('RootController', function ($scope, $http) {
             $scope.on_coc_coa_mill_cert               = false
             $scope.on_cost_per_unit                   = false
             $scope.on_date_in                         = false
+            $scope.on_disposed_after                  = false
             $scope.on_date_of_expiry                  = true
             $scope.on_date_of_manufacture             = false
             $scope.on_date_of_shipment                = false
@@ -355,9 +358,7 @@ app.controller('RootController', function ($scope, $http) {
         $scope.get_material_products()
     }
 
-    // Advanced Search Fitters
-    $scope.search_advanced_mode = (advanced_search, type) => {
-
+     $scope.export = (advanced_search, type) => {
         $scope.filter_status = true
         $scope.sort_by_payload = false;
         if (advanced_search === undefined) {
@@ -377,13 +378,59 @@ app.controller('RootController', function ($scope, $http) {
 
         Object.keys(payload_data.advanced_search).map((item) => {
             if (
-                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment"
+                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment" || item == "disposed_after"
             ) {
                 payload_data.advanced_search[item].startDate = moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
                 payload_data.advanced_search[item].endDate = moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
             }
         })
+     
+         $http({
+                method: 'post',
+                  url:material_products_export,
+                data: payload_data,
+                responseType: 'blob'
+            }).then(function (response) {
+            var blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'banner.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);  
+            }, function (response) {
+                Message('danger','Please search to Export.');
+            });
+     }
+    $scope.search_advanced_mode = (advanced_search, type) => {
+             
+        $scope.filter_status = true
+        $scope.sort_by_payload = false;
+        if (advanced_search === undefined) {
+            $scope.filler_function();
+            var payload_data = $scope.filter_data
+            $scope.advance_search_status = true
+        } else {
+            $scope.advance_search_pre_saved = true
+            $scope.advance_search_pre_saved_data = advanced_search
+            var payload_data = $scope.advanced_filter
+        }
+        if (type == 'saved_search') {
+            var payload_data = {
+                advanced_search: advanced_search
+            }
+        }
 
+        Object.keys(payload_data.advanced_search).map((item) => {
+            if (
+                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment" || item == "disposed_after"
+            ) {
+                payload_data.advanced_search[item].startDate = moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
+                payload_data.advanced_search[item].endDate = moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
+            }
+        })
+        
+       
         $http({
             method: 'post',
             url: material_products_url,
@@ -774,7 +821,7 @@ app.controller('RootController', function ($scope, $http) {
                     );
                 })
             }
-            console.log($scope.repack_outlife_table)
+          
             $('#RepackOutlife').modal('show');
         })
     }
@@ -835,7 +882,7 @@ app.controller('RootController', function ($scope, $http) {
     }
     $scope.changeReadStatus = (id) => {
         $http.post(change_batch_read_status + "/" + id).then((res) => {
-            console.log(res)
+          
             if(res.data.status === 200) { 
                 $scope.get_material_products()
                 getNotificationCount()

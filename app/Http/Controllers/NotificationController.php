@@ -7,7 +7,7 @@ use App\Models\Batches;
 use App\Models\MaterialProducts;
 use App\Models\NEFNotification;
 use Yajra\DataTables\Facades\DataTables;
-
+use Carbon\Carbon;
 class NotificationController extends Controller
 {
     public $dsoRepository;
@@ -104,8 +104,10 @@ class NotificationController extends Controller
             'UnitOfMeasure',
             'Batches.StorageArea',
             'Batches.StatutoryBody',
-            'Batches.BatchMaterialProduct'
+            'Batches.BatchMaterialProduct',
+             'Batches.LatestBatchFiles',
         ])->get();
+       
         $material_products =  $this->dsoRepository->renderTableData($material_product_data, [
             "response"  => "JSON",
             "page_name" => "NEAR_EXPIRY_EXPIRED"
@@ -144,6 +146,13 @@ class NotificationController extends Controller
             })
             ->addColumn('batch_serial_po_number', function ($table) {
                 return $table->batch . "/" . $table->serial . "/" . $table->po_number;
+            })
+             ->addColumn('date_of_disposal', function ($table) {
+            if(isset($table->disposed_after)){
+                 return $table->disposed_after;
+               }
+            return '';
+               
             })
             ->addColumn('owners', function ($table) {
                 $owners = "";

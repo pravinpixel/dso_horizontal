@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class RepackOutlife extends Model
 {
-    use HasFactory;
-    
+    use HasFactory,SoftDeletes;
     protected $fillable = [
         'batch_id',
         'quantity',
@@ -35,12 +34,10 @@ class RepackOutlife extends Model
         'current_date_time',
         'user_id'
     ];
-
     public function Batch()
     {
         return $this->hasOne(Batches::class, 'id', 'batch_id');
     }
-
     public function User()
     {
         return $this->hasOne(User::class, 'id', 'user_id');

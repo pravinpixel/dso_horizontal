@@ -53,8 +53,10 @@
     </div>
     <div class="col d-flex align-items-center justify-content-center">
         <div class="btn-group">
-            <button ng-click="search_advanced_mode()" class="btn btn-sm btn-primary rounded w-100 h-100 me-2"><i class="bi bi-search"></i></i> </button>
+            <button ng-click="search_advanced_mode()" class="btn btn-sm btn-primary rounded w-100 h-100 "><i class="bi bi-search"></i></button>
+            &nbsp; 
             <button ng-click="reset_bulk_search()" class="btn btn-sm btn-light w-100 h-100 rounded"><i class="bi bi-arrow-counterclockwise"></i></button>
+        
         </div>
     </div> 
 </div>
