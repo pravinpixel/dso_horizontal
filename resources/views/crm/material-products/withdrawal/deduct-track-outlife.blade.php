@@ -50,7 +50,8 @@
         <td><small>{{ $history->withdraw_quantity }}</small></td>
         <td><small>{{ $history->remarks }}</small></td>
         <td><small>{{ $row->RepackOutlife[0]->updated_outlife }}</small></td>
-        <td><small>{{ $row->RepackOutlife[0]->current_outlife_expiry }}</small></td>
+        <td><small>
+         {{ SetDateFormatWithHour($row->RepackOutlife[0]->current_outlife_expiry??'') }}</small></td>
     </tr>
 @endif
 @endforeach
@@ -77,7 +78,7 @@
         </td>
         <td class="child-td">
             <small class="text-dark">
-                {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+                  {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
             </small>
         </td>
     </tr> 
