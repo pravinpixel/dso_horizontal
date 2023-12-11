@@ -7,6 +7,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" name="sort_value" id="sort_value" Value="ASC">
 @foreach ($tableAllColumns as $column)
     @if ($column['name'] != 'item_description' && $column['name'] != 'owner_one' && $column['name'] != 'batch' && $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="position-relative box th">

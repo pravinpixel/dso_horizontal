@@ -293,11 +293,25 @@ app.controller('RootController', function ($scope, $http) {
     }
 
     $scope.sort_by = function (name, type) {
+        if(name=='item_description'){
+            $('#sort_value').val(type);
+        }
         $scope.sort_by_payload = true;
-        $scope.sort_by_payload_data = {
-            sort_by: {
-                col_name: name,
-                order_type: type,
+       if(name=='item_description'){
+            $scope.sort_by_payload_data = {
+                sort_by: {
+                    col_name: name,
+                    order_type: type,
+                    type:''
+                }
+            }
+        }else{
+            $scope.sort_by_payload_data = {
+                sort_by: {
+                    col_name: name,
+                    order_type: type,
+                    type:$('#sort_value').val()
+                }
             }
         }
 
