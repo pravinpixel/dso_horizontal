@@ -84,7 +84,9 @@ class SearchRepository implements SearchRepositoryInterface
     }
     public function sortingOrder($sort_by)
     {    
+        //dd($sort_by);
         if (checkIsMaterialColumn($sort_by->col_name) == 1) {
+          
             $material_product_data =  MaterialProducts::with([
                 'Batches',
                 'Batches.RepackOutlife',
@@ -101,7 +103,8 @@ class SearchRepository implements SearchRepositoryInterface
                 ->get();
             return $this->dsoRepository->renderTableData($material_product_data, null);
         } else {
-            $material_product_data = MaterialProducts::with([
+            //dd($sort_by->type);
+            $material_product_data = MaterialProducts::orderBy('item_description',$sort_by->type)->with([
                 'Batches' => function ($q) use ($sort_by) {
                     $q->orderBy($sort_by->col_name, $sort_by->order_type);
                 },
