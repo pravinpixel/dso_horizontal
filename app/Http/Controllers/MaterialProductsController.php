@@ -189,7 +189,8 @@ class MaterialProductsController extends Controller
                     'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
                     'is_draft' => true,
                 ]);
-             }
+                $parent_id=$row['id'];
+              }  
                $unit_of_measure = PackingSizeData::updateOrCreate(['name' => $row['unit_of_measure']], [
                     'name' => $row['unit_of_measure']
                 ]);
@@ -217,8 +218,8 @@ class MaterialProductsController extends Controller
                 if ($row['require_bulk_volume_tracking'] == 1 && $row['require_outlife_tracking'] == 1) {
                     $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
                 }
-           foreach ($array[0] as $key => $new_row) {
-            if ($new_row['type']=='child' && $new_row['id']==$row['id']) {
+            if ($row['type']=='child' && $parent_id==$row['id']) {
+
                 $batch = $material->Batches()->create([
                     'is_draft'                     => 1,
                     'barcode_number'               => generateBarcode($material->category_selection),
@@ -266,11 +267,11 @@ class MaterialProductsController extends Controller
                     "user_id"    => auth_user()->id,
                     "alias_name" => auth_user()->alias_name
                 ]);
-            } }
-                MaterialProductHistory($batch, 'IMPORTED_FROM_EXCEL');
-                Flash::success(__('global.imported'));
-        }
 
+                MaterialProductHistory($batch, 'IMPORTED_FROM_EXCEL'); 
+           }      
+          }
+        Flash::success(__('global.imported'));
         return back();
     }
 

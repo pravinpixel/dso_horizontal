@@ -83,6 +83,9 @@
                              <th>
                              cas
                             </th>
+                            <th>
+                             access
+                            </th>
                              <th>
                              fm_1202
                             </th>
@@ -106,7 +109,8 @@
                             </th> 
                             <th>
                              type
-                            </th>   
+                            </th> 
+
         </tr>
     </thead>
     <tbody>
@@ -140,6 +144,7 @@
             <td></td>
             <td></td>
             <td></td>
+              <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -179,6 +184,7 @@
             <td>{{$child->date_of_expiry}}</td>
             <td>{{$child->iqc_status}}</td>
             <td>{{$child->cas}}</td>
+            <td>{{$child->access}}</td>
             <td>{{$child->fm_1202}}</td>
             <td>{{$child->project_name}}</td>
             <td>{{$child->material_product_type}}</td>
