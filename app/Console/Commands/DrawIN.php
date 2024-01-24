@@ -52,7 +52,7 @@ class DrawIN extends Command
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
 
-                    if(true) {
+                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
                      // if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
 
                         if($batch->unit_packing_value != 0) {
