@@ -886,7 +886,7 @@ app.controller('RootController', function ($scope, $http) {
                     $('#exportLogCheckBox').prop('checked', false)
                 }
                 $scope.get_material_products();
-                $('#RepackOutlife').modal('hide');
+                //$('#RepackOutlife').modal('hide');
             })
     }
     $scope.duplicateThisBatch = (id) => {

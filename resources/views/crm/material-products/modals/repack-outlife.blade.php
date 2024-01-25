@@ -128,8 +128,8 @@
                         </div>
                     </div>
                     <div class="col-6 ms-auto text-end">
-                        <button class="btn btn-primary rounded-pill h-100 btn-loader" ng-show="repackOutlifeForm.$invalid != true" ng-click="saveRepackOutlife()">Save and Submit</button>
-                        <button class="btn btn-secondary rounded-pill h-100" ng-show="repackOutlifeForm.$invalid">Save and Submit</button>
+                        <button class="btn btn-primary rounded-pill h-100 btn-loader" ng-click="saveRepackOutlife()">Save and Submit</button>
+                        <!-- <button class="btn btn-secondary rounded-pill h-100" ng-show="repackOutlifeForm.$invalid">Save and Submit1</button> -->
                     </div>
                 </div>
             </div>
