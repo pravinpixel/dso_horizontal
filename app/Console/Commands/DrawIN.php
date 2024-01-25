@@ -44,24 +44,24 @@ class DrawIN extends Command
     public function handle()
     {
         Log::info("Draw IN !");
-        $Batches = Batches::with("RepackOutlife","BatchOwners")->get();
+    $Batches = Batches::with("RepackOutlife","BatchOwners")->get();
         foreach($Batches as $batch) {
-            foreach($batch->RepackOutlife as $outlife) {
-                if(!is_null($outlife->draw_in_time_stamp) && is_null($outlife->draw_out_time_stamp)) {
-                    $time1     = new DateTime($outlife->created_at);
+        if(count($batch->RepackOutlife)>0){
+       $first=RepackOutlife::where('batch_id',$batch->id)->where('draw_in',0)->where('draw_out_time_stamp',Null)->first();
+       $last=RepackOutlife::where('batch_id',$batch->id)->where('draw_out_time_stamp',Null)->get()->last();
+                if(isset($first)&& isset($last) ) {
+                    $time1     = new DateTime($first->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-
-                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
+                    if(true) {
                      // if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
-
                         if($batch->unit_packing_value != 0) {
                             $batch->RepackOutlife()->create([
-                                'input_repack_amount' => $outlife['repack_size']
+                                'input_repack_amount' => $last['repack_size']
                             ]);
                         }
 
-                        $draw_out_date_strToTime = strtotime($outlife->created_at);
+                        $draw_out_date_strToTime = strtotime($first->created_at);
                         $draw_in_date_strToTime  = strtotime(now());
                         $remaining_days_seconds  = abs($draw_out_date_strToTime-$draw_in_date_strToTime);
 
@@ -78,11 +78,11 @@ class DrawIN extends Command
                             'updated_outlife'   => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds"))
                         ]);
 
-                        $outlife->update([
+                        $last->update([
                             'draw_in'                 => 1,
                             'draw_out'                => 1,
                             'draw_out_time_stamp'     => now()->format("F jS, Y, g:i:s"),
-                            'remain_days'             => dateDifferStr(new DateTime($outlife->created_at), new DateTime()),
+                            'remain_days'             => dateDifferStr(new DateTime($last->created_at), new DateTime()),
                             'remaining_days_seconds'  => $remaining_days_seconds,
                             'current_date_time'       => Carbon::now()->toDateTimeLocalString(),
                             'updated_outlife'         => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds")),
@@ -90,10 +90,10 @@ class DrawIN extends Command
                             'current_outlife_expiry'  => $current_outlife_expiry,
                         ]);
                         MaterialProductHistory($batch,'AUTO_DRAW_IN');
-                        Log::info("Draw IN Success !");
-                    }
+                     Log::info("Draw IN Success !");  
                 }
             }
-        }
+        }     
+      }
     }
 }

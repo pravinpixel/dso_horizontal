@@ -825,6 +825,7 @@ app.controller('RootController', function ($scope, $http) {
                             balance_amount: element.remain_amount,
                             repack_size: element.repack_size,
                             quantity: element.quantity,
+                            draw_in_disabled: element.draw_in_disabled,
                             remaining_days: element.remain_days,
                             remaining_days_seconds: element.remaining_days_seconds,
                             barcode_number: RepackData.barcode_number,
@@ -869,6 +870,7 @@ app.controller('RootController', function ($scope, $http) {
                                     balance_amount: element.remain_amount,
                                     repack_size: element.repack_size,
                                     qty_cut: element.qty_cut,
+                                    draw_in_disabled: element.draw_in_disabled,
                                     remaining_days: element.remain_days,
                                     remaining_days_seconds: element.remaining_days_seconds,
                                     barcode_number: RepackData.barcode_number,
@@ -886,7 +888,7 @@ app.controller('RootController', function ($scope, $http) {
                     $('#exportLogCheckBox').prop('checked', false)
                 }
                 $scope.get_material_products();
-                //$('#RepackOutlife').modal('hide');
+                $('#RepackOutlife').modal('hide');
             })
     }
     $scope.duplicateThisBatch = (id) => {
