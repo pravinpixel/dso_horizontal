@@ -53,8 +53,8 @@ class DrawIN extends Command
                     $time1     = new DateTime($first->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-                    if(true) {
-                     // if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
+                    
+                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
                         if($batch->unit_packing_value != 0) {
                             $batch->RepackOutlife()->create([
                                 'input_repack_amount' => $last['repack_size']
