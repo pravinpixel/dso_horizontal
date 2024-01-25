@@ -51,10 +51,10 @@ class HelpMenuController extends Controller
     {
           
         if($request->has('attachments')) {
-            $attachments = Storage::put('files/helps-attachments', $request->file('attachments'));
+          $attachments = $request->file('attachments')->store('public/files/helps-attachments');
         } 
 
-       
+      
         HelpMenu::create([
             'title'         =>  $request->title,
             'description'   =>  $request->description,
