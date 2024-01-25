@@ -41,6 +41,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/create', [HelpMenuController::class, 'create'])->name('help.menu.create');
         Route::get('/edit/{id}', [HelpMenuController::class, 'edit'])->name('help.menu.edit');
         Route::post('/delete/{id}', [HelpMenuController::class, 'delete'])->name('help.menu.delete');
+        Route::post('/', [HelpMenuController::class, 'store'])->name('help.menu.store');
+    Route::post('/edit/{id}', [HelpMenuController::class, 'update'])->name('help.menu.update'); 
     });
     Route::prefix('pictogram')->group(function () {
         Route::get('/', [PictogramController::class, 'index'])->name('pictogram.index');
@@ -58,8 +60,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::put('/update/{id}', [RoleController::class, 'update'])->name('role.update');
     Route::get('/permission', [PermissionController::class, 'index'])->name('permission.index');
     Route::post('/permission', [PermissionController::class, 'store'])->name('permission.store'); 
-    Route::post('/', [HelpMenuController::class, 'store'])->name('help.menu.store');
-    Route::post('/edit/{id}', [HelpMenuController::class, 'update'])->name('help.menu.update'); 
+
     Route::put('/{id?}', [PictogramController::class, 'update'])->name('pictogram.update');
     Route::post('/create', [PictogramController::class, 'store'])->name('pictogram.store'); 
 });
