@@ -5,27 +5,31 @@ app.directive('repackTable', () => {
             element.on('click', () => {
                 if(attribute.repackTable == "OUT") { 
                     scope.repack.draw_in.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
+                    $('.btn-draw-in').addClass("btn-disabled").click(false);
                     scope.$apply()
                 }
                 if(attribute.repackTable == "IN") { 
+         $.ajax({
+            url: "search-or-add/repack-batch/out-value/"+scope.repack.id,
+            type: "GET",
+            success: function(response) {
                     scope.repack.draw_out.time_stamp = moment().format('MMMM Do YYYY, h:mm:ss a')
-                    var startDate   =   moment(scope.repack.draw_in.time_stamp, "MMMM Do YYYY, h:mm:ss a");
+                    var  startDate   =   moment(response.data, "MMMM Do YYYY, h:mm:ss a");
                     var endDate     =   moment(scope.repack.draw_out.time_stamp, "MMMM Do YYYY, h:mm:ss a"); 
                     var diff        =   moment(endDate).diff(startDate, 'milliseconds');
                     var duration    =   moment.duration(diff);
-
                     const Years     =   duration._data.years != 0 ? duration._data.years  + ' Years': ''
                     const days      =   duration._data.days != 0 ? duration._data.days + ' days' : ''
                     const minutes   =   duration._data.minutes != 0 ? duration._data.minutes + ' minutes' : ''
                     const seconds   =   duration._data.seconds != 0 ? duration._data.seconds + ' seconds' : ''
-
                     localStorage.setItem('repack_outlife_id', scope.repack.id) 
-
                     scope.repack.remaining_days = `${Years} ${days} ${minutes} ${seconds}`
-                    console.log(scope.repack.remaining_days)
-                    console.log(diff)
                     scope.repack.remaining_days_seconds = diff
+                    $('.btn-draw-out').addClass("btn-disabled").click(false);
+                    $('.btn-draw-in').addClass("btn-disabled").click(false);
                     scope.$apply(); 
+                          }
+                     });
                 }
             })
             element.on('keyup', () => { 

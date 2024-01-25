@@ -81,8 +81,16 @@ class RepackBatchController extends Controller
             if ($request->repack_id == $row['id']) {
                 $repackData = RepackOutlife::find($row['id']);
                 $Batches    = Batches::find($repackData->batch_id);
-
                 if ($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
+                   $repacks=RepackOutlife::where('batch_id',$repackData->batch_id)->where('draw_in',0)->where('id','!=',$row['id'])->get();
+                   //dd($repacks);
+                   foreach($repacks as $repack_data){
+                    $repack_outlife=RepackOutlife::find($repack_data->id);
+                    $repack_outlife->draw_in=1;
+                    $repack_outlife->save();
+
+                   }
+
                     $Batches['quantity']            = $row['quantity'];
                     $current_batch                   = Batches::find($repackData->batch_id);
                     $next_batch                      = $current_batch->replicate(); 
@@ -132,18 +140,17 @@ class RepackBatchController extends Controller
                         'old_input_repack_amount' => $row['repack_amount'],
                         'draw_in_last_access'     => auth_user()->alias_name,
                     ]);
-                }
-
-                if ($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
-
-                    if ($Batches->unit_packing_value != 0) {
-                        RepackOutlife::create([
+                     RepackOutlife::create([
                             'batch_id'            => $id,
                             'input_repack_amount' => $row['repack_size'],
                             'total_quantity'      => $row['balance_amount']
                         ]);
-                    }
-
+                    RepackOutlife::find($row['id'])->update([
+                        'user_id'                 => auth_user()->id,
+                        'current_date_time'       => Carbon::now()->toDateTimeLocalString()
+                       ]);
+                }
+                if ($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
                     if (is_null($Batches->outlife_seconds)) {
                         $updated_outlife_seconds    =  (int) $Batches->outlife * 86400 - (int) substr_replace($row['remaining_days_seconds'], "", -3);
                     } else {
@@ -179,11 +186,7 @@ class RepackBatchController extends Controller
                     ]);
                 }
 
-                RepackOutlife::find($row['id'])->update([
-                    'user_id'                 => auth_user()->id,
-                    'current_date_time'       => Carbon::now()->toDateTimeLocalString()
-                ]);
-
+               
                 return response()->json([
                     "status"    => true,
                     "message"   => "Success !"
@@ -196,4 +199,24 @@ class RepackBatchController extends Controller
         $excel_file_name = "Repack-Outlife-" . date("Y-M-d  h-i-s A") . ".xlsx";
         return Excel::download(new RepackOutlifeExport($id), $excel_file_name);
     }
+    public function get_repack_outlife_out_date($id)
+    {  $batch_repack=RepackOutlife::find($id);
+       $repack=RepackOutlife::where('batch_id',$batch_repack->batch_id)->where('draw_out_time_stamp',Null)->where('id','!=',$id)->get();
+       if(count($repack)>0){
+         return response()->json([
+            "status"  => true,
+            "data"=>$repack[0]->draw_in_time_stamp,
+            "message" => ""
+        ]);
+       }else{
+         return response()->json([
+            "status"  => true,
+            "data"=>$batch_repack->draw_in_time_stamp,
+            "message" => ""
+         ]);
+       }
+
+    }
+    
+    
 }

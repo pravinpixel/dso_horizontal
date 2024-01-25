@@ -55,6 +55,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/transfer-batch', [TransferBatchController::class, 'transfer'])->name('transfer-batch');
         Route::post('/repack-batch', [RepackBatchController::class, 'repack'])->name('repack-batch');
         Route::get('/repack-batch/{batch_id}', [RepackBatchController::class, 'get_repack_outlife'])->name('repack_outlife');
+        Route::get('/repack-batch/out-value/{id}', [RepackBatchController::class, 'get_repack_outlife_out_date'])->name('repack_outlife');
         Route::post('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'storeWizardForm'])->name('edit_or_duplicate.material-product');
         Route::get('/material-product/{type?}/{wizard_mode?}/{id?}/batch/{batch_id?}/{is_parent?}', [MaterialProductsController::class, 'wizardFormView'])->name('edit_or_duplicate.material-product');
         Route::post('/material-product/create/{type?}', [MaterialProductsController::class, 'storeWizardForm'])->name('create.material-product');
