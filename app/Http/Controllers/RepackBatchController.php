@@ -82,15 +82,14 @@ class RepackBatchController extends Controller
                 $repackData = RepackOutlife::find($row['id']);
                 $Batches    = Batches::find($repackData->batch_id);
                 if ($row['draw_out']['status'] == 0 && $row['draw_in']['status'] == 1) {
-                   $repacks=RepackOutlife::where('batch_id',$repackData->batch_id)->where('draw_in',0)->where('id','!=',$row['id'])->get();
-                   //dd($repacks);
-                   foreach($repacks as $repack_data){
-                    $repack_outlife=RepackOutlife::find($repack_data->id);
-                    $repack_outlife->draw_in=1;
-                    $repack_outlife->save();
+             $repacks=RepackOutlife::where('batch_id',$repackData->batch_id)->where('draw_in',0)->where('id','!=',$row['id'])->get();
+                       //dd($repacks);
+                       foreach($repacks as $repack_data){
+                        $repack_outlife=RepackOutlife::find($repack_data->id);
+                        $repack_outlife->draw_in_disabled=1;
+                        $repack_outlife->save();
 
-                   }
-
+                       }
                     $Batches['quantity']            = $row['quantity'];
                     $current_batch                   = Batches::find($repackData->batch_id);
                     $next_batch                      = $current_batch->replicate(); 
@@ -151,6 +150,14 @@ class RepackBatchController extends Controller
                        ]);
                 }
                 if ($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
+                    $repacks=RepackOutlife::where('batch_id',$repackData->batch_id)->where('draw_in',0)->where('id','!=',$row['id'])->get();
+                       //dd($repacks);
+                       foreach($repacks as $repack_data){
+                        $repack_outlife=RepackOutlife::find($repack_data->id);
+                        $repack_outlife->draw_in=1;
+                        $repack_outlife->save();
+
+                       }
                     if (is_null($Batches->outlife_seconds)) {
                         $updated_outlife_seconds    =  (int) $Batches->outlife * 86400 - (int) substr_replace($row['remaining_days_seconds'], "", -3);
                     } else {
@@ -201,7 +208,7 @@ class RepackBatchController extends Controller
     }
     public function get_repack_outlife_out_date($id)
     {  $batch_repack=RepackOutlife::find($id);
-       $repack=RepackOutlife::where('batch_id',$batch_repack->batch_id)->where('draw_out_time_stamp',Null)->where('id','!=',$id)->get();
+       $repack=RepackOutlife::where('batch_id',$batch_repack->batch_id)->where('draw_in',0)->where('draw_out_time_stamp',Null)->where('id','!=',$id)->get();
        if(count($repack)>0){
          return response()->json([
             "status"  => true,
