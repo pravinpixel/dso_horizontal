@@ -2,8 +2,8 @@
     <div class="box position-relative h-100 th box-lg">
         Item description
         <div class="btn-sort">
-            <i class="bi bi-arrow-up" ng-click="sort_by('item_description', 'DESC')" ></i>
-            <i class="bi bi-arrow-down" ng-click="sort_by('item_description', 'ASC')"></i>
+           <img src="{{url('/public/asset/images/up.svg')}}" ng-click="sort_by('item_description', 'DESC')" width="15" height="15" style="cursor: pointer;">
+           <img src="{{url('/public/asset/images/down.svg')}}" ng-click="sort_by('item_description', 'ASC')" width="21" height="21" style="cursor: pointer;">
         </div>
     </div>
 </div>
@@ -32,8 +32,8 @@
                 @else {{ ucfirst(str_replace('_', ' ', $column['name'])) }}
             @endif
             <div class="btn-sort">
-                <i class="bi bi-arrow-up" ng-click="sort_by('{{ $column['name'] }}', 'ASC')"></i>
-                <i class="bi bi-arrow-down" ng-click="sort_by('{{ $column['name'] }}', 'DESC')"></i>
+              <img src="{{url('/public/asset/images/up.svg')}}" ng-click="sort_by('{{ $column['name'] }}', 'DESC')" width="15" height="15" style="cursor: pointer;" >
+             <img src="{{url('/public/asset/images/down.svg')}}"ng-click="sort_by('{{ $column['name'] }}', 'ASC')"width="21" height="21" style="cursor: pointer;">
             </div>
         </div>
     @endif

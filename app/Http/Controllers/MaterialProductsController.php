@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\BannerExport;
-
+use Auth;
 class MaterialProductsController extends Controller
 {
     private   $MartialProductRepository;
@@ -50,7 +50,8 @@ class MaterialProductsController extends Controller
     }
 
     public function index(Request $request)
-    {
+    {    
+       
         if ($request->filters) {
             $material_product      =   $this->SearchRepository->barCodeSearch($request);
             return response(['status' => true, 'data' => $material_product], Response::HTTP_OK);
@@ -86,7 +87,6 @@ class MaterialProductsController extends Controller
             'Batches.BatchOwners',
             'Batches.RepackOutlife', 
         ])->latest()->get();
-               
         $material_product = $this->dsoRepository->renderTableData($material_product_data, null);
 
         return response(['status'   =>  true, 'data' => $material_product], Response::HTTP_OK);
@@ -178,7 +178,7 @@ class MaterialProductsController extends Controller
                     'name' => $row['unit_of_measure']
                 ]);
                 $material  = MaterialProducts::create([
-                    'category_selection'              => $row['category_selection'] == 'Material' ? 'material' : 'in_house',
+                    'category_selection'              => ($row['category_selection'] == 'material') ? 'material' : 'in_house',
                     'item_description'                => $row['item_description'] ?? null,
                     'unit_of_measure'                 => $unit_of_measure->id,
                     'unit_packing_value'              => $row['unit_packing_value'] ?? null,
@@ -221,6 +221,8 @@ class MaterialProductsController extends Controller
             if ($row['type']=='child' && $parent_id==$row['id']) {
 
                 $batch = $material->Batches()->create([
+                    'category_selection'              => ($row['category_selection'] == 'material') ? 'material' : 'in_house',
+                    'item_description'                => $row['item_description'] ?? null,
                     'is_draft'                     => 1,
                     'barcode_number'               => generateBarcode($material->category_selection),
                     'brand'                        => $row['brand'] ?? null,
