@@ -154,7 +154,6 @@ class SearchRepository implements SearchRepositoryInterface
 
     public function searchFilter($q, $filter, $material_table)
     {
-      
         foreach ($filter as $column => $value) {
             if (in_array($column, $material_table) != 1) {
                 if (checkIsBatchDateColumn($column)) {
@@ -177,6 +176,12 @@ class SearchRepository implements SearchRepositoryInterface
                 }
             }
         }
-        $q->where('is_draft', 0);
+        if(isset($filter->is_draft)){
+           
+            $q->where('is_draft',$filter->is_draft);
+        }else{
+             $q->where('is_draft', 0);
+        }
+       
     }
 }
