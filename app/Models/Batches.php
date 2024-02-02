@@ -9,6 +9,7 @@ use App\Models\Masters\StorageRoom;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 class Batches extends Model
 {
     use HasFactory,SoftDeletes;
@@ -71,7 +72,8 @@ class Batches extends Model
         'physical_stock',
         'updated_outlife',
         'user_id',
-        'end_of_batch'
+        'end_of_batch',
+        'initial_outlife_date'
     ];
 
     public function BarCodeGenOne()

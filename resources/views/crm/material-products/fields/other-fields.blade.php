@@ -41,7 +41,7 @@
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Date Of Disposal</label>
             <div class="col-8">
-               <input type="text" class="form-control form-select-sm" name="dod" value="{{date('d/m/Y',strtotime($batch->disposed_after))}}" readonly>
+               <input type="text" class="form-control form-select-sm" name="dod" placeholder="dd / mm / yyyy"value="@if(isset($batch->disposed_after)){{date('d/m/Y',strtotime($batch->disposed_after))}}@endif" readonly>
                
             </div>
         </div>

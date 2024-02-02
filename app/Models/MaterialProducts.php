@@ -6,8 +6,6 @@ use App\Models\Masters\PackingSizeData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-
 class MaterialProducts extends Model
 {
     use HasFactory;
@@ -43,7 +41,7 @@ class MaterialProducts extends Model
     }
     public function Batches()
     {
-        return $this->hasMany(Batches::class, 'material_product_id', 'id');
+        return $this->hasMany(Batches::class, 'material_product_id', 'id')->whereRaw('FIND_IN_SET("'.auth_user()->id.'",owners)');
     }
     public function UnitOfMeasure()
     {

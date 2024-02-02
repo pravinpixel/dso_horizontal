@@ -158,7 +158,23 @@
         </td>
         <td class="child-td">
             <small class="text-dark">
-                {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+
+                @php
+                  if(isset($row->Batch->initial_outlife_date) && $row->Batch->initial_outlife_date !=NULL){
+                    $dt1=\Carbon\Carbon::now();
+                    $dt2=$row->Batch->initial_outlife_date;
+                    $diffrence=$dt1->diff($dt2)->format('%a days, %h hours, %i minutes and %s seconds');
+                  }
+
+                @endphp
+                @if(isset($row->Batch->initial_outlife_date) && $row->Batch->initial_outlife_date !=NULL)
+                {{$row->Batch->initial_outlife_date}}<br>
+                {{$diffrence}}
+                @else
+               {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+                @endif
+               
+               
             </small>
         </td>
 </tr>

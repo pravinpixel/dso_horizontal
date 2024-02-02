@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 use App\Models\Batches;
+use DB;
 class UserController extends Controller
 {
     public function index(Request $request)
@@ -97,8 +98,6 @@ class UserController extends Controller
         $this->validate($request, $rules, $customMessages);
   
         try {
- 
-            //  Create a User Record
             $user   =  User::create([
                 'full_name'  => $request->full_name,
                 'alias_name' => $request->alias_name,
@@ -106,21 +105,19 @@ class UserController extends Controller
                 'email'      => $request->email,
                 'password'   => Hash::make(config('auth.password')),
             ]);
-            $data=[];
-            $users=User::select('id')->where('id','!=',$user->id)->orderBy('id','asc')->get();
-            foreach($users as $user_data){
-                 $data[]=$user_data->id;
-            }
-            $batches=Batches::all();
-            foreach($batches as $batch){
+      $users_count=User::select('id')->where('id','!=',$user->id)->orderBy('id','asc')->count();
+      $batches=Batches::all();
+        foreach($batches as $batch){
+    if(isset($batch->access) && $batch->access!=NULL){
+            $access=json_decode($batch->access);
+           if(count($access)==$users_count){
             $batch_data=Batches::find($batch->id);
-            $access=json_decode($batch_data->access);
-           if($access==$data){
-            array_push($access,strval($user->id));
-            $batch_data->access=$access;
-            $batch_data->update();
+            $array=array_merge(json_decode($batch_data->access),[strval($user->id)]);
+            $batch_data->access=$array;
+            $batch_data->save();
             }
         }
+    }
             
             // find a Users
             $user_activation = Sentinel::findById($user->id);
@@ -136,10 +133,11 @@ class UserController extends Controller
             $role->users()->attach($user);
 
             Flash::success( __('auth.account_creation_successful'));
-
+           
         } catch (\Throwable $th) {
 
             Log::error('User registration email sent failure.');
+             return back()->withErrors(['error' => $th->getMessage()]);
         }
         return redirect()->route('user.index');
     } 

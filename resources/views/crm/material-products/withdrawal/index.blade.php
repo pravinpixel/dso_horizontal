@@ -51,6 +51,7 @@
 @endsection
 
 @section('scripts')
+
     <script src="{{ asset('public/asset/js/vendors/axios.min.js') }}"></script>
     <script src="{{ asset('public/asset/js/controllers/NotificationController.js') }}"></script>
     <script>
@@ -59,6 +60,9 @@
                 validate(barcode) && fetch(`${APP_URL}/get-withdrawal-batches/${barcode}`).then(response => response
                     .json()).then((data) => {
                     render(data);
+                  if(data.status==false){
+                     Message('warning', data.message);
+                  }
                 });
             }
         }
@@ -122,4 +126,12 @@
             remain_amount.value = result < 0 ? 0 : result
         }
     </script>
+    @if ($message = Session::get('success_message'))
+    <script>
+        swal({
+            text: "{{ $message }}",
+            icon: "success",
+        })
+    </script>
+@endif
 @endsection
