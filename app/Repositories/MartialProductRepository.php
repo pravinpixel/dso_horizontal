@@ -6,7 +6,7 @@ use App\Interfaces\MartialProductRepositoryInterface;
 use App\Models\Batches;
 use App\Models\MaterialProducts;
 use Laracasts\Flash\Flash;
-
+use Carbon\Carbon;
 class MartialProductRepository implements MartialProductRepositoryInterface
 {
 
@@ -28,6 +28,14 @@ class MartialProductRepository implements MartialProductRepositoryInterface
             } else {
                 $fillable[$column] = $row;
             }
+           
+        if(wizard_mode() ==='create' && $column==="require_outlife_tracking" && $row==1){
+              $fillable['initial_outlife_date']=Carbon::now()->addDays($request['outlife']);
+        }
+        if(wizard_mode() ==='edit' && $column==="require_outlife_tracking" && $row==1){
+                 $fillable['initial_outlife_date']=Carbon::now()->addDays($request['outlife']);
+            
+        }
         }
         $material_product_fillable = $fillable;
 

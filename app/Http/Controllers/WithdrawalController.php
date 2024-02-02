@@ -24,12 +24,15 @@ class WithdrawalController extends Controller
                 'user_id'       => auth_user()->id,
                 'withdraw_type' => 'DEDUCT_TRACK_OUTLIFE'
             ])->get();
+          
+            
             return [
                 "direct_deducts"       => $direct_deducts,
                 "deduct_track_usage"   => $deduct_track_usage,
                 "deduct_track_outlife" => $deduct_track_outlife,
             ];
         } else {
+
             return withdrawCart::with('batch','RepackOutlife')->where([
                 'user_id'       => auth_user()->id,
                 'withdraw_type' => $type
