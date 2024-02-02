@@ -20,6 +20,7 @@
                 ) !!}
             </div>
         </div>
+        
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Housing type <sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -31,6 +32,7 @@
                 ]) !!}
             </div>
         </div>
+        
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">Housing # <sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -105,6 +107,7 @@
                 ]) !!}
             </div>
         </div>
+        
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">IQC status (P/F)<sup class="text-danger">*</sup></label>
             <div class="col-8">
@@ -116,6 +119,7 @@
                 ]) !!}
             </div>
         </div>
+        
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4">IQC result<sup class="text-danger">*</sup></label>
             <div class="col-8 ">
@@ -131,7 +135,7 @@
                     <span class="btn btn-light btn-sm border-start">
                         <input type="checkbox" name="iqc_result_status" id="iqc_result_check_box"
                             class="form-check-input"
-                            @if ($material_product->Batches[0]->iqc_result == null) {{ $batch->iqc_result_status == 'on' ? 'checked' : null }} @endif
+                            @if ( isset($material_product->Batches[0]->iqc_result) && $material_product->Batches[0]->iqc_result == null) {{ $batch->iqc_result_status == 'on' ? 'checked' : null }} @endif
                             {{ config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'iqc_result.status') }}
                             onclick="change_iqc_result_status()" />
                     </span>
@@ -141,6 +145,7 @@
             </div>
         </div>
     </div>
+    
     <div class="col-md-4 p-0">
         <div class="row m-0 y-center my-2">
             <label for="" class="col-4 mb-2">Owners <sup class="text-danger">*</sup></label>
