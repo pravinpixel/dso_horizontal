@@ -106,10 +106,18 @@ class WithdrawalController extends Controller
     public function withdrawal_indexing($barcode)
     {
         try {
-            $batches  = Batches::where('barcode_number', $barcode)
+            $batches  = Batches::with('RepackOutlife')->where('barcode_number', $barcode)
             ->where('end_of_batch', 0)
             ->where('is_draft', 0)->first();
-
+              if(count($batches->RepackOutlife)>0){
+               foreach($batches->RepackOutlife as $repack){
+                if($repack->draw_out==1 && $repack->draw_in==0){
+                     return response(['status' => false, 'message' => trans("Materials is not drawn in yet. Unable to proceed with withdrawal.")], 400);
+                }
+               }
+                
+              }  
+            
             switch ($batches->withdrawal_type) {
                 case 'DIRECT_DEDUCT':
                     $withdraw_cart = withdrawCart::with('batch')->where([
