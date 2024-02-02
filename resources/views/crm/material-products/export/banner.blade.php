@@ -171,7 +171,7 @@
             <td>{{$child->batch}}</td>
             <td>{{$child->serial}}</td>
             <td>{{$child->po_number}}</td>
-            <td>{{$child->StatutoryBody->name}}</td>
+             <td> @if(isset($child->StatutoryBody->name)){{$child->StatutoryBody->name}}@endif</td>
             <td>{{$child->euc_material}}</td>
             <td>{{$child->require_bulk_volume_tracking}}</td>
             <td>{{$child->require_outlife_tracking}}</td>
