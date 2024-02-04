@@ -395,6 +395,7 @@ class MaterialProductsController extends Controller
 
         if ($type == 'form-one') {
             $current_batch = Batches::find(batch_id() ?? $batch_id);
+            if(isset($current_batch->require_bulk_volume_tracking) && !is_null($current_batch->require_bulk_volume_tracking)){
             if ($current_batch->require_bulk_volume_tracking == 0 && $current_batch->require_outlife_tracking == 0) {
                 $withdrawal_type = 'DIRECT_DEDUCT';
             } elseif ($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 0) {
@@ -404,7 +405,8 @@ class MaterialProductsController extends Controller
             } elseif ($current_batch->require_bulk_volume_tracking == 1 && $current_batch->require_outlife_tracking == 1) {
                 $withdrawal_type = 'DEDUCT_TRACK_OUTLIFE';
             }
-
+            }
+ 
             $current_batch->update([
                 'withdrawal_type' => $withdrawal_type
             ]);
