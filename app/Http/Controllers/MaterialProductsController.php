@@ -68,7 +68,6 @@ class MaterialProductsController extends Controller
             $result      =   $this->SearchRepository->advanced_search($row);
             if ($result) return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-
         if ($request->sort_by) {
             $sort_by    =   (object) $request->sort_by;
             $result     =   $this->SearchRepository->sortingOrder($sort_by);

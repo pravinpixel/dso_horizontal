@@ -3,6 +3,7 @@
         Item description
         <div class="btn-sort">
            <img src="{{url('/public/asset/images/up.svg')}}" ng-click="sort_by('item_description', 'DESC')" width="15" height="15" style="cursor: pointer;">
+           &nbsp;&nbsp;
            <img src="{{url('/public/asset/images/down.svg')}}" ng-click="sort_by('item_description', 'ASC')" width="15" height="15" style="cursor: pointer;">
         </div>
     </div>
@@ -33,6 +34,7 @@
             @endif
             <div class="btn-sort">
               <img src="{{url('/public/asset/images/up.svg')}}" ng-click="sort_by('{{ $column['name'] }}', 'DESC')" width="15" height="15" style="cursor: pointer;" >
+              &nbsp;&nbsp;
              <img src="{{url('/public/asset/images/down.svg')}}"ng-click="sort_by('{{ $column['name'] }}', 'ASC')"width="15" height="15" style="cursor: pointer;">
             </div>
         </div>

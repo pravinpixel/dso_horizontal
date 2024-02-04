@@ -123,6 +123,8 @@ Route::middleware(['auth_users'])->group(function () {
 
     //  Get Material OR Products  List
     Route::get('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
+    Route::get('/home/get-material-products', [MaterialProductsController::class, 'index'])->name('home.get-material-products');
+     Route::post('/home/get-material-products', [MaterialProductsController::class, 'index'])->name('home.get-material-products');
     Route::post('/get-material-products', [MaterialProductsController::class, 'index'])->name('get-material-products');
 
     // Get Material Bathes Data

@@ -4,7 +4,11 @@
 @endsection
 @section('scripts')
    <input type="hidden" id="get-material-export" value="{{ route('list-material-products-export') }}">
+    @if(request()->route()->getName()=="list-material-products")
+    <input type="hidden" id="get-material-products" value="{{ route('home.get-material-products') }}">
+    @else
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
+    @endif
     <input type="hidden" id="delete-material-products" value="{{ route('delete-material-products') }}">
     <input type="hidden" id="delete-material-products-batch" value="{{ route('delete-material-products-batch') }}">
     <input type="hidden" id="get-save-search" value="{{ route('get-save-search') }}">

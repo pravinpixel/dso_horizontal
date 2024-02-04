@@ -502,6 +502,7 @@ a {
 }
 .custom-table-head {
     border-bottom: 1px solid #eeeeee;
+    height: 70px;
 }
 .box .dropdown-menu.show  {
     transform: translate(-291px, 1px) !important

@@ -84,29 +84,48 @@ class SearchRepository implements SearchRepositoryInterface
     }
     public function sortingOrder($sort_by)
     {    
-        //dd($sort_by);
+       $filter=(object)$sort_by->filter['advanced_search'];
+       $material_table =  [
+            'quantity',
+            'category_selection',
+            'item_description',
+            'unit_of_measure',
+            'unit_packing_value',
+            'alert_threshold_qty_upper_limit',
+            'alert_threshold_qty_lower_limit',
+            'alert_before_expiry',
+           
+        ];
+        if(isset($filter->is_draft)){
+        $is_draft=$filter->is_draft;
+        }else{
+        $is_draft=0;
+        } 
+    $material_product_data =  MaterialProducts::query();
+    $material_product_data->with([
+            'Batches' => function ($q) use ($filter, $material_table) {
+                
+                $this->searchFilter($q, $filter, $material_table);
+            },
+            'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody', 'Batches.BatchMaterialProduct'
+        ])->when(true, function ($q) use ($filter, $material_table) {
+            foreach ($filter as $column => $value) {
+                if (in_array($column, $material_table)) {
+                    if (!empty($value)) {
+
+                        $q->where($column, $value);
+                    }
+                }
+            }
+        })->WhereHas('Batches', function ($q) use ($filter, $material_table) {
+            $this->searchFilter($q, $filter, $material_table);
+        });
         if (checkIsMaterialColumn($sort_by->col_name) == 1) {
-          
-            $material_product_data =  MaterialProducts::with([
-                'Batches',
-                'Batches.RepackOutlife',
-                'Batches.HousingType',
-                'Batches.Department',
-                'UnitOfMeasure',
-                'Batches.StorageArea',
-                'Batches.StatutoryBody',
-                'Batches.BatchMaterialProduct',
-                'Batches.BatchOwners'
-            ])
-                ->orderBy($sort_by->col_name, $sort_by->order_type)
-                ->latest()
-                ->get();
-            return $this->dsoRepository->renderTableData($material_product_data, null);
+        $material_product_data->orderBy($sort_by->col_name, $sort_by->order_type);
         } else {
-            //dd($sort_by->type);
-            $material_product_data = MaterialProducts::orderBy('item_description',$sort_by->type)->with([
-                'Batches' => function ($q) use ($sort_by) {
-                    $q->orderBy($sort_by->col_name, $sort_by->order_type);
+        $material_product_data->orderBy('item_description',$sort_by->type)->with([
+                'Batches' => function ($q) use ($sort_by,$is_draft) {
+                    $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
                 },
                 'Batches.RepackOutlife',
                 'Batches.HousingType',
@@ -116,9 +135,10 @@ class SearchRepository implements SearchRepositoryInterface
                 'Batches.StatutoryBody',
                 'Batches.BatchMaterialProduct',
                 'Batches.BatchOwners'
-            ])->latest()->get();
-            return $this->dsoRepository->renderTableData($material_product_data, null);
+            ]);
         }
+        $material_product=$material_product_data->latest()->get();
+        return $this->dsoRepository->renderTableData($material_product, null);
     }
 
     public function storeBulkSearch($row, $request)

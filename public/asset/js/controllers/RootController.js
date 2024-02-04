@@ -292,7 +292,32 @@ app.controller('RootController', function ($scope, $http) {
         });
     }
 
-    $scope.sort_by = function (name, type) {
+    $scope.sort_by = function (name, type,advanced_search) {
+        $scope.filter_status = true
+        $scope.sort_by_payload = false;
+        if (advanced_search === undefined) {
+            $scope.filler_function();
+            var payload_data = $scope.filter_data
+            $scope.advance_search_status = true
+        } else {
+            $scope.advance_search_pre_saved = true
+            $scope.advance_search_pre_saved_data = advanced_search
+            var payload_data = $scope.advanced_filter
+        }
+        if (type == 'saved_search') {
+            var payload_data = {
+                advanced_search: advanced_search
+            }
+        }
+
+        Object.keys(payload_data.advanced_search).map((item) => {
+            if (
+                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment" || item == "disposed_after"
+            ) {
+                payload_data.advanced_search[item].startDate = moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
+                payload_data.advanced_search[item].endDate = moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
+            }
+        })
         if(name=='item_description'){
             $('#sort_value').val(type);
         }
@@ -302,7 +327,8 @@ app.controller('RootController', function ($scope, $http) {
                 sort_by: {
                     col_name: name,
                     order_type: type,
-                    type:''
+                    type:'',
+                    filter:payload_data
                 }
             }
         }else{
@@ -310,15 +336,15 @@ app.controller('RootController', function ($scope, $http) {
                 sort_by: {
                     col_name: name,
                     order_type: type,
-                    type:$('#sort_value').val()
+                    type:$('#sort_value').val(),
+                    filter:payload_data
                 }
             }
         }
-
         $http({
             method: 'post',
             url: material_products_url,
-            data: $scope.sort_by_payload_data
+            data:$scope.sort_by_payload_data,
         }).then(function (response) {
             $scope.material_products = response.data.data;
             $scope.material_products.links.shift();

@@ -33,8 +33,11 @@ class MartialProductRepository implements MartialProductRepositoryInterface
               $fillable['initial_outlife_date']=Carbon::now()->addDays($request['outlife']);
         }
         if(wizard_mode() ==='edit' && $column==="require_outlife_tracking" && $row==1){
+            $batch_old=Batches::find($batch_id);
+            if($batch_old->outlife !=$request['outlife']){
                  $fillable['initial_outlife_date']=Carbon::now()->addDays($request['outlife']);
-            
+                 
+            }
         }
         }
         $material_product_fillable = $fillable;
