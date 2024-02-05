@@ -94,8 +94,7 @@
 
                                     <div>
                                         <small class="badge badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
-                                        <small>{{ date('d/m/Y'
-                                            ,strtotime($batch->DrawInOutlifeLatest->current_outlife_expiry)) }}</small>
+                                        <small>{{$batch->DrawInOutlifeLatest->current_outlife_expiry??''}}</small>
                                         </div>              
                                         @else
                                         @php
