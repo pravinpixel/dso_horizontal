@@ -266,18 +266,17 @@ app.controller('RootController', function ($scope, $http) {
 
     //  ===== Pagination & Filters ====
     $scope.next_Prev_page = function (params) {
-        if ($scope.advance_search_status == true) {
+            if ($scope.advance_search_status == true && $scope.sort_by_payload == true) {
+             var payload_data = $scope.sort_by_payload_data;
+            }else if ($scope.advance_search_status == true) {
             var payload_data = $scope.filter_data;
-        } else {
-            if ($scope.advance_search_pre_saved == true) {
+            }else if ($scope.advance_search_pre_saved == true) {
                 var payload_data = { advanced_search: $scope.advance_search_pre_saved_data }
-            }
-            if ($scope.sort_by_payload == true) {
+            }else if ($scope.sort_by_payload == true) {
                 var payload_data = $scope.sort_by_payload_data
             } else {
                 var payload_data = { Empty: "0000" }
             }
-        }
 
         $http({
             method: 'post',
@@ -341,6 +340,7 @@ app.controller('RootController', function ($scope, $http) {
                 }
             }
         }
+        $scope.sort_by_payload = true;
         $http({
             method: 'post',
             url: material_products_url,

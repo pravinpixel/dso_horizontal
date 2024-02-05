@@ -115,6 +115,12 @@ class SearchRepository implements SearchRepositoryInterface
                 }
             }
     });
+     if (checkIsMaterialColumn($sort_by->col_name) == 1) {
+        $material_product_data->orderBy($sort_by->col_name, $sort_by->order_type);
+        }
+       //  if(isset($sort_by->type)){
+       // $material_product_data->orderBy('item_description',$sort_by->type);
+       //  }
         $material_product_data->with(['Batches' => function($q)use($sort_by,$is_draft,$material_table,$filter) {
             $this->searchFilter($q, $filter, $material_table);
             if (checkIsMaterialColumn($sort_by->col_name) == 1) {
@@ -123,9 +129,7 @@ class SearchRepository implements SearchRepositoryInterface
             }
             
         }]);
-        if (checkIsMaterialColumn($sort_by->col_name) == 1) {
-        $material_product_data->orderBy($sort_by->col_name, $sort_by->order_type);
-        }
+        
         $material_product=$material_product_data->latest()->get();
         return $this->dsoRepository->renderTableData($material_product, null);
     }
