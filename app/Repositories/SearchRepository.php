@@ -103,12 +103,9 @@ class SearchRepository implements SearchRepositoryInterface
         } 
     $material_product_data =  MaterialProducts::query();
     $material_product_data->with([
-            'Batches' => function ($q) use ($filter, $material_table) {
-                
-                $this->searchFilter($q, $filter, $material_table);
-            },
+            'Batches',
             'Batches.RepackOutlife', 'Batches.BatchOwners', 'Batches.HousingType', 'Batches.Department', 'UnitOfMeasure', 'Batches.StorageArea', 'Batches.StatutoryBody', 'Batches.BatchMaterialProduct'
-        ])->when(true, function ($q) use ($filter, $material_table) {
+    ])->when(true, function ($q) use ($filter, $material_table) {
             foreach ($filter as $column => $value) {
                 if (in_array($column, $material_table)) {
                     if (!empty($value)) {
@@ -117,25 +114,17 @@ class SearchRepository implements SearchRepositoryInterface
                     }
                 }
             }
-        })->WhereHas('Batches', function ($q) use ($filter, $material_table) {
+    });
+        $material_product_data->with(['Batches' => function($q)use($sort_by,$is_draft,$material_table,$filter) {
             $this->searchFilter($q, $filter, $material_table);
-        });
+            if (checkIsMaterialColumn($sort_by->col_name) == 1) {
+            }else{
+           $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
+            }
+            
+        }]);
         if (checkIsMaterialColumn($sort_by->col_name) == 1) {
         $material_product_data->orderBy($sort_by->col_name, $sort_by->order_type);
-        } else {
-        $material_product_data->orderBy('item_description',$sort_by->type)->with([
-                'Batches' => function ($q) use ($sort_by,$is_draft) {
-                    $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
-                },
-                'Batches.RepackOutlife',
-                'Batches.HousingType',
-                'Batches.Department',
-                'UnitOfMeasure',
-                'Batches.StorageArea',
-                'Batches.StatutoryBody',
-                'Batches.BatchMaterialProduct',
-                'Batches.BatchOwners'
-            ]);
         }
         $material_product=$material_product_data->latest()->get();
         return $this->dsoRepository->renderTableData($material_product, null);
