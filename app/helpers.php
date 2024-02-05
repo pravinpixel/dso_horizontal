@@ -160,10 +160,10 @@ if (!function_exists('checkIsMaterialColumn')) {
     function checkIsMaterialColumn($column)
     {
         $data =  [
-            'category_selection',
+            'item_description',
             'item_description',
             'unit_of_measure',
-            // 'unit_packing_value',
+             //'unit_packing_value',
             'alert_threshold_qty_upper_limit',
             'alert_threshold_qty_lower_limit',
             'alert_before_expiry',
