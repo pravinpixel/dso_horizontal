@@ -399,31 +399,17 @@ app.controller('RootController', function ($scope, $http) {
     }
 
      $scope.export = (advanced_search, type) => {
-        $scope.filter_status = true
-        $scope.sort_by_payload = false;
-        if (advanced_search === undefined) {
-            $scope.filler_function();
-            var payload_data = $scope.filter_data
-            $scope.advance_search_status = true
-        } else {
-            $scope.advance_search_pre_saved = true
-            $scope.advance_search_pre_saved_data = advanced_search
-            var payload_data = $scope.advanced_filter
-        }
-        if (type == 'saved_search') {
-            var payload_data = {
-                advanced_search: advanced_search
+        if ($scope.advance_search_status == true && $scope.sort_by_payload == true) {
+             var payload_data = $scope.sort_by_payload_data;
+            }else if ($scope.advance_search_status == true) {
+            var payload_data = $scope.filter_data;
+            }else if ($scope.advance_search_pre_saved == true) {
+                var payload_data = { advanced_search: $scope.advance_search_pre_saved_data }
+            }else if ($scope.sort_by_payload == true) {
+                var payload_data = $scope.sort_by_payload_data
+            } else {
+                var payload_data = { Empty: "0000" }
             }
-        }
-
-        Object.keys(payload_data.advanced_search).map((item) => {
-            if (
-                item == "date_in" || item == "date_of_expiry" || item == "date_of_manufacture" || item == "date_of_shipment" || item == "disposed_after"
-            ) {
-                payload_data.advanced_search[item].startDate = moment(payload_data.advanced_search[item].startDate).format('YYYY-MM-DD')
-                payload_data.advanced_search[item].endDate = moment(payload_data.advanced_search[item].endDate).format('YYYY-MM-DD')
-            }
-        })
      
          $http({
                 method: 'post',

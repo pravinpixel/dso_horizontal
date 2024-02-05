@@ -41,7 +41,7 @@ class MaterialProducts extends Model
     }
     public function Batches()
     {
-    if(request()->route()->getName()=="home.get-material-products"){
+    if(request()->route()->getName()=="home.get-material-products" || request()->route()->getName()=="list-material-products-export"){
             return $this->hasMany(Batches::class, 'material_product_id', 'id');
     }else{
     return $this->hasMany(Batches::class, 'material_product_id', 'id')->whereRaw('FIND_IN_SET("'.auth_user()->id.'",owners)');
