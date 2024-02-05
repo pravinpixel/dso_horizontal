@@ -20,6 +20,7 @@ use App\Interfaces\DsoRepositoryInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Interfaces\MartialProductRepositoryInterface;
 use App\Interfaces\SearchRepositoryInterface;
+use App\Interfaces\ExportRepositoryInterface;
 use App\Models\Batches;
 use App\Models\BatchFiles;
 use App\Models\BatchOwners;
@@ -38,15 +39,18 @@ class MaterialProductsController extends Controller
     private   $MartialProductRepository;
     private   $SearchRepository;
     private   $dsoRepository;
-
+    private   $SearchRepositoryExport;
     public function __construct(
         MartialProductRepositoryInterface $MartialProductRepository,
         SearchRepositoryInterface   $SearchRepository,
-        DsoRepositoryInterface $dsoRepositoryInterface
+        DsoRepositoryInterface $dsoRepositoryInterface,
+        ExportRepositoryInterface $SearchRepositoryExport
     ) {
         $this->MartialProductRepository = $MartialProductRepository;
         $this->SearchRepository         = $SearchRepository;
         $this->dsoRepository            = $dsoRepositoryInterface;
+        $this->SearchRepositoryExport   = $SearchRepositoryExport;
+
     }
 
     public function index(Request $request)
@@ -666,24 +670,28 @@ class MaterialProductsController extends Controller
         }else{
            
         if ($request->filters) {
-            $result      =   $this->SearchRepository->barCodeSearch($request);
+            $result      = $this->SearchRepositoryExport->barCodeSearchExport($request);
             
         }
 
         if ($request->save_advanced_search) {
             $row        =   (object) $request->save_advanced_search['advanced_search'];
-            $result     =   $this->SearchRepository->storeBulkSearch($row, $request);
+            $result     =  $this->SearchRepositoryExport->storeBulkSearchExport($row, $request);
             
         }
 
         if ($request->advanced_search) {
             $row         =   (object) $request->advanced_search;
-            $result      =   $this->SearchRepository->advanced_search($row);
+            $result      = $this->SearchRepositoryExport->advanced_searchExport($row);
             
+        }
+        if ($request->sort_by) {
+            $sort_by    =   (object) $request->sort_by;
+            $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
+            return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
          $response=Excel::download(new BannerExport($result??[]),'banner.csv');
          return $response;   
-         // ->getFile()
 
         }
        
