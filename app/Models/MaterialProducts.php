@@ -42,9 +42,9 @@ class MaterialProducts extends Model
     public function Batches()
     {
     if(request()->route()->getName()=="home.get-material-products"){
-            return $this->hasMany(Batches::class, 'material_product_id', 'id')->whereRaw('FIND_IN_SET("'.auth_user()->id.'",owners)');
+            return $this->hasMany(Batches::class, 'material_product_id', 'id');
     }else{
-    return $this->hasMany(Batches::class, 'material_product_id', 'id');
+    return $this->hasMany(Batches::class, 'material_product_id', 'id')->whereRaw('FIND_IN_SET("'.auth_user()->id.'",owners)');
     }
     }
     public function UnitOfMeasure()
