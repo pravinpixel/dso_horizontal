@@ -96,7 +96,7 @@
                                         <small class="badge badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
                                         <small>{{$batch->DrawInOutlifeLatest->current_outlife_expiry??''}}</small>
                                         </div>              
-                                        @else
+                                        @elseif(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL)
                                         @php
                                         if(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL){
                                             $dt1=\Carbon\Carbon::now();
@@ -105,11 +105,11 @@
                                         }
 
                                         @endphp
-                                        @if(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL)
                                         {{$batch->initial_outlife_date}}
                                         <br>
                                         {{$diffrence}}
-                                        @endif
+                                        @else
+                                        DD/MM/YYYY
                                         @endif
 
 
