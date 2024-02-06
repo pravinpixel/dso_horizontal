@@ -164,7 +164,7 @@
             <td>{{$child->material_product_id }}</td>
             <td>{{$parent->category_selection}}</td>
             <td>{{$parent->item_description}}</td>
-            <td>{{$parent->UnitOfMeasure->name}}</td>
+            <td>@if(isset($parent->UnitOfMeasure->name)){{$parent->UnitOfMeasure->name}} @endif</td>
             <td>{{$parent->unit_packing_value}}</td>
             <td>{{$parent->alert_threshold_qty_upper_limit}}</td>
             <td>{{$parent->alert_threshold_qty_lower_limit}}</td>
@@ -180,10 +180,10 @@
             <td>{{$child->require_bulk_volume_tracking}}</td>
             <td>{{$child->require_outlife_tracking}}</td>
             <td>{{$child->outlife}}</td>
-            <td>{{$child->StorageArea->name}}</td>
-            <td>{{$child->HousingType->name}}</td>
+            <td>@if(isset($child->StorageArea->name)){{$child->StorageArea->name}}@endif</td>
+            <td>@if(isset($child->HousingType->name)){{$child->HousingType->name}}@endif</td>
             <td>{{$child->housing}}</td>
-            <td>{{$child->Department->name}}</td>
+            <td>@if(isset($child->Department->name)){{$child->Department->name}}@endif</td>
             <td>{{$child->date_in}}</td>
             <td>{{$child->date_of_expiry}}</td>
             <td>{{$child->iqc_status}}</td>
