@@ -108,6 +108,9 @@
                              no_of_extension
                             </th> 
                             <th>
+                             remarks
+                            </th> 
+                            <th>
                              type
                             </th> 
 
@@ -145,6 +148,7 @@
             <td></td>
             <td></td>
               <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -192,6 +196,7 @@
             <td>{{$child->date_of_shipment}}</td>
             <td>{{$child->cost_per_unit}}</td>
             <td>{{$child->no_of_extension}}</td>
+            <td>{{$child->remarks}}</td>
             <td>child</td>
         </tr>
         @endforeach
