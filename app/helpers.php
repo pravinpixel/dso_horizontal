@@ -160,6 +160,7 @@ if (!function_exists('checkIsMaterialColumn')) {
     function checkIsMaterialColumn($column)
     {
         $data =  [
+            'category_selection',
             'item_description',
             'item_description',
             'unit_of_measure',
