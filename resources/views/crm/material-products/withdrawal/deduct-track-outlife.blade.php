@@ -166,7 +166,7 @@
 
                 @endphp
                 @if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL)
-                {{$diffrence}}
+                {{SetDateFormatWithHour($diffrence)}}
                 @else
               DD/MM/YYYY
                 @endif
