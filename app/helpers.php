@@ -826,10 +826,15 @@ if (!function_exists('getRoutes')) {
         function currentOutlifeDate($outlife_seconds)
         {    
             $days=floor($outlife_seconds / 86400);
+            $hours = floor(($outlife_seconds -($days*86400)) / 3600);
+            $minutes = floor(($outlife_seconds / 60) % 60);
+            $seconds = $outlife_seconds % 60;
             $diffrence='';
-            if(isset($days) && $days!=0){
-             $diffrence=\Carbon\Carbon::now()->addDays($days);
-            return $diffrence->format('d/m/Y');
+
+            if(isset($hours)){
+             $now=\Carbon\Carbon::now();
+             $diffrence=$now->addDays($days)->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+             return $diffrence;
             }
             return $diffrence;
             

@@ -443,8 +443,21 @@ class MaterialProductsController extends Controller
             MaterialProductHistory(Batches::find(batch_id() ?? $batch_id), wizard_mode());
             forgot_session();
             if ($request->is_print == 1) {
+            $current_batch = Batches::find(batch_id() ?? $batch_id);
+        if(isset($current_batch) && $current_batch!=NULL){
+            $current_batch->update([
+                    'is_draft' => 0
+                  ]);
+                  }
+              
                 return redirect()->route('barcode.listing', ["id" => $this_batch_id]);
             } else {
+                $current_batch = Batches::find(batch_id() ?? $batch_id);
+        if(isset($current_batch) && $current_batch!=NULL){
+            $current_batch->update([
+                    'is_draft' => 0
+                  ]);
+                  }
                 return redirect()->route('list-material-products');
             }
         }

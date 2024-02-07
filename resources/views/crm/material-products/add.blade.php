@@ -115,7 +115,7 @@
 
     function submitAndSave(e) {
         e.preventDefault();
-        $('#hidden_input').html(`<input type="hidden" name="is_draft" value="0">`);
+         $('#hidden_input').html(`<input type="hidden" name="is_draft" value="0">`);
         swal({
             text: "Do You Want To Print?",
             icon: "info",

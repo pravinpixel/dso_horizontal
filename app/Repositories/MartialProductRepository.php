@@ -82,7 +82,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
             $material_product->update([
                 "material_quantity"       => $batch->quantity,
                 "material_total_quantity" => $batch->quantity *  $MaterialBatch->unit_packing_value,
-                "id_draft"                => 0,
+                "is_draft"                => 0,
                 "quantity_update_status"  => 0,
                 "unit_packing_value" =>  $MaterialBatch->unit_packing_value
             ]);

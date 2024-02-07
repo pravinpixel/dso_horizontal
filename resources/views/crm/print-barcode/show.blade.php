@@ -97,19 +97,22 @@
                                         <small>
                                             @if(isset($batch->DrawInOutlifeLatest->current_outlife_expiry))
 
-                                            {{SetDateFormatWithHour($batch->DrawInOutlifeLatest->outlife_seconds)}}
+                                           {{SetDateFormatWithHours($batch->DrawInOutlifeLatest->current_outlife_expiry)}}
                                         @endif</small>
                                         </div>              
-                                        @elseif(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL)
+                                        @else
                     @php
                     $diffrence='';
                     if(isset($batch->outlife) && $batch->outlife !=NULL){
                     $diffrence=\Carbon\Carbon::now()->addDays($batch->outlife);
                   }
 
-                                        @endphp                                         {{SetDateFormatWithHour($diffrence)}}
+                                        @endphp  
+                                        @if(isset($diffrence) && $diffrence!='')          
+                                        {{SetDateFormatWithHours($diffrence)}}
                                         @else
                                         DD/MM/YYYY
+                                        @endif
                                         @endif
 
 
