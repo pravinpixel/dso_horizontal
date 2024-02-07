@@ -160,18 +160,15 @@
             <small class="text-dark">
 
                 @php
-                  if(isset($row->Batch->initial_outlife_date) && $row->Batch->initial_outlife_date !=NULL){
-                    $dt1=\Carbon\Carbon::now();
-                    $dt2=$row->Batch->initial_outlife_date;
-                    $diffrence=$dt1->diff($dt2)->format('%a days, %h hours, %i minutes and %s seconds');
+                  if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL){
+                    $diffrence=\Carbon\Carbon::now()->addDays($row->Batch->outlife);
                   }
 
                 @endphp
-                @if(isset($row->Batch->initial_outlife_date) && $row->Batch->initial_outlife_date !=NULL)
-                {{$row->Batch->initial_outlife_date}}<br>
+                @if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL)
                 {{$diffrence}}
                 @else
-               {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+              DD/MM/YYYY
                 @endif
                
                
