@@ -78,7 +78,7 @@
         </td>
         <td class="child-td">
             <small class="text-dark">
-                  {{ currentOutlifeDate($row->Batch->outlife_seconds??'')  }} {{date('H:i')}}
+                  {{ SetDateFormatWithHours(currentOutlifeDate($row->Batch->outlife_seconds??''))}}
             </small>
         </td>
     </tr> 
@@ -166,7 +166,7 @@
 
                 @endphp
                 @if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL)
-                {{SetDateFormatWithHour($diffrence)}}
+                {{SetDateFormatWithHours($diffrence)}}
                 @else
               DD/MM/YYYY
                 @endif
