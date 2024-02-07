@@ -107,7 +107,7 @@
                     $diffrence=\Carbon\Carbon::now()->addDays($batch->outlife);
                   }
 
-                                        @endphp                                         {{$diffrence}}
+                                        @endphp                                         {{SetDateFormatWithHour($diffrence)}}
                                         @else
                                         DD/MM/YYYY
                                         @endif
