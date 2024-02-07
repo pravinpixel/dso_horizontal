@@ -94,7 +94,11 @@
 
                                     <div>
                                         <small class="badge badge-outline-dark shadow-sm bg-light rounded-pill">Outlife expiry date</small><br> 
-                                        <small>{{$batch->DrawInOutlifeLatest->current_outlife_expiry??''}}</small>
+                                        <small>
+                                            @if(isset($batch->DrawInOutlifeLatest->current_outlife_expiry))
+                                            
+                                            {{Carbon\Carbon::parse($batch->DrawInOutlifeLatest->current_outlife_expiry)->format('d/m/Y')}}
+                                        @endif</small>
                                         </div>              
                                         @elseif(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL)
                     @php
