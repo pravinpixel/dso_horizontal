@@ -43,7 +43,7 @@
         <td> <small>{{ $history->item_description }}</small> </td>
         <td><small>{{ $history->batch_serial }}</small></td>
         <td class="p-0"><small> {{ $history->last_accessed }} </small></td>
-        <td><small>{{ SetDateFormatWithHour($history->created_at) }}</small></td>
+        <td><small>{{ SetDateFormatWithHours($history->created_at) }}</small></td>
         <td><small>{{ $history->unit_packing_value }}</small></td>
         <td><small>{{ $history->quantity }}</small></td>
         <td><small>{{ $history->total_quantity }}</small></td>
@@ -51,7 +51,7 @@
         <td><small>{{ $history->remarks }}</small></td>
         <td><small>{{ $row->RepackOutlife[0]->updated_outlife }}</small></td>
         <td><small>
-         {{ SetDateFormatWithHour($row->RepackOutlife[0]->current_outlife_expiry??'') }}</small></td>
+         {{ SetDateFormatWithHours($row->RepackOutlife[0]->current_outlife_expiry??'') }}</small></td>
     </tr>
 @endif
 @endforeach
@@ -67,7 +67,7 @@
         </td>
         <td><small>{{ $row->Batch->batch ?? '' }} / {{ $row->Batch->serial ??'' }}</small></td>
         <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
-        <td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
+        <td><small>{{ date('d/m/Y H:i') }}</small></td>
         <td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
         <td><small>{{ $row->Batch->quantity??'' }}</small></td>
         <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
@@ -78,7 +78,7 @@
         </td>
         <td class="child-td">
             <small class="text-dark">
-                  {{ SetDateFormatWithHour(currentOutlifeExpiry($row->Batch->outlife_seconds??'')) }}
+                  {{ currentOutlifeDate($row->Batch->outlife_seconds??'')  }} {{date('H:i')}}
             </small>
         </td>
     </tr> 
@@ -147,7 +147,7 @@
 </td>
 <td><small>{{ $row->Batch->batch??'' }} / {{ $row->Batch->serial??'' }}</small></td>
 <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
-<td><small>{{ SetDateFormatWithHour(date('Y-m-d')) }}</small></td>
+<td><small>{{ date('d/m/Y H:i') }}</small></td>
 <td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
 <td><small>{{ $row->Batch->quantity??'' }}</small></td>
 <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>

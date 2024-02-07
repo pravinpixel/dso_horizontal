@@ -97,7 +97,7 @@
                                         <small>
                                             @if(isset($batch->DrawInOutlifeLatest->current_outlife_expiry))
 
-                                            {{SetDateFormatWithHour($batch->DrawInOutlifeLatest->current_outlife_expiry)}}
+                                            {{SetDateFormatWithHour($batch->DrawInOutlifeLatest->outlife_seconds)}}
                                         @endif</small>
                                         </div>              
                                         @elseif(isset($batch->initial_outlife_date) && $batch->initial_outlife_date !=NULL)

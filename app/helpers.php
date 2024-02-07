@@ -564,7 +564,15 @@ if (!function_exists('getRoutes')) {
     if (!function_exists('SetDateFormatWithHour')) {
         function SetDateFormatWithHour($date)
         {
-            return Carbon::parse()->format('d/m/Y H:i');
+        return Carbon::parse()->format('d/m/Y H:i'); 
+        
+        }
+    }
+    if (!function_exists('SetDateFormatWithHours')) {
+        function SetDateFormatWithHours($date)
+        {
+        return Carbon::parse($date)->format('d/m/Y H:i'); 
+        
         }
     }
     if (!function_exists('getBarcodeImage')) {
@@ -812,6 +820,19 @@ if (!function_exists('getRoutes')) {
         function currentOutlifeExpiry($outlife_seconds)
         {
             return CarbonImmutable::now()->add($outlife_seconds, 'second')->toDateTimeString();
+        }
+    }
+     if (!function_exists('currentOutlifeDate')) {
+        function currentOutlifeDate($outlife_seconds)
+        {    
+            $days=floor($outlife_seconds / 86400);
+            $diffrence='';
+            if(isset($days) && $days!=0){
+             $diffrence=\Carbon\Carbon::now()->addDays($days);
+            return $diffrence->format('d/m/Y');
+            }
+            return $diffrence;
+            
         }
     }
 
