@@ -41,7 +41,8 @@ class MaterialProducts extends Model
     }
     public function Batches()
     {
-    if(request()->route()->getName()=="home.get-material-products" || request()->route()->getName()=="list-material-products-export"){
+        ///dd(request()->route()->getName());
+    if(request()->route()->getName()=="get-batch-material-products" || request()->route()->getName()=="create.material-product" || request()->route()->getName()=="edit_or_duplicate.material-product" || request()->route()->getName()=="home.get-material-products" || request()->route()->getName()=="list-material-products-export"){
             return $this->hasMany(Batches::class, 'material_product_id', 'id');
     }else{
     return $this->hasMany(Batches::class, 'material_product_id', 'id')->whereRaw('FIND_IN_SET("'.auth_user()->id.'",owners)');
