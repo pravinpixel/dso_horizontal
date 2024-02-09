@@ -30,7 +30,7 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
             ])
                 ->WhereHas('Batches', function ($q) use ($parent_id) {
                     $q->where('material_product_id', $parent_id);
-                })
+                })->where('end_of_material_product',0)
                 ->latest()
                 ->get();
             return $material_product_data;
@@ -70,7 +70,7 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
             }
         })->WhereHas('Batches', function ($q) use ($filter, $material_table) {
             $this->searchFilter($q, $filter, $material_table);
-        })->latest()->get();
+        })->where('end_of_material_product',0)->latest()->get();
         
         return $material_product_data;
     }
@@ -122,7 +122,7 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
             
         }]);
         
-        $material_product=$material_product_data->latest()->get();
+        $material_product=$material_product_data->where('end_of_material_product',0)->latest()->get();
         return $material_product;
     }
 
