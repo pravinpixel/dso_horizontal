@@ -134,7 +134,7 @@
         <td><small>{{ $history->withdraw_quantity }}</small></td>
         <td><small>{{ $history->remarks }}</small></td>
          <td class="child-td">
-            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>2
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>
         </td>
         <td class="child-td">
             <small class="text-dark">
@@ -174,7 +174,7 @@
 <td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity??'' }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
 <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
          <td class="child-td">
-            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>2
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>
         </td>
         <td class="child-td">
             <small class="text-dark">
