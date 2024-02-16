@@ -133,7 +133,27 @@
         <td><small>{{ $history->total_quantity }}</small></td>
         <td><small>{{ $history->withdraw_quantity }}</small></td>
         <td><small>{{ $history->remarks }}</small></td>
+         <td class="child-td">
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>2
+        </td>
+        <td class="child-td">
+            <small class="text-dark">
 
+                @php
+                  if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL){
+                    $diffrence=\Carbon\Carbon::now()->addDays($row->Batch->outlife);
+                  }
+
+                @endphp
+                @if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL)
+                {{SetDateFormatWithHours($diffrence)}}
+                @else
+              DD/MM/YYYY
+                @endif
+               
+               
+            </small>
+        </td>
 
     </tr>
 @endif
@@ -147,14 +167,14 @@
 </td>
 <td><small>{{ $row->Batch->batch??'' }} / {{ $row->Batch->serial??'' }}</small></td>
 <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
-<td><small>{{ date('d/m/Y H:i') }}</small></td>
+<td><small>1{{ date('d/m/Y H:i') }}</small></td>
 <td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
 <td><small>{{ $row->Batch->quantity??'' }}</small></td>
 <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
 <td class="p-0 py-0 px-1"> <input onkeyup="return isNumber(event)" max="{{ $row->Batch->total_quantity??'' }}" name="withdraw_quantity[]" class="form-control form-control-sm text-center" type="number"/></td> 
 <td class="p-0 py-0 px-1"><input name="remarks[]" class="form-control form-control-sm" type="text" value=""/></td> 
- <td class="child-td">
-            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>
+         <td class="child-td">
+            <small class="text-dark">{{ $row->Batch->outlife??'' }}</small>2
         </td>
         <td class="child-td">
             <small class="text-dark">
