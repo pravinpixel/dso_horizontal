@@ -167,7 +167,7 @@
 </td>
 <td><small>{{ $row->Batch->batch??'' }} / {{ $row->Batch->serial??'' }}</small></td>
 <td class="p-0"><small> {{ auth_user()->alias_name }} </small></td>
-<td><small>1{{ date('d/m/Y H:i') }}</small></td>
+<td><small>{{ date('d/m/Y H:i') }}</small></td>
 <td><small>{{ $row->Batch->unit_packing_value??'' }}</small></td>
 <td><small>{{ $row->Batch->quantity??'' }}</small></td>
 <td><small>{{ $row->Batch->total_quantity??'' }}</small></td>
