@@ -127,7 +127,7 @@
         <td> <small>{{ $history->item_description }}</small> </td>
         <td><small>{{ $history->batch_serial }}</small></td>
         <td class="p-0"><small> {{ $history->last_accessed }} </small></td>
-        <td><small>{{ SetDateFormatWithHour($history->created_at) }}</small></td>
+        <td><small>{{ SetDateFormatWithHours($history->created_at) }}</small></td>
         <td><small>{{ $history->unit_packing_value }}</small></td>
         <td><small>{{ $history->quantity }}</small></td>
         <td><small>{{ $history->total_quantity }}</small></td>
