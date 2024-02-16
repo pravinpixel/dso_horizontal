@@ -23,6 +23,6 @@ class withdrawCart extends Model
 
     public function RepackOutlife()
     {
-        return $this->hasMany(RepackOutlife::class, 'batch_id', 'batch_id');
+        return $this->hasMany(RepackOutlife::class, 'batch_id', 'batch_id')->whereNotNull('current_outlife_expiry',);
     } 
 }

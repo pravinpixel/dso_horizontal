@@ -32,8 +32,8 @@ class UserSeeder extends Seeder
         $Admin->users()->attach(Sentinel::registerAndActivate([
             'email'      => '123',
             'password'   => config('auth.password'),
-            'full_name'  => 'Alexia',
-            'alias_name' => "Alexia Caleb",
+            'full_name'  => 'Admin',
+            'alias_name' => "Super Admin",
             'department' => 1
         ]));
 
