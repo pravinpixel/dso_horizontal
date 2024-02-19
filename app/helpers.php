@@ -840,6 +840,25 @@ if (!function_exists('getRoutes')) {
             
         }
     }
+     if (!function_exists('NowOutlifeDate')) {
+        function NowOutlifeDate($outlife_seconds,$date)
+        {    
+            $days=floor($outlife_seconds / 86400);
+            $hours = floor(($outlife_seconds -($days*86400)) / 3600);
+            $minutes = floor(($outlife_seconds / 60) % 60);
+            $seconds = $outlife_seconds % 60;
+            $diffrence='';
+
+            if(isset($hours)){
+             $now=Carbon::createFromFormat('Y-m-d H:i:s', $date);
+             $diffrence=$now->addDays($days)->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+            
+             return $diffrence;
+            }
+            return $diffrence;
+            
+        }
+    }
 
     if (!function_exists('updateParentQuantity')) {
         function updateParentQuantity($id)
