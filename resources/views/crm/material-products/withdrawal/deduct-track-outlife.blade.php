@@ -51,7 +51,11 @@
         <td><small>{{ $history->remarks }}</small></td>
         <td><small>{{ $row->RepackOutlife[0]->updated_outlife }}</small></td>
         <td><small>
-         {{ SetDateFormatWithHours($row->RepackOutlife[0]->current_outlife_expiry??'') }}</small></td>
+            @if(isset($row->RepackOutlife[0]->updated_outlife_seconds) && $row->RepackOutlife[0]->updated_outlife_seconds!=NULL)
+        {{ SetDateFormatWithHours(currentOutlifeDate($row->RepackOutlife[0]->updated_outlife_seconds??''))}}
+        @else 
+         {{ SetDateFormatWithHours($row->RepackOutlife[0]->current_outlife_expiry??'') }}
+       @endif</small></td>
     </tr>
 @endif
 @endforeach
