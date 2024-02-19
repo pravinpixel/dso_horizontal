@@ -187,6 +187,8 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
         }else{
              $q->where('is_draft', 0);
         }
+        $q->where('quantity','!=',0);
+        $q->where('end_of_batch',0);
        
     }
 }
