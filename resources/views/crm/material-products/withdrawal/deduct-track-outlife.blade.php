@@ -145,7 +145,7 @@
 
                 @php
                   if(isset($row->Batch->outlife) && $row->Batch->outlife !=NULL){
-                    $diffrence=Carbon::createFromFormat('Y-m-d H:i:s',$history->created_at)->addDays($row->Batch->outlife);
+                    $diffrence=\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$history->created_at)->addDays($row->Batch->outlife);
                   }
 
                 @endphp
