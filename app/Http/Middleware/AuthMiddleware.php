@@ -35,8 +35,11 @@ class AuthMiddleware
             return redirect()->route('login'); 
         }
         if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
+
             foreach(auth_user_role()->permissions as $access => $val) {
-                if(format_route(request()->route()->getName()) == format_route($access)) {
+                
+                $menu=(format_route(request()->route()->getName())=='help_index')?'help_menu_index': format_route(request()->route()->getName());
+                if($menu == format_route($access)) {
                     if($val == 1) {
                         return $this->checkSession($request,$next);
                     } else {

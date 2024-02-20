@@ -186,7 +186,7 @@
             <td>@if(isset($child->Department->name)){{$child->Department->name}}@endif</td>
             <td>{{$child->date_in}}</td>
             <td>{{$child->date_of_expiry}}</td>
-            <td>{{$child->iqc_status}}</td>
+            <td>{{($child->iqc_status==1)?'pass':'fail'}}</td>
             <td>{{$child->cas}}</td>
             <td>{{$child->access}}</td>
             <td>{{$child->fm_1202}}</td>
