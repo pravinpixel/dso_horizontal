@@ -43,11 +43,11 @@
                                     <input type="hidden" ng-if="batch.extended_qc_status != 'FAIL'" name="extended_qc_status" value="1">
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Extended QC document and email approval*</small>
-                                        <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
+                                        <input type="file" name="extended_qc_result" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here" required>
                                     </div>
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Extended Expiry Date *</small>
-                                        <input type="date" min="@{{ batch.date_of_expiry }}" value="@{{ batch.extended_expiry }}" name="extended_expiry" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here">
+                                        <input type="date" min="@{{ batch.date_of_expiry }}" value="@{{ batch.extended_expiry }}" name="extended_expiry" ng-disabled="batch.extended_qc_status == 'FAIL'" class="form-control" placeholder="Type here" required>
                                     </div>
                                     <div class="col-12 text-start mb-2 px-1">
                                         <small class="mb-1">Remark</small>

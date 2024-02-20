@@ -13,11 +13,12 @@
         <div class="h3 text-white m-0 ps-4">EG1 Inventory Management System  <span id="loader"></span> </div>
 
         <ul class="list-unstyled topbar-menu  float-end ms-auto mb-0">  
+    
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ route('help.index') }}" >
                     <i title="Help menu" class="bi bi-question-circle{{ Route::is('help.index') ? "-fill text-white" : "" }} noti-icon"></i>
                 </a> 
-            </li> 
+            </li>
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" data-bs-toggle="modal" data-bs-target="#notification-modal">
                     <i  class="bi bi-bell-fill noti-icon text-white"></i>
@@ -46,13 +47,13 @@
                         <i class="bi bi-gear me-1"></i>
                         <span>Settings </span>
                     </a> 
-
+  <x-has-access :name="['help.menu.index','help.menu.create','help.menu.edit']">
                     <!-- item-->
                     <a href="{{ route('help.index') }}" class="dropdown-item notify-item">
                         <i class="bi bi-question-circle me-1"></i>
                         <span>Help </span>
                     </a>
-
+  </x-has-access>
                     <!-- item-->
                     <a onclick="return document.getElementById('logout_form').submit()" class="dropdown-item notify-item">
                         <i class="bi bi-box-arrow-right me-1"></i>
