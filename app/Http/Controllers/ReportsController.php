@@ -362,8 +362,8 @@ class ReportsController extends Controller
                         }
                     }
                     $expired[] = [
-                        "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection,
-                        "item_description"      => MaterialProducts::find($row->material_product_id)->item_description,
+                        "category_selection"    => MaterialProducts::find($row->material_product_id)->category_selection??'',
+                        "item_description"      => MaterialProducts::find($row->material_product_id)->item_description??'',
                         "batch_serial"          => $row->batch . " / " . $row->serial,
                         "unit_packing_value"    => $row->unit_packing_value,
                         "quantity"              => $row->quantity,
