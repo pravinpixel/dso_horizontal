@@ -417,14 +417,19 @@ app.controller('RootController', function ($scope, $http) {
                 data: payload_data,
                 responseType: 'blob'
             }).then(function (response) {
+            if(response.data.type=="text/html"){
+            Message('danger','Permission Denied ! Contact your admin');
+            }else{
             var blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
             link.download = 'banner.csv';
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);  
+            document.body.removeChild(link);
+            }  
             }, function (response) {
+               
                 Message('danger','Please search to Export.');
             });
      }
