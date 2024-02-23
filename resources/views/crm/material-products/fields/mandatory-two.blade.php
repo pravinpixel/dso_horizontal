@@ -313,14 +313,27 @@
         }
 
         change_iqc_result_status = () => {
+
             const checkBox = $('#iqc_result_check_box')
             const formInput = $('#iqc_status_input')
-            if (checkBox.is(":checked") == true) {
+           if (checkBox.is(":checked") == true) {
                 formInput.prop('required', false)
+                formInput.prop('disabled', true)
             } else {
                 formInput.prop('required', true)
+                formInput.prop('disabled', false)
             }
         }
+
+        const checkBox1 = $('#iqc_result_check_box')
+        const formInput1 = $('#iqc_status_input')
+       if (checkBox1.is(":checked") == true) {
+            formInput1.prop('required', false)
+            formInput1.prop('disabled', true)
+        } else {
+            formInput1.prop('required', true)
+            formInput1.prop('disabled', false)
+        } 
 
         const checkBox = $('#coc_coa_mill_cert_check_box')
         const formInput = $('input#coc_coa_mill_cert_input')
@@ -336,6 +349,11 @@
     @if (!is_null($batch->BatchFiles))
         <script>
             $('input#coc_coa_mill_cert_input').prop('required', false)
+        </script>
+    @endif
+    @if(!is_null($batch->BatchFiles) && count(getBatchFile($batch->BatchFiles, 'iqc_result')->files))
+     <script>
+            $('input#iqc_status_input').prop('required', false)
         </script>
     @endif
 @endsection

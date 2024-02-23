@@ -928,7 +928,7 @@ app.controller('RootController', function ($scope, $http) {
 
     $scope.extension = (batch) => {
         $scope.batch = batch
-        $scope.batch.date_of_expiry = moment(batch.date_of_expiry).format('YYYY-DD-MM')
+        //$scope.batch.date_of_expiry = moment(batch.date_of_expiry).format('YYYY-DD-MM')
         $('#Extensionmodal').modal('show');
     }
 
