@@ -130,6 +130,8 @@ class SearchRepository implements SearchRepositoryInterface
         }else if($sort_by->col_name=="used_for_td_expt_only" ){
             $order=($sort_by->order_type=='DESC')?'ASC':'DESC';
         $q->orderBy($sort_by->col_name,$order)->where('is_draft',$is_draft);       
+        }else if($sort_by->col_name=="serial" ){
+        $q->orderBy('batch',$sort_by->order_type)->where('is_draft',$is_draft);       
         }else{
         $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
         }
