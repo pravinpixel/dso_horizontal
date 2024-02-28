@@ -125,11 +125,14 @@ class SearchRepository implements SearchRepositoryInterface
             $this->searchFilter($q, $filter, $material_table);
             if (checkIsMaterialColumn($sort_by->col_name) == 1) {
             }else{
-                
         if($sort_by->col_name=="housing_type" ){
         $q->orderByRaw("CONCAT(housing_type, housing) {$sort_by->order_type}")->where('is_draft',$is_draft);       
-        }
+        }else if($sort_by->col_name=="used_for_td_expt_only" ){
+            $order=($sort_by->order_type=='DESC')?'ASC':'DESC';
+        $q->orderBy($sort_by->col_name,$order)->where('is_draft',$is_draft);       
+        }else{
         $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
+        }
         }
             
         }]);
