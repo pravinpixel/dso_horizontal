@@ -265,7 +265,7 @@ class MaterialProductsController extends Controller
                     'no_of_extension'              => $row['no_of_extension'] ?? 0,
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
-                    'owners' => auth_user()->id
+                    'owners' => $row['owners']
                 ]);
                 $this->getQuantityColor($batch->id);
                 $batch->BatchOwners()->create([
@@ -513,7 +513,7 @@ class MaterialProductsController extends Controller
             "serial"                       => $data->serial,
             "po_number"                    => $data->po_number,
             "statutory_body"               => $data->StatutoryBody->name,
-            "euc_material"                 => $data->euc_material == 1 ? "Yes" : ($data->euc_material == 0 ? "No" : "-"),
+            "euc_material"                 =>($data->euc_material=='yes')? 1: NULL,
             "require_bulk_volume_tracking" => $data->require_bulk_volume_tracking == 1 ? "Yes" : ($data->require_bulk_volume_tracking == 0 ? "No" : "-"),
             "require_outlife_tracking"     => $data->require_outlife_tracking == 1 ? "Yes" : ($data->require_outlife_tracking == 0 ? "No" : "-" . $data->outlife ?? "0"),
             "storage_area"                 => $data->StorageArea !== null ? $data->StorageArea->name : '-',
@@ -537,11 +537,11 @@ class MaterialProductsController extends Controller
             "cost_per_unit"                => $data->cost_per_unit,
             "remarks"                      => $data->remarks,
             "extended_expiry"              => $data->extended_expiry ?? ' - ',
-            "extended_qc_status"           => $data->extended_qc_status ?? ' - ',
+            "extended_qc_status"           => ($data->extended_qc_status=='yes')?1:0,
             "extended_qc_status"           => $data->extended_qc_status ?? ' - ',
             "extended_qc_result"           => $data->extended_qc_result ?? ' - ',
             "disposal_certificate"         => $data->disposal_certificate ?? ' - ',
-            "used_for_td_expt_only"        => $data->used_for_td_expt_only == 1 ? 'Yes' : ($data->used_for_td_expt_only == 0 ? "No" : "-"),
+            "used_for_td_expt_only"        => ($data->used_for_td_expt_only == 'yes') ? 0: NULL,
         ]);
     }
     public function view_batch($id)

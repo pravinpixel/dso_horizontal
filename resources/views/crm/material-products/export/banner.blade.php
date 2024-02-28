@@ -111,6 +111,15 @@
                              remarks
                             </th> 
                             <th>
+                             owners
+                            </th> 
+                            <th>
+                             extended_qc_status
+                            </th>
+                             <th>
+                             used_for_td_expt_only
+                            </th> 
+                            <th>
                              type
                             </th> 
 
@@ -156,6 +165,9 @@
             <td></td>
             <td></td>
             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
             <td>parent</td>
 
         </tr>
@@ -176,9 +188,9 @@
             <td>{{$child->serial}}</td>
             <td>{{$child->po_number}}</td>
              <td> @if(isset($child->StatutoryBody->name)){{$child->StatutoryBody->name}}@endif</td>
-            <td>{{$child->euc_material}}</td>
-            <td>{{$child->require_bulk_volume_tracking}}</td>
-            <td>{{$child->require_outlife_tracking}}</td>
+            <td>{{($child->euc_material==1)?'yes':'no'}}</td>
+            <td>{{($child->require_bulk_volume_tracking==1)?'yes':'no'}}</td>
+            <td>{{($child->require_outlife_tracking==1)?'yes':'no'}}</td>
             <td>{{$child->outlife}}</td>
             <td>@if(isset($child->StorageArea->name)){{$child->StorageArea->name}}@endif</td>
             <td>@if(isset($child->HousingType->name)){{$child->HousingType->name}}@endif</td>
@@ -189,15 +201,19 @@
             <td>{{($child->iqc_status==1)?'pass':'fail'}}</td>
             <td>{{$child->cas}}</td>
             <td>{{$child->access}}</td>
-            <td>{{$child->fm_1202}}</td>
+            <td>{{($child->fm_1202=='on')?'yes':'no'}}</td>
             <td>{{$child->project_name}}</td>
             <td>{{$child->material_product_type}}</td>
             <td>{{$child->date_of_manufacture}}</td>
             <td>{{$child->date_of_shipment}}</td>
             <td>{{$child->cost_per_unit}}</td>
             <td>{{$child->no_of_extension}}</td>
+            
             <td>{{$child->remarks}}</td>
-            <td>child</td>
+            <td>{{$child->owners}}</td>
+            <td>{{($child->extended_qc_status==1)?'yes':'no'}}</td>
+            <td>{{($child->used_for_td_expt_only==0)?'yes':'no'}}</td>
+           <td>child</td>
         </tr>
         @endforeach
         @endforeach
