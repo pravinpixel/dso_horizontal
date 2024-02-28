@@ -34,10 +34,10 @@
                                 <td>Quantity</td>
                                 <td>
                                   
-                                    <div>Intital count :</div>
+                                    <div>Material Remaining outlife :</div>
                                     <b ng-bind="repack_outlife_days"></b>
                                      <hr>
-                                    <div>Remaining outlife</div>
+                                    <div>Outlife used</div>
                                     <small>(prepreg roll) </small>
                                    
                                 </td>
