@@ -128,8 +128,7 @@ class SearchRepository implements SearchRepositoryInterface
         if($sort_by->col_name=="housing_type" ){
         $q->orderByRaw("CONCAT(housing_type, housing) {$sort_by->order_type}")->where('is_draft',$is_draft);       
         }else if($sort_by->col_name=="used_for_td_expt_only" ){
-            $order=($sort_by->order_type=='DESC')?'ASC':'DESC';
-        $q->orderBy($sort_by->col_name,$order)->where('is_draft',$is_draft);       
+        $q->orderBy('coc_coa_mill_cert_status',$sort_by->order_type)->where('is_draft',$is_draft);       
         }else if($sort_by->col_name=="serial" ){
          $q->orderByRaw("CONCAT(serial, batch) {$sort_by->order_type}")->where('is_draft',$is_draft);       
         }else{

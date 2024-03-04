@@ -113,12 +113,20 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
         if(isset($sort_by->type)){
        $material_product_data->orderBy('item_description',$sort_by->type);
         }
-        $material_product_data->with(['Batches' => function($q)use($sort_by,$is_draft,$material_table,$filter) {
+          $material_product_data->with(['Batches' => function($q)use($sort_by,$is_draft,$material_table,$filter) {
             $this->searchFilter($q, $filter, $material_table);
             if (checkIsMaterialColumn($sort_by->col_name) == 1) {
             }else{
-           $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
-            }
+        if($sort_by->col_name=="housing_type" ){
+        $q->orderByRaw("CONCAT(housing_type, housing) {$sort_by->order_type}")->where('is_draft',$is_draft);       
+        }else if($sort_by->col_name=="used_for_td_expt_only" ){
+       $q->orderBy('coc_coa_mill_cert_status',$sort_by->order_type)->where('is_draft',$is_draft);          
+        }else if($sort_by->col_name=="serial" ){
+         $q->orderByRaw("CONCAT(serial, batch) {$sort_by->order_type}")->where('is_draft',$is_draft);       
+        }else{
+        $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
+        }
+        }
             
         }]);
         
