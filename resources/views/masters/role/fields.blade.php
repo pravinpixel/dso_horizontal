@@ -36,7 +36,11 @@
                                 <input class="form-check-input me-1" readonly type="checkbox" {{ $menu === 'dashboard' ? 'checked' : '' }}  name="{{ $page['name'] }}[]"
                                     value="1" id="{{ $page['name'] }}">
                             @endif
-                            <small>{{ format_text($page['slug']) }}</small>
+                            @if(format_text($page['slug'])=="List material products export")
+                            <small>Export data</small>
+                            @else
+ <small>{{ format_text($page['slug']) }}</small>
+                            @endif
                         </label>
                     @endforeach
                 </td>
