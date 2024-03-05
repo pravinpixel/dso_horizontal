@@ -73,7 +73,8 @@ class Batches extends Model
         'updated_outlife',
         'user_id',
         'end_of_batch',
-        'initial_outlife_date'
+        'initial_outlife_date',
+        'outlife_days'
     ];
 
     public function BarCodeGenOne()
