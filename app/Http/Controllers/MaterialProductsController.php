@@ -253,6 +253,8 @@ class MaterialProductsController extends Controller
                     'iqc_result_status'            => 'on',
                     'sds'                          => $row['sds'] ?? null,
                     'cas'                          => $row['cas'] ?? null,
+                     'outlife'                          => $row['outlife'] ?? null,
+                     'outlife_days'                          => $row['outlife'] ?? null,
                     'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
                     'project_name'                 => $row['project_name'] ?? null,
                     'material_product_type'        => $row['material_product_type'] ?? null,

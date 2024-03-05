@@ -237,7 +237,7 @@
             </label>
             <div class="col-8">
                 @if (session()->get('edit_mode') == 'parent')
-                    {!! Form::number('outlife', $batch->outlife ?? null, [
+                    {!! Form::number('outlife', $batch->outlife_days ?? null, [
                         'class' => 'form-control form-control-sm',
                         'required',
                         'placeholder' => 'Type here...',
@@ -245,7 +245,7 @@
                         config(is_disable(category_type() ?? ($material_product->category_selection ?? null)) . 'outlife.status'),
                     ]) !!}
                 @else
-                    {!! Form::number('outlife', $batch->outlife ?? null, [
+                    {!! Form::number('outlife', $batch->outlife_days ?? null, [
                         'class' => 'form-control form-control-sm',
                         'required',
                         'placeholder' => 'Type here...',

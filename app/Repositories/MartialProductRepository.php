@@ -39,6 +39,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                  
             }
         }
+        if($column==="outlife" && $row==1){
+             $fillable['outlife_days']=$request['outlife'];
+        }
         }
         $material_product_fillable = $fillable;
 
