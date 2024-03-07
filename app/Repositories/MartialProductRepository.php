@@ -39,6 +39,9 @@ class MartialProductRepository implements MartialProductRepositoryInterface
                  
             }
         }
+        if($column==="iqc_status"){
+             $fillable['iqc_result_status']=($request['iqc_result_status']==='on')? 'on':'off';
+        }
         if($column==="outlife" && $row==1){
              $fillable['outlife_days']=$request['outlife'];
         }
