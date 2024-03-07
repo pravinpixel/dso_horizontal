@@ -705,6 +705,30 @@ class MaterialProductsController extends Controller
             $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
+         foreach ($result as $material_index => $material) {
+         $count=count($material->Batches);
+         $i=0;
+         foreach ($material->Batches as $batch_index => $batch) {
+                $batch->permission = 'NONE';
+                if(hasAdmin()) {
+                    $batch->permission = 'READ_AND_WRITE';
+                } else {
+                    $access     = json_decode($batch->access);
+                    if (isset($access)) {
+                        if (in_array(auth_user()->id, $access) == false) {
+                            $i++;
+                            
+                            unset($result[$material_index]->Batches[$batch_index]);
+                            if($i==$count){
+                               unset($result[$material_index]);
+                            }
+                        }
+                    }
+                    
+                } 
+            }
+            
+        }
          $response=Excel::download(new BannerExport($result??[]),'banner.csv');
          return $response;   
 
