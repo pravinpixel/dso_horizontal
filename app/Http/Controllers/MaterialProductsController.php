@@ -705,13 +705,13 @@ class MaterialProductsController extends Controller
             $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
-         foreach ($result as $material_index => $material) {
+        foreach ($result as $material_index => $material) {
          $count=count($material->Batches);
          $i=0;
          foreach ($material->Batches as $batch_index => $batch) {
-                $batch->permission = 'NONE';
                 if(hasAdmin()) {
-                    $batch->permission = 'READ_AND_WRITE';
+                    
+                   
                 } else {
                     $access     = json_decode($batch->access);
                     if (isset($access)) {
