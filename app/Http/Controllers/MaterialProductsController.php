@@ -705,6 +705,7 @@ class MaterialProductsController extends Controller
             $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
             return response(['status' => true, 'data' => $result], Response::HTTP_OK);
         }
+        if(count($result)>0){
         foreach ($result as $material_index => $material) {
          $count=count($material->Batches);
          $i=0;
@@ -729,6 +730,7 @@ class MaterialProductsController extends Controller
             }
             
         }
+    }
          $response=Excel::download(new BannerExport($result??[]),'banner.csv');
          return $response;   
 
