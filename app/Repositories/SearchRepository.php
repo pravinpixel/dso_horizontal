@@ -191,7 +191,9 @@ class SearchRepository implements SearchRepositoryInterface
                         }
                     }
                 } else {
-                    if (!empty($value) && !is_null($value)) {
+
+                    if (!is_null($value)) {
+
                         $q->where($column, $value);
                     }
                 }
