@@ -254,7 +254,7 @@ class MaterialProductsController extends Controller
                     'sds'                          => $row['sds'] ?? null,
                     'cas'                          => $row['cas'] ?? null,
                      'outlife'                          => $row['outlife'] ?? null,
-                     'outlife_days'                          => $row['outlife'] ?? null,
+                     'outlife_days'                          => is_int($row['outlife']) ?? null,
                     'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
                     'project_name'                 => $row['project_name'] ?? null,
                     'material_product_type'        => $row['material_product_type'] ?? null,
@@ -269,6 +269,7 @@ class MaterialProductsController extends Controller
                     'withdrawal_type' => $withdrawal_type,
                     'owners' => $row['owners']
                 ]);
+                
                 $this->getQuantityColor($batch->id);
                 $batch->BatchOwners()->create([
                     "user_id"    => auth_user()->id,
