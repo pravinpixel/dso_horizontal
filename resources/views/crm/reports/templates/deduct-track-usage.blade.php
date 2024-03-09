@@ -62,14 +62,15 @@
         </tr>
     </thead>
     <tbody>
-        @if (count($batch->RepackOutlifeDrawInOut))
-            @foreach ($batch->RepackOutlife as $key =>  $repack)
-                @if ($repack->updated_outlife)
+        @if (count($batch->RepackOutlifeDrawInOut)>0)
+            @foreach ($batch->RepackOutlifeDrawInOut as $key =>  $repack)
+                @if ($repack)
                     <tr>
                         <td rowspan="1">{{ $key + 1 }}</td>
                         <td>Draw OUT</td>
-                        <td>{{ convertDateFormat($repack->draw_in_time_stamp, 'd-m-Y') }}</td>
-                        <td>{{ convertDateFormat($repack->draw_in_time_stamp,'g:i:s a') }}</td>
+                        <td>@if($repack->draw_in_time_stamp)
+                            {{ convertDateFormat($repack->draw_in_time_stamp, 'd-m-Y') }}@else - @endif</td>
+                        <td>@if($repack->draw_in_time_stamp){{ convertDateFormat($repack->draw_in_time_stamp,'g:i:s a') }}@else - @endif</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>{{ $repack->old_input_repack_amount }}</td>
                         <td>{{ $repack->remain_amount }}</td>
@@ -79,8 +80,8 @@
                     <tr>
                         <td rowspan="1"></td>
                         <td>Draw IN</td>
-                        <td>{{ convertDateFormat($repack->draw_out_time_stamp, 'd-m-Y') }}</td>
-                        <td>{{ convertDateFormat($repack->draw_out_time_stamp,'g:i:s a') }}</td>
+                        <td>@if($repack->draw_out_time_stamp){{ convertDateFormat($repack->draw_out_time_stamp, 'd-m-Y') }}@else - @endif</td>
+                        <td>@if($repack->draw_out_time_stamp){{ convertDateFormat($repack->draw_out_time_stamp,'g:i:s a') }}@else - @endif</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>-</td>
                         <td>-</td>
