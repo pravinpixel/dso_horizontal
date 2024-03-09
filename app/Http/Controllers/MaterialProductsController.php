@@ -663,9 +663,15 @@ class MaterialProductsController extends Controller
     {
         $file = BatchFiles::findOrFail($id);
         // Storage::delete($file->file_name);
+        $iqc_result =BatchFiles::where('batch_id',$file->batch_id)->where('column_name','iqc_result')->get()->count();
+        $coc_coa_mill_cert =BatchFiles::where('batch_id',$file->batch_id)->where('column_name','coc_coa_mill_cert')->get()->count();
         $file->delete();
+
         return response()->json([
-            "Message" => "success"
+            "Message" => "success",
+            "iqc_result"=>$iqc_result,
+            "coc_coa_mill_cert"=>$coc_coa_mill_cert,
+            'type'=>$file->column_name
         ]);
     }
     public function delete_batch_file($id, $type)
