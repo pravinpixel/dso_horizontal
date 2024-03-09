@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (count($batch->TrackOutlifeHistory))
+        @if (count($batch->TrackOutlifeHistory)>0)
             @foreach ($batch->TrackOutlifeHistory as $row)
                 <tr>
                     <td>{{ $row->item_description }}</td>
