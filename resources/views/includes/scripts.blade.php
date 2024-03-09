@@ -37,6 +37,27 @@
     deleteFile = (batch_id, element) => {
         fetch(`${AppUrl}/delete-file/${batch_id}`).then((res) => res.json()).then((data) => {
             element.parentNode.classList.add('d-none')
+           if(data.type=="iqc_result"){
+            if(data.iqc_result !=0){
+            var count=data.iqc_result-1;
+            if(count==0){
+            $('input#iqc_status_input').prop('required', true);
+            }
+        }else{
+             $('input#iqc_status_input').prop('required', true);
+        }
+
+           }
+           if(data.type=="coc_coa_mill_cert"){
+            if(data.iqc_result !=0){
+             var count=data.iqc_result-1;
+             if(count==0){
+             $('input#coc_coa_mill_cert_input').prop('required', true);
+            }
+        }else{
+            $('input#coc_coa_mill_cert_input').prop('required', true);
+           }
+        }
         })
     }
     removeNotification = (id,element) => {
