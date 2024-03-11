@@ -5,7 +5,8 @@
 @section('scripts')
    <input type="hidden" id="get-material-export" value="{{ route('list-material-products-export') }}">
     @if(request()->route()->getName()=="list-material-products" || request()->route()->getName()== 
-    "barcode.listing")
+    "barcode.listing"|| request()->route()->getName()== 
+    "eports.deduct_track_outlife" )
     <input type="hidden" id="get-material-products" value="{{ route('home.get-material-products') }}">
     @else
     <input type="hidden" id="get-material-products" value="{{ route('get-material-products') }}">
