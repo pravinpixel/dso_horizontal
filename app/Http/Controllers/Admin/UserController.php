@@ -33,6 +33,9 @@ class UserController extends Controller
             ->addColumn('role', function ($data) {
                 return $data->roles()->first()->name;
             })
+             ->addColumn('staff_id', function ($data) {
+                return $data->email??'';
+            })
             ->addColumn('department', function ($data) {
                 return Departments::find($data->department)->name ?? '-';
             })
