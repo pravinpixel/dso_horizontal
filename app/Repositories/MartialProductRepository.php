@@ -42,7 +42,7 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if($column==="iqc_status"){
              $fillable['iqc_result_status']=($request['iqc_result_status']==='on')? 'on':'off';
         }
-        if($column==="outlife" && $row==1){
+        if($column==="outlife" && !empty($request['outlife']) && is_int($request['outlife'])){
              $fillable['outlife_days']=$request['outlife'];
         }
         if($column==="date_of_expiry"){
