@@ -254,7 +254,7 @@ class MaterialProductsController extends Controller
                     'sds'                          => $row['sds'] ?? null,
                     'cas'                          => $row['cas'] ?? null,
                      'outlife'                          => $row['outlife'] ?? null,
-                     'outlife_days'                          => is_int($row['outlife']) ?? null,
+                     'outlife_days'                          => (is_numeric($row['outlife']) && intval($row['outlife']) == $row['outlife'])? $row['outlife'] : null,
                     'fm_1202'                      => strtolower($row['fm_1202'])  == 'yes' ? 'on' : 'off',
                     'project_name'                 => $row['project_name'] ?? null,
                     'material_product_type'        => $row['material_product_type'] ?? null,
