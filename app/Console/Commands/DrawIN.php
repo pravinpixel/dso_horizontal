@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Batches;
 use App\Models\LogSheet;
 use Carbon\Carbon;
+use App\Models\RepackOutlife;
 use Carbon\CarbonImmutable;
 use DateTime;
 use Illuminate\Console\Command;
@@ -53,7 +54,7 @@ class DrawIN extends Command
                     $time1     = new DateTime($first->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-                    
+                    // if(true){
                     if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
                         if($batch->unit_packing_value != 0) {
                             $batch->RepackOutlife()->create([
