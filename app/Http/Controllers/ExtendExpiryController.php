@@ -6,7 +6,7 @@ use App\Interfaces\DsoRepositoryInterface;
 use App\Models\Batches;
 use App\Repositories\MartialProductRepository;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class ExtendExpiryController extends Controller
 {
     public function __construct(DsoRepositoryInterface $dsoRepositoryInterface,MartialProductRepository $MartialProductRepository){
@@ -33,9 +33,16 @@ class ExtendExpiryController extends Controller
         $batch = Batches::findOrFail(request()->route()->id == null ? $request->id : request()->route()->id);
         $this->MartialProduct->storeFiles($request, $batch);
         if(!empty($request->extended_expiry) && !is_null($request->extended_expiry)) {
+
             $batch->update([
-                'date_of_expiry'     => $request->extended_expiry,
+                'date_of_expiry'     => $request->extended_expiry
             ]);
+             if($request->extended_expiry  <=Carbon::now()){
+                 $batch->update([
+                 'notification_status'=>0
+               ]);
+             }
+             
         }
         $batch->update([
             'remarks'            => $request->remarks,

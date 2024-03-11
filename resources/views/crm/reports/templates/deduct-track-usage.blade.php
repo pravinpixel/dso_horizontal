@@ -68,9 +68,9 @@
                     <tr>
                         <td rowspan="1">{{ $key + 1 }}</td>
                         <td>Draw OUT</td>
-                        <td>@if($repack->draw_in_time_stamp)
-                            {{ convertDateFormat($repack->draw_in_time_stamp, 'd-m-Y') }}@else - @endif</td>
-                        <td>@if($repack->draw_in_time_stamp){{ convertDateFormat($repack->draw_in_time_stamp,'g:i:s a') }}@else - @endif</td>
+                        <td>@if($repack->draw_in_time_stamp && $repack->draw_in_time_stamp !=null)
+                            {{ \Carbon\Carbon::parse($repack->draw_in_time_stamp)->format( 'd-m-Y') }}@else - @endif</td>
+                        <td>@if($repack->draw_in_time_stamp && $repack->draw_in_time_stamp !=null){{ \Carbon\Carbon::parse($repack->draw_in_time_stamp)->format( 'g:i:s a') }}@else - @endif</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>{{ $repack->old_input_repack_amount }}</td>
                         <td>{{ $repack->remain_amount }}</td>
@@ -80,8 +80,8 @@
                     <tr>
                         <td rowspan="1"></td>
                         <td>Draw IN</td>
-                        <td>@if($repack->draw_out_time_stamp){{ convertDateFormat($repack->draw_out_time_stamp, 'd-m-Y') }}@else - @endif</td>
-                        <td>@if($repack->draw_out_time_stamp){{ convertDateFormat($repack->draw_out_time_stamp,'g:i:s a') }}@else - @endif</td>
+                        <td>@if($repack->draw_out_time_stamp && $repack->draw_out_time_stamp !=null){{ \Carbon\Carbon::parse($repack->draw_out_time_stamp)->format( 'd-m-Y')  }}@else - @endif</td>
+                        <td>@if($repack->draw_out_time_stamp && $repack->draw_out_time_stamp !=null){{ \Carbon\Carbon::parse($repack->draw_out_time_stamp)->format( 'g:i:s a') }}@else - @endif</td>
                         <td>{{ $repack->User->alias_name ?? '' }}</td>
                         <td>-</td>
                         <td>-</td>

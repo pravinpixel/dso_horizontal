@@ -54,8 +54,8 @@ class DrawIN extends Command
                     $time1     = new DateTime($first->created_at);
                     $time2     = new DateTime();
                     $time_diff = $time1->diff($time2);
-                    // if(true){
-                    if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
+                     if(true){
+                    // if($time_diff->h.".".$time_diff->i >= env('AUTO_DRAW_TIMING')) {
                         if($batch->unit_packing_value != 0) {
                             $batch->RepackOutlife()->create([
                                 'input_repack_amount' => $last['repack_size']
@@ -90,6 +90,14 @@ class DrawIN extends Command
                             'updated_outlife_seconds' => $updated_outlife_seconds,
                             'current_outlife_expiry'  => $current_outlife_expiry,
                         ]);
+               $repacks=RepackOutlife::where('batch_id',$batch->id)->where('draw_in',0)->get();
+               foreach($repacks as $repack_data){
+                        $repack_outlife=RepackOutlife::find($repack_data->id);
+                        $repack_outlife->draw_in=1;
+                        $repack_outlife->draw_in_disabled=1;
+                        $repack_outlife->save();
+
+                }
                         MaterialProductHistory($batch,'AUTO_DRAW_IN');
                      Log::info("Draw IN Success !");  
                 }

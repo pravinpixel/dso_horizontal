@@ -271,10 +271,16 @@ class MaterialProductsController extends Controller
                 ]);
                 
                 $this->getQuantityColor($batch->id);
-                $batch->BatchOwners()->create([
-                    "user_id"    => auth_user()->id,
-                    "alias_name" => auth_user()->alias_name
+                foreach(explode(",",$row['owners']) as $owner){
+                   $user_data=User::find($owner);
+                   if($user_data){
+                   $batch->BatchOwners()->create([
+                    "user_id"    => $user_data->id,
+                    "alias_name" => $user_data->alias_name
                 ]);
+               }
+                }
+               
 
                 MaterialProductHistory($batch, 'IMPORTED_FROM_EXCEL'); 
            }      
