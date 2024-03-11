@@ -10,6 +10,7 @@
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
+                        <th class="table-th">Staff ID</th>
                         <th class="table-th">Full Name</th>
                         <th class="table-th">Department</th>
                         <th class="table-th">Roles</th>
@@ -30,6 +31,7 @@
                 serverSide: true,
                 ajax: "{{ route('user.index') }}",
                 columns: [
+                    {data: 'staff_id', name: 'staff_id'},
                     {data: 'full_name', name: 'full_name'},
                     {data: 'department', name: 'department'},
                     {data: 'role', name: 'role', defaultContent: '',},
