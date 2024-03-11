@@ -199,7 +199,11 @@ class NotificationController extends Controller
     public function delete_notification($id)
     {
         $row =  NEFNotification::find($id);
-        Batches::find($row->batch_id)->update(['notification_status' => 0]);
+        $batch=Batches::find($row->batch_id);
+        if($batch){
+            $batch->notification_status=1;
+            $batch->update();
+        }
         $row->delete();
         return response([
             "status" => true

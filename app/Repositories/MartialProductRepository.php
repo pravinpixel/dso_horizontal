@@ -45,6 +45,12 @@ class MartialProductRepository implements MartialProductRepositoryInterface
         if($column==="outlife" && $row==1){
              $fillable['outlife_days']=$request['outlife'];
         }
+        if($column==="date_of_expiry"){
+        if($request['date_of_expiry'] <= Carbon::now()){
+             $fillable['notification_status']=0;
+        }
+        }
+        
         }
         $material_product_fillable = $fillable;
 
