@@ -132,7 +132,7 @@
             <td>{{$parent->id}}</td>
             <td>{{$parent->category_selection}}</td>
             <td>{{$parent->item_description}}</td>
-            <td>{{$parent->unit_of_measure}}</td>
+            <td>@if(isset($parent->UnitOfMeasure->name)){{$parent->UnitOfMeasure->name}} @endif</td>
             <td>{{$parent->unit_packing_value}}</td>
             <td>{{$parent->alert_threshold_qty_upper_limit}}</td>
             <td>{{$parent->alert_threshold_qty_lower_limit}}</td>
