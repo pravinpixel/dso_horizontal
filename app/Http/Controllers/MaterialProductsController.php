@@ -161,7 +161,7 @@ class MaterialProductsController extends Controller
         return response(['status' => true, "message" => "Delete Success !"], Response::HTTP_OK);
     }
 
-    public function import_excel(Request $request)
+     public function import_excel(Request $request)
     {
         $request->validate([
             'select_file' => 'required|max:10000',
@@ -262,14 +262,19 @@ class MaterialProductsController extends Controller
                     'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
                     'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                     'remarks'                      => $row['remarks'] ?? null,
-                    'used_for_td_expt_only'        => "1",
+                     "used_for_td_expt_only"        => ($row['used_for_td_expt_only'] == 'yes') ? 0: NULL,
                     'coc_coa_mill_cert_status'     => 'on',
                     'no_of_extension'              => $row['no_of_extension'] ?? 0,
+                    'extended_qc_status'           => ($row['extended_qc_status']=='yes') ? 1:0,
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
                     'owners' => $row['owners']
                 ]);
-                
+                $material->material_total_quantity +=$batch->total_quantity ?? 0;
+               $material->material_quantity  +=$batch->quantity ?? 0;
+                $material->unit_packing_value  +=$batch->unit_packing_value ?? 0;
+                $material->save();
+               
                 $this->getQuantityColor($batch->id);
                 foreach(explode(",",$row['owners']) as $owner){
                    $user_data=User::find($owner);
