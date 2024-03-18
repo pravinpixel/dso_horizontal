@@ -139,7 +139,7 @@
             <td>{{$parent->alert_before_expiry}}</td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>{{$parent->material_quantity}}</td>
             <td></td>
             <td></td>
             <td></td>
