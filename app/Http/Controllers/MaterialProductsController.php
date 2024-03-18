@@ -262,13 +262,15 @@ class MaterialProductsController extends Controller
                     'date_of_shipment'             => strExcelDate($row['date_of_shipment']),
                     'cost_per_unit'                => $row['cost_per_unit'] ?? null,
                     'remarks'                      => $row['remarks'] ?? null,
-                     "used_for_td_expt_only"        => ($row['used_for_td_expt_only'] == 'yes') ? 1: 0,
+                     "used_for_td_expt_only"        => ($row['used_for_td_expt_only'] == 
+                        'yes') ? 1:0,
                     'coc_coa_mill_cert_status'     => 'on',
                     'no_of_extension'              => $row['no_of_extension'] ?? 0,
                     'extended_qc_status'           => ($row['extended_qc_status']=='yes') ? 1:0,
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
-                    'owners' => $row['owners']
+                    'owners' => $row['owners'],
+                    'coc_coa_mill_cert_status'=>($row['used_for_td_expt_only']=='yes')?'on':'off'
                 ]);
                 $this->getQuantityColor($batch->id);
                 foreach(explode(",",$row['owners']) as $owner){
