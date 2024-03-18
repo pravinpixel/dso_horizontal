@@ -119,6 +119,9 @@
                              <th>
                              used_for_td_expt_only
                             </th> 
+                             <th>
+                             coc_coa_mill_cert_status
+                            </th> 
                             <th>
                              type
                             </th> 
@@ -139,7 +142,7 @@
             <td>{{$parent->alert_before_expiry}}</td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>{{$parent->material_quantity}}</td>
             <td></td>
             <td></td>
             <td></td>
@@ -165,6 +168,7 @@
             <td></td>
             <td></td>
             <td></td>
+             <td></td>
              <td></td>
              <td></td>
              <td></td>
@@ -213,6 +217,7 @@
             <td>{{$child->owners}}</td>
             <td>{{($child->extended_qc_status==1)?'yes':'no'}}</td>
             <td>{{($child->used_for_td_expt_only==0)?'yes':'no'}}</td>
+          <td>{{$child->coc_coa_mill_cert_status}}</td>
            <td>child</td>
         </tr>
         @endforeach
