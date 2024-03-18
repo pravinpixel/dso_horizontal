@@ -4,6 +4,7 @@
 @endsection
 @section('scripts')
    <input type="hidden" id="get-material-export" value="{{ route('list-material-products-export') }}">
+    <input type="hidden" id="get-material-document" value="{{ route('document.zip') }}">
     @if(request()->route()->getName()=="list-material-products" || request()->route()->getName()== 
     "barcode.listing"|| request()->route()->getName()== 
     "eports.deduct_track_outlife" )
