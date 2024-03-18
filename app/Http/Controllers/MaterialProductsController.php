@@ -270,7 +270,8 @@ class MaterialProductsController extends Controller
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
                     'owners' => $row['owners'],
-                    'coc_coa_mill_cert_status'=>($row['used_for_td_expt_only']=='yes')?'on':'off'
+                    'coc_coa_mill_cert_status'=>($row['used_for_td_expt_only']=='yes')?
+                    'on':'off'
                 ]);
                 $this->getQuantityColor($batch->id);
                 foreach(explode(",",$row['owners']) as $owner){
