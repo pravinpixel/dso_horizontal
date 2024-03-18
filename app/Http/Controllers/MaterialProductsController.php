@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\BannerExport;
 use Auth;
+use Illuminate\Support\Facades\File;
+use ZipArchive;
 class MaterialProductsController extends Controller
 {
     private   $MartialProductRepository;
@@ -753,5 +755,92 @@ class MaterialProductsController extends Controller
         }
        
     }
+     public function downloadDocumentzip(Request $request)
+    {    
+        
+        if(sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
+            return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 400);
+            
+        }else{
+           
+        if ($request->filters) {
+            $result      = $this->SearchRepositoryExport->barCodeSearchExport($request);
+            
+        }
+
+        if ($request->save_advanced_search) {
+            $row        =   (object) $request->save_advanced_search['advanced_search'];
+            $result     =  $this->SearchRepositoryExport->storeBulkSearchExport($row, $request);
+            
+        }
+
+        if ($request->advanced_search) {
+            $row         =   (object) $request->advanced_search;
+            $result      = $this->SearchRepositoryExport->advanced_searchExport($row);
+            
+        }
+        if ($request->sort_by) {
+            $sort_by    =   (object) $request->sort_by;
+            $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
+            return response(['status' => true, 'data' => $result], Response::HTTP_OK);
+        }
+        if(count($result)>0){
+        foreach ($result as $material_index => $material) {
+         $count=count($material->Batches);
+         $i=0;
+         foreach ($material->Batches as $batch_index => $batch) {
+                if(hasAdmin()) {
+                    
+                   
+                } else {
+                    $access     = json_decode($batch->access);
+                    if (isset($access)) {
+                        if (in_array(auth_user()->id, $access) == false) {
+                            $i++;
+                            
+                            unset($result[$material_index]->Batches[$batch_index]);
+                            if($i==$count){
+                               unset($result[$material_index]);
+                            }
+                        }
+                    }
+                    
+                } 
+            }
+            
+        }
+    }   
+        
+        $zip = new ZipArchive;
+        $zipFileName = 'document.zip';
+        $zipFilePath = public_path($zipFileName);
+        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
+
+        foreach($result as $data){
+        if(count($data->Batches)>0){
+        foreach($data->Batches as $batch){
+        foreach($batch->BatchFiles as $file){
+        $filePath = storage_path('app/' .$file->file_name);
+        if (Storage::exists($file->file_name)) {
+            $zip->addFile($filePath,basename($file->file_name));
+        }else{
+             $zip->close();
+        }
+        }
+        }
+        } 
+        }
+        }
+        $zip->close();
+    }
+    if (File::exists($zipFilePath) && File::size($zipFilePath) > 0) {
+            return response()->download($zipFilePath)->deleteFileAfterSend(true);
+    } else {
+            return response()->json(['error' => 'Failed to generate zip file or zip file is empty'], 501);
+    }
+         
+       
+    }
+    
     
 }

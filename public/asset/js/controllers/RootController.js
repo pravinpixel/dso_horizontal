@@ -10,7 +10,8 @@ app.controller('RootController', function ($scope, $http) {
 
     // === Route Lists ===
     var material_products_url              = $('#get-material-products').val();
-    var material_products_export              = $('#get-material-export').val();
+    var material_products_export           = $('#get-material-export').val();
+    var material_products_document         = $('#get-material-document').val();
     var change_batch_read_status           = $('#change_batch_read_status').val();
     var get_batch_material_products        = $('#get-batch-material-products').val();
     var get_batch                          = $('#get-batch').val();
@@ -431,6 +432,46 @@ app.controller('RootController', function ($scope, $http) {
             }, function (response) {
                
                 Message('danger','Please search to Export.');
+            });
+     }
+      $scope.document_zip = (advanced_search, type) => {
+        if ($scope.advance_search_status == true && $scope.sort_by_payload == true) {
+             var payload_data = $scope.sort_by_payload_data;
+            }else if ($scope.advance_search_status == true) {
+            var payload_data = $scope.filter_data;
+            }else if ($scope.advance_search_pre_saved == true) {
+                var payload_data = { advanced_search: $scope.advance_search_pre_saved_data }
+            }else if ($scope.sort_by_payload == true) {
+                var payload_data = $scope.sort_by_payload_data
+            } else {
+                var payload_data = { Empty: "0000" }
+            }
+     
+         $http({
+                method: 'post',
+                  url:material_products_document,
+                data: payload_data,
+                responseType: 'blob'
+            }).then(function (response) {
+            if(response.data.type=="text/html"){
+            Message('danger','Permission Denied ! Contact your admin');
+            }else{
+            var blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'document.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            }  
+            }, function (response) {
+               if(response.status==501){
+                 Message('danger','Failed to generate zip file or zip file is empty.');
+               }else{
+                 Message('danger','Please search to Download Document.');
+               }
+               
+
             });
      }
     $scope.search_advanced_mode = (advanced_search, type) => {

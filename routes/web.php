@@ -44,6 +44,7 @@ Route::middleware(['auth_users'])->group(function () {
     });
      
     Route::prefix('search-or-add')->group(function() {
+         Route::post('download/document/zip', [MaterialProductsController::class, 'downloadDocumentzip'])->name('document.zip');
         Route::get('export', [MaterialProductsController::class, 'exportData'])->name('list-material-products-export');
         Route::post('export', [MaterialProductsController::class, 'exportData'])->name('list-material-products-export');
         Route::get('/', [MaterialProductsController::class, 'list_index'])->name('list-material-products');
