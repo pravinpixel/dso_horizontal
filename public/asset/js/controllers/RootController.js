@@ -468,7 +468,7 @@ app.controller('RootController', function ($scope, $http) {
                if(response.status==402){
                                  Message('danger','Please search to Download Document.');
                }else if(response.status==401){
-                 Message('danger','Failed to generate zip file size is to large.');
+                 Message('danger','Failed to generate zip file as the file size is too large.');
                }else{
 
                   Message('danger','Failed to generate zip file or zip file is empty.');
