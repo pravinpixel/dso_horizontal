@@ -436,27 +436,27 @@ app.controller('RootController', function ($scope, $http) {
      }
       $scope.document_zip = (advanced_search, type) => {
         if ($scope.advance_search_status == true && $scope.sort_by_payload == true) {
-             var payload_data = $scope.sort_by_payload_data;
+             var payload_data1 = $scope.sort_by_payload_data;
             }else if ($scope.advance_search_status == true) {
-            var payload_data = $scope.filter_data;
+            var payload_data1 = $scope.filter_data;
             }else if ($scope.advance_search_pre_saved == true) {
-                var payload_data = { advanced_search: $scope.advance_search_pre_saved_data }
+                var payload_data1 = { advanced_search: $scope.advance_search_pre_saved_data }
             }else if ($scope.sort_by_payload == true) {
-                var payload_data = $scope.sort_by_payload_data
+                var payload_data1 = $scope.sort_by_payload_data
             } else {
-                var payload_data = { Empty: "0000" }
+                var payload_data1 = { Empty: "0000" }
             }
      
          $http({
                 method: 'post',
                   url:material_products_document,
-                data: payload_data,
+                data: payload_data1,
                 responseType: 'blob'
             }).then(function (response) {
             if(response.data.type=="text/html"){
             Message('danger','Permission Denied ! Contact your admin');
             }else{
-            var blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            var blob = new Blob([response.data], { type: 'application/zip' });
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
             link.download = 'document.zip';
@@ -465,10 +465,13 @@ app.controller('RootController', function ($scope, $http) {
             document.body.removeChild(link);
             }  
             }, function (response) {
-               if(response.status==501){
-                 Message('danger','Failed to generate zip file or zip file is empty.');
+               if(response.status==402){
+                                 Message('danger','Please search to Download Document.');
+               }else if(response.status==401){
+                 Message('danger','Failed to generate zip file size is to large.');
                }else{
-                 Message('danger','Please search to Download Document.');
+
+                  Message('danger','Failed to generate zip file or zip file is empty.');
                }
                
 

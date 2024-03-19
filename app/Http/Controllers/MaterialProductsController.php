@@ -757,9 +757,11 @@ class MaterialProductsController extends Controller
     }
      public function downloadDocumentzip(Request $request)
     {    
-        
+        if(empty($request->all())){
+            return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 402);
+        }
         if(sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
-            return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 400);
+            return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 402);
             
         }else{
            
@@ -821,6 +823,7 @@ class MaterialProductsController extends Controller
         foreach($data->Batches as $batch){
         foreach($batch->BatchFiles as $file){
         $filePath = storage_path('app/' .$file->file_name);
+
         if (Storage::exists($file->file_name)) {
             $zip->addFile($filePath,basename($file->file_name));
         }else{
@@ -833,10 +836,17 @@ class MaterialProductsController extends Controller
         }
         $zip->close();
     }
+    $zipSize = File::size($zipFilePath);
+    // 1,073,741,824 bytes
+    if($zipSize >= 419057676){
+         unlink($zipFilePath);
+        return response()->json(['error' => 'Failed to generate zip file size is to large.'], 401);
+
+    }
     if (File::exists($zipFilePath) && File::size($zipFilePath) > 0) {
             return response()->download($zipFilePath)->deleteFileAfterSend(true);
     } else {
-            return response()->json(['error' => 'Failed to generate zip file or zip file is empty'], 501);
+            return response()->json(['error' => 'Data Not available.'], 501);
     }
          
        
