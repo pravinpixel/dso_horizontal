@@ -266,7 +266,7 @@ class MaterialProductsController extends Controller
                     'remarks'                      => $row['remarks'] ?? null,
                      "used_for_td_expt_only"        => ($row['used_for_td_expt_only'] == 
                         'yes') ? 1:0,
-                    'coc_coa_mill_cert_status'     => 'on',
+                   
                     'no_of_extension'              => $row['no_of_extension'] ?? 0,
                     'extended_qc_status'           => ($row['extended_qc_status']=='yes') ? 1:0,
                     'user_id' => auth_user()->id,
