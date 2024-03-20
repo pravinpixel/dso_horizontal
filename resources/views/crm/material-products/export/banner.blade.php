@@ -216,7 +216,7 @@
             <td>{{$child->remarks}}</td>
             <td>{{$child->owners}}</td>
             <td>{{($child->extended_qc_status==1)?'yes':'no'}}</td>
-            <td>{{($child->used_for_td_expt_only==0)?'yes':'no'}}</td>
+            <td>{{($child->used_for_td_expt_only==1)?'yes':'no'}}</td>
           <td>{{$child->coc_coa_mill_cert_status}}</td>
            <td>child</td>
         </tr>
