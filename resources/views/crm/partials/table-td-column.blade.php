@@ -28,7 +28,7 @@
                     </span>
                 @break
                 @case('total_quantity')
-                    <span ng-if="row.is_draft == 0" ng-bind="row.material_total_quantity"></span>
+                    <span  ng-bind="row.material_total_quantity"></span>
                 @break
                 @case('is_draft') @break
                 @default

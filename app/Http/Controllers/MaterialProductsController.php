@@ -191,7 +191,7 @@ class MaterialProductsController extends Controller
                     'alert_threshold_qty_lower_limit' => $row['alert_threshold_qty_lower_limit'] ?? null,
                     'alert_before_expiry'             => $row['alert_before_expiry'] ?? null,
                     'material_quantity'               => $row['quantity'],
-                    'material_total_quantity'         => $row['quantity'] * $row['unit_packing_value'],
+                    
                     'is_draft' => true,
                 ]);
                 $parent_id=$row['id'];
@@ -275,6 +275,9 @@ class MaterialProductsController extends Controller
                     'coc_coa_mill_cert_status'=>($row['used_for_td_expt_only']=='yes')?
                     'on':'off'
                 ]);
+                $material->material_total_quantity=$material->material_total_quantity+$batch->total_quantity;
+                $material->save();
+                
                 $this->getQuantityColor($batch->id);
                 foreach(explode(",",$row['owners']) as $owner){
                    $user_data=User::find($owner);
