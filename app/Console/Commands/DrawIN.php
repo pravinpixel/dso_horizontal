@@ -48,23 +48,23 @@ class DrawIN extends Command
     $Batches = Batches::with("RepackOutlife","BatchOwners")->get();
         foreach($Batches as $batch) {
         if(count($batch->RepackOutlife)>0){
-       $first=RepackOutlife::where('batch_id',$batch->id)->where('draw_in',0)->where('draw_out_time_stamp',Null)->first();
-       $last=RepackOutlife::where('batch_id',$batch->id)->where('draw_out_time_stamp',Null)->get()->last();
-                if(isset($first)&& isset($last) ) {
+       $first=RepackOutlife::where('batch_id',$batch->id)->where('draw_in',0)->where('draw_in_disabled',0)->where('draw_out_time_stamp',Null)->first();
+     Log::info($first);
+                if(isset($first)) {
                     $time1     =Carbon::parse($first->created_at);
                     $time2     = Carbon::now();
                     $time_diff = $time1->diffInHours($time2);
-                     // if(true){
+                      //if(true){
 
-                     Log::info($time_diff);
+                     //Log::info($time_diff);
                    
                 if($time_diff >= env('AUTO_DRAW_TIMING')) {
                     Log::info('Success');
-                        if($batch->unit_packing_value != 0) {
-                            $batch->RepackOutlife()->create([
-                                'input_repack_amount' => $last['repack_size']
-                            ]);
-                        }
+                        // if($batch->unit_packing_value != 0) {
+                        //     $batch->RepackOutlife()->create([
+                        //         'input_repack_amount' => $last['repack_size']
+                        //     ]);
+                        // }
 
                         $draw_out_date_strToTime = strtotime($first->created_at);
                         $draw_in_date_strToTime  = strtotime(now());
@@ -83,10 +83,10 @@ class DrawIN extends Command
                             'updated_outlife'   => dateDifferStr(new DateTime("@0"),new DateTime("@$updated_outlife_seconds"))
                         ]);
 
-                        $last->update([
+                        $first->update([
                             'draw_in'                 => 1,
                             'draw_out'                => 1,
-                            'draw_out_time_stamp'     => now()->format("F jS, Y, g:i:s"),
+                            'draw_out_time_stamp'     => now()->format("F jS, Y, g:i:s a"),
                             'remain_days'             => dateDifferStr(Carbon::parse($first->created_at), Carbon::now()),
                             'remaining_days_seconds'  => $remaining_days_seconds,
                             'current_date_time'       => Carbon::now()->toDateTimeLocalString(),
