@@ -55,5 +55,9 @@ class MaterialProducts extends Model
     {
         return  $this->hasOne(PackingSizeData::class, 'id', 'unit_of_measure');
     }
+    public function BatchData()
+    {
+      return $this->hasOne(Batches::class, 'id', 'material_product_id');
+    }
     
 }

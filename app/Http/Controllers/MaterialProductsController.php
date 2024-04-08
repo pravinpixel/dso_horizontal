@@ -267,8 +267,8 @@ class MaterialProductsController extends Controller
                      "used_for_td_expt_only"        => ($row['used_for_td_expt_only'] == 
                         'yes') ? 1:0,
                    
-                    'no_of_extension'              => $row['no_of_extension'] ?? 0,
-                    'extended_qc_status'           => ($row['extended_qc_status']=='yes') ? 1:0,
+                    'no_of_extension'              => $row['no_of_extension'] ?? NUll,
+                    'extended_qc_status'           => ($row['extended_qc_status']=='Pass') ? 1:0,
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
                     'owners' => $row['owners'],
