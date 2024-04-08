@@ -29,7 +29,7 @@
                            
                             @if (isset($role->permissions[$page['name']]))
                                 <input type="hidden" name="{{ $page['name'] }}[]"  value="{{ $role->permissions[$page['name']] == 0 ? 0 : '' }}">
-                                <input class="form-check-input me-1" type="checkbox"  {{ $menu === 'dashboard' ? 'checked' : '' }}  {{ $role->permissions[$page['name']] == 1 ? 'checked' : '' }}
+                                <input class="form-check-input me-1" type="checkbox"    {{ $role->permissions[$page['name']] == 1 ? 'checked' : '' }}
                                     name="{{ $page['name'] }}[]" value="1" id="{{ $page['name'] }}">
                             @else
                                 <input type="hidden" name="{{ $page['name'] }}[]" value="0">

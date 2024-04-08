@@ -123,6 +123,12 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
        $q->orderBy('coc_coa_mill_cert_status',$sort_by->order_type)->where('is_draft',$is_draft);          
         }else if($sort_by->col_name=="serial" ){
          $q->orderByRaw("CONCAT(serial, batch) {$sort_by->order_type}")->where('is_draft',$is_draft);       
+        }else if($sort_by->col_name=="storage_area"){
+             $q->join('storage_rooms', 'Batches.storage_area', '=', 'storage_rooms.id');
+             $q->orderBy('storage_rooms.name',$sort_by->order_type)->where('is_draft',$is_draft);
+        }else if($sort_by->col_name=="statutory_body"){
+             $q->join('statutory_bodies', 'Batches.statutory_body', '=', 'statutory_bodies.id');
+             $q->orderBy('statutory_bodies.name',$sort_by->order_type)->where('is_draft',$is_draft);
         }else{
         $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
         }

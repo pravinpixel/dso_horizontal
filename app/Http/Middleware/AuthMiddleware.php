@@ -40,7 +40,9 @@ class AuthMiddleware
                 
                 $menu=(format_route(request()->route()->getName())=='help_index')?'help_menu_index': format_route(request()->route()->getName());
                 if($menu == format_route($access)) {
-                    if($val == 1) {
+                 if($menu=="dashboard" && $val == 0){
+                    return redirect(route('withdrawal_index'));
+                    }else if($val == 1) {
                         return $this->checkSession($request,$next);
                     } else {
                         Flash::error('Permission Denied ! Contact your admin');
