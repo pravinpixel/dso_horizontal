@@ -133,10 +133,12 @@ class ReportsController extends Controller
             "Brand"              => materialProductHistory::groupBy('Brand')->pluck('Brand'),
             "Storage Area"       => materialProductHistory::groupBy('StorageArea')->pluck('StorageArea'),
             "Housing"            => materialProductHistory::groupBy('Housing')->pluck('Housing'),
-            "Module"             => materialProductHistory::groupBy('Module')->pluck('Module'),
+            "Module"             => materialProductHistory::where('Module','!=','DEDUCT_TRACK_OUTLIFE_REPORT')->groupBy('Module')->pluck('Module'),
             "Action Taken"       => materialProductHistory::groupBy('ActionTaken')->pluck('ActionTaken'),
             "Draw Status"        => materialProductHistory::groupBy('DrawStatus')->pluck('DrawStatus')
         ];
+  
+
         return view('crm.reports.material-in-house-pdt-history', compact('filters'));
     }
     public function material_in_house_pdt_history_download(Request $request)
