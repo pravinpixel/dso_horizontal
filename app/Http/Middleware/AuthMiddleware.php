@@ -42,7 +42,9 @@ class AuthMiddleware
                 if($menu == format_route($access)) {
                    if($val == 1) {
                         return $this->checkSession($request,$next);
-                    } else {
+                    }else if( $menu=="dashboard" && $val == 0){
+ return $this->checkSession($request,$next);
+                    }else {
                         Flash::error('Permission Denied ! Contact your admin');
                         return back();
                     }

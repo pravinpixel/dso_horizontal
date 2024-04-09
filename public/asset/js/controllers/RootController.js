@@ -863,6 +863,11 @@ app.controller('RootController', function ($scope, $http) {
         $scope.currentBatch                   = batch
         // end_of_batch
         $http.get(`search-or-add/repack-batch/${batch.id}`).then((response) => {
+            if (typeof response.data === 'string') {
+            if (response.data.includes("<!DOCTYPE html>")) {
+              Message('danger', "Permission Denied ! Contact your admin")
+            }
+            }
             $scope.repack_outlife_table.length = 0;
             const RepackData = response.data
             if (RepackData.repack_outlife.length !== 0) {
