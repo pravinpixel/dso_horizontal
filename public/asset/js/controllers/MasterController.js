@@ -232,8 +232,10 @@ app.controller('MasterController', function($scope, $http) {
 function toggle(source) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     for (var i = 0; i < checkboxes.length; i++) {
+        if(checkboxes[i].name!= "dashboard[]"){
         if (checkboxes[i] != source)
             checkboxes[i].checked = source.checked;
+        }
     }
 }
 function view_alls(source) {
