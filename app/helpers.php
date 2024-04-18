@@ -627,8 +627,12 @@ if (!function_exists('getRoutes')) {
             if ($ActionTaken == 'Repack_Outlife_Draw_IN') {
                 $DrawStatus = 'Draw IN';
             }
+            
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT') {
                 $DrawStatus = 'Draw OUT';
+            }
+            if ($ActionTaken == 'Child_Batch_Created') {
+                $DrawStatus = 'Child Batch Created';
             }
             if ($ActionTaken == 'AUTO_DRAW_IN') {
                 $DrawStatus = 'AUTO DRAW IN';

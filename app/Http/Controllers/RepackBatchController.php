@@ -92,13 +92,15 @@ class RepackBatchController extends Controller
                        }
                     $Batches['quantity']            = $row['quantity'];
                     $current_batch                   = Batches::find($repackData->batch_id);
+                     MaterialProductHistory($current_batch, 'Repack_Outlife_Draw_OUT');
                     $next_batch                      = $current_batch->replicate(); 
                     $next_batch->created_at          = Carbon::now();
                     $next_batch->unit_packing_value  = $row['repack_size'];
                     $next_batch->total_quantity      = $row['repack_amount'];
                     $next_batch->quantity            = $row['quantity'];
                     $next_batch->save();
-                    MaterialProductHistory($next_batch, 'Repack_Outlife_Draw_OUT');
+                   
+
                     $next_batch->barcode_number = generateBarcode(MaterialProducts::find($current_batch->material_product_id)->category_selection);
                     $next_batch->save();
 
@@ -148,6 +150,7 @@ class RepackBatchController extends Controller
                         'user_id'                 => auth_user()->id,
                         'current_date_time'       => Carbon::now()->toDateTimeLocalString()
                        ]);
+                 MaterialProductHistory($next_batch, 'Child_Batch_Created'); 
                 }
                 if ($row['draw_out']['status'] == 1 && $row['draw_in']['status'] == 0) {
                     $repacks=RepackOutlife::where('batch_id',$repackData->batch_id)->where('draw_in',0)->where('id','!=',$row['id'])->get();
@@ -174,11 +177,11 @@ class RepackBatchController extends Controller
                         'outlife'         => $updated_outlife,
                     ]);
                     $history = materialProductHistory::where(['barcode_number' => $Batches->barcode_number, 'DrawStatus' => 'Draw OUT'])->first();
-                    $newHistory =  $history->replicate();
-                    $newHistory->DrawStatus = 'Draw IN';
-                    $newHistory->RemainingOutlifeOfParent = $updated_outlife;
-                    $newHistory->save();
-
+                    // $newHistory =  $history->replicate();
+                    // $newHistory->DrawStatus = 'Draw IN';
+                    // $newHistory->RemainingOutlifeOfParent = $updated_outlife;
+                    // $newHistory->save();
+ MaterialProductHistory($Batches, 'Repack_Outlife_Draw_IN'); 
                     RepackOutlife::find($row['id'])->update([
                         'draw_in'                 => 1,
                         'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
