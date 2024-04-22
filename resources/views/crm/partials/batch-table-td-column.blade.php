@@ -8,6 +8,10 @@
             $column['name'] != 'material_product_id')
         <div ng-if="on_{{ $column['name'] }}" class="box text-center">
             @switch($column['name'])
+             @case('extended_qc_status')
+                    <span ng-if="batch.extended_qc_status == 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
+                    <span ng-if="batch.extended_qc_status != 1" class="mx-auto badge bg-danger rounded-pill">FAIL</span>
+                @break
                 @case('iqc_status')
                     <span ng-if="batch.iqc_status == 1" class="mx-auto badge bg-success rounded-pill">PASS</span>
                     <span ng-if="batch.iqc_status != 1" class="mx-auto badge bg-danger rounded-pill">FAIL</span>
