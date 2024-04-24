@@ -1,6 +1,7 @@
 <table class="table table-bordered table-sm">
     <thead class="bg-primary text-white text-center">
         <tr>
+            <th style="font-weight: bold">Barcode Number</th>
             <th style="font-weight: bold">Category selection</th>
             <th style="font-weight: bold">Item description</th>
             <th style="font-weight: bold">Brand</th>
@@ -24,6 +25,7 @@
     <tbody>
         @foreach ($materialProductHistory as $data)
             <tr>
+                <td>{{ $data->barcode_number }}</td>
                 <td>{{ $data->CategorySelection }}</td>
                 <td>{{ $data->ItemDescription }}</td>
                 <td>{{ $data->Brand }}</td>
