@@ -125,7 +125,7 @@ class ReportsController extends Controller
         return Excel::download(new TrackUsageExport($DeductTrackUsage->toArray()), generateFileName('DeductTrackUsage', 'xlsx'));
     }
     public function material_in_house_pdt_history()
-    {
+    {   
         $filters = [
             "Transaction by"     =>  materialProductHistory::groupBy('TransactionBy')->pluck('TransactionBy'),
             "Item Description"   => materialProductHistory::groupBy('ItemDescription')->pluck('ItemDescription'),
@@ -234,7 +234,7 @@ class ReportsController extends Controller
     }
     public function materialHistoryFilter($request)
     {
-        $material = materialProductHistory::latest()->select('*');
+        $material = materialProductHistory::orderBy('id','DESC')->select('*');
           
         $material->when(isset($request->ItemDescription), function ($query) use ($request) {
             $query->where("ItemDescription", $request->ItemDescription);
