@@ -59,19 +59,19 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="w-100 text-center" ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 0 || repack.draw_in.status == 0 && repack.draw_out.status == 1">
+                                    <table class="w-100 text-center" ng-if="repack.draw_in.status == 1 && repack.draw_out.status == 0 || repack.draw_in.status == 0 && repack.draw_out.status == 1" >
                                         <tr>
                                             <td>
-                                                <label for="DRAW_OUT_@{{ i }}" class="btn btn-sm btn-draw-out" ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ? 'btn-disabled' : ''">
-                                                    <input class="d-none" id="DRAW_OUT_@{{ i }}" repack-table="OUT" type="radio" ng-model="repack.draw_status" value="1" name="draw_status" required  ng-disabled="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" />
+                                                <label for="DRAW_OUT_@{{ i }}" class="btn btn-sm btn-draw-out" ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ||  repack_outlife_days == 0 ? 'btn-disabled' : ''">
+                                                    <input class="d-none" id="DRAW_OUT_@{{ i }}" repack-table="OUT" type="radio" ng-model="repack.draw_status" value="1" name="draw_status" required  ng-disabled="repack_outlife_days == 0 || repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1" />
                                                     <small>Draw Out</small>
                                                 </label>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 || repack.draw_in_disabled==1? 'btn-disabled' : '' " >
-                                                    <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
+                                                <label for="DRAW_IN_@{{ i }}" class="btn btn-sm btn-draw-in" ng-class="repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1 || repack.draw_in_disabled==1 ||  repack_outlife_days == 0? 'btn-disabled' : '' " >
+                                                    <input class="d-none" id="DRAW_IN_@{{ i }}" repack-table="IN" type="radio" ng-model="repack.draw_status" value="0" name="draw_status" required  ng-disabled="repack_outlife_days == 0 || repack.draw_out.status == 0 || repack.draw_in.status == 1 && repack.draw_out.status == 1" />
                                                 <small>Draw In</small>
                                                 </label>
                                             </td>
@@ -94,7 +94,7 @@
                                 {{-- <td ng-bind="repack.total_quantity"></td> --}}
                                 <td class="text-center">
                                     <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
-                                        <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " required>
+                                        <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ||  repack_outlife_days == 0 ? 'btn-disabled' : ''" required>
                                     </span>
                                     <small ng-bind="repack.old_input_repack_amount" ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1"></small>
                                 </td>
@@ -102,7 +102,7 @@
                                 {{-- <td ng-bind="repack.barcode_number"></td> --}}
                                 <td class="text-center position-relative">
                                     <small ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1 ">
-                                        <input type="number" ng-model='repack.repack_size' max="@{{ repack.repack_amount }}" repack-table="REPACK_SIZE" class="form-control form-control-sm text-center " required>
+                                        <input type="number" ng-model='repack.repack_size' max="@{{ repack.repack_amount }}" repack-table="REPACK_SIZE" class="form-control form-control-sm text-center " ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ||  repack_outlife_days == 0 ? 'btn-disabled' : ''" required>
                                     </small>
                                     <small
                                         ng-bind="repack.repack_size"
