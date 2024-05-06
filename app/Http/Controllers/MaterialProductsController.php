@@ -125,7 +125,7 @@ class MaterialProductsController extends Controller
             "total_quantity" => 0
         ]);
         updateParentQuantity( $Batches->material_product_id);
-        MaterialProductHistory($Batches, 'End_Batch');
+        MaterialProductHistory($Batches, 'End_Of_Batch');
     }
 
     public function my_search_history()

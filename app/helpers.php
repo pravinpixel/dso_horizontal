@@ -637,7 +637,7 @@ if (!function_exists('getRoutes')) {
             if ($ActionTaken == 'AUTO_DRAW_IN') {
                 $DrawStatus = 'AUTO DRAW IN';
             }
-             if ($ActionTaken == 'End_Batch') {
+             if ($ActionTaken == 'End_Of_Batch') {
                 $DrawStatus = 'End of Batch';
             }
             if ($ActionTaken == 'Repack_Outlife_Draw_OUT' || $ActionTaken == 'Repack_Outlife_Draw_IN') {
