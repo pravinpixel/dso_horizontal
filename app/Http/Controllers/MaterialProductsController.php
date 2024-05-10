@@ -753,7 +753,7 @@ class MaterialProductsController extends Controller
             
         }
     }
-    dd($result);
+   
          $response=Excel::download(new BannerExport($result??[]),'banner.csv');
          return $response;   
 
