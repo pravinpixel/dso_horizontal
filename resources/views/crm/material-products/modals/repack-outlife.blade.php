@@ -94,8 +94,7 @@
                                 {{-- <td ng-bind="repack.total_quantity"></td> --}}
                                 <td class="text-center">
                                     <span ng-if="repack.draw_out.status == 0 && repack.draw_in.status == 1">
-                                        <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ||  repack_outlife_days == 0 ? 'btn-disabled' : ''"
-                                         required>
+                                        <input type="number" ng-model='repack.repack_amount' repack-table="REPACK_INPUT" ng-min="1" ng-max="repack.total_quantity" class="form-control form-control-sm text-center " ng-class="repack.draw_in.status == 0 ||  repack.draw_in.status == 1 && repack.draw_out.status == 1 ||  repack_outlife_days == 0 ? 'btn-disabled' : ''" required>
                                     </span>
                                     <small ng-bind="repack.old_input_repack_amount" ng-if="repack.draw_out.status == 1 && repack.draw_in.status == 0 || repack.draw_out.status == 1 && repack.draw_in.status == 1"></small>
                                 </td>
@@ -139,7 +138,6 @@
     <script>
 // Listen for the 'input' event on all input fields of type 'number'
 document.addEventListener('input', function(event) {
-    // Check if the target element is an input field of type 'number'
     if (event.target.tagName === 'INPUT' && event.target.type === 'number') {
         var inputValue = event.target.value;
         var numericValue = inputValue.replace(/\D/g, '');
