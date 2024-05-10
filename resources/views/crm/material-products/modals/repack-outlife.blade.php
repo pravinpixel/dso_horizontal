@@ -135,4 +135,14 @@
             </div>
         </div>
     </div>
+    <script>
+// Listen for the 'input' event on all input fields of type 'number'
+document.addEventListener('input', function(event) {
+    if (event.target.tagName === 'INPUT' && event.target.type === 'number') {
+        var inputValue = event.target.value;
+        var numericValue = inputValue.replace(/\D/g, '');
+        event.target.value = numericValue;
+    }
+});
+</script>
 </div>
