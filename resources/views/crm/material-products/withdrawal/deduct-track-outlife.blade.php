@@ -52,7 +52,7 @@
         <td><small>{{ $row->RepackOutlife[0]->updated_outlife }}</small></td>
         <td><small>
             @if(isset($row->RepackOutlife[0]->updated_outlife_seconds) && $row->RepackOutlife[0]->updated_outlife_seconds!=NULL)
-        {{ SetDateFormatWithHours(SetDateOutlifeDate(SetDateFormatWithHours($history->created_at),$row->RepackOutlife[0]->updated_outlife_seconds??''))}} 
+        {{ SetDateFormatWithHours(currentOutlifeDate($row->RepackOutlife[0]->updated_outlife_seconds??''))}} 
         @else 
          {{ SetDateFormatWithHours($row->RepackOutlife[0]->current_outlife_expiry??'') }} 
        @endif</small></td>
