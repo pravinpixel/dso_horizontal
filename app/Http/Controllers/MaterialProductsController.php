@@ -349,6 +349,7 @@ class MaterialProductsController extends Controller
                     $material_product->category_selection ?? category_type()
                 );
             }
+            if($batch){
             foreach ($batch->toArray() as $key => $value) {
                 $batch->{$key} = is_reset(
                     $key,
@@ -356,6 +357,7 @@ class MaterialProductsController extends Controller
                     $material_product->category_selection ?? category_type()
                 );
             }
+          }
         }
 
         if ($type == 'form-one') {
