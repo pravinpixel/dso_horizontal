@@ -26,7 +26,9 @@
     <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Packing size</div>
-            {{ $batch->unit_packing_value ?? '' }} {{ $batch->BatchMaterialProduct->UnitOfMeasure->name }}
+            {{ $batch->unit_packing_value ?? '' }}
+            @if(isset($batch->BatchMaterialProduct->UnitOfMeasure)) {{ $batch->BatchMaterialProduct->UnitOfMeasure->name }}
+            @endif
         </div>
     </li>
     <li class="list-group-item list-group-item-action d-flex align-self-start">

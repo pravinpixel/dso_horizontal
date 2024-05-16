@@ -76,6 +76,7 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
     }
     public function sortingOrderExport($sort_by)
     {    
+       
        $filter=(object)$sort_by->filter['advanced_search'];
        $material_table =  [
             'quantity',
@@ -118,18 +119,24 @@ class SearchRepositoryExport implements ExportRepositoryInterface{
             if (checkIsMaterialColumn($sort_by->col_name) == 1) {
             }else{
         if($sort_by->col_name=="housing_type" ){
-         $q->join('house_types', 'Batches.housing_type', '=', 'house_types.id');
-        $q->orderByRaw("CAST(SUBSTRING_INDEX(CONCAT_WS('_', house_types.name, CAST(batches.housing AS UNSIGNED)), '_', -1) AS UNSIGNED) {$sort_by->order_type}")->where('is_draft',$is_draft);       
+         $q->select('Batches.*', 'house_types.name as house_type_name')
+    ->join('house_types', 'Batches.housing_type', '=', 'house_types.id')
+      ->orderByRaw("CAST(SUBSTRING_INDEX(CONCAT_WS('_', house_types.name, batches.housing), '_', -1) AS UNSIGNED) {$sort_by->order_type}")
+      ->where('Batches.is_draft', $is_draft);       
         }else if($sort_by->col_name=="used_for_td_expt_only" ){
        $q->orderBy('coc_coa_mill_cert_status',$sort_by->order_type)->where('is_draft',$is_draft);          
         }else if($sort_by->col_name=="serial" ){
          $q->orderByRaw("CONCAT(serial, batch) {$sort_by->order_type}")->where('is_draft',$is_draft);       
         }else if($sort_by->col_name=="storage_area"){
-             $q->join('storage_rooms', 'Batches.storage_area', '=', 'storage_rooms.id');
-             $q->orderBy('storage_rooms.name',$sort_by->order_type)->where('is_draft',$is_draft);
+             $q->select('Batches.*', 'storage_rooms.name as storage_room_name')
+      ->join('storage_rooms', 'Batches.storage_area', '=', 'storage_rooms.id')
+      ->orderBy('storage_rooms.name', $sort_by->order_type)
+      ->where('Batches.is_draft', $is_draft);
         }else if($sort_by->col_name=="statutory_body"){
-             $q->join('statutory_bodies', 'Batches.statutory_body', '=', 'statutory_bodies.id');
-             $q->orderBy('statutory_bodies.name',$sort_by->order_type)->where('is_draft',$is_draft);
+            $q->select('Batches.*', 'statutory_bodies.name as statutory_body_name')
+          ->join('statutory_bodies', 'Batches.statutory_body', '=', 'statutory_bodies.id')
+          ->orderBy('statutory_bodies.name', $sort_by->order_type)
+          ->where('Batches.is_draft', $is_draft);
         }else{
         $q->orderBy($sort_by->col_name, $sort_by->order_type)->where('is_draft',$is_draft);
         }
