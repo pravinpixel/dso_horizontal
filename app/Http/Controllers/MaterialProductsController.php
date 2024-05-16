@@ -703,7 +703,10 @@ class MaterialProductsController extends Controller
      public function exportData(Request $request)
     {    
         
-        if(sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
+        if(isset($request->advanced_search) && sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
+            return response(['status' => false, 'message' => trans('Please search anyone option before export.')], 400);
+            
+        }else if(isset($request->sort_by['filter']['advanced_search']) && sizeof($request->sort_by['filter']['advanced_search'])==1 && $request->sort_by['filter']['advanced_search']['owners']===[]){
             return response(['status' => false, 'message' => trans('Please search anyone option before export.')], 400);
             
         }else{
@@ -720,15 +723,19 @@ class MaterialProductsController extends Controller
         }
 
         if ($request->advanced_search) {
+
             $row         =   (object) $request->advanced_search;
+             
             $result      = $this->SearchRepositoryExport->advanced_searchExport($row);
+             
             
         }
         if ($request->sort_by) {
             $sort_by    =   (object) $request->sort_by;
             $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
-            return response(['status' => true, 'data' => $result], Response::HTTP_OK);
+            
         }
+
         if(count($result)>0){
         foreach ($result as $material_index => $material) {
          $count=count($material->Batches);
@@ -755,7 +762,7 @@ class MaterialProductsController extends Controller
             
         }
     }
-   
+      
          $response=Excel::download(new BannerExport($result??[]),'banner.csv');
          return $response;   
 
@@ -767,8 +774,11 @@ class MaterialProductsController extends Controller
         if(empty($request->all())){
             return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 402);
         }
-        if(sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
+        if(isset($request->advanced_search) && sizeof($request->advanced_search)==1 && $request->advanced_search['owners']===[]){
             return response(['status' => false, 'message' => trans('Please search anyone option before zip.')], 402);
+            
+        }else if(isset($request->sort_by['filter']['advanced_search']) && sizeof($request->sort_by['filter']['advanced_search'])==1 && $request->sort_by['filter']['advanced_search']['owners']===[]){
+            return response(['status' => false, 'message' => trans('Please search anyone option before export.')], 400);
             
         }else{
            
@@ -791,7 +801,7 @@ class MaterialProductsController extends Controller
         if ($request->sort_by) {
             $sort_by    =   (object) $request->sort_by;
             $result     = $this->SearchRepositoryExport->sortingOrderExport($sort_by);
-            return response(['status' => true, 'data' => $result], Response::HTTP_OK);
+           
         }
         if(count($result)>0){
         foreach ($result as $material_index => $material) {
@@ -845,6 +855,7 @@ class MaterialProductsController extends Controller
     }
     $zipSize = File::size($zipFilePath);
     // 1,073,741,824 bytes
+    
     if($zipSize >= 419057676){
          unlink($zipFilePath);
         return response()->json(['error' => 'Failed to generate zip file size is to large.'], 401);
