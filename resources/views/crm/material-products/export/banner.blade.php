@@ -119,9 +119,9 @@
                              <th>
                              used_for_td_expt_only
                             </th> 
-                             <th>
+                            <!--  <th>
                              coc_coa_mill_cert_status
-                            </th> 
+                            </th>  -->
                             <th>
                              type
                             </th> 
@@ -171,7 +171,7 @@
              <td></td>
              <td></td>
              <td></td>
-             <td></td>
+             <!-- <td></td> -->
             <td>parent</td>
 
         </tr>
@@ -215,9 +215,14 @@
             
             <td>{{$child->remarks}}</td>
             <td>{{$child->owners}}</td>
-            <td>{{($child->extended_qc_status==1)?'Pass':'Fail'}}</td>
-            <td>{{($child->used_for_td_expt_only==1)?'yes':'no'}}</td>
-          <td>{{$child->coc_coa_mill_cert_status}}</td>
+            <td>@if($child->extended_qc_status==1)
+                Pass
+                @elseif($child->extended_qc_status==0)
+                Fail
+                @else
+                @endif</td>
+            <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td>
+          <!-- <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td> -->
            <td>child</td>
         </tr>
         @endforeach
