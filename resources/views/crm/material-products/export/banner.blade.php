@@ -215,11 +215,11 @@
             
             <td>{{$child->remarks}}</td>
             <td>{{$child->owners}}</td>
-            <td>@if($child->extended_qc_status==1)
+            <td>@if($child->extended_qc_status== 1)
                 Pass
-                @elseif($child->extended_qc_status==0)
+                @elseif($child->extended_qc_status==null)
+                @elseif($child->extended_qc_status== 0)
                 Fail
-                @else
                 @endif</td>
             <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td>
           <!-- <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td> -->
