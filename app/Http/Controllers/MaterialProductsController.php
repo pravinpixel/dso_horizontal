@@ -269,7 +269,7 @@ class MaterialProductsController extends Controller
                         'yes') ? 1:0,
                    
                     'no_of_extension'              => $row['no_of_extension'] ?? NUll,
-                    'extended_qc_status'           => ($row['extended_qc_status']=='Pass') ? 1:0,
+                    'extended_qc_status'           => ($row['extended_qc_status'] == 'Pass') ? 1 : (($row['extended_qc_status'] == 'Fail') ? 0 : null),
                     'user_id' => auth_user()->id,
                     'withdrawal_type' => $withdrawal_type,
                     'owners' => $row['owners'],
