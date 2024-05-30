@@ -405,7 +405,7 @@ class ReportsController extends Controller
         if ($request->ajax()) {
             return DataTables::of($security)->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    if (!is_null($data['file_path'])) {
+                    if (isset($data['file_path']) && !is_null($data['file_path'])) {
                         return  $data['action'] . ' <button onclick=download(' . $data["file_id"] . ',"' . $data["type"] . '") class="badge bg-warning rounded-pill text-dark ms-1 border-0" type="button">
                                 <i class="fa fa-download me-1"></i>
                                 <i>' . str_replace('public/', '', $data['file_path']) . '</i>
