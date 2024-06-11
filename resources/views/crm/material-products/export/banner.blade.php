@@ -181,7 +181,7 @@
             <td>{{$parent->category_selection}}</td>
             <td>{{$parent->item_description}}</td>
             <td>@if(isset($parent->UnitOfMeasure->name)){{$parent->UnitOfMeasure->name}} @endif</td>
-            <td>{{$parent->unit_packing_value}}</td>
+            <td>{{$child->unit_packing_value}}</td>
             <td>{{$parent->alert_threshold_qty_upper_limit}}</td>
             <td>{{$parent->alert_threshold_qty_lower_limit}}</td>
             <td>{{$parent->alert_before_expiry}}</td>
