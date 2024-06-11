@@ -180,7 +180,7 @@
             <td>{{$child->material_product_id }}</td>
             <td>{{$parent->category_selection}}</td>
             <td>{{$parent->item_description}}</td>
-            <td>@if(isset($child->UnitOfMeasure->name)){{$child->UnitOfMeasure->name}} @endif</td>
+            <td>@if(isset($parent->UnitOfMeasure->name)){{$parent->UnitOfMeasure->name}} @endif</td>
             <td>{{$child->unit_packing_value}}</td>
             <td>{{$parent->alert_threshold_qty_upper_limit}}</td>
             <td>{{$parent->alert_threshold_qty_lower_limit}}</td>
