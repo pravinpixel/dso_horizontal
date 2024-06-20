@@ -181,7 +181,7 @@ class RepackBatchController extends Controller
                     // $newHistory->DrawStatus = 'Draw IN';
                     // $newHistory->RemainingOutlifeOfParent = $updated_outlife;
                     // $newHistory->save();
- MaterialProductHistory($Batches, 'Repack_Outlife_Draw_IN'); 
+ MaterialProductHistory($Batches, 'Repack_Outlife_Draw_IN',$updated_outlife); 
                     RepackOutlife::find($row['id'])->update([
                         'draw_in'                 => 1,
                         'draw_in_time_stamp'      => $row['draw_in']['time_stamp'],
