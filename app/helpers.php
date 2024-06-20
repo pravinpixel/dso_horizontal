@@ -661,7 +661,7 @@ if (!function_exists('getRoutes')) {
                 'CategorySelection'        => $batch['BatchMaterialProduct']['category_selection']?? $batch['category_selection'] ,
                 'ItemDescription'          => $batch['BatchMaterialProduct']['item_description']?? $batch['item_description'],
                 'Brand'                    => $Batch['brand']??null,
-                'BatchSerial'              => $Batch['batch']??0 . " / " . $Batch['serial']??0,
+                'BatchSerial'              => $Batch['batch']. " / " . $Batch['serial'],
                 'TransactionBy'            => auth_user()->alias_name ?? "AUTO DRAW",
                 'Module'                   => session()->get('page_name'),
                 'ActionTaken'              => $ActionTaken,
