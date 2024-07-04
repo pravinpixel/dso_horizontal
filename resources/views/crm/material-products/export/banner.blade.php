@@ -119,6 +119,9 @@
                              <th>
                              used_for_td_expt_only
                             </th> 
+                             <th>
+                             Date of Disposal
+                            </th> 
                             <!--  <th>
                              coc_coa_mill_cert_status
                             </th>  -->
@@ -171,7 +174,7 @@
              <td></td>
              <td></td>
              <td></td>
-             <!-- <td></td> -->
+             <td></td>
             <td>parent</td>
 
         </tr>
@@ -222,7 +225,7 @@
                 Fail
                 @endif</td>
             <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td>
-          <!-- <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td> -->
+          <td>@if(isset($child->disposed_after)) {{date('d/m/Y',strtotime($child->disposed_after))}} @endif</td>
            <td>child</td>
         </tr>
         @endforeach
