@@ -319,7 +319,7 @@
      <li class="list-group-item list-group-item-action d-flex align-self-start">
         <div class="w-100">
             <div class="fw-bold mb-1">Date Of Disposal</div>
-           {{date('d/m/Y',strtotime($batch->disposed_after))}}
+           {{$batch->disposed_after}}
         
         @if (!is_null($batch->LatestBatchFiles))
     {!! getBatchFile($batch->LatestBatchFiles,'used_for_td_certificate', false) !!}
