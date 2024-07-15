@@ -225,7 +225,7 @@
                 Fail
                 @endif</td>
             <td>{{($child->coc_coa_mill_cert_status=='on')?'yes':'no'}}</td>
-          <td>@if(isset($child->disposed_after)) {{date('d/m/Y',strtotime($child->disposed_after))}} @endif</td>
+          <td>@if(isset($child->disposed_after) && !empty($child->disposed_after)) {{ $child->disposed_after }} @endif</td>
            <td>child</td>
         </tr>
         @endforeach
